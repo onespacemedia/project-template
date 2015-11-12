@@ -9,8 +9,8 @@ INSTALLED_APPS += (
 
 OPBEAT = {
     "ORGANIZATION_ID": "dde034beb33d4b77bb9937c39f0c158f",
-    "APP_ID": "",
-    "SECRET_TOKEN": ""
+    "APP_ID": "{{cookiecutter.opbeat_app_id}}",
+    "SECRET_TOKEN": "{{cookiecutter.opbeat_secret_token}}"
 }
 
 MIDDLEWARE_CLASSES = (

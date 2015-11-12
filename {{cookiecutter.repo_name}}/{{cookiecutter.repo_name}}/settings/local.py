@@ -49,7 +49,6 @@ DATABASES = {
         "HOST": "localhost",
         "NAME": "{{cookiecutter.repo_name}}",
         "USER": os.getlogin(),
-        "PASSWORD": "",
     },
 }
 

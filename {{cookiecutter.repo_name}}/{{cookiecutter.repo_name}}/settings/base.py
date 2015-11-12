@@ -23,15 +23,17 @@ if platform.python_implementation() == "PyPy":
 
 # The name of this site.  Used for branding in the online admin area.
 
-SITE_NAME = "Example"
+SITE_NAME = "{{cookiecutter.project_name}}"
 
-SITE_DOMAIN = "example.com"
+SITE_DOMAIN = "{{cookiecutter.domain_name}}"
 
 PREPEND_WWW = True
 
 ALLOWED_HOSTS = [
     SITE_DOMAIN,
-    'www.{}'.format(SITE_DOMAIN)
+    'www.{}'.format(SITE_DOMAIN),
+    '{{cookiecutter.staging_subdomain}}.onespace.media',
+    'www.{{cookiecutter.staging_subdomain}}.onespace.media',
 ]
 
 SUIT_CONFIG = {
@@ -45,9 +47,6 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "{{cookiecutter.repo_name}}",
         "USER": "{{cookiecutter.repo_name}}",
-        "PASSWORD": "",
-        "HOST": "",
-        "PORT": ""
     }
 }
 
@@ -78,7 +77,7 @@ EMAIL_HOST = "smtp.mandrillapp.com"
 
 EMAIL_HOST_USER = "developers@onespacemedia.com"
 
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_PASSWORD = "{{cookiecutter.email_password}}"
 
 EMAIL_PORT = 587
 
@@ -143,19 +142,18 @@ INSTALLED_APPS = [
     "cms",
 
     "reversion",
-    "usertools",
     "historylinks",
     "watson",
 
     "cms.apps.pages",
     "cms.apps.links",
     "cms.apps.media",
-    "cms.apps.news",
 
+    {% if cookiecutter.faqs %}"{{cookiecutter.repo_name}}.apps.faqs",{% endif %}
+    {% if cookiecutter.jobs %}"{{cookiecutter.repo_name}}.apps.jobs",{% endif %}
+    {% if cookiecutter.news %}"{{cookiecutter.repo_name}}.apps.news",{% endif %}
+    {% if cookiecutter.people %}"{{cookiecutter.repo_name}}.apps.people",{% endif %}
     "{{cookiecutter.repo_name}}.apps.site",
-    "{{cookiecutter.repo_name}}.apps.faqs",
-    "{{cookiecutter.repo_name}}.apps.jobs",
-    "{{cookiecutter.repo_name}}.apps.people",
 
     'server_management',
     'django_extensions',
@@ -197,7 +195,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = (
-    # "cms.middleware.LocalisationMiddleware",
+    {% if cookiecutter.geoip %}"cms.middleware.LocalisationMiddleware",{% endif %}
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -300,15 +298,16 @@ WYSIWYG_OPTIONS = {
     "extraAllowedContent": "img[src,alt,width,height,title];*{*}"
 }
 
-
+{% if cookiecutter.news %}
 NEWS_APPROVAL_SYSTEM = False
+{% endif %}
 
-GOOGLE_ANALYTICS = ''
+GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
 
 # You can get your Client ID & Secret here: https://creativesdk.adobe.com/myapps.html
-ADOBE_CREATIVE_SDK_ENABLED = False
-ADOBE_CREATIVE_SDK_CLIENT_SECRET = ''
-ADOBE_CREATIVE_SDK_CLIENT_ID = ''
+ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id %}True{% else %}False{% endif %}
+ADOBE_CREATIVE_SDK_CLIENT_SECRET = '{{cookiecutter.adobe_creative_sdk_secret}}'
+ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
 
 # Google Apps authentication.
 
@@ -331,8 +330,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = ''
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = ''
+SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
+SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
+
 WHITELISTED_DOMAINS = ['onespacemedia.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
@@ -341,10 +341,12 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
     'cms.pipeline.make_staff',
 )
 
-SILENCED_SYSTEM_CHECKS = [
-    '1_6.W001',
-    # '1_6.W002'
-]
+SILENCED_SYSTEM_CHECKS = []
+
+{% if cookiecutter.geoip %}
+GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../geoip/"))
+{% endif %}
+
 
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load
@@ -369,5 +371,3 @@ if 'test' in sys.argv:
 
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
         MIDDLEWARE_CLASSES.remove('cms.middleware.LocalisationMiddleware')
-
-GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../geoip/"))
