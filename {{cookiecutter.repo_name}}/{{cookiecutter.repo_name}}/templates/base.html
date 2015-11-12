@@ -1,4 +1,4 @@
-{% load compress html pages %}
+{% raw %}{% load compress html pages %}
 {% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
@@ -61,3 +61,4 @@
     {% endcompress %}
   </body>
 </html>
+{% endraw %}

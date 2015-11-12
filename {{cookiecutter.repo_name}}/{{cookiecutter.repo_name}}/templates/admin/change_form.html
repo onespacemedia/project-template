@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}
+{% raw %}{% extends "admin/base_site.html" %}
 {% load i18n admin_static admin_modify suit_tags admin_urls %}
 {% load url from future %}
 
@@ -233,3 +233,4 @@
 
 {# Empty centered sidebar as now we use sidebar in content block#}
 {% block sidebar_content %}{% endblock %}
+{% endraw %}
