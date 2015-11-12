@@ -1,4 +1,4 @@
-"""URL config for {{ project_name }} project."""
+"""URL config for {{cookiecutter.repo_name}} project."""
 
 from django.conf import settings
 from django.conf.urls import patterns, url, include

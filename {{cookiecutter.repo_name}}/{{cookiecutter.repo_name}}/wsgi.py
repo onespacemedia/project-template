@@ -1,5 +1,5 @@
 """
-WSGI config for {{ project_name }} project.
+WSGI config for {{cookiecutter.repo_name}} project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -15,13 +15,13 @@ framework.
 """
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{ project_name }}.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{cookiecutter.repo_name}}.settings.production")
 
 # For HTTPS sites, enable these.
 # os.environ.setdefault('HTTPS', "on")
 # os.environ.setdefault('wsgi.url_scheme', 'https')
 
-# if os.environ['DJANGO_SETTINGS_MODULE'] != '{{ project_name }}.settings.local':
+# if os.environ['DJANGO_SETTINGS_MODULE'] != '{{cookiecutter.repo_name}}.settings.local':
 #     import newrelic.agent
 #     newrelic.agent.initialize('newrelic.ini')
 
