@@ -42,7 +42,7 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        '{{ project_name }}': {
+        '{{cookiecutter.repo_name}}': {
             'level': 'WARNING',
             'handlers': ['opbeat'],
             'propagate': False,

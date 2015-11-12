@@ -1,5 +1,5 @@
 """
-Production settings for {{ project_name }} project.
+Production settings for {{cookiecutter.repo_name}} project.
 
 For an explanation of these settings, please see the Django documentation at:
 
@@ -43,8 +43,8 @@ SUIT_CONFIG = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "{{ project_name }}",
-        "USER": "{{ project_name }}",
+        "NAME": "{{cookiecutter.repo_name}}",
+        "USER": "{{cookiecutter.repo_name}}",
         "PASSWORD": "",
         "HOST": "",
         "PORT": ""
@@ -54,7 +54,7 @@ DATABASES = {
 
 # Absolute path to the directory where all uploaded media files are stored.
 
-MEDIA_ROOT = "/var/www/{{ project_name }}_media"
+MEDIA_ROOT = "/var/www/{{cookiecutter.repo_name}}_media"
 
 MEDIA_URL = "/media/"
 
@@ -63,11 +63,11 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Absolute path to the directory where static files will be collected.
 
-STATIC_ROOT = "/var/www/{{ project_name }}_static"
+STATIC_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
 
 STATIC_URL = "/static/"
 
-NODE_MODULES_ROOT = "/var/www/{{ project_name }}_static"
+NODE_MODULES_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
 
 NODE_MODULES_URL = "/static/"
 
@@ -152,10 +152,10 @@ INSTALLED_APPS = [
     "cms.apps.media",
     "cms.apps.news",
 
-    "{{ project_name }}.apps.site",
-    "{{ project_name }}.apps.faqs",
-    "{{ project_name }}.apps.jobs",
-    "{{ project_name }}.apps.people",
+    "{{cookiecutter.repo_name}}.apps.site",
+    "{{cookiecutter.repo_name}}.apps.faqs",
+    "{{cookiecutter.repo_name}}.apps.jobs",
+    "{{cookiecutter.repo_name}}.apps.people",
 
     'server_management',
     'django_extensions',
@@ -221,9 +221,9 @@ PASSWORD_HASHERS = (
 )
 
 
-ROOT_URLCONF = "{{ project_name }}.urls"
+ROOT_URLCONF = "{{cookiecutter.repo_name}}.urls"
 
-WSGI_APPLICATION = "{{ project_name }}.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.repo_name}}.wsgi.application"
 
 PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
     "^admin/.*",
@@ -265,7 +265,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Namespace for cache keys, if using a process-shared cache.
 
-CACHE_MIDDLEWARE_KEY_PREFIX = "{{ project_name }}"
+CACHE_MIDDLEWARE_KEY_PREFIX = "{{cookiecutter.repo_name}}"
 
 CACHES = {
     "default": {

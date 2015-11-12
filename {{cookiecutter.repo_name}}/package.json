@@ -1,5 +1,5 @@
 {
-  "name": "{{ project_name }}",
+  "name": "{{cookiecutter.repo_name}}",
   "main": "server.js",
   "dependencies": {
     "webpack": "^1.12.2"
