@@ -1,0 +1,27 @@
+{
+    "local": {
+        "database": {
+            "name": "{{cookiecutter.repo_name}}"
+        }
+    },
+    "remotes": {
+        "staging": {
+            "server": {
+                "ip": "",
+                "identity_file": "",
+                "initial_user": "root"
+            },
+            "database": {
+                "name": "{{cookiecutter.repo_name}}",
+                "user": "{{cookiecutter.repo_name}}",
+                "password": ""
+            },
+            "is_aws": false,
+        }
+    },
+    "opbeat": {
+        "organization_id": "dde034beb33d4b77bb9937c39f0c158f",
+        "app_id": "{{cookiecutter.opbeat_app_id}}",
+        "secret_token": "{{cookiecutter.opbeat_secret_token}}"
+    }
+}
