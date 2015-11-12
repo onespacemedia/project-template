@@ -1,0 +1,21 @@
+{
+    "project_name": "Example Project",
+    "domain_name": "example.com",
+    "staging_subdomain": "example",
+    "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}",
+    "faqs": "no",
+    "jobs": "no",
+    "people": "no",
+    "redirects": "yes",
+    "news": "yes",
+    "sections": "yes",
+    "geoip": "no",
+    "email_password": "",
+    "google_analytics": "",
+    "adobe_creative_sdk_id": "",
+    "adobe_creative_sdk_secret": "",
+    "google_plus_key": "",
+    "google_plus_secret": "",
+    "opbeat_app_id": "",
+    "opbeat_secret_token": ""
+}
