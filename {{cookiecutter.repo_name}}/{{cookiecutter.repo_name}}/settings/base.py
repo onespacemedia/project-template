@@ -149,10 +149,10 @@ INSTALLED_APPS = [
     "cms.apps.links",
     "cms.apps.media",
 
-    {% if cookiecutter.faqs %}"{{cookiecutter.repo_name}}.apps.faqs",{% endif %}
-    {% if cookiecutter.jobs %}"{{cookiecutter.repo_name}}.apps.jobs",{% endif %}
-    {% if cookiecutter.news %}"{{cookiecutter.repo_name}}.apps.news",{% endif %}
-    {% if cookiecutter.people %}"{{cookiecutter.repo_name}}.apps.people",{% endif %}
+    {% if cookiecutter.faqs == 'yes' %}"{{cookiecutter.repo_name}}.apps.faqs",{% endif %}
+    {% if cookiecutter.jobs == 'yes' %}"{{cookiecutter.repo_name}}.apps.jobs",{% endif %}
+    {% if cookiecutter.news == 'yes' %}"{{cookiecutter.repo_name}}.apps.news",{% endif %}
+    {% if cookiecutter.people == 'yes' %}"{{cookiecutter.repo_name}}.apps.people",{% endif %}
     "{{cookiecutter.repo_name}}.apps.site",
 
     'server_management',
@@ -195,7 +195,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = (
-    {% if cookiecutter.geoip %}"cms.middleware.LocalisationMiddleware",{% endif %}
+    {% if cookiecutter.geoip == 'yes' %}"cms.middleware.LocalisationMiddleware",{% endif %}
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -298,7 +298,7 @@ WYSIWYG_OPTIONS = {
     "extraAllowedContent": "img[src,alt,width,height,title];*{*}"
 }
 
-{% if cookiecutter.news %}
+{% if cookiecutter.news == 'yes' %}
 NEWS_APPROVAL_SYSTEM = False
 {% endif %}
 
@@ -343,7 +343,7 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 
 SILENCED_SYSTEM_CHECKS = []
 
-{% if cookiecutter.geoip %}
+{% if cookiecutter.geoip == 'yes' %}
 GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../geoip/"))
 {% endif %}
 
