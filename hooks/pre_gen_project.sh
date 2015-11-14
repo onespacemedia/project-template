@@ -10,6 +10,6 @@ rm -rf tmp/
 {% for project in ['jobs', 'redirects', 'faqs', 'people', 'news'] %}
     {% if cookiecutter[project] == 'yes' %}
         echo "Cloning the {{project}} repo.";
-        git clone --depth 1 -q git@github.com:onespacemedia/cms-{{project}}.git tmp/{{project}}/
+        git clone --depth 1 -q https://github.com/onespacemedia/cms-{{project}}.git tmp/{{project}}/
     {% endif %}
 {% endfor %}
