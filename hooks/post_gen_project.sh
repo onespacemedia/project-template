@@ -22,6 +22,7 @@ if grep -iq GeoIP "requirements.txt"; then
 fi
 
 # Install Python dependencies.
+pip install --upgrade pip
 pip install -r requirements.txt
 
 # The requirements will now have versions pinned, so re-dump them.
