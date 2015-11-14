@@ -150,7 +150,6 @@ INSTALLED_APPS = [
     "cms.apps.pages",
     "cms.apps.links",
     "cms.apps.media",
-    "cms.apps.news",
 
     "{{ project_name }}.apps.site",
     "{{ project_name }}.apps.faqs",
