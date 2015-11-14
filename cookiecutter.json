@@ -17,5 +17,8 @@
     "google_plus_key": "",
     "google_plus_secret": "",
     "opbeat_app_id": "",
-    "opbeat_secret_token": ""
+    "opbeat_secret_token": "",
+    "_copy_without_render": [
+        "{{cookiecutter.repo_name}}/templates"
+    ]
 }
