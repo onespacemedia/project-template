@@ -41,7 +41,7 @@ rm -rf tmp/
 sed -i '' "s|SECRET_KEY = \" \"|SECRET_KEY = \"$(printf '%q' $(./manage.py generate_secret_key))\"|g" {{cookiecutter.repo_name}}/settings/base.py
 
 # The following commands don't need to be run under CI.
-if [ -n "$CI" ]; then
+if [ -z "$CI" ]; then
 
     # Install front-end dependencies.
     npm install -g webpack
