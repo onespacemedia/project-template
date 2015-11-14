@@ -40,22 +40,26 @@ rm -rf tmp/
 # Generate a secret key and update the base settings file.
 sed -i '' "s|SECRET_KEY = \" \"|SECRET_KEY = \"$(printf '%q' $(./manage.py generate_secret_key))\"|g" {{cookiecutter.repo_name}}/settings/base.py
 
-# Install front-end dependencies.
-npm install -g webpack
-npm install
-webpack
+# The following commands don't need to be run under CI.
+if [ -n "$CI" ]; then
 
-# Create a git repo and configure it for git flow.
-git init
+    # Install front-end dependencies.
+    npm install -g webpack
+    npm install
+    webpack
 
-# If Git flow isn't installed, install it. This isn't optional.
-if ! which -s git-flow; then
-    brew install git-flow
+    # Create a git repo and configure it for git flow.
+    git init
+
+    # If Git flow isn't installed, install it. This isn't optional.
+    if ! which -s git-flow; then
+        brew install git-flow
+    fi
+
+    git flow init -d
+
+    # Add all of the project files to a Git commit and push to the remote repo.
+    git add .
+    git commit -am "Initial commit."
+    git push
 fi
-
-git flow init -d
-
-# Add all of the project files to a Git commit and push to the remote repo.
-git add .
-git commit -am "Initial commit."
-git push
