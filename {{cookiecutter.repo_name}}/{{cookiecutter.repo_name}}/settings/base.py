@@ -136,6 +136,7 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.sitemaps",
 
+    'flexible_images',
     "sorl.thumbnail",
     "compressor",
 
