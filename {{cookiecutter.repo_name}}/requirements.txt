@@ -1,0 +1,21 @@
+bcrypt
+django
+django-cachalot
+django-compressor
+django-extensions
+django-flexible-images
+django-historylinks
+django-reversion==1.8.7
+django-suit
+django-watson
+django-webpack-loader
+onespacemedia-cms
+onespacemedia-server-management
+opbeat
+Pillow
+python-memcached
+python-social-auth
+requests
+sorl-thumbnail
+Werkzeug
+{% if cookiecutter.geoip == 'yes' %}geoip{% endif %}
