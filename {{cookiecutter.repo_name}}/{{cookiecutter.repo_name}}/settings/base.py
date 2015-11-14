@@ -276,7 +276,7 @@ CACHES = {
 
 # A secret key used for cryptographic algorithms.
 
-SECRET_KEY = "{{ secret_key }}"
+SECRET_KEY = " "
 
 
 WYSIWYG_OPTIONS = {

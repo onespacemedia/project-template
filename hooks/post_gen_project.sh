@@ -27,3 +27,6 @@ pip install -r requirements.txt
 
 # The requirements will now have versions pinned, so re-dump them.
 pip freeze > requirements.txt
+
+# Generate a secret key and update the base settings file.
+sed -i '' "s|SECRET_KEY = \" \"|SECRET_KEY = \"$(printf '%q' $(./manage.py generate_secret_key))\"|g" {{cookiecutter.repo_name}}/settings/base.py
