@@ -10,7 +10,7 @@ for the site, database, media and email sections below.
 """
 from __future__ import unicode_literals
 
-from social.pipeline import DEFAULT_AUTH_PIPELINE
+# from social.pipeline import DEFAULT_AUTH_PIPELINE
 
 import os
 import platform
@@ -338,9 +338,9 @@ WHITELISTED_DOMAINS = ['onespacemedia.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
-)
+# SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
+#     'cms.pipeline.make_staff',
+# )
 
 SILENCED_SYSTEM_CHECKS = []
 
