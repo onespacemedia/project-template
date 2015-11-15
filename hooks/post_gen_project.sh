@@ -17,11 +17,9 @@ fi
 # If GeoIP wasn't enabled, delete the GeoIP folder.
 cat requirements.txt
 
-if grep -iq GeoIP "requirements.txt"; then
+if ! grep -iq GeoIP "requirements.txt"; then
     echo "Removing GeoIP folder";
     rm -rf {{cookiecutter.repo_name}}/geoip/
-else
-    echo "Not removing GeoIP folder";
 fi
 
 # Install Python dependencies.
