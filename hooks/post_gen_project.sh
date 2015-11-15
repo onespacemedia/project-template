@@ -4,12 +4,14 @@
 createdb {{cookiecutter.repo_name}}
 
 # Make the virtual environment.
-if which -s mkvirtualenv; then
-    mkvirtualenv {{cookiecutter.repo_name}}
-    workon {{cookiecutter.repo_name}}
-else
-    virtualenv -p python .venv
-    . .venv/bin/activate
+if [ -z "$CI" ]; then
+    if which -s mkvirtualenv; then
+        mkvirtualenv {{cookiecutter.repo_name}}
+        workon {{cookiecutter.repo_name}}
+    else
+        virtualenv -p python .venv
+        . .venv/bin/activate
+    fi
 fi
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
