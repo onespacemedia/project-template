@@ -66,5 +66,7 @@ if [ -z "$CI" ]; then
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
     git commit -am "Initial commit."
-    git push
+
+    # We can't push yet because we don't have a remote..
+    # git push
 fi
