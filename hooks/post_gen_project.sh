@@ -45,13 +45,13 @@ rm -rf tmp/
 # Generate a secret key and update the base settings file.
 sed -i '' "s|SECRET_KEY = \" \"|SECRET_KEY = \"$(printf '%q' $(./manage.py generate_secret_key))\"|g" {{cookiecutter.repo_name}}/settings/base.py
 
+# Install front-end dependencies.
+npm install -g webpack
+npm install
+webpack
+
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
-
-    # Install front-end dependencies.
-    npm install -g webpack
-    npm install
-    webpack
 
     # Create a git repo and configure it for git flow.
     git init
