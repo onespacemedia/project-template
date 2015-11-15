@@ -26,7 +26,7 @@ if [ -z "$CI" ]; then
     pip install --upgrade pip
 # If we're running under CI, remove `onespacemedia-cms` from the requirements file.
 else
-    sed -i.bak '' "s/onespacemedia-cms//g" requirements.txt
+    perl -pi -e s,onespacemedia-cms,,g requirements.txt
 fi
 
 pip install -r requirements.txt
@@ -48,7 +48,7 @@ mv tmp/*/templates/* example_project/templates/
 rm -rf tmp/
 
 # Generate a secret key and update the base settings file.
-sed -i.bak '' "s|SECRET_KEY = \" \"|SECRET_KEY = \"$(printf '%q' $(./manage.py generate_secret_key))\"|g" {{cookiecutter.repo_name}}/settings/base.py
+perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.repo_name}}/settings/base.py
 
 # Install front-end dependencies.
 npm install -g webpack
