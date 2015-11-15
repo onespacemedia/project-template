@@ -29,7 +29,9 @@ fi
 
 # Remove anything which doesn't work on Python 3.
 if [ "$(python -c 'import sys; print(sys.version_info[0])')" == "3" ]; then
-    perl -pi -e s,onespacemedia-server-management,,g requirements.txt
+    {% for requirement in ['onespacemedia-server-management', 'python-memcached'] %}
+        perl -pi -e s,{{requirement}},,g requirements.txt
+    {% endfor %}
 fi
 
 pip install -r requirements.txt
