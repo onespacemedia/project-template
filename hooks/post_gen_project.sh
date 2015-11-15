@@ -38,11 +38,13 @@ mv {{ "{{" }}cookiecutter.repo_name{{ "}}" }}/templates {{cookiecutter.repo_name
 rmdir {{ "{{" }}cookiecutter.repo_name{{ "}}" }}
 
 # Move the project app folders into the correct locations.
-mv tmp/*/apps/* example_project/apps/
-mv tmp/*/templates/* example_project/templates/
+if [ -d "tmp" ]; then
+    mv tmp/*/apps/* example_project/apps/
+    mv tmp/*/templates/* example_project/templates/
 
-# Remove the tmp directory.
-rm -rf tmp/
+    # Remove the tmp directory.
+    rm -rf tmp/
+fi
 
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.repo_name}}/settings/base.py
