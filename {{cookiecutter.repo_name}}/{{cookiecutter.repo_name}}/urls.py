@@ -1,7 +1,7 @@
 """URL config for {{cookiecutter.repo_name}} project."""
 
 from django.conf import settings
-from django.conf.urls import patterns, url, include
+from django.conf.urls import url, include
 from django.contrib import admin
 from django.views import generic
 from django.conf.urls.static import static
@@ -14,8 +14,7 @@ from cms.forms import CMSPasswordChangeForm
 admin.autodiscover()
 
 
-urlpatterns = patterns(
-    "",
+urlpatterns = [
 
     # Admin URLs.
     url(r'^admin/password_change/$', 'django.contrib.auth.views.password_change',
@@ -38,7 +37,7 @@ urlpatterns = patterns(
 
     url('', include('social.apps.django_app.urls', namespace='social'))
 
-) + static(
+] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 ) + static(
     settings.NODE_MODULES_URL, document_root=settings.NODE_MODULES_ROOT
@@ -46,12 +45,11 @@ urlpatterns = patterns(
 
 
 if settings.DEBUG:
-    urlpatterns += patterns(
-        "",
+    urlpatterns += [
         url("^404/$", generic.TemplateView.as_view(template_name="404.html")),
         url("^500/$", generic.TemplateView.as_view(template_name="500.html")),
         url('^ui-kit/$', generic.TemplateView.as_view(template_name="ui-kit.html"))
-    )
+    ]
 
 
 handler500 = "cms.views.handler500"
