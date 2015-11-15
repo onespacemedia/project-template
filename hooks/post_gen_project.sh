@@ -27,6 +27,11 @@ if [ -z "$CI" ]; then
     pip install --upgrade pip
 fi
 
+# Remove anything which doesn't work on Python 3.
+if [ "$(python -c 'import sys; print(sys.version_info[0])')" == "3" ]; then
+    perl -pi -e s,onespacemedia-server-management,,g requirements.txt
+fi
+
 pip install -r requirements.txt
 
 # The requirements will now have versions pinned, so re-dump them.
