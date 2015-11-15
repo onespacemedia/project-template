@@ -24,9 +24,6 @@ fi
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
-# If we're running under CI, remove `onespacemedia-cms` from the requirements file.
-else
-    perl -pi -e s,onespacemedia-cms,,g requirements.txt
 fi
 
 pip install -r requirements.txt
