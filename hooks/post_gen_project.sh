@@ -18,7 +18,10 @@ if grep -iq GeoIP "requirements.txt"; then
 fi
 
 # Install Python dependencies.
-pip install --upgrade pip
+if [ -z "$CI" ]; then
+    pip install --upgrade pip
+fi
+
 pip install -r requirements.txt
 
 # The requirements will now have versions pinned, so re-dump them.
