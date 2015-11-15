@@ -16,6 +16,7 @@
     "adobe_creative_sdk_secret": "",
     "google_plus_key": "",
     "google_plus_secret": "",
+    "google_analytics_key": "",
     "opbeat_app_id": "",
     "opbeat_secret_token": "",
     "_copy_without_render": [

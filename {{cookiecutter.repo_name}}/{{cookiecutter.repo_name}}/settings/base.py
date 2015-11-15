@@ -304,6 +304,8 @@ NEWS_APPROVAL_SYSTEM = False
 {% endif %}
 
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
+ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
+ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
 
 # You can get your Client ID & Secret here: https://creativesdk.adobe.com/myapps.html
 ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id %}True{% else %}False{% endif %}
