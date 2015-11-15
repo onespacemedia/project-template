@@ -150,6 +150,8 @@ INSTALLED_APPS = [
     "cms.apps.links",
     "cms.apps.media",
 
+    {% if cookiecutter.redirects == 'yes' %}"redirects",{% endif %}
+
     {% if cookiecutter.faqs == 'yes' %}"{{cookiecutter.repo_name}}.apps.faqs",{% endif %}
     {% if cookiecutter.jobs == 'yes' %}"{{cookiecutter.repo_name}}.apps.jobs",{% endif %}
     {% if cookiecutter.news == 'yes' %}"{{cookiecutter.repo_name}}.apps.news",{% endif %}
@@ -197,6 +199,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 MIDDLEWARE_CLASSES = (
     {% if cookiecutter.geoip == 'yes' %}"cms.middleware.LocalisationMiddleware",{% endif %}
+    {% if cookiecutter.redirects == 'yes' %}"redirects.middleware.RedirectFallbackMiddleware",{% endif %}
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

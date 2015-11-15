@@ -5,6 +5,7 @@ django-compressor
 django-extensions
 django-flexible-images
 django-historylinks
+{% if cookiecutter.redirects == 'yes' %}onespacemedia-cms-redirects{% endif %}s
 django-reversion==1.8.7
 django-suit
 django-watson
