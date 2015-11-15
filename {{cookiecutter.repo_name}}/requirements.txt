@@ -19,4 +19,3 @@ requests
 sorl-thumbnail
 Werkzeug
 {% if cookiecutter.geoip == 'yes' %}geoip{% endif %}
-# geoip is: {{cookiecutter.geoip}}
