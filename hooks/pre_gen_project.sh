@@ -13,3 +13,8 @@ rm -rf tmp/
         git clone --depth 1 -q https://github.com/onespacemedia/cms-{{project}}.git tmp/{{project}}/
     {% endif %}
 {% endfor %}
+
+# If we're running under CI, remove `onespacemedia-cms` from the requirements file.
+if [ -n "$CI" ]; then
+    sed -i '' "s/onespacemedia-cms//g" requirements.txt
+fi
