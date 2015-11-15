@@ -15,6 +15,8 @@ if [ -z "$CI" ]; then
 fi
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
+cat requirements.txt
+
 if grep -iq GeoIP "requirements.txt"; then
     rm -rf {{cookiecutter.repo_name}}/geoip/
 fi
