@@ -1,7 +1,7 @@
 {
-    "project_name": "Example Project",
-    "domain_name": "example.com",
-    "staging_subdomain": "example",
+    "project_name": "{{ cookiecutter.project_name|default('Example Project') }}",
+    "domain_name": "{{ cookiecutter.domain_name|default('example.com') }}",
+    "staging_subdomain": "{{ cookiecutter.staging_subdomain|default('example.com') }}",
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '_') }}",
     "faqs": "no",
     "jobs": "no",
@@ -10,15 +10,11 @@
     "news": "yes",
     "sections": "yes",
     "geoip": "no",
-    "email_password": "",
-    "google_analytics": "",
-    "adobe_creative_sdk_id": "",
-    "adobe_creative_sdk_secret": "",
-    "google_plus_key": "",
-    "google_plus_secret": "",
-    "google_analytics_key": "",
-    "opbeat_app_id": "",
-    "opbeat_secret_token": "",
+    "email_password": "{{ cookiecutter.email_password }}",
+    "google_plus_key": "{{ cookiecutter.google_plus_key }}",
+    "google_plus_secret": "{{ cookiecutter.google_plus_secret }}",
+    "opbeat_app_id": "{{ cookiecutter.opbeat_app_id }}",
+    "opbeat_secret_token": "{{ cookiecutter.opbeat_secret_token }}",
     "_copy_without_render": [
         "{{cookiecutter.repo_name}}/templates"
     ]
