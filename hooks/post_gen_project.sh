@@ -53,6 +53,9 @@ if [ -d "tmp" ]; then
 
     # Remove the tmp directory.
     rm -rf tmp/
+
+    # Replace the project_name variable in the external apps.
+    perl -p -i -e 's/{{ project_name }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ project_name }}" *`
 fi
 
 # Generate a secret key and update the base settings file.
