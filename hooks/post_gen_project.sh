@@ -3,7 +3,7 @@
 source ~/.bash_profile
 
 # Create the database.
-createdb {{cookiecutter.repo_name}}
+createdb {{cookiecutter.package_name}}
 
 # Make the virtual environment.
 if [ -z "$CI" ]; then
@@ -20,7 +20,7 @@ cat requirements.txt
 
 if ! grep -iq GeoIP "requirements.txt"; then
     echo "Removing GeoIP folder";
-    rm -rf {{cookiecutter.repo_name}}/geoip/
+    rm -rf {{cookiecutter.package_name}}/geoip/
 fi
 
 # Install Python dependencies.
@@ -43,8 +43,8 @@ pip freeze > requirements.txt
 # We disable rendering of the templates folder to avoid having to wrap everything in
 # raw tags, but that causes the parent directory path to also not be parse, so we need
 # to move everything into the correct location, then remove the old parent directory.
-mv {{ "{{" }}cookiecutter.repo_name{{ "}}" }}/templates {{cookiecutter.repo_name}}/templates
-rmdir {{ "{{" }}cookiecutter.repo_name{{ "}}" }}
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}/templates
+rmdir {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Move the project app folders into the correct locations.
 if [ -d "tmp" ]; then
@@ -56,7 +56,7 @@ if [ -d "tmp" ]; then
 fi
 
 # Generate a secret key and update the base settings file.
-perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.repo_name}}/settings/base.py
+perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
 npm install -g webpack
