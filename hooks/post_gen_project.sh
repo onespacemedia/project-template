@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#! /bin/bash
 
 # Create the database.
 createdb {{cookiecutter.repo_name}}

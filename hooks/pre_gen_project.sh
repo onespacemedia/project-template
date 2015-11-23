@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#! /bin/bash
 
 # Ensure we don't have a tmp directory already.
 # XXX: Alternatively, rm the individual app folder names.
