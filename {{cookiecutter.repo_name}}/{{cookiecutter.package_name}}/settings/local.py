@@ -24,7 +24,7 @@ TEMPLATE_DEBUG = DEBUG
 
 MEDIA_ROOT = os.path.expanduser(os.path.join("~/Sites", SITE_DOMAIN, "media"))
 STATIC_ROOT = os.path.expanduser(os.path.join("~/Sites", SITE_DOMAIN, "static"))
-NODE_MODULES_ROOT = os.path.expanduser(os.path.join("~/Workspace/{{cookiecutter.repo_name}}", "node_modules"))
+NODE_MODULES_ROOT = os.path.expanduser(os.path.join("~/Workspace/{{cookiecutter.package_name}}", "node_modules"))
 
 
 # Use local server.
@@ -47,7 +47,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "HOST": "localhost",
-        "NAME": "{{cookiecutter.repo_name}}",
+        "NAME": "{{cookiecutter.package_name}}",
         "USER": os.getlogin(),
     },
 }

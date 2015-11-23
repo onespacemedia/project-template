@@ -21,7 +21,7 @@ browserSync({
 
   open: false,
 
-  logPrefix: '{{cookiecutter.repo_name}}',
+  logPrefix: '{{cookiecutter.package_name}}',
   logFileChanges: true,
 
   injectChanges: true,
@@ -50,8 +50,8 @@ browserSync({
   // no need to watch '*.js' here, webpack will take care of it for us,
   // including full page reloads if HMR won't work
   files: [
-    '{{cookiecutter.repo_name}}/static/*.css',
-    '{{cookiecutter.repo_name}}/static/ui-kit/*.html',
-    '{{cookiecutter.repo_name}}/templates/*.html'
+    '{{cookiecutter.package_name}}/static/*.css',
+    '{{cookiecutter.package_name}}/static/ui-kit/*.html',
+    '{{cookiecutter.package_name}}/templates/*.html'
   ]
 });

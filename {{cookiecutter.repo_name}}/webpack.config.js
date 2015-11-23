@@ -56,7 +56,7 @@ module.exports = {
 
   devtool: production ? false : 'eval',
 
-  context: path.join(__dirname, '{{cookiecutter.repo_name}}', 'assets'),
+  context: path.join(__dirname, '{{cookiecutter.package_name}}', 'assets'),
 
   entry: [
     'webpack/hot/dev-server',
@@ -65,7 +65,7 @@ module.exports = {
   ],
 
   output: {
-    path: path.join(__dirname, '{{cookiecutter.repo_name}}', 'static'),
+    path: path.join(__dirname, '{{cookiecutter.package_name}}', 'static'),
     filename: 'bundle.js',
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/static/'
@@ -83,7 +83,7 @@ module.exports = {
         test: /\.js/,
         exclude: /node_modules/,
         loaders: ['babel', 'baggage?[file].html=template&[file].scss'],
-        include: __dirname + '/{{cookiecutter.repo_name}}/assets'
+        include: __dirname + '/{{cookiecutter.package_name}}/assets'
       },
       {
         test: /\.scss/,

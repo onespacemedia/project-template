@@ -45,8 +45,8 @@ SUIT_CONFIG = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "{{cookiecutter.repo_name}}",
-        "USER": "{{cookiecutter.repo_name}}",
+        "NAME": "{{cookiecutter.package_name}}",
+        "USER": "{{cookiecutter.package_name}}",
     }
 }
 
@@ -152,11 +152,11 @@ INSTALLED_APPS = [
 
     {% if cookiecutter.redirects == 'yes' %}"redirects",{% endif %}
 
-    {% if cookiecutter.faqs == 'yes' %}"{{cookiecutter.repo_name}}.apps.faqs",{% endif %}
-    {% if cookiecutter.jobs == 'yes' %}"{{cookiecutter.repo_name}}.apps.jobs",{% endif %}
-    {% if cookiecutter.news == 'yes' %}"{{cookiecutter.repo_name}}.apps.news",{% endif %}
-    {% if cookiecutter.people == 'yes' %}"{{cookiecutter.repo_name}}.apps.people",{% endif %}
-    "{{cookiecutter.repo_name}}.apps.site",
+    {% if cookiecutter.faqs == 'yes' %}"{{cookiecutter.package_name}}.apps.faqs",{% endif %}
+    {% if cookiecutter.jobs == 'yes' %}"{{cookiecutter.package_name}}.apps.jobs",{% endif %}
+    {% if cookiecutter.news == 'yes' %}"{{cookiecutter.package_name}}.apps.news",{% endif %}
+    {% if cookiecutter.people == 'yes' %}"{{cookiecutter.package_name}}.apps.people",{% endif %}
+    "{{cookiecutter.package_name}}.apps.site",
 
     'server_management',
     'django_extensions',
@@ -223,9 +223,9 @@ PASSWORD_HASHERS = (
 )
 
 
-ROOT_URLCONF = "{{cookiecutter.repo_name}}.urls"
+ROOT_URLCONF = "{{cookiecutter.package_name}}.urls"
 
-WSGI_APPLICATION = "{{cookiecutter.repo_name}}.wsgi.application"
+WSGI_APPLICATION = "{{cookiecutter.package_name}}.wsgi.application"
 
 PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
     "^admin/.*",
@@ -267,7 +267,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 # Namespace for cache keys, if using a process-shared cache.
 
-CACHE_MIDDLEWARE_KEY_PREFIX = "{{cookiecutter.repo_name}}"
+CACHE_MIDDLEWARE_KEY_PREFIX = "{{cookiecutter.package_name}}"
 
 CACHES = {
     "default": {
