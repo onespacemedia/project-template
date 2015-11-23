@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/.bash_profile
+
 # Create the database.
 createdb {{cookiecutter.repo_name}}
 
