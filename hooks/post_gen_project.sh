@@ -15,9 +15,6 @@ if [ -z "$CI" ]; then
     }
 fi
 
-pwd
-ls
-
 # If GeoIP wasn't enabled, delete the GeoIP folder.
 cat requirements.txt
 
@@ -51,8 +48,8 @@ rmdir {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Move the project app folders into the correct locations.
 if [ -d "tmp" ]; then
-    mv tmp/*/apps/* example_project/apps/
-    mv tmp/*/templates/* example_project/templates/
+    mv tmp/*/apps/* {{cookiecutter.package_name}}/apps/
+    mv tmp/*/templates/* {{cookiecutter.package_name}}/templates/
 
     # Remove the tmp directory.
     rm -rf tmp/
