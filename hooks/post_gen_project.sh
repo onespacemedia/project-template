@@ -86,3 +86,7 @@ if [ -z "$CI" ]; then
     # We can't push yet because we don't have a remote..
     # git push
 fi
+
+ls -al
+pwd
+ls -al *
