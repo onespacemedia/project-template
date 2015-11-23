@@ -11,9 +11,12 @@ if [ -z "$CI" ]; then
     {
         mkvirtualenv {{cookiecutter.repo_name}} && workon {{cookiecutter.repo_name}}
     } || {
-        virtualenv -p python .venv && .venv/bin/activate
+        virtualenv -p python .venv && source .venv/bin/activate
     }
 fi
+
+pwd
+ls
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
 cat requirements.txt
