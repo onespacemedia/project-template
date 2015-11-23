@@ -9,11 +9,9 @@ createdb {{cookiecutter.repo_name}}
 if [ -z "$CI" ]; then
 
     {
-        mkvirtualenv {{cookiecutter.repo_name}} &&
-        workon {{cookiecutter.repo_name}}
+        mkvirtualenv {{cookiecutter.repo_name}} && workon {{cookiecutter.repo_name}}
     } || {
-        virtualenv -p python .venv &&
-        . .venv/bin/activate
+        virtualenv -p python .venv && .venv/bin/activate
     }
 fi
 
