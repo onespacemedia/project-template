@@ -1,0 +1,52 @@
+{
+  "root": {
+    "src": "./{{cookiecutter.package_name}}/assets",
+    "dest": "./{{cookiecutter.package_name}}/static"
+  },
+
+  "tasks": {
+    "browserSync": {
+      "notify": false,
+      "open": false,
+      "proxy": {
+        "target": "0.0.0.0:8000"
+      }
+    },
+
+    "js": {
+      "src": "js",
+      "dest": "js",
+      "extractSharedJs": true,
+      "entries": {
+        "app": ["./app.js"]
+      },
+      "extensions": ["js"]
+    },
+
+    "css": {
+      "src": "scss",
+      "dest": "css",
+      "autoprefixer": {
+        "browsers": ["last 3 version"]
+      },
+      "sass": {
+        "precision": 10,
+        "stats": true,
+        "includePaths": ["node_modules"]
+      },
+      "extensions": ["sass", "scss", "css"]
+    },
+
+    "images": {
+      "src": "img",
+      "dest": "img",
+      "extensions": ["jpg", "png", "svg", "gif"]
+    },
+
+    "fonts": {
+      "src": "fonts",
+      "dest": "fonts",
+      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
+    }
+  }
+}
