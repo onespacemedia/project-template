@@ -1,0 +1,71 @@
+{
+  "rules": {
+    "color-hex-case": [2, "lower"],
+    "color-hex-length": [2, "short"],
+
+    "number-leading-zero": [2, "always"],
+    "number-max-precision": [1, 3],
+    "number-no-trailing-zeros": [2],
+    "number-zero-length-no-unit": [2],
+
+    "function-comma-space-after": [2, "always-single-line"],
+    "function-comma-space-before": [2, "never"],
+    "function-parentheses-space-inside": [2, "never-single-line"],
+
+    "value-no-vendor-prefix": [2],
+
+    "value-list-comma-space-after": [2, "always"],
+    "value-list-comma-space-before": [2, "never"],
+
+    "property-no-vendor-prefix": [2],
+
+    "declaration-bang-space-after": [2, "never"],
+    "declaration-bang-space-before": [2, "always"],
+    "declaration-colon-space-after": [2, "always"],
+    "declaration-colon-space-before": [2, "never"],
+    "declaration-no-important": [1],
+
+    "declaration-block-semicolon-newline-after": [2, "always-multi-line"],
+    "declaration-block-semicolon-newline-before": [2, "never-multi-line"],
+    "declaration-block-semicolon-space-after": [2, "always-single-line"],
+    "declaration-block-semicolon-space-before": [2, "never"],
+
+    "nesting-block-opening-brace-newline-before": [2, "always-multi-line"],
+
+    "block-closing-brace-newline-after": [2, "always-single-line"],
+    "block-closing-brace-newline-before": [2, "always-multi-line"],
+    "block-closing-brace-space-before": [2, "always-single-line"],
+    "block-no-empty": [2],
+    "block-opening-brace-newline-after": [2, "always-multi-line"],
+    "block-opening-brace-space-after": [2, "always-single-line"],
+    "block-opening-brace-space-before": [2, "always"],
+
+    "selector-combinator-space-after": [2, "always"],
+    "selector-combinator-space-before": [2, "always"],
+    "selector-no-universal": [1],
+    "selector-no-vendor-prefix": [2],
+    "selector-pseudo-element-colon-notation": [2, "double"],
+
+    "selector-list-comma-space-after": [2, "always-single-line"],
+    "selector-list-comma-space-before": [2, "never"],
+
+    "rule-nested-empty-line-before": [2, "always-multi-line", {
+      "except": ["first-nested"],
+      "ignore": ["after-comment"]
+    }],
+    "rule-no-duplicate-properties": [2],
+    "rule-no-shorthand-property-overrides": [2],
+    "rule-trailing-semicolon": [2, "always"],
+
+    "media-feature-colon-space-after": [2, "always"],
+    "media-feature-colon-space-before": [2, "never"],
+    "media-feature-name-no-vendor-prefix": [2],
+    "media-feature-range-operator-space-after": [2, "always"],
+    "media-feature-range-operator-space-before": [2, "always"],
+
+    "media-query-parentheses-space-inside": [2, "never"],
+
+    "indentation": [2, 2],
+    "string-quotes": [2, "single"]
+  }
+}
