@@ -21,10 +21,14 @@ var cssTask = function () {
     .pipe(sass(config.tasks.css.sass))
     .on('error', handleErrors)
     .pipe(postcss([
+      require('postcss-assets')({
+        basePath: 'csap/assets/',
+        loadPaths: ['img/'],
+        baseUrl: '/static/site/build/'
+      }),
       require('postcss-at2x'),
       require('autoprefixer'),
       require('postcss-brand-colors'),
-      require('postcss-pseudo-class-enter'),
       require('postcss-fakeid'),
       require('postcss-flexbugs-fixes'),
       require('postcss-property-lookup'),
@@ -37,5 +41,5 @@ var cssTask = function () {
     .pipe(browserSync.stream({match: '**/*.css'}))
 }
 
-gulp.task('css', cssTask)
+gulp.task('css', ['stylelint'], cssTask)
 module.exports = cssTask
