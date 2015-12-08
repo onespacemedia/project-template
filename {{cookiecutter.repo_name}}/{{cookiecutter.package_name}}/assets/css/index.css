@@ -6,16 +6,7 @@
 | consistency in the default styling of HTML elements.
 |
 */
-@import 'normalize.scss/normalize'; // Included by gulp-sass includePaths
-
-/*
-|--------------------------------------------------------------------------
-| Config
-|--------------------------------------------------------------------------
-| The shared variables that will be used throughout our project.
-|
-*/
-@import 'config/variables';
+@import 'normalize';
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +15,6 @@
 | Sass based shared helper methods that are used throughout all of our project.
 |
 */
-@import 'helpers/functions';
 @import 'helpers/media-queries';
 @import 'helpers/mixins';
 
