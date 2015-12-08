@@ -1,7 +1,20 @@
-/* ======================== */
-/* Logo
-/* ======================== */
-.c-header_logo {
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+| The global site header that appears at the top of every page
+|
+| @prefix: hd-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Header - Logo
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Logo {
   display: block;
   height: height(map-get($logo, file));
   width: width(map-get($logo, file));
@@ -16,15 +29,5 @@
 
     background-image: resolve(map-get($logo-lg, file));
     background-size: #{'@width'} #{'@height'};
-  }
-}
-
-/* ======================== */
-/* Navigation
-/* ======================== */
-.c-header_navigation {
-  @include breakpoint-gte(lg) {
-    display: block;
-    margin-left: auto;
   }
 }

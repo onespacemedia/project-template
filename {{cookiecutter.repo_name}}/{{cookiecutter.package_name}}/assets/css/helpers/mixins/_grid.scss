@@ -1,0 +1,35 @@
+@import '../../config/variables';
+
+/*
+|--------------------------------------------------------------------------
+| Grid
+|--------------------------------------------------------------------------
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Grid - Container
+|--------------------------------------------------------------------------
+| Creates the container for constraining content
+|
+| @collapsed: Boolean for if we want the outside gutters
+|
+*/
+@mixin Grid_Container($collapsed: false) {
+  /* Add 30px to the container as the 'container' should be the size of the
+  /* content not the actual div
+  /* ------------------------ */
+  max-width: if($collapsed, map-get($Grid, container), map-get($Grid, container) + map-get($Grid, gutter));
+  margin-right: auto;
+  margin-left: #{'@margin-right'};
+
+  @if $collapsed == 'right' {
+    padding-left: #{map-get($Grid, gutter)} / 2;
+  } @else if $collapsed == 'left' {
+    padding-right: #{map-get($Grid, gutter)} / 2;
+  } @else if $collapsed == false {
+    padding-right: #{map-get($Grid, gutter)} / 2;
+    padding-left: #{map-get($Grid, gutter)} / 2;
+  }
+}

@@ -1,0 +1,143 @@
+/*
+|--------------------------------------------------------------------------
+| Colors
+|--------------------------------------------------------------------------
+| The base colors that are used throughout the site, if you see yourself
+| using the same hex more than once, consider adding it here. Please use
+| contextless names. If you have `headerRed` then that's used anywhere but
+| the header it doesn't make much sense so just use `darkRed` or `red` etc.
+|
+*/
+$Colors: (
+  dark: #1f2429,
+  light: #efefef
+);
+
+/*
+|--------------------------------------------------------------------------
+| Font - Families
+|--------------------------------------------------------------------------
+| The font families used throughout the site, feel free to rename them to
+| the fonts that are used i.e. $Font_Family-Myriad|Minion instead of
+| Serif|SansSerif.
+|
+| Also don't worry about making this a map as you end up with very long lines
+| having to do map-get($Font_Families, name) we also tend to have very few so
+| a map tends to be overkill.
+|
+*/
+$Font_Family-SansSerif: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$Font_Family-Serif: 'Georgia', 'Times New Roman', serif;
+
+/*
+|--------------------------------------------------------------------------
+| Font - Sizes
+|--------------------------------------------------------------------------
+| Font sizes used across the site, wysiwyg specific sizes are namespaced with
+| wys- to make it clear these are the sizings that are choosable in the
+| wysiwyg. For sizes just used on the site use a non namespaced name
+|
+| !!! Make sure the keys match the keys in the equivalent line-height map
+|
+*/
+
+/**
+* Wysiwyg
+*/
+$Font_Sizes: (
+  wys-lg: 20px,
+  wys-md: 18px,
+  wys-sm: 16px,
+
+  xlg: 24px,
+  lg: 22px,
+  md: 20px,
+  sm: 18px,
+  xsm: 16px,
+  normal: 16px,
+  root: 16px
+);
+
+$Font_Sizes--lg: (
+  wys-lg: 24px,
+  wys-md: 20px,
+  wys-sm: 18px,
+
+  xlg: 32px,
+  lg: 28px,
+  md: 20px,
+  sm: 18px,
+  xsm: 18px,
+  normal: 16px,
+  root: 16px
+);
+
+/*
+|--------------------------------------------------------------------------
+| Line heights
+|--------------------------------------------------------------------------
+| The line heights that get paired with our previously set font-sizes. Again
+| namespace them with Wysiwyg & Site for ease of use
+|
+| !!! Make sure the keys match the keys in the equivalent font-size map
+|
+*/
+$LineHeight_Addition: 10px;
+$LineHeights: (
+  large: map-get($fontSizes, large) + $lineHeightAddition,
+  medium: map-get($fontSizes, medium) + $lineHeightAddition,
+  small: map-get($fontSizes, small) + $lineHeightAddition
+);
+
+$LineHeights--lg: (
+  large: map-get($fontSizes-lg, large) + $lineHeightAddition,
+  medium: map-get($fontSizes-lg, medium) + $lineHeightAddition,
+  small: map-get($fontSizes-lg, small) + $lineHeightAddition
+);
+
+/*
+|--------------------------------------------------------------------------
+| Media queries
+|--------------------------------------------------------------------------
+| The breakpoints we split our responsiveness up into
+|
+*/
+$Media_Ranges: (
+  xs: (0, 480px),
+  sm: (481px, 768px),
+  md: (769px, 1024px),
+  lg: (1025px, 1440px),
+  xlg: (1441px, 1920px),
+  xxlg: (1921px, 999999px)
+);
+
+/*
+|--------------------------------------------------------------------------
+| Grid
+|--------------------------------------------------------------------------
+| We don't actually use a full blown grid on our sites but we do use a few
+| grid quality helpers.
+|
+| @constrained: The size the site will grow to at max-width
+| @container: The size the content will grow to at max-width
+| @gutter: The space we will have between content sitting next to each other
+*/
+$Grid: (
+  constrained: 1700px,
+  container: 1180px,
+  gutter: 30px
+);
+
+/*
+|--------------------------------------------------------------------------
+| Misc
+|--------------------------------------------------------------------------
+| Use this for things we want as variables but don't necessarily fit into
+| their own context
+|
+| @bdrs: The global border-radius
+*/
+$Misc: (
+  bdrs: 4px,
+  transitionDuration: 0.18s
+);

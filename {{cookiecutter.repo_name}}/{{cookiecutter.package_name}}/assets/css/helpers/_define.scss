@@ -54,7 +54,9 @@ html {
 }
 
 body {
-  @include fontSmoothing();
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 
   // This needs escaping so it doesn't double string
   font-family: #{map-get($fontFamilies, serif)};

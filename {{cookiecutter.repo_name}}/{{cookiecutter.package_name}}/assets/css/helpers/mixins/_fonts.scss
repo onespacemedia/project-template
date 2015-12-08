@@ -1,0 +1,32 @@
+@import '../../config/variables';
+@import '../media-queries';
+
+/*
+|--------------------------------------------------------------------------
+| Fonts
+|--------------------------------------------------------------------------
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Font sizing
+|--------------------------------------------------------------------------
+| Returns a dynamic margin-bottom as well as the font-sizes / line-heights
+| declared in the config/_variables.scss
+|
+| @size: The font size variable from the maps & lineheights
+*/
+@mixin Font_Sizing($size) {
+  @if map-has-key($Font_Sizes, $size) {
+    margin-bottom: map-get($Font_Sizes--lg, $size) / 2;
+
+    font-size: map-get($Font_Sizes--lg, $size);
+    line-height: map-get($LineHeights, $size);
+
+    @include breakpoint-gte(lg) {
+      font-size: map-get($Font_Sizes--lg-lg, $size);
+      line-height: map-get($LineHeights--lg, $size);
+    }
+  }
+}
