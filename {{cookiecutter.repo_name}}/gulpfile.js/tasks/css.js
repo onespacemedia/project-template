@@ -3,11 +3,9 @@ if(!config.tasks.css) return
 
 var gulp         = require('gulp')
 var browserSync  = require('browser-sync')
-var sass         = require('gulp-sass')
 var sourcemaps   = require('gulp-sourcemaps')
 var postcss      = require('gulp-postcss')
 var handleErrors = require('../lib/handleErrors')
-var autoprefixer = require('gulp-autoprefixer')
 var path         = require('path')
 
 var paths = {
@@ -20,20 +18,24 @@ var cssTask = function () {
     .pipe(sourcemaps.init())
     .pipe(postcss([
       // Sassy based plugins
-      require('postcss-partial-import'),
+      require('postcss-import'),
       require('postcss-sassy-mixins'),
       require('postcss-advanced-variables'),
       require('postcss-custom-selectors'),
       require('postcss-custom-media'),
       require('postcss-custom-properties'),
-      require('postcss-media-minmax'),
       require('postcss-color-function'),
       require('postcss-nested'),
       require('postcss-atroot'),
       require('postcss-property-lookup'),
-      require('postcss-extend'),
       require('postcss-selector-matches'),
       require('postcss-selector-not'),
+      require('postcss-functions')({
+        contains: function (list, value) {
+          console.log(list, value)
+        }
+      }),
+      require('postcss-conditionals'),
 
       // Niceties
       require('postcss-assets')({
