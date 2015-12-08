@@ -19,6 +19,8 @@ families:
 #
 # !!! Make sure the keys match the keys in the equivalent line-height map
 sizes:
+  root: 16px
+
   wysiwyg:
     base:
       lg: 20px
@@ -37,7 +39,6 @@ sizes:
     sm: 18px
     xsm: 16px
     normal: 16px
-    root: 16px
 
   md:
     xlg: 32px
@@ -46,7 +47,6 @@ sizes:
     sm: 18px
     xsm: 18px
     normal: 16px
-    root: 16px
 
 # Line heights
 #
@@ -73,7 +73,6 @@ lineHeights:
     sm: 28px
     xsm: 26px
     normal: 26px
-    root: 26px
 
   md:
     xlg: 42px
@@ -82,5 +81,3 @@ lineHeights:
     sm: 28px
     xsm: 28px
     normal: 26px
-    root: 26px
-

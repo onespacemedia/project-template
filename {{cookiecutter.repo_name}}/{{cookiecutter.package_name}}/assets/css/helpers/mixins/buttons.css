@@ -1,5 +1,3 @@
-@import '../../config/variables';
-
 /*
 |--------------------------------------------------------------------------
 | Buttons
@@ -20,20 +18,20 @@
 |
 */
 @mixin Button() {
-  $Duration: map-get($Misc, transitionDuration);
+  $Duration: map(misc, transitionDuration);
 
   display: inline-block;
   padding-top: 7px;
-  padding-right: #{map-get($Grid, gutter)} / 2;
-  padding-bottom: #{'@padding-top'};
-  padding-left: #{'@padding-right'};
+  padding-right: calc(map(grid, gutter) / 2);
+  padding-bottom: @padding-top;
+  padding-left: @padding-right;
 
-  font-family: $Font_Family-SansSerif;
+  font-family: map(fonts, families, sans);
   font-weight: 600;
 
   background-color: transparent;
   border: 2px solid transparent;
-  border-radius: map-get($Misc, bdrs);
+  border-radius: map(misc, bdrs);
   color: #fff;
 
   transition: background-color $Duration, color $Duration;

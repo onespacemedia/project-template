@@ -30,11 +30,16 @@ var cssTask = function () {
       require('postcss-property-lookup'),
       require('postcss-selector-matches'),
       require('postcss-selector-not'),
+      require('postcss-map')({
+        basePath: 'assets/css/',
+        maps: ['breakpoints.yaml', 'colors.yaml', 'fonts.yaml', 'grid.yaml', 'misc.yaml']
+      }),
       require('postcss-functions')({
         contains: function (list, value) {
           console.log(list, value)
         }
       }),
+      require('postcss-calc'),
       require('postcss-conditionals'),
 
       // Niceties

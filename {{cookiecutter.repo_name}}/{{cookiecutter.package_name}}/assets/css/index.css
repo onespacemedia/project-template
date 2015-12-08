@@ -15,10 +15,12 @@
 | Sass based shared helper methods that are used throughout all of our project.
 |
 */
-@import 'helpers/media-queries';
+@import 'helpers/media-definitions';
+@import 'helpers/selector-definitions';
+
 @import 'helpers/mixins';
 
-// Like bootstraps reboot, define some base normalized styles
+/* Like bootstraps reboot, define some base normalized styles */
 @import 'helpers/define';
 
 /*

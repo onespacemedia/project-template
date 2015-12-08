@@ -1,4 +1,3 @@
-@import '../../config/variables';
 @import '../media-queries';
 
 /*
@@ -18,15 +17,13 @@
 | @size: The font size variable from the maps & lineheights
 */
 @mixin Font_Sizing($size) {
-  @if map-has-key($Font_Sizes, $size) {
-    margin-bottom: map-get($Font_Sizes--lg, $size) / 2;
+  margin-bottom: calc(map(fonts, sizes, base, $size) / 2);
 
-    font-size: map-get($Font_Sizes--lg, $size);
-    line-height: map-get($LineHeights, $size);
+  font-size: map(fonts, sizes, base, $size);
+  line-height: map(fonts, lineHeights, base, $size);
 
-    @include breakpoint-gte(lg) {
-      font-size: map-get($Font_Sizes--lg-lg, $size);
-      line-height: map-get($LineHeights--lg, $size);
-    }
+  @media (--md) {
+    font-size: map(fonts, sizes, md, $size);
+    line-height: map(fonts, lineHeights, md, $size);
   }
 }

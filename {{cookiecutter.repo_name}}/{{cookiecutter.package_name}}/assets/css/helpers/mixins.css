@@ -1,5 +1,4 @@
 @import 'media-queries';
-@import '../config/variables';
 
 @import 'mixins/buttons';
 @import 'mixins/fonts';

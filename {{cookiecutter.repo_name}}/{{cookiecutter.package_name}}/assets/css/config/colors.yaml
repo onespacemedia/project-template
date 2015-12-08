@@ -6,3 +6,4 @@
 # the header it doesn't make much sense so just use `darkRed` or `red` etc.
 dark: '#1f2429'
 light: '#efefef'
+anchor: '#61bdf2'

@@ -1,0 +1,20 @@
+/*
+|--------------------------------------------------------------------------
+| Selector definitions
+|--------------------------------------------------------------------------
+| The definitions used for all of our responsive changes. By default it will
+| take
+| the breakpoint supplied and apply the changes to that breakpoint and all the
+| sizes above it.
+|
+| If you require styles to be applied to just a certain breakpoint you can use
+| '{$size}-only' which will apply styles to just that size and not to sizes
+| above it.
+|
+| Do not under ANY circumstances add a set of arguments that only apply a
+| max-width so it applies to the size set and all sizes below. This is very
+| bad practice.
+|
+| @size: Size that the styles will apply to and above
+*/
+@custom-selector: :--headings h1, h2, h3, h4, h5, h6;

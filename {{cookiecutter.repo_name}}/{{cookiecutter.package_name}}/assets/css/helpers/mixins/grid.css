@@ -1,5 +1,3 @@
-@import '../../config/variables';
-
 /*
 |--------------------------------------------------------------------------
 | Grid
@@ -20,16 +18,20 @@
   /* Add 30px to the container as the 'container' should be the size of the
   /* content not the actual div
   /* ------------------------ */
-  max-width: if($collapsed, map-get($Grid, container), map-get($Grid, container) + map-get($Grid, gutter));
+  $Container: map(grid, container);
+
   margin-right: auto;
-  margin-left: #{'@margin-right'};
+  margin-left: @margin-right;
 
   @if $collapsed == 'right' {
-    padding-left: #{map-get($Grid, gutter)} / 2;
+    padding-left: calc(map(grid, gutter) / 2);
   } @else if $collapsed == 'left' {
-    padding-right: #{map-get($Grid, gutter)} / 2;
+    padding-right: calc(map(grid, gutter) / 2);
   } @else if $collapsed == false {
-    padding-right: #{map-get($Grid, gutter)} / 2;
-    padding-left: #{map-get($Grid, gutter)} / 2;
+    max-width: calc($Container + map(grid, gutter));
+    padding-right: calc(map(grid, gutter) / 2);
+    padding-left: @padding-right;
+  } @else {
+    max-width: $Container;
   }
 }
