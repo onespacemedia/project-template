@@ -19,7 +19,7 @@ var styleLintTask = function () {
   ]
 
   return gulp.src(paths.src)
-    .pipe(postcss(processors, {syntax: scss}))
+    .pipe(postcss(processors))
 }
 
 gulp.task('stylelint', styleLintTask)

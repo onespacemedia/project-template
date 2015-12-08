@@ -24,25 +24,15 @@
     },
 
     "css": {
-      "src": "scss",
+      "src": "css",
       "dest": "css",
-      "autoprefixer": {
-        "browsers": ["last 2 versions"]
-      },
-      "sass": {
-        "precision": 10,
-        "stats": true,
-        "includePaths": ["node_modules"]
-      },
-      "extensions": ["sass", "scss", "css"]
+      "extensions": ["css"]
     },
 
     "stylelint": {
-      "src": "scss",
+      "src": "css",
       "dest": "css",
       "extensions": [
-        "sass",
-        "scss",
         "css"
       ]
     },
