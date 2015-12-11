@@ -9,7 +9,7 @@ var handleErrors = require('../lib/handleErrors')
 var path         = require('path')
 
 var paths = {
-  src: path.join(config.root.src, config.tasks.css.src, '/*.{' + config.tasks.css.extensions + '}'),
+  src: path.join(config.root.src, config.tasks.css.src, '/*.' + config.tasks.css.extension),
   dest: path.join(config.root.dest, config.tasks.css.dest)
 }
 
@@ -31,13 +31,8 @@ var cssTask = function () {
       require('postcss-selector-matches'),
       require('postcss-selector-not'),
       require('postcss-map')({
-        basePath: 'assets/css/',
+        basePath: 'assets/css/config',
         maps: ['breakpoints.yaml', 'colors.yaml', 'fonts.yaml', 'grid.yaml', 'misc.yaml']
-      }),
-      require('postcss-functions')({
-        contains: function (list, value) {
-          console.log(list, value)
-        }
       }),
       require('postcss-calc'),
       require('postcss-conditionals'),
@@ -55,7 +50,9 @@ var cssTask = function () {
       require('postcss-pxtorem'),
       require('postcss-quantity-queries'),
       require('postcss-will-change'),
-      require('autoprefixer'),
+      require('autoprefixer')({
+        browsers: ['last 2 versions', 'IE 9', 'IE 10']
+      }),
     ]))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest))

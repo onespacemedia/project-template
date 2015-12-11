@@ -26,15 +26,13 @@
     "css": {
       "src": "css",
       "dest": "css",
-      "extensions": ["css"]
+      "extension": "css"
     },
 
     "stylelint": {
       "src": "css",
       "dest": "css",
-      "extensions": [
-        "css"
-      ]
+      "extension": "css"
     },
 
     "images": {
