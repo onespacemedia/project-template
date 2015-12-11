@@ -1,3 +1,5 @@
+/* stylelint-disable */
+
 /*
 |--------------------------------------------------------------------------
 | Redefine
@@ -129,3 +131,4 @@ table {
   table-layout: fixed;
   width: 100%;
 }
+/* stylelint-enable */

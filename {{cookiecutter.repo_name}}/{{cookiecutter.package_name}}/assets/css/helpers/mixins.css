@@ -1,5 +1,3 @@
-@import 'media-queries';
-
-@import 'mixins/buttons';
-@import 'mixins/fonts';
-@import 'mixins/grid';
+@import 'mixins/buttons.css';
+@import 'mixins/fonts.css';
+@import 'mixins/grid.css';

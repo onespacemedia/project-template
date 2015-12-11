@@ -1,0 +1,17 @@
+/*
+|--------------------------------------------------------------------------
+| Wysiwyg
+|--------------------------------------------------------------------------
+|
+*/
+
+/*
+  Since we can't class everything in the WYSIWYG the no type rule is relaxed
+
+  stylelint-disable selector-no-type
+*/
+.wys-Outer {
+
+}
+
+/* stylelint-enable */

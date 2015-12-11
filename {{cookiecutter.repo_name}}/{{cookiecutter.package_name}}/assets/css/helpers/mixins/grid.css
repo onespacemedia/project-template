@@ -18,20 +18,9 @@
   /* Add 30px to the container as the 'container' should be the size of the
   /* content not the actual div
   /* ------------------------ */
-  $Container: map(grid, container);
-
   margin-right: auto;
   margin-left: @margin-right;
-
-  @if $collapsed == 'right' {
-    padding-left: calc(map(grid, gutter) / 2);
-  } @else if $collapsed == 'left' {
-    padding-right: calc(map(grid, gutter) / 2);
-  } @else if $collapsed == false {
-    max-width: calc($Container + map(grid, gutter));
-    padding-right: calc(map(grid, gutter) / 2);
-    padding-left: @padding-right;
-  } @else {
-    max-width: $Container;
-  }
+  max-width: calc(map(grid, container) + map(grid, gutter));
+  padding-right: calc(map(grid, gutter) / 2);
+  padding-left: @padding-right;
 }

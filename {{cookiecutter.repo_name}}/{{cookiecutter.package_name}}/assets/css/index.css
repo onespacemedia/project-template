@@ -6,7 +6,7 @@
 | consistency in the default styling of HTML elements.
 |
 */
-@import 'normalize';
+@import 'normalize.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +15,12 @@
 | Sass based shared helper methods that are used throughout all of our project.
 |
 */
-@import 'helpers/media-definitions';
-@import 'helpers/selector-definitions';
-
-@import 'helpers/mixins';
+@import 'helpers/media-definitions.css';
+@import 'helpers/selector-definitions.css';
+@import 'helpers/mixins.css';
 
 /* Like bootstraps reboot, define some base normalized styles */
-@import 'helpers/define';
+@import 'helpers/define.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +30,9 @@
 | to any particular part of the site.
 |
 */
-@import 'base/layout';
-@import 'base/typography';
+@import 'base/wysiwyg.css';
+@import 'base/layout.css';
+@import 'base/typography.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -43,8 +43,8 @@
 | the footer
 |
 */
-@import 'globals/header';
-@import 'globals/footer';
+@import 'globals/header.css';
+@import 'globals/footer.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -54,4 +54,4 @@
 | regardless of content.
 |
 */
-@import 'components/sections'
+@import 'components/sections.css';

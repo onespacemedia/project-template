@@ -6,4 +6,4 @@
 | in here instead of the index.scss to help declutter things.
 |
 */
-// @import 'sections/section'
+@import 'sections/section.css';
