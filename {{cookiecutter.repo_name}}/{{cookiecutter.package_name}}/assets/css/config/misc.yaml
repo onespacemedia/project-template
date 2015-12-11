@@ -4,6 +4,5 @@
 # their own context
 #
 # @bdrs: The global border-radius
-misc:
-  bdrs: 4px
-  transitionDuration: 0.18s
+bdrs: 4px
+transitionDuration: 0.18s

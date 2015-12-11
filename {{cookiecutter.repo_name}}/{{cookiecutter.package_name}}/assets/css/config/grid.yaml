@@ -6,7 +6,7 @@
 # @constrained: The size the site will grow to at max-width
 # @container: The size the content will grow to at max-width
 # @gutter: The space we will have between content sitting next to each other
-grid:
-  constrained: 1700px
-  container: 1180px
-  gutter: 30px
+
+constrained: 1700px
+container: 1180px
+gutter: 30px

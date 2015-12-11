@@ -8,8 +8,8 @@
 # having to do map-get($Font_Families, name) we also tend to have very few so
 # a map tends to be overkill.
 families:
-  sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif
-  serif: 'Georgia', 'Times New Roman', serif
+  sans: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+  serif: "'Georgia', 'Times New Roman', serif"
 
 # Font - Sizes
 #
