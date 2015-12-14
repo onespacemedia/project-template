@@ -1,20 +1,26 @@
+function bemSelector(block) {
+  var ns = '[a-z]{2,3}'
+  var module = '(?:-[A-Z0-9][a-z]+)?'
+  var component = '(?:_[A-Z0-9][a-z]*(?:-[a-z]*)?)?'
+
+  return new RegExp('^\\.' + ns + module + component + '$')
+}
+
 module.exports = {
   'plugins': [
     'stylelint-statement-max-nesting-depth',
     'stylelint-selector-bem-pattern'
   ],
   'rules': {
+    'selector-bem-pattern': [{
+      componentName: /[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*/,
+      componentSelectors: bemSelector
+    }],
+
     // Plugins
     'statement-max-nesting-depth': [3, {
       countAtRules: false,
       countedNestedAtRules: false
-    }],
-    'selector-bem-pattern': [2, {
-      'componentName': '[A-Z]+',
-      'componentSelectors': {
-        'initial': '^\\.{componentName}(?:-[a-z]+)?$',
-        'combined': '^\\.combined-{componentName}-[a-z]+$'
-      }
     }],
 
     // String
@@ -95,112 +101,112 @@ module.exports = {
     'rule-non-nested-empty-line-before': ['always-multi-line', {
       ignore: ['after-comment']
     }],
-//    'rule-properties-order': [
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'content'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'position',
-//          'top',
-//          'right',
-//          'bottom',
-//          'left',
-//          'z-index'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'align-content',
-//          'align-items',
-//          'align-self',
-//          'flex',
-//          'flex-basis',
-//          'flex-direction',
-//          'flex-flow',
-//          'flex-grow',
-//          'flex-shrink',
-//          'flex-wrap',
-//          'justify-content',
-//          'order'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'display',
-//          'height',
-//          'margin',
-//          'margin-top',
-//          'margin-right',
-//          'margin-bottom',
-//          'margin-left',
-//          'max-height',
-//          'max-width',
-//          'padding',
-//          'padding-top',
-//          'padding-right',
-//          'padding-bottom',
-//          'padding-left',
-//          'table-layout',
-//          'width'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'font-family',
-//          'font-size',
-//          'font-style',
-//          'font-weight',
-//          'letter-spacing',
-//          'line-height',
-//          'text-decoration'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'background',
-//          'background-attachment',
-//          'background-color',
-//          'background-image',
-//          'background-position',
-//          'background-repeat',
-//          'background-size',
-//          'border',
-//          'border-top',
-//          'border-right',
-//          'border-bottom',
-//          'border-left',
-//          'border-radius',
-//          'border-top-left-radius',
-//          'border-top-right-radius',
-//          'border-bottom-right-radius',
-//          'border-bottom-left-radius',
-//          'box-shadow',
-//          'color',
-//          'cursor',
-//          'opacity',
-//          'overflow',
-//          'overflow-x',
-//          'overflow-y',
-//          'visibility'
-//        ]
-//      },
-//      {
-//        emptyLineBefore: true,
-//        properties: [
-//          'transform',
-//          'transition'
-//        ]
-//      }
-//    ],
+    'rule-properties-order': [
+      {
+        emptyLineBefore: true,
+        properties: [
+          'content'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'position',
+          'top',
+          'right',
+          'bottom',
+          'left',
+          'z-index'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'align-content',
+          'align-items',
+          'align-self',
+          'flex',
+          'flex-basis',
+          'flex-direction',
+          'flex-flow',
+          'flex-grow',
+          'flex-shrink',
+          'flex-wrap',
+          'justify-content',
+          'order'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'display',
+          'height',
+          'margin',
+          'margin-top',
+          'margin-right',
+          'margin-bottom',
+          'margin-left',
+          'max-height',
+          'max-width',
+          'padding',
+          'padding-top',
+          'padding-right',
+          'padding-bottom',
+          'padding-left',
+          'table-layout',
+          'width'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'font-family',
+          'font-size',
+          'font-style',
+          'font-weight',
+          'letter-spacing',
+          'line-height',
+          'text-decoration'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'background',
+          'background-attachment',
+          'background-color',
+          'background-image',
+          'background-position',
+          'background-repeat',
+          'background-size',
+          'border',
+          'border-top',
+          'border-right',
+          'border-bottom',
+          'border-left',
+          'border-radius',
+          'border-top-left-radius',
+          'border-top-right-radius',
+          'border-bottom-right-radius',
+          'border-bottom-left-radius',
+          'box-shadow',
+          'color',
+          'cursor',
+          'opacity',
+          'overflow',
+          'overflow-x',
+          'overflow-y',
+          'visibility'
+        ]
+      },
+      {
+        emptyLineBefore: true,
+        properties: [
+          'transform',
+          'transition'
+        ]
+      }
+    ],
     'rule-trailing-semicolon': 'always',
 
     // Media

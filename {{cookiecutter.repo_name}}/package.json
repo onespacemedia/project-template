@@ -73,7 +73,7 @@
     "require-dir": "^0.3.0",
     "standard": "^5.4.1",
     "style-loader": "^0.13.0",
-    "stylelint": "^3.0.2",
+    "stylelint": "^3.1.2",
     "stylelint-selector-bem-pattern": "^0.2.0",
     "stylelint-statement-max-nesting-depth": "^2.0.0",
     "vinyl-source-stream": "~1.1.0",
