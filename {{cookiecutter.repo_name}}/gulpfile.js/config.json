@@ -1,7 +1,7 @@
 {
   "root": {
     "src": "./{{cookiecutter.package_name}}/assets",
-    "dest": "./{{cookiecutter.package_name}}/static"
+    "dest": "./{{cookiecutter.package_name}}/static/build"
   },
 
   "tasks": {

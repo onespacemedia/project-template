@@ -184,7 +184,7 @@ STATICFILES_FINDERS = (
 
 WEBPACK_LOADER = {
     'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
+        'BUNDLE_DIR_NAME': 'build/',
         'STATS_FILE': os.path.join(BASE_ROOT, 'webpack-stats.json')
     }
 }
