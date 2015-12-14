@@ -31,7 +31,7 @@ var cssTask = function () {
       require('postcss-selector-matches'),
       require('postcss-selector-not'),
       require('postcss-map')({
-        basePath: 'assets/css/config',
+        basePath: '{{cookiecutter.package_name}}/assets/css/config',
         maps: ['breakpoints.yaml', 'colors.yaml', 'fonts.yaml', 'grid.yaml', 'misc.yaml']
       }),
       require('postcss-calc'),
