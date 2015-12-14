@@ -283,23 +283,60 @@ SECRET_KEY = " "
 
 
 WYSIWYG_OPTIONS = {
-    "extraPlugins": "iframedialog,cms_image",
-    "toolbar": [
-        {"name": "document", "items": ['Source']},
-        {"name": "basicstyles",
-         "items": ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript',
-                   'Superscript', '-', 'RemoveFormat']},
-        {"name": "clipboard",
-         "items": ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-',
-                   'Undo', 'Redo']},
-        {"name": "links", "items": ['Link', 'Unlink', 'Anchor']},
-        {"name": "insert", "items": ['CmsImage', 'Table', 'SpecialChar']},
-        {"name": "paragraph", "items": ['NumberedList', 'BulletedList']},
-        {"name": "styles", "items": ['Styles', 'Format']},
+    # Overall height of the WYSIWYG
+    'height': 500,
+
+    # Main plugins to load, this has been stripped to match the toolbar
+    # See https://www.tinymce.com/docs/get-started/work-with-plugins/
+    'plugins': [
+        "advlist autolink link image lists charmap hr anchor pagebreak",
+        "wordcount visualblocks visualchars code fullscreen cmsimage",
+        "table contextmenu directionality paste textcolor colorpicker textpattern"
     ],
-    "stylesSet": "custom_styles:/static/js/ckeditor_styles.js",
-    "format_tags": "p;h1;h2;h3;h4;h5;h6",
-    "extraAllowedContent": "img[src,alt,width,height,title];*{*}"
+
+    # Items to display on the 3 toolbar lines
+    'toolbar1': "code | cut copy paste pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap",
+    'toolbar2': "styleselect formatselect | bold italic underline strikethrough | alignleft aligncenter alignright | table | removeformat | subscript superscript",
+    'toolbar3': "",
+
+    # Display menubar with dropdowns
+    'menubar': False,
+
+    # Make toolbar smaller
+    'toolbar_items_size': 'small',
+
+    # Custom style formats
+    'style_formats': [
+        {
+            'title': 'Buttons',
+            'items': [
+                {
+                    'title': 'Primary',
+                    'selector': 'a',
+                    'classes': 'button primary'
+                },
+                {
+                    'title': 'Secondary',
+                    'selector': 'a',
+                    'classes': 'button secondary'
+                },
+            ]
+        }
+    ],
+
+    # Make all elements valid
+    'valid_elements': '*[*]',
+
+    # Disable automatic URL manipulation
+    'convert_urls': False,
+
+    # Make TinyMCE past as text by default
+    'paste_as_text': True,
+
+    'image_advtab': True,
+
+    # Custom CSS to style the wysiwyg content area
+    'content_css': '/static/css/screen.content.css',
 }
 
 {% if cookiecutter.news == 'yes' %}
