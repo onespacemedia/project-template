@@ -230,9 +230,6 @@ module.exports = {
     'at-rule-no-vendor-prefix': true,
 
     // Comment
-    'comment-empty-line-before': ['always', {
-      except: ['first-nested']
-    }],
     'comment-whitespace-inside': 'always',
 
     // General

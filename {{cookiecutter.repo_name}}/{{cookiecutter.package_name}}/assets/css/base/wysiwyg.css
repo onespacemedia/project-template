@@ -2,7 +2,11 @@
 |--------------------------------------------------------------------------
 | Wysiwyg
 |--------------------------------------------------------------------------
+| Styles for when a wysiwyg appears on a page. Here we can use global font-sizes
+| because it's not viable to expect all wysiwyg content to have a class. Make
+| sure all styles are nested inside the wys-Outer so they don't leak.
 |
+| @namespace: wys-
 */
 
 /*
@@ -10,8 +14,8 @@
 
   stylelint-disable selector-no-type
 */
+/** @define Outer **/
 .wys-Outer {
-
+  background-color: transparent; /* Delete this, it's here to stop stylelint crying */
 }
-
 /* stylelint-enable */

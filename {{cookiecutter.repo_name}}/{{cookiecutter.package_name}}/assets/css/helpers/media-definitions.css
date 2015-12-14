@@ -1,12 +1,5 @@
 /*
 |--------------------------------------------------------------------------
-| Defaults
-|--------------------------------------------------------------------------
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
 | Media query definitions
 |--------------------------------------------------------------------------
 | The definitions used for all of our responsive changes. By default it will
@@ -14,14 +7,13 @@
 | the sizes above it.
 |
 | If you require styles to be applied to just a certain breakpoint you can use
-| '{$size}-only' which will apply styles to just that size and not to sizes
+| '{$size}-viewport' which will apply styles to just that size and not to sizes
 | above it.
 |
 | Do not under ANY circumstances add a set of arguments that only apply a
 | max-width so it applies to the size set and all sizes below. This is very
 | bad practice.
 |
-| @size: Size that the styles will apply to and above
 */
 @custom-media --xs (min-width: map(breakpoints, xs, 0));
 @custom-media --sm (min-width: map(breakpoints, sm, 0));
