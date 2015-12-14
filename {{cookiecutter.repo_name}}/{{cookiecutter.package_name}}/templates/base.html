@@ -26,7 +26,7 @@
     {% block feeds %}{% endblock %}
 
     {% compress css %}
-      {% render_bundle 'main' 'css' %}
+      <link rel="stylesheet" href="{% static 'css/build/app.css' %}">
     {% endcompress %}
   </head>
 
