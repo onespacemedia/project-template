@@ -1,0 +1,11 @@
+/*
+|--------------------------------------------------------------------------
+| Typography
+|--------------------------------------------------------------------------
+| Used for any global based typography, normally there is very little of this.
+| Things like font-sizes are normally declared in the wysiwyg specific file
+| instead of here as we shouldn't have any globally declared heading styles
+|
+| @namespace: typ-
+|
+*/

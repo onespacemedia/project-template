@@ -1,0 +1,9 @@
+# Colors
+#
+# The base colors that are used throughout the site, if you see yourself
+# using the same hex more than once, consider adding it here. Please use
+# contextless names. If you have `headerRed` then that's used anywhere but
+# the header it doesn't make much sense so just use `darkRed` or `red` etc.
+dark: '#1f2429'
+light: '#efefef'
+anchor: '#61bdf2'

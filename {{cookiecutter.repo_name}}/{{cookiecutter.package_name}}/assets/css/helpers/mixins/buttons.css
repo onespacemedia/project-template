@@ -1,0 +1,54 @@
+/*
+|--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Button
+|--------------------------------------------------------------------------
+| Main button mixin that lays out the base for a button, nothing besides
+| structure should be implied in here.
+|
+| The background-color & color only exist here so we can do transition, if we
+| have no value for them then the transition is instant instead of what is
+| declared
+|
+*/
+@mixin Button() {
+  $Duration: map(misc, transitionDuration);
+
+  display: inline-block;
+  padding-top: 7px;
+  padding-right: calc(map(grid, gutter) / 2);
+  padding-bottom: @padding-top;
+  padding-left: @padding-right;
+
+  font-family: map(fonts, families, sans);
+  font-weight: 600;
+
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: map(misc, bdrs);
+  color: #fff;
+
+  transition: background-color $Duration, color $Duration;
+
+  &:hover {
+    background-color: transparent;
+    color: #fff;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Button - Primary
+|--------------------------------------------------------------------------
+| The style for the primary button used
+|
+*/
+@mixin Button-Primary() {
+  @include Button();
+}

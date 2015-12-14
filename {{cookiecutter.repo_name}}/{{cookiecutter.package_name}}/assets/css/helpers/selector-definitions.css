@@ -1,0 +1,19 @@
+/*
+|--------------------------------------------------------------------------
+| Selector definitions
+|--------------------------------------------------------------------------
+| Selector definitions are used for targeting multiple selectors but with 1
+| declaration. Please use these sparingly or if they make sense. There's no
+| point defining a custom selector to only use it once.
+|
+*/
+
+/**
+* Headings
+*/
+@custom-selector :--headings h1, h2, h3, h4, h5, h6;
+
+/**
+* Enter state
+*/
+@custom-selector :--enter :hover, :focus;

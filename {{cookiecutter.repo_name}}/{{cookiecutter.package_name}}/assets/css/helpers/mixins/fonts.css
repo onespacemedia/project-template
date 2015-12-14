@@ -1,0 +1,27 @@
+/*
+|--------------------------------------------------------------------------
+| Fonts
+|--------------------------------------------------------------------------
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Font sizing
+|--------------------------------------------------------------------------
+| Returns a dynamic margin-bottom as well as the font-sizes / line-heights
+| declared in the config/_variables.scss
+|
+| @size: The font size variable from the maps & lineheights
+*/
+@mixin Font_Sizing($size) {
+  margin-bottom: calc(map(fonts, sizes, base, $size) / 2);
+
+  font-size: map(fonts, sizes, base, $size);
+  line-height: map(fonts, lineHeights, base, $size);
+
+  @media (--md) {
+    font-size: map(fonts, sizes, md, $size);
+    line-height: map(fonts, lineHeights, md, $size);
+  }
+}

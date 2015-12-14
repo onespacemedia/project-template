@@ -1,0 +1,8 @@
+# Misc
+#
+# Use this for things we want as variables but don't necessarily fit into
+# their own context
+#
+# @bdrs: The global border-radius
+bdrs: 4px
+transitionDuration: 0.18s
