@@ -10,7 +10,7 @@ from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
 from cms.forms import CMSPasswordChangeForm
 
-from kymab.utils.views import FrontendView
+from {{cookiecutter.package_name}}.utils.views import FrontendView
 
 
 admin.autodiscover()
