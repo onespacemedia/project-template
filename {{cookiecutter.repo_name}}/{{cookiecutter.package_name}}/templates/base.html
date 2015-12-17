@@ -27,6 +27,8 @@
 
     {% compress css %}
       <link rel="stylesheet" href="{% static 'css/build/app.css' %}">
+
+      {% block compressed_css %}{% endblock %}
     {% endcompress %}
   </head>
 
@@ -38,7 +40,9 @@
       {% include 'base/_header.html' %}
 
       <div class="l-siteContainer">
-        {% block site %} {% block content_above %}{% endblock %}
+        {% block site %}
+          {% block content_above %}{% endblock %}
+
           <div class="l-contentContainer">
             {% block content %}
               <main class="l-mainContainer">
@@ -57,6 +61,7 @@
     {% endblock %}
 
     {% compress js %}
+      {% render_bundle 'shared' 'js' %}
       {% render_bundle 'app' 'js' %}
       <script src="/static/flexible-images/flexible-images.js"></script>
     {% endcompress %}

@@ -5,11 +5,12 @@ var path            = require('path')
 var webpack         = require('webpack')
 var webpackManifest = require('./webpackManifest')
 var bundleTracker   = require('webpack-bundle-tracker')
+var ExtractText     = require('extract-text-webpack-plugin')
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
   var jsDest = path.resolve(config.root.dest, config.tasks.js.dest)
-  var publicPath = path.join('/static/', config.tasks.js.dest, '/')
+  var publicPath = path.join('/static/build/', config.tasks.js.dest, '/')
   var filenamePattern = env === 'production' ? '[name]-[hash].js' : '[name].js'
   var extensions = config.tasks.js.extensions.map(function(extension) {
     return '.' + extension
@@ -18,7 +19,8 @@ module.exports = function(env) {
   var webpackConfig = {
     context: jsSrc,
     plugins: [
-      new bundleTracker({filename: './webpack-stats.json'})
+      new bundleTracker({filename: './webpack-stats.json'}),
+      new ExtractText('[name].css')
     ],
     resolve: {
       root: jsSrc,
@@ -35,7 +37,7 @@ module.exports = function(env) {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'babel-loader?stage=1',
+          loader: 'babel-loader?stage=0',
           exclude: /node_modules/
         },
         {
@@ -43,6 +45,12 @@ module.exports = function(env) {
           loader: 'vue'
         }
       ]
+    },
+    vue: {
+      postcss: require('../lib/postCssProcessors'),
+      loaders: {
+        css: ExtractText.extract('css')
+      }
     }
   }
 

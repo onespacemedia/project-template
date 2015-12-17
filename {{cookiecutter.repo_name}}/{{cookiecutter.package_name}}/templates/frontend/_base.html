@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
+
+{% block %}
+  <!-- This complies .vue based CSS -->
+  {% render_bundle 'app' 'css' %}
+{% endblock %}
+
+{% block %}
+  <frontend-switcher></frontend-switcher>
+
+  {{ block.super }}
+{% endblock %}

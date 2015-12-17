@@ -10,6 +10,8 @@ from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
 from cms.forms import CMSPasswordChangeForm
 
+from kymab.utils.views import FrontendView
+
 
 admin.autodiscover()
 
@@ -48,7 +50,7 @@ if settings.DEBUG:
     urlpatterns += [
         url("^404/$", generic.TemplateView.as_view(template_name="404.html")),
         url("^500/$", generic.TemplateView.as_view(template_name="500.html")),
-        url('^ui-kit/$', generic.TemplateView.as_view(template_name="ui-kit.html"))
+        url('^frontend/(?P<slug>[\w-]+)/$', FrontendView.as_view())
     ]
 
 
