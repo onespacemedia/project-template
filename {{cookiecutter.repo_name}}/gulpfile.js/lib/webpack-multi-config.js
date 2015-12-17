@@ -19,8 +19,7 @@ module.exports = function(env) {
   var webpackConfig = {
     context: jsSrc,
     plugins: [
-      new bundleTracker({filename: './webpack-stats.json'}),
-      new ExtractText('[name].css')
+      new bundleTracker({filename: './webpack-stats.json'})
     ],
     resolve: {
       root: jsSrc,
@@ -47,10 +46,7 @@ module.exports = function(env) {
       ]
     },
     vue: {
-      postcss: require('../lib/postCssProcessors'),
-      loaders: {
-        css: ExtractText.extract('css')
-      }
+      postcss: require('../lib/postCssProcessors')
     }
   }
 
