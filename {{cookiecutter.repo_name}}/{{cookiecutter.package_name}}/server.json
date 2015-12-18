@@ -16,7 +16,7 @@
                 "user": "{{cookiecutter.repo_name}}",
                 "password": ""
             },
-            "is_aws": false,
+            "is_aws": false
         }
     },
     "opbeat": {
