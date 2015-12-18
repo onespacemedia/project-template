@@ -49,6 +49,7 @@ module.exports = function(env) {
     vue: {
       postcss: require('../lib/postCssProcessors'),
       loaders: {
+        js: 'babel!eslint',
         css: ExtractText.extract('css')
       }
     }
