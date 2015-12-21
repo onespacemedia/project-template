@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: 5.1.0
+
+dependencies:
+  override:
+    - pip install --disable-pip-version-check flake8 isort
+    - npm i stylelint eslint eslint-config-standard babel-eslint -g
+    - npm i standard stylelint-statement-max-nesting-depth stylelint-selector-bem-pattern postcss
+
+test:
+  override:
+    - flake8 --show-source --ignore=E501 --exclude=.venv,node_modules,*/migrations/* .
+    - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
+    - stylelint {{ cookiecutter.package_name }}/assets/css/**/*.css
+    - eslint {{ cookiecutter.package_name }}/assets/js/**/*.js
