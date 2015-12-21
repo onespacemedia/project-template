@@ -10,11 +10,11 @@ for the site, database, media and email sections below.
 """
 from __future__ import unicode_literals
 
-from social.pipeline import DEFAULT_AUTH_PIPELINE
-
 import os
 import platform
 import sys
+
+from social.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == "PyPy":
     from psycopg2cffi import compat
@@ -150,12 +150,12 @@ INSTALLED_APPS = [
     "cms.apps.links",
     "cms.apps.media",
 
-    {% if cookiecutter.redirects == 'yes' %}"redirects",{% endif %}
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects",
 
-    {% if cookiecutter.faqs == 'yes' %}"{{cookiecutter.package_name}}.apps.faqs",{% endif %}
-    {% if cookiecutter.jobs == 'yes' %}"{{cookiecutter.package_name}}.apps.jobs",{% endif %}
-    {% if cookiecutter.news == 'yes' %}"{{cookiecutter.package_name}}.apps.news",{% endif %}
-    {% if cookiecutter.people == 'yes' %}"{{cookiecutter.package_name}}.apps.people",{% endif %}
+    {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
+    {% if cookiecutter.jobs == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.jobs",
+    {% if cookiecutter.news == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
+    {% if cookiecutter.people == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.people",
     "{{cookiecutter.package_name}}.apps.site",
 
     'server_management',
@@ -198,8 +198,8 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = (
-    {% if cookiecutter.geoip == 'yes' %}"cms.middleware.LocalisationMiddleware",{% endif %}
-    {% if cookiecutter.redirects == 'yes' %}"redirects.middleware.RedirectFallbackMiddleware",{% endif %}
+    {% if cookiecutter.geoip == 'yes' %}# {% endif %}"cms.middleware.LocalisationMiddleware",
+    {% if cookiecutter.redirects == 'yes' %}# {% endif %}"redirects.middleware.RedirectFallbackMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -339,9 +339,7 @@ WYSIWYG_OPTIONS = {
     'content_css': '/static/css/screen.content.css',
 }
 
-{% if cookiecutter.news == 'yes' %}
 NEWS_APPROVAL_SYSTEM = False
-{% endif %}
 
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
 ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
@@ -386,10 +384,7 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 
 SILENCED_SYSTEM_CHECKS = []
 
-{% if cookiecutter.geoip == 'yes' %}
-GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../geoip/"))
-{% endif %}
-
+{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../geoip/"))
 
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load

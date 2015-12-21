@@ -1,17 +1,14 @@
 """URL config for {{cookiecutter.repo_name}} project."""
 
-from django.conf import settings
-from django.conf.urls import url, include
-from django.contrib import admin
-from django.views import generic
-from django.conf.urls.static import static
-
+from cms.forms import CMSPasswordChangeForm
 from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
-from cms.forms import CMSPasswordChangeForm
-
+from django.conf import settings
+from django.conf.urls import include, url
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.views import generic
 from {{cookiecutter.package_name}}.utils.views import FrontendView
-
 
 admin.autodiscover()
 
