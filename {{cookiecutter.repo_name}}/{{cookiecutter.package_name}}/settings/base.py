@@ -153,9 +153,9 @@ INSTALLED_APPS = [
     {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects",
 
     {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
-    {% if cookiecutter.jobs == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.jobs",
-    {% if cookiecutter.news == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
-    {% if cookiecutter.people == 'yes' %}# {% endif %}"{{cookiecutter.package_name}}.apps.people",
+    {% if cookiecutter.jobs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.jobs",
+    {% if cookiecutter.news == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
+    {% if cookiecutter.people == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.people",
     "{{cookiecutter.package_name}}.apps.site",
 
     'server_management',
@@ -198,8 +198,8 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = (
-    {% if cookiecutter.geoip == 'yes' %}# {% endif %}"cms.middleware.LocalisationMiddleware",
-    {% if cookiecutter.redirects == 'yes' %}# {% endif %}"redirects.middleware.RedirectFallbackMiddleware",
+    {% if cookiecutter.geoip == 'no' %}# {% endif %}"cms.middleware.LocalisationMiddleware",
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects.middleware.RedirectFallbackMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
