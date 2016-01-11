@@ -70,7 +70,7 @@ body {
   background-color: #fff;
 
   @media(--md) {
-    font-size: map(fonts, size, md, normal);
+    font-size: map(fonts, sizes, md, normal);
     line-height: map(fonts, lineHeights, md, normal);
   }
 }
