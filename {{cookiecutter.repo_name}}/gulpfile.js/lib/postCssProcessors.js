@@ -28,7 +28,6 @@ module.exports = [
     maps: ['breakpoints.yaml', 'colors.yaml', 'fonts.yaml', 'grid.yaml', 'misc.yaml']
   }),
   require('postcss-calc'),
-  require('postcss-conditionals'),
 
   // Niceties
   require('postcss-assets')({
