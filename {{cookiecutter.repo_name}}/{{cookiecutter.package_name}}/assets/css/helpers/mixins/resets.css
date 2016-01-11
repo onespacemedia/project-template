@@ -1,0 +1,14 @@
+/*
+|--------------------------------------------------------------------------
+| Resets - Lists
+|--------------------------------------------------------------------------
+| Just overrides the default list styles, we use lists in multiple places
+| so having an easy access mixin just reduces the amount of code we write
+|
+*/
+@mixin Reset_List() {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}

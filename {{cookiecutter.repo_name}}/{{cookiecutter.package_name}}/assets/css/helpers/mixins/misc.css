@@ -1,0 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Background spread
+|--------------------------------------------------------------------------
+| Mainly used when you're having to have an image cover a section or div
+|
+*/
+@mixin Background_Spread() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

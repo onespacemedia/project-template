@@ -1,5 +1,4 @@
 /* stylelint-disable */
-
 /*
 |--------------------------------------------------------------------------
 | Redefine
@@ -61,6 +60,7 @@ body {
 
   /* This needs escaping so it doesn't double string */
   font-family: map(fonts, families, sans);
+  font-weight: 400;
   /* Make the `body` use the `font-size-normal` */
   font-size: map(fonts, sizes, base, normal);
   line-height: map(fonts, lineHeights, base, normal);
@@ -68,14 +68,23 @@ body {
   color: map(colors, dark);
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #fff;
+
+  @media(--md) {
+    font-size: map(fonts, size, md, normal);
+    line-height: map(fonts, lineHeights, md, normal);
+  }
 }
 
 /*
 |--------------------------------------------------------------------------
-| Typography
+| Typography - Keyline
 |--------------------------------------------------------------------------
 |
 */
+hr {
+  border: 0;
+  border-top: 1px solid map(colors, border);
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -95,7 +104,12 @@ body {
 */
 p {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom:  @margin-top;
+
+  &:not([class]) {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
 }
 
 /*
@@ -107,7 +121,9 @@ p {
 a {
   text-decoration: none;
 
-  color: map(colors, anchor);
+  &[href]:not([class]) {
+    color: map(colors, anchor);
+  }
 }
 
 /*
@@ -118,7 +134,6 @@ a {
 */
 img {
   max-width: 100%;
-  width: 100%;
 }
 
 /*

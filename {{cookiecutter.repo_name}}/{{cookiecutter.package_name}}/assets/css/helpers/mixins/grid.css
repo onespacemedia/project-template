@@ -23,4 +23,33 @@
   max-width: calc(map(grid, container) + map(grid, gutter));
   padding-right: calc(map(grid, gutter) / 2);
   padding-left: @padding-right;
+  width: 100%;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Grid - Row
+|--------------------------------------------------------------------------
+| Adds negative margins to the parent element so we don't have to do
+| individual resets on the first or last children and we can keep all of the
+| widths consistent
+|
+*/
+@mixin Grid_Row() {
+  margin-right: -calc(map(grid, gutter) / 2);
+  margin-left: @margin-right;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Grid - Column
+|--------------------------------------------------------------------------
+| Adds consistent spacing to stop content of columns sitting next to each
+| other
+|
+*/
+@mixin Grid_Column() {
+  margin-right: calc(map(grid, gutter) / 2);
+  margin-left: @margin-right;
+}
+
