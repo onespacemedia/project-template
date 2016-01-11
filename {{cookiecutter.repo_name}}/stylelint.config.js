@@ -1,22 +1,8 @@
-function bemSelector(block) {
-  var ns = '[a-z]{2,3}'
-  var module = '(?:-[A-Z0-9][a-z]+)?'
-  var component = '(?:_[A-Z0-9][a-z]*(?:-[a-z]*)?)?'
-
-  return new RegExp('^\\.' + ns + module + component + '$')
-}
-
 module.exports = {
   'plugins': [
-    'stylelint-statement-max-nesting-depth',
-    'stylelint-selector-bem-pattern'
+    'stylelint-statement-max-nesting-depth'
   ],
   'rules': {
-    'selector-bem-pattern': [{
-      componentName: /[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*/,
-      componentSelectors: bemSelector
-    }],
-
     // Plugins
     'statement-max-nesting-depth': [3, {
       countAtRules: false,
@@ -55,9 +41,6 @@ module.exports = {
     // Unit
     'unit-blacklist': ['em', 'rem'], // Disallow these because PostCSS adds them
 
-    // Property
-    'property-no-vendor-prefix': true,
-
     // Declaration
     'declaration-bang-space-after': 'never',
     'declaration-bang-space-before': 'always',
@@ -88,7 +71,7 @@ module.exports = {
     'selector-pseudo-element-colon-notation': 'double',
 
     // Selector list
-    'selector-list-comma-space-after': 'always',
+    'selector-list-comma-space-after': 'always-single-line',
     'selector-list-comma-space-before': 'never',
 
     // Rules
@@ -140,6 +123,7 @@ module.exports = {
         emptyLineBefore: true,
         properties: [
           'display',
+          'float',
           'height',
           'margin',
           'margin-top',
@@ -148,6 +132,8 @@ module.exports = {
           'margin-left',
           'max-height',
           'max-width',
+          'min-height',
+          'min-width',
           'padding',
           'padding-top',
           'padding-right',
@@ -166,7 +152,9 @@ module.exports = {
           'font-weight',
           'letter-spacing',
           'line-height',
-          'text-decoration'
+          'text-align',
+          'text-decoration',
+          'text-overflow'
         ]
       },
       {
@@ -202,6 +190,15 @@ module.exports = {
       {
         emptyLineBefore: true,
         properties: [
+          'animation',
+          'animation-delay',
+          'animation-direction',
+          'animation-duration',
+          'animation-fill-mode',
+          'animation-iteration-count',
+          'animation-name',
+          'animation-play-state',
+          'animation-timing-function',
           'transform',
           'transition'
         ]
