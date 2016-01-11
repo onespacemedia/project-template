@@ -15,7 +15,6 @@ var paths = {
 var imagesTask = function() {
   return gulp.src(paths.src)
     .pipe(changed(paths.dest)) // Ignore unchanged files
-    .pipe(imagemin()) // Optimize
     .pipe(gulp.dest(paths.dest))
     .pipe(browserSync.stream())
 }

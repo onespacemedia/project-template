@@ -12,11 +12,22 @@ module.exports = function(env) {
     production: 'webpack:production'
   }
 
+  var cssTasks = {
+    watch: 'css',
+    development: 'css',
+    production: 'css:production'
+  }
+
   var matchFilter = function(task) {
     if(config.tasks[task]) {
       if(task === 'js') {
-        task = jsTasks[env] || jsTask.watch
+        task = jsTasks[env] || jsTasks.watch
       }
+
+      if(task === 'css') {
+        task = cssTasks[env] || cssTasks.watch
+      }
+
       return task
     }
   }

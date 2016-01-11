@@ -22,5 +22,15 @@ var cssTask = function () {
     .pipe(browserSync.stream({match: '**/*.css'}))
 }
 
+var cssProductionTask = function () {
+  return gulp.src(path.join(config.root.dest, config.tasks.css.dest, '/*.' + config.tasks.css.extensions))
+    .pipe(postcss([require('cssnano')({
+      mergeRules: false
+    })]))
+    .pipe(gulp.dest(paths.dest))
+    .pipe(browserSync.stream({match: '**/*.css'}))
+}
+
 gulp.task('css', ['stylelint'], cssTask)
+gulp.task('css:production', ['css', 'stylelint'], cssProductionTask)
 module.exports = cssTask
