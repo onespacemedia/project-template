@@ -57,3 +57,5 @@ EMAIL_HOST_USER = '178288370161874a6'
 EMAIL_HOST_PASSWORD = '5033a6d5bca3f0'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
+
+FRONTEND_TEMPLATES = lambda: [str(f[:-5]) for f in os.listdir(os.path.join(TEMPLATE_DIRS[0], 'frontend')) if f[:1] != '_']

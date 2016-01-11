@@ -25,42 +25,57 @@
 
     {% block feeds %}{% endblock %}
 
-    {% compress css %}
-      <link rel="stylesheet" href="{% static 'css/build/app.css' %}">
+    {# Project #}
+    <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
+    <!--[if ie 9]>
+      <link rel="stylesheet" href="{% static 'build/css/ie9.css' %}">
+    <![endif]-->
 
-      {% block compressed_css %}{% endblock %}
-    {% endcompress %}
+    {% block css %}{% endblock %}
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
     {% include 'base/_analytics.html' %}
 
-    {% block body_inner %}
-      {% include 'base/_header.html' %}
+    {% block site %}
+      <div class="lyt-Site">
+        {% include 'base/_header.html' %}
 
-      <div class="l-siteContainer">
-        {% block site %}
-          {% block content_above %}{% endblock %}
+        <div class="lyt-Content_Outer">
+          {% block content_outer %}
+            {% block content_above %}{% endblock %}
 
-          <div class="l-contentContainer">
-            {% block content %}
-              <main class="l-mainContainer">
-                {% block main %}{% endblock %}
-              </main>
+            <div class="lyt-Content">
+              {% block content %}
+                <main class="lyt-Main">
+                  {% block main %}{% endblock %}
+                </main>
 
-              <aside class="l-asideContainer">
-                {% block aside %}{% endblock %}
-              </aside>
-            {% endblock %}
-          </div>
-        {% endblock %}
+                <aside class="lyt-Aside">
+                  {% block aside %}{% endblock %}
+                </aside>
+              {% endblock %}
+            </div>
+
+            {% block content_below %}{% endblock %}
+          {% endblock %}
+        </div>
+
+        {% include 'base/_footer.html' %}
       </div>
-
-      {% include 'base/_footer.html' %}
     {% endblock %}
 
     {% compress js %}
+      {% block compressed_js_first %}{% endblock %}
+
+      {# Get the site navigation as JSON #}
+      {% navigation_json pages.homepage.navigation section=pages.homepage as nav %}
+      <script>
+        // Set the navigation so our Vue file can access it
+        window.navigationData = {{ nav | safe }};
+      </script>
+
       {% render_bundle 'shared' 'js' %}
       {% render_bundle 'app' 'js' %}
       <script src="/static/flexible-images/flexible-images.js"></script>

@@ -1,19 +1,19 @@
 {% load pages site %}
 
-<header class="o-header">
-  <div class="l-container">
-    <a class="c-header_logo" href="{{ pages.homepage.get_absolute_url }}"></a>
+<header class="hd-Outer">
+  <div class="hd-Inner">
+    <a class="hd-Logo" href="{{ pages.homepage.get_absolute_url }}"></a>
 
-    <a class="c-header_navTrigger">
-      <div class="c-hamburger">
-        <div class="c-hamburger_line c-hamburger_bunTop"></div>
-        <div class="c-hamburger_line c-hamburger_patty"></div>
-        <div class="c-hamburger_line c-hamburger_bunBottom"></div>
-      </div>
-    </a>
-
-    <nav class="c-header_nav">
+    <nav class="hd-Nav">
       {% navigation pages.homepage.navigation section=pages.homepage %}
     </nav>
+
+    <div class="hd-MobileNav_Trigger" @click="showMobileNav()">
+      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-top"></div>
+      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-middle"></div>
+      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-bottom"></div>
+    </div>
+
+    <mobile-nav></mobile-nav>
   </div>
 </header>

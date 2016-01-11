@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
 {% load render_bundle from webpack_loader %}
 
-{% block %}
+{% block css %}
   <!-- This complies .vue based CSS -->
   {% render_bundle 'app' 'css' %}
 {% endblock %}
 
-{% block %}
+{% block site %}
   <frontend-switcher></frontend-switcher>
 
   {{ block.super }}
+{% endblock %}
+
+{% block compressed_js_first %}
+  <script type="text/javascript">
+    window.frontendTemplates = {{ settings.FRONTEND_TEMPLATES|safe }}
+  </script>
 {% endblock %}
