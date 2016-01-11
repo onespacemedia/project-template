@@ -30,9 +30,7 @@
 | to any particular part of the site.
 |
 */
-@import 'base/wysiwyg.css';
-@import 'base/layout.css';
-@import 'base/typography.css';
+@import 'base/**/*.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -43,15 +41,37 @@
 | the footer
 |
 */
-@import 'globals/header.css';
-@import 'globals/footer.css';
+@import 'globals/**/*.css';
 
 /*
 |--------------------------------------------------------------------------
-| Components
+| Apps
 |--------------------------------------------------------------------------
 | A component is a specific bit of code that can be reused in any context
 | regardless of content.
 |
 */
-@import 'components/sections.css';
+@import '../apps/**/assets/**/*.css';
+
+/*
+|--------------------------------------------------------------------------
+| Vendor
+|--------------------------------------------------------------------------
+| Vendor specific files that come from `node_modules` or the very rare time
+| we have to actually create a vendors folder. Stylelint is disabled for all
+| vendor imports for obvious reasons.
+|
+*/
+/* stylelint-disable */
+/* stylelint-enable */
+
+/*
+|--------------------------------------------------------------------------
+| Vendor overrides
+|--------------------------------------------------------------------------
+| Vendor files should never be edited themselves. If you want to make style
+| changes to something imported then create a file in `./overrides/` with the
+| same name as the 3rd party plugin
+|
+*/
+@import 'overrides/**/*.css';
