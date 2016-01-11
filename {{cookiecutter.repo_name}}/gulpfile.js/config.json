@@ -1,6 +1,7 @@
 {
   "root": {
-    "src": ["./{{cookiecutter.package_name}}/assets", "./{{cookiecutter.package_name}}/apps/**/assets"],
+    "appSrc": "./{{cookiecutter.package_name}}/apps/**/assets",
+    "src": "./{{cookiecutter.package_name}}/assets",
     "dest": "./{{cookiecutter.package_name}}/static/build"
   },
 
