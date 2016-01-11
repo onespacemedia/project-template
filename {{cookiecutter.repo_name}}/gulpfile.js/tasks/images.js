@@ -8,7 +8,7 @@ var imagemin    = require('gulp-imagemin')
 var path        = require('path')
 
 var paths = {
-  src: path.join(config.root.src, config.tasks.images.src, '/**'),
+  src: [path.join(config.root.src, config.tasks.images.src, '/**'), path.join(config.root.appSrc, config.tasks.images.src, '/**')],
   dest: path.join(config.root.dest, config.tasks.images.dest)
 }
 
