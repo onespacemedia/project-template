@@ -150,7 +150,7 @@ INSTALLED_APPS = [
     "cms.apps.links",
     "cms.apps.media",
 
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects",
+    "redirects",
 
     {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
     {% if cookiecutter.jobs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.jobs",
