@@ -47,6 +47,7 @@ if settings.DEBUG:
     urlpatterns += [
         url("^404/$", generic.TemplateView.as_view(template_name="404.html")),
         url("^500/$", generic.TemplateView.as_view(template_name="500.html")),
+        url('^frontend/$', FrontendView.as_view()),
         url('^frontend/(?P<slug>[\w-]+)/$', FrontendView.as_view())
     ]
 
