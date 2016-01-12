@@ -1,9 +1,4 @@
 import Vue from 'vue'
+import VueConfig from './vue.config'
 
-import FrontendSwitcher from './components/frontend-switcher/FrontendSwitcher.vue'
-
-new Vue({
-  components: {
-    FrontendSwitcher
-  }
-}).$mount('body')
+new Vue(VueConfig).$mount('body')

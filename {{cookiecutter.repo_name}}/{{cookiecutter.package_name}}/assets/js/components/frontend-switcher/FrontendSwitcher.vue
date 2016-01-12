@@ -4,7 +4,7 @@
       <label class="fs-Label">Page selector</label>
 
       <select class="fs-Switcher" v-model="selected" @change="handleSelect()">
-        <option v-for="page in pages" :value="page">{{ page|capitalize }}</option>
+        <option v-for="page in pages" :value="page" :selected="selected === page">{{ page|capitalize|normalCase }}</option>
       </select>
     </div>
   </div>
@@ -15,10 +15,16 @@
     data () {
       return {
         selected: '',
-        pages: [
-          'test'
-        ]
+        pages: window.frontendTemplates
       }
+    },
+
+    ready () {
+      const parser = document.createElement('a')
+      parser.href = window.location.href
+      let splitPathname = parser.pathname.split('/')
+
+      this.selected = splitPathname[splitPathname.length - 2]
     },
 
     methods: {
@@ -30,15 +36,22 @@
 
         window.location = `${url}/frontend/${this.selected}/`
       }
+    },
+
+    filters: {
+      normalCase (value) {
+        return value.replace(/-/, ' ')
+      }
     }
   }
 </script>
 
-<style scoped>
+<style>
   .fs-Outer {
     position: fixed;
-    top: 10px;
+    top: 95px;
     left: 10px;
+    z-index: 10;
 
     align-items: center;
 
