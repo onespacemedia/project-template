@@ -17,6 +17,7 @@
     "opbeat_app_id": "{{ cookiecutter.opbeat_app_id }}",
     "opbeat_secret_token": "{{ cookiecutter.opbeat_secret_token }}",
     "_copy_without_render": [
-        "{{cookiecutter.package_name}}/templates"
+        "{{cookiecutter.package_name}}/templates",
+        "{{cookiecutter.package_name}}/assets"
     ]
 }
