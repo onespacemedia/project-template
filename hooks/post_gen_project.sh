@@ -46,6 +46,7 @@ pip freeze > requirements.txt
 # raw tags, but that causes the parent directory path to also not be parse, so we need
 # to move everything into the correct location, then remove the old parent directory.
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}/templates
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_name}}/assets
 rmdir {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Move the project app folders into the correct locations.
