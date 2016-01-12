@@ -1,5 +1,3 @@
-import $ from 'jquery'
-
 import FrontendSwitcher from './components/frontend-switcher/FrontendSwitcher.vue'
 import MobileNav from './components/mobile-nav/MobileNav.vue'
 
