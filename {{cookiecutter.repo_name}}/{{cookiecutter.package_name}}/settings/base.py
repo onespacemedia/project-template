@@ -166,6 +166,8 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 ]
 
+# {{ cookiecutter.redirects }}
+
 if sys.version_info[0] == 3:
     INSTALLED_APPS.remove("server_management")
 
