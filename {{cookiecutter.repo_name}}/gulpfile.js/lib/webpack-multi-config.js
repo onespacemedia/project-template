@@ -37,7 +37,7 @@ module.exports = function(env) {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'babel-loader?stage=0',
+          loader: 'babel-loader',
           exclude: /node_modules/
         },
         {
@@ -52,6 +52,10 @@ module.exports = function(env) {
         js: 'babel',
         css: ExtractText.extract('css')
       }
+    },
+    babel: {
+      presets: ['es2015', 'stage-0'],
+      plugins: ['transform-runtime']
     }
   }
 
