@@ -61,6 +61,7 @@ if [ -d "tmp" ]; then
 fi
 
 # Generate a secret key and update the base settings file.
+cat {{cookiecutter.package_name}}/settings/base.py
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
