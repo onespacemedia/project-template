@@ -4,7 +4,6 @@ if(!config.tasks.images) return
 var browserSync = require('browser-sync')
 var changed     = require('gulp-changed')
 var gulp        = require('gulp')
-var imagemin    = require('gulp-imagemin')
 var path        = require('path')
 
 var paths = {
