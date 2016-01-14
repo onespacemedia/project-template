@@ -290,13 +290,13 @@ WYSIWYG_OPTIONS = {
     # See https://www.tinymce.com/docs/get-started/work-with-plugins/
     'plugins': [
         "advlist autolink link image lists charmap hr anchor pagebreak",
-        "wordcount visualblocks visualchars code fullscreen cmsimage",
+        "wordcount visualblocks visualchars code fullscreen cmsimage hr",
         "table contextmenu directionality paste textcolor colorpicker textpattern"
     ],
 
     # Items to display on the 3 toolbar lines
     'toolbar1': "code | cut copy paste pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap",
-    'toolbar2': "styleselect formatselect | bold italic underline strikethrough | alignleft aligncenter alignright | table | removeformat | subscript superscript",
+    'toolbar2': "styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript",
     'toolbar3': "",
 
     # Display menubar with dropdowns
