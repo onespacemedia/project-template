@@ -33,7 +33,7 @@
   /**
   * Line heights
   */
-  --Line_Height-base: calc(var(Font_Size-base) + 10px);
+  --Line_Height-base: calc(var(--Font_Size-base) + 10px);
   --Line_Height-large: calc(var(--Font_Size-large) + 10px);
   --Line_Height-medium: calc(var(--Font_Size-medium) + 10px);
   --Line_Height-small: calc(var(--Font_Size-small) + 10px);
@@ -42,7 +42,7 @@
   /**
   * Line heights - Large breakpoint++
   */
-  --Line_Height-base--lg: calc(var(Font_Size-base--lg) + 10px);
+  --Line_Height-base--lg: calc(var(--Font_Size-base--lg) + 10px);
   --Line_Height-large--lg: calc(var(--Font_Size-large--lg) + 10px);
   --Line_Height-medium--lg: calc(var(--Font_Size-medium--lg) + 10px);
   --Line_Height-small--lg: calc(var(--Font_Size-small--lg) + 10px);

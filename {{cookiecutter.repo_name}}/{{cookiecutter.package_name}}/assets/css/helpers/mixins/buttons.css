@@ -17,7 +17,7 @@
 | declared
 |
 */
-@defin-mixin Button {
+@define-mixin Button {
   display: inline-block;
   padding-top: 7px;
   padding-right: calc(map(grid, gutter) / 2);
