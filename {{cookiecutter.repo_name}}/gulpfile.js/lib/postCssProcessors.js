@@ -6,7 +6,7 @@ module.exports = [
   }),
   require('postcss-mixins'),
   require('postcss-functions')({
-    glob: path.join(__dirname, '../../example_project', 'assets', 'css', 'functions', '*.js')
+    glob: path.join(__dirname, '../../{{cookiecutter.repo_name}}', 'assets', 'css', 'functions', '*.js')
   }),
 
   // Niceties
