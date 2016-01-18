@@ -17,9 +17,7 @@
 | declared
 |
 */
-@mixin Button() {
-  $Duration: map(misc, transitionDuration);
-
+@defin-mixin Button {
   display: inline-block;
   padding-top: 7px;
   padding-right: calc(map(grid, gutter) / 2);
@@ -36,7 +34,7 @@
   border-radius: map(misc, bdrs);
   color: #fff;
 
-  transition: background-color $Duration, color $Duration $Duration;
+  transition: background-color 0.18s, color 0.18s 0.18s;
 
   &:hover {
     background-color: transparent;
@@ -51,6 +49,17 @@
 | The style for the primary button used
 |
 */
-@mixin Button-Primary() {
-  @include Button();
+@define-mixin Button-primary() {
+  @mixin Button;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Button - Secondary
+|--------------------------------------------------------------------------
+| The style for the secondary button used
+|
+*/
+@define-mixin Button-secondary() {
+  @mixin Button;
 }

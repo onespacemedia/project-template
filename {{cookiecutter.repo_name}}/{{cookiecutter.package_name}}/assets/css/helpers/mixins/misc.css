@@ -5,7 +5,7 @@
 | Mainly used when you're having to have an image cover a section or div
 |
 */
-@mixin Background_Spread() {
+@define-mixin Background_Spread {
   position: absolute;
   top: 0;
   right: 0;

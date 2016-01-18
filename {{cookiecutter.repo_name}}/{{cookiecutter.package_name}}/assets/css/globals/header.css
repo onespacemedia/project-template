@@ -7,28 +7,3 @@
 | @namespace: hd-
 |
 */
-
-/*
-|--------------------------------------------------------------------------
-| Header - Logo
-|--------------------------------------------------------------------------
-|
-*/
-/* @define Logo */
-.hd-Logo {
-  display: block;
-  height: height('logo.svg');
-  width: width('logo.svg');
-
-  background-image: resolve('logo.svg');
-  background-repeat: no-repeat;
-  background-size: @width @height;
-
-  @media (--lg) {
-    height: height('logo.svg');
-    width: width('logo.svg');
-
-    background-image: resolve('logo.svg');
-    background-size: @width @height;
-  }
-}

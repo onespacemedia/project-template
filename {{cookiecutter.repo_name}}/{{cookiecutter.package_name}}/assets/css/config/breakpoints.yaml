@@ -1,9 +1,0 @@
-# Media queries
-#
-# The breakpoints we split our responsiveness up into
-xxlg: [1921px, 999999px]
-xlg: [1441px, 1920px]
-lg: [1025px, 1440px]
-md: [769px, 1024px]
-sm: [481px, 768px]
-xs: [0, 480px]

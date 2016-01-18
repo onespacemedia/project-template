@@ -11,17 +11,15 @@
 |--------------------------------------------------------------------------
 | Creates the container for constraining content
 |
-| @collapsed: Boolean for if we want the outside gutters
-|
 */
-@mixin Grid_Container($collapsed: false) {
+@define-mixin Grid_Container {
   /* Add 30px to the container as the 'container' should be the size of the
   /* content not the actual div
   /* ------------------------ */
   margin-right: auto;
   margin-left: @margin-right;
-  max-width: calc(map(grid, container) + map(grid, gutter));
-  padding-right: calc(map(grid, gutter) / 2);
+  max-width: calc(var(--Grid_Container) + var(--Grid_Gutter));
+  padding-right: calc(var(--Grid_Gutter) / 2);
   padding-left: @padding-right;
   width: 100%;
 }
@@ -35,8 +33,8 @@
 | widths consistent
 |
 */
-@mixin Grid_Row() {
-  margin-right: -calc(map(grid, gutter) / 2);
+@define-mixin Grid_Row {
+  margin-right: -calc(var(--Grid_Gutter) / 2);
   margin-left: @margin-right;
 }
 
@@ -48,8 +46,8 @@
 | other
 |
 */
-@mixin Grid_Column() {
-  margin-right: calc(map(grid, gutter) / 2);
+@define-mixin Grid_Column {
+  margin-right: calc(var(--Grid_Gutter) / 2);
   margin-left: @margin-right;
 }
 

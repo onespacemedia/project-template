@@ -14,14 +14,14 @@
 |
 | @size: The font size variable from the maps & lineheights
 */
-@mixin Font_Sizing($size) {
-  margin-bottom: calc(map(fonts, sizes, base, $size) / 2);
+@define-mixin Font_Sizing $size {
+  margin-bottom: calc(var(--Font_Size-$(size)) / 2);
 
-  font-size: map(fonts, sizes, base, $size);
-  line-height: map(fonts, lineHeights, base, $size);
+  font-size: var(--Font_Size-$(size));
+  line-height: var(--Line_Height-$(size));
 
-  @media (--md) {
-    font-size: map(fonts, sizes, md, $size);
-    line-height: map(fonts, lineHeights, md, $size);
+  @media (--lg) {
+    font-size: var(--Font_Size-$(size)--lg);
+    line-height: var(--Line_Height-$(size)--lg);
   }
 }

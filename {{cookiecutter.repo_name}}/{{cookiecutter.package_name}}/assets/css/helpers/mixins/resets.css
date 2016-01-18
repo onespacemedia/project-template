@@ -6,7 +6,7 @@
 | so having an easy access mixin just reduces the amount of code we write
 |
 */
-@mixin Reset_List() {
+@define-mixin Reset_List {
   margin: 0;
   padding: 0;
 

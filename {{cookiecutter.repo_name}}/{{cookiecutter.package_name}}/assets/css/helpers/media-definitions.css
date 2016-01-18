@@ -15,17 +15,16 @@
 | bad practice.
 |
 */
-@custom-media --xs (min-width: map(breakpoints, xs, 0));
-@custom-media --sm (min-width: map(breakpoints, sm, 0));
-@custom-media --md (min-width: map(breakpoints, md, 0));
-@custom-media --lg (min-width: map(breakpoints, lg, 0));
-@custom-media --xlg (min-width: map(breakpoints, xlg, 0));
-@custom-media --xxlg (min-width: map(breakpoints, xxlg, 0));
+@custom-media --sm (min-width: 481px);
+@custom-media --md (min-width: 769px);
+@custom-media --lg (min-width: 1025px);
+@custom-media --xlg (min-width: 1441px);
+@custom-media --xxlg (min-width: 1921px);
 
 /* Target just a specific viewport */
-@custom-media --xs-viewport (min-width: map(breakpoints, xs, 0)) and (max-width: map(breakpoints, xs, 1));
-@custom-media --sm-viewport (min-width: map(breakpoints, sm, 0)) and (max-width: map(breakpoints, sm, 1));
-@custom-media --md-viewport (min-width: map(breakpoints, md, 0)) and (max-width: map(breakpoints, md, 1));
-@custom-media --lg-viewport (min-width: map(breakpoints, lg, 0)) and (max-width: map(breakpoints, lg, 1));
-@custom-media --xlg-viewport (min-width: map(breakpoints, xlg, 0)) and (max-width: map(breakpoints, xlg, 1));
-@custom-media --xxlg-viewport (min-width: map(breakpoints, xxlg, 0)) and (max-width: map(breakpoints, xxlg, 1));
+@custom-media --xs-viewport (max-width: 480px);
+@custom-media --sm-viewport (min-width: 481px) and (max-width: 768px);
+@custom-media --md-viewport (min-width: 769px) and (max-width: 1024px);
+@custom-media --lg-viewport (min-width: 1025px) and (max-width: 1440px);
+@custom-media --xlg-viewport (min-width: 1441px) and (max-width: 1920px);
+@custom-media --xxlg-viewport (min-width: 1921px);

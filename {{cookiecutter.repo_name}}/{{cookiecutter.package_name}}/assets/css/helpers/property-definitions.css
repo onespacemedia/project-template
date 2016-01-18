@@ -1,0 +1,60 @@
+:root {
+  /*
+  |--------------------------------------------------------------------------
+  | Fonts
+  |--------------------------------------------------------------------------
+  |
+  */
+  /**
+  * Families
+  */
+  --Font_Family-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --Font_Family-serif: 'Georgia', 'Times New Roman', serif;
+
+
+  /**
+  * Sizes
+  */
+  --Font_Size-base: 16px;
+  --Font_Size-large: 40px;
+  --Font_Size-medium: 30px;
+  --Font_Size-small: 20px;
+  --Font_Size-root: 16px;
+
+  /**
+  * Sizes - Large breakpoint++
+  */
+  --Font_Size-base--lg: 16px;
+  --Font_Size-large--lg: 40px;
+  --Font_Size-medium--lg: 30px;
+  --Font_Size-small--lg: 20px;
+  --Font_Size-root--lg: 16px;
+
+  /**
+  * Line heights
+  */
+  --Line_Height-base: calc(var(Font_Size-base) + 10px);
+  --Line_Height-large: calc(var(--Font_Size-large) + 10px);
+  --Line_Height-medium: calc(var(--Font_Size-medium) + 10px);
+  --Line_Height-small: calc(var(--Font_Size-small) + 10px);
+  --Line_Height-root: calc(var(--Font_Size-root) + 10px);
+
+  /**
+  * Line heights - Large breakpoint++
+  */
+  --Line_Height-base--lg: calc(var(Font_Size-base--lg) + 10px);
+  --Line_Height-large--lg: calc(var(--Font_Size-large--lg) + 10px);
+  --Line_Height-medium--lg: calc(var(--Font_Size-medium--lg) + 10px);
+  --Line_Height-small--lg: calc(var(--Font_Size-small--lg) + 10px);
+  --Line_Height-root--lg: calc(var(--Font_Size-root--lg) + 10px);
+
+  /*
+  |--------------------------------------------------------------------------
+  | Grid
+  |--------------------------------------------------------------------------
+  |
+  */
+  --Grid_Constrained: 1700px;
+  --Grid_Container: 1180px;
+  --Grid_Gutter: 30px;
+}
