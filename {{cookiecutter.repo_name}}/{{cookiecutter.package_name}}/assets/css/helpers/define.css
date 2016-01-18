@@ -60,12 +60,12 @@ body {
 
   /* This needs escaping so it doesn't double string */
   font-family: var(--Font_Family-sans);
-  font-weight: 400;
   /* Make the `body` use the `font-size-normal` */
   font-size: var(--Font_Size-base);
+  font-weight: 400;
   line-height: var(--Line_Height-base);
   /* Go easy on the eyes and use something other than `#000` for text */
-  color: map(colors, dark);
+  color: #333;
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #fff;
 
