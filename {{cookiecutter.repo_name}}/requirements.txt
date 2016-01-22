@@ -2,6 +2,7 @@ bcrypt
 django>=1.8,<1.9
 django-cachalot
 django-compressor
+django-environ
 django-extensions
 django-flexible-images
 django-historylinks

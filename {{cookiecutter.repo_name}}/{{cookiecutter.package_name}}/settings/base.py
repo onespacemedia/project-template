@@ -14,7 +14,16 @@ import os
 import platform
 import sys
 
+import environ
 from social.pipeline import DEFAULT_AUTH_PIPELINE
+
+
+# Auto-discovery of project location.
+SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+
+env = environ.Env()
+
 
 if platform.python_implementation() == "PyPy":
     from psycopg2cffi import compat
@@ -43,17 +52,15 @@ SUIT_CONFIG = {
 # Database settings.
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "{{cookiecutter.package_name}}",
-        "USER": "{{cookiecutter.package_name}}",
-    }
+    # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
+    'default': env.db("DATABASE_URL", default="postgres:///{{ cookiecutter.repo_name }}"),
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Absolute path to the directory where all uploaded media files are stored.
 
-MEDIA_ROOT = "/var/www/{{cookiecutter.repo_name}}_media"
+MEDIA_ROOT = os.path.join(BASE_ROOT, 'media')
 
 MEDIA_URL = "/media/"
 
@@ -62,13 +69,13 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Absolute path to the directory where static files will be collected.
 
-STATIC_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
+STATIC_ROOT = os.path.join(BASE_ROOT, 'static')
 
 STATIC_URL = "/static/"
 
-NODE_MODULES_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
+NODE_MODULES_ROOT = STATIC_ROOT
 
-NODE_MODULES_URL = "/static/"
+NODE_MODULES_URL = STATIC_URL
 
 
 # Email settings.
@@ -115,12 +122,6 @@ USE_I18N = False
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Auto-discovery of project location.
-
-SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 
 
 # A list of additional installed applications.

@@ -40,17 +40,6 @@ TEMPLATE_LOADERS = (
     "django.template.loaders.app_directories.Loader",
 )
 
-
-# Optional separate database settings
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "HOST": "localhost",
-        "NAME": "{{cookiecutter.package_name}}",
-        "USER": os.getlogin(),
-    },
-}
-
 # Mailtrip SMTP
 EMAIL_HOST = 'mailtrap.io'
 EMAIL_HOST_USER = '178288370161874a6'
