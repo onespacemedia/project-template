@@ -58,4 +58,10 @@ EMAIL_HOST_PASSWORD = '5033a6d5bca3f0'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 
-FRONTEND_TEMPLATES = lambda: [str(f[:-5]) for f in os.listdir(os.path.join(TEMPLATE_DIRS[0], 'frontend')) if f[:1] != '_']
+
+def FRONTEND_TEMPLATES():
+    return [
+        str(file[:-5])
+        for file in os.listdir(os.path.join(TEMPLATE_DIRS[0], 'frontend'))
+        if file[:1] != '_'
+    ]
