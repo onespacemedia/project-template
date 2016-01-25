@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - pip install --disable-pip-version-check flake8 isort
-    - npm i stylelint eslint eslint-config-standard babel-eslint -g
+    - npm i stylelint@3.2.2 eslint eslint-config-standard babel-eslint -g
     - npm i standard stylelint-statement-max-nesting-depth stylelint-selector-bem-pattern postcss
 
 test:
