@@ -40,7 +40,7 @@
 
     filters: {
       normalCase (value) {
-        return value.replace(/-/, ' ')
+        return value.replace(/-/g, ' ')
       }
     }
   }
