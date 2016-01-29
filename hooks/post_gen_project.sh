@@ -64,6 +64,8 @@ fi
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
+perl -pi -e s,POSTGRES_PASSWORD=,POSTGRES_PASSWORD=\"$(python -c "import random, string; print ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(16))")\",g .env
+
 # Install front-end dependencies.
 npm install -g webpack
 npm install
