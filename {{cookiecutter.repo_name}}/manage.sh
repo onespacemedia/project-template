@@ -16,5 +16,7 @@ elif [ "$1" == "configure" ]; then
   echo "Django server should now be running at http://$(docker-machine ip {{ cookiecutter.repo_name }}):8000/"
   open "http://$(docker-machine ip {{ cookiecutter.repo_name }}):8000/"
 else
+  docker-machine start {{ cookiecutter.repo_name }}
+  eval "$(docker-machine env {{ cookiecutter.repo_name }})"
   docker-compose -f dev.yml run django python manage.py "$@"
 fi
