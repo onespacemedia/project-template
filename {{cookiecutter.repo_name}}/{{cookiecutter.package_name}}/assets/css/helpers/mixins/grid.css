@@ -39,9 +39,13 @@
 | widths consistent
 |
 */
-@mixin Grid_Row() {
+@mixin Grid_Row($flex: true) {
   margin-right: -calc($Grid_Gutter / 2);
   margin-left: @margin-right;
+
+  @if $flex {
+    display: flex;
+  }
 
   @media (--lg) {
     margin-right: -calc($Grid_Gutter--lg / 2);
@@ -57,13 +61,22 @@
 | other
 |
 */
-@mixin Grid_Column() {
+@mixin Grid_Column($count, $total) {
   margin-right: calc($Grid_Gutter / 2);
   margin-left: @margin-right;
 
   @media (--lg) {
+    flex-basis: @width;
+
     margin-right: calc($Grid_Gutter--lg / 2);
     margin-left: @margin-right;
+    width: percentage($count, $total);
+
+    @if $width {
+      flex-basis: @width;
+
+      width: percentage($count, $total);
+    }
   }
 }
 
