@@ -20,7 +20,7 @@ module.exports = {
 
     // Number
     'number-leading-zero': 'always',
-    'number-max-precision': 2,
+    'number-max-precision': 3,
     'number-no-trailing-zeros': true,
     'number-zero-length-no-unit': true,
 
@@ -29,10 +29,6 @@ module.exports = {
     'function-comma-space-after': 'always',
     'function-comma-space-before': 'never',
     'function-linear-gradient-no-nonstandard-direction': true,
-    'function-url-quotes': 'single',
-
-    // Value
-    'value-no-vendor-prefix': true,
 
     // Value list
     'value-list-comma-space-after': 'always',
@@ -160,8 +156,10 @@ module.exports = {
       {
         emptyLineBefore: true,
         properties: [
+          'appearance',
           'background',
           'background-attachment',
+          'background-blend-mode',
           'background-color',
           'background-image',
           'background-position',
@@ -180,6 +178,7 @@ module.exports = {
           'box-shadow',
           'color',
           'cursor',
+          'mix-blend-mode',
           'opacity',
           'overflow',
           'overflow-x',

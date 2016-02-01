@@ -27,7 +27,7 @@ $Font_Color-small: $Color_Blue;
 $Font_Color-medium: $Color_Blue;
 $Font_Color-large: $Color_Blue;
 $Font_Color-standfirst: $Color_Blue;
-$Font_Color-root: $Color_Blue;
+$Font_Color-body: $Color_Blue;
 
 /**
 * Families
@@ -73,22 +73,20 @@ $Font_Size-body--lg: 16px;
 /**
 * Line heights
 */
-$Line_Height-xs: calc($Font_Size-xs + 7px);
 $Line_Height-small: calc($Font_Size-small + 8px);
 $Line_Height-medium: calc($Font_Size-medium + 8px);
 $Line_Height-large: calc($Font_Size-large + 4px);
 $Line_Height-standfirst: calc($Font_Size-standfirst + 8px);
-$Line_Height-body: calc($Font_Size-root + 10px);
+$Line_Height-body: calc($Font_Size-body + 10px);
 
 /**
 * Line heights - Large breakpoint++
 */
-$Line_Height-xs--lg: calc($Font_Size-xs--lg + 10px);
 $Line_Height-small--lg: calc($Font_Size-small--lg + 8px);
 $Line_Height-medium--lg: $Line_Height-medium;
 $Line_Height-large--lg: calc($Font_Size-large--lg + 10px);
 $Line_Height-standfirst--lg: $Line_Height-standfirst;
-$Line_Height-body--lg: calc($Font_Size-root--lg + 10px);
+$Line_Height-body--lg: calc($Font_Size-body--lg + 10px);
 
 /*
 |--------------------------------------------------------------------------
