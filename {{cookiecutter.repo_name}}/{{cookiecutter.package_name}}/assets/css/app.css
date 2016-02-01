@@ -46,6 +46,16 @@
 
 /*
 |--------------------------------------------------------------------------
+| Modules
+|--------------------------------------------------------------------------
+| A collection of styles that aren't necessarily specific to an app but also
+| aren't global like the header or footer. An example would be a breadcrumb
+|
+*/
+@import 'modules/**/*.css';
+
+/*
+|--------------------------------------------------------------------------
 | Apps
 |--------------------------------------------------------------------------
 | A component is a specific bit of code that can be reused in any context

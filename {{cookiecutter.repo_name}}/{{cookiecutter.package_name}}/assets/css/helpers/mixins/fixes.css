@@ -1,0 +1,26 @@
+/*
+|--------------------------------------------------------------------------
+| Firefox fix
+|--------------------------------------------------------------------------
+| CSS that will work just for Firefox
+|
+*/
+@mixin FireFoxFix() {
+  @-moz-document url-prefix() {
+    @content;
+  }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Safari 9 Fix
+|--------------------------------------------------------------------------
+| CSS that will work just for Safari 9
+|
+*/
+@mixin Safari9Fix() {
+  @supports (overflow:-webkit-marquee) and (justify-content:inherit) {
+    @content;
+  }
+}

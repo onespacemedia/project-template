@@ -17,3 +17,8 @@
 * Enter state
 */
 @custom-selector :--enter :hover, :focus;
+
+/**
+* Anchor (classless)
+*/
+@custom-selector :--anchor-classless a[href]:not([class]);

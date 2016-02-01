@@ -48,7 +48,7 @@ body {
 
 html {
   /* Sets a specific default `font-size` for user with `rem` type scales. */
-  font-size: var(--Font_Size-root);
+  font-size: 16px;
   /* Changes the default tap highlight to be completely transparent in iOS. */
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -59,20 +59,15 @@ body {
   text-rendering: optimizeLegibility;
 
   /* This needs escaping so it doesn't double string */
-  font-family: var(--Font_Family-sans);
+  font-family: $Font_Family-body;
   /* Make the `body` use the `font-size-normal` */
-  font-size: var(--Font_Size-base);
+  font-size: 18px;
   font-weight: 400;
-  line-height: var(--Line_Height-base);
+  line-height: 28px;
   /* Go easy on the eyes and use something other than `#000` for text */
-  color: #333;
+  color: $Color_Body;
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
-  background-color: #fff;
-
-  @media(--lg) {
-    font-size: var(--Font_Size-base--lg);
-    line-height: var(--Line_Height-base--lg);
-  }
+  background-color: #ececec;
 }
 
 /*
@@ -83,7 +78,7 @@ body {
 */
 hr {
   border: 0;
-  border-top: 1px solid #ececec;
+  border-top: 1px solid $Color_Border;
 }
 
 /*
@@ -104,11 +99,11 @@ hr {
 */
 p {
   margin-top: 0;
-  margin-bottom:  @margin-top;
+  margin-bottom: @margin-top;
 
   &:not([class]) {
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: $Global_Margin;
   }
 }
 
@@ -120,10 +115,10 @@ p {
 */
 a {
   text-decoration: none;
+}
 
-  &[href]:not([class]) {
-    color: #b0d;
-  }
+:--anchor-classless {
+  color: $Color_Anchor;
 }
 
 /*

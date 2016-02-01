@@ -14,14 +14,29 @@
 |
 | @size: The font size variable from the maps & lineheights
 */
-@define-mixin Font_Sizing $size {
-  margin-bottom: calc(var(--Font_Size-$(size)) / 2);
+@mixin Font_Sizing($size) {
+  margin-bottom: calc($Font_Size-$(size) * 0.625);
 
-  font-size: var(--Font_Size-$(size));
-  line-height: var(--Line_Height-$(size));
+  font-size: $Font_Size-$(size);
+  line-height: $Line_Height-$(size);
 
   @media (--lg) {
-    font-size: var(--Font_Size-$(size)--lg);
-    line-height: var(--Line_Height-$(size)--lg);
+    font-size: $Font_Size-$(size)--lg;
+    line-height: $Line_Height-$(size)--lg;
   }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Font styles
+|--------------------------------------------------------------------------
+| Returns the font family & weight relative to the size of the font being
+| used
+|
+*/
+@mixin Font_Styles($size) {
+  font-family: $Font_Family-$(size);
+  font-weight: $Font_Weight-$(size);
+
+  color: $Font_Color-$(size);
 }

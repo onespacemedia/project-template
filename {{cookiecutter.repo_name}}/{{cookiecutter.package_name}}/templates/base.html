@@ -46,9 +46,9 @@
           {% block content_outer %}
             {% block content_above %}{% endblock %}
 
-            <div class="lyt-Content">
+            <div class="lyt-Content {% block content_class %}{% endblock %}">
               {% block content %}
-                <main class="lyt-Main">
+                <main class="lyt-Main {% block main_class %}{% endblock %}">
                   {% block main %}{% endblock %}
                 </main>
 

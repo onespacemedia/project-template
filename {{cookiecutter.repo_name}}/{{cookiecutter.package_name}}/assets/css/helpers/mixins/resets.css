@@ -1,12 +1,30 @@
 /*
 |--------------------------------------------------------------------------
+| Resets - Button
+|--------------------------------------------------------------------------
+| Overrides default browser styles for the `<button>` element
+|
+*/
+@mixin Reset_Button() {
+  padding: 0;
+
+  text-align: left;
+
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+  color: inherit;
+}
+
+/*
+|--------------------------------------------------------------------------
 | Resets - Lists
 |--------------------------------------------------------------------------
 | Just overrides the default list styles, we use lists in multiple places
 | so having an easy access mixin just reduces the amount of code we write
 |
 */
-@define-mixin Reset_List {
+@mixin Reset_List() {
   margin: 0;
   padding: 0;
 

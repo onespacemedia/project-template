@@ -1,60 +1,111 @@
-:root {
-  /*
-  |--------------------------------------------------------------------------
-  | Fonts
-  |--------------------------------------------------------------------------
-  |
-  */
-  /**
-  * Families
-  */
-  --Font_Family-sans: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  --Font_Family-serif: 'Georgia', 'Times New Roman', serif;
+/*
+|--------------------------------------------------------------------------
+| Colors
+|--------------------------------------------------------------------------
+|
+*/
+$Color_Anchor: #702670;
+$Color_Blue: #064687;
+$Color_Body: #5c748c;
+$Color_Border: #d0d5d8;
+$Color_Brand-blue: #036;
+$Color_Brand-gold: #ead373;
+$Color_Brand-maroon: #636;
+$Color_Error: #ff3d00;
+$Color_Grey: #eee;
 
+/*
+|--------------------------------------------------------------------------
+| Fonts
+|--------------------------------------------------------------------------
+|
+*/
+/**
+* Colors
+*/
+$Font_Color-small: $Color_Blue;
+$Font_Color-medium: $Color_Blue;
+$Font_Color-large: $Color_Blue;
+$Font_Color-standfirst: $Color_Blue;
+$Font_Color-root: $Color_Blue;
 
-  /**
-  * Sizes
-  */
-  --Font_Size-base: 16px;
-  --Font_Size-large: 40px;
-  --Font_Size-medium: 30px;
-  --Font_Size-small: 20px;
-  --Font_Size-root: 16px;
+/**
+* Families
+*/
+$Font_Family-calluna: 'calluna', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$Font_Family-proxima: 'proxima-nova', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$Font_Family-sofia: 'sofia-pro', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$Font_Family-body: $Font_Family-proxima;
 
-  /**
-  * Sizes - Large breakpoint++
-  */
-  --Font_Size-base--lg: 16px;
-  --Font_Size-large--lg: 40px;
-  --Font_Size-medium--lg: 30px;
-  --Font_Size-small--lg: 20px;
-  --Font_Size-root--lg: 16px;
+$Font_Family-small: $Font_Family-calluna;
+$Font_Family-medium: $Font_Family-calluna;
+$Font_Family-large: $Font_Family-calluna;
+$Font_Family-standfirst: $Font_Family-calluna;
+$Font_Family-body: $Font_Family-calluna;
 
-  /**
-  * Line heights
-  */
-  --Line_Height-base: calc(var(--Font_Size-base) + 10px);
-  --Line_Height-large: calc(var(--Font_Size-large) + 10px);
-  --Line_Height-medium: calc(var(--Font_Size-medium) + 10px);
-  --Line_Height-small: calc(var(--Font_Size-small) + 10px);
-  --Line_Height-root: calc(var(--Font_Size-root) + 10px);
+/**
+* Weights
+*/
+$Font_Weight-small: 600;
+$Font_Weight-medium: 600;
+$Font_Weight-large: 600;
+$Font_Weight-standfirst: 600;
+$Font_Weight-body: 600;
 
-  /**
-  * Line heights - Large breakpoint++
-  */
-  --Line_Height-base--lg: calc(var(--Font_Size-base--lg) + 10px);
-  --Line_Height-large--lg: calc(var(--Font_Size-large--lg) + 10px);
-  --Line_Height-medium--lg: calc(var(--Font_Size-medium--lg) + 10px);
-  --Line_Height-small--lg: calc(var(--Font_Size-small--lg) + 10px);
-  --Line_Height-root--lg: calc(var(--Font_Size-root--lg) + 10px);
+/**
+* Sizes
+*/
+$Font_Size-small: 20px;
+$Font_Size-medium: 24px;
+$Font_Size-large: 32px;
+$Font_Size-standfirst: 24px;
+$Font_Size-body: 18px;
 
-  /*
-  |--------------------------------------------------------------------------
-  | Grid
-  |--------------------------------------------------------------------------
-  |
-  */
-  --Grid_Constrained: 1700px;
-  --Grid_Container: 1180px;
-  --Grid_Gutter: 30px;
-}
+/**
+* Sizes - Large breakpoint++
+*/
+$Font_Size-small--lg: $Font_Size-small;
+$Font_Size-medium--lg: $Font_Size-medium;
+$Font_Size-large--lg: $Font_Size-large;
+$Font_Size-standfirst--lg: $Font_Size-standfirst;
+$Font_Size-body--lg: 16px;
+
+/**
+* Line heights
+*/
+$Line_Height-xs: calc($Font_Size-xs + 7px);
+$Line_Height-small: calc($Font_Size-small + 8px);
+$Line_Height-medium: calc($Font_Size-medium + 8px);
+$Line_Height-large: calc($Font_Size-large + 4px);
+$Line_Height-standfirst: calc($Font_Size-standfirst + 8px);
+$Line_Height-body: calc($Font_Size-root + 10px);
+
+/**
+* Line heights - Large breakpoint++
+*/
+$Line_Height-xs--lg: calc($Font_Size-xs--lg + 10px);
+$Line_Height-small--lg: calc($Font_Size-small--lg + 8px);
+$Line_Height-medium--lg: $Line_Height-medium;
+$Line_Height-large--lg: calc($Font_Size-large--lg + 10px);
+$Line_Height-standfirst--lg: $Line_Height-standfirst;
+$Line_Height-body--lg: calc($Font_Size-root--lg + 10px);
+
+/*
+|--------------------------------------------------------------------------
+| Grid
+|--------------------------------------------------------------------------
+|
+*/
+$Grid_Constrained: 1600px;
+$Grid_Container: 1240px;
+$Grid_Gutter: 30px;
+$Grid_Gutter--lg: 16px;
+
+/*
+|--------------------------------------------------------------------------
+| Misc
+|--------------------------------------------------------------------------
+|
+*/
+$Global_Margin: 18px;
+$Aside_Margin: 40px;

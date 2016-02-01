@@ -12,16 +12,22 @@
 | Creates the container for constraining content
 |
 */
-@define-mixin Grid_Container {
-  /* Add 30px to the container as the 'container' should be the size of the
-  /* content not the actual div
+@mixin Grid_Container() {
+  /* Add $Grid_Gutter to the container as the 'container' should be the size
+  /* of the content not the actual div
   /* ------------------------ */
   margin-right: auto;
   margin-left: @margin-right;
-  max-width: calc(var(--Grid_Container) + var(--Grid_Gutter));
-  padding-right: calc(var(--Grid_Gutter) / 2);
+  max-width: calc($Grid_Container + $Grid_Gutter);
+  padding-right: calc($Grid_Gutter / 2);
   padding-left: @padding-right;
   width: 100%;
+
+  @media (--lg) {
+    max-width: calc($Grid_Container + $Grid_Gutter--lg);
+    padding-right: calc($Grid_Gutter--lg / 2);
+    padding-left: @padding-right;
+  }
 }
 
 /*
@@ -33,9 +39,14 @@
 | widths consistent
 |
 */
-@define-mixin Grid_Row {
-  margin-right: -calc(var(--Grid_Gutter) / 2);
+@mixin Grid_Row() {
+  margin-right: -calc($Grid_Gutter / 2);
   margin-left: @margin-right;
+
+  @media (--lg) {
+    margin-right: -calc($Grid_Gutter--lg / 2);
+    margin-left: @margin-right;
+  }
 }
 
 /*
@@ -46,8 +57,13 @@
 | other
 |
 */
-@define-mixin Grid_Column {
-  margin-right: calc(var(--Grid_Gutter) / 2);
+@mixin Grid_Column() {
+  margin-right: calc($Grid_Gutter / 2);
   margin-left: @margin-right;
+
+  @media (--lg) {
+    margin-right: calc($Grid_Gutter--lg / 2);
+    margin-left: @margin-right;
+  }
 }
 
