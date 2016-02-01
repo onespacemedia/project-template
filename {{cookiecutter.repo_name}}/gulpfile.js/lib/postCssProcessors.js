@@ -6,6 +6,19 @@ module.exports = [
       namespace: '-',
       descendent: '_',
       modifier: '-'
+    },
+    shortcuts: {
+      'component-namespace': 'namespace',
+      'component': 'module',
+      'descendent': 'component',
+      'modifier': 'variant'
+    }
+  }),
+  require('postcss-bem')({
+    separators: {
+      namespace: '-',
+      descendent: '_',
+      modifier: '-'
     }
   }),
   require('postcss-import')({
