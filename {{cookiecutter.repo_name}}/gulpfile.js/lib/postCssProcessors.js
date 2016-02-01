@@ -1,6 +1,13 @@
 var path = require('path')
 
 module.exports = [
+  require('postcss-bem')({
+    separators: {
+      namespace: '-',
+      descendent: '_',
+      modifier: '-'
+    }
+  }),
   require('postcss-import')({
     glob: true
   }),

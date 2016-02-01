@@ -29,6 +29,7 @@
     "js-cookie": "^2.0.4",
     "normalize.css": "^3.0.3",
     "postcss-assets": "^3.0.3",
+    "postcss-bem": "^0.4.1",
     "postcss-brand-colors": "^0.3.0",
     "postcss-color-alpha": "^1.0.3",
     "postcss-conditionals": "^2.0.1",
