@@ -404,8 +404,6 @@ if 'test' in sys.argv:
 
     MIGRATION_MODULES = DisableMigrations()
 
-    # Convert MIDDLEWARE_CLASSES to a list so we can remove the localisation middleware
-    MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES)
-
+    # Remove the localisation middleware
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES.remove('cms.middleware.LocalisationMiddleware')
+        MIDDLEWARE_CLASSES = tuple(c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')
