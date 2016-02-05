@@ -1,4 +1,4 @@
-from .base import *  # noqa
+from .base import *  # pylint: disable=unused-wildcard-import
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
