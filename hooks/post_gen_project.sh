@@ -16,10 +16,10 @@ if [ -z "$CI" ]; then
 fi
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
-if ! grep -iq GeoIP "requirements.txt"; then
+{% if cookiecutter.geoip == "no" %}
     echo "Removing GeoIP folder";
     rm -rf {{cookiecutter.package_name}}/geoip/
-fi
+{% endif %}
 
 # Install Python dependencies.
 if [ -z "$CI" ]; then
