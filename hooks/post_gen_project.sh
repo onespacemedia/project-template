@@ -79,4 +79,11 @@ if [ -z "$CI" ]; then
     fi
 
     git flow init -d
+
+    # Add all of the project files to a Git commit and push to the remote repo.
+    git add .
+    git commit --amend --all --no-edit
+
+    # We can't push yet because we don't have a remote..
+    # git push
 fi
