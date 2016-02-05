@@ -17,7 +17,7 @@ import sys
 from social.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == "PyPy":
-    from psycopg2cffi import compat
+    from psycopg2cffi import compat  # pylint: disable=import-error
     compat.register()
 
 
