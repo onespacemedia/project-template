@@ -65,7 +65,7 @@ perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py
 # Install front-end dependencies.
 npm install -g webpack
 npm install
-webpack
+npm run build
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
