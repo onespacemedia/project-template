@@ -3,8 +3,13 @@ machine:
     version: 5.1.0
 
 dependencies:
+  cache_directories:
+    - /home/ubuntu/nvm/versions/node/v5.1.0/bin
+    - /home/ubuntu/nvm/versions/node/v5.1.0/lib/node_modules
   override:
     - pip install --disable-pip-version-check flake8 isort
+    - pip install --disable-pip-version-check -r requirements.txt
+    - npm set progress=false
     - npm i stylelint@3.2.2 eslint eslint-config-standard babel-eslint -g
     - npm i standard stylelint-statement-max-nesting-depth stylelint-selector-bem-pattern postcss
 
@@ -14,3 +19,4 @@ test:
     - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
     - stylelint {{ cookiecutter.package_name }}/assets/css/**/*.css
     - eslint {{ cookiecutter.package_name }}/assets/js/**/*.js
+    - python manage.py test
