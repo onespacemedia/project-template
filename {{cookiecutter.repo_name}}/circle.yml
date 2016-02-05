@@ -7,7 +7,7 @@ dependencies:
     - /home/ubuntu/nvm/versions/node/v5.1.0/bin
     - /home/ubuntu/nvm/versions/node/v5.1.0/lib/node_modules
   override:
-    - pip install --disable-pip-version-check flake8 isort
+    - pip install --disable-pip-version-check pylint pylint-django pylint-mccabe isort
     - pip install --disable-pip-version-check -r requirements.txt
     - npm set progress=false
     - npm i stylelint@3.2.2 eslint eslint-config-standard babel-eslint -g
@@ -15,7 +15,7 @@ dependencies:
 
 test:
   override:
-    - flake8 --show-source --ignore=E501 --exclude=.venv,node_modules,*/migrations/* .
+    - pylint {{ cookiecutter.package_name }}/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
     - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
     - stylelint {{ cookiecutter.package_name }}/assets/css/**/*.css
     - eslint {{ cookiecutter.package_name }}/assets/js/**/*.js
