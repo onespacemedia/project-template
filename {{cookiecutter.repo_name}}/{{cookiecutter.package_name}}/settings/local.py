@@ -10,7 +10,7 @@ This file should be excluded from version control to keep the settings local.
 import os
 import os.path
 
-from .base import *  # pylint: disable=unused-wildcard-import
+from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
 # Run in debug mode.
 

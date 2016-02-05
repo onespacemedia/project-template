@@ -10,7 +10,7 @@ from django.contrib import admin
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
-from {{cookiecutter.package_name}}.utils.views import FrontendView
+from .utils.views import FrontendView
 
 admin.autodiscover()
 
