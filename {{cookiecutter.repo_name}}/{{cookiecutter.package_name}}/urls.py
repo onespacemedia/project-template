@@ -8,6 +8,8 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import generic
+
+{% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
 from {{cookiecutter.package_name}}.utils.views import FrontendView
 
 admin.autodiscover()
@@ -20,6 +22,8 @@ urlpatterns = [
         {'password_change_form': CMSPasswordChangeForm}, name='password_change'),
     url(r'^admin/password_change/done/$', 'django.contrib.auth.views.password_change_done', name='password_change_done'),
     url(r"^admin/", include(admin.site.urls)),
+    url(r'^admin/', include('social.apps.django_app.urls', namespace='social')),
+    {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name="admin_sections_js"),
 
     # Permalink redirection service.
     url(r"^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$", "django.contrib.contenttypes.views.shortcut", name="permalink_redirect"),
@@ -33,9 +37,6 @@ urlpatterns = [
 
     # There's no favicon here!
     url(r"^favicon.ico$", generic.RedirectView.as_view(permanent=True)),
-
-    url('', include('social.apps.django_app.urls', namespace='social'))
-
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 ) + static(
