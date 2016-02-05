@@ -26,7 +26,9 @@
     {% block feeds %}{% endblock %}
 
     {# Project #}
-    <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
+    {% compress css %}
+      <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
+    {% endcompress %}
 
     {% block css %}{% endblock %}
   </head>

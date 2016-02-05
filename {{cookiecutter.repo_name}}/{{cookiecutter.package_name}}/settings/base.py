@@ -191,7 +191,7 @@ WEBPACK_LOADER = {
 }
 
 COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter'
+    'compressor.filters.css_default.CssAbsoluteFilter',
 ]
 
 THUMBNAIL_PRESERVE_FORMAT = True
