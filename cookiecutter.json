@@ -5,7 +5,7 @@
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "package_name": "{{ cookiecutter.repo_name|replace('-', '_') }}",
     "faqs": "no",
-    "jobs": "no",
+    "careers": "no",
     "people": "no",
     "redirects": "yes",
     "news": "yes",
