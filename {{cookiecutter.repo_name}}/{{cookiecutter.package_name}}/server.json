@@ -1,7 +1,7 @@
 {
     "local": {
         "database": {
-            "name": "{{cookiecutter.repo_name}}"
+            "name": "{{cookiecutter.package_name}}"
         }
     },
     "remotes": {
@@ -12,8 +12,8 @@
                 "initial_user": "root"
             },
             "database": {
-                "name": "{{cookiecutter.repo_name}}",
-                "user": "{{cookiecutter.repo_name}}",
+                "name": "{{cookiecutter.package_name}}",
+                "user": "{{cookiecutter.package_name}}",
                 "password": ""
             },
             "is_aws": false
