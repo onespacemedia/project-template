@@ -53,7 +53,7 @@ DATABASES = {
 
 # Absolute path to the directory where all uploaded media files are stored.
 
-MEDIA_ROOT = "/var/www/{{cookiecutter.repo_name}}_media"
+MEDIA_ROOT = "/var/www/{{cookiecutter.package_name}}_media"
 
 MEDIA_URL = "/media/"
 
@@ -62,11 +62,11 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Absolute path to the directory where static files will be collected.
 
-STATIC_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
+STATIC_ROOT = "/var/www/{{cookiecutter.package_name}}_static"
 
 STATIC_URL = "/static/"
 
-NODE_MODULES_ROOT = "/var/www/{{cookiecutter.repo_name}}_static"
+NODE_MODULES_ROOT = "/var/www/{{cookiecutter.package_name}}_static"
 
 NODE_MODULES_URL = "/static/"
 
