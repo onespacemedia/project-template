@@ -32,7 +32,6 @@ PREPEND_WWW = True
 ALLOWED_HOSTS = [
     SITE_DOMAIN,
     'www.{}'.format(SITE_DOMAIN),
-    '{{cookiecutter.staging_subdomain}}.onespace.media',
     'www.{{cookiecutter.staging_subdomain}}.onespace.media',
 ]
 
