@@ -19,6 +19,38 @@
 
 /*
 |--------------------------------------------------------------------------
+| Intrinsic ratio
+|--------------------------------------------------------------------------
+| Used for surrounding images and videos to maintain their aspect ratio
+|
+*/
+@mixin intrinsic($x: 16, $y: 9) {
+  position: relative;
+
+  display: block;
+  width: 100%;
+
+  /* stylelint-disable */
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+  /* stylelint-enable */
+
+  &::before {
+    content: '';
+
+    display: block;
+    padding-bottom: (100% / (($x / ($x * 0 + 1)) / ($y / ($y * 0 + 1))));
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
 | At least
 |--------------------------------------------------------------------------
 | If there are at least 'x' children
