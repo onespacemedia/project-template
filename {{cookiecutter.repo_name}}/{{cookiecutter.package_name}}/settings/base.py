@@ -155,6 +155,7 @@ INSTALLED_APPS = [
     {% if cookiecutter.careers == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.careers",
     {% if cookiecutter.news == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
     {% if cookiecutter.people == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.people",
+    {% if cookiecutter.footer == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.footer",
     "{{cookiecutter.package_name}}.apps.site",
 
     'server_management',
