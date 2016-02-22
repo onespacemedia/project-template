@@ -12,20 +12,20 @@
 | Creates the container for constraining content
 |
 */
-@mixin Grid_Container() {
+@mixin Grid_Container($lg: false) {
   /* Add $Grid_Gutter to the container as the 'container' should be the size
-  /* of the content not the actual div
-  /* ------------------------ */
+     of the content not the actual div */
+  width: 100%;
   margin-right: auto;
   margin-left: @margin-right;
-  max-width: calc($Grid_Container + $Grid_Gutter);
-  padding-right: calc($Grid_Gutter / 2);
-  padding-left: @padding-right;
-  width: 100%;
 
-  @media (--lg) {
+  @if $lg {
     max-width: calc($Grid_Container + $Grid_Gutter--lg);
     padding-right: calc($Grid_Gutter--lg / 2);
+    padding-left: @padding-right;
+  } @else {
+    max-width: calc($Grid_Container + $Grid_Gutter);
+    padding-right: calc($Grid_Gutter / 2);
     padding-left: @padding-right;
   }
 }
@@ -39,16 +39,16 @@
 | widths consistent
 |
 */
-@mixin Grid_Row($flex: true) {
-  margin-right: -calc($Grid_Gutter / 2);
-  margin-left: @margin-right;
-
+@mixin Grid_Row($flex: true, $lg: false) {
   @if $flex {
     display: flex;
   }
 
-  @media (--lg) {
+  @if $lg {
     margin-right: -calc($Grid_Gutter--lg / 2);
+    margin-left: @margin-right;
+  } @else {
+    margin-right: -calc($Grid_Gutter / 2);
     margin-left: @margin-right;
   }
 }
@@ -61,22 +61,17 @@
 | other
 |
 */
-@mixin Grid_Column($count, $total) {
-  margin-right: calc($Grid_Gutter / 2);
-  margin-left: @margin-right;
+@mixin Grid_Column($count: 0, $total: 0, $lg: false) {
+  flex-basis: @width;
 
-  @media (--lg) {
-    flex-basis: @width;
+  width: percentage($count, $total);
 
+  @if $lg {
     margin-right: calc($Grid_Gutter--lg / 2);
     margin-left: @margin-right;
-    width: percentage($count, $total);
-
-    @if $width {
-      flex-basis: @width;
-
-      width: percentage($count, $total);
-    }
+  } @else {
+    margin-right: calc($Grid_Gutter / 2);
+    margin-left: @margin-right;
   }
 }
 

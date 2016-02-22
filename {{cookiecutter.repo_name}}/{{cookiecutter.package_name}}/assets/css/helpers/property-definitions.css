@@ -97,7 +97,6 @@ $Line_Height-body--lg: calc($Font_Size-body--lg + 10px);
 $Grid_Constrained: 1600px;
 $Grid_Container: 1240px;
 $Grid_Gutter: 30px;
-$Grid_Gutter--lg: 16px;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,3 +106,4 @@ $Grid_Gutter--lg: 16px;
 */
 $Global_Margin: 18px;
 $Aside_Margin: 40px;
+$Global_Transition: 0.16s;

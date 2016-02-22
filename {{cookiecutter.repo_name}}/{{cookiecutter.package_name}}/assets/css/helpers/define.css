@@ -58,16 +58,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  /* This needs escaping so it doesn't double string */
   font-family: $Font_Family-body;
-  /* Make the `body` use the `font-size-normal` */
-  font-size: 18px;
+  font-size: $Font_Size-body;
   font-weight: 400;
-  line-height: 28px;
-  /* Go easy on the eyes and use something other than `#000` for text */
+  line-height: $Line_Height-body;
   color: $Color_Body;
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #ececec;
+
+  @media (--lg) {
+    font-size: $Font_Size-body--lg;
+    line-height: $Line_Height-body--lg;
+  }
 }
 
 /*
@@ -77,6 +79,7 @@ body {
 |
 */
 hr {
+  /* Override  */
   border: 0;
   border-top: 1px solid $Color_Border;
 }
@@ -89,6 +92,7 @@ hr {
 */
 :--headings {
   margin-top: 0;
+  margin-bottom: 0;
 }
 
 /*
@@ -101,6 +105,7 @@ p {
   margin-top: 0;
   margin-bottom: @margin-top;
 
+  /* If the p tag has no class, keep the margin */
   &:not([class]) {
     margin-top: 0;
     margin-bottom: $Global_Margin;
@@ -114,13 +119,11 @@ p {
 |
 */
 a {
+  font-weight: 500;
   text-decoration: none;
-}
 
-:--anchor-classless {
   color: $Color_Anchor;
 }
-
 /*
 |--------------------------------------------------------------------------
 | Images

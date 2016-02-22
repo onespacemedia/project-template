@@ -14,15 +14,13 @@
 |
 | @size: The font size variable from the maps & lineheights
 */
-@mixin Font_Sizing($size) {
-  margin-bottom: calc($Font_Size-$(size) * 0.625);
-
-  font-size: $Font_Size-$(size);
-  line-height: $Line_Height-$(size);
-
-  @media (--lg) {
+@mixin Font_Sizing($size, $lg: false) {
+  @if $lg {
     font-size: $Font_Size-$(size)--lg;
     line-height: $Line_Height-$(size)--lg;
+  } @else {
+    font-size: $Font_Size-$-(size);
+    line-height: $Line_Height-$-(size);
   }
 }
 

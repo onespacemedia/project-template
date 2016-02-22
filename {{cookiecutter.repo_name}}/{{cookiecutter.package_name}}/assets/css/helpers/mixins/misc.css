@@ -5,7 +5,7 @@
 | Mainly used when you're having to have an image cover a section or div
 |
 */
-@define-mixin Background_Spread {
+@mixin Background_Spread() {
   position: absolute;
   top: 0;
   right: 0;
@@ -16,3 +16,67 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+/*
+|--------------------------------------------------------------------------
+| At least
+|--------------------------------------------------------------------------
+| If there are at least 'x' children
+|
+*/
+/* stylelint-disable */
+@mixin AtLeast($count: 0) {
+  &:first-child:nth-last-child($count),
+  &:first-child:nth-last-child($count) ~ & {
+    @content;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| At most
+|--------------------------------------------------------------------------
+| If there are at most 'x' children
+|
+*/
+/* stylelint-disable */
+@mixin AtMost($count: 0) {
+  &:nth-last-child(-n+$count):first-child,
+  &:nth-last-child(-n+$count):first-child ~ & {
+    @content;
+  }
+}
+
+/* stylelint-enable */
+/*
+|--------------------------------------------------------------------------
+| Exactly
+|--------------------------------------------------------------------------
+| If there are exactly 'x' children
+|
+*/
+/* stylelint-disable */
+@mixin Exactly($count: 0) {
+  &:nth-last-child($count):first-child,
+  &:nth-last-child($count):first-child ~ & {
+    @content;
+  }
+}
+/* stylelint-enable */
+
+/* stylelint-enable */
+/*
+|--------------------------------------------------------------------------
+| Between
+|--------------------------------------------------------------------------
+| If there are between 'x' and 'x' children
+|
+*/
+/* stylelint-disable */
+@mixin Between($Start: 0, $End: 0) {
+  &:nth-last-child(n+$Start):nth-last-child(-n+$End):first-child,
+  &:nth-last-child(n+$Start):nth-last-child(-n+$End):first-child ~ & {
+    @content;
+  }
+}
+/* stylelint-enable */

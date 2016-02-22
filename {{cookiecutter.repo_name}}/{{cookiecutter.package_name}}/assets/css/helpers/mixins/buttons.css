@@ -17,21 +17,12 @@
 | declared
 |
 */
-@define-mixin Button {
+@mixin Button() {
   display: inline-block;
-  padding-top: 7px;
-  padding-right: calc(map(grid, gutter) / 2);
-  padding-bottom: @padding-top;
-  padding-left: @padding-right;
-
-  font-family: map(fonts, families, sans);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 26px;
+  padding: 7 calc($Grid_Gutter / 2);
 
   background-color: transparent;
   border: 2px solid transparent;
-  border-radius: map(misc, bdrs);
   color: #fff;
 
   transition: background-color 0.18s, color 0.18s 0.18s;
@@ -49,8 +40,8 @@
 | The style for the primary button used
 |
 */
-@define-mixin Button-primary() {
-  @mixin Button;
+@mixin Button-primary() {
+  @include Button();
 }
 
 /*
@@ -60,6 +51,6 @@
 | The style for the secondary button used
 |
 */
-@define-mixin Button-secondary() {
-  @mixin Button;
+@mixin Button-secondary() {
+  @include Button();
 }
