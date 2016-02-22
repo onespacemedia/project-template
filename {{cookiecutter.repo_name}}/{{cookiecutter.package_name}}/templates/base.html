@@ -27,6 +27,7 @@
 
     {# Project #}
     <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
+    {% render_bundle 'app' 'css' %}
     <!--[if ie 9]>
       <link rel="stylesheet" href="{% static 'build/css/ie9.css' %}">
     <![endif]-->
@@ -43,9 +44,9 @@
         {% include 'base/_header.html' %}
 
         <div class="lyt-Content_Outer">
-          {% block content_outer %}
-            {% block content_above %}{% endblock %}
+          {% block content_above %}{% endblock %}
 
+          {% block content_outer %}
             <div class="lyt-Content {% block content_class %}{% endblock %}">
               {% block content %}
                 <main class="lyt-Main {% block main_class %}{% endblock %}">
@@ -57,9 +58,9 @@
                 </aside>
               {% endblock %}
             </div>
-
-            {% block content_below %}{% endblock %}
           {% endblock %}
+
+          {% block content_below %}{% endblock %}
         </div>
 
         {% include 'base/_footer.html' %}
