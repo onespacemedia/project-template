@@ -45,7 +45,7 @@
     content: '';
 
     display: block;
-    padding-bottom: (100% / (($x / ($x * 0 + 1)) / ($y / ($y * 0 + 1))));
+    padding-bottom: calc(100% / ($x / $y));
   }
 }
 
