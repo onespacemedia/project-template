@@ -5,7 +5,7 @@
        @click="hideMobileNav()">
     <nav class="mbn-Items" @click.stop>
       <div class="mbn-Item"
-          v-for="item in items" track-by="$index">
+           v-for="item in items" track-by="$index">
         <a class="mbn-Item_Action"
            href="{{ item.children.length ? null : item.url }}"
            @click.stop="item.children.length ? activeItem = $index : show = false">
@@ -15,9 +15,9 @@
         </a>
 
         <div class="mbn-Children"
-            v-show="item.children.length && activeItem === $index"
-            transition="trn-Swipe"
-            :aria-selected="activeItem == $index | toString">
+             v-show="item.children.length && activeItem === $index"
+             transition="trn-Swipe"
+             :aria-selected="activeItem == $index | toString">
           <div class="mbn-Child_Item">
             <a class="mbn-Child_ItemAction" @click.stop="activeItem = null">
               <span class="mbn-BackIndicator"></span>
@@ -43,13 +43,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import store from '../../store'
+
   export default {
     data () {
       return {
         activeItem: null,
         items: [],
-        show: false
+        mobileNav: store.state.mobileNav
       }
+    },
+
+    created () {
+      this.$subscribe('mobileNav')
     },
 
     ready () {
@@ -57,7 +63,7 @@
 
       document.addEventListener('keydown', (e) => {
         if (this.show && e.keyCode == 27) {
-          this.hideMobileNav()
+          this.toggleMobileNav()
         }
       })
     },
@@ -70,19 +76,11 @@
           window.location = item.url
         }
       },
-      hideMobileNav () {
-        this.show = false
-        this.activeItem = null
 
-        this.$dispatch('overflowBody', false)
-      }
-    },
+      toggleMobileNav () {
+        store.dispatch({ type: 'TOGGLE_MOBILE_NAV' })
 
-    events: {
-      'showMobileNav': function () {
-        this.show = true
-
-        this.$dispatch('overflowBody', true)
+        this.$dispatch('overflowBody', this.mobileNav.show)
       }
     }
   }

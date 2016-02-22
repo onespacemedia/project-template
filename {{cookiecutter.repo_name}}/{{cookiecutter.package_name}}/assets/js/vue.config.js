@@ -1,7 +1,20 @@
-import FrontendSwitcher from './components/frontend-switcher/FrontendSwitcher.vue'
-import MobileNav from './components/mobile-nav/MobileNav.vue'
+import Vue from 'vue'
+
+import components from './components'
+
+Vue.filter('toString', (val) => {
+  return String(val)
+})
+
+Vue.config.debug = true
 
 export default {
+  components,
+
+  created () {
+    this.$subscribe('mobileNav')
+  },
+
   events: {
     overflowBody (val) {
       if (val) {
@@ -11,13 +24,12 @@ export default {
       }
     }
   },
-  components: {
-    FrontendSwitcher,
-    MobileNav
-  },
+
   methods: {
-    showMobileNav () {
-      this.$broadcast('showMobileNav')
+    toggleMobileNav () {
+      store.dispatch({type: 'TOGGLE_MOBILE_NAV'})
+
+      this.$emit('overflowBody', this.mobileNav.show)
     }
   }
 }
