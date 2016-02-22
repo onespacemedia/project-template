@@ -45,7 +45,3 @@
     }
   }
 </script>
-
-<style>
-  @import './FrontendSwitcher.css';
-</style>
