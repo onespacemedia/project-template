@@ -1,26 +1,23 @@
-var config = require('../config')
-if(!config.tasks.js) return
+import config from '../config'
 
-var path            = require('path')
-var webpack         = require('webpack')
-var webpackManifest = require('./webpackManifest')
-var bundleTracker   = require('webpack-bundle-tracker')
-var ExtractText     = require('extract-text-webpack-plugin')
+import path from 'path'
+import webpack from 'webpack'
+import webpackManifest from './webpackManifest'
+import BundleTracker from 'webpack-bundle-tracker'
 
-module.exports = function(env) {
-  var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
-  var jsDest = path.resolve(config.root.dest, config.tasks.js.dest)
-  var publicPath = path.join('/static/build/', config.tasks.js.dest, '/')
-  var filenamePattern = '[name].js'
-  var extensions = config.tasks.js.extensions.map(function(extension) {
+export default function (env) {
+  const jsSrc = path.resolve(config.root.src, config.tasks.js.src)
+  const jsDest = path.resolve(config.root.dest, config.tasks.js.dest)
+  const publicPath = path.join('/static/build/', config.tasks.js.dest, '/')
+  const filenamePattern = '[name].js'
+  const extensions = config.tasks.js.extensions.map((extension) => {
     return '.' + extension
   })
 
-  var webpackConfig = {
+  const webpackConfig = {
     context: jsSrc,
     plugins: [
-      new bundleTracker({filename: './webpack-stats.json'}),
-      new ExtractText('[name].css')
+      new BundleTracker({ filename: './webpack-stats.json' })
     ],
     resolve: {
       root: jsSrc,
@@ -47,10 +44,8 @@ module.exports = function(env) {
       ]
     },
     vue: {
-      postcss: require('../lib/postCssProcessors'),
       loaders: {
-        js: 'babel',
-        css: ExtractText.extract('css')
+        js: 'babel'
       }
     },
     babel: {
@@ -59,17 +54,17 @@ module.exports = function(env) {
     }
   }
 
-  if(env !== 'test') {
+  if (env !== 'test') {
     // Karma doesn't need entry points or output settings
     webpackConfig.entry = config.tasks.js.entries
 
-    webpackConfig.output= {
+    webpackConfig.output = {
       path: path.normalize(jsDest),
       filename: filenamePattern,
       publicPath: publicPath
     }
 
-    if(config.tasks.js.extractSharedJs) {
+    if (config.tasks.js.extractSharedJs) {
       // Factor out common dependencies into a shared.js
       webpackConfig.plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
@@ -80,12 +75,12 @@ module.exports = function(env) {
     }
   }
 
-  if(env === 'development') {
+  if (env === 'development') {
     webpackConfig.devtool = 'source-map'
     webpack.debug = true
   }
 
-  if(env === 'production') {
+  if (env === 'production') {
     webpackConfig.plugins.push(
       new webpackManifest(publicPath, config.root.dest),
       new webpack.DefinePlugin({

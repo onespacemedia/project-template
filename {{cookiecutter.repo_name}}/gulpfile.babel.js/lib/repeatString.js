@@ -1,8 +1,10 @@
-module.exports = function(pattern, number) {
-    var string = ''
+export default function(pattern, number) {
+    let string = ''
+
     while (number > 0){
       number--
       string += pattern
     }
+
     return string
   }

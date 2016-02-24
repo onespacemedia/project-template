@@ -1,26 +1,6 @@
-var path = require('path')
+import path from 'path'
 
-module.exports = [
-  require('postcss-bem')({
-    separators: {
-      namespace: '-',
-      descendent: '_',
-      modifier: '-'
-    },
-    shortcuts: {
-      'component-namespace': 'namespace',
-      'component': 'module',
-      'descendent': 'component',
-      'modifier': 'variant'
-    }
-  }),
-  require('postcss-bem')({
-    separators: {
-      namespace: '-',
-      descendent: '_',
-      modifier: '-'
-    }
-  }),
+export default [
   require('postcss-import')({
     glob: true
   }),
@@ -29,12 +9,12 @@ module.exports = [
   require('postcss-nested'),
   require('postcss-simple-vars'),
   require('postcss-functions')({
-    glob: path.join(__dirname, '../../{{cookiecutter.repo_name}}', 'assets', 'css', 'functions', '*.js')
+    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
   }),
 
   // Niceties
   require('postcss-assets')({
-    basePath: 'streets/assets/',
+    basePath: '{{cookiecutter.package_name}}/assets/',
     loadPaths: ['img/'],
     baseUrl: '/static/'
   }),
@@ -50,6 +30,7 @@ module.exports = [
       rem: false
     }
   }),
+  require('postcss-font-awesome'),
   require('postcss-round-subpixels'),
   require('autoprefixer')({
     browsers: ['> 1%', 'IE 9', 'IE 10', 'last 2 versions']

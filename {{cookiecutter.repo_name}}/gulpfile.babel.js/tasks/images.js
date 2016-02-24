@@ -1,22 +1,18 @@
-var config      = require('../config')
-if(!config.tasks.images) return
+import browserSync from 'browser-sync'
+import changed from 'gulp-changed'
+import gulp from 'gulp'
+import path from 'path'
 
-var browserSync = require('browser-sync')
-var changed     = require('gulp-changed')
-var gulp        = require('gulp')
-var path        = require('path')
+import config from '../config'
 
-var paths = {
+const paths = {
   src: [path.join(config.root.src, config.tasks.images.src, '/**'), path.join(config.root.appSrc, config.tasks.images.src, '/**')],
   dest: path.join(config.root.dest, config.tasks.images.dest)
 }
 
-var imagesTask = function() {
+export function imagesTask () {
   return gulp.src(paths.src)
     .pipe(changed(paths.dest)) // Ignore unchanged files
     .pipe(gulp.dest(paths.dest))
     .pipe(browserSync.stream())
 }
-
-gulp.task('images', imagesTask)
-module.exports = imagesTask

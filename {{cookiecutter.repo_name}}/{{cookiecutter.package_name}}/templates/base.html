@@ -27,10 +27,6 @@
 
     {# Project #}
     <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
-    {% render_bundle 'app' 'css' %}
-    <!--[if ie 9]>
-      <link rel="stylesheet" href="{% static 'build/css/ie9.css' %}">
-    <![endif]-->
 
     {% block css %}{% endblock %}
   </head>
