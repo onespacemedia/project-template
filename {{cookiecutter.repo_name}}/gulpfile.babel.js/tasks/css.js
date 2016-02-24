@@ -24,7 +24,7 @@ export function cssTask () {
 }
 
 export function cssWatch () {
-  gulp.watch(paths.src, gulp.series('css'))
+  gulp.watch(path.join(config.root.src, config.tasks.css.src, '**/*.' + config.tasks.css.extensions), gulp.series('css'))
 }
 
 export function cssProductionTask () {
