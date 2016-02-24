@@ -1,11 +1,11 @@
-import gutil from 'gulp-util'
-import prettifyTime from './prettifyTime'
-import handleErrors from './handleErrors'
+var gutil        = require("gulp-util")
+var prettifyTime = require('./prettifyTime')
+var handleErrors = require('./handleErrors')
 
-export default function(err, stats) {
+module.exports = function(err, stats) {
   if(err) throw new gutil.PluginError("webpack", err)
 
-  let statColor = stats.compilation.warnings.length < 1 ? 'green' : 'yellow'
+  var statColor = stats.compilation.warnings.length < 1 ? 'green' : 'yellow'
 
   if(stats.compilation.errors.length > 0) {
     stats.compilation.errors.forEach(function(error){
@@ -13,8 +13,7 @@ export default function(err, stats) {
       statColor = 'red'
     })
   } else {
-    const compileTime = prettifyTime(stats.endTime - stats.startTime)
-
+    var compileTime = prettifyTime(stats.endTime - stats.startTime)
     gutil.log(gutil.colors[statColor](stats))
     gutil.log('Compiled with', gutil.colors.cyan('webpack'), 'in', gutil.colors.magenta(compileTime))
   }

@@ -1,23 +1,22 @@
-import fs from 'fs'
-import path from 'path'
+var path = require('path')
+var fs   = require('fs')
 
-export default function(publicPath, dest, filename) {
+module.exports = function(publicPath, dest, filename) {
   filename = filename || 'rev-manifest.json'
 
   return function() {
     this.plugin("done", function(stats) {
-      stats = stats.toJson()
-      const chunks = stats.assetsByChunkName
-      const manifest = {}
+      var stats    = stats.toJson()
+      var chunks   = stats.assetsByChunkName
+      var manifest = {}
 
-      for (const key in chunks) {
-        const originalFilename = key + '.js'
+      for (var key in chunks) {
+        var originalFilename = key + '.js'
         manifest[path.join(publicPath, originalFilename)] = path.join(publicPath, chunks[key][0])
       }
 
       fs.writeFileSync(
         path.join(process.cwd(), dest, filename),
-
         JSON.stringify(manifest)
       )
     })
