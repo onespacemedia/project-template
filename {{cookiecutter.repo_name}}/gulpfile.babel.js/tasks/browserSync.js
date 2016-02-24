@@ -3,8 +3,10 @@ import browserSync from 'browser-sync'
 
 import config from '../config'
 
-export function browserSyncTask () {
-  browserSync.init(config.tasks.browserSync)
+export const bs = browserSync.create()
 
-  gulp.watch(config.tasks.browserSync.watch, browserSync.reload)
+export function browserSyncTask () {
+  bs.init(config.tasks.browserSync)
+
+  gulp.watch(config.tasks.browserSync.watch, bs.reload)
 }

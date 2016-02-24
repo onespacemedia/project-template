@@ -1,5 +1,4 @@
 import gulp from 'gulp'
-import browserSync from 'browser-sync'
 import sourcemaps from 'gulp-sourcemaps'
 import postcss from 'gulp-postcss'
 import path from 'path'
@@ -8,6 +7,7 @@ import handleErrors from '../lib/handleErrors'
 import postCssProcessors from '../lib/postCssProcessors'
 
 import config from '../config'
+import {bs} from './browserSync'
 
 const paths = {
   src: path.join(config.root.src, config.tasks.css.src, '/*.' + config.tasks.css.extensions),
@@ -20,7 +20,7 @@ export function cssTask () {
     .pipe(postcss(postCssProcessors))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest))
-    .pipe(browserSync.stream({ match: '**/*.css' }))
+    .pipe(bs.stream({ match: '**/*.css' }))
 }
 
 export function cssWatch () {
