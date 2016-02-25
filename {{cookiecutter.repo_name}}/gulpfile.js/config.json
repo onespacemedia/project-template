@@ -1,8 +1,8 @@
 {
   "root": {
-    "appSrc": "./{{project.package_name}}/apps/**/assets",
-    "src": "./{{project.package_name}}/assets",
-    "dest": "./{{project.package_name}}/static/build"
+    "appSrc": "./{{cookiecutter.package_name}}/apps/**/assets",
+    "src": "./{{cookiecutter.package_name}}/assets",
+    "dest": "./{{cookiecutter.package_name}}/static/build"
   },
 
   "tasks": {
