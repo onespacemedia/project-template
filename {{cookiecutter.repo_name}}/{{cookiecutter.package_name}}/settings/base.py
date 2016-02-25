@@ -151,11 +151,12 @@ INSTALLED_APPS = [
 
     {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects",
 
-    {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
     {% if cookiecutter.careers == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.careers",
+    {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
+    {% if cookiecutter.footer == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.footer",
     {% if cookiecutter.news == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
     {% if cookiecutter.people == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.people",
-    {% if cookiecutter.footer == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.footer",
+    {% if cookiecutter.sections == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.sections",
     "{{cookiecutter.package_name}}.apps.site",
 
     'server_management',
