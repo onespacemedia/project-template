@@ -49,7 +49,6 @@ module.exports = {
     'declaration-block-semicolon-space-after': 'always-single-line',
 
     // Block
-    'block-closing-brace-newline-after': 'always',
     'block-closing-brace-newline-before': 'always-multi-line',
     'block-closing-brace-space-before': 'always-single-line',
     'block-no-empty': true,
@@ -76,7 +75,6 @@ module.exports = {
       ignore: ['after-comment']
     }],
     'rule-no-duplicate-properties': true,
-    'rule-no-shorthand-property-overrides': true,
     'rule-non-nested-empty-line-before': ['always-multi-line', {
       ignore: ['after-comment']
     }],
@@ -119,24 +117,24 @@ module.exports = {
         emptyLineBefore: true,
         properties: [
           'display',
-          'float',
+          'max-width',
+          'max-height',
+          'min-width',
+          'min-height',
+          'width',
           'height',
+          'float',
           'margin',
           'margin-top',
           'margin-right',
           'margin-bottom',
           'margin-left',
-          'max-height',
-          'max-width',
-          'min-height',
-          'min-width',
           'padding',
           'padding-top',
           'padding-right',
           'padding-bottom',
           'padding-left',
-          'table-layout',
-          'width'
+          'table-layout'
         ]
       },
       {
@@ -150,7 +148,8 @@ module.exports = {
           'line-height',
           'text-align',
           'text-decoration',
-          'text-overflow'
+          'text-overflow',
+          'text-transform'
         ]
       },
       {
@@ -217,13 +216,6 @@ module.exports = {
 
     // Media query
     'media-query-parentheses-space-inside': 'never',
-
-    // At rule
-    'at-rule-empty-line-before': ['always', {
-      except: ['blockless-group', 'first-nested'],
-      ignore: ['after-comment']
-    }],
-    'at-rule-no-vendor-prefix': true,
 
     // Comment
     'comment-whitespace-inside': 'always',

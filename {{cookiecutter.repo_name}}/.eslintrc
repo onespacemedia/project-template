@@ -4,6 +4,9 @@
   "ecmaFeatures": {
     "modules": true,
   },
+  "env": {
+    "browser": 1
+  },
   "rules": {
     "arrow-parens": [2, "always"],
     "no-var": [2],
