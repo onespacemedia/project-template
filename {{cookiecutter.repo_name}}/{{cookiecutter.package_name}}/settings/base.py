@@ -36,7 +36,8 @@ ALLOWED_HOSTS = [
 ]
 
 SUIT_CONFIG = {
-    'ADMIN_NAME': SITE_NAME
+    'ADMIN_NAME': SITE_NAME,
+    'MENU_EXCLUDE': ['default'],
 }
 
 # Database settings.
