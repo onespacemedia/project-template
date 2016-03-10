@@ -14,14 +14,9 @@
 |
 | @size: The font size variable from the maps & lineheights
 */
-@mixin Font_Sizing($size, $lg: false) {
-  @if $lg {
-    font-size: $Font_Size-$(size)--lg;
-    line-height: $Line_Height-$(size)--lg;
-  } @else {
-    font-size: $Font_Size-$-(size);
-    line-height: $Line_Height-$-(size);
-  }
+@mixin Font_Sizing($size) {
+  font-size: var(--Font_Size-$(size));
+  line-height: var(--Line_Height-$(size));
 }
 
 /*
@@ -33,8 +28,18 @@
 |
 */
 @mixin Font_Styles($size) {
-  font-family: $Font_Family-$(size);
-  font-weight: $Font_Weight-$(size);
+  letter-spacing: var(--Letter_Spacing-$(size));
+}
 
-  color: $Font_Color-$(size);
+/*
+|--------------------------------------------------------------------------
+| Font
+|--------------------------------------------------------------------------
+| Proxy to include both Font_Sizing and Font_Styles so a dev doesn't have
+| to remember to do both
+|
+*/
+@mixin Font($size) {
+  @include Font_Sizing($size);
+  @include Font_Styles($size);
 }

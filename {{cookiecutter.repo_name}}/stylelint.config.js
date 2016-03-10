@@ -35,7 +35,7 @@ module.exports = {
     'value-list-comma-space-before': 'never',
 
     // Unit
-    'unit-blacklist': ['em', 'rem'], // Disallow these because PostCSS adds them
+    'unit-blacklist': ['rem'], // Disallow these because PostCSS adds them
 
     // Declaration
     'declaration-bang-space-after': 'never',
@@ -123,6 +123,7 @@ module.exports = {
           'min-height',
           'width',
           'height',
+          'clear',
           'float',
           'margin',
           'margin-top',

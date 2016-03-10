@@ -3,6 +3,7 @@ import Vue from 'vue'
 import components from './components'
 
 import store from './store'
+import {toggleMobileNav} from './components/mobile-nav/actions'
 
 Vue.filter('toString', (val) => {
   return String(val)
@@ -12,15 +13,16 @@ Vue.config.debug = true
 
 export default {
   components,
+  store,
 
-  data () {
-    return {
-      mobileNav: store.state.mobileNav
+  vuex: {
+    getters: {
+      mobileNav: (state) => state.mobileNav
+    },
+
+    actions: {
+      toggleMobileNav
     }
-  },
-
-  created () {
-    this.$subscribe('mobileNav')
   },
 
   events: {
@@ -30,14 +32,6 @@ export default {
       } else {
         document.body.style.overflow = ''
       }
-    }
-  },
-
-  methods: {
-    toggleMobileNav () {
-      store.dispatch({type: 'TOGGLE_MOBILE_NAV'})
-
-      this.$emit('overflowBody', this.mobileNav.show)
     }
   }
 }

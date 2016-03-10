@@ -1,9 +1,15 @@
 /*
 |--------------------------------------------------------------------------
-| Footer
+| Mardkown
 |--------------------------------------------------------------------------
-| The global site footer that appears at the bottom of every page
-|
-| @namespace: ft-
+| @prefix: md-
 |
 */
+/* stylelint-disable selector-no-type */
+.md-Outer {
+  a {
+    display: inline;
+  }
+}
+
+/* stylelint-enable */

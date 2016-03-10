@@ -10,7 +10,7 @@
     "redirects": "yes",
     "news": "yes",
     "sections": "yes",
-    "footer": "no",
+    "footer": "yes",
     "geoip": "no",
     "email_password": "{{ cookiecutter.email_password }}",
     "google_plus_key": "{{ cookiecutter.google_plus_key }}",

@@ -16,8 +16,6 @@ var watchTask = function() {
         glob = '{' + path.join(config.root.src, task.src, '**/*.{' + task.extensions.join(',') + '}') + ',' + path.join(config.root.src + '/js/components/**/*.css}')
       }
 
-      console.log(glob)
-
       watch(glob, function() {
        require('./' + taskName)()
       })

@@ -7,20 +7,25 @@
 |
 */
 
-/*
-|--------------------------------------------------------------------------
-| Box sizing
-|--------------------------------------------------------------------------
-|
-*/
-html {
-  box-sizing: border-box;
-}
-
+/* From: https://twitter.com/paul_irish/status/524959136782364672 */
+/* See also: https://github.com/10up/sanitize.css/issues/2 */
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+span, b, i, strong, em {
+  display: inline;
+}
+
+head, script, meta, title, link, style, template {
+  display: none;
 }
 
 /*
@@ -54,21 +59,20 @@ html {
 }
 
 body {
+  @include Font(body);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  font-family: $Font_Family-body;
-  font-size: $Font_Size-body;
+  font-family: var(--Font_Family-body);
   font-weight: 400;
-  line-height: $Line_Height-body;
-  color: $Color_Body;
+  color: var(--Color_Body);
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #ececec;
 
-  @media (--lg) {
-    font-size: $Font_Size-body--lg;
-    line-height: $Line_Height-body--lg;
+  @media (--md) {
+    @include Font(body--md);
   }
 }
 
@@ -79,9 +83,8 @@ body {
 |
 */
 hr {
-  /* Override  */
   border: 0;
-  border-top: 1px solid $Color_Border;
+  border-top: 1px solid var(--Color_Border);
 }
 
 /*
@@ -108,7 +111,7 @@ p {
   /* If the p tag has no class, keep the margin */
   &:not([class]) {
     margin-top: 0;
-    margin-bottom: $Global_Margin;
+    margin-bottom: 18px;
   }
 }
 
@@ -122,7 +125,7 @@ a {
   font-weight: 500;
   text-decoration: none;
 
-  color: $Color_Anchor;
+  color: var(--Color_Anchor);
 }
 /*
 |--------------------------------------------------------------------------

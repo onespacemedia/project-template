@@ -61,7 +61,7 @@
 | Styles specific to a reusable app
 |
 */
-@import '../apps/**/assets/**/*.css';
+@import '../../apps/**/assets/**/*.css';
 
 /*
 |--------------------------------------------------------------------------

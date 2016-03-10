@@ -63,6 +63,7 @@ docs/_build/
 
 node_modules/
 bower_components/
-*/static/css/
-*/static/js/app.js
 webpack-stats.json
+
+*/static
+!*/apps/*/static

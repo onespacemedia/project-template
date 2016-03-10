@@ -1,9 +1,9 @@
 {
   "name": "{{cookiecutter.repo_name}}",
-  "main": "server.js",
+  "main": "gulpfile.js",
   "devDependencies": {
     "autoprefixer": "^6.2.2",
-    "babel-core": "^6.4.0",
+    "babel-core": "^6.6.5",
     "babel-eslint": "^4.1.5",
     "babel-loader": "^6.2.1",
     "babel-plugin-transform-runtime": "^6.4.0",
@@ -26,10 +26,10 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-util": "^3.0.6",
     "gulp-watch": "^4.3.3",
+    "in-viewport": "^3.4.1",
     "js-cookie": "^2.0.4",
     "normalize.css": "^3.0.3",
     "postcss-assets": "^3.0.3",
-    "postcss-bem": "^0.4.1",
     "postcss-brand-colors": "^0.3.0",
     "postcss-color-alpha": "^1.0.3",
     "postcss-conditionals": "^2.0.1",
@@ -45,25 +45,24 @@
     "postcss-sassy-mixins": "^2.0.0",
     "postcss-simple-vars": "^1.2.0",
     "postcss-will-change": "^1.0.0",
-    "redux": "^3.3.1",
     "require-dir": "^0.3.0",
-    "revue": "^2.0.0-rc1",
     "standard": "^5.4.1",
     "style-loader": "^0.13.0",
     "stylelint": "^3.2.2",
     "stylelint-statement-max-nesting-depth": "^2.0.0",
-    "vue": "^1.0.16",
+    "vue": "^1.0.17",
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.1.0",
     "vue-loader": "^8.1.4",
     "vue-resource": "^0.6.0",
     "vue-style-loader": "^1.0.0",
+    "vuex": "^0.6.2",
     "webpack": "^1.12.10",
     "webpack-bundle-tracker": "0.0.9"
   },
   "scripts": {
-    "dev": "./node_modules/gulp/bin/gulp.js",
-    "build": "./node_modules/gulp/bin/gulp.js production"
+    "dev": "gulp",
+    "build": "gulp production"
   },
   "babel": {
     "presets": [
