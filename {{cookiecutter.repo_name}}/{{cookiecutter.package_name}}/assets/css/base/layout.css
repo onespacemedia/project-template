@@ -4,15 +4,27 @@
 |--------------------------------------------------------------------------
 | Global layouts, normally used for layout out the main & aside + other
 | recurring layouts
+|
 | @namespace: lyt-
 |
 */
 
-/*
 .lyt-Site {
+  max-width: var(--Grid_Constrained);
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 
+  will-change: transform; /* This prevents slow painting on certain hardware */
+
+  /* var(--Grid_Constrained) + (1px * 2) for each border */
+  @media (width >= 1602px) {
+    border-right: 1px solid var(--Color_Border);
+    border-left: @border-right;
+  }
 }
 
+/*
 .lyt-Content_Outer {
 
 }

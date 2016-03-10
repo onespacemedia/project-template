@@ -9,13 +9,10 @@
 | @namespace: wys-
 */
 
-/*
-  Since we can't class everything in the WYSIWYG the no type rule is relaxed
-
-  stylelint-disable selector-no-type
-*/
-/** @define Outer **/
+/* stylelint-disable selector-no-type */
 .wys-Outer {
-  background-color: transparent; /* Delete this, it's here to stop stylelint crying */
+  a {
+    display: inline;
+  }
 }
 /* stylelint-enable */

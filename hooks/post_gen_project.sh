@@ -35,6 +35,12 @@ if [ "$(python -c 'import sys; print(sys.version_info[0])')" == "3" ]; then
     perl -pi -e s,python-memcached,python3-memcached,g requirements.txt
 fi
 
+# Work out which footer we want to include
+{% if cookiecutter['footer'] == 'yes' %}
+  perl -pi -e s,base/_footer.html,footer/_footer.html,g {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base.html
+  rm {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base/_footer.html
+{% endif %}
+
 pip install -r requirements.txt
 
 # The requirements will now have versions pinned, so re-dump them.

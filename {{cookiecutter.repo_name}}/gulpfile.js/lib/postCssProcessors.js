@@ -33,6 +33,6 @@ module.exports = [
   require('postcss-font-awesome'),
   require('postcss-round-subpixels'),
   require('autoprefixer')({
-    browsers: ['> 1%', 'IE 9', 'IE 10', 'last 2 versions']
+    browsers: ['ie 11', 'last 2 versions']
   }),
 ];

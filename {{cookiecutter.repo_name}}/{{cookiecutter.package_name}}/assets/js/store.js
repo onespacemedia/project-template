@@ -1,12 +1,10 @@
 import Vue from 'vue'
-import Revue from 'revue'
-import {createStore} from 'redux'
-import reducers from './reducers'
+import Vuex from 'vuex'
 
-import actions from './actions'
+import modules from './components/modules'
 
-const reduxStore = createStore(reducers)
+Vue.use(Vuex)
 
-const store = new Revue(Vue, reduxStore, actions)
-
-export default store
+export default new Vuex.Store({ // eslint-disable-line new-cap
+  modules
+})
