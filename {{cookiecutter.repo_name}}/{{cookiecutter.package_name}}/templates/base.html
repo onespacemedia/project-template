@@ -61,11 +61,7 @@
           {% block content_below %}{% endblock %}
         </div>
 
-        {% if cookiecutter.footer == 'no' %}
-
-        {% else %}
-          {% include 'base/_footer.html' %}
-        {% endif %}
+        {% include 'base/_footer.html' %}
       </div>
     {% endblock %}
 

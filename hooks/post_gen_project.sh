@@ -38,7 +38,7 @@ fi
 # Work out which footer we want to include
 {% if cookiecutter['footer'] == 'yes' %}
   perl -pi -e s,base/_,footer/_,g {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base.html
-  rm {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/_footer.html
+  rm {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base/_footer.html
 {% endif %}
 
 pip install -r requirements.txt
