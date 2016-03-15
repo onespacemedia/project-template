@@ -165,7 +165,7 @@ INSTALLED_APPS = [
     'cachalot',
     'webpack_loader',
 
-    'social.apps.django_app.default',
+    'social.apps.django_app.default'
 ]
 
 if sys.version_info[0] == 3:
