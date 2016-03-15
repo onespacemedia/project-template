@@ -37,7 +37,7 @@ fi
 
 # Work out which footer we want to include
 {% if cookiecutter['footer'] == 'yes' %}
-  perl -pi -e s,base/_,footer/_,g {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base.html
+  perl -pi -e s,base/_footer.html,footer/_footer.html,g {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base.html
   rm {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base/_footer.html
 {% endif %}
 
