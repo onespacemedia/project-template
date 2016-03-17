@@ -17,6 +17,7 @@ var cssTask = function () {
   return gulp.src(paths.src)
     .pipe(sourcemaps.init())
     .pipe(postcss(require('../lib/postCssProcessors')))
+    .on('error', console.log)
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest))
     .pipe(browserSync.stream({match: '**/*.css'}))
