@@ -28,7 +28,7 @@
 |
 */
 @mixin Font_Styles($size) {
-  letter-spacing: calc(var(--Letter_Spacing-$(size) / 1000);
+  letter-spacing: calc(var(--Letter_Spacing-$(size)) / 1000);
 }
 
 /*
