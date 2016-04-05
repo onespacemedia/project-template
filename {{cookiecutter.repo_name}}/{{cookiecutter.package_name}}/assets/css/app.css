@@ -6,7 +6,7 @@
 | consistency in the default styling of HTML elements.
 |
 */
-@import 'normalize.css';
+@import 'sanitize.css';
 
 /*
 |--------------------------------------------------------------------------
