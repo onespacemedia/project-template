@@ -12,20 +12,7 @@
 *,
 *::before,
 *::after {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  flex-shrink: 0;
-  overflow: hidden;
   box-sizing: border-box;
-}
-
-span, b, i, strong, em {
-  display: inline;
-}
-
-head, script, meta, title, link, style, template {
-  display: none;
 }
 
 /*
