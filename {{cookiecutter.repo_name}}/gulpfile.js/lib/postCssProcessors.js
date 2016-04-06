@@ -28,7 +28,6 @@ module.exports = [
     baseUrl: '/static/'
   }),
   require('postcss-brand-colors'),
-  require('postcss-color-alpha'),
   require('postcss-property-lookup'),
   require('postcss-pxtorem'),
   require('postcss-will-change'),

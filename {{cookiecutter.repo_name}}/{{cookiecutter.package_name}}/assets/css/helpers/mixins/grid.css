@@ -46,7 +46,9 @@
 |
 */
 @mixin Grid_Column($count: 0, $total: 0) {
-  width: percentage($count, $total);
+  @if $count AND $total {
+    width: percentage($count, $total);
+  }
 
   margin-right: calc(var(--Grid_Gutter) / 2);
   margin-left: @margin-right;
