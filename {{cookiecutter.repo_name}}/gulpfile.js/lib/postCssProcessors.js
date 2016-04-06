@@ -4,6 +4,13 @@ module.exports = [
   require('postcss-import')({
     glob: true
   }),
+  require('postcss-sassy-mixins'),
+  require('postcss-conditionals'),
+  require('postcss-nested'),
+  require('postcss-functions')({
+    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
+  }),
+    
   require('postcss-cssnext')({
     features: {
       autoprefixer: false,
@@ -13,12 +20,6 @@ module.exports = [
   }),
   require('rucksack-css')({
     autoprefixer: false
-  }),
-  require('postcss-sassy-mixins'),
-  require('postcss-conditionals'),
-  require('postcss-nested'),
-  require('postcss-functions')({
-    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
   }),
 
   // Niceties
