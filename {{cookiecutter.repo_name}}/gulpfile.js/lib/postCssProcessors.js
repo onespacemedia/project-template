@@ -32,6 +32,9 @@ module.exports = [
   }),
   require('postcss-font-awesome'),
   require('postcss-round-subpixels'),
+  require('rucksack-css')({
+    autoprefixer: false
+  }),
   require('autoprefixer')({
     browsers: ['ie 11', 'last 2 versions']
   }),
