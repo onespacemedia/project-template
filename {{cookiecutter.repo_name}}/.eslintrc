@@ -5,7 +5,8 @@
     "modules": true,
   },
   "env": {
-    "browser": 1
+    "browser": true,
+    "es6": true
   },
   "rules": {
     "arrow-parens": [2, "always"],
