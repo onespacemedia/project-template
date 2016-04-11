@@ -30,12 +30,6 @@
       "extensions": ["css"]
     },
 
-    "stylelint": {
-      "src": "css",
-      "dest": "css",
-      "extensions": ["css"]
-    },
-
     "images": {
       "src": "img",
       "dest": "img",

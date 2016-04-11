@@ -48,7 +48,7 @@
     "sanitize.css": "^3.3.0",
     "standard": "^5.4.1",
     "style-loader": "^0.13.0",
-    "stylelint": "^3.2.2",
+    "stylelint": "^5.4.0",
     "stylelint-statement-max-nesting-depth": "^2.0.0",
     "vue": "^1.0.17",
     "vue-hot-reload-api": "^1.2.2",

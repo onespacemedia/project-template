@@ -15,8 +15,12 @@ module.exports = {
     // Color
     'color-hex-case': 'lower',
     'color-hex-length': 'short',
+    'color-named': 'never',
     'color-no-invalid-hex': true,
-    'color-no-named': true,
+
+    // Font
+    'font-family-name-quotes': 'single-where-required',
+    'font-weight-notation': 'numeric',
 
     // Number
     'number-leading-zero': 'always',
@@ -30,6 +34,9 @@ module.exports = {
     'function-comma-space-before': 'never',
     'function-linear-gradient-no-nonstandard-direction': true,
 
+    // Time
+    'time-no-imperceptible': true,
+
     // Value list
     'value-list-comma-space-after': 'always',
     'value-list-comma-space-before': 'never',
@@ -42,51 +49,17 @@ module.exports = {
     'declaration-bang-space-before': 'always',
     'declaration-colon-space-after': 'always',
     'declaration-colon-space-before': 'never',
-    'declaration-no-important': true, // Ask DG if this is causing you problems
-
-    // Declaration block
-    'declaration-block-semicolon-newline-after': 'always-multi-line',
-    'declaration-block-semicolon-space-after': 'always-single-line',
-
-    // Block
-    'block-closing-brace-newline-before': 'always-multi-line',
-    'block-closing-brace-space-before': 'always-single-line',
-    'block-no-empty': true,
-    'block-opening-brace-newline-after': 'always-multi-line',
-    'block-opening-brace-space-after': 'always-single-line',
-    'block-opening-brace-space-before': 'always',
-
-    // Selector
-    'selector-combinator-space-after': 'always',
-    'selector-combinator-space-before': 'always',
-    'selector-no-id': true,
-    'selector-no-type': true, // Ask DG if this is causing you problems
-    'selector-no-universal': true,
-    'selector-no-vendor-prefix': true,
-    'selector-pseudo-element-colon-notation': 'double',
-
-    // Selector list
-    'selector-list-comma-space-after': 'always-single-line',
-    'selector-list-comma-space-before': 'never',
-
-    // Rules
-    'rule-nested-empty-line-before': ['always', {
-      except: ['first-nested'],
-      ignore: ['after-comment']
-    }],
-    'rule-no-duplicate-properties': true,
-    'rule-non-nested-empty-line-before': ['always-multi-line', {
-      ignore: ['after-comment']
-    }],
-    'rule-properties-order': [
+    'declaration-no-important': true,
+    'declaration-block-no-duplicate-properties': true,
+    'declaration-block-properties-order': [
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'content'
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'position',
           'top',
@@ -97,7 +70,7 @@ module.exports = {
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'align-content',
           'align-items',
@@ -114,7 +87,7 @@ module.exports = {
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'display',
           'max-width',
@@ -139,7 +112,7 @@ module.exports = {
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'font-family',
           'font-size',
@@ -154,7 +127,7 @@ module.exports = {
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'appearance',
           'background',
@@ -187,7 +160,7 @@ module.exports = {
         ]
       },
       {
-        emptyLineBefore: true,
+        emptyLineBefore: 'always',
         properties: [
           'animation',
           'animation-delay',
@@ -203,7 +176,31 @@ module.exports = {
         ]
       }
     ],
-    'rule-trailing-semicolon': 'always',
+
+    // Declaration block
+    'declaration-block-semicolon-newline-after': 'always-multi-line',
+    'declaration-block-semicolon-space-after': 'always-single-line',
+
+    // Block
+    'block-closing-brace-newline-before': 'always-multi-line',
+    'block-closing-brace-space-before': 'always-single-line',
+    'block-no-empty': true,
+    'block-opening-brace-newline-after': 'always-multi-line',
+    'block-opening-brace-space-after': 'always-single-line',
+    'block-opening-brace-space-before': 'always',
+
+    // Selector
+    'selector-combinator-space-after': 'always',
+    'selector-combinator-space-before': 'always',
+    'selector-no-id': true,
+    'selector-no-type': true,
+    'selector-no-universal': true,
+    'selector-no-vendor-prefix': true,
+    'selector-pseudo-element-colon-notation': 'double',
+
+    // Selector list
+    'selector-list-comma-space-after': 'always-single-line',
+    'selector-list-comma-space-before': 'never',
 
     // Media
     'media-feature-colon-space-after': 'always',
@@ -224,6 +221,16 @@ module.exports = {
     // General
     'indentation': 2,
     'no-eol-whitespace': true,
-    'no-missing-eof-newline': true
+    'no-missing-eof-newline': true,
+
+    // Rules
+    'rule-nested-empty-line-before': ['always', {
+      except: ['first-nested'],
+      ignore: ['after-comment']
+    }],
+    'rule-non-nested-empty-line-before': ['always-multi-line', {
+      ignore: ['after-comment']
+    }],
+    'declaration-block-trailing-semicolon': 'always',
   }
 }
