@@ -63,8 +63,8 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp production",
-    "eslint": "eslint undo_software/assets/js/**/*.js",
-    "stylelint": "stylelint \"undo_software/assets/**/*.css\""
+    "eslint": "eslint {{cookiecutter.package_name}}/assets/js/**/*.js",
+    "stylelint": "stylelint \"{{cookiecutter.package_name}}/assets/**/*.css\""
   },
   "babel": {
     "presets": [
