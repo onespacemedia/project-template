@@ -306,6 +306,11 @@ WYSIWYG_OPTIONS = {
     # Make toolbar smaller
     'toolbar_items_size': 'small',
 
+    # Disallow (easy) use of <h1> tags - there should only be one of these in
+    # a document and this is always supplied derived from the page title or
+    # some other dedicated field.
+    'block_formats': 'Paragraph=p;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6;Preformatted=pre',
+
     # Custom style formats
     'style_formats': [
         {
