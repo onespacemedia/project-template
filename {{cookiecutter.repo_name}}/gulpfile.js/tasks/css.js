@@ -8,6 +8,7 @@ var sourcemaps   = require('gulp-sourcemaps')
 var postcss      = require('gulp-postcss')
 var handleErrors = require('../lib/handleErrors')
 var path         = require('path')
+var reporter     = require('postcss-reporter')
 
 var paths = {
   src: path.join(config.root.src, config.tasks.css.src, '/*.' + config.tasks.css.extensions),
@@ -16,6 +17,10 @@ var paths = {
 
 var cssTask = function () {
   return gulp.src(paths.src)
+    .pipe(gulpif(!global.production, postcss([
+      require('stylelint'),
+      reporter({clearMessages: true})
+    ])))
     .pipe(gulpif(!global.production, sourcemaps.init()))
     .pipe(postcss(require('../lib/postCssProcessors')))
     .on('error', console.log)
