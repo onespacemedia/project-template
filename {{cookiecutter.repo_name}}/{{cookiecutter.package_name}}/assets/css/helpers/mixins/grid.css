@@ -15,11 +15,11 @@
 @mixin Grid_Container() {
   /* Add $Grid_Gutter to the container as the 'container' should be the size
      of the content not the actual div */
-  max-width: calc(var(--Grid_Container) + var(--Grid_Gutter));
+  max-width: calc(var(--Grid_Container) + (var(--Grid_Gutter) * 2));
   width: 100%;
   margin-right: auto;
   margin-left: @margin-right;
-  padding-right: calc(var(--Grid_Gutter) / 2);
+  padding-right: var(--Grid_Gutter);
   padding-left: @padding-right;
 }
 
@@ -34,7 +34,7 @@
 */
 @mixin Grid_Row() {
   display: flex;
-  margin-right: -calc(var(--Grid_Gutter) / 2);
+  margin-right: -var(--Grid_Gutter);
   margin-left: @margin-right;
 }
 
@@ -51,7 +51,7 @@
     width: calc(percentage($count, $total) - (var(--Grid_Gutter) * 2));
   }
 
-  margin-right: calc(var(--Grid_Gutter) / 2);
+  margin-right: var(--Grid_Gutter);
   margin-left: @margin-right;
 }
 

@@ -25,6 +25,19 @@
 
 /*
 |--------------------------------------------------------------------------
+| Wysiwyg
+|--------------------------------------------------------------------------
+| We manually import this ourselves as we want to be able to wrap it in a
+| class, it can't go in any existing folder as then it get's imported twice
+| because of globbing
+|
+*/
+.wys-Outer {
+  @import 'wysiwyg/wysiwyg.css';
+}
+
+/*
+|--------------------------------------------------------------------------
 | Base
 |--------------------------------------------------------------------------
 | Styles that will effect most of the pages on the site and aren't specific

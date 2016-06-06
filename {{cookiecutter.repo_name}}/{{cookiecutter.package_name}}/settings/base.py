@@ -291,13 +291,13 @@ WYSIWYG_OPTIONS = {
     # See https://www.tinymce.com/docs/get-started/work-with-plugins/
     'plugins': [
         "advlist autolink link image lists charmap hr anchor pagebreak",
-        "wordcount visualblocks visualchars code fullscreen cmsimage hr",
+        "wordcount visualblocks visualchars code fullscreen cmsimage hr template",
         "table contextmenu directionality paste textcolor colorpicker textpattern"
     ],
 
     # Items to display on the 3 toolbar lines
     'toolbar1': "code | cut copy paste pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap",
-    'toolbar2': "styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript",
+    'toolbar2': "template styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript",
     'toolbar3': "",
 
     # Display menubar with dropdowns
@@ -305,6 +305,15 @@ WYSIWYG_OPTIONS = {
 
     # Make toolbar smaller
     'toolbar_items_size': 'small',
+
+    # These come from assets/html and are moved into these file paths by Gulp
+    'templates': [
+        {
+            'title': 'Test',
+            'description': 'A test template',
+            'url': '/static/build/html/test.html'
+        }
+    ],
 
     # Custom style formats
     'style_formats': [
@@ -314,12 +323,12 @@ WYSIWYG_OPTIONS = {
                 {
                     'title': 'Primary',
                     'selector': 'a',
-                    'classes': 'button primary'
+                    'classes': 'wys-Button-primary'
                 },
                 {
                     'title': 'Secondary',
                     'selector': 'a',
-                    'classes': 'button secondary'
+                    'classes': 'wys-Button-secondary'
                 },
             ]
         }
@@ -337,7 +346,7 @@ WYSIWYG_OPTIONS = {
     'image_advtab': True,
 
     # Custom CSS to style the wysiwyg content area
-    'content_css': '/static/css/screen.content.css',
+    'content_css': '/static/build/css/wysiwyg.css'
 }
 
 NEWS_APPROVAL_SYSTEM = False

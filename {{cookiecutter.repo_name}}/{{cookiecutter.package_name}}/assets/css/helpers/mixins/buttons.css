@@ -19,10 +19,10 @@
 */
 @mixin Button() {
   display: inline-block;
-  padding: 7 calc(var(--Grid_Gutter) / 2);
+  padding: 7 var(--Grid_Gutter);
 
   background-color: transparent;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   color: #fff;
 
   /* stylelint-disable */
@@ -30,12 +30,6 @@
               border var(--Global_Transition),
               color var(--Global_Transition);
   /* stylelint-enable */
-
-  &:hover {
-    background-color: transparent;
-    border: 2px solid transparent;
-    color: #fff;
-  }
 }
 
 /*

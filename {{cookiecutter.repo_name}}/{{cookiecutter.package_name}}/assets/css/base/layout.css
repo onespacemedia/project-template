@@ -15,8 +15,6 @@
   margin-right: auto;
   margin-left: auto;
 
-  will-change: transform; /* This prevents slow painting on certain hardware */
-
   /* var(--Grid_Constrained) + (1px * 2) for each border */
   @media (width >= 1602px) {
     border-right: 1px solid var(--Color_Border);

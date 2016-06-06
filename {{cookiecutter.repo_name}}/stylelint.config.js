@@ -1,14 +1,5 @@
 module.exports = {
-  'plugins': [
-    'stylelint-statement-max-nesting-depth'
-  ],
   'rules': {
-    // Plugins
-    'statement-max-nesting-depth': [3, {
-      countAtRules: false,
-      countedNestedAtRules: false
-    }],
-
     // String
     'string-quotes': 'single',
 
@@ -55,7 +46,8 @@ module.exports = {
       {
         emptyLineBefore: 'always',
         properties: [
-          'content'
+          'content',
+          'font-awesome'
         ]
       },
       {
@@ -119,9 +111,12 @@ module.exports = {
           'font-style',
           'font-weight',
           'letter-spacing',
+          'list-style',
+          'list-style-position',
           'line-height',
           'text-align',
           'text-decoration',
+          'text-indent',
           'text-overflow',
           'text-transform'
         ]
@@ -151,12 +146,14 @@ module.exports = {
           'box-shadow',
           'color',
           'cursor',
+          'fill',
           'mix-blend-mode',
           'opacity',
           'overflow',
           'overflow-x',
           'overflow-y',
-          'visibility'
+          'visibility',
+          'will-change'
         ]
       },
       {
@@ -231,6 +228,6 @@ module.exports = {
     'rule-non-nested-empty-line-before': ['always-multi-line', {
       ignore: ['after-comment']
     }],
-    'declaration-block-trailing-semicolon': 'always',
+    'declaration-block-trailing-semicolon': 'always'
   }
 }
