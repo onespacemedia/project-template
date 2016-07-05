@@ -12,6 +12,7 @@
     "sections": "yes",
     "footer": "yes",
     "geoip": "no",
+    "email_password": "{{ cookiecutter.email_password }}",
     "google_plus_key": "{{ cookiecutter.google_plus_key }}",
     "google_plus_secret": "{{ cookiecutter.google_plus_secret }}",
     "opbeat_app_id": "{{ cookiecutter.opbeat_app_id }}",
