@@ -46,7 +46,7 @@
     "lolex": "1.4.0",
     "object-assign": "4.0.1",
     "open": "0.0.5",
-    "postcss-assets": "^3.0.3",
+    "postcss-assets": "^4.1.0",
     "postcss-brand-colors": "^0.3.0",
     "postcss-calc": "^5.2.1",
     "postcss-color-alpha": "^1.0.3",
