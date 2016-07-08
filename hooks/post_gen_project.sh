@@ -69,7 +69,6 @@ fi
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
-npm install -g webpack
 npm install
 npm run build
 
