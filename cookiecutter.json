@@ -12,7 +12,6 @@
     "sections": "yes",
     "footer": "yes",
     "geoip": "no",
-    "email_password": "{{ cookiecutter.email_password }}",
     "google_analytics": "ef",
     "google_analytics_key": "wdwd",
     "adobe_creative_sdk_secret": "wdwd",

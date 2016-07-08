@@ -77,7 +77,7 @@ EMAIL_HOST = "smtp.mandrillapp.com"
 
 EMAIL_HOST_USER = "developers@onespacemedia.com"
 
-EMAIL_HOST_PASSWORD = "{{cookiecutter.email_password}}"
+EMAIL_HOST_PASSWORD = ""
 
 EMAIL_PORT = 587
 
