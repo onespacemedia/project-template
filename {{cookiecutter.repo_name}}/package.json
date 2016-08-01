@@ -42,6 +42,7 @@
     "gulp-watch": "4.3.5",
     "js-cookie": "^2.0.4",
     "json-loader": "^0.5.4",
+    "lint-staged": "^2.0.2",
     "lodash": "4.6.1",
     "lolex": "1.4.0",
     "object-assign": "4.0.1",
@@ -64,6 +65,7 @@
     "postcss-round-subpixels": "^1.2.0",
     "postcss-sassy-mixins": "^2.0.0",
     "postcss-will-change": "^1.0.0",
+    "pre-commit": "^1.1.3",
     "pretty-hrtime": "1.0.2",
     "require-dir": "0.3.0",
     "rucksack-css": "^0.8.5",
@@ -86,12 +88,45 @@
   "scripts": {
     "dev": "gulp",
     "build": "gulp production",
+    "lint:css": "stylelint \"{{cookiecutter.package_name}}/assets/**/*.css\"",
+    "lint:js": "eslint {{cookiecutter.package_name}}/assets/js/**/*.js",
+    "lint:iSort": "isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*",
+    "lint:py": "pylint {{cookiecutter.package_name}}/ --load-plugins pylint_django --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code,fixme --reports=n",
+    "git:add": "git add",
+    "lint-staged": "lint-staged"
+  },
+  "scripts": {
+    "dev": "gulp",
+    "build": "gulp production",
     "eslint": "eslint {{cookiecutter.package_name}}/assets/js/**/*.js",
     "stylelint": "stylelint \"{{cookiecutter.package_name}}/assets/**/*.css\""
   },
   "babel": {
+    "plugins": [
+      "transform-runtime"
+    ],
     "presets": [
-      "es2015"
+      "es2015",
+      "es2016",
+      "stage-0"
+    ]
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "*.css": [
+      "lint:css",
+      "git:add"
+    ],
+    "*.@(js)": [
+      "lint:js",
+      "git:add"
+    ],
+    "*.py": [
+      "lint:iSort",
+      "lint:py",
+      "git:add"
     ]
   }
 }
