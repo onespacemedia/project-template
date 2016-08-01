@@ -11,19 +11,10 @@ module.exports = [
     glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
   }),
 
-  require('postcss-cssnext')({
-    features: {
-      autoprefixer: false,
-      calc: false,
-      nesting: false,
-      rem: false
-    }
-  }),
-  require('rucksack-css')({
-    autoprefixer: false,
-    hexRGBA: false
-  }),
-
+  require('postcss-custom-properties'),
+  require('postcss-custom-media'),
+  require('postcss-media-minmax'),
+  require('postcss-custom-selectors'),
   // Niceties
   require('postcss-assets')({
     basePath: '{{cookiecutter.package_name}}/assets/',
