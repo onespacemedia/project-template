@@ -7,7 +7,6 @@ var webpack         = require('webpack')
 var webpackManifest = require('./webpackManifest')
 var BundleTracker   = require('webpack-bundle-tracker')
 var ExtractText     = require('extract-text-webpack-plugin')
-var projectRoot     = require(__dirname, '../../')
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
@@ -35,13 +34,11 @@ module.exports = function(env) {
         {
           test: /\.vue$/,
           loader: 'eslint',
-          include: projectRoot,
           exclude: /(node_modules|bower_components|vendor)/
         },
         {
           test: /\.js$/,
           loader: 'eslint',
-          include: projectRoot,
           exclude: /(node_modules|bower_components|vendor)/
         }
       ],
