@@ -22,7 +22,7 @@
     ready () {
       const parser = document.createElement('a')
       parser.href = window.location.href
-      let splitPathname = parser.pathname.split('/')
+      const splitPathname = parser.pathname.split('/')
 
       this.selected = splitPathname[splitPathname.length - 2]
     },

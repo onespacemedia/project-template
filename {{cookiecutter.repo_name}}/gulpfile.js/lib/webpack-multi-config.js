@@ -7,6 +7,7 @@ var webpack         = require('webpack')
 var webpackManifest = require('./webpackManifest')
 var BundleTracker   = require('webpack-bundle-tracker')
 var ExtractText     = require('extract-text-webpack-plugin')
+var projectRoot     = require(__dirname, '../../')
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
@@ -32,8 +33,15 @@ module.exports = function(env) {
     module: {
       preLoaders: [
         {
+          test: /\.vue$/,
+          loader: 'eslint',
+          include: projectRoot,
+          exclude: /(node_modules|bower_components|vendor)/
+        },
+        {
           test: /\.js$/,
           loader: 'eslint',
+          include: projectRoot,
           exclude: /(node_modules|bower_components|vendor)/
         }
       ],
@@ -61,7 +69,10 @@ module.exports = function(env) {
         css: ExtractText.extract('css')
       }
     },
-    babel: config.tasks.js.babel
+    babel: config.tasks.js.babel,
+    eslint: {
+      formatter: require('eslint-friendly-formatter')
+    }
   }
 
   if(env === 'development') {

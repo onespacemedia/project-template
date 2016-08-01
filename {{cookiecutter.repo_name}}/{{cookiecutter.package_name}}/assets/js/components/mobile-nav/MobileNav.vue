@@ -67,7 +67,7 @@
       this.items = window.navigationData
 
       document.addEventListener('keydown', (e) => {
-        if (this.mobileNav.show && e.keyCode == 27) {
+        if (this.mobileNav.show && e.keyCode === 27) {
           this.toggleMobileNav()
         }
       })
