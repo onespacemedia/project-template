@@ -27,9 +27,7 @@ module.exports = [
   require('postcss-brand-colors'),
   require('postcss-property-lookup'),
   require('postcss-lh')({
-    rootSelector: ':root',
-    rhythmUnit: 'vr',
-    lineHeight: 1.5
+    rhythmUnit: 'vr'
   }),
   require('postcss-pxtorem'),
   require('postcss-will-change'),
