@@ -33,4 +33,8 @@
   */
   --Global_Radius: 3px;
   --Global_Transition: 0.16s;
+
+  font: 16px / 1.5 var(--Font_Family);
+
+  cursor: auto;
 }

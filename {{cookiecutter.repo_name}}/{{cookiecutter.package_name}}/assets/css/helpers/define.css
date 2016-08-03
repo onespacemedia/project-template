@@ -33,11 +33,6 @@
 |--------------------------------------------------------------------------
 |
 */
-html,
-body {
-  height: 100%;
-}
-
 html {
   /* Sets a specific default `font-size` for user with `rem` type scales. */
   font-size: 16px;

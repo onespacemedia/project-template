@@ -32,7 +32,7 @@
 | because of globbing
 |
 */
-.wys-Outer {
+.wys-WYSIWYG {
   @import 'wysiwyg/wysiwyg.css';
 }
 

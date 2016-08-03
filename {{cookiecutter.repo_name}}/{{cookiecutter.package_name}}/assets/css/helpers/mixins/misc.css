@@ -24,7 +24,7 @@
 | Used for surrounding images and videos to maintain their aspect ratio
 |
 */
-@mixin intrinsic($x: 16, $y: 9) {
+@mixin Intrinsic($x: 16, $y: 9) {
   position: relative;
 
   display: block;

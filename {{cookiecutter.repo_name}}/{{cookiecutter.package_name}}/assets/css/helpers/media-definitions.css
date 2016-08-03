@@ -23,8 +23,8 @@
 
 /* Target just a specific viewport */
 @custom-media --xs-viewport (width <= 480px);
-@custom-media --sm-viewport (width > 480px) and (width < 800px);
-@custom-media --md-viewport (width > 800px) and (width < 1024px);
-@custom-media --lg-viewport (width > 1024px) and (width < 1440px);
-@custom-media --xlg-viewport (width > 1440px) and (width < 1920px);
+@custom-media --sm-viewport (width > 480px) and (width <= 800px);
+@custom-media --md-viewport (width > 800px) and (width <= 1024px);
+@custom-media --lg-viewport (width > 1024px) and (width <= 1440px);
+@custom-media --xlg-viewport (width > 1440px) and (width <= 1920px);
 @custom-media --xxlg-viewport (width > 1920px);
