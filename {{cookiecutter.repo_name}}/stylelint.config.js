@@ -187,6 +187,7 @@ module.exports = {
     'block-opening-brace-space-before': 'always',
 
     // Selector
+    'selector-class-pattern': '^[a-z]([a-z0-9]){1,3}-[A-Z][a-zA-Z0-9]+(_[A-Z][a-zA-Z0-9]+)?(-[a-z]([a-zA-Z0-9-]+)?[a-z0-9]+)?$',
     'selector-combinator-space-after': 'always',
     'selector-combinator-space-before': 'always',
     'selector-no-id': true,
