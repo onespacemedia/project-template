@@ -1,12 +1,13 @@
 var config = require('../config')
 if(!config.tasks.js) return
 
-var path            = require('path')
-var pathToUrl       = require('./pathToUrl')
-var webpack         = require('webpack')
-var webpackManifest = require('./webpackManifest')
-var BundleTracker   = require('webpack-bundle-tracker')
-var ExtractText     = require('extract-text-webpack-plugin')
+var path                          = require('path')
+var pathToUrl                     = require('./pathToUrl')
+var webpack                       = require('webpack')
+var webpackManifest               = require('./webpackManifest')
+var BundleTracker                 = require('webpack-bundle-tracker')
+var ExtractText                   = require('extract-text-webpack-plugin')
+var LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
@@ -113,6 +114,8 @@ module.exports = function(env) {
           'NODE_ENV': JSON.stringify('production')
         }
       }),
+      new LodashModuleReplacementPlugin,
+      new webpack.optimize.OccurenceOrderPlugin,
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
