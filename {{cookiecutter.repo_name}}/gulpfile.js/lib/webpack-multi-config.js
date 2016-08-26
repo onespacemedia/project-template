@@ -69,6 +69,7 @@ module.exports = function(env) {
     },
     babel: config.tasks.js.babel,
     eslint: {
+      configFile: './.eslintrc.dev',
       formatter: require('eslint-friendly-formatter')
     }
   }
