@@ -15,9 +15,8 @@ module.exports = {
 
     // Number
     'number-leading-zero': 'always',
-    'number-max-precision': 3,
+    'number-max-precision': 5,
     'number-no-trailing-zeros': true,
-    'number-zero-length-no-unit': true,
 
     // Function
     'function-calc-no-unspaced-operator': true,
@@ -211,7 +210,7 @@ module.exports = {
     'custom-media-pattern': 'xs|sm|md|lg|xlg|xxlg.+/',
 
     // Media query
-    'media-query-parentheses-space-inside': 'never',
+    // 'media-feature-parentheses-space-inside': 'never',
 
     // Comment
     'comment-whitespace-inside': 'always',
@@ -219,7 +218,8 @@ module.exports = {
     // General
     'indentation': 2,
     'no-eol-whitespace': true,
-    'no-missing-eof-newline': true,
+    // 'no-missing-eof-newline': true,
+    'length-zero-no-unit': true,
 
     // Rules
     'rule-nested-empty-line-before': ['always', {
@@ -230,5 +230,6 @@ module.exports = {
       ignore: ['after-comment']
     }],
     'declaration-block-trailing-semicolon': 'always'
-  }
+  },
+  'ignoreFiles': ['static/**/*.css', 'vendor/**/*.css']
 }
