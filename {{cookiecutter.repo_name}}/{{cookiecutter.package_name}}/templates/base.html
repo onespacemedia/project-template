@@ -1,4 +1,4 @@
-{% load compress html pages site static %}
+{% load compress html pages pagination site static %}
 {% load render_bundle from webpack_loader %}
 
 <!DOCTYPE html>
@@ -9,7 +9,19 @@
     <meta name="description" content="{% block meta_description %}{% meta_description %}{% endblock %}">
     <meta name="robots" content="{% block meta_robots %}{% meta_robots %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    {% block canonical %}
     <link rel="canonical" href="{% canonical_url %}"/>
+    {% endblock %}
+
+    {% if paginator.num_pages %}
+      {% if page_obj.has_previous %}
+        <link rel="previous" href="{% pagination_url page_obj.previous_page_number %}">
+      {% endif %}
+
+      {% if page_obj.has_next %}
+        <link rel="next" href="{% pagination_url page_obj.next_page_number %}">
+      {% endif %}
 
     <!-- Open Graph data -->
     <meta property="og:title" content="{% block og_title %}{% og_title %}{% endblock %}">
