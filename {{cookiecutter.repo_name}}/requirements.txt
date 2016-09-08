@@ -13,6 +13,7 @@ django-webpack-loader
 onespacemedia-cms
 onespacemedia-server-management
 opbeat
+paramiko==1.16.0
 Pillow
 python-memcached
 python-social-auth
