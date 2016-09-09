@@ -5,11 +5,13 @@ django-compressor
 django-extensions
 django-flexible-images
 django-historylinks
+django-jinja==2.2.1
 {% if cookiecutter.redirects == 'yes' %}onespacemedia-cms-redirects{% endif %}
 django-reversion==1.8.7
 django-suit
 django-watson==1.1.9
 django-webpack-loader
+Jinja2==2.8
 onespacemedia-cms
 onespacemedia-server-management
 opbeat

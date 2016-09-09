@@ -1,11 +1,9 @@
-{% load pages site %}
-
 <header class="hd-Outer">
   <div class="hd-Inner">
-    <a class="hd-Logo" href="{{ pages.homepage.get_absolute_url }}"></a>
+    <a class="hd-Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
 
     <nav class="hd-Nav">
-      {% navigation pages.homepage.navigation section=pages.homepage %}
+      {{ navigation(pages.homepage.navigation, section=pages.homepage) }}
     </nav>
 
     <div class="hd-MobileNav_Trigger" @click="toggleMobileNav()">

@@ -14,6 +14,8 @@ import os
 import platform
 import sys
 
+from django.conf import settings
+from django_jinja.builtins import DEFAULT_EXTENSIONS
 from social.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == "PyPy":
@@ -140,6 +142,8 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "compressor",
 
+    "django_jinja",
+
     "cms",
 
     "reversion",
@@ -240,30 +244,68 @@ SITE_ID = 1
 
 # Absolute path to the directory where templates are stored.
 
-TEMPLATE_DIRS = (
-    os.path.join(SITE_ROOT, "templates"),
-)
-
-TEMPLATE_LOADERS = (
-    ("django.template.loaders.cached.Loader", (
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
-    )),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request",
-    "cms.context_processors.settings",
-    "cms.apps.pages.context_processors.pages",
-    'social.apps.django_app.context_processors.backends',
-    'social.apps.django_app.context_processors.login_redirect',
-)
+TEMPLATES = [
+    {
+        "BACKEND": "django_jinja.backend.Jinja2",
+        "DIRS": [
+            os.path.join(SITE_ROOT, "templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "match_extension": ".html",
+            "match_regex": r"^(?!admin/|reversion/).*",
+            "app_dirname": "templates",
+            "newstyle_gettext": True,
+            "extensions": DEFAULT_EXTENSIONS + [
+                "webpack_loader.contrib.jinja2ext.WebpackExtension",
+                "compressor.contrib.jinja2ext.CompressorExtension"
+            ],
+            "bytecode_cache": {
+                "name": "default",
+                "backend": "django_jinja.cache.BytecodeCache",
+                "enabled": False,
+            },
+            "autoescape": True,
+            "auto_reload": False,
+            "translation_engine": "django.utils.translation",
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.core.context_processors.debug",
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
+                "django.core.context_processors.static",
+                "django.contrib.messages.context_processors.messages",
+                "django.core.context_processors.request",
+                "cms.context_processors.settings",
+                "cms.apps.pages.context_processors.pages",
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect'
+            ]
+        }
+    },
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(SITE_ROOT, "templates"),
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.core.context_processors.debug",
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
+                "django.core.context_processors.static",
+                "django.contrib.messages.context_processors.messages",
+                "django.core.context_processors.request",
+                "cms.context_processors.settings",
+                "cms.apps.pages.context_processors.pages",
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect'
+            ]
+        }
+    }
+]
 
 
 # Namespace for cache keys, if using a process-shared cache.

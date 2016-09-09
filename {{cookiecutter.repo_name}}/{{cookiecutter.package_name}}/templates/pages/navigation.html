@@ -1,5 +1,3 @@
-{% load site %}
-
 <ul class="nav-Items">
   {% for entry in navigation %}
     <li class="nav-Item{% if entry.children %} nav-Item-hasDropdown{% endif %}" aria-current="{% if entry.here %}true{% else %}false{% endif %}">

@@ -16,7 +16,7 @@ from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
 DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
+TEMPLATES[0]["OPTIONS"]["auto_reload"] = DEBUG
 
 
 # Save media files to the user's Sites folder.
