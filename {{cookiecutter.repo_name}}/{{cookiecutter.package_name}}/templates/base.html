@@ -34,7 +34,7 @@
     <meta name="twitter:description" content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
     <meta name="twitter:image" content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
 
-    <title>{% block title %}{{ get_title() }}{% endblock %}</title>
+    <title>{% block title %}{{ render_title() }}{% endblock %}</title>
 
     <!-- Favicons -->
     {% include 'base/_favicons.html' %}
