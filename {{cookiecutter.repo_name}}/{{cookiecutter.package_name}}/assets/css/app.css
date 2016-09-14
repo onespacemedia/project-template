@@ -15,10 +15,8 @@
 | Sass based shared helper methods that are used throughout all of our project.
 |
 */
-@import 'helpers/property-definitions.css';
-@import 'helpers/media-definitions.css';
-@import 'helpers/selector-definitions.css';
-@import 'helpers/mixins/*.css';
+
+@import 'helpers/index.css';
 
 /* Like bootstraps reboot, define some base normalized styles */
 @import 'helpers/define.css';
