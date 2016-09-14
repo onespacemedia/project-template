@@ -28,7 +28,10 @@ module.exports = function(env) {
     ],
     resolve: {
       root: jsSrc,
-      extensions: [''].concat(extensions)
+      extensions: [''].concat(extensions),
+      alias: {
+        'vue': 'vue/dist/vue.js'
+      }
     },
     module: {
       preLoaders: [

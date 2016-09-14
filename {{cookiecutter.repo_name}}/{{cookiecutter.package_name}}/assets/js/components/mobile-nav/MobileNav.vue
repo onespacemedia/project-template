@@ -1,13 +1,12 @@
 <template>
-  <div class="mbn-Outer"
-       v-show="mobileNav.show"
-       transition="trn-Fade"
+  <div class="mbn-MobileNav"
+       v-show="show"
        @click="toggleMobileNav()">
     <nav class="mbn-Items" @click.stop>
       <div class="mbn-Item"
            v-for="item in items" track-by="$index">
         <a class="mbn-Item_Action"
-           href="{{ item.children.length ? null : item.url }}"
+           :href="item.children.length ? null : item.url"
            @click.stop="item.children.length ? activeItem = $index : toggleMobileNav()">
           {{ item.title }}
 
@@ -26,13 +25,13 @@
           </div>
 
           <div class="mbn-Child_Item">
-            <a class="mbn-Child_ItemAction" href="{{ item.url }}">
+            <a class="mbn-Child_ItemAction" :href="item.url">
               <span>{{ item.title }}</span>
             </a>
           </div>
 
           <div class="mbn-Child_Item" v-for="child in item.children">
-            <a class="mbn-Child_ItemAction" href="{{ child.url }}">
+            <a class="mbn-Child_ItemAction" :href="child.url">
               <span>{{ child.title }}</span>
             </a>
           </div>
@@ -43,23 +42,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import store from '../../store'
-  import * as actions from './actions'
-
   export default {
-    store,
-
-    vuex: {
-      actions,
-      getters: {
-        mobileNav: (state) => state.mobileNav
-      }
-    },
-
     data () {
       return {
         activeItem: null,
-        items: []
+        items: [],
+        show: false
       }
     },
 
@@ -67,7 +55,7 @@
       this.items = window.navigationData
 
       document.addEventListener('keydown', (e) => {
-        if (this.mobileNav.show && e.keyCode === 27) {
+        if (this.show && e.keyCode === 27) {
           this.toggleMobileNav()
         }
       })
