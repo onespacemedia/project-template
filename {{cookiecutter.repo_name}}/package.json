@@ -98,9 +98,7 @@
     "dev": "gulp",
     "build": "gulp production",
     "lint:css": "stylelint \"{{cookiecutter.package_name}}/assets/**/*.css\"",
-    "lint:js": "eslint --ext .js,.vue {{cookiecutter.package_name}}/assets/js/**/*.js",
-    "lint:iSort": "isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*",
-    "lint:py": "pylint {{cookiecutter.package_name}}/ --load-plugins pylint_django --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code,fixme --reports=n"
+    "lint:js": "eslint --ext .js,.vue {{cookiecutter.package_name}}/assets/js/**/*.js"
   },
   "babel": {
     "plugins": [
