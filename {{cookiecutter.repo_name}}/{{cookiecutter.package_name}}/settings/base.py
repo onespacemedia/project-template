@@ -14,7 +14,6 @@ import os
 import platform
 import sys
 
-from django.conf import settings
 from django_jinja.builtins import DEFAULT_EXTENSIONS
 from social.pipeline import DEFAULT_AUTH_PIPELINE
 

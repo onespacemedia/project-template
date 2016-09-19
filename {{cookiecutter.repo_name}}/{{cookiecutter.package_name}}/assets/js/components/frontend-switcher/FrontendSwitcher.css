@@ -14,9 +14,9 @@
   border: 1px solid #dedede;
   border-radius: 3px;
   opacity: 0.3;
+  will-change: transform;
 
   transition: opacity 0.18s ease;
-  will-change: transform;
 }
 
 .fs-Outer:hover {
