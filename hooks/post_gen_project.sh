@@ -63,8 +63,9 @@ if [ -d "tmp" ]; then
     rm -rf tmp/
 
     # Replace the project_name variable in the external apps.
-    echo 'perl 65'
+    echo "grep 65"
     grep -ril "{{ "{{" }} project_name {{ "}}" }}" *
+    echo 'perl 67'
     perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
 fi
 
