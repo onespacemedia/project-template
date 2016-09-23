@@ -63,10 +63,10 @@ if [ -d "tmp" ]; then
     rm -rf tmp/
 
     # Replace the project_name variable in the external apps.
-    echo "grep 65"
-    grep -ril "{{ "{{" }} project_name {{ "}}" }}" *
-    echo 'perl 67'
-    perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
+    if grep -ril "{{ "{{" }} project_name {{ "}}" }}" *
+    then
+        perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
+    fi
 fi
 
 # Generate a secret key and update the base settings file.
