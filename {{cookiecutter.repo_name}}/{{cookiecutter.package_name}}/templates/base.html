@@ -83,7 +83,7 @@
       {% block compressed_js_first %}{% endblock %}
 
       {# Get the site navigation as JSON #}
-      {% set nav = navigation_json(pages.homepage.navigation) %}
+      {% set nav = get_navigation_json(pages.homepage.navigation) %}
       <script>
         // Set the navigation so our Vue file can access it
         window.navigationData = {{ nav | safe }};
