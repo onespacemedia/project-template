@@ -1,36 +1,40 @@
-{% load compress html pages pagination site static %}
-{% load render_bundle from webpack_loader %}
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="{% block meta_description %}{% meta_description %}{% endblock %}">
-    <meta name="robots" content="{% block meta_robots %}{% meta_robots %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
+    <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     {% block canonical %}
-    <link rel="canonical" href="{% canonical_url %}"/>
+      <link rel="canonical" href="{{ get_canonical_url() }}"/>
     {% endblock %}
 
-    {% if paginator.num_pages %}
-      {% if page_obj.has_previous %}
-        <link rel="previous" href="{% pagination_url page_obj.previous_page_number %}">
+    {% if page_obj and page_obj.has_other_pages() %}
+      {% if page_obj.has_previous() %}
+        <link rel="previous" href="{{ get_pagination_url(page_obj.previous_page_number()) }}">
       {% endif %}
 
-      {% if page_obj.has_next %}
-        <link rel="next" href="{% pagination_url page_obj.next_page_number %}">
+      {% if page_obj.has_next() %}
+        <link rel="next" href="{{ get_pagination_url(page_obj.next_page_number()) }}">
       {% endif %}
+    {% endif %}
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="{% block og_title %}{% og_title %}{% endblock %}">
-    <meta property="og:url" content="{% canonical_url %}">
+    <meta property="og:title" content="{% block og_title %}{{ get_og_title() }}{% endblock %}">
+    <meta property="og:url" content="{{ get_canonical_url() }}">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="{% block og_description %}{% og_description %}{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{% og_image %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ get_og_description() }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ get_og_image() }}{% endblock %}">
 
-    <title>{% block title %}{% title %}{% endblock %}</title>
+    <!-- Twitter card data -->
+    <meta name="twitter:card" content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
+    <meta name="twitter:site" content="" />
+    <meta name="twitter:title" content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
+    <meta name="twitter:image" content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
+
+    <title>{% block title %}{{ render_title() }}{% endblock %}</title>
 
     <!-- Favicons -->
     {% include 'base/_favicons.html' %}
@@ -39,7 +43,7 @@
 
     {# Project #}
     {% compress css %}
-      <link rel="stylesheet" href="{% static 'build/css/app.css' %}">
+      <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 
     {% block css %}{% endblock %}
@@ -72,8 +76,6 @@
 
           {% block content_below %}{% endblock %}
         </div>
-
-        {% include 'base/_footer.html' %}
       </div>
     {% endblock %}
 
@@ -81,15 +83,15 @@
       {% block compressed_js_first %}{% endblock %}
 
       {# Get the site navigation as JSON #}
-      {% navigation_json pages.homepage.navigation as nav %}
+      {% set nav = get_navigation_json(pages.homepage.navigation) %}
       <script>
         // Set the navigation so our Vue file can access it
         window.navigationData = {{ nav | safe }};
       </script>
 
-      {% render_bundle 'shared' 'js' %}
-      {% render_bundle 'app' 'js' %}
-      <script src="/static/flexible-images/flexible-images.js"></script>
+      {{ render_bundle('shared', 'js') }}
+      {{ render_bundle('app', 'js') }}
+      <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
 
       {% block compressed_js_last %}{% endblock %}
     {% endcompress %}

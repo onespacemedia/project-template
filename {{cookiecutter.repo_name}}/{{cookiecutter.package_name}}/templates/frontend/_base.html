@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
-{% load render_bundle from webpack_loader %}
 
 {% block site %}
   <frontend-switcher></frontend-switcher>
 
-  {{ block.super }}
+  {{ super() }}
 {% endblock %}
 
 {% block compressed_js_first %}
   <script type="text/javascript">
-    window.frontendTemplates = {{ settings.frontend_templates|safe }}
+    window.frontendTemplates = {{ frontend_templates() }}
   </script>
 {% endblock %}

@@ -6,6 +6,7 @@ module.exports = [
   }),
   require('postcss-sassy-mixins'),
   require('postcss-conditionals'),
+  require('postcss-apply'),
   require('postcss-nested'),
   require('postcss-functions')({
     glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
