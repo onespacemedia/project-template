@@ -19,8 +19,13 @@
   width: 100%;
   margin-right: auto;
   margin-left: @margin-right;
-  padding-right: var(--Grid_Gutter);
+  padding-right: calc(var(--Grid_Gutter) * 2);
   padding-left: @padding-right;
+
+  @media (--lg) {
+    padding-right: var(--Grid_Gutter);
+    padding-left: @padding-right;
+  }
 }
 
 /*

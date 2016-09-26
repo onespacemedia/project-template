@@ -28,7 +28,10 @@ module.exports = function(env) {
     ],
     resolve: {
       root: jsSrc,
-      extensions: [''].concat(extensions)
+      extensions: [''].concat(extensions),
+      alias: {
+        'vue': 'vue/dist/vue.js'
+      }
     },
     module: {
       preLoaders: [
@@ -46,7 +49,7 @@ module.exports = function(env) {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
+          loader: 'babel',
           exclude: /node_modules/,
           query: config.tasks.js.babel
         },

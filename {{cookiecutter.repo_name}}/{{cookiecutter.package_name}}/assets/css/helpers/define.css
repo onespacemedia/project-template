@@ -47,8 +47,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  font-family: var(--Font_Family-body);
-  font-weight: 400;
   color: var(--Color_Body);
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #ececec;

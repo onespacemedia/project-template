@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import VueConfig from './vue.config'
+import App from './App'
 
-new Vue(VueConfig).$mount('body')
+new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   // Stuff

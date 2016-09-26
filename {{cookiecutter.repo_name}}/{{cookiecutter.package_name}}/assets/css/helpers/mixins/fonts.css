@@ -39,7 +39,40 @@
 | to remember to do both
 |
 */
-@mixin Font($size) {
+@mixin Font($size, $weight: false) {
   @include Font_Sizing($size);
   @include Font_Styles($size);
+
+  @if $weight {
+    @if $weight == 'thin' or $weight == 'hairline' {
+      font-weight: 100;
+    }
+    @else if $weight == 'extralight' or $weight == 'extra light' or $weight == 'ultralight' or $weight == 'ultra light' {
+      font-weight: 200;
+    }
+    @else if $weight == 'light' {
+      font-weight: 300;
+    }
+    @else if $weight == 'normal' or $weight == 'regular' {
+      font-weight: 400;
+    }
+    @else if $weight == 'medium' {
+      font-weight: 500;
+    }
+    @else if $weight == 'semibold' or $weight == 'semi bold' or $weight == 'demibold' or $weight == 'demi bold' {
+      font-weight: 600;
+    }
+    @else if $weight == 'bold' {
+      font-weight: 700;
+    }
+    @else if $weight == 'extrabold' or $weight == 'extra bold' or $weight == 'ultrabold' or $weight == 'ultra bold' {
+      font-weight: 800;
+    }
+    @else if $weight == 'black' or $weight == 'heavy' {
+      font-weight: 900;
+    }
+    @else {
+      font-weight: $weight;
+    }
+  }
 }
