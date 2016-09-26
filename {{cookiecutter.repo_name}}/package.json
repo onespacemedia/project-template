@@ -111,8 +111,6 @@
       "es2016",
       "stage-0"
     ]
-<<<<<<< Updated upstream
-=======
   },
   "eslintConfig": {
     "root": true,
@@ -351,6 +349,5 @@
       "declaration-block-trailing-semicolon": "always"
     },
     "ignoreFiles": ["static/**/*.css", "vendor/**/*.css"]
->>>>>>> Stashed changes
   }
 }
