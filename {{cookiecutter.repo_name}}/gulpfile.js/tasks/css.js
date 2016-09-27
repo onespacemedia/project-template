@@ -29,5 +29,14 @@ var cssTask = function () {
     .pipe(browserSync.stream())
 }
 
+var cssProductionTask = function () {
+  return gulp.src(path.join(config.root.dest, config.tasks.css.dest,  '/*.' + config.tasks.css.extensions))
+    .pipe(postcss([require('cssnano')({
+      mergeRules: false
+    })]))
+    .pipe(gulp.dest(paths.dest))
+}
+
 gulp.task('css', cssTask)
+gulp.task('css:production', ['css'], cssProductionTask)
 module.exports = cssTask
