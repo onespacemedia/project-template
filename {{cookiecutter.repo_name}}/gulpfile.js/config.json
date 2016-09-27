@@ -21,10 +21,6 @@
         "app": ["./main.js"]
       },
       "extensions": ["js"],
-      "babel": {
-        "presets": ["es2015", "stage-0"],
-        "plugins": ["transform-runtime", "lodash"]
-      },
       "extractSharedJs": true
     },
     "css": {

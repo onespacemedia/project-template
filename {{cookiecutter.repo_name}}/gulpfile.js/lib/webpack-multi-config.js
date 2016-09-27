@@ -70,7 +70,6 @@ module.exports = function(env) {
         css: ExtractText.extract('css')
       }
     },
-    babel: config.tasks.js.babel,
     eslint: {
       configFile: './.eslintrc.dev',
       formatter: require('eslint-friendly-formatter')
