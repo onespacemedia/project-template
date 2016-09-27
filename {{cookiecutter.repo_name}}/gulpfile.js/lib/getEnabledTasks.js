@@ -6,12 +6,6 @@ var assetTasks = ['fonts', 'iconFont', 'images', 'svgSprite']
 var codeTasks = ['html', 'css', 'js']
 
 module.exports = function(env) {
-  var jsTasks = {
-    watch: 'webpack:watch',
-    development: 'wepback:watch',
-    production: 'webpack:production'
-  }
-
   var cssTasks = {
     watch: 'css',
     development: 'css',
@@ -21,7 +15,7 @@ module.exports = function(env) {
   function matchFilter(task) {
     if(config.tasks[task]) {
       if(task === 'js') {
-        task = jsTasks[env] || jsTasks.watch
+        task = env === 'production' ? 'webpack:production' : false
       }
 
       if(task === 'css') {
