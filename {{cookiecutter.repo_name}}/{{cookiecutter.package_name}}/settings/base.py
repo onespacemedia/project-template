@@ -356,6 +356,8 @@ WYSIWYG_OPTIONS = {
         }
     ],
 
+    'block_formats': 'Paragraph=p;Header 2=h2;Header 3=h3;Header 4=h4;Header 5=h5;Header 6=h6;',
+
     # Custom style formats
     'style_formats': [
         {
