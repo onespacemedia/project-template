@@ -17,7 +17,7 @@ def get_navigation_json(context, pages, section=None):
 @library.global_function
 def frontend_templates():
     return mark_safe([
-         str(f[:-5])
-         for f in os.listdir(os.path.join(settings.TEMPLATES[0]["DIRS"][0], 'frontend'))
-         if f[:1] != '_'
-     ])
+        str(f[:-5])
+        for f in os.listdir(os.path.join(settings.TEMPLATES[0]["DIRS"][0], 'frontend'))
+        if f[:1] != '_'
+    ])

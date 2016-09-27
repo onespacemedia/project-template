@@ -1,18 +1,19 @@
 #!/bin/bash
 
-source ~/.bash_profile
+if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
+    source ~/.zshrc
+else
+    source ~/.bash_profile
+fi
 
 # Create the database.
 createdb {{cookiecutter.package_name}}
 
 # Make the virtual environment.
-if [ -z "$CI" ]; then
-
-    {
-        mkvirtualenv {{cookiecutter.repo_name}} && workon {{cookiecutter.repo_name}}
-    } || {
-        virtualenv -p python .venv && source .venv/bin/activate
-    }
+if command -v mkvirtualenv >/dev/null 2>&1; then
+    mkvirtualenv {{cookiecutter.repo_name}} && workon {{cookiecutter.repo_name}}
+else
+    virtualenv -p python .venv && source .venv/bin/activate
 fi
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
@@ -78,17 +79,21 @@ if [ -z "$CI" ]; then
     # Create a git repo and configure it for git flow.
     git init
 
-    # If Git flow isn't installed, install it. This isn't optional.
-    if ! which -s git-flow; then
-        brew install git-flow
-    fi
-
     git flow init -d
 
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
     git commit --amend --all --no-edit
 
-    # We can't push yet because we don't have a remote..
-    # git push
+    mkdir -p .git/hooks
+    mv pre-push .git/hooks/pre-push
+    chmod +x .git/hooks/pre-push
+
+    {% if cookiecutter.create_repo == 'yes' %}
+      if command -v hub >/dev/null 2>&1; then
+          hub create -p onespacemedia/{{cookiecutter.repo_name}}
+
+          git push -u origin develop
+      fi
+    {% endif %}
 fi

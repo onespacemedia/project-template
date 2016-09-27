@@ -71,7 +71,6 @@ module.exports = function(env) {
       }
     },
     eslint: {
-      configFile: './.eslintrc.dev',
       formatter: require('eslint-friendly-formatter')
     }
   }
