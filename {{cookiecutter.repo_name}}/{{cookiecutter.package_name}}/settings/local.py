@@ -47,3 +47,5 @@ EMAIL_HOST_USER = '178288370161874a6'
 EMAIL_HOST_PASSWORD = '5033a6d5bca3f0'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
+
+CACHES['default']['BACKEND'] = 'django.core.cache.backends.dummy.DummyCache'
