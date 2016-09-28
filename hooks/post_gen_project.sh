@@ -79,15 +79,15 @@ if [ -z "$CI" ]; then
     # Create a git repo and configure it for git flow.
     git init
 
+    mkdir -p .git/hooks
+    mv pre-push .git/hooks/pre-push
+    chmod +x .git/hooks/pre-push
+
     git flow init -d
 
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
     git commit --amend --all --no-edit
-
-    mkdir -p .git/hooks
-    mv pre-push .git/hooks/pre-push
-    chmod +x .git/hooks/pre-push
 
     {% if cookiecutter.create_repo == 'yes' %}
       if command -v hub >/dev/null 2>&1; then
