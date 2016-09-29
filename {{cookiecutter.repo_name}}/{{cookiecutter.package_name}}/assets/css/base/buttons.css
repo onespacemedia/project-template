@@ -6,7 +6,7 @@
 |
 */
 .btn-Button {
-  @include Button();
+  @apply --Button-base;
 }
 
 /*
@@ -16,7 +16,7 @@
 |
 */
 .btn-Primary {
-  @include Button-primary();
+  @apply --Button-primary;
 }
 
 /*
@@ -26,5 +26,5 @@
 |
 */
 .btn-Secondary {
-  @include Button-secondary();
+  @apply --Button-secondary;
 }
