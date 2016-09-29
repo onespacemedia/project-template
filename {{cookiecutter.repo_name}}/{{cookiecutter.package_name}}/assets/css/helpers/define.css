@@ -41,7 +41,7 @@ html {
 }
 
 body {
-  @include Font(16);
+  @apply --Font-16;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
