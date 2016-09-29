@@ -15,9 +15,12 @@
   /**
   * Font - Sizes
   */
-  --Font_Size-16: 16px;
-  --Letter_Spacing-16: 0;
-  --Line_Height-16: 1vr;
+  /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
+  --Font-16: {
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 1vr;
+  };
 
   /**
   * Grid
