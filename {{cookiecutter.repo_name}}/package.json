@@ -146,7 +146,7 @@
       "color-named": "never",
       "color-no-invalid-hex": true,
 
-      "font-family-name-quotes": "single-where-required",
+      "font-family-name-quotes": "always-where-required",
       "font-weight-notation": "numeric",
 
       "number-leading-zero": "always",
