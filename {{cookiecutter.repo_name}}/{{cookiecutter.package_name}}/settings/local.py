@@ -1,10 +1,5 @@
 """
 Settings for local development.
-
-These settings are not fast or efficient, but allow local servers to be run
-using the django-admin.py utility.
-
-This file should be excluded from version control to keep the settings local.
 """
 
 import os
