@@ -325,8 +325,6 @@
       "value-list-comma-space-before": "never",
       "value-list-max-empty-lines": 0,
 
-      "custom-property-empty-line-before": "never",
-
       "shorthand-property-no-redundant-values": true,
 
       "property-case": "lower",
@@ -412,7 +410,6 @@
       ],
       "no-duplicate-selectors": true,
       "no-eol-whitespace": true,
-      "no-extra-semicolons": true,
       "no-indistinguishable-colors": true,
       "no-invalid-double-slash-comments": true,
       "no-missing-end-of-source-newline": true,
