@@ -1,3 +1,4 @@
+/* stylelint-disable plugin/declaration-block-order */
 :root {
   /**
   * Colors
@@ -65,3 +66,4 @@
 
   cursor: auto;
 }
+/* stylelint-enable */
