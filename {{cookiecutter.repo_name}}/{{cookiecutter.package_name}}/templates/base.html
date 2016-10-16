@@ -57,25 +57,27 @@
       <div class="lyt-Site" id="app">
         {% include 'base/_header.html' %}
 
-        <div class="lyt-Content_Outer">
-          {% block content_above %}{% endblock %}
+        {% block content_outer %}
+          <div class="lyt-Content_Outer">
+            {% block content_above %}{% endblock %}
 
-          {% block content_outer %}
-            <div class="lyt-Content {% block content_class %}{% endblock %}">
-              {% block content %}
-                <main class="lyt-Main {% block main_class %}{% endblock %}">
-                  {% block main %}{% endblock %}
-                </main>
+            {% block content %}
+              <div class="lyt-Content {% block content_class %}{% endblock %}">
+                {% block content_inner %}
+                  <main class="lyt-Main {% block main_class %}{% endblock %}">
+                    {% block main %}{% endblock %}
+                  </main>
 
-                <aside class="lyt-Aside">
-                  {% block aside %}{% endblock %}
-                </aside>
-              {% endblock %}
-            </div>
-          {% endblock %}
+                  <aside class="lyt-Aside">
+                    {% block aside %}{% endblock %}
+                  </aside>
+                {% endblock %}
+              </div>
+            {% endblock %}
 
-          {% block content_below %}{% endblock %}
-        </div>
+            {% block content_below %}{% endblock %}
+          </div>
+        {% endblock %}
       </div>
     {% endblock %}
 
