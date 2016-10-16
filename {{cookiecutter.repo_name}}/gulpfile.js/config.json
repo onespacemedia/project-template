@@ -20,7 +20,6 @@
       "entries": {
         "app": ["./main.js"]
       },
-      "extensions": ["js"],
       "extractSharedJs": true
     },
     "css": {
