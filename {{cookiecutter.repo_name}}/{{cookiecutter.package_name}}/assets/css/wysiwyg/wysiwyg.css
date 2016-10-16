@@ -9,5 +9,31 @@
 | @namespace: wys-
 */
 
+/* We are styling root elements so we need access to type */
 /* stylelint-disable selector-no-type */
+.wys-Intrinsic {
+  position: relative;
+
+  display: block;
+  width: 100%;
+
+  /* We want every single direct child to have these styles so universal is easier to use */
+  /* stylelint-disable selector-no-universal */
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+  /* stylelint-enable */
+
+  &::before {
+    content: '';
+
+    display: block;
+    padding-bottom: calc(100% / (16 / 9));
+  }
+}
 /* stylelint-enable */

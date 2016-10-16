@@ -30,6 +30,28 @@
   --Grid_Container: 1240px;
   --Grid_Gutter: 15px;
 
+  --GridContainer: {
+    /* Add --Grid_Gutter to the container as the 'container' should be the size
+       of the content not the actual div */
+    max-width: calc(var(--Grid_Container) + (var(--Grid_Gutter) * 2));
+    width: 100%;
+    margin-right: auto;
+    margin-left: @margin-right;
+    padding-right: calc(var(--Grid_Gutter) * 2);
+    padding-left: @padding-right;
+  };
+
+  --GridRow: {
+    display: flex;
+    margin-right: -var(--Grid_Gutter);
+    margin-left: @margin-right;
+  }
+
+  --GridColumn: {
+    margin-right: var(--Grid_Gutter);
+    margin-left: @margin-right;
+  }
+
   /**
   * Buttons
   */

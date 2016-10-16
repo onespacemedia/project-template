@@ -1,11 +1,71 @@
-@import 'helpers/property-definitions.css';
-@import 'helpers/media-definitions.css';
-@import 'helpers/selector-definitions.css';
-@import 'helpers/define.css';
-@import 'helpers/mixins/**/*.css';
+/* We use an order that will make sense to us here */
+/* stylelint-disable plugin/declaration-block-order */
+:root {
+  /**
+  * Colors
+  */
+  --Color_Anchor: #702670;
+  --Color_Body: #5c748c;
+  --Color_Border: #d0d5d8;
 
-/* stylelint-disable selector-no-type */
-body {
-  @import 'wysiwyg/wysiwyg.css';
+  /**
+  * Font - Families
+  */
+  --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --Font_Family-body: var(--Font_Family);
+
+  /**
+  * Font - Sizes
+  */
+  /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
+  --Font-16: {
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 1vr;
+  };
+
+  /**
+  * Grid
+  */
+  --Grid_Constrained: 1600px;
+  --Grid_Container: 1240px;
+  --Grid_Gutter: 15px;
+
+  /**
+  * Buttons
+  */
+  --Button-base: {
+    display: inline-block;
+    padding: 0.5vr var(--Grid_Gutter);
+
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff;
+
+    /* Easier to read this way */
+    /* stylelint-disable */
+    transition: background-color var(--Global_Transition),
+    border var(--Global_Transition),
+    color var(--Global_Transition);
+    /* stylelint-enable */
+  };
+
+  --Button-primary: {
+    background-color: transparent;
+  };
+
+  --Button-secondary: {
+    background-color: transparent;
+  };
+
+  /**
+  * Misc
+  */
+  --Global_Radius: 3px;
+  --Global_Transition: 0.16s;
+
+  font: 16px / 1.5 var(--Font_Family);
+
+  cursor: auto;
 }
 /* stylelint-enable */

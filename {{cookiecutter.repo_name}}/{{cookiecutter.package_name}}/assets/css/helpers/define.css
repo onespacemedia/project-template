@@ -1,4 +1,5 @@
-/* stylelint-disable */
+/* This is used for multiple base styles so we need selector types */
+/* stylelint-disable selector-no-type, selector-no-universal */
 /*
 |--------------------------------------------------------------------------
 | Redefine
@@ -41,13 +42,14 @@ html {
 body {
   @apply --Font-16;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  color: var(--Color_Body);
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #ececec;
+  color: var(--Color_Body);
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*
@@ -112,7 +114,8 @@ img {
 |
 */
 table {
-  table-layout: fixed;
   width: 100%;
+
+  table-layout: fixed;
 }
 /* stylelint-enable */
