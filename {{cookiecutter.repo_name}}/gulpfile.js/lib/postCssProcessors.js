@@ -4,7 +4,6 @@ module.exports = [
   require('postcss-import')({
     glob: true
   }),
-  require('postcss-sassy-mixins'),
   require('postcss-conditionals'),
   require('postcss-apply'),
   require('postcss-nested'),
