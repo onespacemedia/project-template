@@ -415,6 +415,9 @@
       "no-unknown-animations": true
     },
 
-    "ignoreFiles": ["static/**/*.css", "vendor/**/*.css"]
+    "ignoreFiles": [
+      "**/*/static/**/*.css",
+      "**/*/vendor/**/*.css"
+    ]
   }
 }
