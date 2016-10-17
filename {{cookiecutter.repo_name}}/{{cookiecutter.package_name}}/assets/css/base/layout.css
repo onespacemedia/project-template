@@ -29,5 +29,5 @@
 |
 */
 .lyt-Container {
-  @include Grid_Container();
+  @apply --GridContainer;
 }
