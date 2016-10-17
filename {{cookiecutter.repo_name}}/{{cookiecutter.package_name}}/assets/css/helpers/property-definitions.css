@@ -45,12 +45,12 @@
     display: flex;
     margin-right: -var(--Grid_Gutter);
     margin-left: @margin-right;
-  }
+  };
 
   --GridColumn: {
     margin-right: var(--Grid_Gutter);
     margin-left: @margin-right;
-  }
+  };
 
   /**
   * Buttons
