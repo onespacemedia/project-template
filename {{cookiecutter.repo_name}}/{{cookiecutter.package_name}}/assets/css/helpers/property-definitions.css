@@ -1,3 +1,4 @@
+/* We use an order that is beneficial for a 'settings' file */
 /* stylelint-disable plugin/declaration-block-order */
 :root {
   /**
@@ -63,10 +64,11 @@
     border: 1px solid transparent;
     color: #fff;
 
+    /* Style reasons */
     /* stylelint-disable */
     transition: background-color var(--Global_Transition),
-    border var(--Global_Transition),
-    color var(--Global_Transition);
+                border var(--Global_Transition),
+                color var(--Global_Transition);
     /* stylelint-enable */
   };
 
