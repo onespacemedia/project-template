@@ -8,5 +8,7 @@
 /* stylelint-disable selector-no-type */
 body {
   @import 'wysiwyg/wysiwyg.css';
+
+  background-color: #fff;
 }
 /* stylelint-enable */
