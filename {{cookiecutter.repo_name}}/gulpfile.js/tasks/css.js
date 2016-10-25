@@ -24,7 +24,7 @@ var cssTask = function () {
     .pipe(gulpif(!global.production, sourcemaps.init()))
     .pipe(postcss(require('../lib/postCssProcessors')))
     .on('error', console.log)
-    .pipe(gulpif(!global.production, sourcemaps.write()))
+    .pipe(gulpif(!global.production, sourcemaps.write('./maps')))
     .pipe(gulp.dest(paths.dest))
     .pipe(browserSync.stream())
 }
