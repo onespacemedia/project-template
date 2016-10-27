@@ -47,11 +47,12 @@
     {% endcompress %}
 
     {% block css %}{% endblock %}
+    
+    {% include 'base/_analytics.html' %}
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
-    {% include 'base/_analytics.html' %}
 
     {% block site %}
       <div class="lyt-Site" id="app">
