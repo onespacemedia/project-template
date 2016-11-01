@@ -252,7 +252,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "match_extension": ".html",
-            "match_regex": r"^(?!admin/|reversion/).*",
+            "match_regex": r"^(?!admin/|reversion/|registration/).*",
             "app_dirname": "templates",
             "newstyle_gettext": True,
             "extensions": DEFAULT_EXTENSIONS + [
