@@ -24,6 +24,11 @@ NODE_MODULES_ROOT = os.path.expanduser(os.path.join("~/Workspace/{{cookiecutter.
 
 SITE_DOMAIN = "localhost:8000"
 
+ALLOWED_HOSTS = ALLOWED_HOSTS + [
+    "127.0.0.1",
+    "localhost",
+]
+
 PREPEND_WWW = False
 
 # Optional separate database settings
