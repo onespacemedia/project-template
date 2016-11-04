@@ -41,12 +41,12 @@ export default function () {
         // Add noopener and 'noreferrer' to work around this:
         // https://dev.to/ben/the-targetblank-vulnerability-by-example
         let rel = link.getAttribute('rel')
-        
+
         if (!rel) {
           // will be null if it is not set
           rel = ''
         }
-        
+
         link.setAttribute('rel', `${rel} noopener noreferrer`)
       }
     }
@@ -56,10 +56,10 @@ export default function () {
       if (href.indexOf(prefix) === 0) {
         link.addEventListener('click', (event) => {
           event.preventDefault()
-          
+
           window.open(href, '_blank', 'width=600,height=300,menubar=0,toolbar=0,status=0')
         })
-        
+
         break
       }
     }
