@@ -5,7 +5,7 @@ will have their 'target' attribute set to '_blank'.
 
 Social media sharing links will show in a popup.
 */
-export default function () {
+export function externalLinks () {
   const links = [].slice.call(document.getElementsByTagName('a'))
 
   // If the link starts with any of these things, we'll open a 600x300 popup
