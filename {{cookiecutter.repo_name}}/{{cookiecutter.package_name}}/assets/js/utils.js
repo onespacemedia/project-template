@@ -6,7 +6,7 @@ will have their 'target' attribute set to '_blank'.
 Social media sharing links will show in a popup.
 */
 export function externalLinks () {
-  const links = [].slice.call(document.getElementsByTagName('a'))
+  const links = Array.from(document.getElementsByTagName('a'))
 
   // If the link starts with any of these things, we'll open a 600x300 popup
   // window for them.
@@ -41,10 +41,12 @@ export function externalLinks () {
         // Add noopener and 'noreferrer' to work around this:
         // https://dev.to/ben/the-targetblank-vulnerability-by-example
         let rel = link.getAttribute('rel')
+
         if (!rel) {
           // will be null if it is not set
           rel = ''
         }
+
         link.setAttribute('rel', `${rel} noopener noreferrer`)
       }
     }
@@ -56,6 +58,7 @@ export function externalLinks () {
           event.preventDefault()
           window.open(href, '_blank', 'width=600,height=300,menubar=0,toolbar=0,status=0')
         })
+
         break
       }
     }
