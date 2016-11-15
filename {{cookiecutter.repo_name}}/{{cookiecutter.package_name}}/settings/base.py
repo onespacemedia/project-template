@@ -156,6 +156,7 @@ INSTALLED_APPS = [
     {% if cookiecutter.redirects == 'no' %}# {% endif %}"redirects",
 
     {% if cookiecutter.careers == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.careers",
+    "{{cookiecutter.package_name}}.apps.components",
     {% if cookiecutter.faqs == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.faqs",
     {% if cookiecutter.footer == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.footer",
     {% if cookiecutter.news == 'no' %}# {% endif %}"{{cookiecutter.package_name}}.apps.news",
