@@ -374,6 +374,31 @@ WYSIWYG_OPTIONS = {
                     'classes': 'wys-Button-secondary'
                 },
             ]
+        },
+        {
+            'title': 'Titles',
+            'items': [
+                {
+                    'title': 'Small',
+                    'selector': 'h1,h2,h3,h4,h5,h6',
+                    'classes': 'wys-Title-small'
+                },
+                {
+                    'title': 'Medium',
+                    'selector': 'h1,h2,h3,h4,h5,h6',
+                    'classes': 'wys-Title-medium'
+                },
+                {
+                    'title': 'Large',
+                    'selector': 'h1,h2,h3,h4,h5,h6',
+                    'classes': 'wys-Title-large'
+                },
+                {
+                    'title': 'Extra large',
+                    'selector': 'h1,h2,h3,h4,h5,h6',
+                    'classes': 'wys-Title-extraLarge'
+                }
+            ]
         }
     ],
 
