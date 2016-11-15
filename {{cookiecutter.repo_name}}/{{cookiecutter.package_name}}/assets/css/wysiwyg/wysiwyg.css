@@ -36,4 +36,54 @@
     padding-bottom: calc(100% / (16 / 9));
   }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Titles
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Title-small {
+  /* @apply --Font-12; */
+
+  margin-top: 1.33333vr;
+  margin-bottom: 0.25vr;
+
+  font-weight: 400;
+}
+
+.wys-Title-medium {
+  /* @apply --Font-22; */
+
+  margin-top: 1.33333vr;
+  margin-bottom: 0.25vr;
+
+  font-weight: 400;
+
+  + .wys-Title-small {
+    margin-top: -0.25vr;
+  }
+}
+
+.wys-Title-large {
+  /* @apply --Font-28; */
+
+  margin-top: 1.33333vr;
+  margin-bottom: 0.25vr;
+
+  font-weight: 400;
+
+  + .wys-Title-medium {
+    margin-top: -0.25vr;
+  }
+}
+
+.wys-Title-extraLarge {
+  /* @apply --Font-36; */
+
+  margin-top: 1.33333vr;
+  margin-bottom: 0.25vr;
+
+  font-weight: 400;
+}
 /* stylelint-enable */
