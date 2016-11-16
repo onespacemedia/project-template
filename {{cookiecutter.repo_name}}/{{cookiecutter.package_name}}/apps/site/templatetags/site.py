@@ -24,6 +24,7 @@ def frontend_templates():
 
 
 # Usage: get_next_by_field(obj, 'date')
+@library.global_function
 def get_next_by_field(obj, field):
     try:
         return getattr(obj, 'get_next_by_{}'.format(field))()
@@ -34,6 +35,7 @@ def get_next_by_field(obj, field):
 
 
 # Usage: get_previous_by_field(obj, 'date')
+@library.global_function
 def get_previous_by_field(obj, field):
     try:
         return getattr(obj, 'get_previous_by_{}'.format(field))()
