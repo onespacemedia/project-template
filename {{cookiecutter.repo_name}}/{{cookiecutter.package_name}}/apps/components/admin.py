@@ -24,5 +24,5 @@ class CallToActionAdmin(admin.ModelAdmin):
 
         return ', '.join(pages_used)
 
-    pages_used_on.short_description = "Pages used on"
+    pages_used_on.short_description = 'Pages used on'
     pages_used_on.allow_tags = True

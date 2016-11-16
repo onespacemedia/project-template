@@ -1,4 +1,4 @@
-"""
+'''
 WSGI config for {{cookiecutter.repo_name}} project.
 
 This module contains the WSGI application used by Django's development server
@@ -11,8 +11,8 @@ might make sense to replace the whole Django WSGI application with a custom one
 that later delegates to the Django one. For example, you could introduce WSGI
 middleware here, or combine a Django application with an application of another
 framework.
+'''
 
-"""
 import os
 
 # This application object is used by any WSGI server configured to use this
@@ -20,10 +20,10 @@ import os
 # setting points here.
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{{cookiecutter.package_name}}.settings.production")
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '{{cookiecutter.package_name}}.settings.production')
 
 # For HTTPS sites, enable these.
-# os.environ.setdefault('HTTPS', "on")
+# os.environ.setdefault('HTTPS', 'on')
 # os.environ.setdefault('wsgi.url_scheme', 'https')
 
 # if os.environ['DJANGO_SETTINGS_MODULE'] != '{{cookiecutter.package_name}}.settings.local':

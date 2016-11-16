@@ -4,6 +4,6 @@
 # class Content(ContentBase):
 
 #     content_primary = HtmlField(
-#         "primary content",
+#         'primary content',
 #         blank=True
 #     )

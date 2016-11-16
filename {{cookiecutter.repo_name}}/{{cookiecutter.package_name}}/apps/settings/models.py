@@ -8,12 +8,12 @@ class Setting(models.Model):
 
     name = models.CharField(
         max_length=1024,
-        help_text="Name of the setting",
+        help_text='Name of the setting',
     )
 
     key = models.CharField(
         max_length=1024,
-        help_text="The key used to reference the setting",
+        help_text='The key used to reference the setting',
     )
 
     type = models.CharField(
