@@ -21,3 +21,25 @@ def frontend_templates():
         for f in os.listdir(os.path.join(settings.TEMPLATES[0]['DIRS'][0], 'frontend'))
         if f[:1] != '_'
     ])
+
+
+# Usage: get_next_by_field(obj, 'date')
+@library.global_function
+def get_next_by_field(obj, field):
+    try:
+        return getattr(obj, 'get_next_by_{}'.format(field))()
+    except obj.DoesNotExist:
+        return obj._default_manager.last()
+    except Exception:
+        pass  # Will cause 'None' to be returned.
+
+
+# Usage: get_previous_by_field(obj, 'date')
+@library.global_function
+def get_previous_by_field(obj, field):
+    try:
+        return getattr(obj, 'get_previous_by_{}'.format(field))()
+    except obj.DoesNotExist:
+        return obj._default_manager.first()
+    except Exception:
+        pass  # Will cause 'None' to be returned.
