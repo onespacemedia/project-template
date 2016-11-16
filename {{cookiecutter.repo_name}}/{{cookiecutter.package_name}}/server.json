@@ -9,7 +9,8 @@
             "server": {
                 "ip": "",
                 "identity_file": "",
-                "initial_user": "root"
+                "initial_user": "root",
+                "build_system": "npm"
             },
             "database": {
                 "name": "{{cookiecutter.package_name}}",
