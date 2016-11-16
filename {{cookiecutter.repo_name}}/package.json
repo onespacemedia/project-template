@@ -64,6 +64,7 @@
     "postcss-ref": "^1.1.0",
     "postcss-reporter": "1.4.1",
     "postcss-round-subpixels": "^1.2.0",
+    "postcss-sassy-mixins": "^2.0.0",
     "postcss-will-change": "^1.1.0",
     "require-dir": "0.3.1",
     "sanitize.css": "^4.1.0",

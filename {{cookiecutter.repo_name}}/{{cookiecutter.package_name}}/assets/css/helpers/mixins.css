@@ -1,0 +1,34 @@
+/*
+|--------------------------------------------------------------------------
+| Intrinsic
+|--------------------------------------------------------------------------
+|
+*/
+
+@mixin Intrinsic($x: 16, $y: 9) {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+  width: 100%;
+
+  /* Disabling no-asterisk selector because this needs to work with any
+  element. */
+  /* stylelint-disable */
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+  }
+  /* stylelint-enable */
+
+  &::before {
+    content: '';
+
+    display: block;
+    padding-bottom: calc(100% / ($x / $y));
+  }
+}
