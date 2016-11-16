@@ -1,5 +1,3 @@
-'''URL config for {{cookiecutter.repo_name}} project.'''
-
 from cms.forms import CMSPasswordChangeForm
 from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
