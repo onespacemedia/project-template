@@ -18,6 +18,6 @@ def get_navigation_json(context, pages, section=None):
 def frontend_templates():
     return mark_safe([
         str(f[:-5])
-        for f in os.listdir(os.path.join(settings.TEMPLATES[0]["DIRS"][0], 'frontend'))
+        for f in os.listdir(os.path.join(settings.TEMPLATES[0]['DIRS'][0], 'frontend'))
         if f[:1] != '_'
     ])
