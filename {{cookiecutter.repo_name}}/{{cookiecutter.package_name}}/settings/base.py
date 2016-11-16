@@ -1,13 +1,3 @@
-'''
-Production settings for {{cookiecutter.repo_name}} project.
-
-For an explanation of these settings, please see the Django documentation at:
-
-<http://docs.djangoproject.com/en/dev/>
-
-While many of these settings assume sensible defaults, you must provide values
-for the site, database, media and email sections below.
-'''
 from __future__ import unicode_literals
 
 import os

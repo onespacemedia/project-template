@@ -1,7 +1,3 @@
-'''
-Settings for local development.
-'''
-
 import os
 import os.path
 
