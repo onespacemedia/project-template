@@ -14,7 +14,7 @@ dependencies:
 
 test:
   override:
-    - pylint imperial/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
+    - pylint {{ cookiecutter.package_name }}/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
     - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
     - yarn run lint:css
     - yarn run lint:js
