@@ -1,0 +1,4 @@
+{% if '.onespace.media' in request.get_host %}
+User-agent: *
+Disallow: /
+{% endif %}
