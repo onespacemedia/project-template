@@ -65,5 +65,4 @@ node_modules/
 bower_components/
 webpack-stats.json
 
-*/static
-!*/apps/*/static
+*/static/build
