@@ -32,7 +32,7 @@ module.exports = function(env) {
         {
           enforce: 'pre',
           test: /\.vue$/,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           options: {
             formatter: require('eslint-friendly-formatter')
           },
@@ -42,7 +42,7 @@ module.exports = function(env) {
         {
           enforce: 'pre',
           test: /\.js$/,
-          loader: 'eslint',
+          loader: 'eslint-loader',
           options: {
             formatter: require('eslint-friendly-formatter')
           },
@@ -51,23 +51,23 @@ module.exports = function(env) {
         },
         {
           test: /\.vue$/,
-          loader: 'vue',
+          loader: 'vue-loader',
           options: {
             postcss: require('../lib/postCssProcessors'),
             loaders: {
-              js: 'babel'
+              js: 'babel-loader'
             }
           }
         },
         {
           test: /\.js$/,
-          loader: 'babel',
+          loader: 'babel-loader',
           include: jsSrc,
           exclude: /node_modules/
         },
         {
           test: /\.json$/,
-          loader: 'json'
+          loader: 'json-loader'
         }
       ]
     }
@@ -142,7 +142,7 @@ module.exports = function(env) {
     )
 
     webpackConfig.module.rules[2].options.loaders.css = ExtractText.extract({
-      loader: 'css',
+      loader: 'css-loader',
       fallBackLoader: 'vue-style-loader'
     })
   }
