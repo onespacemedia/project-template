@@ -70,8 +70,13 @@ fi
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
-npm install
-npm run build
+if command -v yarn >/dev/null 2>&1; then
+    yarn
+    yarn run build
+else
+    npm install
+    npm run build
+fi
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
