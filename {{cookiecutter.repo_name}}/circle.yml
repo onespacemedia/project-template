@@ -1,21 +1,31 @@
 machine:
   node:
-    version: 6.7.0
+    version: 6.9.0
 
 dependencies:
   cache_directories:
-    - /home/ubuntu/nvm/versions/node/v6.7.0/bin
-    - /home/ubuntu/nvm/versions/node/v6.7.0/lib/node_modules
+    - /home/ubuntu/nvm/versions/node/v6.9.0/bin
+    - /home/ubuntu/nvm/versions/node/v6.9.0/lib/node_modules
   override:
     - pip install --disable-pip-version-check pylint pylint-django pylint-mccabe isort
     - pip install --disable-pip-version-check -r requirements.txt
-    - npm i stylelint@7.4.2 stylelint-declaration-block-order@0.2.0 stylelint-property-groups-structure@0.1.1 eslint@3.8.0 eslint-config-standard@6.2.0 eslint-plugin-standard@2.0.0 eslint-plugin-html@1.5.3 babel-eslint@7.0.0 standard@8.4.0
-    - npm set progress=false
+    - npm install --global yarn
+    - yarn add stylelint@7.4.2 stylelint-declaration-block-order@0.2.0 stylelint-property-groups-structure@0.1.1 eslint@3.8.0 eslint-config-standard@6.2.0 eslint-plugin-standard@2.0.0 eslint-plugin-html@1.5.3 babel-eslint@7.0.0 standard@8.4.0
 
 test:
   override:
     - pylint {{ cookiecutter.package_name }}/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
     - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
-    - npm run lint:css
-    - npm run lint:js
+    - yarn run lint:css
+    - yarn run lint:js
     - python manage.py test
+
+# deployment:
+#   staging:
+#     branch: develop
+#     commands:
+#       - python manage.py update --remote=staging
+#   production:
+#     branch: master
+#     commands:
+#       - python manage.py update --remote=production
