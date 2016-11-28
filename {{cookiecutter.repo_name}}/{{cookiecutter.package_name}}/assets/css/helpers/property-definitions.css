@@ -18,11 +18,7 @@
   * Font - Sizes
   */
   /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
-  --Font-16: {
-    font-size: 16px;
-    letter-spacing: 0;
-    line-height: 1vr;
-  };
+  --Font-16: { font-size: 16px; letter-spacing: 0; line-height: 1vr; };
 
   /**
   * Grid
@@ -30,15 +26,21 @@
   --Grid_Constrained: 1600px;
   --Grid_Container: 1240px;
   --Grid_Gutter: 15px;
+  /* This differentiates to the Grid_Gutter in that this is used for the inside of panels and
+   cards. On all old projects this has been styled by using the Grid_Gutter. This is wrong, it
+   seemed right because the insides were normally 30ish and the Grid_Gutter was 30 as well so i
+   just assumed a natural connection between the 2. This actually has been coincidental and it's
+   just that we normally use a Grid_Gutter of 15 we haven't come across is */
+  --Grid_Inside: 15px;
 
   --GridContainer: {
-    /* Add --Grid_Gutter to the container as the 'container' should be the size
-       of the content not the actual div */
-    max-width: calc(var(--Grid_Container) + (var(--Grid_Gutter) * 2));
+    /* We add the `_Inside` to the container instead of the `_Gutter` as if we have a rather large
+     gutter on a project this can really shrink the available content size on smaller devices */
+    max-width: calc(var(--Grid_Container) + (var(--Grid_Inside) * 2));
     width: 100%;
     margin-right: auto;
     margin-left: @margin-right;
-    padding-right: calc(var(--Grid_Gutter) * 2);
+    padding-right: calc(var(--Grid_Inside) * 2);
     padding-left: @padding-right;
   };
 
