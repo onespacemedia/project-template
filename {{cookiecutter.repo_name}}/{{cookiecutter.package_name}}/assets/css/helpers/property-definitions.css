@@ -34,8 +34,8 @@
   --Grid_Inside: 15px;
 
   --GridContainer: {
-    /* Add --Grid_Gutter to the container as the 'container' should be the size
-       of the content not the actual div */
+    /* We add the `_Inside` to the container instead of the `_Gutter` as if we have a rather large
+     gutter on a project this can really shrink the available content size on smaller devices */
     max-width: calc(var(--Grid_Container) + (var(--Grid_Inside) * 2));
     width: 100%;
     margin-right: auto;
