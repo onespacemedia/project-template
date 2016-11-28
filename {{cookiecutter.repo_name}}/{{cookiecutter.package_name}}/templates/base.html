@@ -47,7 +47,7 @@
     {% endcompress %}
 
     {% block css %}{% endblock %}
-    
+
     {% include 'base/_analytics.html' %}
   </head>
 
@@ -65,13 +65,17 @@
             {% block content %}
               <div class="lyt-Content {% block content_class %}{% endblock %}">
                 {% block content_inner %}
-                  <main class="lyt-Main {% block main_class %}{% endblock %}">
-                    {% block main %}{% endblock %}
-                  </main>
+                  <div class="lyt-Content_Inner">
+                    <main class="lyt-Main {% block main_class %}{% endblock %}">
+                      {% block main %}{% endblock %}
+                    </main>
 
-                  <aside class="lyt-Aside">
-                    {% block aside %}{% endblock %}
-                  </aside>
+                    {% if self.aside() %}
+                      <aside class="lyt-Aside">
+                        {% block aside %}{% endblock %}
+                      </aside>
+                    {% endif %}
+                  </div>
                 {% endblock %}
               </div>
             {% endblock %}
