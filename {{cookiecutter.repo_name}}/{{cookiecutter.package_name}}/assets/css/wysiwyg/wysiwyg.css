@@ -17,26 +17,42 @@
 
 /*
 |--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Button-primary {
+  @include Button-primary();
+}
+
+.wys-Button-secondary {
+  @include Button-secondary();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Intrinsic
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Intrinsic {
+  @include Intrinsic();
+}
+
+/*
+|--------------------------------------------------------------------------
 | Titles
 |--------------------------------------------------------------------------
 |
 */
 .wys-Title-small {
-  /* @apply --Font-12; */
-
-  margin-top: 1.33333vr;
-  margin-bottom: 0.25vr;
-
-  font-weight: 400;
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
 }
 
 .wys-Title-medium {
-  /* @apply --Font-22; */
-
-  margin-top: 1.33333vr;
-  margin-bottom: 0.25vr;
-
-  font-weight: 400;
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
 
   + .wys-Title-small {
     margin-top: -0.25vr;
@@ -44,24 +60,31 @@
 }
 
 .wys-Title-large {
-  /* @apply --Font-28; */
-
-  margin-top: 1.33333vr;
-  margin-bottom: 0.25vr;
-
-  font-weight: 400;
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
 
   + .wys-Title-medium {
     margin-top: -0.25vr;
   }
 }
 
-.wys-Title-extraLarge {
-  /* @apply --Font-36; */
+/* We want every first and last item to never have their relative margin */
+/* stylelint-disable selector-no-universal, declaration-no-important */
+> *:first-child {
+  margin-top: 0 !important;
 
-  margin-top: 1.33333vr;
-  margin-bottom: 0.25vr;
+  /* This covers cases like images */
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+}
 
-  font-weight: 400;
+> *:last-child {
+  margin-bottom: 0 !important;
+
+  /* This covers cases like images */
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
 }
 /* stylelint-enable */
