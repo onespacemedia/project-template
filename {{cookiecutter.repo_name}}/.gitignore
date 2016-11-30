@@ -66,4 +66,3 @@ bower_components/
 webpack-stats.json
 
 */static/build
-yarn.lock
