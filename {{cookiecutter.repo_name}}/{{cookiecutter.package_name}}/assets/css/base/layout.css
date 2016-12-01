@@ -8,7 +8,6 @@
 | @namespace: lyt-
 |
 */
-
 .lyt-Site {
   max-width: var(--Grid_Constrained);
   width: 100%;
@@ -20,14 +19,4 @@
     border-right: 1px solid var(--Color_Border);
     border-left: @border-right;
   }
-}
-
-/*
-|--------------------------------------------------------------------------
-| Container
-|--------------------------------------------------------------------------
-|
-*/
-.lyt-Container {
-  @apply --GridContainer;
 }

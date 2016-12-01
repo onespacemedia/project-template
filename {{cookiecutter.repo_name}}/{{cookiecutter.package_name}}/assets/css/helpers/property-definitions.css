@@ -1,27 +1,39 @@
 /* We use an order that is beneficial for a 'settings' file */
 /* stylelint-disable plugin/declaration-block-order */
 :root {
-  /**
-  * Colors
+  /*
+  |--------------------------------------------------------------------------
+  | Colours
+  |--------------------------------------------------------------------------
+  |
   */
   --Color_Anchor: #702670;
   --Color_Body: #5c748c;
   --Color_Border: #d0d5d8;
 
+  /*
+  |--------------------------------------------------------------------------
+  | Fonts
+  |--------------------------------------------------------------------------
+  |
+  */
   /**
-  * Font - Families
+  * Fonts - Families
   */
   --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   --Font_Family-body: var(--Font_Family);
 
   /**
-  * Font - Sizes
+  * Fonts - Sizes
   */
   /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
   --Font-16: { font-size: 16px; letter-spacing: 0; line-height: 1vr; };
 
-  /**
-  * Grid
+  /*
+  |--------------------------------------------------------------------------
+  | Grid
+  |--------------------------------------------------------------------------
+  |
   */
   --Grid_Constrained: 1600px;
   --Grid_Container: 1240px;
@@ -55,8 +67,13 @@
     margin-left: @margin-right;
   };
 
-  /**
-  * Buttons
+  /*
+  |--------------------------------------------------------------------------
+  | Buttons
+  |--------------------------------------------------------------------------
+  | These are only to be used for the button mixins. The mixins themselves should be used when
+  | you want the button style.
+  |
   */
   --Button-base: {
     display: inline-block;
@@ -74,20 +91,21 @@
     /* stylelint-enable */
   };
 
-  --Button-primary: {
-    background-color: transparent;
-  };
-
-  --Button-secondary: {
-    background-color: transparent;
-  };
-
-  /**
-  * Misc
+  /*
+  |--------------------------------------------------------------------------
+  | Miscellaneous
+  |--------------------------------------------------------------------------
+  |
   */
   --Global_Radius: 3px;
-  --Global_Transition: 0.16s;
+  --Global_Transition: 0.2s;
 
+  /*
+  |--------------------------------------------------------------------------
+  | Styles
+  |--------------------------------------------------------------------------
+  |
+  */
   font: 16px / 1.5 var(--Font_Family);
 
   cursor: auto;
