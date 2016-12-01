@@ -19,7 +19,7 @@
 @import 'helpers/index.css';
 
 /* Like bootstraps reboot, define some base normalized styles */
-@import 'helpers/define.css';
+@import 'base/define.css';
 
 /*
 |--------------------------------------------------------------------------
