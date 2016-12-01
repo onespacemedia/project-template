@@ -28,6 +28,7 @@ module.exports = function(env) {
       }
     },
     module: {
+      noParse: /es6-promise\.js$/, // avoid webpack shimming process
       rules: [
         {
           enforce: 'pre',
@@ -106,10 +107,10 @@ module.exports = function(env) {
     }
 
     if(config.tasks.js.extractSharedJs) {
-      // Factor out common dependencies into a shared.js
+      // Factor out common dependencies into a vendor.js
       webpackConfig.plugins.push(
         new webpack.optimize.CommonsChunkPlugin({
-          name: 'shared',
+          name: 'vendor',
           filename: filenamePattern,
         })
       )
@@ -136,7 +137,6 @@ module.exports = function(env) {
         }
       }),
       new webpack.optimize.OccurrenceOrderPlugin,
-      new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
     )
