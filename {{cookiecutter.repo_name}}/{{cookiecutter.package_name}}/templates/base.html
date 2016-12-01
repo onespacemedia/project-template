@@ -91,6 +91,10 @@
     {% endblock %}
 
     {% compress js %}
+      {{ render_bundle('vendor', 'js') }}
+    {% endcompress %}
+
+    {% compress js %}
       {% block compressed_js_first %}{% endblock %}
 
       {# Get the site navigation as JSON #}
@@ -100,7 +104,6 @@
         window.navigationData = {{ nav | safe }};
       </script>
 
-      {{ render_bundle('vendor', 'js') }}
       {{ render_bundle('app', 'js') }}
       <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
 
