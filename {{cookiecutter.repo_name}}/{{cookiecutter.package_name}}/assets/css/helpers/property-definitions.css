@@ -18,13 +18,13 @@
   |
   */
   /**
-  * Fonts - Families
+  * Font - Families
   */
   --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   --Font_Family-body: var(--Font_Family);
 
   /**
-  * Fonts - Sizes
+  * Font - Sizes
   */
   /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
   --Font-16: { font-size: 16px; letter-spacing: 0; line-height: 1vr; };
