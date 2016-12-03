@@ -39,6 +39,15 @@ module.exports = [
   require('postcss-calc'),
   require('postcss-hexrgba'),
   require('autoprefixer')({
-    browsers: ['ie 11', 'last 2 versions']
+    browsers: [
+      'Android > 4.4.4',
+      'Chrome > 40',
+      'Edge > 12',
+      'Explorer > 11',
+      'Firefox > 35',
+      'iOS > 8.4',
+      'Opera > 30',
+      'Safari > 9'
+    ]
   }),
 ];
