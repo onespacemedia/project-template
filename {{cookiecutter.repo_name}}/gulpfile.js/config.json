@@ -18,7 +18,8 @@
       "src": "js",
       "dest": "js",
       "entries": {
-        "app": ["./main.js"]
+        "app": ["./main.js"],
+        "vendor": ["es6-promise", "vue", "vuex"]
       },
       "extractSharedJs": true
     },
