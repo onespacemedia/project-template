@@ -5,6 +5,8 @@ from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
 # Run in debug mode.
 
+DEBUG = True
+
 TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
 
 COMPRESS_ENABLED = True
