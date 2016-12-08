@@ -9,8 +9,6 @@ DEBUG = True
 
 TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
 
-COMPRESS_ENABLED = True
-
 # Save media files to the user's Sites folder.
 
 MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
