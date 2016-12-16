@@ -8,8 +8,13 @@ if __name__ == "__main__":
     # Ensure we have a pre-push Git hook.
     os.system("""
         if [ ! -f .git/hooks/pre-push ]; then
+            echo "Downloading the pre-push hook..";
             curl -so .git/hooks/pre-push https://raw.githubusercontent.com/onespacemedia/project-template/develop/%7B%7Bcookiecutter.repo_name%7D%7D/pre-push;
+            
+            echo "Installing the pre-push hook..";
             chmod +x .git/hooks/pre-push;
+            
+            echo "Done!";
         fi
     """)
 
