@@ -1,4 +1,4 @@
-{% raw %}
+# {% raw %}
 #!/bin/bash
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     . ~/.zshrcPrePush
@@ -58,4 +58,4 @@ if [ $FAILED == true ]; then
 fi
 
 exit 0
-{% endraw %}
+# {% endraw %}
