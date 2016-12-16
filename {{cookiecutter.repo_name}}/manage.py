@@ -7,7 +7,7 @@ if __name__ == "__main__":
 
     # Ensure we have a pre-push Git hook.
     os.system("""
-        cd $(git rev-parse --show-toplevel);
+        cd "$(git rev-parse --show-toplevel)" || exit;
         
         if [ ! -f .git/hooks/pre-push ]; then
             echo "Downloading the pre-push hook..";
