@@ -7,6 +7,8 @@ if __name__ == "__main__":
 
     # Ensure we have a pre-push Git hook.
     os.system("""
+        cd $(git rev-parse --show-toplevel);
+        
         if [ ! -f .git/hooks/pre-push ]; then
             echo "Downloading the pre-push hook..";
             curl -so .git/hooks/pre-push https://raw.githubusercontent.com/onespacemedia/project-template/develop/%7B%7Bcookiecutter.repo_name%7D%7D/pre-push;
