@@ -64,3 +64,23 @@ export function externalLinks () {
     }
   }
 }
+
+/*
+ https://github.com/vuejs/vue/issues/4419
+
+ As per this, since we mount Vue on the `#app` element this breaks iframes in Safari (Safari bug).
+ This snippet removes the iframe and re-inserts it so Safari is happy
+ */
+export function safariIframeFix () {
+  const iframes = document.querySelectorAll('iframe')
+
+  if (iframes.length > 0) {
+    for (const iframe of iframes) {
+      const iframeCopy = iframe.cloneNode()
+      const parent = iframe.parentNode
+
+      parent.insertBefore(iframeCopy, iframe)
+      parent.removeChild(iframe)
+    }
+  }
+}
