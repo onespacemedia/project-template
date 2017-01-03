@@ -138,10 +138,6 @@
       "es6": true
     },
     "rules": {
-      "arrow-parens": [
-        2,
-        "always"
-      ],
       "no-var": [
         2
       ],
