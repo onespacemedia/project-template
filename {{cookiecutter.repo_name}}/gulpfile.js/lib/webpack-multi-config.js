@@ -13,7 +13,7 @@ module.exports = function(env) {
   var jsDest = path.resolve(config.root.dest, config.tasks.js.dest)
   var publicPath = pathToUrl('/static/build/', config.tasks.js.dest, '/')
 
-  var filenamePattern = '[name].js'
+  var filenamePattern = '[name]-[hash].js'
 
   var webpackConfig = {
     context: jsSrc,
@@ -24,7 +24,7 @@ module.exports = function(env) {
       modules: [jsSrc, 'node_modules'],
       extensions: ['.js', '.vue', '.css', '.json'],
       alias: {
-        'vue$': 'vue/dist/vue'
+        'vue': 'vue/dist/vue'
       }
     },
     module: {

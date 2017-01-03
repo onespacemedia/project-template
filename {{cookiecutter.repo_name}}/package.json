@@ -2,20 +2,21 @@
   "name": "{{cookiecutter.repo_name}}",
   "main": "gulpfile.js",
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
     "es6-promise": "^4.0.5",
-    "vue": "2.1.3",
-    "vuex": "^2.0.0"
+    "vue": "2.1.8",
+    "vuex": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",
-    "babel-core": "6.8.0",
+    "babel-core": "6.18.2",
     "babel-eslint": "^7.0.0",
-    "babel-loader": "6.2.4",
-    "babel-plugin-transform-runtime": "^6.4.0",
-    "babel-preset-es2015": "6.16.0",
-    "babel-preset-es2016": "^6.16.0",
-    "babel-preset-es2017": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
+    "babel-loader": "6.2.8",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-latest": "^6.16.0",
     "browser-sync": "2.17.1",
     "css-loader": "^0.25.0",
     "cssnano": "^3.7.7",
@@ -76,11 +77,11 @@
     "stylelint-property-groups-structure": "^0.1.1",
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.2.3",
-    "vue-loader": "10.0.0",
+    "vue-loader": "^10.0.2",
     "vue-resource": "^1.0.3",
     "vue-style-loader": "^1.0.0",
-    "vue-template-compiler": "^2.1.3",
-    "webpack": "^2.1.0-beta.27",
+    "vue-template-compiler": "^2.1.4",
+    "webpack": "beta",
     "webpack-bundle-tracker": "0.0.93",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0"
@@ -93,12 +94,30 @@
   },
   "babel": {
     "plugins": [
-      "transform-runtime"
+      "dynamic-import-webpack",
+      "transform-runtime",
+      "transform-object-rest-spread"
     ],
     "presets": [
-      "es2015",
-      "es2016",
-      "stage-0"
+      "latest",
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              "Android >= 4.4.4",
+              "Chrome >= 40",
+              "Edge >= 12",
+              "Firefox >= 35",
+              "ie >= 11",
+              "iOS >= 8.4",
+              "Opera >= 30",
+              "Safari >= 9"
+            ]
+          },
+          "useBuiltIns": true
+        }
+      ]
     ]
   },
   "eslintConfig": {
