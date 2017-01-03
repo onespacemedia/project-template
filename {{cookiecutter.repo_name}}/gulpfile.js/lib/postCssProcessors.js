@@ -10,7 +10,7 @@ module.exports = [
   require('postcss-nested-ancestors')({ replaceValues: true, pseudoClasses: true }),
   require('postcss-nested'),
   require('postcss-functions')({
-    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'functions', '*.js')
+    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'helpers', 'functions', '*.js')
   }),
 
   require('postcss-custom-properties'),
