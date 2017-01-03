@@ -4,16 +4,18 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "es6-promise": "^4.0.5",
-    "vue": "2.1.3",
-    "vuex": "^2.0.0"
+    "vue": "2.1.8",
+    "vuex": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.1",
     "babel-core": "6.18.2",
     "babel-eslint": "^7.0.0",
     "babel-loader": "6.2.8",
+    "babel-plugin-dynamic-import-webpack": "^1.0.1",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
     "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-env": "^0.0.9",
+    "babel-preset-env": "^1.1.4",
     "babel-preset-latest": "^6.16.0",
     "browser-sync": "2.17.1",
     "css-loader": "^0.25.0",
@@ -75,10 +77,11 @@
     "stylelint-property-groups-structure": "^0.1.1",
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.2.3",
-    "vue-loader": "9.9.5",
+    "vue-loader": "^10.0.2",
     "vue-resource": "^1.0.3",
     "vue-style-loader": "^1.0.0",
-    "webpack": "^2.1.0-beta.27",
+    "vue-template-compiler": "^2.1.4",
+    "webpack": "beta",
     "webpack-bundle-tracker": "0.0.93",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0"
@@ -91,23 +94,28 @@
   },
   "babel": {
     "plugins": [
-      "transform-runtime"
+      "dynamic-import-webpack",
+      "transform-runtime",
+      "transform-object-rest-spread"
     ],
     "presets": [
       "latest",
       [
         "env",
         {
-          "browsers": [
-            "Android > 4.4.4",
-            "Chrome > 40",
-            "Edge > 12",
-            "Explorer > 11",
-            "Firefox > 35",
-            "iOS > 8.4",
-            "Opera > 30",
-            "Safari > 9"
-          ]
+          "targets": {
+            "browsers": [
+              "Android >= 4.4.4",
+              "Chrome >= 40",
+              "Edge >= 12",
+              "Firefox >= 35",
+              "ie >= 11",
+              "iOS >= 8.4",
+              "Opera >= 30",
+              "Safari >= 9"
+            ]
+          },
+          "useBuiltIns": true
         }
       ]
     ]
