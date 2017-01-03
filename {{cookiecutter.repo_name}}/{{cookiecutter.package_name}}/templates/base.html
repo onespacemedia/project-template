@@ -90,9 +90,8 @@
       </div>
     {% endblock %}
 
-    {% compress js %}
-      {{ render_bundle('vendor', 'js') }}
-    {% endcompress %}
+    {{ render_bundle('vendor', 'js') }}
+    {{ render_bundle('app', 'js') }}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
@@ -104,7 +103,6 @@
         window.navigationData = {{ nav | safe }};
       </script>
 
-      {{ render_bundle('app', 'js') }}
       <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
 
       {% block compressed_js_last %}{% endblock %}
