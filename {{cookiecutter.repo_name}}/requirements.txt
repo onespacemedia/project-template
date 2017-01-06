@@ -18,7 +18,7 @@ opbeat
 paramiko==1.16.0
 Pillow
 python-memcached
-python-social-auth
+python-social-auth==0.2.21
 requests
 sorl-thumbnail
 Werkzeug
