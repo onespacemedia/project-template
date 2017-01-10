@@ -3,6 +3,8 @@ from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 INSTALLED_APPS += (
     'opbeat.contrib.django',
 )
