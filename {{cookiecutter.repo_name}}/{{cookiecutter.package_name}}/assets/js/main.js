@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
 
   // If the browser isn't Safari, don't do anything
-  if (document.querySelector('iframe') && window.navigator.userAgent.indexOf("Safari") > -1) {
+  if (document.querySelector('iframe') && window.navigator.userAgent.indexOf('Safari') > -1) {
     iframeFix()
   }
 })
