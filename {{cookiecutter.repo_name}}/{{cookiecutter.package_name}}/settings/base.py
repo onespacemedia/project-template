@@ -26,8 +26,6 @@ ALLOWED_HOSTS = [
     'www.{{cookiecutter.staging_subdomain}}.onespace.media',
 ]
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 SUIT_CONFIG = {
     'ADMIN_NAME': SITE_NAME,
     'MENU_EXCLUDE': ['default'],
