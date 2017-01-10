@@ -5,7 +5,7 @@ import platform
 import sys
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS
-from social.pipeline import DEFAULT_AUTH_PIPELINE
+from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat  # pylint: disable=import-error
@@ -162,7 +162,7 @@ INSTALLED_APPS = [
     'cachalot',
     'webpack_loader',
 
-    'social.apps.django_app.default'
+    'social_django'
 ]
 
 if sys.version_info[0] == 3:
@@ -271,8 +271,8 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
-                'social.apps.django_app.context_processors.backends',
-                'social.apps.django_app.context_processors.login_redirect'
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ]
         }
     },
@@ -293,8 +293,8 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
-                'social.apps.django_app.context_processors.backends',
-                'social.apps.django_app.context_processors.login_redirect'
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect'
             ]
         }
     }
@@ -439,7 +439,7 @@ ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
 # 12. Set authorized domain
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.google.GooglePlusAuth',
+    'social_core.backends.google.GooglePlusAuth',
     'django.contrib.auth.backends.ModelBackend'
 )
 
