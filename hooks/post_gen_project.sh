@@ -22,6 +22,12 @@ fi
     rm -rf {{cookiecutter.package_name}}/geoip/
 {% endif %}
 
+# If the sections app wasn't enabled, delete the utils file.
+{% if cookiecutter.sections == "no" %}
+    echo "Removing admin utils file."
+    rm {{cookiecutter.package_name}}/utils/admin.py
+{% endif %}
+
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
