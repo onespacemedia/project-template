@@ -4,7 +4,7 @@
   "dependencies": {
     "babel-polyfill": "^6.16.0",
     "es6-promise": "^4.0.5",
-    "vue": "2.1.8",
+    "vue": "^2.1.8",
     "vuex": "^2.1.0"
   },
   "devDependencies": {
