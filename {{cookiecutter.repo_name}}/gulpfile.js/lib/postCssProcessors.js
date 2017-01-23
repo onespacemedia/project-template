@@ -7,7 +7,6 @@ module.exports = [
   require('postcss-sassy-mixins'),
   require('postcss-conditionals'),
   require('postcss-apply'),
-  require('postcss-nested-ancestors')({ replaceValues: true, pseudoClasses: true }),
   require('postcss-nested'),
   require('postcss-functions')({
     glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'helpers', 'functions', '*.js')
@@ -17,7 +16,6 @@ module.exports = [
   require('postcss-custom-media'),
   require('postcss-media-minmax'),
   require('postcss-custom-selectors'),
-  require('postcss-ref')({ atRule: false }),
   // Niceties
   require('postcss-assets')({
     basePath: '{{cookiecutter.package_name}}/assets/',
