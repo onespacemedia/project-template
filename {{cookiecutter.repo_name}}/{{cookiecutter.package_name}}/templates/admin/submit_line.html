@@ -1,0 +1,16 @@
+{% load i18n admin_urls suit_tags %}
+<div class="submit-row clearfix">
+  {% if show_save %}<button type="submit" class="btn btn-high btn-info" name="_save">{% trans 'Save' %}</button>{% endif %}
+  <button type="submit" name="_continue" class=" btn btn-high">{% trans 'Save and continue editing' %}</button>
+  <button type="submit" name="_addanother" class="btn">{% trans 'Save and add another' %}</button>
+  <button type="submit" name="_saveasnew" class="btn">{% trans 'Save as new' %}</button>
+
+  {% if show_delete_link %}
+    {% if '1.9'|django_version_lt %}
+      <a href="delete/" class="text-error deletelink">{% trans "Delete" %}</a>
+    {% else %}
+        {% url opts|admin_urlname:'delete' original.pk|admin_urlquote as delete_url %}
+        <a href="{% add_preserved_filters delete_url %}" class="text-error deletelink">{% trans "Delete" %}</a>
+    {% endif %}
+  {% endif %}
+</div>
