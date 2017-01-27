@@ -10,7 +10,7 @@ dependencies:
     - pip install --disable-pip-version-check pylint pylint-django pylint-mccabe isort
     - pip install --disable-pip-version-check -r requirements.txt
     - npm install --global yarn
-    - yarn add stylelint@7.4.2 stylelint-declaration-block-order@0.2.0 stylelint-property-groups-structure@0.1.1 eslint@3.8.0 eslint-config-standard@6.2.0 eslint-plugin-standard@2.0.0 eslint-plugin-html@1.5.3 babel-eslint@7.0.0 standard@8.4.0
+    - yarn add stylelint@7.7.1 stylelint-order@0.2.2 eslint@3.8.0 eslint-config-standard@6.2.0 eslint-plugin-standard@2.0.0 eslint-plugin-html@1.5.3 babel-eslint@7.0.0 standard@8.4.0
 
 test:
   override:
