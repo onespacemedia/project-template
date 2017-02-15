@@ -6,7 +6,6 @@ var pathToUrl       = require('./pathToUrl')
 var webpack         = require('webpack')
 var webpackManifest = require('./webpackManifest')
 var BundleTracker   = require('webpack-bundle-tracker')
-var ExtractText     = require('extract-text-webpack-plugin')
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
@@ -92,7 +91,7 @@ module.exports = function(env) {
       }),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin()
     )
   }
 
@@ -119,7 +118,6 @@ module.exports = function(env) {
 
   if(env === 'production') {
     webpackConfig.plugins.push(
-      new ExtractText('[name][contenthash:8].css'),
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('production')
@@ -140,11 +138,6 @@ module.exports = function(env) {
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin()
     )
-
-    webpackConfig.module.rules[2].options.loaders.css = ExtractText.extract({
-      loader: 'css-loader',
-      fallBackLoader: 'vue-style-loader'
-    })
   }
 
   return webpackConfig
