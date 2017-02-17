@@ -26,7 +26,7 @@ var cssTask = function () {
     .on('error', console.log)
     .pipe(gulpif(!global.production, sourcemaps.write('./maps')))
     .pipe(gulp.dest(paths.dest))
-    .pipe(browserSync.stream())
+    .pipe(browserSync.stream({ match: '**/*.css' }))
 }
 
 var cssProductionTask = function () {
