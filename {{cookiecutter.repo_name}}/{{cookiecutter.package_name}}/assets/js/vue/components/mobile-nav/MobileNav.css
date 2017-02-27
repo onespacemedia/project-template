@@ -1,0 +1,236 @@
+/*
+|--------------------------------------------------------------------------
+| Mobile nav
+|--------------------------------------------------------------------------
+| @namespace: mbn-
+|
+*/
+.mbn-MobileNav {
+  position: fixed;
+  top: 75px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+
+  background-color: #fff;
+  box-shadow: inset 0 3px 9px 0 rgba(0, 0, 0, 0.19);
+}
+
+.nav-IsOpen {
+  overflow: hidden;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.mbn-Item {
+  border-bottom: 1px solid var(--Color_Border);
+}
+
+.mbn-Item_Link {
+  display: flex;
+  padding: 13px var(--Grid_Inside);
+
+  font-weight: 700;
+  letter-spacing: calc(40em / 1000);
+  text-transform: uppercase;
+
+  color: blue;
+
+  .mbn-Item-children > & {
+    &::after {
+      font-awesome: angle-right;
+
+      margin-left: auto;
+    }
+  }
+
+  .mbn-Item-back > & {
+    &::before {
+      font-awesome: angle-left;
+
+      margin-right: var(--Grid_Inside);
+    }
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Children
+|--------------------------------------------------------------------------
+|
+*/
+.mbn-Children {
+  position: fixed;
+  top: 75px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: #fff;
+  box-shadow: inset 0 3px 9px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Trigger
+|--------------------------------------------------------------------------
+|
+*/
+.mbn-Trigger {
+  position: relative;
+
+  display: block;
+  width: 46px;
+  height: @width;
+
+  border: 2px solid blue;
+
+  @media (--lg) {
+    display: none;
+  }
+}
+
+.mbn-Trigger_Line {
+  position: absolute;
+  left: 14px;
+
+  display: block;
+  width: 14px;
+  height: 2px;
+
+  background-color: blue;
+
+  transition: top var(--Global_Transition) var(--Transition_EaseOutBack);
+
+  /* This stops the navigation animation on initial page load */
+  .util-Preload & {
+    animation-duration: 0s;
+  }
+}
+
+.mbn-Trigger_Line-top {
+  top: 14px;
+
+  animation: MobileNav_TriggerLine-topOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .mbn-Trigger[aria-selected='true'] & {
+    animation: MobileNav_TriggerLine-topIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+.mbn-Trigger_Line-middle {
+  top: 19px;
+
+  animation: MobileNav_TriggerLine-middleOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .mbn-Trigger[aria-selected='true'] & {
+    animation: MobileNav_TriggerLine-middleIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+.mbn-Trigger_Line-bottom {
+  top: 24px;
+
+  animation: MobileNav_TriggerLine-bottomOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .mbn-Trigger[aria-selected='true'] & {
+    animation: MobileNav_TriggerLine-bottomIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+@keyframes MobileNav_TriggerLine-topIn {
+  0% {
+    top: 14px;
+  }
+
+  50% {
+    top: 19px;
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: 19px;
+
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes MobileNav_TriggerLine-topOut {
+  0% {
+    top: 19px;
+
+    transform: rotate(45deg);
+  }
+
+  50% {
+    top: 19px;
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: 14px;
+  }
+}
+
+@keyframes MobileNav_TriggerLine-middleIn {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes MobileNav_TriggerLine-middleOut {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes MobileNav_TriggerLine-bottomIn {
+  0% {
+    top: 24px;
+  }
+
+  50% {
+    top: 19px;
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: 19px;
+
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes MobileNav_TriggerLine-bottomOut {
+  0% {
+    top: 19px;
+
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    top: 19px;
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: 24px;
+  }
+}

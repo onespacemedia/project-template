@@ -1,73 +1,119 @@
 <template>
-  <div class="mbn-MobileNav"
-       v-show="show"
-       @click="toggleMobileNav()">
-    <nav class="mbn-Items" @click.stop>
-      <div class="mbn-Item"
-           v-for="item in items" track-by="$index">
-        <a class="mbn-Item_Action"
-           :href="item.children.length ? null : item.url"
-           @click.stop="item.children.length ? activeItem = $index : toggleMobileNav()">
-          {{ item.title }}
+  <div class="mbn-MobileNav_Container">
+    <div class="mbn-Trigger" @click="open = !open" :aria-selected="String(open)">
+      <span class="mbn-Trigger_Line mbn-Trigger_Line-top"></span>
+      <span class="mbn-Trigger_Line mbn-Trigger_Line-middle"></span>
+      <span class="mbn-Trigger_Line mbn-Trigger_Line-bottom"></span>
+    </div>
 
-          <span class="mbn-Children_Indicator" v-show="item.children.length"></span>
-        </a>
+    <transition name="trn-Fade">
+      <nav class="mbn-MobileNav"
+           v-show="open"
+           @click="open = !open">
+        <ul class="mbn-Items" @click.stop>
+          <li class="mbn-Item">
+            <a href="/" class="mbn-Item_Link">Home</a>
+          </li>
 
-        <div class="mbn-Children"
-             v-show="item.children.length && activeItem === $index"
-             transition="trn-Swipe"
-             :aria-selected="activeItem == $index | toString">
-          <div class="mbn-Child_Item">
-            <a class="mbn-Child_ItemAction" @click.stop="activeItem = null">
-              <span class="mbn-BackIndicator"></span>
-              <span>Back</span>
+          <li class="mbn-Item"
+              v-for="(item, index) in items"
+              :class="{ 'mbn-Item-children': item.children.length }"
+              :aria-selected="String(activeChild == index)">
+            <a class="mbn-Item_Link"
+               :href="item.children.length ? null : item.url"
+               @click.stop="handleParentLink('activeChild', item, index)">{{ item.title }}
             </a>
-          </div>
 
-          <div class="mbn-Child_Item">
-            <a class="mbn-Child_ItemAction" :href="item.url">
-              <span>{{ item.title }}</span>
-            </a>
-          </div>
+            <transition name="trn-SlideIn">
+              <ul :class="{ 'mbn-Children': true, 'mbn-Children-disableOverflow': activeChildChild !== undefined }"
+                  v-show="item.children.length !== 0 && activeChild === index"
+                  :aria-selected="String(activeChild == index)">
+                <li class="mbn-Item mbn-Item-back">
+                  <a class="mbn-Item_Link" @click="activeChild = undefined">Back</a>
+                </li>
 
-          <div class="mbn-Child_Item" v-for="child in item.children">
-            <a class="mbn-Child_ItemAction" :href="child.url">
-              <span>{{ child.title }}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+                <li class="mbn-Item">
+                  <a class="mbn-Item_Link" :href="item.url">{{ item.title }}</a>
+                </li>
+
+                <li class="mbn-Item"
+                    v-for="(child, childIndex) in item.children"
+                    :class="{ 'mbn-Item-children': child.children.length }">
+                  <a class="mbn-Item_Link"
+                     :href="child.children.length ? null : child.url"
+                     @click.stop="handleParentLink('activeChildChild', child, childIndex)">{{ child.title }}
+                  </a>
+
+                  <transition name="trn-SlideIn">
+                    <ul class="mbn-Children"
+                        v-show="child.children.length !== 0 && activeChildChild === childIndex"
+                        :aria-selected="String(activeChildChild == childIndex)">
+                      <li class="mbn-Item mbn-Item-back">
+                        <a class="mbn-Item_Link" @click="activeChildChild = undefined">
+                          <span>Back</span>
+                        </a>
+                      </li>
+
+                      <li class="mbn-Item">
+                        <a class="mbn-Item_Link" :href="child.url">{{ child.title }}</a>
+                      </li>
+
+                      <li class="mbn-Item" v-for="child in child.children">
+                        <a class="mbn-Item_Link" :href="child.url">{{ child.title }}</a>
+                      </li>
+                    </ul>
+                  </transition>
+                </li>
+              </ul>
+            </transition>
+          </li>
+        </ul>
+      </nav>
+    </transition>
   </div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+  import { mediaBreakpoints } from '../../../utils'
+
   export default {
-    data () {
-      return {
-        activeItem: null,
-        items: [],
-        show: false
+    props: ['items'],
+
+    data: () => ({
+      open: false,
+      activeChild: undefined,
+      activeChildChild: undefined
+    }),
+
+    mounted () {
+      this.onResize()
+
+      window.addEventListener('resize', this.onResize.bind(this))
+    },
+
+    watch: {
+      open (val) {
+        const body = document.body || document.documentElement
+
+        body.classList.toggle('nav-IsOpen', val)
       }
     },
 
-    ready () {
-      this.items = window.navigationData
-
-      document.addEventListener('keydown', (e) => {
-        if (this.show && e.keyCode === 27) {
-          this.toggleMobileNav()
-        }
-      })
-    },
-
     methods: {
-      handleParentLink (item, index) {
+      handleParentLink (dataItem, item, index) {
         if (item.children.length) {
-          this.activeItem = index
+          if (this[dataItem] === index) {
+            this[dataItem] = null
+          } else {
+            this[dataItem] = index
+          }
         } else {
           window.location = item.url
         }
+      },
+
+      onResize (event) {
+        if (window.innerWidth >= mediaBreakpoints.lg && this.open) this.open = false
       }
     }
   }

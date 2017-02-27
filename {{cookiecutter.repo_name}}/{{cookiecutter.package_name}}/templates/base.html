@@ -50,12 +50,14 @@
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
     {% block css %}{% endblock %}
 
     {% include 'base/_analytics.html' %}
   </head>
 
-  <body class="{% block body_class %}{% endblock %}">
+  <body class="util-Preload {% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
 
     {% block site %}
@@ -95,13 +97,6 @@
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
-
-      {# Get the site navigation as JSON #}
-      {% set nav = get_navigation_json(pages.homepage.navigation) %}
-      <script>
-        // Set the navigation so our Vue file can access it
-        window.navigationData = {{ nav | safe }};
-      </script>
 
       <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
 

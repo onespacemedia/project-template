@@ -19,4 +19,13 @@
     border-right: 1px solid var(--Color_Border);
     border-left: @border-right;
   }
+
+  /* Prefer to use the actual term for it (iOS) */
+  /* stylelint-disable selector-class-pattern */
+  .is-iOS.nav-IsOpen & {
+    position: fixed;
+
+    overflow: hidden;
+  }
+  /* stylelint-enable */
 }

@@ -7,3 +7,7 @@
 | @namespace: hd-
 |
 */
+.hd-Header {
+  position: relative;
+  z-index: 10;
+}
