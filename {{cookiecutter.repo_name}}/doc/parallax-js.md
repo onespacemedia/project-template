@@ -4,7 +4,7 @@
 
 It has been massively optimised for speed. While listening to the `scroll` event is usually considered a no-no, it does so little work in the hook that it has no effect on performance.
 
-Everything that can be precomputed or cached, is precomputed or cached. The only operations taht are performed in the `scroll` event are simple mathematical operations, a few object key lookups and three string replacements, all of which are very fast operations. By default it does not change any CSS properties that cause layout recalculations; it uses `transform`, which is hardware-accelerated on nearly all browsers out there.
+Everything that can be precomputed or cached, is precomputed or cached. The only operations that are performed in the `scroll` event are simple mathematical operations, a few object key lookups and three string replacements, all of which are very fast operations. By default it does not change any CSS properties that cause layout recalculations; it uses `transform`, which is hardware-accelerated on nearly all browsers out there.
 
 ## Activating it
 
