@@ -135,15 +135,11 @@ INSTALLED_APPS = [
 
     'cms',
 
-    # 'reversion',
     'historylinks',
-    # 'watson',
 
     'cms.apps.pages',
     'cms.apps.links',
     'cms.apps.media',
-
-    # {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects',
 
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
@@ -197,13 +193,11 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 MIDDLEWARE_CLASSES = (
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
-    # {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects.middleware.RedirectFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'watson.middleware.SearchContextMiddleware',
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',
