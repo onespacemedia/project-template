@@ -97,7 +97,7 @@
             <h4 class="italic-title">{% trans 'tools'|capfirst %}</h4>
             <ul class="box menu-box">
               {% block object-tools-items %}
-                <li><a href="history/" class="historylink"><i
+                <li><a href="{% url opts|admin_urlname:'history' object_id %}" class="historylink"><i
                     class="icon-time icon-alpha75"></i>{% trans "History" %}</a>
                 </li>
                 {% if has_absolute_url %}
