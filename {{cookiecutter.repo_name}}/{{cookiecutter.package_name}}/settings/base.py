@@ -135,18 +135,17 @@ INSTALLED_APPS = [
 
     'cms',
 
-    'reversion',
+    # 'reversion',
     'historylinks',
-    'watson',
+    # 'watson',
 
     'cms.apps.pages',
     'cms.apps.links',
     'cms.apps.media',
 
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects',
+    # {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects',
 
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
-    '{{cookiecutter.package_name}}.apps.components',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
     {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
     {% if cookiecutter.footer == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.footer',
@@ -198,7 +197,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 MIDDLEWARE_CLASSES = (
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects.middleware.RedirectFallbackMiddleware',
+    # {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects.middleware.RedirectFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -242,16 +241,17 @@ TEMPLATES = [
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
             os.path.join(SITE_ROOT, 'templates'),
+            os.path.join(SITE_ROOT, 'assets', 'img', 'svgs')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|reversion/|registration/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension',
-                'compressor.contrib.jinja2ext.CompressorExtension'
+                'compressor.contrib.jinja2ext.CompressorExtension',
             ],
             'bytecode_cache': {
                 'name': 'default',
@@ -263,12 +263,12 @@ TEMPLATES = [
             'translation_engine': 'django.utils.translation',
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
@@ -285,14 +285,13 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
                 'cms.context_processors.settings',
-                'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect'
             ]
