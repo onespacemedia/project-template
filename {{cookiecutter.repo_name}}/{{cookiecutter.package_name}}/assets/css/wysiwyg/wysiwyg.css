@@ -11,6 +11,14 @@
 
 /* We are styling root elements so we need access to type */
 /* stylelint-disable selector-no-type */
+p {
+  margin-bottom: 1vr;
+}
+
+ul {
+  list-style: disc;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Buttons
