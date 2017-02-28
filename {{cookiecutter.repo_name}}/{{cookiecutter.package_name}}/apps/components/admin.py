@@ -1,9 +1,9 @@
 from django.contrib import admin
 
-from ...utils.admin import UsedOnAdminMixin
+{% if cookiecutter.sections == 'yes' %}from ...utils.admin import UsedOnAdminMixin{% endif %}
 # from .models import CallToAction
 
 
 # @admin.register(CallToAction)
-class CallToActionAdmin(admin.ModelAdmin, UsedOnAdminMixin):
-    list_display = ['title', 'pages_used_on']
+class CallToActionAdmin(admin.ModelAdmin{% if cookiecutter.sections == 'yes' %}, UsedOnAdminMixin{% endif %}):
+    list_display = ['title'{% if cookiecutter.sections == 'yes' %}, 'pages_used_on'{% endif %}]

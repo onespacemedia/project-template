@@ -22,6 +22,12 @@ fi
     rm -rf {{cookiecutter.package_name}}/geoip/
 {% endif %}
 
+# If the sections app wasn't enabled, delete the utils file.
+{% if cookiecutter.sections == "no" %}
+    echo "Removing admin utils file."
+    rm {{cookiecutter.package_name}}/utils/admin.py
+{% endif %}
+
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
@@ -63,10 +69,14 @@ if [ -d "tmp" ]; then
     rm -rf tmp/
 
     # Replace the project_name variable in the external apps.
-    perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
+    if grep -ril "{{ "{{" }} project_name {{ "}}" }}" *;
+    then
+        perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
+    fi
 fi
 
 # Generate a secret key and update the base settings file.
+echo 'perl 70'
 perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
