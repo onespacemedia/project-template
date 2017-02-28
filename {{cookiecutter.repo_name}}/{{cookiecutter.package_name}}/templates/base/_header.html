@@ -1,17 +1,13 @@
 <header class="hd-Header">
-  <div class="hd-Inner">
-    <a class="hd-Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
+  <div class="hd-Header_Inner">
+    <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
 
-    <nav class="hd-Nav">
+    <nav class="hd-Header_Nav">
       {{ render_navigation(pages.homepage.navigation, section=pages.homepage) }}
     </nav>
 
-    <div class="hd-MobileNav_Trigger" @click="toggleMobileNav()">
-      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-top"></div>
-      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-middle"></div>
-      <div class="hd-MobileNav_TriggerLine hd-MobileNav_TriggerLine-bottom"></div>
+    <div class="hd-Header_MobileNav">
+      <mobile-nav :items="{{ get_navigation_json(pages.homepage.navigation) }}"></mobile-nav>
     </div>
-
-    <mobile-nav></mobile-nav>
   </div>
 </header>
