@@ -40,6 +40,24 @@
     }(Suit.$))
   </script>
 
+  {# Fix WYSIWYGs when reordering inlines #}
+  <script>
+  function recreateTinyMCE () {
+    $('.sortable').click(function () {
+      tinymce.remove()
+      $('.wysiwyg:visible').each(function(){
+          activate_tinymce(this)
+      })
+    })
+  }
+  $(function () {
+    recreateTinyMCE()
+
+    Suit.after_inline.register('bind_sortable_arrows_2', function (prefix, row) {
+      recreateTinyMCE()
+    })
+  });
+  </script>
 {% endblock %}
 
 {% block extrastyle %}
