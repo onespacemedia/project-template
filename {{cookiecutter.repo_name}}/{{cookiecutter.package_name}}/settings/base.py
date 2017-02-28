@@ -123,8 +123,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'suit',
-    'django.contrib.admin',
     'django.contrib.sitemaps',
 
     'flexible_images',
@@ -156,6 +154,9 @@ INSTALLED_APPS = [
     {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
+
+    'suit',
+    'django.contrib.admin',
 
     'server_management',
     'django_extensions',
