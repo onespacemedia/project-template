@@ -43,10 +43,10 @@ while read -r line; do
 	if [[ "$line" != *"# CI" ]]; then
 		echo ">>> ${line:2}"
 		if eval "${line:2}"; then
-		        echo "<<< Check failed."
-		        FAILED=true
+			echo "<<< Check passed."
 		else
-		        echo "<<< Check passed."
+			echo "<<< Check failed."
+			FAILED=true
 		fi
 	fi
 
