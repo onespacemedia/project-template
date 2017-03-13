@@ -1,5 +1,5 @@
 # {% raw %}
-#!/bin/bash
+#!/usr/bin/env
 if [ -n "$($SHELL -c 'echo $ZSH_VERSION')" ]; then
     . ~/.zshrcPrePush
 else
