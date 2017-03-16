@@ -23,7 +23,7 @@ module.exports = function(env) {
       modules: [jsSrc, 'node_modules'],
       extensions: ['.js', '.vue', '.css', '.json'],
       alias: {
-        'vue': 'vue/dist/vue'
+        'vue$': 'vue/dist/vue.common.js'
       }
     },
     module: {
