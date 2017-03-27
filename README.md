@@ -1,4 +1,4 @@
-# project-template
+# project-template
 
 This is the project template that the [Onespacemedia](http://www.onespacemedia.com) team use to start their projects. It uses the excellent [Cookiecutter](https://github.com/audreyr/cookiecutter) project as a foundation and makes use of a lot of it's features in the generation process.
 
