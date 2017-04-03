@@ -3,9 +3,8 @@ django-cachalot
 django-compressor
 django-extensions
 django-flexible-images
-django-historylinks
 django-webpack-loader
-/Users/jamesfoley/Workspace/cms
+onespacemedia-cms
 {% if cookiecutter.redirects == 'yes' %}onespacemedia-cms-redirects{% endif %}
 onespacemedia-server-management
 opbeat

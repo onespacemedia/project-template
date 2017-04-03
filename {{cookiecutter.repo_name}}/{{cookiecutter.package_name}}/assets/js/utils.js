@@ -75,7 +75,6 @@ export const mediaBreakpoints = {
   'xlg': 1800
 }
 
-
 /*
  https://github.com/vuejs/vue/issues/4419
 

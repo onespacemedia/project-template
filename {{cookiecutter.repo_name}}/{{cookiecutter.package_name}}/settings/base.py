@@ -264,12 +264,12 @@ TEMPLATES = [
             'translation_engine': 'django.utils.translation',
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
@@ -286,14 +286,13 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django.core.context_processors.debug',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.request',
                 'cms.context_processors.settings',
-                'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect'
             ]
