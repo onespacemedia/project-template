@@ -23,7 +23,7 @@ export function externalLinks () {
   }
 
   for (const link of links) {
-    const href = link.getAttribute('href')
+    const href = link.getAttribute('href').trim()
 
     if (!href) {
       continue
