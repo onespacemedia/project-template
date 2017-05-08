@@ -466,15 +466,9 @@ if 'test' in sys.argv:
     # Note: This will not catch a situation where a developer commits model
     # changes without the migration files.
 
-    class DisableMigrations(object):
-
-        def __contains__(self, item):
-            return True
-
-        def __getitem__(self, item):
-            return 'notmigrations'
-
-    MIGRATION_MODULES = DisableMigrations()
+    MIGRATION_MODULES = {}
+    for app in INSTALLED_APPS:
+        MIGRATION_MODULES[app] = None
 
     # Remove the localisation middleware
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
