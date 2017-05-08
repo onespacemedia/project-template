@@ -7,3 +7,6 @@
 #         'primary content',
 #         blank=True
 #     )
+
+#     def __unicode__(self):
+#         return self.page.title

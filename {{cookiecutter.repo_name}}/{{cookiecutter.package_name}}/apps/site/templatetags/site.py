@@ -30,7 +30,7 @@ def get_next_by_field(obj, field):
         return getattr(obj, 'get_next_by_{}'.format(field))()
     except obj.DoesNotExist:
         return obj._default_manager.last()
-    except Exception:
+    except Exception:  # pylint:disable=broad-except
         pass  # Will cause 'None' to be returned.
 
 
@@ -41,5 +41,5 @@ def get_previous_by_field(obj, field):
         return getattr(obj, 'get_previous_by_{}'.format(field))()
     except obj.DoesNotExist:
         return obj._default_manager.first()
-    except Exception:
+    except Exception:  # pylint:disable=broad-except
         pass  # Will cause 'None' to be returned.
