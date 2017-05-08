@@ -468,7 +468,8 @@ if 'test' in sys.argv:
 
     MIGRATION_MODULES = {}
     for app in INSTALLED_APPS:
-        MIGRATION_MODULES[app] = None
+        app_name = app.split('.')[-1]
+        MIGRATION_MODULES[app_name] = None
 
     # Remove the localisation middleware
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
