@@ -46,6 +46,10 @@
     {% block feeds %}{% endblock %}
 
     {# Project #}
+    {% if settings.TYPEKIT_USED %}
+      {% include 'base/_typekit.html' %}
+    {% endif %}
+
     {% compress css %}
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
