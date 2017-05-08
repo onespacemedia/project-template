@@ -66,17 +66,6 @@ export function externalLinks () {
 }
 
 /*
-  Media breakpoints
- */
-export const mediaBreakpoints = {
-  'sm': 600,
-  'md': 900,
-  'lg': 1200,
-  'xlg': 1800
-}
-
-
-/*
  https://github.com/vuejs/vue/issues/4419
 
  As per this, since we mount Vue on the `#app` element this breaks iframes in Safari (Safari bug).
