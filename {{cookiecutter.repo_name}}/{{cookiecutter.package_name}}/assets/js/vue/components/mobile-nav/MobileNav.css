@@ -39,7 +39,7 @@
   letter-spacing: calc(40em / 1000);
   text-transform: uppercase;
 
-  color: blue;
+  color: #f00;
 
   .mbn-Item-children > & {
     &::after {
@@ -88,7 +88,7 @@
   width: 46px;
   height: @width;
 
-  border: 2px solid blue;
+  border: 2px solid #f00;
 
   @media (--lg) {
     display: none;
@@ -103,7 +103,7 @@
   width: 14px;
   height: 2px;
 
-  background-color: blue;
+  background-color: #f00;
 
   transition: top var(--Global_Transition) var(--Transition_EaseOutBack);
 
