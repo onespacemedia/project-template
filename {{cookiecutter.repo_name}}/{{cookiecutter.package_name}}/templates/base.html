@@ -70,7 +70,6 @@
       {% if user.is_authenticated() %}
         <script>
         _opbeat('setUserContext', {
-            email: "{{ user.email }}",
             id: "{{ user.pk }}"
         });
         </script>
