@@ -1,0 +1,15 @@
+<lazy-image aspect-ratio="{{ aspect_ratio }}"
+            small-image-url="{{ small_image_url }}"
+            large-image-url="{{ large_image_url }}">
+  <figure class="img-Image">
+    <div class="img-Image_AspectRatioHolder">
+      <div class="img-Image_AspectRatio" style="padding-bottom: {{ aspect_ratio }}"></div>
+
+      <div class="img-Image_Media">
+        <noscript class="img-Image_Noscript">
+          <img alt="" src="{{ large_image_url }}" class="img-Image_Image">
+        </noscript>
+      </div>
+    </div>
+  </figure>
+</lazy-image>

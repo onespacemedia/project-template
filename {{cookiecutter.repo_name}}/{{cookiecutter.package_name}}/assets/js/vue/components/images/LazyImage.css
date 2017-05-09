@@ -1,0 +1,69 @@
+/*
+|--------------------------------------------------------------------------
+| Image
+|--------------------------------------------------------------------------
+| @namespace: img-
+|
+*/
+.img-Image {
+  position: relative;
+
+  margin: 0;
+
+  background-color: #0e0e0e;
+  overflow: hidden;
+}
+
+.img-Image_Media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.img-Image_Image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  transition: opacity 0.5s linear;
+
+  @supports (object-fit: cover) {
+    object-fit: cover;
+  }
+}
+
+.img-Image_Image-ie {
+  display: none;
+
+  background-position: center;
+  background-size: cover;
+
+  /* IE11+ hack */
+  /* stylelint-disable */
+  _:-ms-fullscreen, :root & {
+    display: block;
+  }
+  /* stylelint-enable */
+}
+
+.img-Image_Image-blurred {
+  filter: blur(50px);
+
+  transform: scale(1);
+}
+
+.img-Image_Image-loaded {
+  opacity: 1;
+}
