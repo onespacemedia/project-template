@@ -66,7 +66,7 @@ export function externalLinks () {
 }
 
 /*
-  Media breakpoints
+ Media breakpoints
  */
 export const mediaBreakpoints = {
   'sm': 600,
@@ -74,7 +74,6 @@ export const mediaBreakpoints = {
   'lg': 1200,
   'xlg': 1800
 }
-
 
 /*
  https://github.com/vuejs/vue/issues/4419

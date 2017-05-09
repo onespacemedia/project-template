@@ -1,5 +1,5 @@
 /* We use an order that is beneficial for a 'settings' file */
-/* stylelint-disable plugin/declaration-block-order */
+/* stylelint-disable order/declaration-block-order */
 :root {
   /*
   |--------------------------------------------------------------------------
