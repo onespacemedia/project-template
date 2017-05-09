@@ -59,6 +59,24 @@
     {% block css %}{% endblock %}
 
     {% include 'base/_analytics.html' %}
+
+    {# Opbeat JS error tracking #}
+    {% if settings.OPBEAT %}
+      <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
+          data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
+          data-app-id="{{ settings.OPBEAT.APP_ID }}">
+      </script>
+
+      {% if user.is_authenticated() %}
+        <script>
+        _opbeat('setUserContext', {
+            email: "{{ user.email }}",
+            id: "{{ user.pk }}"
+        });
+        </script>
+        {% endif %}
+    {% endif %}
+
   </head>
 
   <body class="util-Preload {% block body_class %}{% endblock %}">
