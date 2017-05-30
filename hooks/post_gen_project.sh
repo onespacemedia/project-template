@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     source ~/.zshrc
@@ -76,8 +76,7 @@ if [ -d "tmp" ]; then
 fi
 
 # Generate a secret key and update the base settings file.
-echo 'perl 70'
-perl -pi -e s,SECRET_KEY\ =\ \"\ \",SECRET_KEY\ =\ \"$(printf '%q' $(./manage.py generate_secret_key))\",g {{cookiecutter.package_name}}/settings/base.py
+perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
 if command -v yarn >/dev/null 2>&1; then
