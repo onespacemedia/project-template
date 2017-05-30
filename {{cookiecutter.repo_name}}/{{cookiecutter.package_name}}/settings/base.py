@@ -292,6 +292,8 @@ TEMPLATES = [
                 'django.core.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
+                'django.middleware.security.SecurityMiddleware',
+                'django.middleware.clickjacking.XFrameOptionsMiddleware',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
@@ -317,7 +319,9 @@ CACHES = {
 # A secret key used for cryptographic algorithms.
 
 SECRET_KEY = ' '
-
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+X_FRAME_OPTIONS = 'DENY'
 
 WYSIWYG_OPTIONS = {
     # Overall height of the WYSIWYG
