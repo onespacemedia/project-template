@@ -2,7 +2,14 @@ from cms.apps.pages.models import ContentBase
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils.html import escape
 
-from ..apps.sections.models import ContentSection, SectionBase
+try:
+    from ..apps.sections.models import ContentSection, SectionBase
+except ImportError:
+    class ContentSection(object):
+        pass
+
+    class SectionBase(object):
+        pass
 
 
 class UsedOnAdminMixin(object):
