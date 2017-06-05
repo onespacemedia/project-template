@@ -427,6 +427,8 @@ ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and co
 ADOBE_CREATIVE_SDK_CLIENT_SECRET = '{{cookiecutter.adobe_creative_sdk_secret}}'
 ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
 
+TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
+
 # Google Apps authentication.
 
 # SETUP:
