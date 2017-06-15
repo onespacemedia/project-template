@@ -69,13 +69,14 @@
     "postcss-round-subpixels": "^1.2.0",
     "postcss-sassy-mixins": "^2.0.0",
     "postcss-will-change": "^1.1.0",
+    "prettier": "^1.4.4",
     "prettier-standard": "^5.1.0",
     "require-dir": "0.3.1",
     "sanitize.css": "^4.1.0",
     "standard": "^8.6.0",
     "style-loader": "^0.13.1",
-    "stylelint": "7.7.1",
-    "stylelint-order": "0.2.2",
+    "stylelint": "^7.11.0",
+    "stylelint-order": "^0.5.0",
     "vue-hot-reload-api": "^2.0.8",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^10.0.2",
@@ -103,7 +104,11 @@
         "eslint --fix",
         "git add"
       ],
-      "*.css": "stylelint",
+      "**/!(definitions)/*.css": [
+        "prettier",
+        "stylelint",
+        "git add"
+      ],
       "**/!(migrations|tests)/*.py": [
         "pylint --load-plugins pylint_django,pylint_mccabe -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code,fixme --reports=n",
         "isort --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*"
@@ -186,7 +191,11 @@
       "stylelint-order"
     ],
     "rules": {
-      "order/declaration-block-order": [
+      "order/order": [
+        {
+          "type": "at-rule",
+          "name": "apply"
+        },
         {
           "type": "at-rule",
           "name": "include"
@@ -200,7 +209,7 @@
         },
         "rules"
       ],
-      "order/declaration-block-property-groups-structure": [
+      "order/properties-order": [
         {
           "emptyLineBefore": "always",
           "properties": [
@@ -276,6 +285,7 @@
             "text-decoration",
             "text-indent",
             "text-overflow",
+            "text-rendering",
             "text-transform"
           ]
         },
@@ -292,6 +302,7 @@
             "background-repeat",
             "background-size",
             "border",
+            "border-color",
             "border-top",
             "border-right",
             "border-bottom",
@@ -344,13 +355,10 @@
       ],
       "font-weight-notation": "numeric",
       "function-calc-no-unspaced-operator": true,
-      "function-comma-newline-after": "never-multi-line",
       "function-comma-newline-before": "never-multi-line",
-      "function-comma-space-after": "always",
       "function-comma-space-before": "never",
       "function-linear-gradient-no-nonstandard-direction": true,
       "function-name-case": "lower",
-      "function-parentheses-space-inside": "never",
       "function-url-data-uris": "always",
       "function-url-quotes": "always",
       "number-leading-zero": "always",
@@ -381,7 +389,6 @@
           ]
         }
       ],
-      "declaration-block-no-ignored-properties": true,
       "declaration-block-no-redundant-longhand-properties": true,
       "declaration-block-no-shorthand-property-overrides": true,
       "declaration-block-semicolon-newline-after": "always-multi-line",
@@ -401,7 +408,6 @@
       "selector-combinator-space-after": "always",
       "selector-combinator-space-before": "always",
       "selector-descendant-combinator-no-non-space": true,
-      "selector-no-empty": true,
       "selector-no-id": true,
       "selector-no-qualifying-type": true,
       "selector-no-type": true,
@@ -411,7 +417,6 @@
       "selector-pseudo-class-parentheses-space-inside": "never",
       "selector-pseudo-element-case": "lower",
       "selector-pseudo-element-colon-notation": "double",
-      "selector-root-no-composition": true,
       "selector-type-case": "lower",
       "selector-max-empty-lines": 0,
       "selector-list-comma-space-after": "always-single-line",
@@ -420,7 +425,6 @@
       "media-feature-colon-space-before": "never",
       "media-feature-name-case": "lower",
       "media-feature-name-no-vendor-prefix": true,
-      "media-feature-no-missing-punctuation": true,
       "media-feature-parentheses-space-inside": "never",
       "media-feature-range-operator-space-after": "always",
       "media-feature-range-operator-space-before": "always",
@@ -436,7 +440,7 @@
         3,
         {
           "ignore": [
-            "at-rules-without-declaration-blocks"
+            "blockless-at-rules"
           ]
         }
       ],

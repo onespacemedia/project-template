@@ -4,12 +4,16 @@
 |--------------------------------------------------------------------------
 |
 */
-@mixin Button-primary() {
+@mixin Button {
   @apply --Button-base;
 }
 
-@mixin Button-secondary() {
-  @apply --Button-base;
+@mixin Button-primary {
+  @include Button;
+}
+
+@mixin Button-secondary {
+  @include Button;
 }
 
 /*
