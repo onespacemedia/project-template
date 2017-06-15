@@ -154,51 +154,6 @@
       ]
     ]
   },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "standard",
-      "prettier"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "plugins": [
-      "compat",
-      "html",
-      "prettier"
-    ],
-    "ecmaFeatures": {
-      "modules": true
-    },
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "rules": {
-      "compat/compat": 2,
-      "no-var": [
-        2
-      ],
-      "object-shorthand": [
-        2,
-        "always"
-      ],
-      "prefer-const": [
-        1
-      ],
-      "prefer-template": [
-        2
-      ],
-      "no-console": [
-        1
-      ],
-      "no-unused-vars": [
-        1
-      ]
-    }
-  },
   "stylelint": {
     "plugins": [
       "stylelint-order"
