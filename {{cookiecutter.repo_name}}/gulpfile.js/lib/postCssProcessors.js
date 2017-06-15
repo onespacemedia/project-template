@@ -1,9 +1,7 @@
 var path = require('path')
 
 module.exports = [
-  require('postcss-import')({
-    glob: true
-  }),
+  require('postcss-easy-import'),
   require('postcss-sassy-mixins'),
   require('postcss-conditionals'),
   require('postcss-apply'),
