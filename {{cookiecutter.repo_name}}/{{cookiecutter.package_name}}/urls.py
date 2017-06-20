@@ -38,7 +38,9 @@ urlpatterns = [
 
     # There's no favicon here!
     url(r'^favicon.ico$', generic.RedirectView.as_view(permanent=True)),
-]
+] + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)
 
 
 if settings.DEBUG:
