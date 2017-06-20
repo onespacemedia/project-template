@@ -198,7 +198,7 @@
         1
       ]
     }
-  }
+  },
   "stylelint": {
     "plugins": [
       "stylelint-order"
