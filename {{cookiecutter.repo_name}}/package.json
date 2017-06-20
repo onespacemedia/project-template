@@ -444,7 +444,6 @@
       "at-rule-name-case": "lower",
       "at-rule-name-space-after": "always",
       "at-rule-no-vendor-prefix": true,
-      "stylelint-disable-reason": "always-before",
       "comment-no-empty": true,
       "comment-whitespace-inside": "always",
       "indentation": 2,
