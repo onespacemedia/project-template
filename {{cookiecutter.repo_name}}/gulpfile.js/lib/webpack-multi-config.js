@@ -34,6 +34,7 @@ module.exports = function(env) {
           test: /\.vue$/,
           loader: 'eslint-loader',
           options: {
+            configFile: path.resolve('.eslintrc.dev.js'),
             formatter: require('eslint-friendly-formatter')
           },
           include: jsSrc,
@@ -44,6 +45,7 @@ module.exports = function(env) {
           test: /\.js$/,
           loader: 'eslint-loader',
           options: {
+            configFile: path.resolve('.eslintrc.dev.js'),
             formatter: require('eslint-friendly-formatter')
           },
           include: jsSrc,

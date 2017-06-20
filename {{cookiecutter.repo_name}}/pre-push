@@ -13,8 +13,6 @@ else
     . .venv/bin/activate
 fi
 
-pip install -q --disable-pip-version-check pylint pylint-django pylint-mccabe isort
-
 IN_TEST=false
 IN_OVERRIDE=false
 FAILED=false

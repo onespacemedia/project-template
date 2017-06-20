@@ -10,7 +10,7 @@ class SiteAppConfig(AppConfig):
         #
         # Import needs to be here as it won't work at the top level of the
         # file.
-        from social.apps.django_app.default.models import Association, Nonce, UserSocialAuth
+        from social_django.models import Association, Nonce, UserSocialAuth
 
         for model in [Association, Nonce, UserSocialAuth]:
             try:

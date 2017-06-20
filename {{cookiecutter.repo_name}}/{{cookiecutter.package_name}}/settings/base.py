@@ -198,6 +198,8 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
     {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects.middleware.RedirectFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -292,8 +294,6 @@ TEMPLATES = [
                 'django.core.context_processors.static',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.request',
-                'django.middleware.security.SecurityMiddleware',
-                'django.middleware.clickjacking.XFrameOptionsMiddleware',
                 'cms.context_processors.settings',
                 'cms.apps.pages.context_processors.pages',
                 'social_django.context_processors.backends',
