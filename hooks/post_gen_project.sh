@@ -50,6 +50,9 @@ fi
 
 pip install -r requirements.txt
 
+# Install the linters so the versions get frozen.
+pip install -q --disable-pip-version-check pylint pylint-django pylint-mccabe isort
+
 # The requirements will now have versions pinned, so re-dump them.
 pip freeze > requirements.txt
 
