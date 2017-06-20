@@ -36,16 +36,5 @@ module.exports = [
   require('postcss-round-subpixels'),
   require('postcss-calc'),
   require('postcss-hexrgba'),
-  require('autoprefixer')({
-    browsers: [
-      'Android > 4.4.4',
-      'Chrome > 40',
-      'Edge > 12',
-      'Explorer > 11',
-      'Firefox > 35',
-      'iOS > 8.4',
-      'Opera > 30',
-      'Safari > 9'
-    ]
-  }),
+  require('autoprefixer'),
 ];

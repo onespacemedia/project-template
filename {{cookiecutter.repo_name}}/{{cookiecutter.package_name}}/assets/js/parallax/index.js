@@ -1,13 +1,15 @@
 /*
-See `doc/parallax-js.md` for instructions.
-*/
+ See `doc/parallax-js.md` for instructions.
+ */
 export default function () {
   // Don't throw an exception on ancient browsers.
   if (!('classList' in document.body)) {
     return
   }
 
-  const parallaxElementsA = [].slice.call(document.getElementsByClassName('js-Parallax'))
+  const parallaxElementsA = [].slice.call(
+    document.getElementsByClassName('js-Parallax')
+  )
   let parallaxElements = []
 
   let transformProperty
@@ -33,10 +35,10 @@ export default function () {
 
   function recalculateElementOffsets () {
     /*
-    Calculate the top offsets of all of our elements and store them.
-    This is to prevent doing it on every scroll; we only need to do it
-    on load and on resize. getBoundingClientRect is surprisingly expensive.
-    */
+     Calculate the top offsets of all of our elements and store them.
+     This is to prevent doing it on every scroll; we only need to do it
+     on load and on resize. getBoundingClientRect is surprisingly expensive.
+     */
 
     windowWidth = window.innerWidth
     windowHeight = window.innerHeight
@@ -44,16 +46,23 @@ export default function () {
 
     parallaxElements = []
 
-    const currentPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
+    const currentPos =
+      window.scrollY || window.pageYOffset || document.documentElement.scrollTop
 
     for (const element of parallaxElementsA) {
       const elemobj = {
         element,
         top: currentPos + element.getBoundingClientRect().top,
         // Bottom of the element, measured from the top of the document.
-        bottom: currentPos + element.getBoundingClientRect().top + element.offsetHeight,
+        bottom:
+        currentPos +
+        element.getBoundingClientRect().top +
+        element.offsetHeight,
         // Middle of the element, measured from the top of the document.
-        middle: currentPos + element.getBoundingClientRect().top + (element.offsetHeight / 2),
+        middle:
+        currentPos +
+        element.getBoundingClientRect().top +
+        element.offsetHeight / 2,
         // If an element's position is above the half-way mark of the viewport
         // then we'll want to compensate for that - its starting point should
         // be zero.
@@ -68,14 +77,14 @@ export default function () {
         // CSS property to change.
         cssProperty: element.dataset.parallaxCssProperty || transformProperty,
         // Template for transform property
-        transformTemplate: (
-          element.dataset.parallaxTransformTemplate || 'translate3d([x][unit], [y][unit], 0)'
-        ),
+        transformTemplate:
+        element.dataset.parallaxTransformTemplate ||
+        'translate3d([x][unit], [y][unit], 0)',
         unit: element.dataset.parallaxUnit || 'px'
       }
 
       if (elemobj.middle < window.innerHeight / 2) {
-        elemobj.compensation = elemobj.middle - (window.innerHeight / 2)
+        elemobj.compensation = elemobj.middle - window.innerHeight / 2
       }
 
       if (element.dataset.parallaxXBy) {
@@ -120,7 +129,8 @@ export default function () {
   window.addEventListener('resize', recalculateElementOffsets)
 
   function scrollHook () {
-    const currentPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop
+    const currentPos =
+      window.scrollY || window.pageYOffset || document.documentElement.scrollTop
 
     const scrollBottom = windowHeight + currentPos
 
@@ -130,21 +140,22 @@ export default function () {
       const item = parallaxElements[i]
       // Do nothing if it is not on screen.
       if (scrollBottom < item.top || currentPos > item.bottom) {
-        continue
+        return
       }
       // How far is the middle of the element from the middle of the
       // screen?
-      const middleOffset = item.middle - currentPos - windowMiddle - item.compensation
+      const middleOffset =
+        item.middle - currentPos - windowMiddle - item.compensation
 
       let yOffset = 0
       let xOffset = 0
 
       if (item.moveXBy) {
-        xOffset = (middleOffset / 100.0) * item.moveXBy
+        xOffset = middleOffset / 100.0 * item.moveXBy
       }
 
       if (item.moveYBy) {
-        yOffset = (middleOffset / 100.0) * item.moveYBy
+        yOffset = middleOffset / 100.0 * item.moveYBy
       }
 
       if (item.unit === 'px') {

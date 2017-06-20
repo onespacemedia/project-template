@@ -116,30 +116,48 @@
 .mbn-Trigger_Line-top {
   top: 14px;
 
-  animation: MobileNav_TriggerLine-topOut 0.5s var(--Transition_EaseOutBack) forwards;
+  animation: MobileNav_TriggerLine-topOut
+    0.5s
+    var(--Transition_EaseOutBack)
+    forwards;
 
   .mbn-Trigger[aria-selected='true'] & {
-    animation: MobileNav_TriggerLine-topIn 0.5s var(--Transition_EaseOutBack) forwards;
+    animation: MobileNav_TriggerLine-topIn
+      0.5s
+      var(--Transition_EaseOutBack)
+      forwards;
   }
 }
 
 .mbn-Trigger_Line-middle {
   top: 19px;
 
-  animation: MobileNav_TriggerLine-middleOut 0.5s var(--Transition_EaseOutBack) forwards;
+  animation: MobileNav_TriggerLine-middleOut
+    0.5s
+    var(--Transition_EaseOutBack)
+    forwards;
 
   .mbn-Trigger[aria-selected='true'] & {
-    animation: MobileNav_TriggerLine-middleIn 0.5s var(--Transition_EaseOutBack) forwards;
+    animation: MobileNav_TriggerLine-middleIn
+      0.5s
+      var(--Transition_EaseOutBack)
+      forwards;
   }
 }
 
 .mbn-Trigger_Line-bottom {
   top: 24px;
 
-  animation: MobileNav_TriggerLine-bottomOut 0.5s var(--Transition_EaseOutBack) forwards;
+  animation: MobileNav_TriggerLine-bottomOut
+    0.5s
+    var(--Transition_EaseOutBack)
+    forwards;
 
   .mbn-Trigger[aria-selected='true'] & {
-    animation: MobileNav_TriggerLine-bottomIn 0.5s var(--Transition_EaseOutBack) forwards;
+    animation: MobileNav_TriggerLine-bottomIn
+      0.5s
+      var(--Transition_EaseOutBack)
+      forwards;
   }
 }
 
