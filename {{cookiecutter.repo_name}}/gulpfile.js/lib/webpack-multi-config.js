@@ -55,7 +55,6 @@ module.exports = function(env) {
           test: /\.vue$/,
           loader: 'vue-loader',
           options: {
-            postcss: require('../lib/postCssProcessors'),
             loaders: {
               js: 'babel-loader'
             }
@@ -138,7 +137,8 @@ module.exports = function(env) {
       }),
       new webpack.optimize.OccurrenceOrderPlugin,
       new webpack.optimize.UglifyJsPlugin(),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
+      new webpack.optimize.ModuleConcatenationPlugin()
     )
   }
 

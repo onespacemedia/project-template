@@ -7,9 +7,10 @@ dependencies:
     - /home/ubuntu/nvm/versions/node/v6.9.0/bin
     - /home/ubuntu/nvm/versions/node/v6.9.0/lib/node_modules
   override:
+    - pip install --disable-pip-version-check pylint pylint-django pylint-mccabe isort
     - pip install --disable-pip-version-check -r requirements.txt
     - npm install --global yarn
-    - yarn add stylelint@7.11.0 stylelint-order@0.5.0 eslint@4.0.0 eslint-config-standard@6.2.0 eslint-config-prettyer@2.1.1 eslint-plugin-standard@2.0.0 eslint-plugin-html@3.0.0 eslint-plugin-prettier@2.1.2 babel-eslint@7.0.0 standard@8.4.0
+    - yarn add stylelint@7.11.0 stylelint-order@0.5.0 eslint@4.0.0 eslint-config-standard@10.2.1 eslint-config-prettier@2.1.1 eslint-plugin-standard@3.0.1 eslint-plugin-html@3.0.0 eslint-plugin-prettier@2.1.2 babel-eslint@7.2.3 standard@10.0.2
 
 test:
   override:
