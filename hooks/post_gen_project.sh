@@ -11,9 +11,9 @@ createdb {{cookiecutter.package_name}}
 
 # Make the virtual environment.
 if command -v mkvirtualenv >/dev/null 2>&1; then
-    mkvirtualenv {{cookiecutter.repo_name}} && workon {{cookiecutter.repo_name}}
+    mkvirtualenv {{cookiecutter.repo_name}} -p /usr/local/bin/python3 && workon {{cookiecutter.repo_name}}
 else
-    virtualenv -p python .venv && source .venv/bin/activate
+    python3 -m venv .venv && source .venv/bin/activate
 fi
 
 # If GeoIP wasn't enabled, delete the GeoIP folder.
@@ -31,15 +31,6 @@ fi
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
-fi
-
-# Remove anything which doesn't work on Python 3.
-if [ "$(python -c 'import sys; print(sys.version_info[0])')" == "3" ]; then
-    {% for requirement in ['onespacemedia-server-management'] %}
-        perl -pi -e s,{{requirement}},,g requirements.txt
-    {% endfor %}
-
-    perl -pi -e s,python-memcached,python3-memcached,g requirements.txt
 fi
 
 # Work out which footer we want to include
@@ -102,12 +93,4 @@ if [ -z "$CI" ]; then
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
     git commit --amend --all --no-edit
-
-    {% if cookiecutter.create_repo == 'yes' %}
-      if command -v hub >/dev/null 2>&1; then
-          hub create -p onespacemedia/{{cookiecutter.repo_name}}
-
-          git push -u origin develop
-      fi
-    {% endif %}
 fi
