@@ -10,7 +10,8 @@
                 "ip": "",
                 "identity_file": "",
                 "initial_user": "root",
-                "build_system": "npm"
+                "build_system": "npm",
+                "python_version": "3"
             },
             "database": {
                 "name": "{{cookiecutter.package_name}}",
