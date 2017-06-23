@@ -1,10 +1,10 @@
 import 'babel-polyfill'
-import 'utils/class-list-polyfill'
+import './js/utils/class-list-polyfill'
 
 import Vue from 'vue'
-import App from './vue/App'
+import App from './js/vue/App'
 
-import { externalLinks, iframeFix } from './utils'
+import { externalLinks, iframeFix } from './js/utils'
 
 new Vue(App).$mount('#app')
 

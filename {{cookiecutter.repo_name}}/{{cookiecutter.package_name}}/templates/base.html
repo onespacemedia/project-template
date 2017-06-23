@@ -52,7 +52,7 @@
     {% endif %}
 
     {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
+      {{ render_bundle('app', 'css') }}
     {% endcompress %}
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -114,7 +114,10 @@
       </div>
     {% endblock %}
 
-    {{ render_bundle('vendor', 'js') }}
+    {% if not settings.DEBUG %}
+      {{ render_bundle('manifest', 'js') }}
+      {{ render_bundle('vendor', 'js') }}
+    {% endif %}
     {{ render_bundle('app', 'js') }}
 
     {% compress js %}
