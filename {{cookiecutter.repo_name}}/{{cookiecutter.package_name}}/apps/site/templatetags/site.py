@@ -48,14 +48,18 @@ def get_previous_by_field(obj, field):
 
 @library.global_function
 @library.render_with('images/lazy.html')
-def lazy_image(image, height=None, width=None):
+@library.global_function
+@library.render_with('images/lazy.html')
+def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
     """
-    Usage: {% raw %}{{ lazy_image(path.to.image) }}{% endraw %}
-    
-    :param image: 
-    :param height: 
-    :param width: 
-    :return: 
+    Usage: {{ lazy_image(path.to.image) }}
+
+    :param max_width:
+    :param blur:
+    :param image:
+    :param height:
+    :param width
+    :return:
     """
 
     # Ideally we will use the images uploaded sizes to get our aspect ratio but in certain circumstances, like cards,
@@ -66,13 +70,21 @@ def lazy_image(image, height=None, width=None):
     if not width:
         width = image.width
 
+    aspect_ratio = height / width
+
+    if width > max_width:
+        width = max_width
+
     # The aspect ratio will be used to size the image with a padding-bottom based element
-    aspect_ratio = '{}%'.format((height / width) * 100)
+    aspect_ratio_percentage = '{}%'.format(aspect_ratio * 100)
     small_image_url = get_thumbnail(image.file, str(int(width / 20))).url
     large_image_url = get_thumbnail(image.file, str(width)).url
 
     return {
-        'aspect_ratio': aspect_ratio,
+        'image_obj': image,
+        'aspect_ratio': aspect_ratio_percentage,
         'small_image_url': small_image_url,
         'large_image_url': large_image_url,
+        'blur': blur
     }
+
