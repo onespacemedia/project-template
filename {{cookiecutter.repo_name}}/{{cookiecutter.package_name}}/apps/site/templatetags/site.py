@@ -52,7 +52,7 @@ def get_previous_by_field(obj, field):
 @library.render_with('images/lazy.html')
 def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
     """
-    Usage: {{ lazy_image(path.to.image) }}
+    Usage: {% raw %}{{ lazy_image(path.to.image) }}{% endraw %}
 
     :param max_width:
     :param blur:
