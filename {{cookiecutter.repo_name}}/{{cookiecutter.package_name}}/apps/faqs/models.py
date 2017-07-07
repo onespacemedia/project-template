@@ -8,7 +8,7 @@ from historylinks import shortcuts as historylinks
 class Faqs(ContentBase):
 
     classifier = 'apps'
-    urlconf = '{{ project_name }}.apps.faqs.urls'
+    urlconf = '{{ cookiecutter.package_name }}.apps.faqs.urls'
 
     per_page = models.PositiveIntegerField(
         'FAQs per page',

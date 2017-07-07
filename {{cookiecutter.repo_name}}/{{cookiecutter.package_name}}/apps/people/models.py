@@ -23,7 +23,7 @@ class Team(models.Model):
 class People(ContentBase):
 
     classifier = 'apps'
-    urlconf = '{{ project_name }}.apps.people.urls'
+    urlconf = '{{ cookiecutter.package_name }}.apps.people.urls'
 
     per_page = models.PositiveIntegerField(
         'people per page',

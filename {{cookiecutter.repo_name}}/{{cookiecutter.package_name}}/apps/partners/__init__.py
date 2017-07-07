@@ -1,1 +1,1 @@
-default_app_config = "{{ project_name }}.apps.partners.apps.PartnersConfig"
+default_app_config = "{{ cookiecutter.package_name }}.apps.partners.apps.PartnersConfig"

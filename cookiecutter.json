@@ -12,7 +12,6 @@
     "redirects": "yes",
     "news": "yes",
     "sections": "yes",
-    "footer": "yes",
     "geoip": "no",
     "uses_typekit": "yes",
     "typekit_kit_id": "",
@@ -26,6 +25,7 @@
     "opbeat_secret_token": "",
     "tinypng_api_key": "",
     "_copy_without_render": [
+        "{{cookiecutter.package_name}}/apps/*/templates",
         "{{cookiecutter.package_name}}/templates",
         "{{cookiecutter.package_name}}/assets"
     ]

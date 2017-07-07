@@ -3,7 +3,7 @@ from watson import search as watson
 
 
 class CareersConfig(AppConfig):
-    name = '{{ project_name }}.apps.careers'
+    name = '{{ cookiecutter.package_name }}.apps.careers'
 
     def ready(self):
         from cms.models import PageBaseSearchAdapter

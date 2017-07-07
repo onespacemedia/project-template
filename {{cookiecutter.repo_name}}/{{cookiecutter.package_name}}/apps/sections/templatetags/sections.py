@@ -23,7 +23,7 @@ def render_section(context, page_section):
         from django.conf import settings
 
         if settings.DEBUG:
-            os.system(f'touch {{ project_name }}/apps/sections/templates/sections/types/{page_section.template}')
+            os.system(f'touch {{ cookiecutter.package_name }}/apps/sections/templates/sections/types/{page_section.template}')
 
             return ''
         else:

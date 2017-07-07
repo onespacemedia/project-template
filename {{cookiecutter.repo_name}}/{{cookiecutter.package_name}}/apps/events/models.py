@@ -10,7 +10,7 @@ from historylinks import shortcuts as historylinks
 class Events(ContentBase):
 
     classifier = 'apps'
-    urlconf = '{{ project_name }}.apps.events.urls'
+    urlconf = '{{ cookiecutter.package_name }}.apps.events.urls'
 
     per_page = models.PositiveIntegerField(
         'events per page',

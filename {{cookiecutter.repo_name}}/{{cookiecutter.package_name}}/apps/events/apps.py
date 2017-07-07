@@ -3,7 +3,7 @@ from watson import search as watson
 
 
 class EventsConfig(AppConfig):
-    name = '{{ project_name }}.apps.events'
+    name = '{{ cookiecutter.package_name }}.apps.events'
 
     def ready(self):
         from cms.models import PageBaseSearchAdapter

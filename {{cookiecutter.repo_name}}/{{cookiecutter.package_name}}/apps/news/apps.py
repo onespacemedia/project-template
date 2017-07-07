@@ -3,7 +3,7 @@ from watson import search as watson
 
 
 class NewsConfig(AppConfig):
-    name = '{{ project_name }}.apps.news'
+    name = '{{ cookiecutter.package_name }}.apps.news'
 
     def ready(self):
         from cms.models import PageBaseSearchAdapter

@@ -3,7 +3,7 @@ from watson import search as watson
 
 
 class FaqsConfig(AppConfig):
-    name = '{{ project_name }}.apps.faqs'
+    name = '{{ cookiecutter.package_name }}.apps.faqs'
     verbose_name = 'FAQ'
     verbose_name_plural = 'FAQs'
 
