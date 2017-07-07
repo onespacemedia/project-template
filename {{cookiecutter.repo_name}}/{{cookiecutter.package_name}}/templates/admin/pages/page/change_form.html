@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+{% load sections %}
+
+{% block bodyclass %}{{ block.super }} page-content-types{% endblock %}
+
+{% block footer %}
+  {{ block.super }}
+
+  {% render_type_modal %}
+{% endblock %}

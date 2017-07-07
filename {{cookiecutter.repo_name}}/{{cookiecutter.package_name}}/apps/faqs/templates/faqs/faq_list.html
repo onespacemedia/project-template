@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <ul>
+    {% for faq in faq_list %}
+      <li>{{ faq }}</li>
+    {% else %}
+      <li>No faqs</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

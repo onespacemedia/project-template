@@ -1,0 +1,102 @@
+{% load sections %}
+
+<div class="modal fade" id="typeModal" tabindex="-1" role="dialog" aria-labelledby="typeModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="typeModalLabel">Select a section type</h4>
+      </div>
+      <div class="modal-body">
+        {% for group_name, sections in section_types %}
+          <h3>{{ group_name }}</h3>
+          <ul class="content-types clearfix" style="margin: 0;">
+           {% for section in sections.sections %}
+            <li>
+              <a href="#" class="section" data-section="{{ section.0 }}">
+                {% if section.1.icon %}
+                <img src="/static/img/sections/{{ section.1.icon }}.png" width="64" alt="" class="content-type-icon">
+                {% else %}
+                <img src="/static/pages/img/content.png" alt="" class="content-type-icon">
+                {% endif %}
+                <span class="content-type-name">{% get_section_name section %}</span>
+              </a>
+            </li>
+           {% endfor %}
+           </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function () {
+  var dataName;
+
+  $('a.section').on('click', function () {
+    $('input[name="' + dataName + '"]').val(this.getAttribute('data-section')).trigger('change')
+
+    $('~ .currently-selected', $('input[name="' + dataName + '"]')).html('Currently selected: ' + $('.content-type-name', this)[0].innerText)
+    $('#typeModal').modal('hide')
+    $('button[data-target="#typeModal"]').blur()
+
+    setTimeout(function () {
+      var fieldset = $('button[data-name="' + dataName + '"]').parents('fieldset')
+      $(':input', $('.form-row:visible', fieldset)[1]).focus()
+    }, 200)
+
+    return false
+  })
+
+  $(document).on('click', 'button[data-target="#typeModal"]', function () {
+    dataName = this.previousElementSibling.getAttribute('name')
+    this.setAttribute('data-name', dataName)
+  })
+})
+</script>
+
+<style>
+.modal {
+  display: none;
+  overflow: hidden;
+}
+
+#typeModal {
+  left: 50%;
+
+  width: 50%;
+  margin-left: auto;
+
+  transform: translateX(-50%);
+}
+
+#typeModal .modal-body {
+  max-height: 70vh;
+}
+
+#typeModal img.content-type-icon,
+#typeModal span.content-type-name {
+  position: static;
+}
+
+#typeModal span.content-type-name {
+  margin-top: 10px;
+  text-decoration: none;
+
+}
+
+#typeModal ul.content-types {
+  margin-top: 10px !important;
+}
+
+#typeModal ul.content-types a {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+
+}
+</style>

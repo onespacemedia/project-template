@@ -1,0 +1,17 @@
+{% if date_list %}
+  <section>
+    <h1>News archive</h1>
+
+    <ul>
+      <li>
+        <a{% if not current_year %} class="here"{% endif %} href="{{ get_article_archive_url() }}">All articles</a>
+      </li>
+
+      {% for year_group in date_list|groupby('year') %}
+        <li>
+          <a{% if year_group.grouper == current_year %} class="here"{% endif %} href="{{ get_article_year_archive_url(year_group.grouper) }}">{{ year_group.grouper }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
