@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <ul>
+    {% for career in career_list %}
+      <li>{{ career }}</li>
+    {% else %}
+      <li>No careers</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "news/base.html" %}
+
+{% block main %}
+  <article>
+    {{ article.content|html }}
+    {% if next_article or prev_article %}
+      <nav class="news-article-detail-navigation">
+        {% if prev_article %}
+          <a rel="prev" href="{{ get_article_url(prev_article) }}">
+            Previous
+          </a>
+        {% endif %}
+
+        {% if next_article %}
+          <a rel="next" href="{{ get_article_url(next_article) }}">
+            Next
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </article>
+{% endblock %}

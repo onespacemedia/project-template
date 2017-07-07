@@ -1,0 +1,7 @@
+{% if categories %}
+  {% for category in categories %}
+    <a href="{{ get_category_url(category) }}">
+      {{ category }}{% if not forloop.last %},{% endif %}
+    </a>
+  {% endfor %}
+{% endif %}

@@ -33,12 +33,6 @@ if [ -z "$CI" ]; then
     pip install --upgrade pip
 fi
 
-# Work out which footer we want to include
-{% if cookiecutter['footer'] == 'yes' %}
-  perl -pi -e s,base/_footer.html,footer/_footer.html,g {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base.html
-  rm {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates/base/_footer.html
-{% endif %}
-
 pip install -r requirements.txt
 
 # Install the linters so the versions get frozen.
@@ -47,39 +41,28 @@ pip install -q --disable-pip-version-check pylint pylint-django pylint-mccabe is
 # The requirements will now have versions pinned, so re-dump them.
 pip freeze > requirements.txt
 
-# We disable rendering of the templates folder to avoid having to wrap everything in
-# raw tags, but that causes the parent directory path to also not be parse, so we need
-# to move everything into the correct location, then remove the old parent directory.
-mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}/templates
-mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_name}}/assets
-rmdir {{ "{{" }}cookiecutter.package_name{{ "}}" }}
-
-# Move the project app folders into the correct locations.
-if [ -d "tmp" ]; then
-    mv tmp/*/apps/* {{cookiecutter.package_name}}/apps/
-    mv tmp/*/templates/* {{cookiecutter.package_name}}/templates/
-
-    # Remove the tmp directory.
-    rm -rf tmp/
-
-    # Replace the project_name variable in the external apps.
-    if grep -ril "{{ "{{" }} project_name {{ "}}" }}" *;
-    then
-        perl -pi -e 's/{{ "{{" }} project_name {{ "}}" }}/{{ cookiecutter.package_name }}/g' `grep -ril "{{ "{{" }} project_name {{ "}}" }}" *`
-    fi
-fi
-
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
-if command -v yarn >/dev/null 2>&1; then
-    yarn
-    yarn run build
-else
-    npm install
-    npm run build
-fi
+#if command -v yarn >/dev/null 2>&1; then
+#    yarn
+#    yarn run build
+#else
+#    npm install
+#    npm run build
+#fi
+
+{% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
+    {% if cookiecutter[project] == 'no' %}
+        echo "Remove the {{project}} app.";
+        rm -r {{ cookiecutter.package_name }}/apps/{{ project }}
+    {% else %}
+        mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/{{ project }}/templates {{cookiecutter.package_name}}/apps/{{ project }}/templates
+    {% endif %}
+{% endfor %}
+
+rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then

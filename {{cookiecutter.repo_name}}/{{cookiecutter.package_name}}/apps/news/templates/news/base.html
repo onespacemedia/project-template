@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block feeds %}
+  <link rel="alternate" type="application/rss+xml" title="{{ pages.current.title }}" href="{{ get_page_url(pages.current, 'article_feed') }}">
+{% endblock %}
+
+{% block aside %}
+  {% if category_list %}
+    <section>
+      <h1>Categories</h1>
+
+      <ul>
+        <li>
+          <a
+            {% if not current_category %} class="here"{% endif %} href="{{ get_article_archive_url() }}">All categories</a>
+        </li>
+
+        {% for category in category_list %}
+          <li>
+            <a
+              {% if current_category == category %} class="here"{% endif %} href="{{ get_category_url(category) }}">{{ category }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
+{% endblock %}
