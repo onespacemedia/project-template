@@ -5,9 +5,9 @@ TEMPLATE_DEBUG = DEBUG
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-INSTALLED_APPS += (
+INSTALLED_APPS += [
     'opbeat.contrib.django',
-)
+]
 
 OPBEAT = {
     'ORGANIZATION_ID': 'dde034beb33d4b77bb9937c39f0c158f',
@@ -15,9 +15,9 @@ OPBEAT = {
     'SECRET_TOKEN': '{{cookiecutter.opbeat_secret_token}}'
 }
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-) + MIDDLEWARE_CLASSES
+] + MIDDLEWARE_CLASSES
 
 LOGGING = {
     'version': 1,
