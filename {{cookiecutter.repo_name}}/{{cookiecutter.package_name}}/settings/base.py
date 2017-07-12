@@ -463,6 +463,8 @@ TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 
 SILENCED_SYSTEM_CHECKS = []
 
+THUMBNAIL_QUALITY = 60
+
 {% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 
 if 'test' in sys.argv:
