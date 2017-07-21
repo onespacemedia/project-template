@@ -105,4 +105,3 @@ def get_footer_content():
         return Footer.objects.first()
     except IndexError:
         return None
-

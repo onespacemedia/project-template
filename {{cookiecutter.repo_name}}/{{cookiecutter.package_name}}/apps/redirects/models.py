@@ -46,7 +46,7 @@ class Redirect(models.Model):
         verbose_name_plural = 'redirects'
         ordering = ('old_path',)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.old_path
 
     def sub_path(self, path):

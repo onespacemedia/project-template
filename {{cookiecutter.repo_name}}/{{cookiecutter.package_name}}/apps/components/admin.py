@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 {% if cookiecutter.sections == 'yes' %}from ...utils.admin import UsedOnAdminMixin{% endif %}
+
 # from .models import CallToAction
 
 

@@ -40,7 +40,7 @@ class UsedOnAdminMixin(object):
                         rel.field.name,
                     )
 
-                    title = unicode(rel_obj)
+                    title = rel_obj
 
                 elif isinstance(rel_obj, ContentSection):
                     index = list(rel_obj.page.contentsection_set.all()).index(rel_obj)
@@ -55,7 +55,7 @@ class UsedOnAdminMixin(object):
                         fragment,
                     )
 
-                    title = unicode(rel_obj.page.title)
+                    title = rel_obj.page.title
 
                 # Not a page. But it is a BaseSection instance. Let's try and
                 # guess its admin URL.
@@ -66,7 +66,7 @@ class UsedOnAdminMixin(object):
                     )
 
                     try:
-                        title = unicode(rel_obj.page)
+                        title = rel_obj.page
                         url = reverse(guess_url, args=[rel_obj.page_id])
 
                     except NoReverseMatch:

@@ -6,9 +6,8 @@ from django.utils.timezone import now
 from watson import search
 
 from ..models import Article, Category, NewsFeed
-from ..templatetags.news import (get_article_archive_url,
-                                 get_article_url, get_category_url,
-                                 get_latest_news_articles, get_related_articles,
+from ..templatetags.news import (get_article_archive_url, get_article_url,
+                                 get_category_url, get_latest_news_articles,
                                  get_page_from_context, page_context,
                                  takes_article_page, takes_current_page)
 

@@ -144,9 +144,3 @@ def get_related_articles(context, count=4):
     ).distinct()[:missing]
 
     return list(related_articles) + list(padding)
-
-    if news_feed:
-        articles = articles.filter(news_feed=news_feed)
-
-    return articles[:count]
-
