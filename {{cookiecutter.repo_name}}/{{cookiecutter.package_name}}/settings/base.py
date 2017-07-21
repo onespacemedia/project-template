@@ -141,8 +141,6 @@ INSTALLED_APPS = [
     'cms.apps.links',
     'cms.apps.media',
 
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects',
-
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
@@ -150,6 +148,7 @@ INSTALLED_APPS = [
     {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
     {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
     {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
     {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
@@ -197,7 +196,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'redirects.middleware.RedirectFallbackMiddleware',
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects.middleware.RedirectFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
