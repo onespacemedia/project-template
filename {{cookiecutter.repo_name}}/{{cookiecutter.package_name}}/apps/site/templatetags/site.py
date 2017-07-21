@@ -8,6 +8,8 @@ from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
 
+# from ..models import Footer, Header
+
 
 @library.global_function
 @jinja2.contextfunction
@@ -87,4 +89,20 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
         'large_image_url': large_image_url,
         'blur': blur
     }
+
+
+@library.global_function
+def get_header_content():
+    try:
+        return Header.objects.first()
+    except IndexError:
+        return None
+
+
+@library.global_function
+def get_footer_content():
+    try:
+        return Footer.objects.first()
+    except IndexError:
+        return None
 
