@@ -87,4 +87,3 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
         'large_image_url': large_image_url,
         'blur': blur
     }
-

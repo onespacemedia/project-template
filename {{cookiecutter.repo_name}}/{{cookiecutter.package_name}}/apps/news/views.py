@@ -10,6 +10,7 @@ from django.views.generic.list import BaseListView
 
 from .models import Article, Category
 
+
 class ArticleMixin(object):
     model = Article
 

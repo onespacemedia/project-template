@@ -2,8 +2,7 @@
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
-from cms.models import (HtmlField, OnlineBaseManager, PageBase,
-                        PageBaseSearchAdapter)
+from cms.models import HtmlField, OnlineBaseManager, PageBase
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -36,7 +35,7 @@ class NewsFeed(ContentBase):
         null=True,
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.page.title
 
 
@@ -86,7 +85,7 @@ class Category(PageBase):
             for page in pages
         )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.short_title or self.title
 
     class Meta:
@@ -183,7 +182,7 @@ class Article(PageBase):
         """Returns the URL of the article."""
         return self._get_permalink_for_page(self.news_feed.page)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.short_title or self.title
 
     class Meta:
