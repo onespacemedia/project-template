@@ -62,6 +62,9 @@ perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 |
     {% endif %}
 {% endfor %}
 
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_name}}
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}
+
 rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # The following commands don't need to be run under CI.
