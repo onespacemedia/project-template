@@ -11,7 +11,7 @@
                 "identity_file": "",
                 "initial_user": "root",
                 "build_system": "npm",
-                "python_version": "3"
+                "python_version": "3.6"
             },
             "database": {
                 "name": "{{cookiecutter.package_name}}",
