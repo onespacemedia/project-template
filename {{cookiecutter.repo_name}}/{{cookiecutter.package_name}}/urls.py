@@ -30,8 +30,8 @@ urlpatterns = [
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),
 
     # Google sitemap service.
-    url(r'^sitemap.xml$', sitemaps_views.index, {'sitemaps': registered_sitemaps}),
-    url(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}),
+    url(r'^sitemap.xml$', sitemaps_views.index, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^sitemap-(?P<section>.+)\.xml$', sitemaps_views.sitemap, {'sitemaps': registered_sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 
     # Basic robots.txt.
     url(r'^robots.txt$', TextTemplateView.as_view(template_name='robots.txt')),
