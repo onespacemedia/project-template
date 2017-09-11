@@ -15,14 +15,15 @@
 | bad practice.
 |
 */
-@custom-media --sm (width > 600px);
+@custom-media --sm (width >= 768px);
 @custom-media --md (width > 900px);
 @custom-media --lg (width > 1200px);
-@custom-media --xlg (width > 1800px);
+@custom-media --xlg (width > 1440px);
+@custom-media --xxlg (width > 1600px);
 
 /* Target just a specific viewport */
-@custom-media --xs-viewport (width <= 600px);
-@custom-media --sm-viewport (width > 600px) and (width <= 900px);
+@custom-media --xxs-viewport (width <= 450px);
+@custom-media --xs-viewport (width < 768px);
+@custom-media --sm-viewport (width > 768px) and (width <= 900px);
 @custom-media --md-viewport (width > 900px) and (width <= 1200px);
-@custom-media --lg-viewport (width > 1200px) and (width <= 1800px);
-@custom-media --xlg-viewport (width > 1800px);
+@custom-media --lg-viewport (width > 1200px) and (width <= 1440px);
