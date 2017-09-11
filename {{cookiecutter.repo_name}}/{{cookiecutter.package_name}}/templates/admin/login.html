@@ -54,18 +54,6 @@
                 {% endif %}
                 <div class="submit-row">
                     <input type="submit" value="{% trans 'Log in' %}" class="btn btn-info"/>
-
-                    {% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
-                    <a href="#" class="btn btn-danger pull-right onespacemedia-login">Onespacemedia login</a>
-
-                    <span class="g-signin"
-                        data-callback="signInCallback"
-                        data-clientid="{{ settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY }}"
-                        data-cookiepolicy="single_host_origin"
-                        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                        data-scope="https://www.googleapis.com/auth/plus.profile.emails.read">
-                    </span>
-                    {% endif %}
                 </div>
             </form>
 
@@ -75,7 +63,7 @@
         </div>
 
         {% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
-        <form id="google-plus" method="post" action="{% url 'social:complete' "google-plus" %}">
+        <form id="google-plus" method="post" action="{% url 'social:complete' "google-plus" %}" style="margin:0;">
             {% csrf_token %}
             <input id="at" type="hidden" name="access_token" value="" />
             <input id="code" type="hidden" name="code" value="" />
@@ -126,4 +114,20 @@
         {% endif %}
 
     {% endblock %}
+{% endblock %}
+
+{% block footer_links %}
+    {{ block.super }}
+
+    {% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
+    <a href="#" class="onespacemedia-login">OSM staff login</a>
+
+    <span class="g-signin"
+        data-callback="signInCallback"
+        data-clientid="{{ settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY }}"
+        data-cookiepolicy="single_host_origin"
+        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+        data-scope="https://www.googleapis.com/auth/plus.profile.emails.read">
+    </span>
+    {% endif %}
 {% endblock %}
