@@ -77,10 +77,11 @@ export function externalLinks () {
  Media breakpoints
  */
 export const mediaBreakpoints = {
-  sm: 600,
+  sm: 768,
   md: 900,
   lg: 1200,
-  xlg: 1800
+  xlg: 1440,
+  xxlg: 1600,
 }
 
 /*
