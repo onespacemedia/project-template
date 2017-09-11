@@ -4,12 +4,19 @@ import 'utils/class-list-polyfill'
 import Vue from 'vue'
 import App from './vue/App'
 
+import LazyImage from './utils/lazy-image'
 import { externalLinks, iframeFix } from './utils'
 
 new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
+
+  const lazyImage = document.querySelector('.js-LazyImage')
+  if (lazyImage) {
+    const lazyImages = document.querySelectorAll('.js-LazyImage')
+    Array.from(lazyImages).map(image => new LazyImage({ el: image }))
+  }
 
   // If the browser isn't Safari, don't do anything
   if (
