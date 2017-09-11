@@ -372,7 +372,6 @@
       "function-comma-space-before": "never",
       "function-linear-gradient-no-nonstandard-direction": true,
       "function-name-case": "lower",
-      "function-url-data-uris": "always",
       "function-url-quotes": "always",
       "number-leading-zero": "always",
       "number-max-precision": 5,
