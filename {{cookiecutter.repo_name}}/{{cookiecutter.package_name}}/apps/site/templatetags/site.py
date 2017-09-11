@@ -49,7 +49,7 @@ def get_previous_by_field(obj, field):
 
 
 @library.global_function
-def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):
+def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):  # pylint: disable=too-many-arguments
     # Ideally we will use the images uploaded sizes to get our aspect ratio but in certain circumstances, like cards,
     # we will use our own provided ones
     if not height:
@@ -79,9 +79,10 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
 
 @library.global_function
 @library.render_with('images/lazy.html')
-def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):
+def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):  # pylint: disable=too-many-arguments
     """
         Usage: {{ lazy_image(path.to.image) }}
+        :param crop:
         :param max_width:
         :param blur:
         :param image:
