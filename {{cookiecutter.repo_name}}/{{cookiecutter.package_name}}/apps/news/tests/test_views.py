@@ -4,7 +4,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory, TestCase
 from django.utils.timezone import now
 from django.views import generic
-from watson import search
 
 from ..models import Article, Category, NewsFeed
 from ..views import (ArticleCategoryArchiveView, ArticleDetailView,
@@ -20,38 +19,37 @@ class TestViews(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
 
-        with search.update_index():
-            self.date = now()
-            self.date_str = '/{}/{}/{}'.format(
-                self.date.strftime('%Y'),
-                self.date.strftime('%b').lower(),
-                self.date.strftime('%d').lstrip('0'),
-            )
+        self.date = now()
+        self.date_str = '/{}/{}/{}'.format(
+            self.date.strftime('%Y'),
+            self.date.strftime('%b').lower(),
+            self.date.strftime('%d').lstrip('0'),
+        )
 
-            content_type = ContentType.objects.get_for_model(NewsFeed)
+        content_type = ContentType.objects.get_for_model(NewsFeed)
 
-            self.page = Page.objects.create(
-                title='News Feed',
-                slug='news',
-                content_type=content_type,
-            )
+        self.page = Page.objects.create(
+            title='News Feed',
+            slug='news',
+            content_type=content_type,
+        )
 
-            self.feed = NewsFeed.objects.create(
-                page=self.page,
-            )
+        self.feed = NewsFeed.objects.create(
+            page=self.page,
+        )
 
-            self.article = Article.objects.create(
-                news_feed=self.feed,
-                title='Foo',
-                slug='foo',
-                date=self.date,
-            )
+        self.article = Article.objects.create(
+            news_feed=self.feed,
+            title='Foo',
+            slug='foo',
+            date=self.date,
+        )
 
-            self.category = Category.objects.create(
-                title='Foo',
-                slug='foo'
-            )
-            self.article.categories.add(self.category)
+        self.category = Category.objects.create(
+            title='Foo',
+            slug='foo'
+        )
+        self.article.categories.add(self.category)
 
     def test_articlelistmixin_get_paginate_by(self):
         view = ArticleListMixin()
