@@ -1,18 +1,18 @@
 machine:
   node:
-    version: 6.11.1
+    version: 8.4.0
   python:
     version: 3.6.2
 
 dependencies:
   cache_directories:
-    - /home/ubuntu/nvm/versions/node/v6.11.1/bin
-    - /home/ubuntu/nvm/versions/node/v6.11.1/lib/node_modules
+    - /home/ubuntu/nvm/versions/node/v8.4.0/bin
+    - /home/ubuntu/nvm/versions/node/v8.4.0/lib/node_modules
   override:
     - pip install -U setuptools
     - pip install --disable-pip-version-check -r requirements.txt
     - npm install --global yarn
-    - yarn add stylelint@7.11.0 stylelint-order@0.5.0 eslint@4.0.0 eslint-config-standard@10.2.1 eslint-config-prettier@2.1.1 eslint-plugin-standard@3.0.1 eslint-plugin-html@3.0.0 eslint-plugin-prettier@2.1.2 babel-eslint@7.2.3 standard@10.0.2
+    - yarn add stylelint@8.1.1 stylelint-order@0.5.0 eslint@4.6.1 eslint-config-standard@10.2.1 eslint-config-prettier@2.4.0 eslint-plugin-standard@3.0.1 eslint-plugin-html@3.0.0 eslint-plugin-prettier@2.2.0 babel-eslint@7.2.3 standard@10.0.2
 
 test:
   override:
