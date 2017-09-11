@@ -5,7 +5,7 @@ $(window).load(function() {
 
   $sections.find('.field-type select').change(renderSectionFields);
 
-  $(document).on("change", "[class*=section_set] .field-type input[type=hidden]", renderSectionFields);
+  $(document).on("change", "[class*=section_set] .field-type select", renderSectionFields);
   // As jQuery event bindings are 'first come first served',
   // showHideSectionFields will be called after the default 'add another
   // section' handler is called. So this will work!
@@ -29,7 +29,7 @@ $(window).load(function() {
 
       // We get the select so we can exclude it from the fields list and we can
       // also check if it has a value to see if hidden fields should be rendered
-      var $select = $('.field-type input[type=hidden]', $section);
+      var $select = $('.field-type select', $section);
 
       // These are the fields we will be unhiding
       var fieldsToShow = types[$select.val()];
