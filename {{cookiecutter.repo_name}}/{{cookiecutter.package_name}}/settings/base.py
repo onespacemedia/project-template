@@ -314,8 +314,6 @@ CACHES = {
 # A secret key used for cryptographic algorithms.
 
 SECRET_KEY = ' '
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 WYSIWYG_OPTIONS = {
