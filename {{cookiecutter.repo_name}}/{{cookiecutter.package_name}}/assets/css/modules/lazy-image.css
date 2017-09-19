@@ -45,17 +45,8 @@
 }
 
 .img-Image_Image-ie {
-  display: none;
-
   background-position: center;
   background-size: cover;
-
-  /* IE11+ hack */
-  /* stylelint-disable */
-  _:-ms-fullscreen, :root & {
-    display: block;
-  }
-  /* stylelint-enable */
 }
 
 .img-Image_Image-blurred {
