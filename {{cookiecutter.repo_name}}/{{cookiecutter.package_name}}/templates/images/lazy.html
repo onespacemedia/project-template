@@ -2,13 +2,17 @@
      data-alt-text="{{ alt_text }}"
      data-aspect-ratio="{{ aspect_ratio }}"
      data-small-image-url="{{ small_image_url }}"
-     data-large-image-url="{{ large_image_url }}">
+     data-large-image-url="{{ large_image_url }}"
+     data-large-image-2x-url="{{ large_image_url_2x }}">
   <div class="img-Image_AspectRatioHolder">
     <div class="img-Image_AspectRatio" style="padding-bottom: {{ aspect_ratio }}"></div>
 
     <div class="img-Image_Media">
       <noscript class="img-Image_Noscript">
-        <img alt="{{ alt_text }}" src="{{ large_image_url }}" class="img-Image_Image">
+        <img alt="{{ alt_text }}"
+             src="{{ large_image_url }}"
+             srcset="{{ large_image_url_2x }} 2x"
+             class="img-Image_Image">
       </noscript>
     </div>
   </div>

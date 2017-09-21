@@ -67,12 +67,14 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
     aspect_ratio_percentage = '{}%'.format(aspect_ratio * 100)
     small_image_url = get_thumbnail(image.file, str(int(width / 20))).url
     large_image_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop).url
+    large_image_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop).url
 
     return {
         'alt_text': image.alt_text or '',
         'aspect_ratio': aspect_ratio_percentage,
         'small_image_url': small_image_url,
         'large_image_url': large_image_url,
+        'large_image_url_2x': large_image_url_2x,
         'blur': blur
     }
 
