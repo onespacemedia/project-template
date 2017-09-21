@@ -81,7 +81,7 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
 @library.render_with('images/lazy.html')
 def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):  # pylint: disable=too-many-arguments
     """
-        Usage: {{ lazy_image(path.to.image) }}
+        {% raw %}Usage: {{ lazy_image(path.to.image) }}{% endraw %}
         :param crop:
         :param max_width:
         :param blur:
