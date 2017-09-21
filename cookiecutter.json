@@ -25,6 +25,7 @@
     "opbeat_secret_token": "",
     "tinypng_api_key": "",
     "_copy_without_render": [
+        "{{cookiecutter.package_name}}/apps/site/templatetags/",
         "{{cookiecutter.package_name}}/apps/*/templates",
         "{{cookiecutter.package_name}}/templates",
         "{{cookiecutter.package_name}}/assets"
