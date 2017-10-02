@@ -112,7 +112,8 @@
       ],
       "**/!(migrations|tests)/*.py": [
         "pylint --load-plugins pylint_django,pylint_mccabe -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code,fixme --reports=n",
-        "isort --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*"
+        "isort --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*",
+        "git add"
       ]
     }
   },
