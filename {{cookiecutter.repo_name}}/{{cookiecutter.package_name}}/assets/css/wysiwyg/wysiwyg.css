@@ -10,7 +10,7 @@
 */
 
 /* We are styling root elements so we need access to type */
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 p {
   margin-bottom: 1vr;
 }
@@ -73,7 +73,7 @@ ul {
 }
 
 /* We want every first and last item to never have their relative margin */
-/* stylelint-disable selector-no-universal, declaration-no-important */
+/* stylelint-disable selector-max-universal, declaration-no-important */
 > *:first-child {
   margin-top: 0 !important;
 

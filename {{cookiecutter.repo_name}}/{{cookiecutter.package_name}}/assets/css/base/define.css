@@ -1,5 +1,5 @@
 /* This is used for multiple base styles so we need selector types */
-/* stylelint-disable selector-no-type, selector-no-universal */
+/* stylelint-disable selector-max-type, selector-max-universal */
 /*
 |--------------------------------------------------------------------------
 | Redefine

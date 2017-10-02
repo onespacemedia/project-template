@@ -2,7 +2,7 @@
 @import 'base/define.css';
 
 /* We are targetting the admin's iframe */
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 body {
   @import 'wysiwyg/wysiwyg.css';
 
