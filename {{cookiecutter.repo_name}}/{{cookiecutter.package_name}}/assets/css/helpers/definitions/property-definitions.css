@@ -83,12 +83,9 @@
     border: 1px solid transparent;
     color: #fff;
 
-    /* Style reasons */
-    /* stylelint-disable */
     transition: background-color var(--Global_Transition),
                 border var(--Global_Transition),
                 color var(--Global_Transition);
-    /* stylelint-enable */
   };
 
   /*
