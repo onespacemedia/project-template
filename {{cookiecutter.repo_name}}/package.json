@@ -106,7 +106,7 @@
         "git add"
       ],
       "**/!(definitions)/*.css": [
-        "prettier --write --single-quote",
+        "prettier-standard --write",
         "stylelint",
         "git add"
       ],
