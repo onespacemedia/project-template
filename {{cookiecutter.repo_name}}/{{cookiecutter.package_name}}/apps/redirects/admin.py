@@ -22,7 +22,7 @@ class RedirectModelForm(forms.ModelForm):
                     )
                 except RegexError as err:
                     raise forms.ValidationError(
-                        'There was an error in your regular expression: {}'.format(err.message)
+                        'There was an error in your regular expression: {}'.format(err)
                     )
         return cleaned_data
 
