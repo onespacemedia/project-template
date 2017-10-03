@@ -28,8 +28,8 @@ class CareerOpenClosedListFilter(admin.SimpleListFilter):
 class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
     prepopulated_fields = {'slug': ['title']}
 
-    list_display = ['__str__', 'is_online', 'order']
-    list_editable = ['is_online', 'order']
+    list_display = ['__str__', 'location', 'closing_date', 'is_online']
+    list_editable = ['is_online']
     list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter]
 
     fieldsets = [
