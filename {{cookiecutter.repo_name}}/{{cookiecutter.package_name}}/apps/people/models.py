@@ -1,6 +1,6 @@
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase, PageBase
+from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
 from historylinks import shortcuts as historylinks
@@ -13,7 +13,7 @@ class Team(models.Model):
     )
 
     slug = models.SlugField(
-        unique=True
+        unique=True,
     )
 
     def __str__(self):
@@ -29,41 +29,52 @@ class People(ContentBase):
         'people per page',
         default=10,
         blank=True,
-        null=True
+        null=True,
     )
 
     def __str__(self):
         return self.page.title
 
 
-class Person(PageBase):
+class Person(SearchMetaBase):
 
     page = models.ForeignKey(
-        People
+        People,
+    )
+
+    slug = models.SlugField(
+        unique=True,
+    )
+
+    title = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True,
+        help_text='This is their formal title, not their job title.',
     )
 
     first_name = models.CharField(
         max_length=256,
         null=True,
-        blank=True
+        blank=True,
     )
 
     middle_name = models.CharField(
         max_length=256,
         null=True,
-        blank=True
+        blank=True,
     )
 
     last_name = models.CharField(
         max_length=256,
         null=True,
-        blank=True
+        blank=True,
     )
 
     job_title = models.CharField(
         max_length=256,
         null=True,
-        blank=True
+        blank=True,
     )
 
     team = models.ForeignKey(
@@ -74,34 +85,36 @@ class Person(PageBase):
 
     photo = ImageRefField(
         blank=True,
-        null=True
+        null=True,
     )
 
     bio = HtmlField(
         blank=True,
-        null=True
+        null=True,
     )
 
     email = models.CharField(
         max_length=100,
         blank=True,
-        null=True
+        null=True,
     )
 
     linkedin_url = models.URLField(
+        'LinkedIn URL',
         max_length=100,
         blank=True,
-        null=True
+        null=True,
     )
 
     twitter_username = models.CharField(
+        'Twitter username',
         max_length=100,
         blank=True,
-        null=True
+        null=True,
     )
 
     order = models.PositiveIntegerField(
-        default=0
+        default=0,
     )
 
     class Meta:
@@ -129,17 +142,6 @@ class Person(PageBase):
             twitter_username = twitter_username[1:]
 
         return f'https://twitter.com/{twitter_username}'
-
-    def get_linkedin_url(self):
-        linkedin_username = self.linkedin_username
-
-        if linkedin_username.startswith('http://') or linkedin_username.startswith('https://'):
-            return self.linked_username
-
-        if linkedin_username.startswith('@'):
-            linkedin_username = linkedin_username[1:]
-
-        return f'https://www.linkedin.com/in/{linkedin_username}'
 
 historylinks.register(Person)
 sitemaps.register(Person)
