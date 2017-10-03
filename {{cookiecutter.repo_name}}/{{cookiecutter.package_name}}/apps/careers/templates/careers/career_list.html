@@ -2,10 +2,16 @@
 
 {% block main %}
   <ul>
-    {% for career in career_list %}
-      <li>{{ career }}</li>
+    {% for object in object_list %}
+      <li><a href="{{ object.get_absolute_url() }}">{{ object }}</a></li>
     {% else %}
       <li>No careers</li>
     {% endfor %}
   </ul>
+
+  <p>
+    Career template tag test:
+    {% for object in get_careers() %}
+      {{ object }}{% if not loop.last %},{% endif %}
+    {% endfor %}
 {% endblock %}
