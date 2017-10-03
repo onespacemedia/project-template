@@ -6,7 +6,7 @@ from ._base import CareersBaseTestCase
 
 
 class CareerViewsTestCase(CareersBaseTestCase):
-    # Remeber _base gives us:
+    # Remember that _base.CareersBaseTestCase gives us:
     # * closed_job (a job that has closed due to closing date)
     # * closes_future_job (a job that is open because of a future closing date)
     # * job (an open job due to no closing date)
