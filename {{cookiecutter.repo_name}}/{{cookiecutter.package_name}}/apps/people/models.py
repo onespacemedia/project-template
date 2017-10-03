@@ -99,18 +99,20 @@ class Person(SearchMetaBase):
         null=True,
     )
 
-    linkedin_url = models.URLField(
-        'LinkedIn URL',
+    linkedin = models.CharField(
+        'LinkedIn',
         max_length=100,
         blank=True,
         null=True,
+        help_text="This can either be a username (e.g. @person) or a full URL; it'll be normalised to a URL on save.",
     )
 
-    twitter_username = models.CharField(
-        'Twitter username',
+    twitter = models.CharField(
+        'Twitter',
         max_length=100,
         blank=True,
         null=True,
+        help_text="This can either be a username (e.g. @person) or a full URL; it'll be normalised to a username on save.",
     )
 
     order = models.PositiveIntegerField(
@@ -133,15 +135,8 @@ class Person(SearchMetaBase):
         })
 
     def get_twitter_url(self):
-        twitter_username = self.twitter_username
-
-        if twitter_username.startswith('http://') or twitter_username.startswith('https://'):
-            return self.twitter_username
-
-        if self.twitter_username.startswith('@'):
-            twitter_username = twitter_username[1:]
-
-        return f'https://twitter.com/{twitter_username}'
+        if self.twitter:
+            return f'https://twitter.com/{self.twitter}'
 
 historylinks.register(Person)
 sitemaps.register(Person)
