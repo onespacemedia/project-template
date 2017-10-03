@@ -1,13 +1,15 @@
+from six import text_type
+
 from .base import BaseRedirectTestCase
 
 
 class RedirectTestCase(BaseRedirectTestCase):
 
-    def test_unicode(self):
-        # Make sure the __unicode__ method works fine.
+    def test_str(self):
+        # Make sure the __str__/__unicode__ method works fine.
         self.assertEqual(
-            self.regex_redirect.__unicode__(),
-            self.regex_redirect.old_path,
+            text_type(self.regex_redirect),
+            text_type(self.regex_redirect.old_path),
         )
 
     def test_sub_path(self):
