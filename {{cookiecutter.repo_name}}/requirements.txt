@@ -19,6 +19,7 @@ paramiko==1.16.0
 Pillow
 python-memcached
 social-auth-app-django
+sorl-thumbnail==12.4a1
 requests
 sorl-thumbnail
 Werkzeug
