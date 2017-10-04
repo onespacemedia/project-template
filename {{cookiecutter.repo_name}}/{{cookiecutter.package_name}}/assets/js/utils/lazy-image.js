@@ -1,16 +1,21 @@
 export default class LazyImage {
-  constructor ({el}) {
+  constructor ({ el }) {
     this.el = el
     this.altText = el.dataset.altText
     this.aspectRatio = el.dataset.aspectRatio
     this.smallImageUrl = el.dataset.smallImageUrl
     this.largeImageUrl = el.dataset.largeImageUrl
+    this.largeImage2xUrl = el.dataset['largeImage-2xUrl']
 
     this.supportsObjectFit = 'objectFit' in document.documentElement.style
     this.loadedClass = 'img-Image_Image-loaded'
 
     const fragment = document.createDocumentFragment()
-    const node = this.createNode(this.aspectRatio, this.smallImageUrl, this.largeImageUrl)
+    const node = this.createNode(
+      this.aspectRatio,
+      this.smallImageUrl,
+      this.largeImageUrl
+    )
     const smallImage = node.querySelector('.img-Image_Image-small')
     const largeImage = node.querySelector('.img-Image_Image-large')
     const ieImage = node.querySelector('.img-Image_Image-ie')
@@ -28,15 +33,30 @@ export default class LazyImage {
   }
 
   createNode (blurred = true) {
+    const fallbackEl = `
+      <div class="img-Image_Image img-Image_Image-ie"
+           style="background-image: url(${this.largeImageUrl});"></div>`
+
+    let imageClass = 'img-Image_Image img-Image_Image-small'
+    imageClass += blurred
+      ? ' img-Image_Image-blurred'
+      : ''
+
     return document.createRange().createContextualFragment(`
       <div class="img-Image">
         <div class="img-Image_AspectRatioHolder">
-          <div class="img-Image_AspectRatio" style="padding-bottom: ${this.aspectRatio}"></div>
+          <div class="img-Image_AspectRatio"
+               style="padding-bottom: ${this.aspectRatio}"></div>
 
           <div class="img-Image_Media">
-            <img alt="" class="img-Image_Image img-Image_Image-small${blurred ? ' img-Image_Image-blurred' : ''}" src="${this.smallImageUrl}">
-            <img alt="${this.altText}" class="img-Image_Image img-Image_Image-large" src="${this.largeImageUrl}">
-            ${!this.supportsObjectFit ? `<div class="img-Image_Image img-Image_Image-ie" style="background-image: url(${this.largeImageUrl});"></div>` : ''}
+            <img alt=""
+                 class="${imageClass}"
+                 src="${this.smallImageUrl}">
+            <img alt="${this.altText}"
+                 class="img-Image_Image img-Image_Image-large"
+                 src="${this.largeImageUrl}"
+                 srcset="${this.largeImage2xUrl} 2x">
+            ${!this.supportsObjectFit ? fallbackEl : ''}
           </div>
         </div>
       </div>
