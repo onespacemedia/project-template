@@ -135,7 +135,6 @@ INSTALLED_APPS = [
 
     'reversion',
     'historylinks',
-    'watson',
 
     'cms.apps.pages',
     'cms.apps.links',
@@ -202,7 +201,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'watson.middleware.SearchContextMiddleware',
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',

@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.template import VariableDoesNotExist
 from django.test import TestCase
 from django.utils.timezone import now
-from watson import search
 
 from ..models import Article, Category, NewsFeed
 from ..templatetags.news import (get_article_archive_url, get_article_url,
@@ -23,18 +22,17 @@ class Object(object):
 class NewsTest(TestCase):
 
     def setUp(self):
-        with search.update_index():
-            content_type = ContentType.objects.get_for_model(TestPageContent)
+        content_type = ContentType.objects.get_for_model(TestPageContent)
 
-            self.homepage = Page.objects.create(
-                title='Homepage',
-                slug='homepage',
-                content_type=content_type,
-            )
+        self.homepage = Page.objects.create(
+            title='Homepage',
+            slug='homepage',
+            content_type=content_type,
+        )
 
-            TestPageContent.objects.create(
-                page=self.homepage,
-            )
+        TestPageContent.objects.create(
+            page=self.homepage,
+        )
 
     def _create_feed_article(self):
         self.date = now()
@@ -45,27 +43,26 @@ class NewsTest(TestCase):
         )
 
         # Create a NewsFeed page.
-        with search.update_index():
-            content_type = ContentType.objects.get_for_model(NewsFeed)
+        content_type = ContentType.objects.get_for_model(NewsFeed)
 
-            self.page = Page.objects.create(
-                title='News Feed',
-                slug='news',
-                parent=self.homepage,
-                content_type=content_type,
-            )
+        self.page = Page.objects.create(
+            title='News Feed',
+            slug='news',
+            parent=self.homepage,
+            content_type=content_type,
+        )
 
-            self.feed = NewsFeed.objects.create(
-                page=self.page,
-            )
+        self.feed = NewsFeed.objects.create(
+            page=self.page,
+        )
 
-            self.category = Category.objects.create(
-                slug='foo'
-            )
+        self.category = Category.objects.create(
+            slug='foo'
+        )
 
-            self.category1 = Category.objects.create(
-                slug='bar'
-            )
+        self.category1 = Category.objects.create(
+            slug='bar'
+        )
 
         # Create an Article.
         self.article = Article.objects.create(
@@ -185,18 +182,17 @@ class NewsTest(TestCase):
             takes_current_page(inner_function)({})
 
         # Create a NewsFeed page.
-        with search.update_index():
-            content_type = ContentType.objects.get_for_model(NewsFeed)
+        content_type = ContentType.objects.get_for_model(NewsFeed)
 
-            self.page = Page.objects.create(
-                title='News Feed',
-                parent=self.homepage,
-                content_type=content_type,
-            )
+        self.page = Page.objects.create(
+            title='News Feed',
+            parent=self.homepage,
+            content_type=content_type,
+        )
 
-            self.feed = NewsFeed.objects.create(
-                page=self.page,
-            )
+        self.feed = NewsFeed.objects.create(
+            page=self.page,
+        )
 
         self.assertEqual(takes_current_page(inner_function)({}), self.page)
 

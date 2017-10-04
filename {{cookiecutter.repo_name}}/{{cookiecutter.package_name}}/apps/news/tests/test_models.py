@@ -5,58 +5,55 @@ from cms.models import publication_manager
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.utils.timezone import now
-from watson import search
 
 from ..models import (Article, Category, CategoryHistoryLinkAdapter, NewsFeed,
                       get_default_news_feed, get_default_news_page)
 
 
 class TestNews(TestCase):
-
     def _create_objects(self):
-        with search.update_index():
-            self.date = now()
+        self.date = now()
 
-            content_type = ContentType.objects.get_for_model(NewsFeed)
+        content_type = ContentType.objects.get_for_model(NewsFeed)
 
-            self.page = Page.objects.create(
-                title='News Feed',
-                content_type=content_type,
-            )
+        self.page = Page.objects.create(
+            title='News Feed',
+            content_type=content_type,
+        )
 
-            self.feed = NewsFeed.objects.create(
-                page=self.page,
-            )
+        self.feed = NewsFeed.objects.create(
+            page=self.page,
+        )
 
-            self.category = Category.objects.create(
-                slug='foo'
-            )
+        self.category = Category.objects.create(
+            slug='foo'
+        )
 
-            self.article = Article.objects.create(
-                news_feed=self.feed,
-                title='Foo',
-                slug='foo',
-                # The seconds subtraction is because of time-rounding
-                # in the base publication manager.
-                date=self.date - timedelta(seconds=61),
-            )
+        self.article = Article.objects.create(
+            news_feed=self.feed,
+            title='Foo',
+            slug='foo',
+            # The seconds subtraction is because of time-rounding
+            # in the base publication manager.
+            date=self.date - timedelta(seconds=61),
+        )
 
-            self.article.categories.add(self.category)
+        self.article.categories.add(self.category)
 
-            self.article_2 = Article.objects.create(
-                news_feed=self.feed,
-                title='Foo 2',
-                slug='foo2',
-                date=self.date + timedelta(days=10)
-            )
+        self.article_2 = Article.objects.create(
+            news_feed=self.feed,
+            title='Foo 2',
+            slug='foo2',
+            date=self.date + timedelta(days=10)
+        )
 
-            self.article_3 = Article.objects.create(
-                news_feed=self.feed,
-                title='Foo 3',
-                slug='foo3',
-                status='approved',
-                date=self.date - timedelta(seconds=61),
-            )
+        self.article_3 = Article.objects.create(
+            news_feed=self.feed,
+            title='Foo 3',
+            slug='foo3',
+            status='approved',
+            date=self.date - timedelta(seconds=61),
+        )
 
     def test_get_default_news_page_no_pages(self):
         self.assertIsNone(get_default_news_page())
@@ -111,5 +108,5 @@ class TestNews(TestCase):
 
         # We need to generate an exception within the published block.
         with self.assertRaises(TypeError), \
-                publication_manager.select_published(True):
+             publication_manager.select_published(True):
             assert 1 / 'a'
