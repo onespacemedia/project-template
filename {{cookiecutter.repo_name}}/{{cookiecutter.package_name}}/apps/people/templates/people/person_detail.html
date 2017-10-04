@@ -2,6 +2,8 @@
 
 {% block main %}
   <section>
-    {{ person }}
+    {{ person }}<br>
+    linkedin: {{ person.linkedin }}<br>
+    twitter: @{{ person.twitter }} ({{ person.get_twitter_url() }})
   </section>
 {% endblock %}
