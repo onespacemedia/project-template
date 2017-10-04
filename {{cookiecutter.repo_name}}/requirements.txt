@@ -21,6 +21,5 @@ python-memcached
 social-auth-app-django
 sorl-thumbnail==12.4a1
 requests
-sorl-thumbnail
 Werkzeug
 {% if cookiecutter.geoip == 'yes' %}geoip{% endif %}
