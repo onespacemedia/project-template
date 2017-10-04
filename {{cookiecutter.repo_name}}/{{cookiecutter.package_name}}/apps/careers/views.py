@@ -1,3 +1,4 @@
+from cms.views import PageDetailMixin
 from django.views.generic import DetailView, ListView
 
 from .models import Career
@@ -11,9 +12,13 @@ class CareerListView(ListView):
 
     def get_queryset(self):
         queryset = super(CareerListView, self).get_queryset()
+        # Only show the careers with either no closing date or a closing date
+        # that is not in the past, and that are assigned to the current
+        # page.
+        return queryset.select_open().filter(
+            page__page=self.request.pages.current
+        )
 
-        return queryset.filter(page__page=self.request.pages.current)
 
-
-class CareerDetailView(DetailView):
+class CareerDetailView(PageDetailMixin, DetailView):
     model = Career

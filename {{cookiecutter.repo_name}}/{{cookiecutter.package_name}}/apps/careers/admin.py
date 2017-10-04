@@ -5,25 +5,47 @@ from suit.admin import SortableModelAdmin
 from .models import Career, Careers
 
 
+class CareerOpenClosedListFilter(admin.SimpleListFilter):
+    title = 'Status'
+
+    parameter_name = 'application_status'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('open', 'Open'),
+            ('closed', 'Closed')
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'closed':
+            return queryset.select_closed()
+
+        if self.value() == 'open':
+            return queryset.select_open()
+
+
 @admin.register(Career)
 class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
     prepopulated_fields = {'slug': ['title']}
 
-    list_display = ['__str__', 'is_online', 'order']
-    list_editable = ['is_online', 'order']
+    list_display = ['__str__', 'location', 'closing_date', 'is_online']
+    list_editable = ['is_online']
+    list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter]
 
     fieldsets = [
         (None, {
-            'fields': ['page', 'title', 'slug'],
+            'fields': ['page', 'title', 'slug', 'closing_date'],
         }),
         ('Content', {
-            'fields': ['location', 'summary', 'description', 'email_address'],
+            'fields': ['location', 'summary', 'description'],
+        }),
+        ('Applying', {
+            'fields': ['email_address', 'application_url'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
-        PageBaseAdmin.NAVIGATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
         PageBaseAdmin.OPENGRAPH_FIELDS,
-        PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS
+        PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS,
     ]
 
     def get_form(self, request, obj=None, **kwargs):

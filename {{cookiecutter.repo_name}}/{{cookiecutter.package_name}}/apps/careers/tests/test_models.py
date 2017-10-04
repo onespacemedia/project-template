@@ -1,37 +1,42 @@
-from cms.apps.pages.models import Page
-from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase
-from watson import search
+from datetime import timedelta
 
-from ..models import Career, Careers
+from django.utils import timezone
+
+from ..models import Career
+from ._base import CareersBaseTestCase
 
 
-class ApplicationTestCase(TestCase):
-
-    def setUp(self):
-        # Note: as this is the only page in the database, it's absolute URL
-        # will simply be '/'
-
-        with search.update_index():
-            content_type = ContentType.objects.get_for_model(Careers)
-            self.page = Page.objects.create(
-                content_type=content_type,
-                title='Foo',
-                slug='foo',
-            )
-
-            self.job_page = Careers.objects.create(
-                page=self.page,
-            )
-
-        self.job = Career.objects.create(
-            page=self.job_page,
-            slug='foo-bar',
-            title='Tester',
-        )
+class CareerModelsTestCase(CareersBaseTestCase):
 
     def test_job_get_absolute_url(self):
         self.assertEqual(self.job.get_absolute_url(), '/foo-bar/')
 
     def test_job_unicode(self):
         self.assertEqual(self.job.__str__(), 'Tester')
+
+    def test_careerqueryset_select_open(self):
+        # Make sure jobs with no closing date are considered as open.
+        self.assertIn(self.job, Career.objects.all().select_open())
+        # Make sure one with a closing date in the future are considered as
+        # open.
+        self.assertIn(self.closes_future_job, Career.objects.all().select_open())
+        # Make sure those which have a closing date in the past are not
+        # considered as open.
+        self.assertNotIn(self.closed_job, Career.objects.all().select_open())
+
+    def test_careerqueryset_select_open(self):
+        # Make sure those which have a closing date in the past are considered
+        # as closed.
+        self.assertIn(self.closed_job, Career.objects.all().select_closed())
+
+        # Make sure jobs with no closing date are not considered to be closed.
+        self.assertNotIn(self.job, Career.objects.all().select_closed())
+
+        # Make sure one with a closing date in the future are not considered
+        # as closed.
+        self.assertNotIn(self.closes_future_job, Career.objects.all().select_closed())
+
+    def test_career_is_open(self):
+        self.assertTrue(self.job.is_open())
+        self.assertTrue(self.closes_future_job.is_open())
+        self.assertFalse(self.closed_job.is_open())
