@@ -30,8 +30,7 @@
 
 #     def __str__(self):
 #         return self.title
-        return self.title
-
+#
     # @property
     # def link_location(self):
     #     try:
