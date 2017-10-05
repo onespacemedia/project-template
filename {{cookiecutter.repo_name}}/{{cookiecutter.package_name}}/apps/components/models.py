@@ -30,7 +30,11 @@
 
 #     def __str__(self):
 #         return self.title
+        return self.title
 
-#     @property
-#     def link_location(self):
-#         return self.link_page.get_absolute_url() if self.link_page else self.link_url
+    # @property
+    # def link_location(self):
+    #     try:
+    #         return self.link_page.get_absolute_url() if self.link_page else self.link_url
+    #     except (Page.DoesNotExist, AttributeError):
+    #         return self.link_url
