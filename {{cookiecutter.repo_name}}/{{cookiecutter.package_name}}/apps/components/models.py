@@ -28,7 +28,7 @@
 #         help_text='If you want to link to an external page, please use this.'
 #     )
 
-#     def __unicode__(self):
+#     def __str__(self):
 #         return self.title
 
 #     @property
