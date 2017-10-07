@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('to_email')
 
-    def handle(self, **options):
+    def handle(self, *args, **options):
         for template_obj in EmailTemplate.objects.all():
             self.stdout.write('[SENDING] {}\r'.format(template_obj.reference), ending='')
             self.stdout.flush()

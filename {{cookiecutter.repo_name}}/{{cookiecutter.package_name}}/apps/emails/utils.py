@@ -1,10 +1,9 @@
 from email.utils import make_msgid
-from django.template import engines
 
 import CommonMark
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-from django.template import Context, Template
+from django.template import Context, engines
 from django.template.loader import render_to_string
 
 from .models import EmailLog, EmailTemplate
@@ -25,17 +24,15 @@ def send_email(reference, to, **kwargs):
         },
     }
 
-    """
-    The To value can be provided in a few different ways. The following are all valid:
-
-    1. "john.smith@example.com"
-    2. "John Smith <john.smith@example.com>"
-    3. ["john.smith@example.com", "jane.smith@example.com"]
-    4. ["John Smith <john.smith@example.com>", "Jane Smith <jane.smith@example.com>"]
-
-    We detect the instance type and make changes where required.  Option 3 will be
-    converted into the Option 4 format if `split_list` is not disabled.
-    """
+    # The To value can be provided in a few different ways. The following are all valid:
+    #
+    # 1. "john.smith@example.com"
+    # 2. "John Smith <john.smith@example.com>"
+    # 3. ["john.smith@example.com", "jane.smith@example.com"]
+    # 4. ["John Smith <john.smith@example.com>", "Jane Smith <jane.smith@example.com>"]
+    #
+    # We detect the instance type and make changes where required.  Option 3 will be
+    # converted into the Option 4 format if `split_list` is not disabled.
 
     if isinstance(to, str):
         to = [to]
@@ -45,20 +42,15 @@ def send_email(reference, to, **kwargs):
 
     email_data['to'] = to
 
-    """
-    If a Reply-To value is defined, turn it into the format required.
-    """
-
+    # If a Reply-To value is defined, turn it into the format required.
     if template_obj.reply_to:
         email_data['reply_to'] = [template_obj.reply_to]
 
-    """
-    Generate the email content.
-
-    * Make substitutions for the pre-defined merge tags.
-    * Render the plain text version by simply using the Markdown content.
-    * Render the Markdown into HTML and inject that into our template.
-    """
+    # Generate the email content.
+    #
+    # * Make substitutions for the pre-defined merge tags.
+    # * Render the plain text version by simply using the Markdown content.
+    # * Render the Markdown into HTML and inject that into our template.
 
     # Add some additional data to the kwargs.
     if 'title' not in kwargs:

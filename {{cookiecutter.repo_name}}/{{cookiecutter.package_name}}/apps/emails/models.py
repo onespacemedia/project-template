@@ -1,9 +1,8 @@
 import CommonMark
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
-from django.core.mail import EmailMultiAlternatives
 from django.db import models
-from django.template import Context, Template
+from django.template import Context
 from django.template.loader import render_to_string
 
 from .json import DjangoJSONEncoder
@@ -128,10 +127,10 @@ class EmailLog(models.Model):
         return render_to_string('emails/base.html', self.kwargs)
 
     def to(self):
-        return self.email_data['to']
+        return self.email_data.get('to')
 
     def from_email(self):
-        return self.email_data['from_email']
+        return self.email_data.get('from_email')
 
     def subject(self):
-        return self.email_data['subject']
+        return self.email_data.get('subject')

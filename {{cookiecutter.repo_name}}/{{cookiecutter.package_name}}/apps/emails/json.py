@@ -1,3 +1,6 @@
+# Taken mostly from https://github.com/django/django/blob/11ade8eefd32f5bc7ee6379b77824f02ca61c20b/django/core/serializers/json.py#L76
+# Support for encoding model objects has been added.
+
 # Avoid shadowing the standard library json module
 from __future__ import absolute_import, unicode_literals
 
@@ -20,7 +23,7 @@ class DjangoJSONEncoder(json.JSONEncoder):
     JSONEncoder subclass that knows how to encode date/time, decimal types and UUIDs.
     """
 
-    def default(self, o):
+    def default(self, o):  # pylint: disable=too-complex,too-many-return-statements,too-many-branches,method-hidden
         # See "Date Time String Format" in the ECMA-262 specification.
         if isinstance(o, datetime.datetime):
             r = o.isoformat()
