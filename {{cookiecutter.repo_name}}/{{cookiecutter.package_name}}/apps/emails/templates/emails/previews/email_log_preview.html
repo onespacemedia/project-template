@@ -1,0 +1,12 @@
+{% load emails %}
+
+{% if object_id %}
+  {% get_email_log_html object_id as html %}
+  <fieldset class="full-width" style="margin-bottom: 35px">
+    <h2 class="legend">Email sent</h2>
+
+    <div class="box">
+      <iframe width="100%" height="450" frameborder=0 sandbox srcdoc="{{ html | force_escape }}"></iframe>
+    </div>
+  </fieldset>
+{% endif %}
