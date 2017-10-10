@@ -58,3 +58,7 @@
 .img-Image_Image-loaded {
   opacity: 1;
 }
+
+.img-Image_Image-hide {
+  opacity: 0;
+}
