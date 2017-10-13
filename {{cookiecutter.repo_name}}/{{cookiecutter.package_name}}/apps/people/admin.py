@@ -39,7 +39,6 @@ class PersonForm(forms.ModelForm):
                 return 'https://{}'.format(value)
             return value
 
-        # It's a username!
         return 'https://www.linkedin.com/in/{}'.format(value)
 
     def clean_twitter(self):
