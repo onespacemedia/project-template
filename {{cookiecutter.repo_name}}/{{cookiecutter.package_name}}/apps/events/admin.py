@@ -7,7 +7,8 @@ from .models import Event, Events
 
 @admin.register(Event)
 class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
-    list_display = ['__str__', 'start_date', 'end_date', 'is_online', 'get_image']
+    list_display = ['get_image', '__str__', 'start_date', 'end_date', 'is_online']
+    list_display_links = ['get_image', '__str__']
     list_editable = ['is_online']
 
     fieldsets = [

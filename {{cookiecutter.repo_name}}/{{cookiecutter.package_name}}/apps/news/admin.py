@@ -26,8 +26,8 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     search_fields = PageBaseAdmin.search_fields + ('content', 'summary',)
 
-    list_display = ['title', 'date', 'render_categories', 'is_online', 'last_modified', 'get_image']
-
+    list_display = ['get_image', 'title', 'date', 'render_categories', 'is_online', 'last_modified']
+    list_display_links = ['get_image', 'title']
     list_filter = ['is_online', 'categories', 'status']
 
     fieldsets = [

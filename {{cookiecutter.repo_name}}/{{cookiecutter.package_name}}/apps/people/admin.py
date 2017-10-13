@@ -76,7 +76,8 @@ class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
     # for HasImageAdminMixin
     image_field = 'photo'
 
-    list_display = ['__str__', 'job_title', 'team', 'is_online', 'get_image']
+    list_display = ['get_image', '__str__', 'job_title', 'team', 'is_online']
+    list_display_links = ['get_image', '__str__']
     list_editable = ['is_online']
 
     list_filter = list(SearchMetaBaseAdmin.list_filter) + ['team']
