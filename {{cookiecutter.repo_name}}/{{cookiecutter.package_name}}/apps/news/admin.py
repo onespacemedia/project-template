@@ -4,7 +4,9 @@ from cms.admin import OnlineBaseAdmin, PageBaseAdmin
 from django.conf import settings
 from django.contrib import admin
 from reversion.admin import VersionAdmin
+from reversion.models import Version
 
+from ...utils.admin import HasImageAdminMixin
 from .models import STATUS_CHOICES, Article, Category, get_default_news_feed
 
 
@@ -12,9 +14,6 @@ from .models import STATUS_CHOICES, Article, Category, get_default_news_feed
 class CategoryAdmin(PageBaseAdmin):
     fieldsets = (
         PageBaseAdmin.TITLE_FIELDS,
-        ('Content', {
-            'fields': ['content_primary']
-        }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.NAVIGATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
@@ -22,12 +21,12 @@ class CategoryAdmin(PageBaseAdmin):
     list_display = ['__str__']
 
 
-class ArticleAdmin(PageBaseAdmin, VersionAdmin):
+class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
     date_hierarchy = 'date'
 
     search_fields = PageBaseAdmin.search_fields + ('content', 'summary',)
 
-    list_display = ['title', 'date', 'is_online']
+    list_display = ['title', 'date', 'render_categories', 'is_online', 'last_modified', 'get_image']
 
     list_filter = ['is_online', 'categories', 'status']
 
@@ -36,10 +35,10 @@ class ArticleAdmin(PageBaseAdmin, VersionAdmin):
             'fields': ['title', 'slug', 'news_feed', 'date', 'status']
         }),
         ('Content', {
-            'fields': ['image', 'content', 'summary']
+            'fields': ['image', 'content', 'summary', 'categories']
         }),
         ('Publication', {
-            'fields': ['categories', 'is_online'],
+            'fields': ['is_online'],
             'classes': ['collapse']
         }),
     ]
@@ -67,6 +66,9 @@ class ArticleAdmin(PageBaseAdmin, VersionAdmin):
         form.base_fields['news_feed'].initial = get_default_news_feed()
         return form
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('categories')
+
     def formfield_for_choice_field(self, db_field, request=None, **kwargs):
         """
         Give people who have the permission to approve articles an extra
@@ -81,5 +83,23 @@ class ArticleAdmin(PageBaseAdmin, VersionAdmin):
                 kwargs['choices'] = choices_list
 
         return super(ArticleAdmin, self).formfield_for_choice_field(db_field, request, **kwargs)
+
+    def render_categories(self, obj):
+        categories = obj.categories.all()
+        if not categories:
+            return '(None)'
+        return ', '.join([str(category) for category in categories])
+
+    def last_modified(self, obj):
+        versions = Version.objects.get_for_object(obj)
+        if versions.count() > 0:
+            latest_version = versions[:1][0]
+            return "{} by {}".format(
+                latest_version.revision.date_created.strftime("%Y-%m-%d %H:%M:%S"),
+                latest_version.revision.user
+            )
+        return "-"
+
+    render_categories.short_description = 'Categories'
 
 admin.site.register(Article, ArticleAdmin)

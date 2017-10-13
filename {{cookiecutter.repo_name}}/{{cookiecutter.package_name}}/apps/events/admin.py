@@ -1,12 +1,13 @@
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
 
+from ...utils.admin import HasImageAdminMixin
 from .models import Event, Events
 
 
 @admin.register(Event)
-class EventAdmin(PageBaseAdmin):
-    list_display = ['__str__', 'start_date', 'end_date', 'is_online']
+class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
+    list_display = ['__str__', 'start_date', 'end_date', 'is_online', 'get_image']
     list_editable = ['is_online']
 
     fieldsets = [

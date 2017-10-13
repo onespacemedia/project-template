@@ -5,6 +5,7 @@ from django import forms
 from django.contrib import admin
 from suit.admin import SortableModelAdmin
 
+from ...utils.admin import HasImageAdminMixin
 from .models import People, Person, Team
 
 
@@ -38,6 +39,7 @@ class PersonForm(forms.ModelForm):
                 return 'https://{}'.format(value)
             return value
 
+        # It's a username!
         return 'https://www.linkedin.com/in/{}'.format(value)
 
     def clean_twitter(self):
@@ -67,13 +69,17 @@ class PersonForm(forms.ModelForm):
 
 
 @admin.register(Person)
-class PersonAdmin(SortableModelAdmin, SearchMetaBaseAdmin):
+class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
     form = PersonForm
 
     prepopulated_fields = {'slug': ['first_name', 'last_name']}
 
-    list_display = ['__str__', 'is_online']
-    list_editable = ['is_online', 'order']
+    # for HasImageAdminMixin
+    image_field = 'photo'
+
+    list_display = ['__str__', 'job_title', 'team', 'is_online', 'get_image']
+    list_editable = ['is_online']
+
     list_filter = list(SearchMetaBaseAdmin.list_filter) + ['team']
 
     fieldsets = (
@@ -95,7 +101,7 @@ class PersonAdmin(SortableModelAdmin, SearchMetaBaseAdmin):
         SearchMetaBaseAdmin.OPENGRAPH_TWITTER_FIELDS,
     )
 
-    def aget_form(self, request, obj=None, **kwargs):
+    def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
 
         try:
