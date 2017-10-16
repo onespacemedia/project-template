@@ -19,7 +19,7 @@ $(window).load(function() {
     var types = {
       '': [],
       {% for type in types %}
-      '{{ type.name }}': {{ type.fields|default:'[]'|safe }}{% if not forloop.last %},{% endif %}
+      '{{ type.slug }}': {{ type.fields|default:'[]'|safe }}{% if not forloop.last %},{% endif %}
       {% endfor %}
     };
 
