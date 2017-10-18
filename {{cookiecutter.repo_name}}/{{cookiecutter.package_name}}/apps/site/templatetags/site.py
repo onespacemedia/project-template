@@ -1,6 +1,7 @@
 import json
 import os
 
+import CommonMark
 import jinja2
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from django.conf import settings
@@ -94,6 +95,25 @@ def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920,
     """
 
     return lazy_image(image, height, width, blur, max_width, crop)
+
+
+@library.filter
+def md_escaped(value):
+    if not value:
+        return ""
+
+    formatted = CommonMark.commonmark(value).strip()
+
+    # Remove wrapping <p> tags.
+    if formatted.startswith('<p>') and formatted.endswith('</p>'):
+        formatted = formatted[3:-4]
+
+    return formatted
+
+
+@library.filter
+def md(value):
+    return mark_safe(md_escaped(value))
 
 
 @library.global_function
