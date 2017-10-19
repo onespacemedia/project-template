@@ -117,8 +117,20 @@ def md_escaped(value, inline=True):
 
 
 @library.filter
-def md(value):
-    return mark_safe(md_escaped(value))
+def md(value, inline=True):
+    '''
+    Formats a string of Markdown text to HTML.
+
+    By default it assumes that the text will be wrapped in a meaningful
+    block-level element, i.e. the return value will not be wrapped in a `<p>`
+    tag, and line breaks will be rendered using `<br>` elements. If you wish
+    to override this and use standard Markdown behaviour, pass `inline=True`
+    as an argument to this filter.
+
+    This should never be used on untrusted user input, as Markdown by design
+    allows arbitrary HTML.
+    '''
+    return mark_safe(md_escaped(value, inline=inline))
 
 
 @library.global_function
