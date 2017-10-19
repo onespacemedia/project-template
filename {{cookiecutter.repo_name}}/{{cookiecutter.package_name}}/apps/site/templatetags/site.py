@@ -98,14 +98,19 @@ def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920,
 
 
 @library.filter
-def md_escaped(value):
+def md_escaped(value, inline=True):
     if not value:
         return ""
 
-    formatted = CommonMark.commonmark(value).strip()
+    formatted = value.strip()
+
+    if inline:
+        formatted = formatted.replace('\n', '<br>')
+
+    formatted = CommonMark.commonmark(formatted).strip()
 
     # Remove wrapping <p> tags.
-    if formatted.startswith('<p>') and formatted.endswith('</p>'):
+    if inline and formatted.startswith('<p>') and formatted.endswith('</p>'):
         formatted = formatted[3:-4]
 
     return formatted
