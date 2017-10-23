@@ -140,6 +140,9 @@ INSTALLED_APPS = [
     'cms.apps.pages',
     'cms.apps.links',
     'cms.apps.media',
+    # Needs to be before `apps.site` so that unregistering social auth models
+    # in site/admin.py works.
+    'social_django',
 
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
@@ -160,8 +163,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'cachalot',
     'webpack_loader',
-
-    'social_django'
 ]
 
 # Additional static file locations.
