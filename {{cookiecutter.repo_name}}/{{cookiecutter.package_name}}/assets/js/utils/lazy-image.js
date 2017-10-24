@@ -18,13 +18,13 @@ export default class LazyImage {
     )
     const smallImage = node.querySelector('.img-Image_Image-small')
     const largeImage = node.querySelector('.img-Image_Image-large')
-    const ieImage = node.querySelector('.img-Image_Image-ie')
+    const fallbackImage = node.querySelector('.img-Image_Image-noObjectFit')
 
     if (this.supportsObjectFit) {
       smallImage.onload = () => smallImage.classList.add(this.loadedClass)
       largeImage.onload = () => largeImage.classList.add(this.loadedClass)
     } else {
-      largeImage.onload = () => ieImage.classList.add(this.loadedClass)
+      largeImage.onload = () => fallbackImage.classList.add(this.loadedClass)
     }
 
     fragment.appendChild(node)
@@ -34,7 +34,7 @@ export default class LazyImage {
 
   createNode (blurred = true) {
     const fallbackEl = `
-      <div class="img-Image_Image img-Image_Image-ie"
+      <div class="img-Image_Image img-Image_Image-noObjectFit"
            style="background-image: url(${this.largeImageUrl});"></div>`
 
     let imageClass = 'img-Image_Image img-Image_Image-small'
