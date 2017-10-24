@@ -44,9 +44,16 @@
   }
 }
 
-.img-Image_Image-ie {
+.img-Image_Image-noObjectFit {
+  /* Fallback for IE and Edge */
+  display: block;
+
   background-position: center;
   background-size: cover;
+
+  @supports (object-fit: cover) {
+    display: none;
+  }
 }
 
 .img-Image_Image-blurred {
