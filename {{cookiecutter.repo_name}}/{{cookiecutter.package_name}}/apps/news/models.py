@@ -58,13 +58,7 @@ def get_default_news_feed():
 
 
 class Category(PageBase):
-
     """A category for news articles."""
-
-    content_primary = HtmlField(
-        'primary content',
-        blank=True
-    )
 
     def _get_permalink_for_page(self, page):
         """Returns the URL for this category for the given page."""
