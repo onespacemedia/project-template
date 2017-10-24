@@ -1,4 +1,4 @@
-bcrypt
+argon2-cffi
 django>=1.11,<1.12
 django-cachalot
 django-compressor
