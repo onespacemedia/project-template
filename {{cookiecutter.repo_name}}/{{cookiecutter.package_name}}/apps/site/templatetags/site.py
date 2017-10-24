@@ -1,6 +1,7 @@
 import json
 import os
 
+import CommonMark
 import jinja2
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from django.conf import settings
@@ -94,6 +95,42 @@ def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920,
     """
 
     return lazy_image(image, height, width, blur, max_width, crop)
+
+
+@library.filter
+def md_escaped(value, inline=True):
+    if not value:
+        return ""
+
+    formatted = value.strip()
+
+    if inline:
+        formatted = formatted.replace('\n', '<br>')
+
+    formatted = CommonMark.commonmark(formatted).strip()
+
+    # Remove wrapping <p> tags.
+    if inline and formatted.startswith('<p>') and formatted.endswith('</p>'):
+        formatted = formatted[3:-4]
+
+    return formatted
+
+
+@library.filter
+def md(value, inline=True):
+    '''
+    Formats a string of Markdown text to HTML.
+
+    By default it assumes that the text will be wrapped in a meaningful
+    block-level element, i.e. the return value will not be wrapped in a `<p>`
+    tag, and line breaks will be rendered using `<br>` elements. If you wish
+    to override this and use standard Markdown behaviour, pass `inline=True`
+    as an argument to this filter.
+
+    This should never be used on untrusted user input, as Markdown by design
+    allows arbitrary HTML.
+    '''
+    return mark_safe(md_escaped(value, inline=inline))
 
 
 @library.global_function
