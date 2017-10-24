@@ -42,27 +42,31 @@ def get_section_name(obj):
     return obj[0][0].upper() + obj[0][1:].replace('-', ' ')
 
 
-def sections_js(request):
-    model_fields = SectionBase._meta.get_fields()
-    # Since our sections aren't at the top level we'll need to create an array
-    # of them when we are iterating
-    sections = []
-
-    # Each optgroup we define
+def get_section_types_flat():
+    '''Gets a list of section types as a flat list of dictionaries.'''
+    types = []
+    # Loop section groups.
     for group in SECTION_TYPES:
         # Every section that appears in the optgroup
         for section_type in group[1]['sections']:
-            fields = section_type[1].get('fields', [])
-
-            # We've got a section so lets add it to the sections list
-            sections.append({
-                'name': section_type[0],
-                'fields': fields
+            types.append({
+                'slug': section_type[0],
+                'name': get_section_name(section_type),
+                'fields': section_type[1].get('fields', [])
             })
+    return types
 
-            for field in fields:
-                if field not in model_fields:
-                    print(f"NOTE: Field `{field}` is referenced by section type `{section_type[0]}`, but doesn't exist.")
+
+def sections_js(request):
+    model_fields = [f.name for f in SectionBase._meta.get_fields()]
+    # Since our sections aren't at the top level we'll need to create an array
+    # of them when we are iterating
+    sections = get_section_types_flat()
+
+    for section_type in sections:
+        for field in section_type['fields']:
+            if field not in model_fields:
+                print(f"NOTE: Field `{field}` is referenced by section type `{section_type['name']}`, but doesn't exist.")
 
     return render_to_response('admin/pages/page/sections.js', {
         'types': sections,
