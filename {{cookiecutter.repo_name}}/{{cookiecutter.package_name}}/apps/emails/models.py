@@ -2,8 +2,10 @@ import CommonMark
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-from django.template import Context
+from django.template import Context, engines
+from django.template.defaultfilters import linebreaks
 from django.template.loader import render_to_string
+from jinja2.exceptions import UndefinedError
 
 from .json import DjangoJSONEncoder
 
@@ -15,6 +17,14 @@ class EmailTemplate(models.Model):
         blank=True,
         null=True,
         help_text="This will be used in the application to send emails of this type. It's recommended that you don't change this value after it's defined. otherwise bad things may happen.",
+    )
+
+    # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
+    to_email = models.CharField(
+        max_length=300,
+        blank=True,
+        null=True,
+        help_text='For automated emails, such as contact forms, you can define where the emails are send.',
     )
 
     # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
@@ -72,23 +82,28 @@ class EmailTemplate(models.Model):
     )
 
     def get_html_version(self):
-        from django.template import engines
+        self.content = linebreaks(self.content)
+
         template = engines['backend'].from_string(self.content)
 
         # Pass the plain text template through the rendering engine so we're able to
         # use the full capabilities of Jinja.
 
-        body = template.render(Context({}))
+        try:
+            body = template.render(Context({}))
+        except UndefinedError:
+            body = self.content
 
         # Generate the HTML version of the email and render it into the full template.
         body = CommonMark.commonmark(body).strip()
 
         return render_to_string('emails/base.html', {
+            'title': self.title,
             'body': body,
         })
 
     def __str__(self):
-        return self.title
+        return self.title or self.subject
 
     class Meta:
         # Moves this model above logs in the sidebar

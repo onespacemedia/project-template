@@ -4,19 +4,27 @@ import CommonMark
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template import Context, engines
+from django.template.defaultfilters import linebreaks
 from django.template.loader import render_to_string
 
 from .models import EmailLog, EmailTemplate
 
 
-def send_email(reference, to, **kwargs):
+def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
     # We will allow Django's DoesNotExist exception to be raised here.
     template_obj = EmailTemplate.objects.get(reference=reference)
+
+    # Does this email template have a `to_email` defined?
+    if template_obj.to_email:
+        to = [email for email in template_obj.to_email.split(',')]
+    elif not to:
+        raise ValueError("You must supply the `to` value if the email template doesn't.")
+
     msg_id = make_msgid(domain=settings.SITE_DOMAIN)
 
     email_data = {
         'from_email': template_obj.from_email,
-        'bcc': [email for email in template_obj.bcc_list.split(',')],
+        'bcc': [email for email in template_obj.bcc_list.split(',')] if template_obj.bcc_list else [],
         'subject': template_obj.subject,
         'headers': {
             'Message-ID': msg_id,
@@ -56,7 +64,7 @@ def send_email(reference, to, **kwargs):
     if 'title' not in kwargs:
         kwargs['title'] = template_obj.title
 
-    plain_text_template = template_obj.content
+    plain_text_template = linebreaks(template_obj.content)
 
     # Replace the merge tags in the template.
     if 'user' in kwargs:
