@@ -2,6 +2,7 @@ export default class LazyImage {
   constructor ({ el }) {
     this.el = el
     this.altText = el.dataset.altText
+    this.blur = el.dataset.blur === 'True'
     this.aspectRatio = el.dataset.aspectRatio
     this.smallImageUrl = el.dataset.smallImageUrl
     this.largeImageUrl = el.dataset.largeImageUrl
@@ -11,18 +12,20 @@ export default class LazyImage {
     this.loadedClass = 'img-Image_Image-loaded'
 
     const fragment = document.createDocumentFragment()
-    const node = this.createNode(
-      this.aspectRatio,
-      this.smallImageUrl,
-      this.largeImageUrl
-    )
+    const node = this.createNode()
     const smallImage = node.querySelector('.img-Image_Image-small')
     const largeImage = node.querySelector('.img-Image_Image-large')
     const fallbackImage = node.querySelector('.img-Image_Image-noObjectFit')
 
     if (this.supportsObjectFit) {
       smallImage.onload = () => smallImage.classList.add(this.loadedClass)
-      largeImage.onload = () => largeImage.classList.add(this.loadedClass)
+      largeImage.onload = () => {
+        largeImage.classList.add(this.loadedClass)
+
+        if (!this.blur) {
+          smallImage.classList.add('img-Image_Image-hide')
+        }
+      }
     } else {
       largeImage.onload = () => fallbackImage.classList.add(this.loadedClass)
     }
@@ -37,8 +40,8 @@ export default class LazyImage {
       <div class="img-Image_Image img-Image_Image-noObjectFit"
            style="background-image: url(${this.largeImageUrl});"></div>`
 
-    let imageClass = 'img-Image_Image img-Image_Image-small'
-    imageClass += blurred
+    let smallImageClass = 'img-Image_Image img-Image_Image-small'
+    smallImageClass += blurred
       ? ' img-Image_Image-blurred'
       : ''
 
@@ -50,7 +53,7 @@ export default class LazyImage {
 
           <div class="img-Image_Media">
             <img alt=""
-                 class="${imageClass}"
+                 class="${smallImageClass}"
                  src="${this.smallImageUrl}">
             <img alt="${this.altText}"
                  class="img-Image_Image img-Image_Image-large"
