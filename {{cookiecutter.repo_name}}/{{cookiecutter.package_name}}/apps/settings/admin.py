@@ -15,7 +15,11 @@ class SettingAdmin(admin.ModelAdmin):
                 self.exclude = ['name', 'key']
                 self.prepopulated_fields = {}
 
-        return super(SettingAdmin, self).get_form(request, obj, **kwargs)
+        form = super(SettingAdmin, self).get_form(request, obj, **kwargs)
+
+        if obj:
+            form.base_fields['type'].help_text = 'Changing the type of an existing setting can cause things to break. Be careful!'
+        return form
 
     def has_add_permission(self, request):
         if getattr(settings, 'SETTINGS_ADMINS', None) is not None:
