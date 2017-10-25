@@ -9,7 +9,8 @@ function hide_inline_section_fields () {
     '.field-string': ['string'],
     '.field-text': ['text'],
     '.field-number': ['number'],
-    '.field-image': ['image']
+    '.field-image': ['image'],
+    '.field-html': ['html']
   }
 
   //	Loop all of the section inlines

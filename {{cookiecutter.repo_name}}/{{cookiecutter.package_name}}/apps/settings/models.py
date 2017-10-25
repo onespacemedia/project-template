@@ -1,6 +1,8 @@
 from cms.apps.media.models import ImageRefField
+from cms.models import HtmlField
 from django.db import models
 from django.template.defaultfilters import linebreaksbr
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
 
@@ -21,6 +23,7 @@ class Setting(models.Model):
         choices=[
             ('string', 'String'),
             ('text', 'Text'),
+            ('html', 'HTML'),
             ('number', 'Number'),
             ('image', 'Image'),
         ],
@@ -35,6 +38,12 @@ class Setting(models.Model):
     text = models.TextField(
         blank=True,
         null=True,
+    )
+
+    html = HtmlField(
+        'HTML',
+        null=True,
+        blank=True,
     )
 
     number = models.IntegerField(
@@ -53,10 +62,12 @@ class Setting(models.Model):
     def __str__(self):
         return self.name
 
+    @cached_property
     def value(self):
         return {
             'string': self.string,
             'text': linebreaksbr(mark_safe(self.text)),
+            'html': mark_safe(self.html),
             'number': self.number,
             'image': self.image if self.image else '',
         }[self.type]
