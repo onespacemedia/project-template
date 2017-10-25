@@ -57,8 +57,15 @@ perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 |
     {% if cookiecutter[project] == 'no' %}
         echo "Remove the {{project}} app.";
         rm -r {{ cookiecutter.package_name }}/apps/{{ project }}
+    {% else %}
+        mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/{{ project }}/templates {{cookiecutter.package_name}}/apps/{{ project }}/templates
     {% endif %}
 {% endfor %}
+
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_name}}
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}
+
+rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
