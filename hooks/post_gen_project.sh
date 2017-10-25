@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euxo pipefail
 
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
     source ~/.zshrc
