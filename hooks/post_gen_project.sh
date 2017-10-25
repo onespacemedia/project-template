@@ -17,7 +17,7 @@ if [ -z "$CI" ]; then
     trap cleanup ERR
     trap cleanup INT
 else
-    set -euxo pipefail
+    set -exo pipefail
 fi
 
 if [ -f ~/.zshrc ]; then
