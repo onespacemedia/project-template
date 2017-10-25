@@ -6,13 +6,7 @@ from ..utils import get_setting_value
 
 @library.global_function
 def setting(key, default=None):
-    value = get_setting_value(key=key, default=None)
-    if value is None:
-        # rather than 'return default or key' - means coverage isn't fooled?
-        if default is not None:
-            return default
-        return key
-    return value
+    return get_setting_value(key=key, default=default)
 
 
 @library.global_function

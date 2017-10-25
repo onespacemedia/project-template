@@ -17,7 +17,7 @@ class SettingsTagsTest(TestCase):
         self.assertEquals(setting('test-setting'), self.setting.value)
         self.assertEquals(setting('test-setting'), 'Value')
         # Test ones that don't exist, and defaults.
-        self.assertEquals(setting('no'), 'no')
+        self.assertEquals(setting('no'), None)
         self.assertEquals(setting('no', 'yes'), 'yes')
 
     def test_get_setting(self):
