@@ -1,5 +1,5 @@
 /* This is used for multiple base styles so we need selector types */
-/* stylelint-disable selector-max-type, selector-max-universal */
+/* stylelint-disable */
 /*
 |--------------------------------------------------------------------------
 | Redefine
@@ -38,7 +38,7 @@ html {
 }
 
 body {
-  @apply --Font-16;
+  @include Font_16-24;
 
   text-rendering: optimizeLegibility;
 

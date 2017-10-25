@@ -47,7 +47,6 @@
     "husky": "^0.13.4",
     "json-loader": "^0.5.4",
     "lint-staged": "^3.6.1",
-    "postcss-apply": "^0.8.0",
     "postcss-assets": "^4.1.0",
     "postcss-brand-colors": "^1.0.0",
     "postcss-calc": "^6.0.0",

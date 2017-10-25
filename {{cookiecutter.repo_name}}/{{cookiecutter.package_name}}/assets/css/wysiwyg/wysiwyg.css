@@ -10,85 +10,87 @@
 */
 
 /* We are styling root elements so we need access to type */
-/* stylelint-disable selector-max-type */
-p {
-  margin-bottom: 1vr;
-}
-
-ul {
-  list-style: disc;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Buttons
-|--------------------------------------------------------------------------
-|
-*/
-.wys-Button-primary {
-  @include Button-primary();
-}
-
-.wys-Button-secondary {
-  @include Button-secondary();
-}
-
-/*
-|--------------------------------------------------------------------------
-| Intrinsic
-|--------------------------------------------------------------------------
-|
-*/
-.wys-Intrinsic {
-  @include Intrinsic();
-}
-
-/*
-|--------------------------------------------------------------------------
-| Titles
-|--------------------------------------------------------------------------
-|
-*/
-.wys-Title-small {
-  margin-top: 1vr;
-  margin-bottom: 0.5vr;
-}
-
-.wys-Title-medium {
-  margin-top: 1vr;
-  margin-bottom: 0.5vr;
-
-  + .wys-Title-small {
-    margin-top: -0.25vr;
+/* stylelint-disable declaration-no-important, max-nesting-depth, selector-max-id, selector-max-type */
+#tinymce,
+.wys-WYSIWYG {
+  > p {
+    margin-bottom: 1vr;
   }
-}
 
-.wys-Title-large {
-  margin-top: 1vr;
-  margin-bottom: 0.5vr;
-
-  + .wys-Title-medium {
-    margin-top: -0.25vr;
+  > ul {
+    list-style: disc;
   }
-}
 
-/* We want every first and last item to never have their relative margin */
-/* stylelint-disable selector-max-universal, declaration-no-important */
-> *:first-child {
-  margin-top: 0 !important;
+  /*
+  |--------------------------------------------------------------------------
+  | Buttons
+  |--------------------------------------------------------------------------
+  |
+  */
+  .wys-Button-primary {
+    @include Button-primary;
+  }
 
-  /* This covers cases like images */
+  .wys-Button-secondary {
+    @include Button-secondary;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Intrinsic
+  |--------------------------------------------------------------------------
+  |
+  */
+  .wys-Intrinsic {
+    @include Intrinsic;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Titles
+  |--------------------------------------------------------------------------
+  |
+  */
+  .wys-Title-small {
+    margin-top: 1vr;
+    margin-bottom: 0.5vr;
+  }
+
+  .wys-Title-medium {
+    margin-top: 1vr;
+    margin-bottom: 0.5vr;
+
+    + .wys-Title-small {
+      margin-top: -0.25vr;
+    }
+  }
+
+  .wys-Title-large {
+    margin-top: 1vr;
+    margin-bottom: 0.5vr;
+
+    + .wys-Title-medium {
+      margin-top: -0.25vr;
+    }
+  }
+
+  /* We want every first and last item to never have their relative margin */
   > *:first-child {
     margin-top: 0 !important;
+
+    /* This covers cases like images */
+    > *:first-child {
+      margin-top: 0 !important;
+    }
   }
-}
 
-> *:last-child {
-  margin-bottom: 0 !important;
-
-  /* This covers cases like images */
   > *:last-child {
     margin-bottom: 0 !important;
+
+    /* This covers cases like images */
+    > *:last-child {
+      margin-bottom: 0 !important;
+    }
   }
 }
 /* stylelint-enable */
