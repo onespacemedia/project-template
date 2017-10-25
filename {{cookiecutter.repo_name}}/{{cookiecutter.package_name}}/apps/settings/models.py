@@ -23,6 +23,7 @@ class Setting(models.Model):
         choices=[
             ('string', 'String'),
             ('text', 'Text'),
+            ('html', 'HTML'),
             ('number', 'Number'),
             ('image', 'Image'),
         ],
