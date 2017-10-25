@@ -9,16 +9,19 @@ dependencies:
     - sudo apt-get install libgeoip-dev
   override:
     - if psql test -c ''; then dropdb test; fi
-    - pip install --upgrade pip setuptools cookiecutter python-coveralls
+    # Things required to create the project
+    - pip install --upgrade pip setuptools cookiecutter
     - npm install --global yarn
     - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
+    # Things required to test the project
+    - deactivate && cd test/ && . .venv/bin/activate && pip install --upgrade pytest pytest-cov pytest-django pytest-xdist python-coveralls
 
 test:
   override:
-    - deactivate && . test/.venv/bin/activate && pylint test/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
-    - deactivate && . test/.venv/bin/activate && isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
-    - deactivate && . test/.venv/bin/activate && yarn run lint:css
-    - deactivate && . test/.venv/bin/activate && yarn run lint:js
-    - deactivate && . test/.venv/bin/activate && pytest --cov=test -n auto --create-db --nomigrations
+    - deactivate && cd test/ && . .venv/bin/activate && pylint test/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
+    - deactivate && cd test/ && . .venv/bin/activate && isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
+    - deactivate && cd test/ && . .venv/bin/activate && yarn run lint:css
+    - deactivate && cd test/ && . .venv/bin/activate && yarn run lint:js
+    - deactivate && cd test/ && . .venv/bin/activate && pytest --cov=test -n auto --create-db --nomigrations
   post:
     - coveralls
