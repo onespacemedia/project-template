@@ -133,17 +133,11 @@ def md(value, inline=True):
     return mark_safe(md_escaped(value, inline=inline))
 
 
-@library.global_function
-def get_header_content():
-    try:
-        return Header.objects.first()
-    except IndexError:
-        return None
+# @library.global_function
+# def get_header_content():
+#     return Header.objects.first()
 
 
-@library.global_function
-def get_footer_content():
-    try:
-        return Footer.objects.first()
-    except IndexError:
-        return None
+# @library.global_function
+# def get_footer_content():
+#     return Footer.objects.first()

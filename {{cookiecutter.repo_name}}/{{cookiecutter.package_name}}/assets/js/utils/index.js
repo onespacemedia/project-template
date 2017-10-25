@@ -81,7 +81,7 @@ export const mediaBreakpoints = {
   md: 900,
   lg: 1200,
   xlg: 1440,
-  xxlg: 1600,
+  xxlg: 1600
 }
 
 /*
