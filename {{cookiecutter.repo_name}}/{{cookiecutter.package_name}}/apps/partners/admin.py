@@ -23,4 +23,3 @@ class PartnerAdmin(SortableModelAdmin, PageBaseAdmin):
         PageBaseAdmin.OPENGRAPH_FIELDS,
         PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS,
     ]
-
