@@ -193,7 +193,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 # Dispatch settings.
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
@@ -207,7 +207,7 @@ MIDDLEWARE_CLASSES = (
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',
-)
+]
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.Argon2PasswordHasher',

@@ -1,12 +1,9 @@
 import re
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.safestring import mark_safe
-from six import text_type
 
 
-@python_2_unicode_compatible
 class Redirect(models.Model):
 
     old_path = models.CharField(
