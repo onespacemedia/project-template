@@ -9,7 +9,7 @@ dependencies:
     - sudo apt-get install libgeoip-dev
   override:
     - if psql test -c ''; then dropdb test; fi
-    - pip install --update pip setuptools cookiecutter python-coveralls
+    - pip install --upgrade pip setuptools cookiecutter python-coveralls
     - npm install --global yarn
     - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
 
