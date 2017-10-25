@@ -117,6 +117,8 @@ mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.packag
 
 rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
+which pylint
+
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
 
