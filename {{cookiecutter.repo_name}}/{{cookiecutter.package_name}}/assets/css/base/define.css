@@ -7,6 +7,26 @@
 | Global resets to make life easier
 |
 */
+a,
+area,
+button,
+[role='button'],
+input:not([type='range']),
+label,
+select,
+summary,
+textarea {
+  /* stylelint-disable property-no-vendor-prefix */
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+body:not(.util-IsTabbing) button:focus,
+body:not(.util-IsTabbing) input:focus,
+body:not(.util-IsTabbing) select:focus,
+body:not(.util-IsTabbing) textarea:focus {
+  outline: none;
+}
 
 *, *::before, *::after {
   box-sizing: border-box;
