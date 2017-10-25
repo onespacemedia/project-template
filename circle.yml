@@ -6,7 +6,7 @@ machine:
 
 dependencies:
   override:
-    - pip install -U pip setuptools cookiecutter python-coveralls
+    - pip install -U pip setuptools==36.2.7 cookiecutter python-coveralls
     - npm install --global yarn
     - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
 
