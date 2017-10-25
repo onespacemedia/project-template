@@ -1,0 +1,21 @@
+machine:
+  node:
+    version: 8.4.0
+  python:
+    version: 3.6.2
+
+dependencies:
+  override:
+    - pip install -U pip setuptools cookiecutter python-coveralls
+    - npm install --global yarn
+    - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
+
+test:
+  override:
+    - pylint test/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
+    - isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
+    - yarn run lint:css
+    - yarn run lint:js
+    - pytest --cov=test -n auto --create-db --nomigrations
+  post:
+    - coveralls
