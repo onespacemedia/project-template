@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from ..models import Setting
-from ..templatetags.settings import setting, get_setting
+from ..templatetags.settings import get_setting, setting
 
 
 class SettingsTagsTest(TestCase):
