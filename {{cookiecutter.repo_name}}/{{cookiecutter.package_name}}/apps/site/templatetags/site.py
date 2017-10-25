@@ -9,6 +9,8 @@ from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
 
+from ..models import Footer, Header
+
 
 @library.global_function
 @jinja2.contextfunction
@@ -131,21 +133,11 @@ def md(value, inline=True):
     return mark_safe(md_escaped(value, inline=inline))
 
 
-@library.global_function
-def get_header_content():
-    from ..models import Header
-
-    try:
-        return Header.objects.first()
-    except IndexError:
-        return None
+# @library.global_function
+# def get_header_content():
+#     return Header.objects.first()
 
 
-@library.global_function
-def get_footer_content():
-    from ..models import Footer
-
-    try:
-        return Footer.objects.first()
-    except IndexError:
-        return None
+# @library.global_function
+# def get_footer_content():
+#     return Footer.objects.first()
