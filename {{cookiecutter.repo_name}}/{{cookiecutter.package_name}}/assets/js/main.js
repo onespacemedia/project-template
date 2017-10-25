@@ -1,5 +1,6 @@
 import 'babel-polyfill'
 import 'utils/class-list-polyfill'
+import 'utils/focus-ring'
 
 import Vue from 'vue'
 import App from './vue/App'
@@ -10,6 +11,10 @@ import { externalLinks, iframeFix } from './utils'
 new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body || document.documentElement
+  body.classList.add('util-JSEnabled')
+  body.classList.remove('usr-IsTabbing')
+
   externalLinks()
 
   const lazyImage = document.querySelector('.js-LazyImage')
