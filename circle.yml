@@ -10,11 +10,11 @@ dependencies:
   override:
     - if psql test -c ''; then dropdb test; fi
     # Things required to create the project
-    - pip install --upgrade pip setuptools cookiecutter
+    - pip install --upgrade pip setuptools cookiecutter python-coveralls
     - npm install --global yarn
     - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
     # Things required to test the project
-    - deactivate && cd test/ && . .venv/bin/activate && pip install --upgrade pytest pytest-cov pytest-django python-coveralls
+    - deactivate && cd test/ && . .venv/bin/activate && pip install --upgrade pytest pytest-cov pytest-django
 
 test:
   override:
@@ -24,4 +24,4 @@ test:
     - deactivate && cd test/ && . .venv/bin/activate && yarn run lint:js
     - deactivate && cd test/ && . .venv/bin/activate && pytest --cov=test --create-db --nomigrations --ds=test.settings.production
   post:
-    - coveralls
+    - cd test/ && coveralls
