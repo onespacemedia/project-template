@@ -22,6 +22,6 @@ test:
     - deactivate && cd test/ && . .venv/bin/activate && isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
     - deactivate && cd test/ && . .venv/bin/activate && yarn run lint:css
     - deactivate && cd test/ && . .venv/bin/activate && yarn run lint:js
-    - deactivate && cd test/ && . .venv/bin/activate && pytest --cov=test --create-db --nomigrations
+    - deactivate && cd test/ && . .venv/bin/activate && pytest --cov=test --create-db --nomigrations --ds=test.settings.production
   post:
     - coveralls
