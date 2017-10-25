@@ -1,5 +1,7 @@
 import 'babel-polyfill'
+import 'intersection-observer'
 import 'utils/class-list-polyfill'
+import 'utils/webp-detector'
 
 import Vue from 'vue'
 import App from './vue/App'
@@ -15,7 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const lazyImage = document.querySelector('.js-LazyImage')
   if (lazyImage) {
     const lazyImages = document.querySelectorAll('.js-LazyImage')
-    Array.from(lazyImages).map(image => new LazyImage({ el: image }))
+    const callback = (entries, observer) => {
+      Array.from(entries).forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          window.setTimeout(() => {
+            new LazyImage({ el: entry.target })
+            observer.unobserve(entry.target)
+          }, 150 * index)
+        }
+      })
+    }
+    /* eslint-disable compat/compat */
+    const observer = new IntersectionObserver(callback, {
+      threshold: 0.4
+    })
+    Array.from(lazyImages).forEach(image => observer.observe(image))
   }
 
   // If the browser isn't Safari, don't do anything
