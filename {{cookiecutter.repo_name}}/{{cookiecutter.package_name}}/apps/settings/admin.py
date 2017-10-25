@@ -34,7 +34,6 @@ class SettingAdmin(admin.ModelAdmin):
     def setting_name(self, obj):
         return obj.name
 
-
     class Media:
         js = ('/static/settings/js/admin/fields.js',)
 
