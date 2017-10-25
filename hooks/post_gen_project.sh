@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
-set -eo pipefail
 
-function cleanup {
-    echo 'Removing project folder.'
-    if [ -d "{{cookiecutter.package_name}}" ]; then
-        rm -r "{{cookiecutter.package_name}}"
-    fi
+if [ -z "$CI" ]; then
+    set -eo pipefail
 
-    if [ -d "{{ "{{" }}cookiecutter.package_name{{ "}}" }}" ]; then
-        rm -r "{{ "{{" }}cookiecutter.package_name{{ "}}" }}"
-    fi
-}
+    function cleanup {
+        echo 'Removing project folder.'
+        if [ -d "{{cookiecutter.package_name}}" ]; then
+            rm -r "{{cookiecutter.package_name}}"
+        fi
 
-trap cleanup ERR
-trap cleanup INT
+        if [ -d "{{ "{{" }}cookiecutter.package_name{{ "}}" }}" ]; then
+            rm -r "{{ "{{" }}cookiecutter.package_name{{ "}}" }}"
+        fi
+    }
+
+    trap cleanup ERR
+    trap cleanup INT
+else
+    set -euxo pipefail
+fi
 
 if [ -f ~/.zshrc ]; then
     source ~/.zshrc
