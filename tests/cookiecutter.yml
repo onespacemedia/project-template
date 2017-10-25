@@ -1,9 +1,9 @@
 default_context:
-  project_name: "Test Project"
+  project_name: "Demo Project"
   domain_name: "example.com"
-  staging_subdomain: "test"
-  repo_name: "test"
-  package_name: "test"
+  staging_subdomain: "demo"
+  repo_name: "demo"
+  package_name: "demo"
   events: "yes"
   faqs: "yes"
   careers: "yes"
