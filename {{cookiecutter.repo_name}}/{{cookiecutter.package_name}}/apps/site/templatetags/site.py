@@ -9,7 +9,7 @@ from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
 
-from ..models import Footer, Header
+# from ..models import Footer, Header
 
 
 @library.global_function
