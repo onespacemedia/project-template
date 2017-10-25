@@ -3,8 +3,13 @@ set -eo pipefail
 
 function cleanup {
     echo 'Removing project folder.'
-    rm -r "{{cookiecutter.package_name}}"
-    rm -r "{{ "{{" }}cookiecutter.package_name{{ "}}" }}"
+    if [ -d "{{cookiecutter.package_name}}" ]; then
+        rm -r "{{cookiecutter.package_name}}"
+    fi
+
+    if [ -d "{{ "{{" }}cookiecutter.package_name{{ "}}" }}" ]; then
+        rm -r "{{ "{{" }}cookiecutter.package_name{{ "}}" }}"
+    fi
 }
 
 trap cleanup ERR
