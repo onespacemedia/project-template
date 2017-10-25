@@ -69,12 +69,6 @@ fi
     rm -rf {{cookiecutter.package_name}}/geoip/
 {% endif %}
 
-# If the sections app wasn't enabled, delete the utils file.
-{% if cookiecutter.sections == "no" %}
-    echo "Removing admin utils file."
-    rm {{cookiecutter.package_name}}/utils/admin.py
-{% endif %}
-
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
@@ -85,7 +79,7 @@ pip install --upgrade setuptools
 pip install -r requirements.txt
 
 # Install the linters so the versions get frozen.
-pip install -q --disable-pip-version-check pylint pylint-django pylint-mccabe isort
+pip install --disable-pip-version-check pylint pylint-django pylint-mccabe isort
 
 # The requirements will now have versions pinned, so re-dump them.
 pip freeze > requirements.txt
@@ -94,13 +88,13 @@ pip freeze > requirements.txt
 perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
 
 # Install front-end dependencies.
-#if command -v yarn >/dev/null 2>&1; then
-#    yarn
-#    yarn run build
-#else
-#    npm install
-#    npm run build
-#fi
+if command -v yarn >/dev/null 2>&1; then
+   yarn
+   yarn run build
+else
+   npm install
+   npm run build
+fi
 
 {% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
     {% if cookiecutter[project] == 'no' %}
