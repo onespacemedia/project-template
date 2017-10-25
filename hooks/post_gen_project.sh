@@ -92,15 +92,6 @@ pip freeze > requirements.txt
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
 
-# Install front-end dependencies.
-if command -v yarn >/dev/null 2>&1; then
-   yarn
-   yarn run build
-else
-   npm install
-   npm run build
-fi
-
 {% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
     {% if cookiecutter[project] == 'no' %}
         echo "Remove the {{project}} app.";
@@ -116,6 +107,17 @@ mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_n
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}
 
 rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
+
+# Install front-end dependencies.
+nvm use
+
+if command -v yarn >/dev/null 2>&1; then
+   yarn
+   yarn run build
+else
+   npm install
+   npm run build
+fi
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
