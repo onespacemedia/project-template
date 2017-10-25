@@ -13,7 +13,6 @@ function cleanup {
 }
 
 trap cleanup ERR
-trap cleanup EXIT
 trap cleanup INT
 
 if [ -f ~/.zshrc ]; then
