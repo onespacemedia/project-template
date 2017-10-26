@@ -189,6 +189,8 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter',
 ]
 
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
 THUMBNAIL_PRESERVE_FORMAT = True
 
 # Dispatch settings.
