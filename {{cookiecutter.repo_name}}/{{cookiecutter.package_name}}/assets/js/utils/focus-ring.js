@@ -1,4 +1,5 @@
 const body = document.body || document.documentElement
+body.classList.remove('util-IsTabbing')
 
 const handleFirstTab = e => {
   if (e.keyCode === 9) {

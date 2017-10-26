@@ -13,7 +13,6 @@ new Vue(App).$mount('#app')
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.documentElement
   body.classList.add('util-JSEnabled')
-  body.classList.remove('util-IsTabbing')
 
   externalLinks()
 
