@@ -4,15 +4,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description" content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
+    <meta name="description"
+          content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
     <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
 
     {% block canonical %}
-      <link rel="canonical" href="{{ get_canonical_url() }}"/>
+      <link rel="canonical" href="{{ get_canonical_url() }}" />
     {% endblock %}
 
     {% if page_obj and page_obj.has_other_pages() %}
@@ -29,15 +31,20 @@
     <meta property="og:title" content="{% block og_title %}{{ get_og_title() }}{% endblock %}">
     <meta property="og:url" content="{{ get_canonical_url() }}">
     <meta property="og:type" content="website">
-    <meta property="og:description" content="{% block og_description %}{{ get_og_description() }}{% endblock %}">
+    <meta property="og:description"
+          content="{% block og_description %}{{ get_og_description() }}{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ get_og_image() }}{% endblock %}">
 
     <!-- Twitter card data -->
-    <meta name="twitter:card" content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
+    <meta name="twitter:card"
+          content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
     <meta name="twitter:site" content="" />
-    <meta name="twitter:title" content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
-    <meta name="twitter:description" content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
-    <meta name="twitter:image" content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
+    <meta name="twitter:title"
+          content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
+    <meta name="twitter:description"
+          content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
+    <meta name="twitter:image"
+          content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
 
     <title>{% block title %}{{ render_title() }}{% endblock %}</title>
 
@@ -55,7 +62,8 @@
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet">
 
     {% block css %}{% endblock %}
 
@@ -64,22 +72,22 @@
     {# Opbeat JS error tracking #}
     {% if settings.OPBEAT %}
       <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
-          data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
-          data-app-id="{{ settings.OPBEAT.APP_ID }}">
+              data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
+              data-app-id="{{ settings.OPBEAT.APP_ID }}">
       </script>
 
       {% if user.is_authenticated() %}
         <script>
-        _opbeat('setUserContext', {
+          _opbeat('setUserContext', {
             id: "{{ user.pk }}"
-        });
+          });
         </script>
-        {% endif %}
+      {% endif %}
     {% endif %}
 
   </head>
 
-  <body class="util-Preload {% block body_class %}{% endblock %}">
+  <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
 
     {% block site %}
@@ -94,15 +102,17 @@
               <div class="lyt-Content {% block content_class %}{% endblock %}">
                 {% block content_inner %}
                   <div class="lyt-Content_Inner">
-                    <main class="lyt-Main {% block main_class %}{% endblock %}">
-                      {% block main %}{% endblock %}
-                    </main>
+                    <div class="lyt-Content_Body">
+                      <main class="lyt-Main {% block main_class %}{% endblock %}">
+                        {% block main %}{% endblock %}
+                      </main>
 
-                    {% if self.aside() %}
-                      <aside class="lyt-Aside">
-                        {% block aside %}{% endblock %}
-                      </aside>
-                    {% endif %}
+                      {% if self.aside() %}
+                        <aside class="lyt-Aside">
+                          {% block aside %}{% endblock %}
+                        </aside>
+                      {% endif %}
+                    </div>
                   </div>
                 {% endblock %}
               </div>

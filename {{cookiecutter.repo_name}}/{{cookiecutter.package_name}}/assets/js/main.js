@@ -1,6 +1,7 @@
 import 'babel-polyfill'
 import 'intersection-observer'
 import 'utils/class-list-polyfill'
+import 'utils/focus-ring'
 import 'utils/webp-detector'
 
 import Vue from 'vue'
@@ -12,6 +13,9 @@ import { externalLinks, iframeFix } from './utils'
 new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body || document.documentElement
+  body.classList.add('util-JSEnabled')
+
   externalLinks()
 
   const lazyImage = document.querySelector('.js-LazyImage')
