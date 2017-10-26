@@ -11,6 +11,8 @@ dependencies:
   override:
     - pip install -U setuptools
     - pip install --disable-pip-version-check -r requirements.txt
+    # For issue_notify
+    - pip install cryptography pygithub
     - npm install --global yarn
     - yarn add stylelint@8.1.1 stylelint-order@0.5.0 eslint@4.6.1 eslint-config-standard@10.2.1 eslint-config-prettier@2.4.0 eslint-plugin-standard@3.0.1 eslint-plugin-html@3.0.0 eslint-plugin-prettier@2.2.0 babel-eslint@7.2.3 standard@10.0.2
 
@@ -27,7 +29,9 @@ test:
 #     branch: develop
 #     commands:
 #       - python manage.py update --remote=staging
+#       - python issue_notify.py staging
 #   production:
 #     branch: master
 #     commands:
 #       - python manage.py update --remote=production
+#       - python issue_notify.py production
