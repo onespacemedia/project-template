@@ -10,6 +10,7 @@ from historylinks import shortcuts as historylinks
 class Careers(ContentBase):
 
     classifier = 'apps'
+    icon = 'cms-icons/careers.png'
     urlconf = '{{ cookiecutter.package_name }}.apps.careers.urls'
 
     per_page = models.PositiveIntegerField(
