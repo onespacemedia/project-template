@@ -9,6 +9,7 @@ class ContentSectionInline(SortableStackedInline):
     model = ContentSection
     extra = 0
     filter_horizontal = ['people']
+    fk_name = 'page'
 
     class Media(object):
         js = [reverse_lazy('admin_sections_js')]

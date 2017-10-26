@@ -5,29 +5,31 @@ from cms.apps.pages.models import ContentBase, Page
 from cms.models import HtmlField
 from django.db import models
 from django.shortcuts import render_to_response
+from django.utils.functional import cached_property
 from django.utils.text import slugify
+
 
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
             ('homepage-hero', {
-                'fields': ['title', 'text', 'button_text', 'button_url'],
+                'fields': ['title', 'text', 'link_text', 'link_page', 'link_url'],
             }),
             ('landing-hero', {
-                'fields': ['title', 'text', 'image', 'button_text', 'button_url'],
+                'fields': ['title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
             }),
         ]
     }),
     ('Text', {
         'sections': [
             ('dual-column', {
-                'fields': ['title', 'text', 'button_text', 'button_url'],
+                'fields': ['title', 'text', 'link_text', 'link_page', 'link_url'],
             }),
         ]
     }),
     ('Misc', {
         'sections': [
-            ('keyline', {
+            ('key7e', {
                 'fields': []
             })
         ]
@@ -126,17 +128,26 @@ class SectionBase(models.Model):
         null=True,
     )
 
-    button_text = models.CharField(
+    link_text = models.CharField(
         max_length=100,
         blank=True,
         null=True,
     )
 
-    button_url = models.CharField(
-        'button URL',
+    link_page = models.ForeignKey(
+        'pages.Page',
+        blank=True,
+        null=True,
+        help_text='Use this to link to an internal page.',
+        related_name='+'
+    )
+
+    link_url = models.CharField(
+        'link URL',
         max_length=200,
         blank=True,
         null=True,
+        help_text='Use this to link to any other URL.',
     )
 
     order = models.PositiveIntegerField(
@@ -152,8 +163,17 @@ class SectionBase(models.Model):
         return dict(SECTION_TYPES)[self.type]['name']
 
     @property
-    def template(self):
-        return f'{self.type}.html'
+    def has_link(self):
+        return self.link_location and self.link_text
+
+    @cached_property
+    def link_location(self):
+        if self.link_page_id:
+            try:
+                return self.link_page.get_absolute_url()
+            except Page.DoesNotExist:
+                pass
+        return self.link_url
 
 
 class ContentSection(SectionBase):
