@@ -11,10 +11,10 @@ dependencies:
     - if psql demo -c ''; then dropdb demo; fi
     # Things required to create the project
     - pip install --upgrade pip setuptools cookiecutter python-coveralls
-    # For issue_notify
-    - pip install cryptography pygithub
     - npm install --global yarn
     - cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
+    # For issue_notify
+    - deactivate && cd demo/ && . .venv/bin/activate && pip install cryptography pygithub
     # Things required to test the project
     - deactivate && cd demo/ && . .venv/bin/activate && pip install --upgrade pytest pytest-cov pytest-django
 
