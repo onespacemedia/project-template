@@ -8,7 +8,6 @@ from django.shortcuts import render_to_response
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
-
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
