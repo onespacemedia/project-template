@@ -23,6 +23,7 @@ class Team(models.Model):
 class People(ContentBase):
 
     classifier = 'apps'
+    icon = 'cms-icons/people.png'
     urlconf = '{{ cookiecutter.package_name }}.apps.people.urls'
 
     per_page = models.PositiveIntegerField(

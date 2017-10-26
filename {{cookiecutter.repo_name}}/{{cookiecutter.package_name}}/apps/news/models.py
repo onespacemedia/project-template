@@ -15,7 +15,8 @@ class NewsFeed(ContentBase):
 
     """A stream of news articles."""
 
-    icon = 'news/img/news-feed.png'
+    classifier = 'apps'
+    icon = 'cms-icons/news.png'
 
     # The heading that the admin places this content under.
     classifier = 'syndication'
