@@ -183,5 +183,7 @@ class ContentSection(SectionBase):
 
 class Content(ContentBase):
 
+    icon = 'cms-icons/sections.png'
+
     def __str__(self):
         return self.page.title
