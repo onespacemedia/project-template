@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand
 from ...models import SECTION_TYPES
 
 IMAGE_ROOT = os.path.join(settings.SITE_ROOT, 'assets/img/sections/')
-IMAGE_URL = 'https://github.com/onespacemedia/cms-icons/raw/master/png/i-_{}.png'
+IMAGE_URL = 'https://github.com/onespacemedia/cms-icons/raw/master/png/{}.png'
 
 
 class Command(BaseCommand):
