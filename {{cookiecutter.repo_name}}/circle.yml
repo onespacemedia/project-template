@@ -28,10 +28,10 @@ test:
 #   staging:
 #     branch: develop
 #     commands:
-#       - python manage.py update --remote=staging
+#       - python manage.py update --remote=staging --commit=$CIRCLE_SHA1
 #       - python issue_notify.py staging
 #   production:
 #     branch: master
 #     commands:
-#       - python manage.py update --remote=production
+#       - python manage.py update --remote=production --commit=$CIRCLE_SHA1
 #       - python issue_notify.py production
