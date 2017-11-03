@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.utils import timezone
 from watson import search
 
-from ..models import Event, Events
+from ..models import Category, Event, Events
 
 
 class EventsBaseTestCase(TestCase):
@@ -26,6 +26,8 @@ class EventsBaseTestCase(TestCase):
                 page=self.page,
                 per_page=6,
             )
+
+            self.category = Category(title='Test category')
 
         self.future_events = []
         # Add a few future dates.

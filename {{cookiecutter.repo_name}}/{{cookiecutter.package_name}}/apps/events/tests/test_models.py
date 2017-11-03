@@ -1,8 +1,15 @@
-from ..models import Event
+from ..models import Category, Event
 from ._base import EventsBaseTestCase
 
 
 class EventsModelsTestCase(EventsBaseTestCase):
+    def test_category_meta(self):
+        # Make sure categories isn't being pluralised as 'categorys'.
+        self.assertEqual(self.category._meta.verbose_name_plural, 'categories')
+
+    def test_category_str(self):
+        self.assertEqual(str(self.category), 'Test category')
+
     # Ensure select_upcoming is pulling all future dates and no past ones.
     def test_eventsqueryset_select_upcoming(self):
         future = Event.objects.select_upcoming()
