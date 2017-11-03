@@ -1,4 +1,6 @@
-from ..models import Category, Event
+from datetime import date
+
+from ..models import Event
 from ._base import EventsBaseTestCase
 
 
@@ -34,3 +36,17 @@ class EventsModelsTestCase(EventsBaseTestCase):
 
     def test_events_get_absolute_url(self):
         self.assertEqual(self.future_event.get_absolute_url(), '/test-future-1/')
+
+    def test_event_date(self):
+        # Test formatted date.
+        date_test = Event(
+            start_date=date(2017, 1, 1),
+            end_date=date(2017, 1, 1),
+        )
+        self.assertEquals(date_test.date, '1 January 2017')
+
+        date_test = Event(
+            start_date=date(2017, 1, 1),
+            end_date=date(2017, 11, 11),
+        )
+        self.assertEquals(date_test.date, '1 January 2017 - 11 November 2017')
