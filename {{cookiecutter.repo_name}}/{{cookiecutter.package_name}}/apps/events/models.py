@@ -61,13 +61,9 @@ class Event(PageBase):
         return self.title
 
     def get_absolute_url(self):
-        if self.page:
-            return self.page.page.reverse('event_detail', kwargs={
-                'slug': self.slug,
-            })
-
-    def get_summary(self):
-        return self.summary
+        return self.page.page.reverse('event_detail', kwargs={
+            'slug': self.slug,
+        })
 
     @property
     def date(self):
