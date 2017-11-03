@@ -1,8 +1,17 @@
-from ..models import People, Person
+from ..models import Person, Team
 from ._base import PeopleBaseTestCase
 
 
 class ApplicationTestCase(PeopleBaseTestCase):
+
+    def test_people_str(self):
+        self.assertEqual(str(self.person_page), self.page.title)
+
+    def test_team_str(self):
+        team = Team(
+            title='Test team'
+        )
+        self.assertEqual(str(team), team.title)
 
     def test_person_get_absolute_url(self):
         self.assertEqual(self.person.get_absolute_url(), '/foo-bar/')
