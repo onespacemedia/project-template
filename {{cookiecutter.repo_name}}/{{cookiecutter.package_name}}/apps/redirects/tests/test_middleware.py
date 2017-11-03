@@ -41,6 +41,11 @@ class RedirectMiddlewareTestCase(BaseRedirectTestCase):
             )
 
             self.assertEqual(
+                middleware._redirect_for_path(self.regex_redirect.test_path),
+                self.regex_redirect,
+            )
+
+            self.assertEqual(
                 middleware._redirect_for_path(self.regex_redirect.old_path),
                 self.regex_redirect
             )
