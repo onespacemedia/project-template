@@ -5,7 +5,7 @@ from django.test import RequestFactory
 from watson import search
 
 from ..models import People
-from ..views import PersonView, PersonListView
+from ..views import PersonListView, PersonView
 from ._base import PeopleBaseTestCase
 
 
