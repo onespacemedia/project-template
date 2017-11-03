@@ -46,7 +46,13 @@ class TestArticleAdminBase(TestCase):
             )
 
             self.category = Category.objects.create(
+                title='Foo',
                 slug='foo'
+            )
+
+            self.category_2 = Category.objects.create(
+                title='Foo 2',
+                slug='foo-2',
             )
 
             self.article = Article.objects.create(
@@ -55,6 +61,9 @@ class TestArticleAdminBase(TestCase):
                 slug='foo',
                 date=self.date,
             )
+
+            self.article.categories.add(self.category)
+            self.article.categories.add(self.category_2)
 
     def test_articleadminbase_formfield_for_choice_field(self):
         formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
@@ -89,3 +98,12 @@ class TestArticleAdminBase(TestCase):
         default_feed = get_default_news_feed()
         self.assertTrue('news_feed' in form.base_fields)
         self.assertEqual(default_feed, form.base_fields['news_feed'].initial)
+
+    def test_render_categories(self):
+        categories = self.article_admin.render_categories(self.article)
+        self.assertEqual(categories, 'Foo, Foo 2')
+
+    def test_get_queryset(self):
+        # don't do anything with it, just make sure this doesn't throw an
+        # exception
+        self.article_admin.get_queryset(self.request)
