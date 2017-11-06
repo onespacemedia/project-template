@@ -56,9 +56,9 @@ export default class LazyImage {
              src="${this.originalLargeImageUrl}"
              srcset="${this.originalLargeImage2xUrl} 2x">
     </picture>`
+    // prettier-ignore
     const fallbackEl = `<div class="img-Image_Media">
-      <div class="img-Image_Image img-Image_Image-large img-Image_Image-noObjectFit ${this
-      .loadedClass}"
+      <div class="img-Image_Image img-Image_Image-large img-Image_Image-noObjectFit ${this.loadedClass}"
            style="background-image: url(${this.originalLargeImageUrl});"></div>
     </div>`
 
