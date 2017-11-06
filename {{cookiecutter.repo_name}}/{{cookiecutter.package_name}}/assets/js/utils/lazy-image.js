@@ -17,7 +17,6 @@ export default class LazyImage {
     const node = this.createNode()
     const smallImage = node.querySelector('.img-Image_Image-small')
     const largeImage = node.querySelector('.img-Image_Image-large')
-    const fallbackImage = node.querySelector('.img-Image_Image-noObjectFit')
 
     if (this.supportsObjectFit) {
       smallImage.onload = () => smallImage.classList.add(this.loadedClass)
@@ -36,8 +35,6 @@ export default class LazyImage {
 
         largeImage.addEventListener('transitionend', transitionEndFnc)
       }
-    } else {
-      largeImage.onload = () => fallbackImage.classList.add(this.loadedClass)
     }
 
     fragment.appendChild(node)
@@ -46,12 +43,24 @@ export default class LazyImage {
   }
 
   createNode () {
-    const fallbackEl = `
-      <div class="img-Image_Image img-Image_Image-noObjectFit"
-           style="background-image: url(${this.originalLargeImageUrl});"></div>`
-
     let smallImageClass = 'img-Image_Image img-Image_Image-small'
     smallImageClass += this.blur ? ' img-Image_Image-blurred' : ''
+
+    const baseEl = `<picture class="img-Image_Media">
+      <source srcset="${this.webPUrl}, ${this.webP2xUrl} 2x" type="image/webp">
+        <img alt=""
+             class="${smallImageClass}"
+             src="${this.smallImageUrl}">
+        <img alt="${this.altText}"
+             class="img-Image_Image img-Image_Image-large"
+             src="${this.originalLargeImageUrl}"
+             srcset="${this.originalLargeImage2xUrl} 2x">
+    </picture>`
+    const fallbackEl = `<div class="img-Image_Media">
+      <div class="img-Image_Image img-Image_Image-large img-Image_Image-noObjectFit ${this
+      .loadedClass}"
+           style="background-image: url(${this.originalLargeImageUrl});"></div>
+    </div>`
 
     return document.createRange().createContextualFragment(`
       <div class="img-Image${this.blur === false ? ' img-Image-noBlur' : ''}">
@@ -59,20 +68,7 @@ export default class LazyImage {
           <div class="img-Image_AspectRatio"
                style="padding-bottom: ${this.aspectRatio}"></div>
 
-          <picture class="img-Image_Media">
-            <source srcset="${this.webPUrl}, ${this
-      .webP2xUrl} 2x" type="image/webp">
-            <img alt=""
-                 class="${smallImageClass}"
-                 src="${this.smallImageUrl}">
-            <img alt="${this.altText}"
-                 class="img-Image_Image img-Image_Image-large"
-                 src="${this.originalLargeImageUrl}"
-                 srcset="${this.originalLargeImage2xUrl} 2x">
-            ${!this.supportsObjectFit ? fallbackEl : ''}
-          </picture>
-        </div>
-      </div>
-    `)
+          ${this.supportsObjectFit ? baseEl : fallbackEl}
+      `)
   }
 }
