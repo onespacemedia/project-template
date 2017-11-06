@@ -3,17 +3,23 @@
      data-blur="{{ blur }}"
      data-aspect-ratio="{{ aspect_ratio }}"
      data-small-image-url="{{ small_image_url }}"
-     data-large-image-url="{{ large_image_url }}"
-     data-large-image-2x-url="{{ large_image_url_2x }}">
+     data-original-large-image-url="{{ original_large_image_url }}"
+     data-original-large-image-2x-url="{{ original_large_image_url_2x }}"
+     data-webp-url="{{ webp_url }}"
+     data-webp-2x-url="{{ webp_url_2x }}">
   <div class="img-Image_AspectRatioHolder">
     <div class="img-Image_AspectRatio" style="padding-bottom: {{ aspect_ratio }}"></div>
 
     <div class="img-Image_Media">
       <noscript class="img-Image_Noscript">
-        <img alt="{{ alt_text }}"
-             src="{{ large_image_url }}"
-             srcset="{{ large_image_url_2x }} 2x"
-             class="img-Image_Image">
+        <picture>
+          <source srcset="{{ webp_url }}" type="image/webp">
+          <source srcset="{{ original_large_image_url }}">
+          <img alt="{{ alt_text }}"
+               src="{{ original_large_image_url }}"
+               srcset="{{ original_large_image_url_2x }} 2x"
+               class="img-Image_Image">
+        </picture>
       </noscript>
     </div>
   </div>

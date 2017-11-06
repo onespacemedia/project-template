@@ -51,6 +51,11 @@ def get_previous_by_field(obj, field):
 
 @library.global_function
 def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):  # pylint: disable=too-many-arguments
+    user_sized = height and width
+
+    if user_sized and not crop:
+        crop = 'center'
+
     # Ideally we will use the images uploaded sizes to get our aspect ratio but in certain circumstances, like cards,
     # we will use our own provided ones
     if not height:
@@ -59,24 +64,31 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
     if not width:
         width = image.width
 
-    aspect_ratio = height / width
+    aspect_ratio = height / width if user_sized else image.height / image.width
 
     if width > max_width:
         width = max_width
 
+    if width > height:
+        height = int(width * aspect_ratio)
+
     # The aspect ratio will be used to size the image with a padding-bottom based element
     aspect_ratio_percentage = '{}%'.format(aspect_ratio * 100)
     small_image_url = get_thumbnail(image.file, str(int(width / 20))).url
-    large_image_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop).url
-    large_image_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop).url
+    original_large_image_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop).url
+    original_large_image_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop).url
+    webp_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop, format='WEBP', quality=80).url
+    webp_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop, format='WEBP', quality=80).url
 
     return {
         'alt_text': image.alt_text or '',
         'aspect_ratio': aspect_ratio_percentage,
         'small_image_url': small_image_url,
-        'large_image_url': large_image_url,
-        'large_image_url_2x': large_image_url_2x,
-        'blur': blur
+        'original_large_image_url': original_large_image_url,
+        'original_large_image_url_2x': original_large_image_url_2x,
+        'webp_url': webp_url,
+        'webp_url_2x': webp_url_2x,
+        'blur': False if str(image.file).endswith('.png') else blur
     }
 
 
@@ -84,7 +96,7 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
 @library.render_with('images/lazy.html')
 def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None):  # pylint: disable=too-many-arguments
     """
-        {% raw %}Usage: {{ lazy_image(path.to.image) }}{% endraw %}
+        Usage: {% raw %}{{ lazy_image(path.to.image) }}{% endraw %}
         :param crop:
         :param max_width:
         :param blur:
