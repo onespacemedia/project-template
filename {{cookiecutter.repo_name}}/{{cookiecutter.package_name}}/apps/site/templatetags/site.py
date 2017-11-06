@@ -5,6 +5,7 @@ import CommonMark
 import jinja2
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
@@ -74,11 +75,46 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
 
     # The aspect ratio will be used to size the image with a padding-bottom based element
     aspect_ratio_percentage = '{}%'.format(aspect_ratio * 100)
-    small_image_url = get_thumbnail(image.file, str(int(width / 20))).url
-    original_large_image_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop).url
-    original_large_image_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop).url
-    webp_url = get_thumbnail(image.file, f'{width}x{height}', crop=crop, format='WEBP', quality=80).url
-    webp_url_2x = get_thumbnail(image.file, f'{width * 2}x{height * 2}', crop=crop, format='WEBP', quality=80).url
+
+    original_large_image_url = reverse('assets:thumbnail', kwargs={
+        'pk': image.pk,
+        'width': width,
+        'height': height,
+        'format': 'source',
+        'crop': crop,
+    })
+
+    original_large_image_url_2x = reverse('assets:thumbnail', kwargs={
+        'pk': image.pk,
+        'width': width * 2,
+        'height': height * 2,
+        'format': 'source',
+        'crop': crop,
+    })
+
+    webp_url = reverse('assets:thumbnail', kwargs={
+        'pk': image.pk,
+        'width': width,
+        'height': height,
+        'format': 'webp',
+        'crop': crop,
+        # quality=80
+    })
+
+    webp_url_2x = reverse('assets:thumbnail', kwargs={
+        'pk': image.pk,
+        'width': width * 2,
+        'height': height * 2,
+        'format': 'webp',
+        'crop': crop,
+        # quality=80
+    })
+
+    try:
+        small_image_url = get_thumbnail(image.file, str(int(width / 20))).url
+    except ValueError:
+        # Guard against really tiny images, i.e. width / 20 results in 0.
+        small_image_url = original_large_image_url
 
     return {
         'alt_text': image.alt_text or '',
@@ -88,7 +124,7 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=N
         'original_large_image_url_2x': original_large_image_url_2x,
         'webp_url': webp_url,
         'webp_url_2x': webp_url_2x,
-        'blur': False if str(image.file).endswith('.png') else blur
+        'blur': blur
     }
 
 
