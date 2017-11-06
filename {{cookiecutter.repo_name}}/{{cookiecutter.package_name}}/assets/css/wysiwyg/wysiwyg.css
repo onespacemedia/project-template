@@ -9,7 +9,6 @@
 | @namespace: wys-
 */
 
-/* We are styling root elements so we need access to type */
 /* stylelint-disable declaration-no-important, max-nesting-depth, selector-max-id, selector-max-type */
 #tinymce,
 .wys-WYSIWYG {
