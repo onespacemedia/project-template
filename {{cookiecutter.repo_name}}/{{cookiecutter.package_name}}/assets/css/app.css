@@ -100,6 +100,4 @@
 | because of globbing
 |
 */
-.wys-WYSIWYG {
-  @import 'wysiwyg/wysiwyg.css';
-}
+@import 'wysiwyg/wysiwyg.css';

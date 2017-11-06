@@ -23,12 +23,6 @@
   --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   --Font_Family-body: var(--Font_Family);
 
-  /**
-  * Font - Sizes
-  */
-  /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
-  --Font-16: { font-size: 16px; letter-spacing: 0; line-height: 1vr; };
-
   /*
   |--------------------------------------------------------------------------
   | Grid
@@ -44,49 +38,6 @@
    just assumed a natural connection between the 2. This actually has been coincidental and it's
    just that we normally use a Grid_Gutter of 15 we haven't come across is */
   --Grid_Inside: 15px;
-
-  --GridContainer: {
-    /* We add the `_Inside` to the container instead of the `_Gutter` as if we have a rather large
-     gutter on a project this can really shrink the available content size on smaller devices */
-    max-width: calc(var(--Grid_Container) + (var(--Grid_Inside) * 2));
-    width: 100%;
-    margin-right: auto;
-    margin-left: @margin-right;
-    padding-right: calc(var(--Grid_Inside) * 2);
-    padding-left: @padding-right;
-  };
-
-  --GridRow: {
-    display: flex;
-    margin-right: -var(--Grid_Gutter);
-    margin-left: @margin-right;
-  };
-
-  --GridColumn: {
-    margin-right: var(--Grid_Gutter);
-    margin-left: @margin-right;
-  };
-
-  /*
-  |--------------------------------------------------------------------------
-  | Buttons
-  |--------------------------------------------------------------------------
-  | These are only to be used for the button mixins. The mixins themselves should be used when
-  | you want the button style.
-  |
-  */
-  --Button-base: {
-    display: inline-block;
-    padding: 0.5vr var(--Grid_Gutter);
-
-    background-color: transparent;
-    border: 1px solid transparent;
-    color: #fff;
-
-    transition: background-color var(--Global_Transition),
-                border var(--Global_Transition),
-                color var(--Global_Transition);
-  };
 
   /*
   |--------------------------------------------------------------------------
