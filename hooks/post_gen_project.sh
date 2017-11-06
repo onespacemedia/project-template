@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if [ -f ~/.zshrc ]; then
+    source ~/.zshrc
+else
+    source ~/.bash_profile
+fi
+
 if [ -z "$CI" ]; then
     set -eo pipefail
 
@@ -18,12 +24,6 @@ if [ -z "$CI" ]; then
     trap cleanup INT
 else
     set -exo pipefail
-fi
-
-if [ -f ~/.zshrc ]; then
-    source ~/.zshrc
-else
-    source ~/.bash_profile
 fi
 
 # Check if the database already exists
