@@ -1,13 +1,13 @@
 machine:
   node:
-    version: 8.4.0
+    version: 8.9.0
   python:
     version: 3.6.2
 
 dependencies:
   cache_directories:
-    - /home/ubuntu/nvm/versions/node/v8.4.0/bin
-    - /home/ubuntu/nvm/versions/node/v8.4.0/lib/node_modules
+    - /home/ubuntu/nvm/versions/node/v8.9.0/bin
+    - /home/ubuntu/nvm/versions/node/v8.9.0/lib/node_modules
   override:
     - pip install -U setuptools
     - pip install --disable-pip-version-check -r requirements.txt
