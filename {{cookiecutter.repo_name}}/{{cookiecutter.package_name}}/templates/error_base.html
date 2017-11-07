@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Favicons -->
+    {% include 'base/_favicons.html' %}
+
+    {% compress css %}
+      <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
+    {% endcompress %}
+  </head>
+
+  <body>
+    <div class="err-Error" style="{% block error_style %}{% endblock %}">
+      <div class="err-Error_Container">
+        <h1 class="err-Error_Heading">{% block heading %}{% endblock %}</h1>
+
+        <p class="err-Error_Description">{% block description %}{% endblock %}</p>
+
+        <p class="err-Error_Footer">
+          {% block footer_link %}
+          {% endblock %}
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

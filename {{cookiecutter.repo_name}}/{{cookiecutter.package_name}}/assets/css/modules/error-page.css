@@ -1,0 +1,44 @@
+/*
+|--------------------------------------------------------------------------
+| Error pages
+|--------------------------------------------------------------------------
+| Styles for stripped-down 404 and 500 pages.
+|
+| @namespace: .err-
+|
+*/
+.err-Error {
+  justify-content: center;
+
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  color: #fff;
+}
+
+.err-Error_Container {
+  position: relative;
+  z-index: 1;
+
+  max-width: 500px;
+  /* use this rather than align-items: center on the parent as this scales
+  down to really small sizes more gracefully (content doesn't go off-screen) */
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 2vr var(--Grid_Gutter);
+
+  text-align: center;
+}
+
+.err-Error_Description {
+  margin-top: 1vr;
+}
+
+.err-Error_Footer {
+  margin-top: 1vr;
+}
+
+.err-Error_FooterLink {
+  @include Button();
+}

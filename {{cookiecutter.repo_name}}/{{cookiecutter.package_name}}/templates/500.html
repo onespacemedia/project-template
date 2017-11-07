@@ -1,15 +1,15 @@
-{% extends "base.html" %}
+{% extends "error_base.html" %}
 
-{% block title %}{{ render_title('Server Error') }}{% endblock %}
+{% block title %}Server error{% endblock %}
 
-{% block content %}
-  <p>We're sorry, but the site is currently experiencing some technical
-    difficulties. </p>
+{% block heading %}500: Server error{% endblock %}
 
-  <h2>What you can try</h2>
+{% block description %}An unexpected error has occurred.<br>
+  Please try again shortly.
+{% endblock %}
 
-  <ul>
-    <li>Contact us, so we find out about the error as soon as possible.</li>
-    <li>Come back in a few hours and try again.</li>
-  </ul>
+{% block footer_link %}
+  <a href="javascript:location.reload()" class="err-Error_FooterLink">
+    Reload this page
+  </a>
 {% endblock %}
