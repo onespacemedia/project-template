@@ -16,6 +16,7 @@ class EmailTemplate(models.Model):
         max_length=300,
         blank=True,
         null=True,
+        unique=True,
         help_text="This will be used in the application to send emails of this type. It's recommended that you don't change this value after it's defined. otherwise bad things may happen.",
     )
 
