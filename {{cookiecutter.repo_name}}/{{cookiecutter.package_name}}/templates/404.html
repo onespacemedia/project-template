@@ -1,22 +1,13 @@
-{% extends "base.html" %}
+{% extends "error_base.html" %}
 
-{% block title %}{{ render_title('Page Not Found') }}{% endblock %}
+{% block title %}Page not found{% endblock %}
 
-{% block content %}
-  <p>We're sorry, but the page you were looking for cannot be found.</p>
+{% block heading %}404: Not found{% endblock %}
 
-  <h2>Most likely causes</h2>
+{% block description %}The link you clicked may be broken or the page may have been removed.{% endblock %}
 
-  <ul>
-    <li>There might be a typing error in the address.</li>
-    <li>If you clicked on a link, it may be out of date.</li>
-  </ul>
-
-  <h2>What you can try</h2>
-
-  <ul>
-    <li>Re-type the address.</li>
-    <li>Go to our <a href="/">homepage</a> and look for the information you want.</li>
-    <li>Contact us, so we can help you find what you are looking for.</li>
-  </ul>
+{% block footer_link %}
+  <a href="/" class="err-Error_FooterLink">
+    Go to our homepage
+  </a>
 {% endblock %}
