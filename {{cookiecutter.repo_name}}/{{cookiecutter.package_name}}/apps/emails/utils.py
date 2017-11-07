@@ -66,13 +66,14 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
 
     plain_text_template = linebreaks(template_obj.content)
 
-    # Replace the merge tags in the template.
+    # Replace the merge tags in the template. {% raw %}
     if 'user' in kwargs:
         plain_text_template = plain_text_template.replace('[fullname]', '{{ user.get_full_name() }}')
         plain_text_template = plain_text_template.replace('[firstname]', '{{ user.first_name }}')
         plain_text_template = plain_text_template.replace('[lastname]', '{{ user.last_name }}')
         plain_text_template = plain_text_template.replace('[email]', '{{ user.email }}')
 
+    # {% endraw %}
     # Pass the plain text template through the rendering engine so we're able to
     # use the full capabilities of Jinja.
 
