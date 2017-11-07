@@ -5,8 +5,8 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 from watson import search
 
-from ..models import Faqs
-from ..views import FaqListView
+from ..models import Faq, Faqs
+from ..views import FaqListView, FaqView
 
 
 class FAQsTestCase(TestCase):
@@ -26,6 +26,13 @@ class FAQsTestCase(TestCase):
             self.faq_page = Faqs.objects.create(
                 page=self.page,
             )
+
+        self.faq = Faq.objects.create(
+            page=self.faq_page,
+            question='Do my tests pass?',
+            answer='no',
+            slug='tests-pass'
+        )
 
     def test_faq_list_view_get_paginate_by(self):
         def setup_view(view, request, *args, **kwargs):
@@ -50,3 +57,12 @@ class FAQsTestCase(TestCase):
         view.dispatch(view.request, *view.args, **view.kwargs)
 
         self.assertEqual(view.get_paginate_by(view.get_queryset()), 10)
+
+    def test_faq_detail_view(self):
+        view = FaqView()
+        request = RequestFactory().get(self.faq.get_absolute_url())
+        request.pages = RequestPageManager(request)
+        view.request = request
+        view.kwargs = {'slug': self.faq.slug}
+        obj = view.get_object()
+        self.assertEquals(obj, self.faq)

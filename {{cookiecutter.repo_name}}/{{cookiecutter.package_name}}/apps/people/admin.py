@@ -62,7 +62,10 @@ class PersonForm(forms.ModelForm):
         if not url.startswith('http:') and not url.startswith('https:'):
             url = 'https://{}'.format(url)
         try:
-            return urlparse(url).path[1:]
+            parsed = urlparse(url)
+            if len(parsed.path) < 2:
+                raise ValueError
+            return parsed.path[1:]
         except ValueError:
             raise forms.ValidationError('Please provide either a username or a URL.')
 

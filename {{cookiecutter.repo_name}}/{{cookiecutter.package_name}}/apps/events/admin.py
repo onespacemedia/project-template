@@ -22,7 +22,6 @@ class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
             'fields': ['image', 'description'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
-        PageBaseAdmin.NAVIGATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
         PageBaseAdmin.OPENGRAPH_FIELDS,
         PageBaseAdmin.OPENGRAPH_TWITTER_FIELDS

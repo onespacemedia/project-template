@@ -67,6 +67,13 @@ class RedirectAdminTestCase(BaseRedirectTestCase):
             '<a target="_blank" href="{}">Test</a>'.format(self.normal_redirect.old_path)
         )
 
+        with self.settings(REDIRECTS_ENABLE_REGEX=True):
+            column = self.admin.test_redirect(self.regex_redirect)
+            self.assertEqual(
+                column,
+                '<a target="_blank" href="/regex-test-cases/regex-redirect/">Test</a>'
+            )
+
     def test_form(self):
         # Test for invalid from_path.
         form = RedirectModelForm({

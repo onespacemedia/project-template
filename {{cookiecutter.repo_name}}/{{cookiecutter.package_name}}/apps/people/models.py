@@ -3,6 +3,7 @@ from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
+from django.utils.functional import cached_property
 from historylinks import shortcuts as historylinks
 
 
@@ -135,7 +136,8 @@ class Person(SearchMetaBase):
             'slug': self.slug,
         })
 
-    def get_twitter_url(self):
+    @cached_property
+    def twitter_url(self):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
 

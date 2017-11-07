@@ -2,8 +2,10 @@ from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField
+from cms.models.managers import PageBaseManager
 from django.db import models
 from django.template.defaultfilters import date
+from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
 
@@ -37,7 +39,18 @@ class Category(models.Model):
         return self.title
 
 
+class EventQueryset(models.QuerySet):
+
+    def select_upcoming(self):
+        return self.filter(end_date__gte=now().date())
+
+    def select_past(self):
+        return self.filter(end_date__lt=now().date())
+
+
 class Event(PageBase):
+
+    objects = PageBaseManager.from_queryset(EventQueryset)()
 
     page = models.ForeignKey(
         Events,
@@ -61,13 +74,9 @@ class Event(PageBase):
         return self.title
 
     def get_absolute_url(self):
-        if self.page:
-            return self.page.page.reverse('event_detail', kwargs={
-                'slug': self.slug,
-            })
-
-    def get_summary(self):
-        return self.summary
+        return self.page.page.reverse('event_detail', kwargs={
+            'slug': self.slug,
+        })
 
     @property
     def date(self):

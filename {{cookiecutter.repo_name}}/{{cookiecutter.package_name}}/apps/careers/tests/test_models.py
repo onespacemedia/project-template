@@ -24,7 +24,7 @@ class CareerModelsTestCase(CareersBaseTestCase):
         # considered as open.
         self.assertNotIn(self.closed_job, Career.objects.all().select_open())
 
-    def test_careerqueryset_select_open(self):
+    def test_careerqueryset_select_closed(self):
         # Make sure those which have a closing date in the past are considered
         # as closed.
         self.assertIn(self.closed_job, Career.objects.all().select_closed())
