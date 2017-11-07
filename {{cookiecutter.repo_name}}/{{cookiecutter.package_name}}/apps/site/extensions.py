@@ -9,7 +9,7 @@ from jinja2.ext import Extension
 
 class DjangoNow(Extension):
     """
-    Implements django's `{% now %}` tag.
+    Implements django's `{% raw %}{% now %}{% endraw %}` tag.
     """
     tags = set(['now'])
 
