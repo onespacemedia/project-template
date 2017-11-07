@@ -13,33 +13,63 @@ export default class LazyImage {
     this.supportsObjectFit = 'objectFit' in document.documentElement.style
     this.loadedClass = 'img-Image_Image-loaded'
 
-    const fragment = document.createDocumentFragment()
-    const node = this.createNode()
-    const smallImage = node.querySelector('.img-Image_Image-small')
-    const largeImage = node.querySelector('.img-Image_Image-large')
+    try {
+      const fragment = document.createDocumentFragment()
+      const node = document
+        .createRange()
+        .createContextualFragment(
+          this.createNode(
+            this.aspectRatio,
+            this.smallImageUrl,
+            this.largeImageUrl
+          )
+        )
+      const smallImage = node.querySelector('.img-Image_Image-small')
+      const largeImage = node.querySelector('.img-Image_Image-large')
+      const ieImage = node.querySelector('.img-Image_Image-ie')
 
-    if (this.supportsObjectFit) {
-      smallImage.onload = () => smallImage.classList.add(this.loadedClass)
-      largeImage.onload = () => {
-        largeImage.classList.add(this.loadedClass)
+      if (this.supportsObjectFit) {
+        smallImage.addEventListener('load', () => {
+          smallImage.classList.add(this.loadedClass)
+        })
+        largeImage.addEventListener('load', () => {
+          largeImage.classList.add(this.loadedClass)
+        })
+      } else {
+        largeImage.addEventListener('load', () => {
+          ieImage.classList.add(this.loadedClass)
+        })
+      }
 
-        if (!this.blur) {
-          smallImage.classList.add('img-Image_Image-hide')
-        }
+      fragment.appendChild(node)
 
-        const transitionEndFnc = e => {
-          smallImage.parentNode.removeChild(smallImage)
+      this.el.parentNode.replaceChild(fragment, this.el)
+    } catch (e) {
+      const div = document.createElement('div')
+      div.innerHTML = this.createNode(
+        this.aspectRatio,
+        this.smallImageUrl,
+        this.largeImageUrl
+      )
+      const el = div.firstElementChild
+      this.el.parentNode.replaceChild(el, this.el)
+      const smallImage = el.querySelector('.img-Image_Image-small')
+      const largeImage = el.querySelector('.img-Image_Image-large')
+      const ieImage = el.querySelector('.img-Image_Image-ie')
 
-          e.target.removeEventListener('transitionend', transitionEndFnc)
-        }
-
-        largeImage.addEventListener('transitionend', transitionEndFnc)
+      if (this.supportsObjectFit) {
+        smallImage.addEventListener('load', () => {
+          smallImage.classList.add(this.loadedClass)
+        })
+        largeImage.addEventListener('load', () => {
+          largeImage.classList.add(this.loadedClass)
+        })
+      } else {
+        largeImage.addEventListener('load', () => {
+          ieImage.classList.add(this.loadedClass)
+        })
       }
     }
-
-    fragment.appendChild(node)
-
-    this.el.parentNode.replaceChild(fragment, this.el)
   }
 
   createNode () {
@@ -62,13 +92,13 @@ export default class LazyImage {
            style="background-image: url(${this.originalLargeImageUrl});"></div>
     </div>`
 
-    return document.createRange().createContextualFragment(`
+    return `
       <div class="img-Image${this.blur === false ? ' img-Image-noBlur' : ''}">
         <div class="img-Image_AspectRatioHolder">
           <div class="img-Image_AspectRatio"
                style="padding-bottom: ${this.aspectRatio}"></div>
 
           ${this.supportsObjectFit ? baseEl : fallbackEl}
-      `)
+      `
   }
 }
