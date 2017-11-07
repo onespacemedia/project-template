@@ -108,7 +108,7 @@
         "eslint --fix",
         "git add"
       ],
-      "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css\"": [
+      "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css": [
         "prettier-standard --write",
         "stylelint --fix",
         "git add"
