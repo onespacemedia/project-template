@@ -7,11 +7,6 @@
 | @namespace: .err-
 |
 */
-.err-ErrorBody {
-  margin: 0;
-  padding: 0;
-}
-
 .err-Error {
   justify-content: center;
 
