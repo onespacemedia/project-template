@@ -5,8 +5,10 @@ export default class LazyImage {
     this.blur = el.dataset.blur === 'True'
     this.aspectRatio = el.dataset.aspectRatio
     this.smallImageUrl = el.dataset.smallImageUrl
-    this.largeImageUrl = el.dataset.largeImageUrl
-    this.largeImage2xUrl = el.dataset['largeImage-2xUrl']
+    this.originalLargeImageUrl = el.dataset.originalLargeImageUrl
+    this.originalLargeImage2xUrl = el.dataset['originalLargeImage-2xUrl']
+    this.webPUrl = el.dataset.webpUrl
+    this.webP2xUrl = el.dataset['webp-2xUrl']
 
     this.supportsObjectFit = 'objectFit' in document.documentElement.style
     this.loadedClass = 'img-Image_Image-loaded'
@@ -15,7 +17,6 @@ export default class LazyImage {
     const node = this.createNode()
     const smallImage = node.querySelector('.img-Image_Image-small')
     const largeImage = node.querySelector('.img-Image_Image-large')
-    const fallbackImage = node.querySelector('.img-Image_Image-noObjectFit')
 
     if (this.supportsObjectFit) {
       smallImage.onload = () => smallImage.classList.add(this.loadedClass)
@@ -25,9 +26,15 @@ export default class LazyImage {
         if (!this.blur) {
           smallImage.classList.add('img-Image_Image-hide')
         }
+
+        const transitionEndFnc = e => {
+          smallImage.parentNode.removeChild(smallImage)
+
+          e.target.removeEventListener('transitionend', transitionEndFnc)
+        }
+
+        largeImage.addEventListener('transitionend', transitionEndFnc)
       }
-    } else {
-      largeImage.onload = () => fallbackImage.classList.add(this.loadedClass)
     }
 
     fragment.appendChild(node)
@@ -35,34 +42,33 @@ export default class LazyImage {
     this.el.parentNode.replaceChild(fragment, this.el)
   }
 
-  createNode (blurred = true) {
-    const fallbackEl = `
-      <div class="img-Image_Image img-Image_Image-noObjectFit"
-           style="background-image: url(${this.largeImageUrl});"></div>`
-
+  createNode () {
     let smallImageClass = 'img-Image_Image img-Image_Image-small'
-    smallImageClass += blurred
-      ? ' img-Image_Image-blurred'
-      : ''
+    smallImageClass += this.blur ? ' img-Image_Image-blurred' : ''
+
+    const baseEl = `<picture class="img-Image_Media">
+      <source srcset="${this.webPUrl}, ${this.webP2xUrl} 2x" type="image/webp">
+        <img alt=""
+             class="${smallImageClass}"
+             src="${this.smallImageUrl}">
+        <img alt="${this.altText}"
+             class="img-Image_Image img-Image_Image-large"
+             src="${this.originalLargeImageUrl}"
+             srcset="${this.originalLargeImage2xUrl} 2x">
+    </picture>`
+    // prettier-ignore
+    const fallbackEl = `<div class="img-Image_Media">
+      <div class="img-Image_Image img-Image_Image-large img-Image_Image-noObjectFit ${this.loadedClass}"
+           style="background-image: url(${this.originalLargeImageUrl});"></div>
+    </div>`
 
     return document.createRange().createContextualFragment(`
-      <div class="img-Image">
+      <div class="img-Image${this.blur === false ? ' img-Image-noBlur' : ''}">
         <div class="img-Image_AspectRatioHolder">
           <div class="img-Image_AspectRatio"
                style="padding-bottom: ${this.aspectRatio}"></div>
 
-          <div class="img-Image_Media">
-            <img alt=""
-                 class="${smallImageClass}"
-                 src="${this.smallImageUrl}">
-            <img alt="${this.altText}"
-                 class="img-Image_Image img-Image_Image-large"
-                 src="${this.largeImageUrl}"
-                 srcset="${this.largeImage2xUrl} 2x">
-            ${!this.supportsObjectFit ? fallbackEl : ''}
-          </div>
-        </div>
-      </div>
-    `)
+          ${this.supportsObjectFit ? baseEl : fallbackEl}
+      `)
   }
 }
