@@ -1,0 +1,3 @@
+<svg viewBox="0 0 12 7">
+  <use xlink:href="{{ static('svg/sprite.svg') }}#dropdown"></use>
+</svg>

@@ -1,13 +1,28 @@
+{% set header = get_header_content() %}
+{% if header and header.headerlink_set.all() %}
+  <div class="hd-Bar">
+    <div class="hd-Bar_Inner">
+      <div class="hd-Bar_Body">
+        <ul class="hd-Bar_Items">
+          {% for link in header.headerlink_set.all() %}
+            <li class="hd-Bar_Item">
+              <a class="hd-Bar_Link" href="{{ link.link_location }}">{{ link.link_text }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
 <header class="hd-Header">
   <div class="hd-Header_Inner">
-    <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
+    <div class="hd-Header_Body">
+      <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
 
-    <nav class="hd-Header_Nav">
-      {{ render_navigation(pages.homepage.navigation, section=pages.homepage) }}
-    </nav>
-
-    <div class="hd-Header_MobileNav">
-      <mobile-nav :items="{{ get_navigation_json(pages.homepage.navigation) }}"></mobile-nav>
+      <div class="hd-Header_Nav">
+        {{ render_navigation(pages.homepage.navigation, recursive=True) }}
+      </div>
     </div>
   </div>
 </header>

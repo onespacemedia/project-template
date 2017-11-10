@@ -1,0 +1,71 @@
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+| The global site header that appears at the top of every page
+|
+| @namespace: hd-
+|
+*/
+.hd-Header {
+  position: relative;
+  z-index: 10;
+
+  padding-top: 0.5vr;
+  padding-bottom: @padding-top;
+
+  background-color: #fff;
+  border-bottom: 1px solid var(--Color_Border);
+}
+
+.hd-Header_Inner {
+  @include Grid_Container;
+}
+
+.hd-Header_Body {
+  align-items: center;
+
+  display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Logo
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Logo {
+  display: block;
+  width: calc(width('logo.png') / 2);
+  height: calc(height('logo.png') / 2);
+
+  background-image: resolve('logo.png');
+  background-size: @width @height;
+
+  @media (--lg) {
+    width: width('logo.png');
+    height: height('logo.png');
+
+    background-size: @width @height;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Nav
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Nav {
+  margin-left: auto;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Search {
+  margin-left: calc(var(--Grid_Gutter) * 2);
+}

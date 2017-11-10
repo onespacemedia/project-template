@@ -19,7 +19,7 @@
       "dest": "js",
       "entries": {
         "app": ["./main.js"],
-        "vendor": ["es6-promise", "vue", "vuex"]
+        "vendor": ["es6-promise"]
       },
       "extractSharedJs": true
     },

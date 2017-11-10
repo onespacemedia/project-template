@@ -144,15 +144,15 @@ INSTALLED_APPS = [
     # in site/admin.py works.
     'social_django',
 
-    {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
+    { % if cookiecutter.careers == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
-    {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
-    {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
-    {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
-    {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
-    {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
-    {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
+    { % if cookiecutter.events == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.events',
+    { % if cookiecutter.faqs == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
+    { % if cookiecutter.news == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.news',
+    { % if cookiecutter.partners == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
+    { % if cookiecutter.people == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.people',
+    { % if cookiecutter.redirects == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
+    { % if cookiecutter.sections == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
 
@@ -198,8 +198,8 @@ THUMBNAIL_PRESERVE_FORMAT = True
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects.middleware.RedirectFallbackMiddleware',
+    { % if cookiecutter.geoip == 'no' % }# {% endif %}'cms.middleware.LocalisationMiddleware',
+    { % if cookiecutter.redirects == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.redirects.middleware.RedirectFallbackMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -236,6 +236,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
+            os.path.join(SITE_ROOT, 'assets/svg'),
             os.path.join(SITE_ROOT, 'templates'),
         ],
         'APP_DIRS': True,
@@ -413,7 +414,7 @@ ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
 ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
 
 # You can get your Client ID & Secret here: https://creativesdk.adobe.com/myapps.html
-ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id %}True{% else %}False{% endif %}
+ADOBE_CREATIVE_SDK_ENABLED = { % if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id % }True{ % else % }False{ % endif % }
 ADOBE_CREATIVE_SDK_CLIENT_SECRET = '{{cookiecutter.adobe_creative_sdk_secret}}'
 ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
 
@@ -452,14 +453,14 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 )
 
 # Typekit
-TYPEKIT_USED = {% if cookiecutter.uses_typekit == 'yes' %}True{% else %}False{% endif %}
+TYPEKIT_USED = { % if cookiecutter.uses_typekit == 'yes' % }True{ % else % }False{ % endif % }
 TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 
 SILENCED_SYSTEM_CHECKS = []
 
 THUMBNAIL_QUALITY = 60
 
-{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
+{ % if cookiecutter.geoip == 'no' % }# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load
@@ -476,4 +477,5 @@ if 'test' in sys.argv:
 
     # Remove the localisation middleware
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES = tuple(c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')
+        MIDDLEWARE_CLASSES = tuple(
+            c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')
