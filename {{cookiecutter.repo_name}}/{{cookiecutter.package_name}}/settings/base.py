@@ -247,7 +247,8 @@ TEMPLATES = [
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension',
-                'compressor.contrib.jinja2ext.CompressorExtension'
+                'compressor.contrib.jinja2ext.CompressorExtension',
+                '{{cookiecutter.package_name}}.apps.site.extensions.DjangoNow',
             ],
             'bytecode_cache': {
                 'name': 'default',
