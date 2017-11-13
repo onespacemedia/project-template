@@ -144,15 +144,15 @@ INSTALLED_APPS = [
     # in site/admin.py works.
     'social_django',
 
-    { % if cookiecutter.careers == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
+    {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
-    { % if cookiecutter.events == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.events',
-    { % if cookiecutter.faqs == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
-    { % if cookiecutter.news == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.news',
-    { % if cookiecutter.partners == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
-    { % if cookiecutter.people == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.people',
-    { % if cookiecutter.redirects == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
-    { % if cookiecutter.sections == 'no' % }# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
+    {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
+    {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
+    {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
+    {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
+    {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
+    {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
 
