@@ -7,6 +7,8 @@
   |--------------------------------------------------------------------------
   |
   */
+  --Color_Brand: #242224;
+
   --Color_Anchor: #702670;
   --Color_Body: #5c748c;
   --Color_Border: #d0d5d8;
@@ -20,7 +22,7 @@
   /**
   * Font - Families
   */
-  --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --Font_Family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   --Font_Family-body: var(--Font_Family);
 
   /*

@@ -15,6 +15,7 @@
 | bad practice.
 |
 */
+@custom-media --xs (width > 450px);
 @custom-media --sm (width >= 768px);
 @custom-media --md (width > 900px);
 @custom-media --lg (width > 1200px);

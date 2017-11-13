@@ -1,0 +1,57 @@
+/*
+|--------------------------------------------------------------------------
+| Bar
+|--------------------------------------------------------------------------
+| @namespace: hd-
+|
+*/
+.hd-Bar {
+  display: none;
+  padding-top: 0.5vr;
+  padding-bottom: @padding-top;
+
+  background-color: #f4f4f4;
+
+  @media (--sm) {
+    display: block;
+  }
+}
+
+.hd-Bar_Inner {
+  @include Grid_Container;
+}
+
+.hd-Bar_Body {
+  align-items: center;
+  justify-content: flex-end;
+
+  display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Bar_Items {
+  @include Font_14-20;
+
+  align-items: center;
+
+  display: flex;
+  margin-right: -10px;
+  margin-left: @margin-right;
+}
+
+.hd-Bar_Item {
+  margin-right: 5px;
+  margin-left: @margin-right;
+}
+
+.hd-Bar_Link {
+  display: inline-block;
+  padding: 5px;
+
+  color: var(--Color_Brand);
+}

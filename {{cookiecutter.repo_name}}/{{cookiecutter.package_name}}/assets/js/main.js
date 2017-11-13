@@ -4,19 +4,16 @@ import 'utils/class-list-polyfill'
 import 'utils/focus-ring'
 import 'utils/webp-detector'
 
-import Vue from 'vue'
-import App from './vue/App'
-
 import LazyImage from './utils/lazy-image'
+import { Navigation } from './site'
 import { externalLinks, iframeFix } from './utils'
-
-new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.documentElement
   body.classList.add('util-JSEnabled')
 
   externalLinks()
+  new Navigation()
 
   const lazyImage = document.querySelector('.js-LazyImage')
   if (lazyImage) {

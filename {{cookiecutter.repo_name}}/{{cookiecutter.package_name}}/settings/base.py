@@ -236,6 +236,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
+            os.path.join(SITE_ROOT, 'assets/svg'),
             os.path.join(SITE_ROOT, 'templates'),
         ],
         'APP_DIRS': True,
@@ -476,4 +477,5 @@ if 'test' in sys.argv:
 
     # Remove the localisation middleware
     if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES = tuple(c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')
+        MIDDLEWARE_CLASSES = tuple(
+            c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')

@@ -1,23 +1,79 @@
-<ul class="nav-Items">
-  {% for entry in navigation %}
-    <li class="nav-Item{% if entry.children %} nav-Item-hasDropdown{% endif %}" aria-current="{% if entry.here %}true{% else %}false{% endif %}">
-      <a class="nav-Action" href="{{ entry.url }}">
-        <span>{{ entry.page }}</span>
+<nav class="nav-Header">
+  <button class="nav-Header_Trigger" aria-selected="false">
+    <span class="nav-Header_TriggerLine nav-Header_TriggerLine-top"></span>
+    <span class="nav-Header_TriggerLine nav-Header_TriggerLine-middle"></span>
+    <span class="nav-Header_TriggerLine nav-Header_TriggerLine-bottom"></span>
+  </button>
+
+  <ul class="nav-Header_Items" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+    {% for entry in navigation %}
+      <li class="nav-Header_Item{% if entry.children %} nav-Header_Item-hasDropdown{% endif %}"
+          {% if entry.here %}aria-current="page"{% endif %}>
+        <a class="nav-Header_Link" href="{{ entry.url }}" itemprop="url">
+          <span itemprop="name">{{ entry.page }}</span>
+
+          {% if entry.children %}
+            <span class="nav-Header_LinkIcon">
+              {% include 'dropdown.svg' %}
+            </span>
+          {% endif %}
+        </a>
 
         {% if entry.children %}
-          <span class="nav-DropdownIndicator"></span>
-        {% endif %}
-      </a>
+          <ul class="nav-Header_Dropdown">
+            {% for sub_entry in entry.children recursive %}
+              {% if loop.first %}
+                <li class="nav-Header_Item nav-Header_Item-back">
+                  <button class="nav-Header_Link">
+                    <span class="nav-Header_LinkIcon">
+                      {% include 'dropdown.svg' %}
+                    </span>
 
-      {% if entry.children %}
-        <ul class="nav-Dropdown">
-          {% for sub_entry in entry.children %}
-            <li class="nav-Dropdown_Item">
-              <a class="nav-Dropdown_Action" href="{{ sub_entry.url }}">{{ sub_entry.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </li>
-  {% endfor %}
-</ul>
+                    Back
+                  </button>
+                </li>
+
+                <li class="nav-Header_Item nav-Header_Item-parent">
+                  <a class="nav-Header_Link" href="{{ entry.url }}">
+                    {{ entry.title }}
+                  </a>
+                </li>
+              {% endif %}
+
+              <li class="nav-Header_Item{% if sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
+                <a class="nav-Header_Link" href="{{ sub_entry.url }}" itemprop="url">
+                  <span itemprop="name">{{ sub_entry.page }}</span>
+
+                  {% if sub_entry.children %}
+                    <span class="nav-Header_LinkIcon">
+                      {% include 'dropdown.svg' %}
+                    </span>
+                  {% endif %}
+                </a>
+
+                {% if recursive %}
+                  {% if sub_entry.children %}
+                    <ul class="nav-Header_Dropdown">
+                      {{ loop(sub_entry.children) }}
+                    </ul>
+                  {% endif %}
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+
+    {% set header = get_header_content() %}
+    {% if header and header.headerlink_set.all() %}
+      {% for link in header.headerlink_set.all() %}
+        <li class="nav-Header_Item nav-Header_Item-extra">
+          <a class="nav-Header_Link" href="{{ link.link_location }}">{{ link.link_text }}</a>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+  <div class="nav-Header_Backdrop"></div>
+</nav>

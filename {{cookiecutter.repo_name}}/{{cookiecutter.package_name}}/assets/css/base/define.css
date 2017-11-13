@@ -65,11 +65,15 @@ body {
   text-rendering: optimizeLegibility;
 
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
-  background-color: #ececec;
+  background-color: #fff;
   color: var(--Color_Body);
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+}
+
+button {
+  cursor: pointer;
 }
 
 /*
