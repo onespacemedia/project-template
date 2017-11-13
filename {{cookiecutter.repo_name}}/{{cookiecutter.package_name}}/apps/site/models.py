@@ -35,7 +35,7 @@ class Footer(models.Model):
         null=True,
     )
 
-    privacy_policy_page = models.CharField(
+    privacy_policy_page = models.ForeignKey(
         'pages.Page',
         blank=True,
         null=True,
