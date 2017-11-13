@@ -47,8 +47,6 @@ export class Navigation {
     this.els.backdrop.addEventListener('click', this.toggleIsOpen)
 
     const resizeFnc = () => {
-      this.setupItems()
-
       if (window.innerWidth > mediaBreakpoints.lg) {
         this.isOpen = false
 
@@ -64,7 +62,7 @@ export class Navigation {
       }
     }
 
-    window.addEventListener('resize', debounce(resizeFnc, 100))
+    window.addEventListener('resize', debounce(resizeFnc, 10))
   }
 
   toggleIsOpen () {
@@ -82,6 +80,7 @@ export class Navigation {
         hasChildren,
         link,
         el: item,
+        parent: item.parentNode,
         children: hasChildren
           ? this.constructItems(
             Array.from(dropdown.children).filter(
@@ -102,16 +101,25 @@ export class Navigation {
         }
       }
 
+      const className = schema.parent.classList.contains('nav-Header_Items')
+        ? 'nav-Header_Items-active'
+        : 'nav-Header_Dropdown-active'
+
       if (schema.hasChildren) {
         schema.link.addEventListener('click', e => {
           e.preventDefault()
 
-          schema.active = !schema.active
+          const isActive = !schema.active
+
+          schema.active = isActive
+          schema.parent.classList.toggle(className, isActive)
         })
-        schema.back.addEventListener(
-          'click',
-          e => (schema.active = !schema.active)
-        )
+        schema.back.addEventListener('click', () => {
+          const isActive = !schema.active
+
+          schema.active = isActive
+          schema.parent.classList.toggle(className, isActive)
+        })
       }
 
       return schema
