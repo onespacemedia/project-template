@@ -5,12 +5,12 @@
     <span class="nav-Header_TriggerLine nav-Header_TriggerLine-bottom"></span>
   </button>
 
-  <ul class="nav-Header_Items">
+  <ul class="nav-Header_Items" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
     {% for entry in navigation %}
       <li class="nav-Header_Item{% if entry.children %} nav-Header_Item-hasDropdown{% endif %}"
           {% if entry.here %}aria-current="page"{% endif %}>
-        <a class="nav-Header_Link" href="{{ entry.url }}">
-          {{ entry.page }}
+        <a class="nav-Header_Link" href="{{ entry.url }}" itemprop="url">
+          <span itemprop="name">{{ entry.page }}</span>
 
           {% if entry.children %}
             <span class="nav-Header_LinkIcon">
@@ -41,8 +41,8 @@
               {% endif %}
 
               <li class="nav-Header_Item{% if sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
-                <a class="nav-Header_Link" href="{{ sub_entry.url }}">
-                  {{ sub_entry.title }}
+                <a class="nav-Header_Link" href="{{ sub_entry.url }}" itemprop="url">
+                  <span itemprop="name">{{ sub_entry.page }}</span>
 
                   {% if sub_entry.children %}
                     <span class="nav-Header_LinkIcon">
