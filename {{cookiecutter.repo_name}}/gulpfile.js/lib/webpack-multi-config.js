@@ -6,6 +6,7 @@ var pathToUrl       = require('./pathToUrl')
 var webpack         = require('webpack')
 var webpackManifest = require('./webpackManifest')
 var BundleTracker   = require('webpack-bundle-tracker')
+var BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = function(env) {
   var jsSrc = path.resolve(config.root.src, config.tasks.js.src)
@@ -92,7 +93,10 @@ module.exports = function(env) {
       }),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
+      new webpack.NoEmitOnErrorsPlugin(),
+      new BundleAnalyzer({
+        openAnalyzer: false
+      })
     )
   }
 

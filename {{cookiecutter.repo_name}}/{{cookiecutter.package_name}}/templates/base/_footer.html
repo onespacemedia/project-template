@@ -1,3 +1,90 @@
-<footer class="ft-Outer">
-  <p>© {% now "Y" %} {{ settings.SITE_NAME }}</p>
-</footer>
+{% set footer = get_footer_content() %}
+
+{% if footer %}
+  <footer class="ft-Footer">
+    <div class="ft-Footer_Inner">
+      <div class="ft-Footer_Body">
+        <div class="ft-Footer_Columns">
+          {% if footer.columns.about %}
+            <div class="ft-Footer_Column ft-Footer_Column-about">
+              <h4 class="ft-Footer_Title">{{ footer.about_title }}</h4>
+
+              <p class="ft-Footer_Text">{{ footer.about_text | md(True) }}</p>
+            </div>
+          {% endif %}
+
+          {% if footer.columns.links %}
+            <div class="ft-Footer_Column ft-Footer_Column-links">
+              <h4 class="ft-Footer_Title">{{ footer.links_title }}</h4>
+
+              <ul class="ft-Footer_Links">
+                {% for link in footer.footerlink_set.all() %}
+                  <li class="ft-Footer_LinkItem">
+                    <a class="ft-Footer_Link" href="{{ link.link_location }}">{{ link.text }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {% if footer.columns.contact %}
+            <div class="ft-Footer_Column ft-Footer_Column-contact">
+              <h4 class="ft-Footer_Title">{{ footer.contact_title }}</h4>
+
+              <address class="ft-Footer_Address">{{ footer.contact_address | linebreaksbr() }}</address>
+
+              {% if footer.contact_has_link %}
+                <a class="ft-Footer_Button btn-Primary"
+                   href="{{ footer.contact_link_location }}">{{ footer.contact_link_text }}</a>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="ft-Bar">
+    <div class="ft-Bar_Inner">
+      <div class="ft-Bar_Body">
+        <div class="ft-Bar_Left">
+          <p class="ft-Bar_Copyright">
+            Copyright © {% now "Y" %} {{ settings.SITE_NAME }}
+          </p>
+
+          {% set extra_links = footer.extra_links %}
+          {% if extra_links.terms.has_link or extra_links.legal.has_link or extra_links.privacy.has_link %}
+            <ul class="ft-Bar_Links">
+              {% if extra_links.terms.has_link %}
+                <li class="ft-Bar_LinksItem">
+                  <a class="ft-Bar_Link"
+                     href="{{ extra_links.terms.link_location }}">{{ extra_links.terms.label }}</a>
+                </li>
+              {% endif %}
+
+              {% if extra_links.legal.has_link %}
+                <li class="ft-Bar_LinksItem">
+                  <a class="ft-Bar_Link"
+                     href="{{ extra_links.legal.link_location }}">{{ extra_links.legal.label }}</a>
+                </li>
+              {% endif %}
+
+              {% if extra_links.privacy.has_link %}
+                <li class="ft-Bar_LinksItem">
+                  <a class="ft-Bar_Link"
+                     href="{{ extra_links.privacy.link_location }}">{{ extra_links.privacy.label }}</a>
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </div>
+
+        <div class="ft-Bar_Right">
+          <a class="ft-Bar_Onespacemedia" href="//onespacemedia.com">
+            Designed and built by <strong>Onespacemedia</strong>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
