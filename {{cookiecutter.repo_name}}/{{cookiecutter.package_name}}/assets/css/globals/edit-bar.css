@@ -43,6 +43,15 @@
     height: 15px;
     margin-right: calc(var(--Grid_Inside) / 2);
   }
+
+  .pg-EditBar_Divider + & {
+    margin-left: 0;
+  }
+}
+
+.pg-EditBar_Divider {
+  margin: 0 var(--Grid_Inside);
+  font-size: 12px;
 }
 
 .pg-EditBar_Image {
