@@ -57,6 +57,7 @@
 
     container.addEventListener('click', (e) => {
       container.style.opacity = 0
+      document.body.style.overflow = ''
 
       setTimeout(() => {
         container.remove()
@@ -64,6 +65,7 @@
     })
 
     setTimeout(() => {
+      document.body.style.overflow = 'hidden'
       container.style.opacity = 1
     }, 100)
   })
