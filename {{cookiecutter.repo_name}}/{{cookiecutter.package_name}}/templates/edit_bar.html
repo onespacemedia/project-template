@@ -55,6 +55,14 @@
     container.appendChild(iframe)
     document.body.appendChild(container)
 
+    container.addEventListener('click', (e) => {
+      container.style.opacity = 0
+
+      setTimeout(() => {
+        container.remove()
+      }, 150)
+    })
+
     setTimeout(() => {
       container.style.opacity = 1
     }, 100)
