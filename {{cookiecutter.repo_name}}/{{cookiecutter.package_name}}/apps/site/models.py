@@ -81,6 +81,7 @@ class Footer(models.Model):
     )
 
     terms_of_use_url = models.CharField(
+        verbose_name='Terms of Use URL',
         max_length=255,
         blank=True,
         null=True,
@@ -103,6 +104,7 @@ class Footer(models.Model):
     )
 
     legal_url = models.CharField(
+        verbose_name='Legal URL',
         max_length=255,
         blank=True,
         null=True,
@@ -125,6 +127,7 @@ class Footer(models.Model):
     )
 
     privacy_policy_url = models.CharField(
+        verbose_name='Privacy Policy URL',
         max_length=255,
         blank=True,
         null=True,
@@ -214,6 +217,7 @@ class FooterLink(models.Model):
     )
 
     link_url = models.CharField(
+        verbose_name='Link URL',
         max_length=200,
         blank=True,
         null=True,
