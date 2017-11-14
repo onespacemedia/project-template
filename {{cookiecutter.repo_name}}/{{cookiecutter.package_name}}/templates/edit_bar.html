@@ -57,7 +57,7 @@
 
     container.addEventListener('click', (e) => {
       container.style.opacity = 0
-      document.body.style.overflow = ''
+      document.body.classList.remove('nav-IsOpen')
 
       setTimeout(() => {
         container.remove()
@@ -65,7 +65,7 @@
     })
 
     setTimeout(() => {
-      document.body.style.overflow = 'hidden'
+      document.body.classList.add('nav-IsOpen')
       container.style.opacity = 1
     }, 100)
   })
