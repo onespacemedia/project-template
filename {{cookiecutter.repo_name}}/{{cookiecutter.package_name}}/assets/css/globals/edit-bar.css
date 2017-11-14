@@ -9,22 +9,24 @@
 */
 
 .pg-EditBar {
-  background-color: var(--Color_Body);
-  color: #fff;
+  padding: 0.25vr var(--Grid_Gutter);
+
   font-size: 14px;
 
-  padding: 0.25vr var(--Grid_Gutter);
+  background-color: var(--Color_Body);
+  color: #fff;
 }
 
 .pg-EditBar_Columns {
-  display: flex;
-
   justify-content: space-between;
+
+  display: flex;
 }
 
 .pg-EditBar_Column {
-  display: flex;
   align-items: center;
+
+  display: flex;
 }
 
 .pg-EditBar_Title {
@@ -51,6 +53,7 @@
 
 .pg-EditBar_Divider {
   margin: 0 var(--Grid_Inside);
+
   font-size: 12px;
 }
 
@@ -62,21 +65,21 @@
 * iFrame things
 */
 .pg-EditBar_FrameContainer {
-  align-items: center;
-  justify-content: center;
-
   position: fixed;
   top: 36px;
-  left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+
+  align-items: center;
+  justify-content: center;
 
   display: flex;
   padding: 40px;
 
   background-color: rgba(0, 0, 0, 0.8);
   opacity: 0;
-  z-index: 1000;
 
   transition: opacity 0.3s;
 }
