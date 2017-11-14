@@ -90,6 +90,8 @@
   <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
 
+    {{ edit_bar() }}
+
     {% block site %}
       <div class="lyt-Site" id="app">
         {% include 'base/_header.html' %}

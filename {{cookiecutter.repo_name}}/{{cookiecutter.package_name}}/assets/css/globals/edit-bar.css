@@ -1,0 +1,80 @@
+/*
+|--------------------------------------------------------------------------
+| Edit bar
+|--------------------------------------------------------------------------
+| A global 'edit this thing' bar shown to logged-in admin users.
+|
+| @namespace: pg-
+|
+*/
+
+.pg-EditBar {
+  background-color: var(--Color_Body);
+  color: #fff;
+  font-size: 14px;
+
+  padding: 0.25vr var(--Grid_Gutter);
+}
+
+.pg-EditBar_Columns {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+.pg-EditBar_Column {
+  display: flex;
+  align-items: center;
+}
+
+.pg-EditBar_Title {
+  font-weight: 700;
+}
+
+.pg-EditBar_Link {
+  align-items: center;
+
+  display: inline-flex;
+  margin-left: var(--Grid_Inside);
+
+  color: inherit;
+
+  .svg-Image {
+    height: 15px;
+    margin-right: calc(var(--Grid_Inside) / 2);
+  }
+}
+
+.pg-EditBar_Image {
+  margin-left: var(--Grid_Inside);
+}
+
+/**
+* iFrame things
+*/
+.pg-EditBar_FrameContainer {
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  top: 36px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+  padding: 40px;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+
+  transition: opacity 0.3s;
+}
+
+.pg-EditBar_Frame {
+  width: 85%;
+  height: 90%;
+
+  background-color: #edeff1;
+  border: 0;
+}
