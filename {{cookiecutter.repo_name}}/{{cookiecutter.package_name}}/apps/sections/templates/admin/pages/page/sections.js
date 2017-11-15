@@ -49,6 +49,10 @@ $(window).load(function() {
           $section.find('.field-' + field).show();
         });
       }
+      
+      $('.wysiwyg:visible', $section).each(function () {
+        activate_tinymce(this)
+      });
     });
   }
 });
