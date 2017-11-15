@@ -1,0 +1,78 @@
+{% if show %}
+  <div class="pg-EditBar">
+    <div class="pg-EditBar_Columns">
+      <div class="pg-EditBar_Column">
+        <div class="pg-EditBar_Title">{{ settings.SITE_NAME }}</div>
+
+        <a class="pg-EditBar_Link" href="{{ add_url }}" target="_blank">
+          {% include 'fa-plus.svg' %}
+          New
+        </a>
+
+        <a class="pg-EditBar_Link js-EditBar_EditLink" href="{{ edit_url }}?_popup=1" target="_blank">
+          {% include 'fa-pencil.svg' %}
+          Edit {{ model_name }}
+        </a>
+      </div>
+
+      <div class="pg-EditBar_Column">
+        <a class="pg-EditBar_Link" href="/admin/" target="_blank">
+          Admin
+        </a>
+
+        <span class="pg-EditBar_Divider">|</span>
+
+        <a class="pg-EditBar_Link" href="#" target="_blank">
+          Basecamp
+        </a>
+
+        <span class="pg-EditBar_Divider">|</span>
+
+        <p class="pg-EditBar_Text">
+          You are logged in as <strong>{{ user.first_name }}</strong>
+        </p>
+
+        <img src="{{ gravatar_url(user.email, size=24) }}" class="pg-EditBar_Image" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const editLink = document.querySelector('.js-EditBar_EditLink')
+
+  editLink.addEventListener('click', (e) => {
+    e.preventDefault()
+
+    // Create a containing element
+    const container = document.createElement('div')
+    container.classList.add('pg-EditBar_FrameContainer')
+
+    // Create an iframe
+    const iframe = document.createElement('iframe')
+    iframe.classList.add('pg-EditBar_Frame')
+    iframe.setAttribute('src', editLink.getAttribute('href'))
+
+    container.appendChild(iframe)
+    document.body.appendChild(container)
+
+    container.addEventListener('click', (e) => {
+      container.style.opacity = 0
+      document.body.classList.remove('nav-IsOpen')
+
+      setTimeout(() => {
+        container.remove()
+      }, 150)
+    })
+
+    setTimeout(() => {
+      document.body.classList.add('nav-IsOpen')
+      container.style.opacity = 1
+    }, 100)
+  })
+
+  function dismissChangeRelatedObjectPopup() {
+    document.querySelector('.pg-EditBar_FrameContainer').style.opacity = 0
+    window.location.reload()
+  }
+  </script>
+{% endif %}

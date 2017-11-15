@@ -1,0 +1,93 @@
+/*
+|--------------------------------------------------------------------------
+| Edit bar
+|--------------------------------------------------------------------------
+| A global 'edit this thing' bar shown to logged-in admin users.
+|
+| @namespace: pg-
+|
+*/
+
+.pg-EditBar {
+  padding: 0.25vr var(--Grid_Gutter);
+
+  font-size: 14px;
+
+  background-color: var(--Color_Body);
+  color: #fff;
+}
+
+.pg-EditBar_Columns {
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.pg-EditBar_Column {
+  align-items: center;
+
+  display: flex;
+}
+
+.pg-EditBar_Title {
+  font-weight: 700;
+}
+
+.pg-EditBar_Link {
+  align-items: center;
+
+  display: inline-flex;
+  margin-left: var(--Grid_Inside);
+
+  color: inherit;
+
+  .svg-Image {
+    height: 15px;
+    margin-right: calc(var(--Grid_Inside) / 2);
+  }
+
+  .pg-EditBar_Divider + & {
+    margin-left: 0;
+  }
+}
+
+.pg-EditBar_Divider {
+  margin: 0 var(--Grid_Inside);
+
+  font-size: 12px;
+}
+
+.pg-EditBar_Image {
+  margin-left: var(--Grid_Inside);
+}
+
+/**
+* iFrame things
+*/
+.pg-EditBar_FrameContainer {
+  position: fixed;
+  top: 36px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  padding: 40px;
+
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+
+  transition: opacity 0.3s;
+}
+
+.pg-EditBar_Frame {
+  width: 85%;
+  height: 90%;
+
+  background-color: #edeff1;
+  border: 0;
+}
