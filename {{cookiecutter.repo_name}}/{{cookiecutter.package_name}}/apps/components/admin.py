@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import CallToAction
 {% if cookiecutter.sections == 'yes' %}from ...utils.admin import UsedOnAdminMixin{% endif %}
+from .models import CallToAction
 
 
 @admin.register(CallToAction)
