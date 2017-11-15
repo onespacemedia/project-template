@@ -14,3 +14,14 @@
 .inline-related.collapsed fieldset {
   display: none;
 }
+
+.inline-related > .errorlist {
+  margin: 0;
+  padding: 15px;
+
+  list-style: none;
+
+  background-color: #f2dede;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07);
+  color: #b94a48;
+}
