@@ -62,29 +62,42 @@
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          rel="stylesheet">
-
     {% block css %}{% endblock %}
 
+    <script>
+      var body = document.documentElement || document.body
+
+      if (!('grid' in body.style)) {
+        var grid = document.createElement('link')
+        grid.href = '/static/build/css/grid-fallback.css'
+        grid.rel = 'stylesheet'
+        document.head.appendChild(grid)
+        body.className += ' util-NoGrid'
+      }
+
+      function hasNativeCSSProperties() {
+        var opacity = 0
+        var el = body
+        // Setup CSS properties.
+        el.style.setProperty('--test-opacity', opacity)
+        el.style.setProperty('opacity', 'var(--test-opacity)')
+        // Feature detect then remove all set properties.
+        var hasNativeCSSProperties = window.getComputedStyle(el).opacity == opacity
+        el.style.setProperty('--test-opacity', '')
+        el.style.opacity = ''
+        return hasNativeCSSProperties
+      }
+
+      if (!hasNativeCSSProperties()) {
+        var vars = document.createElement('link')
+        vars.href = '/static/build/css/vars-fallback.css'
+        vars.rel = 'stylesheet'
+        document.head.appendChild(vars)
+        body.className += ' util-NoCssVars'
+      }
+    </script>
+
     {% include 'base/_analytics.html' %}
-
-    {# Opbeat JS error tracking #}
-    {% if settings.OPBEAT %}
-      <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
-              data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
-              data-app-id="{{ settings.OPBEAT.APP_ID }}">
-      </script>
-
-      {% if user.is_authenticated() %}
-        <script>
-          _opbeat('setUserContext', {
-            id: "{{ user.pk }}"
-          });
-        </script>
-      {% endif %}
-    {% endif %}
-
   </head>
 
   <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
@@ -136,5 +149,21 @@
 
       {% block compressed_js_last %}{% endblock %}
     {% endcompress %}
+
+    {# Opbeat JS error tracking #}
+    {% if settings.OPBEAT %}
+      <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
+              data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
+              data-app-id="{{ settings.OPBEAT.APP_ID }}">
+      </script>
+
+      {% if user.is_authenticated() %}
+        <script>
+          _opbeat('setUserContext', {
+            id: "{{ user.pk }}"
+          });
+        </script>
+      {% endif %}
+    {% endif %}
   </body>
 </html>

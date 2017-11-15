@@ -1,0 +1,73 @@
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+| The global site footer that appears at the bottom of every page
+|
+| @namespace: ft-
+|
+*/
+.ft-Footer {
+  padding-top: 1vr;
+  padding-bottom: @padding-top;
+
+  background-color: #ebf0f6;
+  border-top: 1px solid var(--Color_Border);
+
+  @media (--md) {
+    padding-top: 1.5vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--lg) {
+    padding-top: 2vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.ft-Footer_Inner {
+  @include Grid_Container;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Columns
+|--------------------------------------------------------------------------
+|
+*/
+.ft-Footer_Columns {
+  grid-gap: calc(var(--Grid_Gutter) * 2);
+
+  display: grid;
+
+  @media (--sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (--md) {
+    grid-column-gap: calc(var(--Grid_Gutter) * 2);
+    grid-template-columns: 5fr 4fr 3fr;
+  }
+
+  @media (--lg) {
+    grid-column-gap: calc(var(--Grid_Gutter) * 4);
+  }
+}
+
+.ft-Footer_Column-about {
+  @media (--sm-viewport) {
+    grid-column: 1 / -1;
+  }
+}
+
+.ft-Footer_Title {
+  margin-bottom: 0.25vr;
+}
+
+.ft-Footer_Address {
+  font-style: normal;
+}
+
+.ft-Footer_Button {
+  margin-top: 0.5vr;
+}
