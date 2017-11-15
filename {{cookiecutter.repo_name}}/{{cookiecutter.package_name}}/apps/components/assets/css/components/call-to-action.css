@@ -1,0 +1,58 @@
+/*
+|--------------------------------------------------------------------------
+| Call to action
+|--------------------------------------------------------------------------
+| @namespace: cta-
+|
+*/
+.cta-CallToAction {
+  margin-top: 1vr;
+  padding-top: 1vr;
+  padding-bottom: @padding-top;
+
+  background-color: #e6ebf1;
+  border-top: 1px solid var(--Color_Border);
+
+  @media (--sm) {
+    padding-top: 1.5vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--md) {
+    padding-top: 2vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--lg) {
+    padding-top: 3vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.cta-CallToAction_Inner {
+  @include Grid_Container;
+}
+
+.cta-CallToAction_Body {
+  text-align: center;
+
+  @media (--sm) {
+    width: calc(6 / 8 * 100%);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (--md) {
+    width: calc(8 / 12 * 100%);
+  }
+}
+
+.cta-CallToAction_Kicker {
+  margin-bottom: 0.5vr;
+}
+
+.cta-CallToAction_Link {
+  @include Button-primary;
+
+  margin-top: 1vr;
+}

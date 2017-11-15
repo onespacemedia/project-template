@@ -7,8 +7,7 @@ from django.views import generic
 from watson import search
 
 from ..models import Article, Category, NewsFeed
-from ..views import (ArticleCategoryArchiveView, ArticleDetailView,
-                     ArticleFeedView, ArticleListMixin)
+from ..views import ArticleDetailView, ArticleFeedView, ArticleListMixin
 
 
 class TestView(ArticleListMixin, generic.ListView):
@@ -58,7 +57,7 @@ class TestViews(TestCase):
         view.request = self.factory.get('/')
         view.request.pages = RequestPageManager(view.request)
 
-        self.assertEqual(view.get_paginate_by(None), 5)
+        self.assertEqual(view.get_paginate_by(None), 12)
 
     def test_articlelistmixin_get_context_data(self):
         view = TestView()
@@ -112,51 +111,5 @@ class TestViews(TestCase):
         self.assertEqual(data['object'], self.article)
         self.assertEqual(data['robots_archive'], True)
         self.assertEqual(data['header'], 'Foo')
-        self.assertEqual(data['prev_article'], None)
         self.assertEqual(data['article'], self.article)
-        self.assertEqual(data['next_article'], None)
         self.assertEqual(data['view'], view)
-
-    def test_articlecategoryarchiveview_get_queryset(self):
-        view = ArticleCategoryArchiveView()
-        view.request = self.factory.get('')
-        view.request.pages = RequestPageManager(view.request)
-        view.object = self.category
-
-        self.assertListEqual(list(view.get_queryset()), [self.article])
-
-    def test_articlecategoryarchiveview_get_context_data(self):
-        view = ArticleCategoryArchiveView()
-        view.request = self.factory.get('')
-        view.request.pages = RequestPageManager(view.request)
-        view.object = self.category
-        view.object_list = Article.objects.all()
-        view.kwargs = {}
-
-        data = view.get_context_data()
-
-        self.assertEqual(data['meta_description'], '')
-        self.assertEqual(data['robots_follow'], True)
-        self.assertEqual(list(data['category_list']), [self.category])
-        self.assertEqual(data['robots_index'], True)
-        self.assertEqual(data['title'], 'Foo')
-        self.assertEqual(list(data['object_list']), [self.article])
-        self.assertEqual(data['robots_archive'], True)
-        self.assertEqual(data['header'], 'Foo')
-        self.assertEqual(list(data['article_list']), [self.article])
-        self.assertEqual(repr(data['page_obj']), '<Page 1 of 1>')
-        self.assertEqual(data['category'], self.category)
-        self.assertEqual(data['view'], view)
-
-    def test_articlecategoryarchiveview_dispatch(self):
-        view = ArticleCategoryArchiveView()
-        view.request = self.factory.get('')
-        view.request.pages = RequestPageManager(view.request)
-        view.kwargs = {}
-
-        dispatch = view.dispatch(view.request, slug='foo')
-        self.assertListEqual(dispatch.template_name, [
-            'news/article_category_archive.html',
-            'news/article_list.html'
-        ])
-        self.assertEqual(dispatch.status_code, 200)

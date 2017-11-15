@@ -1,4 +1,5 @@
 argon2-cffi
+beautifulsoup4==4.6.0
 CommonMark==0.7.4
 django>=1.11,<1.12
 django-cachalot

@@ -3,35 +3,52 @@ from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import HtmlField, OnlineBaseManager, PageBase
+from cms.templatetags.html import truncate_paragraphs
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.template.defaultfilters import striptags, truncatewords
+from django.template.loader import render_to_string
 from django.utils import timezone
 from historylinks import shortcuts as historylinks
-from historylinks.registration import HistoryLinkAdapter
+from reversion.models import Version
 
 
 class NewsFeed(ContentBase):
 
     """A stream of news articles."""
-
     classifier = 'apps'
     icon = 'cms-icons/news.png'
 
-    # The heading that the admin places this content under.
-    classifier = 'syndication'
-
     # The urlconf used to power this content's views.
     urlconf = '{{ cookiecutter.package_name }}.apps.news.urls'
+    fieldsets = [
+        (None, {
+            'fields': ['per_page', 'call_to_action'],
+        }),
+        ('Hero', {
+            'fields': ['hero_kicker', 'hero_title'],
+        }),
+    ]
 
-    content_primary = HtmlField(
-        'primary content',
-        blank=True
+    hero_kicker = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        help_text='If this is left blank it will use the page title',
+    )
+
+    hero_title = models.CharField(
+        max_length=255,
     )
 
     per_page = models.IntegerField(
-        'articles per page',
-        default=5,
+        verbose_name='Articles per page',
+        default=12,
+    )
+
+    call_to_action = models.ForeignKey(
+        'components.CallToAction',
         blank=True,
         null=True,
     )
@@ -58,51 +75,28 @@ def get_default_news_feed():
     return None
 
 
-class Category(PageBase):
-    """A category for news articles."""
+class Category(models.Model):
+    title = models.CharField(
+        max_length=50,
+    )
 
-    def _get_permalink_for_page(self, page):
-        """Returns the URL for this category for the given page."""
-        return page.reverse('article_category_archive', kwargs={
-            'slug': self.slug,
-        })
+    slug = models.SlugField(
+        unique=True
+    )
 
-    def _get_permalinks(self):
-        """Returns a dictionary of all permalinks for the given category."""
-        pages = Page.objects.filter(
-            id__in=Article.objects.filter(
-                categories=self
-            ).values_list('news_feed_id', flat=True)
-        )
-        return dict(
-            (
-                'page_{id}'.format(id=page.id), self._get_permalink_for_page(page))
-            for page in pages
-        )
-
-    def __str__(self):
-        return self.short_title or self.title
+    order = models.PositiveIntegerField(
+        default=0
+    )
 
     class Meta:
-        verbose_name_plural = 'categories'
-        unique_together = (('slug',),)
-        ordering = ('title',)
+        verbose_name_plural = 'Categories'
+        ordering = ['order']
 
-
-class CategoryHistoryLinkAdapter(HistoryLinkAdapter):
-
-    """History link adapter for category models."""
-
-    def get_permalinks(self, obj):
-        """Returns all permalinks for the given category."""
-        return obj._get_permalinks()
-
-
-historylinks.register(Category, CategoryHistoryLinkAdapter)
+    def __str__(self):
+        return self.title or self.title
 
 
 class ArticleManager(OnlineBaseManager):
-
     """Manager for Article models."""
 
     def select_published(self, queryset):
@@ -129,15 +123,18 @@ STATUS_CHOICES = [
 
 
 class Article(PageBase):
-
     """A news article."""
 
     objects = ArticleManager()
 
     news_feed = models.ForeignKey(
-        NewsFeed,
+        'news.NewsFeed',
         null=True,
         blank=False,
+    )
+
+    featured = models.BooleanField(
+        default=False,
     )
 
     date = models.DateTimeField(
@@ -150,22 +147,51 @@ class Article(PageBase):
         null=True,
     )
 
+    card_image = ImageRefField(
+        blank=True,
+        null=True,
+        help_text="By default the card will try and use the main image, if it doesn't look right you can override it here.",
+    )
+
     content = HtmlField()
 
     summary = models.TextField(
         blank=True,
     )
 
-    categories = models.ManyToManyField(
-        Category,
+    call_to_action = models.ForeignKey(
+        'components.CallToAction',
         blank=True,
+        null=True,
+        help_text="By default the call to action will be the same as the news feed. You can override it for a specific article here."
     )
 
+    categories = models.ManyToManyField(
+        'news.Category',
+        blank=True,
+    )
+    {% if cookiecutter.people == 'yes' %}
+    author = models.ForeignKey(
+        'people.Person',
+        blank=True,
+        null=True,
+    )
+    {% endif %}
     status = models.CharField(
         max_length=100,
         choices=STATUS_CHOICES,
-        default='draft'
+        default='draft',
     )
+
+    class Meta:
+        unique_together = [['news_feed', 'date', 'slug']]
+        ordering = ['-date']
+        permissions = [
+            ('can_approve_articles', 'Can approve articles'),
+        ]
+
+    def __str__(self):
+        return self.short_title or self.title
 
     def _get_permalink_for_page(self, page):
         """Returns the URL of this article for the given news feed page."""
@@ -177,15 +203,37 @@ class Article(PageBase):
         """Returns the URL of the article."""
         return self._get_permalink_for_page(self.news_feed.page)
 
-    def __str__(self):
-        return self.short_title or self.title
+    @property
+    def get_summary(self):
+        summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
 
-    class Meta:
-        unique_together = (('news_feed', 'date', 'slug',),)
-        ordering = ('-date',)
-        permissions = (
-            ('can_approve_articles', 'Can approve articles'),
+        return truncatewords(summary, 15)
+
+    @property
+    def last_modified(self):
+        version = Version.objects.get_for_object(self).first()
+
+        if version:
+            return version.revision.date_created
+
+    def render_card(self):
+        return render_to_string('news/includes/card.html', {
+            'article': self,
+        })
+
+    def get_related_articles(self, count=3):
+        related_articles = Article.objects.filter(
+            categories=self.categories.all(),
+        ).exclude(
+            id=self.id
         )
+
+        if related_articles.count() < count:
+            related_articles |= Article.objects.exclude(
+                id__in=[self.pk] + [x.id for x in related_articles]
+            )
+
+        return related_articles.distinct()[:count]
 
 
 historylinks.register(Article)

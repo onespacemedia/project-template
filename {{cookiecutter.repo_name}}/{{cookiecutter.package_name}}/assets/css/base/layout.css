@@ -30,48 +30,32 @@
   /* stylelint-enable */
 }
 
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+*/
+.lyt-Content {
+  margin-top: 1vr;
+  margin-bottom: @margin-top;
+
+  @media (--sm) {
+    margin-top: 2vr;
+    margin-bottom: @margin-top;
+  }
+
+  @media (--md) {
+    margin-top: 2.5vr;
+    margin-bottom: @margin-top;
+  }
+
+  @media (--lg) {
+    margin-top: 3vr;
+    margin-bottom: @margin-top;
+  }
+}
+
 .lyt-Content_Inner {
-  .lyt-Content-mainAside & {
-    @include Grid_Container;
-  }
-}
-
-.lyt-Content_Body {
-  .lyt-Content-mainAside & {
-    @include Grid_Row;
-
-    justify-content: space-between;
-  }
-}
-
-/*
-|--------------------------------------------------------------------------
-| Main
-|--------------------------------------------------------------------------
-|
-*/
-.lyt-Content_Main {
-  .lyt-Content-mainAside & {
-    @include Grid_Column;
-
-    @media (--xlg) {
-      width: calc((8 / 12 * 100%) - (var(--Grid_Gutter) * 2));
-    }
-  }
-}
-
-/*
-|--------------------------------------------------------------------------
-| Aside
-|--------------------------------------------------------------------------
-|
-*/
-.lyt-Content_Aside {
-  .lyt-Content-mainAside & {
-    @include Grid_Column;
-
-    @media (--xlg) {
-      width: calc((3 / 12 * 100%) - (var(--Grid_Gutter) * 2));
-    }
-  }
+  @include Grid_Container;
 }

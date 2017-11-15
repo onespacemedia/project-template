@@ -1,0 +1,66 @@
+/*
+|--------------------------------------------------------------------------
+| Section
+|--------------------------------------------------------------------------
+| @namespace: sec-
+|
+*/
+.sec-Section {
+  margin-top: 1vr;
+  margin-bottom: @margin-top;
+
+  @media (--sm) {
+    margin-top: 1.5vr;
+    margin-bottom: @margin-top;
+  }
+
+  @media (--md) {
+    margin-top: 2vr;
+    margin-bottom: @margin-top;
+  }
+
+  @media (--lg) {
+    margin-top: 3vr;
+    margin-bottom: @margin-top;
+  }
+
+  @media (--xlg) {
+    margin-top: 4vr;
+    margin-bottom: @margin-top;
+  }
+}
+
+.sec-Section_Inner {
+  @include Grid_Container;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.sec-Section_Header {
+  margin-bottom: 1vr;
+
+  text-align: center;
+
+  @media (--sm) {
+    width: calc(6 / 8 * 100%);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (--md) {
+    width: calc(8 / 12 * 100%);
+    margin-bottom: 1.5vr;
+  }
+
+  @media (--lg) {
+    margin-bottom: 2vr;
+  }
+}
+
+.sec-Section_Title {
+  margin-bottom: 0.5vr;
+}

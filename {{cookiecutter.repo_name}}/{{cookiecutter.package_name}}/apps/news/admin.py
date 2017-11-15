@@ -5,20 +5,16 @@ from django.conf import settings
 from django.contrib import admin
 from reversion.admin import VersionAdmin
 from reversion.models import Version
+from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin
 from .models import STATUS_CHOICES, Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
-class CategoryAdmin(PageBaseAdmin):
-    fieldsets = (
-        PageBaseAdmin.TITLE_FIELDS,
-        PageBaseAdmin.PUBLICATION_FIELDS,
-        PageBaseAdmin.NAVIGATION_FIELDS,
-        PageBaseAdmin.SEO_FIELDS,
-    )
+class CategoryAdmin(SortableModelAdmin):
     list_display = ['__str__']
+    prepopulated_fields = {'slug': ['title']}
 
 
 class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
@@ -26,20 +22,21 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     search_fields = PageBaseAdmin.search_fields + ('content', 'summary',)
 
-    list_display = ['get_image', 'title', 'date', 'render_categories', 'is_online', 'last_modified']
+    list_display = ['get_image', 'title', 'date', 'render_categories', 'featured', 'is_online', 'last_modified']
     list_display_links = ['get_image', 'title']
-    list_filter = ['is_online', 'categories', 'status']
+    list_editable = ['featured', 'is_online']
+    list_filter = ['featured', 'is_online', 'categories', 'status']
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'news_feed', 'date', 'status']
+            'fields': ['title', 'slug', 'news_feed', 'featured', 'date', 'status'],
         }),
         ('Content', {
-            'fields': ['image', 'content', 'summary', 'categories']
+            'fields': ['image', 'card_image', 'content', 'summary', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
         }),
         ('Publication', {
             'fields': ['is_online'],
-            'classes': ['collapse']
+            'classes': ['collapse'],
         }),
     ]
 
@@ -47,8 +44,6 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets.remove(PageBaseAdmin.TITLE_FIELDS)
     fieldsets.remove(OnlineBaseAdmin.PUBLICATION_FIELDS)
-
-    raw_id_fields = ['image']
 
     filter_horizontal = ['categories']
 
@@ -94,12 +89,13 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
         versions = Version.objects.get_for_object(obj)
         if versions.count() > 0:
             latest_version = versions[:1][0]
-            return "{} by {}".format(
+            return '{} by {}'.format(
                 latest_version.revision.date_created.strftime("%Y-%m-%d %H:%M:%S"),
                 latest_version.revision.user
             )
         return "-"
 
     render_categories.short_description = 'Categories'
+
 
 admin.site.register(Article, ArticleAdmin)

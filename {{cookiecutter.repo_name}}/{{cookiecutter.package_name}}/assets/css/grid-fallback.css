@@ -1,0 +1,130 @@
+/*
+|--------------------------------------------------------------------------
+| Grid fallback
+|--------------------------------------------------------------------------
+|
+*/
+@import 'helpers/index.css';
+
+.util-NoGrid {
+  /*
+  |--------------------------------------------------------------------------
+  | Footer
+  |--------------------------------------------------------------------------
+  |
+  */
+  .ft-Footer_Columns {
+    @media (--sm) {
+      @include Grid_Row;
+    }
+  }
+
+  .ft-Footer_Column {
+    @media (--sm) {
+      @include Grid_Column;
+
+      width: calc((4 / 8 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    @media (--lg) {
+      margin-right: calc(var(--Grid_Gutter) * 2);
+      margin-left: @margin-right;
+    }
+  }
+
+  .ft-Footer_Column-about {
+    @media (--sm-viewport) {
+      width: 100%;
+    }
+
+    @media (--md) {
+      width: calc((5 / 12 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    @media (--lg) {
+      width: calc((5 / 12 * 100%) - (var(--Grid_Gutter) * 4));
+    }
+  }
+
+  .ft-Footer_Column-links {
+    @media (--md) {
+      width: calc((4 / 12 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    @media (--lg) {
+      width: calc((4 / 12 * 100%) - (var(--Grid_Gutter) * 4));
+    }
+  }
+
+  .ft-Footer_Column-contact {
+    @media (--md) {
+      width: calc((3 / 12 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    @media (--lg) {
+      width: calc((3 / 12 * 100%) - (var(--Grid_Gutter) * 4));
+    }
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | News
+  |--------------------------------------------------------------------------
+  |
+  */
+  .nws-Articles_Items {
+    @media (--sm) {
+      @include Grid_Row;
+    }
+  }
+
+  .nws-Articles_Item {
+    margin-top: 1vr;
+
+    @media (--sm) {
+      @include Grid_Column;
+
+      width: calc((4 / 8 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    @media (--md) {
+      width: calc((4 / 12 * 100%) - (var(--Grid_Gutter) * 2));
+    }
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:nth-child(-n+2) {
+      @media (--sm) {
+        margin-top: 0;
+      }
+    }
+
+    &:nth-child(-n+3) {
+      @media (--md) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .nws-Articles_Item-full {
+    @media (--sm) {
+      width: 100%;
+    }
+  }
+
+  .nws-Articles_Items-withFeatured .nws-Articles_Item {
+    &:nth-child(-n+3) {
+      @media (--sm) {
+        margin-top: 0;
+      }
+    }
+
+    &:nth-child(-n+4) {
+      @media (--md) {
+        margin-top: 0;
+      }
+    }
+  }
+}

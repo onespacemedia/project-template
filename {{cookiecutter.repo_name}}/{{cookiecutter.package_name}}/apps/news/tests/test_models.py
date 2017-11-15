@@ -7,8 +7,8 @@ from django.test import TestCase
 from django.utils.timezone import now
 from watson import search
 
-from ..models import (Article, Category, CategoryHistoryLinkAdapter, NewsFeed,
-                      get_default_news_feed, get_default_news_page)
+from ..models import (Article, Category, NewsFeed, get_default_news_feed,
+                      get_default_news_page)
 
 
 class TestNews(TestCase):
@@ -72,19 +72,6 @@ class TestNews(TestCase):
         self._create_objects()
         self.assertEqual(get_default_news_feed(), self.feed)
 
-    def test_category_get_permalink_for_page(self):
-        self._create_objects()
-        self.assertEqual(self.category._get_permalink_for_page(self.page), '/category/foo/')
-
-    def test_category_get_permalinks(self):
-        self._create_objects()
-        self.assertEqual(self.category._get_permalinks(), {'page_' + str(self.page.pk): '/category/foo/'})
-
-    def test_categoryhistorylinkadapter_get_permalinks(self):
-        self._create_objects()
-        adapter = CategoryHistoryLinkAdapter(model=Category)
-        self.assertEqual(adapter.get_permalinks(self.category), {'page_' + str(self.page.pk): '/category/foo/'})
-
     def test_article_get_permalink_for_page(self):
         self._create_objects()
         self.assertEqual(self.article._get_permalink_for_page(self.page), '/foo/')
@@ -111,5 +98,5 @@ class TestNews(TestCase):
 
         # We need to generate an exception within the published block.
         with self.assertRaises(TypeError), \
-                publication_manager.select_published(True):
+             publication_manager.select_published(True):
             assert 1 / 'a'

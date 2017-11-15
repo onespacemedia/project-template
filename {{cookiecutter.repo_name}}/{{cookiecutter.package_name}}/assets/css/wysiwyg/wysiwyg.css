@@ -12,6 +12,34 @@
 /* stylelint-disable declaration-no-important, max-nesting-depth, selector-max-id, selector-max-type, selector-max-universal */
 #tinymce,
 .wys-WYSIWYG {
+  > * {
+    @media (--sm) {
+      width: calc(6 / 8 * 100%);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    @media (--md) {
+      width: calc(8 / 12 * 100%);
+    }
+  }
+
+  > img {
+    display: block;
+    margin-top: 1vr;
+    margin-bottom: @margin-top;
+
+    @media (--sm) {
+      width: calc(7 / 8 * 100%);
+    }
+
+    @media (--md) {
+      width: calc(10 / 12 * 100%);
+      margin-top: 2vr;
+      margin-bottom: @margin-top;
+    }
+  }
+
   > p {
     margin-bottom: 1vr;
   }
