@@ -170,13 +170,11 @@ class Article(PageBase):
         'news.Category',
         blank=True,
     )
-    {% if cookiecutter.people == 'yes' %}
-    author = models.ForeignKey(
+    {% if cookiecutter.people == 'yes' %}author = models.ForeignKey(
         'people.Person',
         blank=True,
         null=True,
-    )
-    {% endif %}
+    ){% endif %}
     status = models.CharField(
         max_length=100,
         choices=STATUS_CHOICES,
