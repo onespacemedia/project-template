@@ -3,36 +3,54 @@ from __future__ import print_function
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import HtmlField
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.shortcuts import render_to_response
 from django.utils.functional import cached_property
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
-            ('homepage-hero', {
-                'fields': ['title', 'text', 'link_text', 'link_page', 'link_url'],
-            }),
             ('landing-hero', {
-                'fields': ['title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
+                'fields': ['kicker', 'title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'text'],
+                'required': ['title', 'image'],
+                'help_text': {
+                    'kicker': 'If this is left blank it will inherit the pages title',
+                },
+            }),
+        ]
+    }),
+    ('Images', {
+        'sections': [
+            ('full-width', {
+                'fields': ['image', 'mobile_image'],
+                'required': ['image']
+            }),
+            ('split', {
+                'fields': ['kicker', 'title', 'text', 'image', 'image_side' 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'text'],
+                'required': ['title', 'image'],
             }),
         ]
     }),
     ('Text', {
         'sections': [
+            ('centered', {
+                'fields': ['background_colour', 'kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'text'],
+                'required': ['title'],
+            }),
             ('dual-column', {
-                'fields': ['title', 'text', 'link_text', 'link_page', 'link_url'],
+                'fields': ['kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'text'],
+                'required': ['title'],
             }),
         ]
     }),
-    ('Misc', {
-        'sections': [
-            ('key7e', {
-                'fields': []
-            })
-        ]
-    })
 )
 
 
@@ -51,9 +69,12 @@ def get_section_types_flat():
         # Every section that appears in the optgroup
         for section_type in group[1]['sections']:
             types.append({
-                'slug': section_type[0],
-                'name': get_section_name(section_type),
-                'fields': section_type[1].get('fields', [])
+                'slug': f'{slugify(group[0])}-{section_type[0]}',
+                'name': f'{group[0]} - {get_section_name(section_type)}',
+                'fields': section_type[1].get('fields', []),
+                'search': section_type[1].get('search', []),
+                'required': section_type[1].get('required', []),
+                'help_text': section_type[1].get('help_text', {}),
             })
     return types
 
@@ -86,9 +107,10 @@ def get_section_type_choices(types):
         sections = []
 
         for section in content['sections']:
-            section_label = section[0]
+            section_label = slugify(f'{section_group[0]}-{section[0]}')
 
-            sections.append((slugify(section_label), get_section_name(section)))
+            sections.append(
+                (slugify(section_label), get_section_name(section)))
 
         groups.append((label, sections))
 
@@ -104,6 +126,20 @@ class SectionBase(models.Model):
     type = models.CharField(
         choices=get_section_type_choices(SECTION_TYPES),
         max_length=100,
+    )
+
+    background_colour = models.CharField(
+        max_length=255,
+        choices=[
+            ('white', 'White'),
+        ],
+        default='white',
+    )
+
+    kicker = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
     )
 
     title = models.CharField(
@@ -125,6 +161,20 @@ class SectionBase(models.Model):
     image = ImageRefField(
         blank=True,
         null=True,
+    )
+
+    mobile_image = ImageRefField(
+        blank=True,
+        null=True,
+    )
+
+    image_side = models.CharField(
+        max_length=10,
+        choices=[
+            ('left', 'Left'),
+            ('right', 'Right'),
+        ],
+        default='left',
     )
 
     link_text = models.CharField(
@@ -159,7 +209,50 @@ class SectionBase(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return dict(SECTION_TYPES)[self.type]['name']
+        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+
+    def clean(self):
+        sections = get_section_types_flat()
+
+        for section in sections:
+            if self.type == section['slug']:
+                required = [getattr(self, field)
+                            for field in section['required']]
+                if not all(required):
+                    fields_str = ''
+                    fields_len = len(section['required'])
+                    fields = {}
+
+                    for index, field in enumerate(section['required']):
+                        fields[field] = ValidationError(f'Please provide an {field}', code='required')
+                        connector = ', '
+
+                        if index == fields_len - 2:
+                            connector = ' and '
+                        elif index == fields_len - 1:
+                            connector = ''
+
+                        anchor = f'id_{self._meta.model_name}_set-{self.order}-{field}'
+                        fields_str += f'<a href="#{anchor}">{field.title()}</a>{connector}'
+
+                    fields['__all__'] = ValidationError(mark_safe(f'{fields_str} fields are required'), code='error')
+
+                    raise ValidationError(fields)
+
+        if self.link_text and (not self.link_page or not self.link_url):
+            raise ValidationError({
+                'link_page': 'Please provide either a "Link Page" or a "Link URL"',
+            })
+
+    @property
+    def template(self):
+        folder_name = self.type.split('-')[0]
+        file_name = '-'.join(self.type.split('-')[1:])
+
+        return {
+            'folder': folder_name,
+            'file_name': f'{file_name}.html'
+        }
 
     @property
     def has_link(self):
@@ -174,16 +267,42 @@ class SectionBase(models.Model):
                 pass
         return self.link_url
 
+    def get_searchable_text(self):
+        """Returns a blob of text suitable for searching."""
+
+        # Let's look for the options for our section type.
+        for section_group in SECTION_TYPES:
+            for section_type in section_group[1]['sections']:
+                section_label = slugify(f'{section_group[0]}-{section_type[0]}')
+
+                if not section_label == self.type:
+                    continue
+
+                # If we defeated the above clause then we have the options
+                # for the right section type.
+                section_options = section_type[1]
+
+                # Don't require that search_fields is set.
+                if 'search_fields' not in section_options:
+                    continue
+
+                search_fields = section_options['search_fields']
+
+                search_text_items = []
+                for field in search_fields:
+                    search_item = getattr(self, field)
+                    if search_item:
+                        search_text_items.append(strip_tags(search_item))
+
+                return '\n'.join(search_text_items)
+
+        return ''
+
 
 class ContentSection(SectionBase):
-
-    def __str__(self):
-        return self.title
+    pass
 
 
 class Content(ContentBase):
 
     icon = 'cms-icons/sections.png'
-
-    def __str__(self):
-        return self.page.title
