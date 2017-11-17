@@ -109,6 +109,10 @@ $(window).load(function() {
           }
         }
       });
+      
+      $('.wysiwyg:visible', $section).each(function () {
+        activate_tinymce(this)
+      });
     });
   }
 });

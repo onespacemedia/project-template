@@ -1,22 +1,52 @@
 {% extends "news/base.html" %}
+{% import "components/macros/components.html" as components %}
+{% import "news/macros/news.html" as news %}
+
+{% block content_above %}
+  <section class="pg-LandingHero pg-LandingHero-hasOverhang">
+    <div class="pg-LandingHero_Inner">
+      <div class="pg-LandingHero_Body">
+        <p class="pg-LandingHero_Kicker">{{ pages.current.content.hero_kicker or pages.current }}</p>
+        <h1 class="pg-LandingHero_Title">{{ article.title }}</h1>
+      </div>
+    </div>
+
+    <div class="pg-LandingHero_Overhang">
+      <div class="pg-LandingHero_OverhangInner">
+        <div class="pg-LandingHero_OverhangBody">
+          <div class="pg-LandingHero_ImageContainer">
+            {{ render_lazy_image(article.image) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
 
 {% block main %}
-  <article>
-    {{ article.content|html }}
-    {% if next_article or prev_article %}
-      <nav class="news-article-detail-navigation">
-        {% if prev_article %}
-          <a rel="prev" href="{{ get_article_url(prev_article) }}">
-            Previous
-          </a>
-        {% endif %}
-
-        {% if next_article %}
-          <a rel="next" href="{{ get_article_url(next_article) }}">
-            Next
-          </a>
-        {% endif %}
-      </nav>
-    {% endif %}
+  <article class="nws-Article">
+    <div class="wys-WYSIWYG">
+      {{ article.content|html }}
+    </div>
   </article>
+{% endblock %}
+
+{% block content_below %}
+  <section class="sec-Section">
+    <div class="sec-Section_Inner">
+      <header class="sec-Section_Header">
+        <h2 class="sec-Section_Title">Related articles</h2>
+        <p class="sec-Section_Text">You might be interested in some of our other articles</p>
+      </header>
+
+      <div class="sec-Section_Body">
+        {{ news.article_list(article.get_related_articles()) }}
+      </div>
+    </div>
+  </section>
+
+  {% set cta = object is defined and object.call_to_action or pages.current.content.call_to_action %}
+  {% if cta %}
+    {{ components.call_to_action(cta) }}
+  {% endif %}
 {% endblock %}

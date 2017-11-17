@@ -1,41 +1,35 @@
 {% extends "news/base.html" %}
-{#{% load html news pagination thumbnail %}#}
+{% import "components/macros/components.html" as components %}
+{% import "news/macros/news.html" as news %}
+
+{% block content_above %}
+  <section class="pg-LandingHero">
+    <div class="pg-LandingHero_Inner">
+      <div class="pg-LandingHero_Body">
+        <p class="pg-LandingHero_Kicker">{{ pages.current.content.hero_kicker or pages.current }}</p>
+        <h1 class="pg-LandingHero_Title">{{ pages.current.content.hero_title }}</h1>
+      </div>
+    </div>
+  </section>
+{% endblock %}
 
 {% block main %}
-  <ul>
-    {% for article in article_list %}
-      <li>
-        <article>
-          <a href="{{ get_article_url(article) }}">
-            {% with image = thumbnail(article.image.file, 'x140', crop='center') %}
-              <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
-            {% endwith %}
-          </a>
-
-          <h3><a href="{{ get_article_url(article) }}">{{ article }}</a></h3>
-          <p>
-            {{ article.date }}
-
-            {% for category in article.categories.all() %}
-              <a href="{{ get_category_url(category) }}">
-                {{ category }}{% if not loop.last %}, {% endif %}
-              </a>
-            {% endfor %}
-          </p>
-
-          {% if article.summary %}
-            {{ article.summary|html }}
-          {% else %}
-            <p>{{ article.content|truncate_paragraphs(1)|striptags }}</p>
-          {% endif %}
-        </article>
-      </li>
+  <div class="nws-Articles">
+    {% if object_list %}
+      {{ news.article_list(object_list, featured_article) }}
     {% else %}
-      <li>There are no articles!</li>
-    {% endfor %}
-  </ul>
+      <p>There are no articles.</p>
+    {% endif %}
+  </div>
 
   {% if page_obj %}
     {{ render_pagination(page_obj) }}
+  {% endif %}
+{% endblock %}
+
+{% block content_below %}
+  {% set cta = object is defined and object.call_to_action or pages.current.content.call_to_action %}
+  {% if cta %}
+    {{ components.call_to_action(cta) }}
   {% endif %}
 {% endblock %}

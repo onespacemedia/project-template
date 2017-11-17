@@ -107,12 +107,14 @@ export class Navigation {
 
       if (schema.hasChildren) {
         schema.link.addEventListener('click', e => {
-          e.preventDefault()
+          if (window.innerWidth <= mediaBreakpoints.lg) {
+            e.preventDefault()
 
-          const isActive = !schema.active
+            const isActive = !schema.active
 
-          schema.active = isActive
-          schema.parent.classList.toggle(className, isActive)
+            schema.active = isActive
+            schema.parent.classList.toggle(className, isActive)
+          }
         })
         schema.back.addEventListener('click', () => {
           const isActive = !schema.active
@@ -128,9 +130,10 @@ export class Navigation {
 
   setTop () {
     Array.from(this.els.tops).forEach(el => {
-      const top = window.innerWidth <= mediaBreakpoints.xs
-        ? this.els.header.offsetHeight
-        : getOffsetTop(this.els.header) + this.els.header.offsetHeight
+      const top =
+        window.innerWidth <= mediaBreakpoints.xs
+          ? this.els.header.offsetHeight
+          : getOffsetTop(this.els.header) + this.els.header.offsetHeight
 
       el.style.top = `${top}px`
     })

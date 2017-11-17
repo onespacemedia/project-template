@@ -4,6 +4,8 @@ import 'utils/class-list-polyfill'
 import 'utils/focus-ring'
 import 'utils/webp-detector'
 
+import { svg4everybody } from './utils/svgforeverybody'
+
 import LazyImage from './utils/lazy-image'
 import { Navigation } from './site'
 import { externalLinks, iframeFix } from './utils'
@@ -48,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body || document.documentElement
     body.classList.add('is-iOS')
   }
+
+  svg4everybody()
 
   // This class is used for making the animation duration on CSS animations 0, initially
   setTimeout(() => {

@@ -1,0 +1,15 @@
+{% macro article_list(articles, featured=None) %}
+  <ul class="nws-Articles_Items{% if featured %} nws-Articles_Items-withFeatured{% endif %}">
+    {% if featured %}
+      <li class="nws-Articles_Item nws-Articles_Item-full">
+        {{ featured.render_card() }}
+      </li>
+    {% endif %}
+
+    {% for article in articles %}
+      <li class="nws-Articles_Item">
+        {{ article.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

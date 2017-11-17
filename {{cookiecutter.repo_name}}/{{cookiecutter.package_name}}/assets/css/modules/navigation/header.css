@@ -254,6 +254,8 @@
 |
 */
 .nav-Header_Dropdown {
+  z-index: 10;
+
   @media (--not-lg-viewport) {
     position: fixed;
     top: 69px;

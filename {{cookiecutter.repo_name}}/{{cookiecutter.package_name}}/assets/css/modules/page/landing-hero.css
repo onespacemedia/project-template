@@ -1,0 +1,102 @@
+/*
+|--------------------------------------------------------------------------
+| Landing hero
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-LandingHero {
+  padding-top: 1vr;
+  padding-bottom: @padding-top;
+
+  background-color: #e6ebf1;
+  border-bottom: 1px solid var(--Color_Border);
+
+  @media (--sm) {
+    padding-top: 1.5vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--md) {
+    padding-top: 2vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--lg) {
+    padding-top: 3vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.pg-LandingHero-hasOverhang {
+  padding-bottom: 0;
+
+  border-bottom: 0;
+}
+
+.pg-LandingHero_Inner {
+  @include Grid_Container;
+}
+
+.pg-LandingHero_Body {
+  text-align: center;
+
+  @media (--sm) {
+    width: calc(6 / 8 * 100%);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (--md) {
+    width: calc(8 / 12 * 100%);
+  }
+}
+
+.pg-LandingHero_Kicker {
+  margin-bottom: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Overhang
+|--------------------------------------------------------------------------
+|
+*/
+.pg-LandingHero_Overhang {
+  margin-top: 1vr;
+
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 1) 50%
+  );
+
+  @media (--sm) {
+    margin-top: 1.5vr;
+  }
+
+  @media (--md) {
+    margin-top: 2vr;
+  }
+
+  @media (--lg) {
+    margin-top: 3vr;
+  }
+}
+
+.pg-LandingHero_OverhangInner {
+  @include Grid_Container;
+}
+
+.pg-LandingHero_OverhangBody {
+  @media (--sm) {
+    width: calc(7 / 8 * 100%);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (--md) {
+    width: calc(10 / 12 * 100%);
+  }
+}

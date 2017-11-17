@@ -3,7 +3,6 @@
 from cms.html import process as process_html
 from cms.views import SearchMetaDetailMixin
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.utils.feedgenerator import DefaultFeed
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import BaseListView
@@ -40,7 +39,8 @@ class ArticleListMixin(ArticleMixin):
         return super(ArticleListMixin, self).get_queryset().prefetch_related(
             'categories',
         ).select_related(
-            'image'
+            'image',
+            'card_image',
         ).filter(
             news_feed__page=self.request.pages.current,
         ).order_by(
@@ -49,7 +49,26 @@ class ArticleListMixin(ArticleMixin):
 
 
 class ArticleArchiveView(ArticleListMixin, ListView):
-    pass
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.featured_article = None
+
+    def dispatch(self, request, *args, **kwargs):
+        self.featured_article = Article.objects.filter(featured=True)[:1].get()
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        return super().get_queryset().exclude(id=self.featured_article.id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['featured_article'] = self.featured_article
+
+        return context
 
 
 class ArticleFeedView(ArticleListMixin, BaseListView):
@@ -84,49 +103,4 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
 
 
 class ArticleDetailView(ArticleMixin, SearchMetaDetailMixin, DetailView):
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleDetailView, self).get_context_data(**kwargs)
-
-        # Get the next article.
-        try:
-            next_article = self.object.get_next_by_date()
-        except Article.DoesNotExist:
-            next_article = None
-
-        # Get the previous article.
-        try:
-            prev_article = self.object.get_previous_by_date()
-        except Article.DoesNotExist:
-            prev_article = None
-
-        context['next_article'] = next_article
-        context['prev_article'] = prev_article
-
-        return context
-
-
-class ArticleCategoryArchiveView(SearchMetaDetailMixin, ArticleArchiveView):
-    template_name = 'news/article_category_archive.html'
-
-    def get_queryset(self):
-        """Returns the queryset filtered by category."""
-        return super(ArticleCategoryArchiveView, self).get_queryset().filter(
-            categories=self.object,
-        )
-
-    def get_context_data(self, **kwargs):
-        """Adds the category to the context."""
-        context = super(ArticleCategoryArchiveView, self).get_context_data(**kwargs)
-        context['category'] = self.object
-
-        return context
-
-    def dispatch(self, request, *args, **kwargs):
-        """Parses the category from the request."""
-        self.object = get_object_or_404(
-            Category,
-            slug=kwargs['slug'],
-        )
-
-        return super(ArticleCategoryArchiveView, self).dispatch(request, *args, **kwargs)
+    pass
