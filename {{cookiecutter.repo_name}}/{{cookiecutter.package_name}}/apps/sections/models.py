@@ -235,13 +235,13 @@ class SectionBase(models.Model):
                         anchor = f'id_{self._meta.model_name}_set-{self.order}-{field}'
                         fields_str += f'<a href="#{anchor}">{field.title()}</a>{connector}'
 
-                    fields['__all__'] = ValidationError(mark_safe(f"{fields_str} fields are required"), code='error')
+                    fields['__all__'] = ValidationError(mark_safe(f'{fields_str} fields are required'), code='error')
 
                     raise ValidationError(fields)
 
         if self.link_text and (not self.link_page or not self.link_url):
             raise ValidationError({
-                'link_page': 'Please supply 1 of "link page" or "link URL"',
+                'link_page': 'Please provide either a "Link Page" or a "Link URL"',
             })
 
     @property
@@ -273,8 +273,7 @@ class SectionBase(models.Model):
         # Let's look for the options for our section type.
         for section_group in SECTION_TYPES:
             for section_type in section_group[1]['sections']:
-                section_label = slugify(
-                    '{}-{}'.format(section_group[0], section_type[0]))
+                section_label = slugify(f'{section_group[0]}-{section_type[0]}')
 
                 if not section_label == self.type:
                     continue
@@ -295,7 +294,7 @@ class SectionBase(models.Model):
                     if search_item:
                         search_text_items.append(strip_tags(search_item))
 
-                return u'\n'.join(search_text_items)
+                return '\n'.join(search_text_items)
 
         return ''
 

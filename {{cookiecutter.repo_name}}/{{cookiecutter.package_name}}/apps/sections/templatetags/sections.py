@@ -23,14 +23,14 @@ def render_section(context, page_section):
 
         if settings.DEBUG:
             try:
-                os.makedirs(f'example_project/apps/sections/templates/sections/types/{page_section.template["folder"]}')
+                os.makedirs(f'{{ cookiecutter.package_name }}/apps/sections/templates/sections/types/{page_section.template["folder"]}')
             except OSError as exc:  # Python >2.5
                 if exc.errno == errno.EEXIST and os.path.isdir(page_section.template["folder"]):
                     pass
                 else:
                     raise
 
-            os.system(f'touch example_project/apps/sections/templates/sections/types/{page_section.template["folder"]}/{page_section.template["file_name"]}')
+            os.system(f'touch {{ cookiecutter.package_name }}/apps/sections/templates/sections/types/{page_section.template["folder"]}/{page_section.template["file_name"]}')
 
             return ''
         else:
