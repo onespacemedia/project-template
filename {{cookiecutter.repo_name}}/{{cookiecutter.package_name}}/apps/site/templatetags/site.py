@@ -1,6 +1,6 @@
-import os
 import hashlib
-import urllib.parse
+import os
+import urllib
 
 import CommonMark
 import jinja2
@@ -9,6 +9,7 @@ from cms.apps.pages.templatetags.pages import _navigation_entries
 from cms.html import process as process_html
 from django.conf import settings
 from django.template.defaultfilters import stringfilter
+from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
@@ -196,6 +197,7 @@ def get_header_content():
 @library.global_function
 def get_footer_content():
     return Footer.objects.first()
+
 
 @library.global_function
 @library.render_with('edit_bar.html')
