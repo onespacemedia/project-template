@@ -89,6 +89,8 @@
 }
 
 @mixin Grid_Row {
+  flex-wrap: wrap;
+
   display: flex;
   margin-right: -var(--Grid_Gutter);
   margin-left: @margin-right;

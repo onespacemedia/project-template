@@ -1,7 +1,15 @@
 {% extends "base.html" %}
+{% import "components/macros/components.html" as components %}
 
 {% block main %}
   {% for section in pages.current.contentsection_set.all() %}
     {{ render_section(section) }}
   {% endfor %}
+{% endblock %}
+
+{% block content_below %}
+  {% set cta = object is defined and object.call_to_action or pages.current.content.call_to_action %}
+  {% if cta %}
+    {{ components.call_to_action(cta) }}
+  {% endif %}
 {% endblock %}

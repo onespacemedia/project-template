@@ -31,7 +31,6 @@ module.exports = [
   require('postcss-will-change'),
   require('postcss-font-awesome'),
   require('postcss-round-subpixels'),
-  require('postcss-calc'),
   require('postcss-hexrgba'),
   require('autoprefixer'),
 ];

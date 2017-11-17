@@ -1,0 +1,36 @@
+/*
+|--------------------------------------------------------------------------
+| Articles
+|--------------------------------------------------------------------------
+| @namespace: nws-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.nws-Articles_Items {
+  grid-gap: calc(var(--Grid_Gutter) * 2);
+
+  display: grid;
+
+  @media (--sm) {
+    grid-gap: calc(var(--Grid_Gutter) * 2);
+    grid-template-columns: repeat(2, 1fr);
+
+    display: grid;
+  }
+
+  @media (--md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.nws-Articles_Item-full {
+  @media (--sm) {
+    grid-column: 1 / -1;
+  }
+}
