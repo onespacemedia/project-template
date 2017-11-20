@@ -6,11 +6,11 @@ jobs:
       - image: circleci/python:3.6.2
         environment:
           - DB_USER=root
-          - DB_NAME={{ cookiecutter.package_name
+          - DB_NAME={{ cookiecutter.package_name }}
       - image: circleci/postgres:9.5.10
         environment:
           - POSTGRES_USER=root
-          - POSTGRES_DB={{ cookiecutter.package_name
+          - POSTGRES_DB={{ cookiecutter.package_name }}
     steps:
       - checkout
       - restore_cache:
@@ -30,7 +30,7 @@ jobs:
           name: pylint
           command: |
             . .venv/bin/activate
-            pylint {{ cookiecutter.package_name / --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
+            pylint {{ cookiecutter.package_name }} / --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
       - run:
           name: iSort
           command: |
