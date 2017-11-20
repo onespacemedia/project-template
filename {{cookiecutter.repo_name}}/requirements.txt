@@ -1,6 +1,7 @@
 argon2-cffi
 beautifulsoup4==4.6.0
 CommonMark==0.7.4
+cryptography
 django>=1.11,<1.12
 django-cachalot
 django-compressor
@@ -19,6 +20,7 @@ onespacemedia-server-management
 opbeat
 paramiko==1.16.0
 Pillow
+pygithub
 python-memcached
 social-auth-app-django
 -e git://github.com/jazzband/sorl-thumbnail.git@eff221e0e0ea6054c62a31ca35fc1854e1f3287a#egg=sorl-thumbnail

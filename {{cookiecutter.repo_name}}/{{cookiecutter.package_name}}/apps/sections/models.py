@@ -119,10 +119,6 @@ def get_section_type_choices(types):
 
 class SectionBase(models.Model):
 
-    page = models.ForeignKey(
-        Page,
-    )
-
     type = models.CharField(
         choices=get_section_type_choices(SECTION_TYPES),
         max_length=100,

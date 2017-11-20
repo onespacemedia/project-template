@@ -1,6 +1,5 @@
 import os
 import os.path
-import pwd
 
 from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
@@ -37,8 +36,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'HOST': 'localhost',
-        'NAME': '{{cookiecutter.package_name}}',
-        'USER': pwd.getpwuid(os.getuid()).pw_name,
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
     },
 }
 
