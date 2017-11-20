@@ -14,8 +14,8 @@ cd $DJANGODIR
 source .venv/bin/activate
 
 export DJANGO_SETTINGS_MODULE={{ cookiecutter.package_name }}.settings.production
-export DB_USER=fluidic_analytics
-export DB_NAME=fluidic_analytics
+export DB_USER={{cookiecutter.package_name}}
+export DB_NAME={{cookiecutter.package_name}}
 
 # Programs meant to be run under supervisor should not daemonize themselves
 # (do not use --daemon).
