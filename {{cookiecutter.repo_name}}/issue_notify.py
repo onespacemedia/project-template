@@ -7,7 +7,6 @@ import time
 import jwt
 from github import Github, GithubIntegration
 
-
 # Custom class to fix this: https://github.com/PyGithub/PyGithub/issues/627
 class Py3GithubIntegration(GithubIntegration):
     def create_jwt(self):
