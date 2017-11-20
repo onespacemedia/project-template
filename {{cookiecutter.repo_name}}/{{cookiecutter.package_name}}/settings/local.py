@@ -1,6 +1,5 @@
 import os
 import os.path
-import pwd
 
 from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 
