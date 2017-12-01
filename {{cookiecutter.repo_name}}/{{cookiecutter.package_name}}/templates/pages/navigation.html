@@ -40,7 +40,7 @@
                 </li>
               {% endif %}
 
-              <li class="nav-Header_Item{% if sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
+              <li class="nav-Header_Item{% if recursive and sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
                 <a class="nav-Header_Link" href="{{ sub_entry.url }}" itemprop="url">
                   <span itemprop="name">{{ sub_entry.page }}</span>
 
