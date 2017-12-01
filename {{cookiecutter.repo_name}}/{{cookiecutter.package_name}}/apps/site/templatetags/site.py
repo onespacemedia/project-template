@@ -165,7 +165,8 @@ def html(text):
 
     # Unwrap all image tags
     for img in soup.find_all('img'):
-        img.parent.unwrap()
+        if not img.parent.has_attr('class'):
+            img.parent.unwrap()
 
     def wrap(to_wrap, wrap_in):
         contents = to_wrap.replace_with(wrap_in)
