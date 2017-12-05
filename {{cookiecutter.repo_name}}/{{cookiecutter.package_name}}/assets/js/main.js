@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const lazyImages = document.querySelectorAll('.js-LazyImage')
     const callback = (entries, observer) => {
       Array.from(entries).forEach((entry, index) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !entry.target.dataset.activating) {
+          entry.target.dataset.activating = true
           window.setTimeout(() => {
             new LazyImage({ el: entry.target })
             observer.unobserve(entry.target)
