@@ -92,6 +92,8 @@ pip freeze > requirements.txt
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
 
+mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/components/templates {{cookiecutter.package_name}}/apps/components/templates
+
 {% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
     {% if cookiecutter[project] == 'no' %}
         echo "Remove the {{project}} app.";
