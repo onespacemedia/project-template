@@ -2,7 +2,7 @@
 
 NAME="{{ cookiecutter.package_name }}"
 DJANGODIR=/var/www/{{ cookiecutter.package_name }}
-USER=fluidic_analytics
+USER={{ cookiecutter.package_name }}
 GROUP=webapps
 NUM_WORKERS=`expr 2 \* \`cat /proc/cpuinfo | grep processor | wc -l\` + 1`
 DJANGO_WSGI_MODULE={{ cookiecutter.package_name }}.wsgi
