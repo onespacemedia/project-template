@@ -165,7 +165,7 @@ def html(text):
 
     # Unwrap all image tags
     for img in soup.find_all('img'):
-        if not img.parent.has_attr('class'):
+        if not img.parent.has_attr('class') and not img.parent.has_attr('href'):
             img.parent.unwrap()
 
     def wrap(to_wrap, wrap_in):
