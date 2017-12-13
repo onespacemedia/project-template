@@ -112,6 +112,7 @@ rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Install front-end dependencies.
 if [ -z "$CI" ]; then
+    nvm install
     nvm use
 fi
 
