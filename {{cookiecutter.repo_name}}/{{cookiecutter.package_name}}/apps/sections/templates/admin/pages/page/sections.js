@@ -41,7 +41,7 @@ $(window).load(function() {
       // These are the fields we will be unhiding
       var fieldsToShow = types[$select.val()].fields;
       var requiredFields = types[$select.val()].required;
-      var helpText = types[$select.val()].helpText;
+      var helpText = types[$select.val()].helpText || {};
       // Get all of the fields in the section
       var $fields = $('div[class*="field-"]', $section);
 
