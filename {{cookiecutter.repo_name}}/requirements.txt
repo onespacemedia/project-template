@@ -1,5 +1,6 @@
 argon2-cffi
 beautifulsoup4==4.6.0
+celery[redis]
 CommonMark==0.7.4
 cryptography
 django>=1.11,<1.12
