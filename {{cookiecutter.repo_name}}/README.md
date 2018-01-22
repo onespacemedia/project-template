@@ -36,7 +36,7 @@ This will eventually be handled by server-manangement, but for now if you need i
 * `sudo add-apt-repository ppa:chris-lea/redis-server`
 * `sudo apt-get update`
 * `sudo apt-get install redis-server`
-* `ln -s /var/www/{{cookiecutter.package_name}}/config/celery.conf /etc/supervisor/conf.d/celery.conf`
+* `sudo ln -s /var/www/{{cookiecutter.package_name}}/config/celery.conf /etc/supervisor/conf.d/celery.conf`
 * `sudo supervisorctl reread`
 
 # Useful resources:
