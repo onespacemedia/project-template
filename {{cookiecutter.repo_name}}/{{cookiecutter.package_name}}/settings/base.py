@@ -461,6 +461,9 @@ SILENCED_SYSTEM_CHECKS = []
 
 THUMBNAIL_QUALITY = 60
 
+# Celery config
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
 {% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 
 if 'test' in sys.argv:
