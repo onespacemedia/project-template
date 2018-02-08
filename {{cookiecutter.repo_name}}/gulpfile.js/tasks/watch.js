@@ -12,7 +12,11 @@ var watchTask = function() {
       var glob = path.join(config.root.src, task.src, '**/*.{' + task.extensions.join(',') + '}')
 
       if (task.src === 'css') {
-        glob = '{' + path.join(config.root.src, task.src, '**/*.{' + task.extensions.join(',') + '}') + ',' + path.join(config.root.src + '/js/**/*.css') + ',' + path.join(config.root.appSrc + '/**/*.css}')
+        glob = [
+          path.join(config.root.src, task.src, '**/*.{' + task.extensions.join(',') + '}'),
+          path.join(config.root.src + '/js/**/*.css'),
+          path.join(config.root.appSrc + '/**/*.css}'),
+        ];
       }
 
       watch(glob, function() {
