@@ -29,7 +29,6 @@ module.exports = [
   }),
   require('postcss-pxtorem'),
   require('postcss-will-change'),
-  require('postcss-font-awesome'),
   require('postcss-round-subpixels'),
   require('postcss-hexrgba'),
   require('autoprefixer'),
