@@ -28,7 +28,7 @@ export function externalLinks () {
     if (!href) {
       continue
     }
-   
+
     // Don't open mailto links in a new window
     if (href.indexOf('mailto:') === 0) {
       continue
