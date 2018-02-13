@@ -408,6 +408,13 @@ WYSIWYG_OPTIONS = {
     'content_css': '/static/build/css/wysiwyg.css'
 }
 
+# Current commit hash, used for cache-busting CSS.
+try:
+    GIT_COMMIT_HASH = os.popen('git rev-parse --short HEAD').read().strip()
+# Catch everything so we don't stop the application starting if there's a problem.
+except:  # pylint: disable=bare-except
+    GIT_COMMIT_HASH = ''
+
 NEWS_APPROVAL_SYSTEM = False
 
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'

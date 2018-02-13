@@ -59,7 +59,7 @@
     {% endif %}
 
     {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
+      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
     {% endcompress %}
 
     {% block css %}{% endblock %}
