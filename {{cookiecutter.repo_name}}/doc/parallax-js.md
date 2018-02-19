@@ -23,7 +23,7 @@ Exactly how the parallaxing behaves can be controlled with `data-*` attributes.
 
 ### data-parallax-y-by
 
-This specifies a slightly-arbitrary vertical parallaxing factor. A smaller number will increase the parallax factor, and a larger number will increase it. You can specify a negative number to reverse the parallax effect.
+This specifies a slightly-arbitrary vertical parallaxing factor. A smaller number will decrease the parallax factor, and a larger number will increase it. You can specify a negative number to reverse the parallax effect.
 
 ```html
 <div class="js-Parallax" data-parallax-y-by="2.5"></div>
