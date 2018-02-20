@@ -140,7 +140,7 @@ export default function () {
       const item = parallaxElements[i]
       // Do nothing if it is not on screen.
       if (scrollBottom < item.top || currentPos > item.bottom) {
-        return
+        continue
       }
       // How far is the middle of the element from the middle of the
       // screen?
