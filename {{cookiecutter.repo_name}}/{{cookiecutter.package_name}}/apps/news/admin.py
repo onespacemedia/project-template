@@ -79,6 +79,9 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
         return super(ArticleAdmin, self).formfield_for_choice_field(db_field, request, **kwargs)
 
+    def get_image_reference(self, obj):
+        return obj.card_image or obj.image
+
     def render_categories(self, obj):
         categories = obj.categories.all()
         if not categories:
