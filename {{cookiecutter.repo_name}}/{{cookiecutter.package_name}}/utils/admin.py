@@ -1,7 +1,4 @@
-from django.core.urlresolvers import NoReverseMatch, reverse
-from django.utils.html import escape
 from django.utils.safestring import mark_safe
-from sorl.thumbnail import get_thumbnail
 
 
 class HasImageAdminMixin(object):

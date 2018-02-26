@@ -1,11 +1,10 @@
 from django.contrib import admin
-from reversion.admin import VersionAdmin
 
 from .models import EmailLog, EmailTemplate
 
 
 @admin.register(EmailTemplate)
-class EmailTemplateAdmin(VersionAdmin):
+class EmailTemplateAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'reference', 'from_email', 'reply_to', 'bcc_list', 'subject']
 
@@ -15,7 +14,7 @@ class EmailTemplateAdmin(VersionAdmin):
 
 
 @admin.register(EmailLog)
-class EmailLogAdmin(VersionAdmin):
+class EmailLogAdmin(admin.ModelAdmin):
 
     list_display = ['email_template', 'to', 'from_email', 'subject', 'timestamp']
 

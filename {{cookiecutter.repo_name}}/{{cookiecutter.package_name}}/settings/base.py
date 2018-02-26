@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 
 import os
 import platform
-import sys
 
 from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
