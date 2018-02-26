@@ -142,6 +142,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'djangocms_file',
     'djangocms_link',
+    {% if cookiecutter.redirects == 'yes' %}djangocms_redirect{% endif %}
 
     '{{ cookiecutter.package_name }}',
 ]
@@ -177,6 +178,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 # Dispatch settings.
 
 MIDDLEWARE_CLASSES = [
+    {% if cookiecutter.redirects == 'yes' %}'djangocms_redirect.middleware.RedirectMiddleware',{% endif %}
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
