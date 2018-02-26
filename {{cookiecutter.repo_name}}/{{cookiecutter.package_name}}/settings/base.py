@@ -330,7 +330,6 @@ CMS_LANGUAGES = {
 CMS_TEMPLATES = (
     # Customize this
     ('general.html', 'General template'),
-    ('home.html', 'Home template'),
 )
 
 CMS_PERMISSION = True
