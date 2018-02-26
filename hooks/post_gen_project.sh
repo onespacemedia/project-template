@@ -124,3 +124,5 @@ if [ -z "$CI" ]; then
     git add .
     git commit --amend --all --no-edit
 fi
+./manage.py migrate
+./manage.py set_default_site --name "{{ cookiecutter.project_name }}" --domain "{{ cookiecutter.domain_name }}"
