@@ -142,7 +142,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'djangocms_file',
     'djangocms_link',
-    {% if cookiecutter.redirects == 'yes' %}djangocms_redirect{% endif %}
+    {% if cookiecutter.redirects == 'yes' %}'djangocms_redirect',{% endif %}
 
     '{{ cookiecutter.package_name }}',
 ]
