@@ -6,7 +6,7 @@ import platform
 from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == 'PyPy':
-    from psycopg2cffi import compat  # pylint: disable=import-error
+    from psycopg2cffi import compat
     compat.register()
 
 
@@ -268,7 +268,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 try:
     GIT_COMMIT_HASH = os.popen('git rev-parse --short HEAD').read().strip()
 # Catch everything so we don't stop the application starting if there's a problem.
-except:  # pylint: disable=bare-except
+except:
     GIT_COMMIT_HASH = ''
 
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'

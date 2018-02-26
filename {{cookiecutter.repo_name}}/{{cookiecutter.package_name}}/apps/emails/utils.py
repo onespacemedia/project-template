@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from .models import EmailLog, EmailTemplate
 
 
-def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
+def send_email(reference, to=None, **kwargs):
     # We will allow Django's DoesNotExist exception to be raised here.
     template_obj = EmailTemplate.objects.get(reference=reference)
 

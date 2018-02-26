@@ -81,7 +81,7 @@ pip install --upgrade setuptools
 pip install -r requirements.txt
 
 # Install the linters so the versions get frozen.
-pip install --disable-pip-version-check pylint==1.7.5 pylint-django==0.7.2 pylint-mccabe==0.1.3 isort==4.2.15 astroid==1.5.3
+pip install --disable-pip-version-check prospector
 
 # The requirements will now have versions pinned, so re-dump them.
 pip freeze > requirements.txt

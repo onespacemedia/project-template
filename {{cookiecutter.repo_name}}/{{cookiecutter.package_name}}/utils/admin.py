@@ -39,7 +39,7 @@ class HasImageAdminMixin(object):
                 thumbnail.width,
                 thumbnail.height,
             ))
-        except:  # pylint:disable=bare-except
+        except:
             # ^^ We allow bare exceptions above because of the vast number
             # of exceptions that can occur; it could be IOError for bad
             # permissions, ValueError or ZeroDivisionError with invalid files,
