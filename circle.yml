@@ -5,8 +5,6 @@ machine:
     version: 3.6.2
 
 dependencies:
-  pre:
-    - sudo apt-get install libgeoip-dev
   override:
     - if psql demo -c ''; then dropdb demo; fi
     # Things required to create the project

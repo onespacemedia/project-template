@@ -24,6 +24,9 @@ if [ -z "$CI" ]; then
     trap cleanup INT
 else
     set -exo pipefail
+
+    trap cleanup ERR
+    trap cleanup INT
 fi
 
 # Check if the database already exists
@@ -68,12 +71,6 @@ else
     python3 -m venv .venv && source .venv/bin/activate
 fi
 
-# If GeoIP wasn't enabled, delete the GeoIP folder.
-{% if cookiecutter.geoip == "no" %}
-    echo "Removing GeoIP folder";
-    rm -rf {{cookiecutter.package_name}}/geoip/
-{% endif %}
-
 # Install Python dependencies.
 if [ -z "$CI" ]; then
     pip install --upgrade pip
@@ -91,19 +88,6 @@ pip freeze > requirements.txt
 
 # Generate a secret key and update the base settings file.
 perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 | tr -d '\n')\',g {{cookiecutter.package_name}}/settings/base.py
-
-mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/components/templates {{cookiecutter.package_name}}/apps/components/templates
-
-{% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
-    {% if cookiecutter[project] == 'no' %}
-        echo "Remove the {{project}} app.";
-        rm -r {{ cookiecutter.package_name }}/apps/{{ project }}
-    {% else %}
-        if [ -d "{{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/{{ project }}/templates" ]; then
-            mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/{{ project }}/templates {{cookiecutter.package_name}}/apps/{{ project }}/templates
-        fi
-    {% endif %}
-{% endfor %}
 
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/assets {{cookiecutter.package_name}}
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.package_name}}
