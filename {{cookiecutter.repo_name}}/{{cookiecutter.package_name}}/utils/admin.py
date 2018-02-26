@@ -1,4 +1,5 @@
 from django.utils.safestring import mark_safe
+from easy_thumbnails.files import get_thumbnailer
 
 
 class HasImageAdminMixin(object):
@@ -32,7 +33,7 @@ class HasImageAdminMixin(object):
         if not image:
             return ''
         try:
-            thumbnail = get_thumbnail(image.file, '100x66', quality=99)
+            thumbnail = get_thumbnailer(image.file).get_thumbnail({'size': (100, 66), 'quality': 99})
             return mark_safe('<img src="{}" width="{}" height="{}" alt=""/>'.format(
                 thumbnail.url,
                 thumbnail.width,
