@@ -139,9 +139,11 @@ INSTALLED_APPS = [
     'treebeard',
     'djangocms_text_ckeditor',
     'filer',
+    'meta',
     'easy_thumbnails',
     'djangocms_file',
     'djangocms_link',
+    'djangocms_page_meta',
     {% if cookiecutter.redirects == 'yes' %}'djangocms_redirect',{% endif %}
 
     '{{ cookiecutter.package_name }}',
@@ -343,3 +345,12 @@ THUMBNAIL_PROCESSORS = (
     'filer.thumbnail_processors.scale_and_crop_with_subject_location',
     'easy_thumbnails.processors.filters'
 )
+
+# Meta information settings
+META_SITE_PROTOCOL = 'http'
+META_USE_SITES = True
+
+META_SITE_TYPE = 'website'
+META_USE_OG_PROPERTIES = True
+META_USE_TWITTER_PROPERTIES = True
+META_USE_GOOGLEPLUS_PROPERTIES = True

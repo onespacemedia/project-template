@@ -28,6 +28,7 @@ django-treebeard>=4.0,<5.0
 djangocms-text-ckeditor
 djangocms-file
 djangocms-link
+djangocms-page-meta
 {% if cookiecutter.redirects == 'yes' %}djangocms-redirect{% endif %}
 djangocms-style
 easy_thumbnails

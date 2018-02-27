@@ -58,3 +58,6 @@ LOGGING = {
         },
     },
 }
+
+# Meta information settings
+META_SITE_PROTOCOL = 'https'
