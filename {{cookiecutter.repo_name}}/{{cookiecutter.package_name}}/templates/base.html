@@ -46,7 +46,7 @@
     <meta name="twitter:image"
           content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
 
-    <title>{% block title %}{{ render_title() }}{% endblock %}</title>
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
 
     <!-- Favicons -->
     {% include 'base/_favicons.html' %}
@@ -59,10 +59,10 @@
     {% endif %}
 
     {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
+      <link rel="stylesheet" href="{% static 'build/css/app.css' %}?last={{ settings.GIT_COMMIT_HASH }}">
     {% endcompress %}
 
-    {% block css %}{% endblock %}
+    {% render_block "css" %}
 
     <script>
       var body = document.documentElement || document.body
@@ -101,9 +101,7 @@
   </head>
 
   <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
-    {% include 'base/_browser-update.html' %}
-
-    {{ edit_bar() }}
+    {% cms_toolbar %}
 
     {% block site %}
       <div class="lyt-Site" id="app">
@@ -141,14 +139,11 @@
       {% include 'base/_footer.html' %}
     {% endblock %}
 
-    {{ render_bundle('vendor', 'js') }}
-    {{ render_bundle('app', 'js') }}
+    {% render_bundle 'vendor' 'js' %}
+    {% render_bundle 'app' 'js' %}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
-
-      <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
-
       {% block compressed_js_last %}{% endblock %}
     {% endcompress %}
 
@@ -159,7 +154,7 @@
               data-app-id="{{ settings.OPBEAT.APP_ID }}">
       </script>
 
-      {% if user.is_authenticated() %}
+      {% if user.is_authenticated %}
         <script>
           _opbeat('setUserContext', {
             id: "{{ user.pk }}"

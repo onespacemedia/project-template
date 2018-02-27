@@ -1,3 +1,7 @@
+{% load cms_tags menu_tags %}
+
+{% static_placeholder 'header' %}
+
 {% set header = get_header_content() %}
 {% if header and header.headerlink_set.all() %}
   <div class="hd-Bar">
@@ -21,7 +25,8 @@
       <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
 
       <div class="hd-Header_Nav">
-        {{ render_navigation(pages.homepage.navigation, recursive=True) }}
+        {# http://docs.django-cms.org/en/latest/reference/navigation.html#show-menu #}
+        {% show_menu 0 100 100 100 'pages/navigation.html' %}
       </div>
     </div>
   </div>

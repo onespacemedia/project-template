@@ -327,6 +327,7 @@ CMS_LANGUAGES = {
 }
 
 # XXX: These seem to be similar to ContentBase templates
+# DOCS: http://docs.django-cms.org/en/latest/introduction/templates_placeholders.html
 CMS_TEMPLATES = (
     # Customize this
     ('general.html', 'General template'),
