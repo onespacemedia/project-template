@@ -18,7 +18,7 @@ dependencies:
 
 test:
   override:
-    - deactivate && cd demo/ && . .venv/bin/activate && prospector demo/
+    - deactivate && cd demo/ && . .venv/bin/activate && prospector --profile .prospector.yaml --profile-path demo demo/
     - deactivate && cd demo/ && . .venv/bin/activate && yarn run lint:css
     - deactivate && cd demo/ && . .venv/bin/activate && yarn run lint:js
     - deactivate && cd demo/ && . .venv/bin/activate && pytest --cov=demo --create-db --nomigrations --ds=demo.settings.local

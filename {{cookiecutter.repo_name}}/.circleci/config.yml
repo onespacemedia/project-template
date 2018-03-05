@@ -30,7 +30,7 @@ jobs:
           name: prospector
           command: |
             . .venv/bin/activate
-            prospector {{ cookiecutter.package_name }}/
+            prospector --profile .prospector.yaml --profile-path . {{ cookiecutter.package_name }}/
       - run:
           name: tests
           command: |
