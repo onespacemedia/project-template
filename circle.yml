@@ -14,11 +14,11 @@ dependencies:
     # For issue_notify
     - deactivate && cd demo/ && . .venv/bin/activate && pip install cryptography pygithub
     # Things required to test the project
-    - deactivate && cd demo/ && . .venv/bin/activate && pip install --upgrade prospector
+    - deactivate && cd demo/ && . .venv/bin/activate && pip install --upgrade prospector pytest pytest-cov pytest-django
 
 test:
   override:
-    - deactivate && cd demo/ && . .venv/bin/activate && prospector --profile .prospector.yaml --profile-path demo demo/
+    - deactivate && cd demo/ && . .venv/bin/activate && prospector --profile .prospector.yaml --profile-path . demo/
     - deactivate && cd demo/ && . .venv/bin/activate && yarn run lint:css
     - deactivate && cd demo/ && . .venv/bin/activate && yarn run lint:js
     - deactivate && cd demo/ && . .venv/bin/activate && pytest --cov=demo --create-db --nomigrations --ds=demo.settings.local
