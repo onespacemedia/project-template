@@ -47,6 +47,66 @@
   > ul {
     list-style: disc;
   }
+  
+  /*
+  |--------------------------------------------------------------------------
+  | Table
+  |--------------------------------------------------------------------------
+  |
+  */
+  table {
+    width: auto;
+    margin-top: 0.5vr;
+    margin-bottom: @margin-top;
+
+    border: 1px solid var(--Color_Border);
+
+    @media (--sm) {
+      width: 100%;
+      margin-top: 1vr;
+      margin-bottom: @margin-top;
+    }
+
+    @media (--md) {
+      margin-top: 1.75vr;
+      margin-bottom: @margin-top;
+    }
+
+    @media (--lg) {
+      margin-top: 2vr;
+      margin-bottom: @margin-top;
+    }
+
+    td,
+    th {
+      padding: 0.25vr var(--Grid_Gutter);
+
+      border-right: 1px solid var(--Color_Border);
+      border-bottom: 1px solid var(--Color_Border);
+
+      @media (--md) {
+        padding: 0.5vr var(--Grid_Gutter);
+
+        text-align: left;
+      }
+    }
+
+    thead {
+      background-color: var(--Color_Blue);
+    }
+
+    tr:first-child {
+      th,
+      td {
+        text-align: center;
+
+        background-color: var(--Color_Brand);
+        border: 1px solid var(--Color_Brand);
+
+        color: #fff;
+      }
+    }
+  }
 
   /*
   |--------------------------------------------------------------------------
