@@ -1,133 +1,57 @@
-{% extends "admin/base_site.html" %}
-{% load i18n admin_static suit_tags %}
+{% extends 'admin/login.html' %}
 
+{% block extrahead %}
+  {{ block.super }}
+  <script src="https://apis.google.com/js/client:platform.js"></script>
 
-{% block bodyclass %}login{% endblock %}
+  <script type="text/javascript">
+    gapi.load('auth2', function () {
+      var auth2;
 
-{% block nav-global %}{% endblock %}
+      auth2 = gapi.auth2.init({
+        client_id: '938455100537-nu7cm468n7b2944pj73g0u7qrff81m6c.apps.googleusercontent.com',
+        scope: 'https://www.googleapis.com/auth/plus.profile.emails.read'
+      });
 
-{% block content_title %}{% endblock %}
+      auth2.then(function () {
+        var button = document.getElementById("google-plus-button");
+        console.log("User is signed-in in Google+ platform?", auth2.isSignedIn.get() ? "Yes" : "No");
 
-{% block breadcrumbs %}{% endblock %}
+        auth2.attachClickHandler(button, {}, function (googleUser) {
+          // Send access-token to backend to finish the authenticate
+          // with your application
 
-{% block header %}{% endblock %}
-
-{% block content-left %}{% endblock %}
-
-{% block container %}
-
-    {% block content %}
-
-        {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
-            <p class="errornote alert alert-error">
-                {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-            </p>
-        {% endif %}
-
-        {% if form.non_field_errors or form.this_is_the_login_form.errors %}
-            {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
-                <p class="errornote alert alert-error">
-                    {{ error }}
-                </p>
-            {% endfor %}
-        {% endif %}
-
-        <div id="content-main">
-            <h1><i class="icon-lock icon-white"></i> {{ 'ADMIN_NAME'|suit_conf }}</h1>
-
-            <form action="{{ app_path }}" method="post" id="login-form"><div class="hide">{% csrf_token %}</div>
-                <div class="form-row control-group{% if not form.this_is_the_login_form.errors and form.username.errors %} error{% endif %}">
-                    <label for="id_username" class="control-label required">{{ form.username.label }}:</label> {{ form.username }}
-                  {% if not form.this_is_the_login_form.errors and form.username.errors %}<div class="help-block">{{ form.username.errors }}</div>{% endif %}
-                </div>
-                <div class="form-row control-group{% if not form.this_is_the_login_form.errors and form.password.errors %} error{% endif %}">
-                    <label for="id_password" class="control-label required">{% trans 'Password' %}:</label> {{ form.password }}
-                  {% if not form.this_is_the_login_form.errors and form.password.errors %}<div class="help-block">{{ form.password.errors }}</div>{% endif %}
-                    <input type="hidden" name="this_is_the_login_form" value="1"/>
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                </div>
-                {% url 'admin_password_reset' as password_reset_url %}
-                {% if password_reset_url %}
-                    <div class="password-reset-link">
-                        <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-                    </div>
-                {% endif %}
-                <div class="submit-row">
-                    <input type="submit" value="{% trans 'Log in' %}" class="btn btn-info"/>
-                </div>
-            </form>
-
-            <script type="text/javascript">
-                document.getElementById('id_username').focus()
-            </script>
-        </div>
-
-        {% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
-        <form id="google-plus" method="post" action="{% url 'social:complete' "google-plus" %}" style="margin:0;">
-            {% csrf_token %}
-            <input id="at" type="hidden" name="access_token" value="" />
-            <input id="code" type="hidden" name="code" value="" />
-        </form>
-
-        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-        <script type="text/javascript">
-        $(function() {
-            var script_added = false;
-
-            $('.onespacemedia-login').on('click', function () {
-                if (script_added === false) {
-                    var po = document.createElement('script');
-                    po.type = 'text/javascript';
-                    po.async = true;
-                    po.src = 'https://apis.google.com/js/client:plusone.js';
-
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(po, s);
-
-                    setTimeout(function() {
-                        $('#___signin_0 button').trigger('click');
-                    }, 1000);
-
-                    script_added = true;
-                } else {
-                    $('#___signin_0 button').trigger('click');
-                }
-            });
+          var authResponse = googleUser.getAuthResponse();
+          document.getElementById('access_token').value = authResponse.access_token
+          document.getElementById('google_form').submit()
         });
+      });
+    });
+  </script>
 
-        var signInCallback = function (result) {
-            if (result['error']) {
-
-            } else {
-                $('#code').attr('value', result['code']);
-                $('#at').attr('value', result['access_token']);
-                $('#google-plus').submit();
-            }
-        };
-        </script>
-
-        <style>
-        #___signin_0 {
-            display: none !important;
-        }
-        </style>
-        {% endif %}
-
-    {% endblock %}
+  <style>
+  .lyt-GooglePlus {
+    margin: 10px auto 5px;
+    padding: 0;
+    width: 35.5% !important;
+    min-width: 320px !important;
+    border: none;
+  }
+  </style>
 {% endblock %}
 
-{% block footer_links %}
-    {{ block.super }}
+{% block footer %}
+  {{ block.super }}
 
-    {% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
-    <a href="#" class="onespacemedia-login">OSM staff login</a>
+  <!-- Close the container div -->
+  </div>
 
-    <span class="g-signin"
-        data-callback="signInCallback"
-        data-clientid="{{ settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY }}"
-        data-cookiepolicy="single_host_origin"
-        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-        data-scope="https://www.googleapis.com/auth/plus.profile.emails.read">
-    </span>
-    {% endif %}
+  <div class="lyt-GooglePlus">
+    <a href="#" id="google-plus-button">OSM Staff Login</a>
+
+    <form action="{% url 'social:complete' 'google-plus' %}" method="post" id="google_form" style="display: none;">
+      {% csrf_token %}
+      <input type="hidden" name="access_token" id="access_token">
+      <input type="submit">
+    </form>
 {% endblock %}

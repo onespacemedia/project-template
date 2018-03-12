@@ -1,52 +1,39 @@
+{% load cms_tags compress meta page_meta_tags sekizai_tags static %}
+{% load render_bundle from webpack_loader %}
+
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="en" {% googleplus_html_scope meta.gplus_type %}>
+  <head {% meta_namespaces %}>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="description"
-          content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
-    <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=5">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+    {# Meta information, OpenGraph, Twitter cards etc #}
+    {% page_meta request.current_page as meta %}
+    {% include 'djangocms_page_meta/meta.html' with meta=meta %}
 
     {# TODO: Change this value #}
-    <meta name="theme-color" content="#db5945">
-
+    <meta name="theme-color" content="#000">
     {% block canonical %}
-      <link rel="canonical" href="{{ get_canonical_url() }}" />
+      {# Emit a 'canonical' tag when the page is displayed on an alternate url #}
+      {% if request.current_page %}
+        {% page_url request.current_page as current_url %}
+        {% if current_url and current_url != request.get_full_path %}<link rel="canonical" href="{% page_url request.current_page %}">{% endif %}
+      {% endif %}
     {% endblock %}
 
-    {% if page_obj and page_obj.has_other_pages() %}
-      {% if page_obj.has_previous() %}
-        <link rel="previous" href="{{ get_pagination_url(page_obj.previous_page_number()) }}">
+    {% if page_obj and page_obj.has_other_pages %}
+      {% if page_obj.has_previous %}
+        {# <link rel="previous" href="{% get_pagination_url page_obj.previous_page_number %}"> #}
       {% endif %}
 
-      {% if page_obj.has_next() %}
-        <link rel="next" href="{{ get_pagination_url(page_obj.next_page_number()) }}">
+      {% if page_obj.has_next %}
+        {# <link rel="next" href="{% get_pagination_url page_obj.next_page_number %}"> #}
       {% endif %}
     {% endif %}
 
-    <!-- Open Graph data -->
-    <meta property="og:title" content="{% block og_title %}{{ get_og_title() }}{% endblock %}">
-    <meta property="og:url" content="{{ get_canonical_url() }}">
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-          content="{% block og_description %}{{ get_og_description() }}{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ get_og_image() }}{% endblock %}">
-
-    <!-- Twitter card data -->
-    <meta name="twitter:card"
-          content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
-    <meta name="twitter:site" content="" />
-    <meta name="twitter:title"
-          content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
-    <meta name="twitter:description"
-          content="{% block twitter_description %}{{ get_twitter_description() }}{% endblock %}" />
-    <meta name="twitter:image"
-          content="{% block twitter_image %}{{ get_twitter_image() }}{% endblock %}" />
-
-    <title>{% block title %}{{ render_title() }}{% endblock %}</title>
+    <title>{% block title %}{% page_attribute "page_title" %}{% endblock title %}</title>
 
     <!-- Favicons -->
     {% include 'base/_favicons.html' %}
@@ -59,10 +46,10 @@
     {% endif %}
 
     {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
+      <link rel="stylesheet" href="{% static 'build/css/app.css' %}?last={{ settings.GIT_COMMIT_HASH }}">
     {% endcompress %}
 
-    {% block css %}{% endblock %}
+    {% render_block "css" %}
 
     <script>
       var body = document.documentElement || document.body
@@ -101,9 +88,7 @@
   </head>
 
   <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
-    {% include 'base/_browser-update.html' %}
-
-    {{ edit_bar() }}
+    {% cms_toolbar %}
 
     {% block site %}
       <div class="lyt-Site" id="app">
@@ -122,11 +107,11 @@
                         {% block main %}{% endblock %}
                       </main>
 
-                      {% if self.aside() %}
+                      {% block aside_outer %}
                         <aside class="lyt-Aside">
                           {% block aside %}{% endblock %}
                         </aside>
-                      {% endif %}
+                      {% endblock %}
                     </div>
                   </div>
                 {% endblock %}
@@ -141,16 +126,15 @@
       {% include 'base/_footer.html' %}
     {% endblock %}
 
-    {{ render_bundle('vendor', 'js') }}
-    {{ render_bundle('app', 'js') }}
+    {% render_bundle 'vendor' 'js' %}
+    {% render_bundle 'app' 'js' %}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
-
-      <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
-
       {% block compressed_js_last %}{% endblock %}
     {% endcompress %}
+
+    {% render_block "js" %}
 
     {# Opbeat JS error tracking #}
     {% if settings.OPBEAT %}
@@ -159,7 +143,7 @@
               data-app-id="{{ settings.OPBEAT.APP_ID }}">
       </script>
 
-      {% if user.is_authenticated() %}
+      {% if user.is_authenticated %}
         <script>
           _opbeat('setUserContext', {
             id: "{{ user.pk }}"

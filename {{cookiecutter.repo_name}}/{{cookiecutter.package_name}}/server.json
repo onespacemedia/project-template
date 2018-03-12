@@ -27,7 +27,6 @@
         "secret_token": "{{cookiecutter.opbeat_secret_token}}"
     },
     "optional_packages": {
-        "geoip": {% if cookiecutter.geoip == 'no' %}false{% else %}true{% endif %},
         "mysql": false
     }
 }

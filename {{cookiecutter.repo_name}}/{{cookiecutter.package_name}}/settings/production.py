@@ -1,4 +1,4 @@
-from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
+from .base import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -58,3 +58,6 @@ LOGGING = {
         },
     },
 }
+
+# Meta information settings
+META_SITE_PROTOCOL = 'https'

@@ -23,7 +23,7 @@ class DjangoJSONEncoder(json.JSONEncoder):
     JSONEncoder subclass that knows how to encode date/time, decimal types and UUIDs.
     """
 
-    def default(self, o):  # pylint: disable=too-complex,too-many-return-statements,too-many-branches,method-hidden
+    def default(self, o):
         # See "Date Time String Format" in the ECMA-262 specification.
         if isinstance(o, datetime.datetime):
             r = o.isoformat()

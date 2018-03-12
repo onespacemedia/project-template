@@ -1,16 +1,12 @@
 import os
 import os.path
 
-from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
+from .base import *
 
 # Run in debug mode.
-
 DEBUG = True
 
-TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
-
 # Save media files to the user's Sites folder.
-
 MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/{{cookiecutter.package_name}}', 'node_modules'))

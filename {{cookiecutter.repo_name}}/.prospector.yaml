@@ -1,0 +1,40 @@
+strictness: medium
+
+ignore-paths:
+  - node_modules
+  - .venv
+
+ignore-patterns:
+  - .+/migrations/.+
+  - .+/settings/.+
+
+pyflakes:
+  disable:
+    - F999
+
+pylint:
+  disable:
+    - missing-docstring
+    - invalid-name
+    - no-init
+    - too-many-ancestors
+    - no-member
+    - line-too-long
+    - attribute-defined-outside-init
+    - too-few-public-methods
+    - no-self-use
+    - import-self
+    - unused-argument
+    - protected-access
+    - locally-disabled
+    - duplicate-code
+  options:
+    max-line-length: 160
+
+pep8:
+  full: true
+  options:
+    max-line-length: 160
+
+dodgy:
+  run: false

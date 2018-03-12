@@ -1,4 +1,9 @@
-{% set header = get_header_content() %}
+{% load cms_tags menu_tags %}
+
+{% static_placeholder 'header' %}
+
+{% comment %}
+{% get_header_content as header %}
 {% if header and header.headerlink_set.all() %}
   <div class="hd-Bar">
     <div class="hd-Bar_Inner">
@@ -14,14 +19,16 @@
     </div>
   </div>
 {% endif %}
+{% endcomment %}
 
 <header class="hd-Header">
   <div class="hd-Header_Inner">
     <div class="hd-Header_Body">
-      <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
+      <a class="hd-Header_Logo" href="/"></a>
 
       <div class="hd-Header_Nav">
-        {{ render_navigation(pages.homepage.navigation, recursive=True) }}
+        {# http://docs.django-cms.org/en/latest/reference/navigation.html#show-menu #}
+        {% show_menu 0 100 100 100 %}
       </div>
     </div>
   </div>
