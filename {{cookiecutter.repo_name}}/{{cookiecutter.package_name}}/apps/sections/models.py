@@ -296,7 +296,10 @@ class SectionBase(models.Model):
 
 
 class ContentSection(SectionBase):
-    pass
+
+    page = models.ForeignKey(
+        'pages.Page',
+    )
 
 
 class Content(ContentBase):
