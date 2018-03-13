@@ -235,7 +235,7 @@ class SectionBase(models.Model):
 
                     raise ValidationError(fields)
 
-        if self.link_text and (not self.link_page or not self.link_url):
+        if self.link_text and (not self.link_page and not self.link_url):
             raise ValidationError({
                 'link_page': 'Please provide either a "Link Page" or a "Link URL"',
             })
