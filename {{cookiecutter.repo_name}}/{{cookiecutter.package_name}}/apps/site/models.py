@@ -53,7 +53,7 @@ class Footer(models.Model):
         blank=True,
         null=True,
         related_name='+',
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
     )
 
     contact_link_url = models.CharField(
@@ -61,7 +61,7 @@ class Footer(models.Model):
         max_length=200,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.',
+        help_text='Use this to link to an external page.',
     )
 
     terms_of_use_text = models.CharField(
@@ -77,15 +77,15 @@ class Footer(models.Model):
         blank=True,
         null=True,
         related_name='+',
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
     )
 
     terms_of_use_url = models.CharField(
-        verbose_name='Terms of Use URL',
+        verbose_name='Terms of use URL',
         max_length=255,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.',
+        help_text='Use this to link to an external page.',
     )
 
     legal_text = models.CharField(
@@ -100,7 +100,7 @@ class Footer(models.Model):
         blank=True,
         null=True,
         related_name='+',
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
     )
 
     legal_url = models.CharField(
@@ -108,14 +108,14 @@ class Footer(models.Model):
         max_length=255,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.',
+        help_text='Use this to link to an external page.',
     )
 
     privacy_policy_text = models.CharField(
         max_length=255,
         blank=True,
         null=True,
-        default='Privacy Policy',
+        default='Privacy policy',
     )
 
     privacy_policy_page = models.ForeignKey(
@@ -123,15 +123,15 @@ class Footer(models.Model):
         blank=True,
         null=True,
         related_name='+',
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
     )
 
     privacy_policy_url = models.CharField(
-        verbose_name='Privacy Policy URL',
+        verbose_name='Privacy policy URL',
         max_length=255,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.',
+        help_text='Use this to link to an external page.',
     )
 
     def __str__(self):
@@ -212,7 +212,7 @@ class FooterLink(models.Model):
         'pages.Page',
         blank=True,
         null=True,
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
         related_name='+'
     )
 
@@ -221,7 +221,7 @@ class FooterLink(models.Model):
         max_length=200,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.'
+        help_text='Use this to link to an external page.'
     )
 
     order = models.PositiveIntegerField()
@@ -237,7 +237,7 @@ class FooterLink(models.Model):
             pass
         else:
             raise ValidationError({
-                'link_page': 'Please supply either a link page or a link url.'
+                'link_page': 'Please supply either a link page or a link URL.'
             })
 
     def has_link(self):
@@ -277,15 +277,16 @@ class HeaderLink(models.Model):
         'pages.Page',
         blank=True,
         null=True,
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
         related_name='+'
     )
 
     link_url = models.CharField(
+        'link URL',
         max_length=200,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.'
+        help_text='Use this to link to an external page.'
     )
 
     order = models.PositiveIntegerField()

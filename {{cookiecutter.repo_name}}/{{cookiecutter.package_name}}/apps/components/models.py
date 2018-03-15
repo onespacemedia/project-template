@@ -24,14 +24,15 @@ class CallToAction(models.Model):
         Page,
         blank=True,
         null=True,
-        help_text='If you want to link to an internal page, please use this.',
+        help_text='Use this to link to an internal page.',
     )
 
     link_url = models.CharField(
+        'link URL',
         max_length=200,
         blank=True,
         null=True,
-        help_text='If you want to link to an external page, please use this.',
+        help_text='Use this to link to an external page.',
     )
 
     def __str__(self):
@@ -40,7 +41,7 @@ class CallToAction(models.Model):
     def clean(self):
         if not self.link_page and not self.link_url:
             raise ValidationError({
-                'link_page': 'Please supply 1 of "link page" or "link URL"',
+                'link_page': 'Please supply either a "link page" or "link URL"',
             })
 
     @property
