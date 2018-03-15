@@ -89,6 +89,7 @@
 | same name as the 3rd party plugin
 |
 */
+@import 'django-lazy-image/assets/css/lazy-image.css';
 @import 'overrides/**/*.css';
 
 /*

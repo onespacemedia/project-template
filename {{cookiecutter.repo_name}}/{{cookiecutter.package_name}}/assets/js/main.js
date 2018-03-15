@@ -6,7 +6,7 @@ import 'utils/webp-detector'
 
 import { svg4everybody } from './utils/svgforeverybody'
 
-import LazyImage from './utils/lazy-image'
+import LazyImage from './images'
 import { Navigation } from './site'
 import { externalLinks, iframeFix } from './utils'
 import { overflowTables } from './wysiwyg'

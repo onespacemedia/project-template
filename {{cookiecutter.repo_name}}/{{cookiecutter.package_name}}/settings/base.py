@@ -130,6 +130,7 @@ INSTALLED_APPS = [
     'compressor',
 
     'django_jinja',
+    'django_lazy_image',
 
     'cms',
 
