@@ -44,8 +44,66 @@
     margin-bottom: 1vr;
   }
 
-  > ul {
-    list-style: disc;
+  > ul,
+  > ol {
+    margin-top: 0.75vr;
+    margin-bottom: 1.5vr;
+    padding-left: 25px;
+
+    list-style: none;
+
+    li {
+      position: relative;
+
+      margin-bottom: 18px;
+      padding-left: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &::before {
+        content: '';
+
+        position: absolute;
+        top: 10px;
+        left: -20px;
+
+        @media (--sm) {
+          top: 14px;
+        }
+      }
+    }
+  }
+
+  > ul li::before {
+    display: block;
+    width: 6px;
+    height: @width;
+
+    background-color: var(--Color_Brand);
+    border-radius: 50%;
+  }
+
+  > ol {
+    counter-reset: item;
+
+    li {
+      &::before {
+        content: counter(item);
+
+        top: 0;
+
+        font-weight: 400;
+
+        color: var(--Color_Brand);
+        counter-increment: item;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   /*
@@ -92,7 +150,7 @@
     }
 
     thead {
-      background-color: var(--Color_Blue);
+      background-color: var(--Color_Brand);
     }
 
     tr:first-child {
@@ -105,6 +163,30 @@
 
         color: #fff;
       }
+    }
+  }
+
+  .wys-Table {
+    @media (--lg) {
+      &:not(.wys-Table-overflowing) {
+        overflow-x: initial;
+      }
+    }
+
+    &.wys-Table-overflowing {
+      overflow-x: scroll;
+    }
+
+    &.wys-Table-overflowing::before {
+      content: 'Please scroll left / right to see whole table';
+
+      display: block;
+
+      font-size: 14px;
+    }
+
+    table {
+      min-width: 100%;
     }
   }
 
