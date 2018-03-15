@@ -166,6 +166,30 @@
     }
   }
 
+  .wys-Table {
+    @media (--lg) {
+      &:not(.wys-Table-overflowing) {
+        overflow-x: initial;
+      }
+    }
+
+    &.wys-Table-overflowing {
+      overflow-x: scroll;
+    }
+
+    &.wys-Table-overflowing::before {
+      content: 'Please scroll left / right to see whole table';
+
+      display: block;
+
+      font-size: 14px;
+    }
+
+    table {
+      min-width: 100%;
+    }
+  }
+
   /*
   |--------------------------------------------------------------------------
   | Buttons
