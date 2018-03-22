@@ -80,6 +80,7 @@ class RedirectAdminTestCase(BaseRedirectTestCase):
             "old_path": "invalid",
             "new_path": "/",
             "regular_expression": False,
+            "type": "301",
         })
 
         self.assertFalse(form.is_valid())
@@ -89,9 +90,20 @@ class RedirectAdminTestCase(BaseRedirectTestCase):
             "old_path": "/good/",
             "new_path": "/",
             "regular_expression": False,
+            "type": "301",
         })
 
         self.assertTrue(form.is_valid())
+
+        # Test for an invalid redirect type.
+        form = RedirectModelForm({
+            "old_path": "/good/",
+            "new_path": "/",
+            "regular_expression": False,
+            "type": "xxx",
+        })
+
+        self.assertFalse(form.is_valid())
 
         with self.settings(REDIRECTS_ENABLE_REGEX=True):
             # Test for a missing 'test_path' attribute from a regex

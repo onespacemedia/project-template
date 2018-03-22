@@ -20,6 +20,15 @@ class BaseRedirectTestCase(TestCase):
             regular_expression=False,
         )
 
+
+        # A normal non-regex redirect.
+        self.normal_temporary_redirect = Redirect.objects.create(
+            old_path=r"/tset-cases/normal-temporary-redirect/",
+            new_path=r"/test-cases/normal-temporary-redirect/",
+            type="302",
+            regular_expression=False,
+        )
+
         # A redirect that should return a 410 Gone.
         self.dead_redirect = Redirect.objects.create(
             old_path="/tset-cases/dead-redirect/",
@@ -31,5 +40,12 @@ class BaseRedirectTestCase(TestCase):
         self.unslashed_redirect = Redirect.objects.create(
             old_path="/tset-cases/unslashed-redirect",
             new_path="/test-cases/unslashed-redirect/",
+            regular_expression=False,
+        )
+
+        self.old_path_slash_redirect = Redirect.objects.create(
+            old_path="/tset-cases/slashed-redirect/",
+            new_path="/test-cases/slashed-redirect/",
+            test_path="/tset-cases/slashed-redirect",
             regular_expression=False,
         )

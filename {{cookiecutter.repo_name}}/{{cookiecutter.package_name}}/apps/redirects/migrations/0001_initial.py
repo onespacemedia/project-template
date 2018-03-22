@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
             name='Redirect',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('type', models.CharField(choices=[('301', 'Permanent'), ('302', 'Temporary')], default='301', max_length=3)),
                 ('old_path', models.CharField(db_index=True, help_text="This should be an absolute path, excluding the domain name. Example: '/events/search/'.", max_length=200, unique=True, verbose_name='redirect from')),
                 ('new_path', models.CharField(blank=True, help_text="This can be either an absolute path (as above) or a full URL starting with 'http://'.", max_length=200, verbose_name='redirect to')),
                 ('regular_expression', models.BooleanField(default=False, help_text="This will allow using regular expressions to match and replace patterns in URLs. See the <a href='https://docs.python.org/2/library/re.html' target='_blank'>Python regular expression documentation</a> for details.")),

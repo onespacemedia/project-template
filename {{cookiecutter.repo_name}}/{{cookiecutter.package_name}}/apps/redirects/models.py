@@ -6,6 +6,15 @@ from django.utils.safestring import mark_safe
 
 class Redirect(models.Model):
 
+    type = models.CharField(
+        max_length=3,
+        choices=[
+            ('301', 'Permanent'),
+            ('302', 'Temporary'),
+        ],
+        default='301',
+    )
+
     old_path = models.CharField(
         'redirect from',
         max_length=200,

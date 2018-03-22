@@ -84,6 +84,16 @@ class RedirectMiddlewareTestCase(BaseRedirectTestCase):
         self.assertEqual(self.normal_redirect.new_path, response["Location"])
         self.assertEqual(response.status_code, 301)
 
+        # Test that a temporary redirect has the appropriate status code and Location
+        # header.
+        response = middleware.process_response(
+            self.factory.get(self.normal_temporary_redirect.old_path),
+            HttpResponseNotFound
+        )
+
+        self.assertEqual(self.normal_temporary_redirect.new_path, response["Location"])
+        self.assertEqual(response.status_code, 302)
+
         # Test that a request to a completely imaginary path that doesn't
         # have a redirect will 404.
         response = middleware.process_response(

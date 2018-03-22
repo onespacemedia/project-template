@@ -30,14 +30,17 @@ class RedirectFallbackMiddleware(object):
         path = request.get_full_path()
         r = self._redirect_for_path(path)
 
-        # Try removing the trailing slash.
-        if r is None and path.endswith('/'):
-            r = self._redirect_for_path(path[:-1])
+        # Try removing or adding the trailing slash.
+        if r is None:
+            if path.endswith('/'):
+                r = self._redirect_for_path(path[:-1])
+            else:
+                r = self._redirect_for_path('{}/'.format(path))
 
         if r is not None:
             if r.new_path == '':
                 return http.HttpResponseGone()
-            return http.HttpResponsePermanentRedirect(r.sub_path(path))
+            return http.HttpResponsePermanentRedirect(r.sub_path(path)) if r.type == '301' else http.HttpResponseRedirect(r.sub_path(path))
 
         # No redirect was found. Return the response.
         return response
