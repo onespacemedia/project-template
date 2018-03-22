@@ -113,3 +113,25 @@ class RedirectMiddlewareTestCase(BaseRedirectTestCase):
             self.unslashed_redirect.new_path,
             response["Location"]
         )
+
+        # Make sure that old paths missing a trailing forward slash are
+        # redirected appropriately.
+        response = middleware.process_response(
+            self.factory.get(self.unslashed_redirect.old_path),
+            HttpResponseNotFound
+        )
+
+        self.assertEqual(
+            self.unslashed_redirect.new_path,
+            response["Location"]
+        )
+
+        response = middleware.process_response(
+            self.factory.get(self.old_path_slash_redirect.test_path),
+            HttpResponseNotFound
+        )
+
+        self.assertEqual(
+            self.old_path_slash_redirect.new_path,
+            response["Location"]
+        )
