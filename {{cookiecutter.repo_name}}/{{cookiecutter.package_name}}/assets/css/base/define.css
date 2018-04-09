@@ -28,7 +28,6 @@ textarea {
 
 input,
 select,
-summary,
 textarea {
   /* Older iOS puts a border radius on inputs by default. */
   border-radius: 0;
