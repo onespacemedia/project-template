@@ -51,8 +51,9 @@ def get_video_info(url):
     '''Returns video information for a given URL. Returns a dict in this form:
 
     {
-        'embed_code': '<iframe src=...>',
+        'html': '<iframe src=...>',
         'title': 'Title of a video',
+        <other standard oEmbed pairs, see https://oembed.com/ for details>,
     }
 
     ...or None if no information could be found.
@@ -75,23 +76,21 @@ def get_video_info(url):
         # too.
         return
 
-    # Sanity check.
-    if 'html' not in json or not json['html']:
+    # Sanity check -
+    if not json.get('html'):
         return
 
-    return {
-        'embed_code': json['html'],
-        'title': json['title'],
-    }
+    return json
 
 
 def get_video_iframe_url(url, modest=False):
+    '''Gets a bare IFrame URL for a given video source.'''
     info = get_video_info(url)
 
     if not info:
         return
 
-    soup = BeautifulSoup(info['embed_code'], 'html.parser')
+    soup = BeautifulSoup(info['html'], 'html.parser')
     src = soup.find('iframe')['src']
     # Remove query string - if we need extra stuff like '?autoplay=1' we
     # can add it later.
