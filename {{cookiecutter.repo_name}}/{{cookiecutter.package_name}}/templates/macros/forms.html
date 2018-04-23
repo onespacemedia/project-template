@@ -17,6 +17,8 @@
       {{ render_multi_checkbox(field) }}
     {% elif widget_class == 'RadioSelect' %}
       {{ render_multi_radios(field) }}
+    {% elif widget_class == 'Select' %}
+      {{ field|add_field_attributes('frm-Form_Select') }}
     {% elif widget_class == 'Textarea' %}
       {{ field|add_field_attributes('frm-Form_Textarea') }}
     {% else %}
