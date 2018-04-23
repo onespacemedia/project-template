@@ -8,7 +8,6 @@
 |
 */
 
-/* Enable panning and pinch zoom gestures, but disable additional non-standard gestures such as double-tap to zoom. Disabling double-tap to zoom removes the need for browsers to delay the generation of click events when the user taps the screen. This is an alias for "pan-x pan-y pinch-zoom" (which, for compatibility, is itself still valid). */
 a,
 area,
 button,
@@ -18,9 +17,20 @@ label,
 select,
 summary,
 textarea {
-  /* stylelint-disable property-no-vendor-prefix */
+  /* Enable panning and pinch zoom gestures, but disable additional
+  non-standard gestures such as double-tap to zoom. Disabling double-tap to
+  zoom removes the need for browsers to delay the generation of click events
+  when the user taps the screen. This is an alias for "pan-x pan-y pinch-zoom"
+  (which, for compatibility, is itself still valid). */
   -ms-touch-action: manipulation;
   touch-action: manipulation;
+}
+
+input,
+select,
+textarea {
+  /* Older iOS puts a border radius on inputs by default. */
+  border-radius: 0;
 }
 
 body:not(.util-IsTabbing) button:focus,

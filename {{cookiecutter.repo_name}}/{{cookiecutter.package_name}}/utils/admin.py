@@ -110,9 +110,12 @@ class HasImageAdminMixin(object):
     def get_queryset(self, request):
         return super().get_queryset(request).select_related(self.image_field)
 
+    def get_image_reference(self, obj):
+        return getattr(obj, self.image_field)
+
     def get_image(self, obj):
         """Generates a thumbnail of the image."""
-        image = getattr(obj, self.image_field)
+        image = self.get_image_reference(obj)
         if not image:
             return ''
         try:

@@ -1,5 +1,5 @@
 <script>
-  if (window.localStorage && window.localStorage._tk_cache) {
+  if (window.localStorage && window.localStorage._tk_cache_{{ settings.GIT_COMMIT_HASH }}) {
     document.documentElement.classList.add('wf-active')
     var script = document.createElement('script')
     script.innerHTML = localStorage._tk_cache + ";(function () {var timeout = setTimeout(function () {document.documentElement.classList.remove('wf-active');}, 300); Typekit.load({ async: false, active: function () { clearTimeout(timeout); }});})();";
@@ -8,7 +8,7 @@
   window._tk_onload = function () {
     var req = new XMLHttpRequest()
     req.addEventListener("load", function () {
-      window.localStorage._tk_cache = this.responseText;
+      window.localStorage._tk_cache_{{ settings.GIT_COMMIT_HASH }} = this.responseText;
     });
     req.open("GET", "https://use.typekit.net/{{ settings.TYPEKIT_KIT_ID }}.js");
     req.send();

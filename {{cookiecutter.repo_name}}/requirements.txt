@@ -1,5 +1,6 @@
 argon2-cffi
 beautifulsoup4==4.6.0
+celery[redis]
 CommonMark==0.7.4
 cryptography
 django>=1.11,<1.12
@@ -9,6 +10,7 @@ django-extensions
 django-flexible-images
 django-historylinks
 django-jinja
+django-lazy-image==0.4.0
 {% if cookiecutter.redirects == 'yes' %}onespacemedia-cms-redirects{% endif %}
 django-reversion==2.0.9
 django-suit

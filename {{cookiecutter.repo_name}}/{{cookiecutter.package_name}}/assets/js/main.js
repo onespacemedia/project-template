@@ -6,9 +6,10 @@ import 'utils/webp-detector'
 
 import { svg4everybody } from './utils/svgforeverybody'
 
-import LazyImage from './utils/lazy-image'
+import LazyImage from './images'
 import { Navigation } from './site'
 import { externalLinks, iframeFix } from './utils'
+import { overflowTables } from './wysiwyg'
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.documentElement
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   externalLinks()
   new Navigation()
+  overflowTables()
 
   const lazyImage = document.querySelector('.js-LazyImage')
   if (lazyImage) {

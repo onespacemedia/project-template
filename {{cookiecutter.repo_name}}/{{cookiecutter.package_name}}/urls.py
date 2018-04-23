@@ -27,7 +27,7 @@ urlpatterns = [
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
 
     # Site URLs
-    url(r'^assets/', include('{{cookiecutter.package_name}}.apps.site.urls', namespace='assets')),
+    url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),
 
     # Permalink redirection service.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),

@@ -56,7 +56,6 @@
     "postcss-custom-properties": "^5.0.1",
     "postcss-custom-selectors": "^4.0.1",
     "postcss-easy-import": "^2.1.0",
-    "postcss-font-awesome": "^0.3.4",
     "postcss-functions": "^2.1.1",
     "postcss-hexrgba": "^0.2.1",
     "postcss-inline-svg": "^3.0.0",
