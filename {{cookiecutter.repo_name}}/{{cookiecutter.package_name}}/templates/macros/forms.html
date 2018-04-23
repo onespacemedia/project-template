@@ -1,0 +1,94 @@
+{% macro render_item(field, half_size=False, label_override=None) %}
+  {% set field_class = field.field.__class__.__name__ %}
+  {% set widget_class = field.field.widget.__class__.__name__ %}
+  <div class="frm-Form_Item
+    {% if field.field.required %} frm-Form_Item-required{% endif %}
+    {% if not half_size %} frm-Form_Item-full{% endif %}
+    {% if field.errors %} frm-Form_Item-error{% endif %}">
+    {% if not label_override == 'REMOVE' %}
+      <label class="frm-Form_Label" {% if not widget_class == 'CheckboxSelectMultiple' %}for="{{ field.id_for_label }}"{% endif %}>
+        {{ label_override or field.label }}
+      </label>
+    {% endif %}
+
+    {% if widget_class == 'HtmlWidget' %}
+      {{ render_wysiwyg(field) }}
+    {% elif widget_class=='ReCaptcha' %}
+      {{ field }}
+    {% elif widget_class == 'CheckboxSelectMultiple' %}
+      {{ render_multi_checkbox(field) }}
+    {% elif widget_class == 'RadioSelect' %}
+      {{ render_multi_radios(field) }}
+    {% else %}
+      {{ field|add_field_attributes('frm-Form_Input') }}
+    {% endif %}
+
+    {% if field.errors %}
+      <div class="frm-Item_Extra">
+        {% for error in field.errors %}
+          <p class="frm-Error">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}
+
+{% macro render_multi_checkbox(field) %}
+  {% set field_value = field.value() or [] %}
+
+  <div class="frm-Form_MultiItems">
+    {% for value, label in field.field.choices %}
+      {% set field_id = '{}_choice_{}'.format(field.name, value)  %}
+
+      <div class="frm-Form_MultiItem">
+        <label class="frm-Form_CheckboxLabel">
+          <input type="checkbox"
+            {% if '{}'.format(value) in field_value or value in field_value %}checked{% endif %} value="{{ value }}" name="{{ field.name }}" id="{{ field_id }}" class="frm-Form_Checkbox">
+          <span class="frm-Form_CheckboxText">{{ label }}</span>
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro render_multi_radios(field) %}
+  <div class="frm-Form_MultiItems">
+    {% set field_value = field.value() %}
+    {% for value, label in field.field.choices %}
+      {% set field_id = '{}_choice_{}'.format(field.name, value) %}
+
+      <div class="frm-Form_MultiItem {% if field.field.choices|length == 2 %}frm-Form_MultiItem-wider{% endif %}">
+        <label class="frm-Form_CheckboxLabel">
+          <input type="radio"
+            {% if '{}'.format(value) == field_value or value == field_value %}checked{% endif %} value="{{ value }}" name="{{ field.name }}" id="{{ field_id }}" class="frm-Form_RadioButton">
+          <span class="frm-Form_CheckboxText">{{ label }}</span>
+        </label>
+      </div>
+    {% endfor %}
+  </div>
+{% endmacro %}
+
+{% macro render_wysiwyg(field, additional_classes) %}
+  {% if field.field.help_text %}
+    <p class="frm-Form_Help">{{ field.field.help_text | safe }}</p>
+  {% endif %}
+
+  <textarea
+    id="{{ field.auto_id }}"
+    {% if additional_attributes %}
+    {% for k, v in additional_attributes.items() %}
+    {{ k }}{% if v %}="{{ v }}"{% endif %}
+    {% endfor %}
+    {% endif %}
+    name="{{ field.html_name }}"
+    class="frm-Form_Textarea js-WYSIWYG {% if additional_classes %}{{ additional_classes }}{% endif %}"
+    >{% if field.value() %}{{ field.value() }}{% endif %}</textarea>
+{% endmacro %}
+
+{% macro render_items(form) %}
+  <div class="frm-Form_Items">
+    {% for field in form %}
+      {{ render_item(field) }}
+    {% endfor %}
+  </div>
+{% endmacro %}

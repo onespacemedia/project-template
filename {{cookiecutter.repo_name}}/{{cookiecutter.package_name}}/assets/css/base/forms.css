@@ -1,0 +1,144 @@
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+| @namespace: frm-
+|
+*/
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Items {
+  @media (--sm) {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    display: flex;
+    margin-top: -1vr;
+  }
+}
+
+.frm-Form_Item {
+  width: 100%;
+  margin-top: 1vr;
+
+  @media (--sm) {
+    flex-shrink: 0;
+
+    width: calc(1 / 2 * 100% - var(--Grid_Inside));
+    margin-top: 1vr;
+  }
+
+  &:first-child {
+    margin-top: 0;
+
+    @media (--sm) {
+      margin-top: 1vr;
+    }
+  }
+}
+
+.frm-Form_Item-full {
+  width: 100%;
+}
+
+.frm-Item_Extra {
+  margin-top: 5px;
+}
+
+.frm-Error {
+  @include Font_14-20;
+
+  color: var(--Color_Error);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Label
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Label {
+  display: block;
+  margin-bottom: 4px;
+
+  font-weight: 500;
+
+  color: var(--Color_Brand);
+  cursor: pointer;
+
+  .frm-Form_Item-required & {
+    &::after {
+      content: '*';
+    }
+  }
+
+  .frm-Form_Item-error & {
+    color: var(--Color_Error);
+  }
+}
+
+.frm-Form_Label-hasLink {
+  @media (--xs) {
+    align-items: center;
+
+    display: flex;
+    width: 100%;
+  }
+}
+
+.frm-Form_LabelLink {
+  display: block;
+  margin-top: 8px;
+  margin-left: auto;
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+
+  color: var(--Color_Brand);
+
+  @media (--xs) {
+    @include Font_14-20;
+
+    margin-top: 0;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Input
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Input,
+.frm-Form_Select,
+.frm-Form_Textarea,
+.frm-Form_WYSIWYG {
+  @include Font_14-20;
+
+  display: block;
+  width: 100%;
+
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+
+  transition: border-color var(--Global_Transition);
+
+  &:focus {
+    outline: 0;
+  }
+
+  .frm-Form_Item-error & {
+    border-color: var(--Color_Error);
+  }
+}
+
+.frm-Form_Input,
+.frm-Form_Select,
+.frm-Form_Textarea {
+  padding: 0.5vr var(--Grid_Gutter);
+}
