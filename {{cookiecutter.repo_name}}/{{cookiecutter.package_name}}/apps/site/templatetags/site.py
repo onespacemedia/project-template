@@ -115,21 +115,6 @@ def html(text):
     # Load text into BS4
     soup = BeautifulSoup(text, 'html.parser')
 
-    # Unwrap all image tags
-    for img in soup.find_all('img'):
-        if not img.parent.has_attr('class') and not img.parent.has_attr('href'):
-            img.parent.unwrap()
-
-    def wrap(to_wrap, wrap_in):
-        contents = to_wrap.replace_with(wrap_in)
-        wrap_in.append(contents)
-
-    # Wrap all table tags
-    for table in soup.find_all('table'):
-        div = soup.new_tag('div')
-        div['class'] = 'wys-TableWrap'
-        wrap(table, div)
-
     # Wrap all iframes in intrinsic containers
     for iframe in soup.find_all('iframe'):
         for attr in ['width', 'height']:
