@@ -11,9 +11,7 @@
       </label>
     {% endif %}
 
-    {% if widget_class == 'HtmlWidget' %}
-      {{ render_wysiwyg(field) }}
-    {% elif widget_class=='ReCaptcha' %}
+    {% if widget_class=='ReCaptcha' %}
       {{ field }}
     {% elif widget_class == 'CheckboxSelectMultiple' %}
       {{ render_multi_checkbox(field) }}
@@ -66,23 +64,6 @@
       </div>
     {% endfor %}
   </div>
-{% endmacro %}
-
-{% macro render_wysiwyg(field, additional_classes) %}
-  {% if field.field.help_text %}
-    <p class="frm-Form_Help">{{ field.field.help_text | safe }}</p>
-  {% endif %}
-
-  <textarea
-    id="{{ field.auto_id }}"
-    {% if additional_attributes %}
-    {% for k, v in additional_attributes.items() %}
-    {{ k }}{% if v %}="{{ v }}"{% endif %}
-    {% endfor %}
-    {% endif %}
-    name="{{ field.html_name }}"
-    class="frm-Form_Textarea js-WYSIWYG {% if additional_classes %}{{ additional_classes }}{% endif %}"
-    >{% if field.value() %}{{ field.value() }}{% endif %}</textarea>
 {% endmacro %}
 
 {% macro render_items(form) %}

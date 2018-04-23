@@ -116,8 +116,7 @@
 */
 .frm-Form_Input,
 .frm-Form_Select,
-.frm-Form_Textarea,
-.frm-Form_WYSIWYG {
+.frm-Form_Textarea {
   @include Font_14-20;
 
   display: block;
