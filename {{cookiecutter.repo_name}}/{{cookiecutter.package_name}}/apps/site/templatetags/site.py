@@ -197,3 +197,11 @@ def gravatar_url(email, size=40):
             's': str(size)
         })
     )
+
+
+@library.filter
+def add_field_attributes(field, class_name, placeholder=True):
+    return field.as_widget(attrs={
+        'class': ' '.join((field.css_classes(), class_name)),
+        'placeholder': field.label if placeholder else '',
+    })
