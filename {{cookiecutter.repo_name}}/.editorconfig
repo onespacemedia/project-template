@@ -1,0 +1,15 @@
+root = true
+
+[*]
+# Force Unix-style newlines.
+end_of_line = lf
+# Always have a trailing newline.
+insert_final_newline = true
+# Indentation is 2 spaces for nearly everything.
+indent_size = 2
+indent_style = space
+trim_trailing_whitespace = true
+
+[*.py]
+# Use 4-space indentation for Python only.
+indent_size = 4
