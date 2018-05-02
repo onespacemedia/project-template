@@ -8,7 +8,7 @@ import { svg4everybody } from './utils/svgforeverybody'
 
 import LazyImage from './images'
 import { Navigation } from './site'
-import { externalLinks, iframeFix } from './utils'
+import { externalLinks } from './utils'
 import { overflowTables } from './wysiwyg'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,14 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       threshold: 0.4
     })
     Array.from(lazyImages).forEach(image => observer.observe(image))
-  }
-
-  // If the browser isn't Safari, don't do anything
-  if (
-    document.querySelector('iframe') &&
-    window.navigator.userAgent.indexOf('Safari') > -1
-  ) {
-    iframeFix()
   }
 
   // If the device is iOS add a class to the body so we can do specific CSS for it
