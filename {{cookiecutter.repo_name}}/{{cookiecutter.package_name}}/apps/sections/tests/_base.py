@@ -28,5 +28,16 @@ class BaseSectionTestCase(TestCase):
                 content='<p>Text test</p>',
                 link_url='/link-test/',
                 link_text='Link test',
+                order=2,
+            )
+
+            self.hero_section = ContentSection.objects.create(
+                type='heroes-hero',
+                page=self.content_page,
+                kicker='Kicker test',
+                title='Title test',
+                text='Text test',
+                link_url='/link-test/',
+                link_text='Link test',
                 order=0,
             )

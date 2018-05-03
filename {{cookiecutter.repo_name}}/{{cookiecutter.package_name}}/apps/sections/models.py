@@ -14,15 +14,16 @@ from django.utils.text import slugify
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
-            ('landing-hero', {
-                'fields': ['kicker', 'title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
+            ('hero', {
+                'name': 'Hero (normal)',
+                'fields': ['kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'text'],
                 'required': ['title', 'image'],
                 'help_text': {
-                    'kicker': 'If this is left blank it will inherit the pages title',
+                    'kicker': "If this is left blank it will inherit the pages title",
                 },
             }),
-        ]
+        ],
     }),
     ('Images', {
         'sections': [

@@ -1,0 +1,44 @@
+/*
+|--------------------------------------------------------------------------
+| Hero
+|--------------------------------------------------------------------------
+| @namespace: sec-
+|
+*/
+.sec-Hero {
+  background-color: #000;
+  color: #fff;
+
+  padding-top: 1vr;
+  padding-bottom: @padding-top;
+
+  @media (--sm) {
+    padding-top: 4vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--md) {
+    padding-top: 6vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.sec-Hero_Inner {
+  @include Grid_Container;
+}
+
+.sec-Hero_Kicker {
+  margin-bottom: 0.5vr;
+}
+
+.sec-Hero_Text {
+  margin-top: 1vr;
+}
+
+.sec-Hero_Footer {
+  margin-top: 1vr;
+}
+
+.sec-Hero_Link {
+  @include Button-primary;
+}

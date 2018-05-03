@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "components/macros/components.html" as components %}
 
-{% block main %}
+{% block content %}
   {% for section in pages.current.contentsection_set.all() %}
     {{ render_section(section) }}
   {% endfor %}
