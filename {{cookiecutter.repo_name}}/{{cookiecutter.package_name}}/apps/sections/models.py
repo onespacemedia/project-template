@@ -20,7 +20,7 @@ SECTION_TYPES = (
                 'search': ['kicker', 'title', 'text'],
                 'required': ['title', 'image'],
                 'help_text': {
-                    'kicker': "If this is left blank it will inherit the pages title",
+                    'kicker': 'If this is left blank it will inherit the title of the page.',
                 },
             }),
         ],
