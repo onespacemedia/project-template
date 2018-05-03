@@ -13,6 +13,8 @@ from django.utils import timezone
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
+from ...utils.utils import get_related_items
+
 
 class NewsFeed(ContentBase):
 
@@ -201,6 +203,13 @@ class Article(PageBase):
         """Returns the URL of the article."""
         return self._get_permalink_for_page(self.news_feed.page)
 
+    def get_related_articles(self, count=3):
+        candidate_querysets = [
+            Article.objects.filter(categories__in=self.categories.all()),
+            Article.objects.all(),
+        ]
+        return get_related_items(candidate_querysets, count=count, exclude=self)
+
     @property
     def get_summary(self):
         summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
@@ -218,20 +227,6 @@ class Article(PageBase):
         return render_to_string('news/includes/card.html', {
             'article': self,
         })
-
-    def get_related_articles(self, count=3):
-        related_articles = Article.objects.filter(
-            categories=self.categories.all(),
-        ).exclude(
-            id=self.id
-        )
-
-        if related_articles.count() < count:
-            related_articles |= Article.objects.exclude(
-                id__in=[self.pk] + [x.id for x in related_articles]
-            )
-
-        return related_articles.distinct()[:count]
 
 
 historylinks.register(Article)
