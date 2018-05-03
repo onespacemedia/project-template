@@ -26,4 +26,4 @@ test:
     - deactivate && cd demo/ && . .venv/bin/activate && yarn run lint:js
     - deactivate && cd demo/ && . .venv/bin/activate && pytest --cov=demo --create-db --nomigrations --ds=demo.settings.local
   post:
-    - cd demo/ && coveralls
+    - cd demo/ && coveralls --ignore-errors
