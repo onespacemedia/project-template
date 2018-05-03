@@ -6,11 +6,11 @@
 |
 */
 .sec-Hero {
-  background-color: #000;
-  color: #fff;
-
   padding-top: 1vr;
   padding-bottom: @padding-top;
+
+  background-color: #000;
+  color: #fff;
 
   @media (--sm) {
     padding-top: 4vr;
