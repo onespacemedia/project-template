@@ -124,8 +124,8 @@
   min-width: 200px;
 
   background-color: #fff;
-  box-shadow: 0 2px 5px 0 var(--Global_ShadowColor);
   border: 1px solid var(--Color_Border);
+  box-shadow: 0 2px 5px 0 var(--Global_ShadowColor);
   opacity: 0;
   visibility: hidden;
 
@@ -204,8 +204,8 @@
   display: flex;
   padding: 5px 25px;
 
-  color: currentColor;
   border-bottom: 1px solid var(--Color_Border);
+  color: currentColor;
 
   transition: background-color 0.2s;
 
