@@ -76,6 +76,7 @@ export class Navigation {
 
     const mobileNav = document.createElement('nav')
     mobileNav.className = 'nav-Mobile'
+    mobileNav.setAttribute('aria-hidden', 'true')
 
     const mobileNavItems = this.els.nav.cloneNode(true)
     this.replaceClassNames(mobileNavItems, 'nav-Header', 'nav-Mobile')
