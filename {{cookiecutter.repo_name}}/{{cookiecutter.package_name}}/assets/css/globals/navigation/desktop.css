@@ -33,7 +33,6 @@
   margin-right: -var(--Grid_Gutter);
   margin-left: @margin-right;
 
-  font-family: var(--Font_Family-muli);
   font-weight: 600;
 
   @media (--lg) {
@@ -125,7 +124,6 @@
 
   background-color: #fff;
   border: 1px solid var(--Color_Border);
-  box-shadow: 0 2px 5px 0 var(--Global_ShadowColor);
   opacity: 0;
   visibility: hidden;
 
