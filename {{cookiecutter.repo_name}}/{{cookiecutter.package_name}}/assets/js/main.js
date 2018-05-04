@@ -10,10 +10,10 @@ import LazyImage from './images'
 import { Navigation } from './site'
 import { externalLinks, iframeFix } from './utils'
 import { overflowTables } from './wysiwyg'
+import { bindAnimations } from './viewport-animation'
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.documentElement
-  body.classList.add('util-JSEnabled')
 
   externalLinks()
   new Navigation()
@@ -50,14 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // If the device is iOS add a class to the body so we can do specific CSS for it
   if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
-    const body = document.body || document.documentElement
     body.classList.add('is-iOS')
   }
 
   svg4everybody()
 
+  // Bind the in viewport checking for animations
+  bindAnimations()
+
   // This class is used for making the animation duration on CSS animations 0, initially
   setTimeout(() => {
-    document.body.classList.remove('util-Preload')
+    body.classList.remove('util-Preload')
   }, 500)
 })

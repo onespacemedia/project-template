@@ -67,6 +67,8 @@
     <script>
       var body = document.documentElement || document.body
 
+      body.classList.add('util-JSEnabled')
+
       if (!('grid' in body.style)) {
         var grid = document.createElement('link')
         grid.href = '/static/build/css/grid-fallback.css'
