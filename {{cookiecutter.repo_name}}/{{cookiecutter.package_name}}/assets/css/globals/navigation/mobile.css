@@ -107,14 +107,12 @@
   justify-content: space-between;
 
   display: flex;
-
   width: 100%;
   padding: var(--Grid_Gutter) calc(var(--Grid_Gutter) * 2);
 
   text-align: left;
 
   border: none;
-
   color: currentColor;
 
   transition: color var(--Global_Transition);
@@ -169,7 +167,6 @@
   position: fixed;
   top: 0;
   left: 100%;
-
   z-index: 1;
 
   max-width: var(--Mobile_NavWidth);

@@ -28,7 +28,6 @@
   align-items: stretch;
 
   display: none;
-
   height: 100%;
   margin-right: -var(--Grid_Gutter);
   margin-left: @margin-right;
@@ -46,7 +45,6 @@
   align-items: center;
 
   display: flex;
-
   margin-right: var(--Grid_Gutter);
   margin-left: @margin-right;
 
@@ -75,7 +73,6 @@
   align-items: baseline;
 
   display: flex;
-
   padding: 5px;
 
   color: currentColor;
@@ -181,7 +178,6 @@
 
 .nav-Header_DropdownChild {
   position: absolute;
-
   top: -1px;
   left: 100%;
 
