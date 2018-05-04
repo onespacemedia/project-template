@@ -2,21 +2,14 @@ import { debounce, getOffsetTop, mediaBreakpoints } from '../utils/index'
 
 export class Navigation {
   constructor () {
-    const el = document.querySelector('.nav-Header')
+    this.setUpElements()
 
-    this.els = {
-      el,
-      trigger: el.querySelector('.nav-Header_Trigger'),
-      document: document.documentElement || document.body,
-      backdrop: el.querySelector('.nav-Header_Backdrop'),
-      header: document.querySelector('.hd-Header'),
-      tops: document.querySelectorAll(
-        '.nav-Header_Items, .nav-Header_Backdrop, .nav-Header_Dropdown'
-      )
-    }
+    this.generateMobileNav()
+
+    this.setUpMobileElements()
 
     this.items = this.constructItems(
-      this.els.el.querySelectorAll('.nav-Header_Items > .nav-Header_Item')
+      this.els.document.querySelectorAll('.nav-Mobile_Item')
     )
 
     this.isOpen = false
@@ -25,6 +18,31 @@ export class Navigation {
     this.setupItems = this.setupItems.bind(this)
 
     this.setupListeners()
+  }
+
+  setUpElements () {
+    const el = document.querySelector('.nav-Header')
+
+    this.els = {
+      el,
+      document: document.documentElement || document.body,
+      header: document.querySelector('.hd-Header'),
+      nav: document.querySelector('.nav-Header_Items')
+    }
+  }
+
+  setUpMobileElements () {
+    this.els.trigger = this.els.el.querySelector('.nav-Header_Trigger')
+
+    this.els.backdrop = this.els.document.querySelector('.nav-Header_Backdrop')
+
+    this.els.tops = this.els.document.querySelectorAll(
+      `.nav-Header_Items,
+      .nav-Header_Backdrop,
+      .nav-Header_Dropdown,
+      .nav-Mobile,
+      .nav-Mobile_Dropdown`
+    )
   }
 
   setupItems () {
@@ -46,23 +64,66 @@ export class Navigation {
     this.els.trigger.addEventListener('click', this.toggleIsOpen)
     this.els.backdrop.addEventListener('click', this.toggleIsOpen)
 
-    const resizeFnc = () => {
-      if (window.innerWidth > mediaBreakpoints.lg) {
-        this.isOpen = false
+    window.addEventListener(
+      'resize',
+      debounce(this.handleResizeComplete.bind(this), 10)
+    )
+  }
 
-        Array.from(this.els.tops).forEach(item => {
-          item.style.top = ''
+  generateMobileNav () {
+    const backdrop = document.createElement('div')
+    backdrop.className = 'nav-Header_Backdrop'
 
-          if (item.getAttribute('style') === '') {
-            item.removeAttribute('style')
-          }
-        })
-      } else {
-        this.setTop()
+    const mobileNav = document.createElement('nav')
+    mobileNav.className = 'nav-Mobile'
+    mobileNav.setAttribute('aria-hidden', 'true')
+
+    const mobileNavItems = this.els.nav.cloneNode(true)
+    this.replaceClassNames(mobileNavItems, 'nav-Header', 'nav-Mobile')
+
+    mobileNav.appendChild(mobileNavItems)
+
+    this.insertAfter(mobileNav, this.els.header)
+    this.insertAfter(backdrop, this.els.header)
+  }
+
+  replaceClassNames (els, origClass, newClass) {
+    const allChildren = els.querySelectorAll('nav,div,span,ul,li,a,button')
+
+    const replaceClassName = child => {
+      const className = child.className
+
+      if (className) {
+        child.className = className.replace(
+          new RegExp(origClass, 'g'),
+          newClass
+        )
       }
     }
 
-    window.addEventListener('resize', debounce(resizeFnc, 10))
+    replaceClassName(els)
+
+    Array.from(allChildren).forEach(child => {
+      replaceClassName(child)
+    })
+  }
+
+  handleResizeComplete () {
+    if (window.innerWidth > mediaBreakpoints.lg) {
+      if (this.isOpen) this.setIsOpen(false)
+
+      this.isOpen = false
+
+      Array.from(this.els.tops).forEach(item => {
+        item.style.top = ''
+
+        if (item.getAttribute('style') === '') {
+          item.removeAttribute('style')
+        }
+      })
+    } else {
+      this.setTop()
+    }
   }
 
   toggleIsOpen () {
@@ -71,9 +132,9 @@ export class Navigation {
 
   constructItems (elements) {
     return Array.from(elements).map(item => {
-      const dropdown = item.querySelector('.nav-Header_Dropdown')
-      const hasChildren = item.classList.contains('nav-Header_Item-hasDropdown')
-      const link = item.querySelector('.nav-Header_Link')
+      const dropdown = item.querySelector('[data-hasDropdown]')
+      const hasChildren = item.classList.contains('nav-Mobile_Item-hasDropdown')
+      const link = item.querySelector('.nav-Mobile_Link')
 
       const schema = {
         dropdown,
@@ -81,15 +142,10 @@ export class Navigation {
         link,
         el: item,
         parent: item.parentNode,
-        children: hasChildren
-          ? this.constructItems(
-            Array.from(dropdown.children).filter(
-              child =>
-                child.classList.contains('nav-Header_Item-back') === false
-            )
-          )
-          : {},
-        back: hasChildren ? item.querySelector('.nav-Header_Item-back') : null,
+        children: hasChildren ? this.constructItems(dropdown.children) : {},
+        back: hasChildren
+          ? item.querySelector('.nav-Mobile_DropdownItem-back')
+          : null,
         _active: false,
         get active () {
           return this._active
@@ -107,21 +163,22 @@ export class Navigation {
 
       if (schema.hasChildren) {
         schema.link.addEventListener('click', e => {
-          if (window.innerWidth <= mediaBreakpoints.lg) {
-            e.preventDefault()
+          e.preventDefault()
 
-            const isActive = !schema.active
-
-            schema.active = isActive
-            schema.parent.classList.toggle(className, isActive)
-          }
-        })
-        schema.back.addEventListener('click', () => {
           const isActive = !schema.active
 
           schema.active = isActive
           schema.parent.classList.toggle(className, isActive)
         })
+
+        if (schema.back) {
+          schema.back.addEventListener('click', () => {
+            const isActive = !schema.active
+
+            schema.active = isActive
+            schema.parent.classList.toggle(className, isActive)
+          })
+        }
       }
 
       return schema
@@ -149,7 +206,7 @@ export class Navigation {
     this.els.document.classList.toggle('nav-IsOpen', val)
     this.els.document.classList.toggle(inClass, val)
     this.els.document.classList.toggle(outClass, !val)
-    this.els.trigger.setAttribute('aria-selected', val)
+    this.els.trigger.classList.toggle('nav-Header_Trigger-open', val)
 
     if (!val) {
       this.els.document.classList.remove(endedClass)
@@ -187,5 +244,9 @@ export class Navigation {
     }
 
     this.els.document.addEventListener('animationend', animationFnc)
+  }
+
+  insertAfter (newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling)
   }
 }

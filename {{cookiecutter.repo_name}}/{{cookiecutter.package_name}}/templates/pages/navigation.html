@@ -1,12 +1,19 @@
 <nav class="nav-Header">
-  <button class="nav-Header_Trigger" aria-selected="false">
+  <div class="nav-Header_Trigger">
     <span class="nav-Header_TriggerLine nav-Header_TriggerLine-top"></span>
     <span class="nav-Header_TriggerLine nav-Header_TriggerLine-middle"></span>
     <span class="nav-Header_TriggerLine nav-Header_TriggerLine-bottom"></span>
-  </button>
+  </div>
 
   <ul class="nav-Header_Items" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
     {% for entry in navigation %}
+      {% if loop.first %}
+        <li class="nav-Header_Item nav-Header_Item-home" {% if request.path == '/' %}aria-current="page"{% endif %}>
+          <a class="nav-Header_Link" href="/" itemprop="url">
+            <span itemprop="name">Home</span>
+          </a>
+        </li>
+      {% endif %}
       <li class="nav-Header_Item{% if entry.children %} nav-Header_Item-hasDropdown{% endif %}"
           {% if entry.here %}aria-current="page"{% endif %}>
         <a class="nav-Header_Link" href="{{ entry.url }}" itemprop="url">
@@ -20,32 +27,30 @@
         </a>
 
         {% if entry.children %}
-          <ul class="nav-Header_Dropdown">
+          <ul class="nav-Header_Dropdown" data-hasDropdown>
             {% for sub_entry in entry.children recursive %}
               {% if loop.first %}
-                <li class="nav-Header_Item nav-Header_Item-back">
-                  <button class="nav-Header_Link">
-                    <span class="nav-Header_LinkIcon">
+                <li class="nav-Header_DropdownItem nav-Header_DropdownItem-back">
+                  <div class="nav-Header_Link nav-Header_Link-dropdown">
+                    <span class="nav-Header_LinkIcon nav-Header_LinkIcon-dropdown">
                       {% include 'dropdown.svg' %}
                     </span>
-
                     Back
-                  </button>
+                  </div>
                 </li>
 
-                <li class="nav-Header_Item nav-Header_Item-parent">
-                  <a class="nav-Header_Link" href="{{ entry.url }}">
-                    {{ entry.title }}
+                <li class="nav-Header_DropdownItem nav-Header_DropdownItem-parent">
+                  <a class="nav-Header_Link nav-Header_Link-dropdown" href="{{ sub_entry.page.parent.get_absolute_url() }}">
+                    {{ sub_entry.page.parent }}
                   </a>
                 </li>
               {% endif %}
-
-              <li class="nav-Header_Item{% if recursive and sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
-                <a class="nav-Header_Link" href="{{ sub_entry.url }}" itemprop="url">
+              <li class="nav-Header_DropdownItem{% if recursive and sub_entry.children %} nav-Header_Item-hasDropdown{% endif %}">
+                <a class="nav-Header_Link nav-Header_Link-dropdown" href="{{ sub_entry.url }}" itemprop="url">
                   <span itemprop="name">{{ sub_entry.page }}</span>
 
                   {% if sub_entry.children %}
-                    <span class="nav-Header_LinkIcon">
+                    <span class="nav-Header_LinkIcon nav-Header_LinkIcon-dropdown">
                       {% include 'dropdown.svg' %}
                     </span>
                   {% endif %}
@@ -53,7 +58,7 @@
 
                 {% if recursive %}
                   {% if sub_entry.children %}
-                    <ul class="nav-Header_Dropdown">
+                    <ul class="nav-Header_DropdownChild" data-hasDropdown>
                       {{ loop(sub_entry.children) }}
                     </ul>
                   {% endif %}
@@ -66,6 +71,7 @@
     {% endfor %}
 
     {% set header = get_header_content() %}
+
     {% if header and header.headerlink_set.all() %}
       {% for link in header.headerlink_set.all() %}
         <li class="nav-Header_Item nav-Header_Item-extra">
@@ -74,6 +80,4 @@
       {% endfor %}
     {% endif %}
   </ul>
-
-  <div class="nav-Header_Backdrop"></div>
 </nav>
