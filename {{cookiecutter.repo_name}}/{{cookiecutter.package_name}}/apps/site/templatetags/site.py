@@ -60,10 +60,14 @@ def render_navigation(context, pages, section=None, recursive=False):
     You can also specify an alias for the navigation, at which point it will be set in the
     context rather than rendered.
     """
-    return {
+    # Take a copy of the current context and update it - we do this so that
+    # we have access to 'request', 'settings', etc.
+    context = dict(context)
+    context.update({
         'navigation': _navigation_entries(context, pages, section),
         'recursive': recursive,
-    }
+    })
+    return context
 
 
 @library.filter

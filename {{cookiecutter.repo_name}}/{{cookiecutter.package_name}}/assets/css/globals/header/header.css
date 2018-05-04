@@ -11,21 +11,29 @@
   position: relative;
   z-index: 10;
 
-  padding-top: 0.5vr;
-  padding-bottom: @padding-top;
+  height: var(--Mobile_NavHeight);
 
   background-color: #fff;
   border-bottom: 1px solid var(--Color_Border);
+
+  @media (--lg) {
+    height: var(--Desktop_NavHeight);
+  }
 }
 
 .hd-Header_Inner {
   @include Grid_Container;
+
+  height: 100%;
 }
 
 .hd-Header_Body {
   align-items: center;
+  justify-content: space-between;
 
   display: flex;
+
+  height: 100%;
 }
 
 /*
@@ -57,7 +65,7 @@
 |
 */
 .hd-Header_Nav {
-  margin-left: auto;
+  height: 100%;
 }
 
 /*
