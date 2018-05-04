@@ -8,11 +8,11 @@
   <ul class="nav-Header_Items" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
     {% for entry in navigation %}
       {% if loop.first %}
-      <li class="nav-Header_Item nav-Header_Item-home" {% if request.path == '/' %}aria-current="page"{% endif %}>
-        <a class="nav-Header_Link" href="/" itemprop="url">
-          <span itemprop="name">Home</span>
-        </a>
-      </li>
+        <li class="nav-Header_Item nav-Header_Item-home" {% if request.path == '/' %}aria-current="page"{% endif %}>
+          <a class="nav-Header_Link" href="/" itemprop="url">
+            <span itemprop="name">Home</span>
+          </a>
+        </li>
       {% endif %}
       <li class="nav-Header_Item{% if entry.children %} nav-Header_Item-hasDropdown{% endif %}"
           {% if entry.here %}aria-current="page"{% endif %}>
