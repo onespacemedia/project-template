@@ -35,7 +35,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     /* eslint-disable compat/compat */
     const observer = new IntersectionObserver(callback, {
-      threshold: 0.4
+      threshold: 0,
+      rootMargin: `${window.innerHeight}px`
     })
     Array.from(lazyImages).forEach(image => observer.observe(image))
   }
