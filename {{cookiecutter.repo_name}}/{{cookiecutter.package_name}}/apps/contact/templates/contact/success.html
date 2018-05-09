@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% import 'macros/heroes.html' as heroes %}
+
+{% set content = pages.current.content %}
+
+{% block content_above %}
+    {{ heroes.landing_hero({
+    'kicker': content.kicker,
+    'title': content.success_page_title,
+  }) }}
+{% endblock %}
+
+{% block main %}
+  <section class="sec-Section">
+    <div class="sec-Section_Inner">
+      <div class="wys-WYSIWYG">
+        {{ content.success_page_content|html }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

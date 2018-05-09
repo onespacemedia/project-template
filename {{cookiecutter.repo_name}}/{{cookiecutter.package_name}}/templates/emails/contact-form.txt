@@ -1,0 +1,8 @@
+Someone has submitted a contact form on {{ settings.SITE_NAME }}.
+
+Name: {{ first_name }} {{ last_name }}{% if job_title %}, {{ job_title }}{% endif %}
+{% if phone_number %}Phone: {{ phone_number }}{% endif %}
+Email address: {{ email }}
+Subject: {{ reason_for_enquiry }}
+
+{{ message }}
