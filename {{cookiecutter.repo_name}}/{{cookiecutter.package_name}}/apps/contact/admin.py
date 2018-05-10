@@ -16,7 +16,7 @@ from .models import Contact, ContactSubmission
 class ContactSubmissionAdmin(VersionAdmin):
     list_display = ['first_name', 'last_name', 'email', 'phone_number', 'job_title', 'reason_for_enquiry', 'created']
 
-    # TODO: Rewrite to use django_import_export?
+    # Rewrite to use django_import_export?
     def export_view(self, request):
         '''Exports all contact form submissions to a CSV.'''
         fd = StringIO()
