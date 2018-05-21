@@ -1,0 +1,100 @@
+/*
+|--------------------------------------------------------------------------
+| Animations
+|--------------------------------------------------------------------------
+| @namespace: ani-
+|
+*/
+.ani-Animation_Animate {
+  .util-JSEnabled & {
+    opacity: 0;
+  }
+}
+
+.ani-Animation_Child {
+  .util-JSEnabled & {
+    opacity: 0;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Draw in
+|--------------------------------------------------------------------------
+| See: .stp-Step_Line
+|
+*/
+@keyframes ani-Draw-in {
+  0% {
+    opacity: 1;
+
+    transform: translateY(-50%) scale(0);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.ani-Animation_DrawIn {
+  .util-JSEnabled & {
+    animation: ani-Draw-in 1.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.35, 0, 0, 1);
+    transform-origin: top center;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Fade
+|--------------------------------------------------------------------------
+|
+*/
+@keyframes ani-Fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.ani-Animation_FadeIn {
+  .util-JSEnabled & {
+    animation: ani-Fade-in 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.35, 0, 0, 1);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Slide up
+|--------------------------------------------------------------------------
+|
+*/
+@keyframes ani-Slide-up {
+  0% {
+    opacity: 0;
+
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: none;
+  }
+}
+
+.ani-Animation_SlideUp {
+  .util-JSEnabled & {
+    animation: ani-Slide-up 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.35, 0, 0, 1);
+  }
+}
