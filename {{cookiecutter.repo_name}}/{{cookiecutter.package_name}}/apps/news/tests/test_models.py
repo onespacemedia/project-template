@@ -80,6 +80,10 @@ class TestNews(TestCase):
         self._create_objects()
         self.assertEqual(self.article.get_absolute_url(), '/foo/')
 
+    def test_article_get_related_articles(self):
+        self._create_objects()
+        self.assertNotEqual(len(self.article.get_related_articles()), 0)
+
     def test_articlemanager_select_published(self):
         self._create_objects()
 
