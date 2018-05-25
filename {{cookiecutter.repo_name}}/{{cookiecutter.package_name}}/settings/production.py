@@ -6,20 +6,6 @@ CSRF_COOKIE_SECURE = True
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-INSTALLED_APPS += [
-    'opbeat.contrib.django',
-]
-
-OPBEAT = {
-    'ORGANIZATION_ID': 'dde034beb33d4b77bb9937c39f0c158f',
-    'APP_ID': '{{cookiecutter.opbeat_app_id}}',
-    'SECRET_TOKEN': '{{cookiecutter.opbeat_secret_token}}'
-}
-
-MIDDLEWARE_CLASSES = [
-    'opbeat.contrib.django.middleware.OpbeatAPMMiddleware',
-] + MIDDLEWARE_CLASSES
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
@@ -29,9 +15,10 @@ LOGGING = {
         },
     },
     'handlers': {
-        'opbeat': {
-            'level': 'WARNING',
-            'class': 'opbeat.contrib.django.handlers.OpbeatHandler',
+        'rollbar': {
+            'access_token': '{{ cookiecutter.rollbar_access_token }}',
+            'environment': 'production',
+            'class': 'rollbar.logger.RollbarHandler'
         },
         'console': {
             'level': 'DEBUG',
@@ -45,15 +32,9 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
-        '{{cookiecutter.package_name}}': {
+        '{{ cookiecutter.package_name }}': {
             'level': 'WARNING',
-            'handlers': ['opbeat'],
-            'propagate': False,
-        },
-        # Log errors from the Opbeat module to the console (recommended)
-        'opbeat.errors': {
-            'level': 'ERROR',
-            'handlers': ['console'],
+            'handlers': ['rollbar'],
             'propagate': False,
         },
     },

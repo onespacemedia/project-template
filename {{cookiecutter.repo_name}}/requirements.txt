@@ -19,11 +19,11 @@ django-webpack-loader
 Jinja2
 onespacemedia-cms
 onespacemedia-server-management
-opbeat
 paramiko==1.16.0
 Pillow
 pygithub
 python-memcached
+rollbar
 social-auth-app-django
 -e git://github.com/jazzband/sorl-thumbnail.git@eff221e0e0ea6054c62a31ca35fc1854e1f3287a#egg=sorl-thumbnail
 requests

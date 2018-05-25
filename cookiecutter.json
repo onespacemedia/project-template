@@ -21,8 +21,7 @@
     "adobe_creative_sdk_id": "",
     "google_plus_key": "",
     "google_plus_secret": "",
-    "opbeat_app_id": "",
-    "opbeat_secret_token": "",
+    "rollbar_access_token": "",
     "tinypng_api_key": "",
     "_copy_without_render": [
         "{{cookiecutter.package_name}}/apps/site/templatetags/",
