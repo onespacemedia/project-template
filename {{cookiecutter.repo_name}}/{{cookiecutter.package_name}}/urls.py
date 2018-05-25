@@ -1,3 +1,6 @@
+import logging
+import sys
+
 from cms.forms import CMSPasswordChangeForm
 from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
@@ -8,6 +11,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
+from django.shortcuts import render
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
@@ -55,4 +59,24 @@ if settings.DEBUG:
     ]
 
 
-handler500 = 'cms.views.handler500'
+def handler500(request):
+    """Renders a nicer error page and sends errors to Rollbar."""
+    import traceback
+
+    logger = logging.getLogger('{{ cookiecutter.package_name }}')
+
+    type_, value, _ = sys.exc_info()
+
+    logger.error(
+        '%s: %s',
+        type_.__name__,
+        value,
+        exc_info=True,
+        extra={
+            'traceback': ''.join(traceback.format_stack()),
+        }
+    )
+
+    response = render(request, "500.html", {})
+    response.status_code = 500
+    return response
