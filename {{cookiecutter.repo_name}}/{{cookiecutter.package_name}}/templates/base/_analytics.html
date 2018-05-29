@@ -13,14 +13,11 @@
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
     ga('create', '{{ settings.GOOGLE_ANALYTICS }}', 'auto');
-    // Only anonymize if not consented.
-    if (!localStorage.getItem('cookie_consent')) {
-      ga('set', 'anonymizeIp', true);
-    }
+    ga('set', 'anonymizeIp', true);
     ga('send', 'pageview');
   {% endif %}
 
-  // Put any further non-anonymous tracking scripts in here.
+  {# Put any further non-anonymous tracking scripts in here. #}
   window.tracking = function() {}
 
   if (localStorage.getItem('cookie_consent')) {

@@ -95,7 +95,7 @@
   cursor: pointer;
 }
 
-.js-CookieOptIn,
-.js-CookieOptOut {
+.cc-Button_OptIn,
+.cc-Button_OptOut {
   display: inline-block;
 }
