@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
   new Navigation()
   overflowTables()
-  bindCookieConset()
+  bindCookieConsent()
 
   const lazyImage = document.querySelector('.js-LazyImage')
   if (lazyImage) {
