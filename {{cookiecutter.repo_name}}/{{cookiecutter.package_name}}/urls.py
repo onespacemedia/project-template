@@ -60,7 +60,7 @@ if settings.DEBUG:
 
 
 def handler500(request):
-    """Renders a nicer error page and sends errors to Rollbar."""
+    '''Renders a nicer error page and sends errors to Rollbar.'''
     import traceback
 
     logger = logging.getLogger('{{ cookiecutter.package_name }}')
