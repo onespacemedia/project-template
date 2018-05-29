@@ -97,7 +97,7 @@
   "lint-staged": {
     "linters": {
       "{{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}": [
-        "prettier-standard",
+        "prettier-standard --print-width 120",
         "eslint --fix",
         "git add"
       ],
@@ -106,7 +106,7 @@
         "git add"
       ],
       "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css": [
-        "prettier-standard --write",
+        "prettier-standard --print-width 120 --write",
         "stylelint --fix",
         "git add"
       ],
