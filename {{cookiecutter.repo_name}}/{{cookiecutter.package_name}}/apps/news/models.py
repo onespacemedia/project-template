@@ -51,6 +51,7 @@ class NewsFeed(ContentBase):
 
     call_to_action = models.ForeignKey(
         'components.CallToAction',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )
@@ -131,6 +132,7 @@ class Article(PageBase):
 
     news_feed = models.ForeignKey(
         'news.NewsFeed',
+        on_delete=models.PROTECT,
         null=True,
         blank=False,
     )
@@ -163,6 +165,7 @@ class Article(PageBase):
 
     call_to_action = models.ForeignKey(
         'components.CallToAction',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text="By default the call to action will be the same as the news feed. You can override it for a specific article here."
@@ -174,6 +177,7 @@ class Article(PageBase):
     )
     {% if cookiecutter.people == 'yes' %}author = models.ForeignKey(
         'people.Person',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     ){% endif %}

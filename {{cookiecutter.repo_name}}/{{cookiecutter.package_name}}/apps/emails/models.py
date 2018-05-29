@@ -119,6 +119,7 @@ class EmailLog(models.Model):
 
     email_template = models.ForeignKey(
         EmailTemplate,
+        on_delete=models.SET_NULL,
     )
 
     email_data = JSONField(

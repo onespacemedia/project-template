@@ -64,7 +64,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='career',
             name='page',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='careers.Careers'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='careers.Careers'),
         ),
         migrations.AddField(
             model_name='career',
