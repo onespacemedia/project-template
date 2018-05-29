@@ -181,6 +181,7 @@ class SectionBase(models.Model):
 
     link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
@@ -299,6 +300,7 @@ class ContentSection(SectionBase):
 
     page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.CASCADE,
     )
 
 

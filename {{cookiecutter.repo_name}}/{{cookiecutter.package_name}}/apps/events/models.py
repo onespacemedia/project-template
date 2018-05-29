@@ -54,6 +54,7 @@ class Event(PageBase):
 
     page = models.ForeignKey(
         Events,
+        on_delete=models.PROTECT,
     )
 
     start_date = models.DateField()

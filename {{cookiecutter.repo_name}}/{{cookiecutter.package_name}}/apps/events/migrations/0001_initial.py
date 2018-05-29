@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='event',
             name='page',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='events.Events'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='events.Events'),
         ),
         migrations.AddField(
             model_name='event',

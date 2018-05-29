@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
                 ('twitter', models.CharField(blank=True, help_text="This can either be a username (e.g. @person) or a full URL; it'll be normalised to a username on save.", max_length=100, null=True, verbose_name='Twitter')),
                 ('order', models.PositiveIntegerField(default=0)),
                 ('og_image', cms.apps.media.models.ImageRefField(blank=True, help_text='The recommended image size is 1200x627 (1.91:1 ratio); this gives you a big stand out thumbnail. Using an image smaller than 400x209 will give you a small thumbnail and will splits posts into 2 columns. If you have text on the image make sure it is centered.', null=True, on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File', verbose_name='image')),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='people.People')),
+                ('page', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='people.People')),
                 ('photo', cms.apps.media.models.ImageRefField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File')),
             ],
             options={
@@ -76,7 +76,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='person',
             name='team',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='people.Team'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='people.Team'),
         ),
         migrations.AddField(
             model_name='person',
