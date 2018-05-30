@@ -101,7 +101,7 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
                     replacement = '[Embedded media]'
                 element.replace_with(replacement)
 
-            # Add absolute path internal link starting with /.
+            # Add absolute path internal link starting with "/".
             if element.name == 'a' and element.has_attr('href'):
                     element_href_value = element['href']
                     if element_href_value.startswith('/') and not element_href_value.startswith('//'):
