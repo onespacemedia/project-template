@@ -1,5 +1,7 @@
 '''Miscellaneous helpful functions.'''
 
+from django.conf import settings
+
 
 def get_related_items(candidate_querysets, count=3, exclude=None):
     '''
@@ -34,3 +36,18 @@ def get_related_items(candidate_querysets, count=3, exclude=None):
             break
 
     return objects
+
+
+def url_from_path(path, request=None):
+    if path.startswith('http://') or path.startswith('https://'):
+        return path
+
+    if not path.startswith('/'):
+        path = '/' + path
+
+    if request and not request.is_secure():
+        secure_part = ''
+    else:
+        secure_part = 's'
+
+    return 'http{}://{}{}'.format(secure_part, settings.SITE_DOMAIN, path)

@@ -90,9 +90,6 @@ class TestViews(TestCase):
 
         self.assertEqual(get.status_code, 200)
 
-        # Handle single and double digit dates.
-        self.assertIn(get['Content-Length'], ['376', '377'])
-
         self.assertEqual(get['Content-Type'], 'application/rss+xml; charset=utf-8')
 
     def test_articledetailview_get_context_data(self):
