@@ -103,9 +103,9 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
 
             # Add absolute path internal link starting with "/".
             if element.name == 'a' and element.has_attr('href'):
-                    element_href_value = element['href']
-                    if element_href_value.startswith('/') and not element_href_value.startswith('//'):
-                        element['href'] = url_from_path(element_href_value)
+                element_href_value = element['href']
+                if element_href_value.startswith('/') and not element_href_value.startswith('//'):
+                    element['href'] = url_from_path(element_href_value)
         html = str(soup)
 
         return str(html)
@@ -126,8 +126,7 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
             feed.add_item(
                 title=article.title,
                 link=url_from_path(article.get_absolute_url()),
-                description=self.process_rss(
-                    article.summary or article.content),
+                description=self.process_rss(article.content),
                 pubdate=article.date,
             )
 
