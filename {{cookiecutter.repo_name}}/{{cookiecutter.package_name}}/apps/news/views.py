@@ -96,10 +96,13 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
             if element.name == 'iframe':
                 # No src= should not cause an exception.
                 if element.has_attr('src'):
-                    replacement = '<a href="{}">[Embedded media]</a>'.format(element['src'])
+                    element.name = 'a'
+                    element['href'] = element['src']
+                    element.string = '[Embedded media]'
+                    del element['src']
                 else:
                     replacement = '[Embedded media]'
-                element.replace_with(replacement)
+                    element.replace_with(replacement)
 
             # Add absolute path internal link starting with "/".
             if element.name == 'a' and element.has_attr('href'):
