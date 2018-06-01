@@ -8,7 +8,7 @@ class UtilsUtilsTest(TestCase):
 
     def test_url_from_path(self):
 
-        site_url = url_from_path('\\')
+        site_url = url_from_path('/')
         site_domain = settings.SITE_DOMAIN
 
         self.assertTrue(site_url.startswith('http'))
