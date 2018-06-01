@@ -1,7 +1,7 @@
 """Views used by the CMS news app."""
 
 from bs4 import BeautifulSoup
-from cms.html import process as cms_process_html
+from cms.html import process as process_html
 from cms.views import SearchMetaDetailMixin
 from django.http import HttpResponse
 from django.utils.feedgenerator import DefaultFeed
@@ -77,7 +77,7 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
 
     def process_rss(self, text):
         """Processes CMS content into RSS format."""
-        html = cms_process_html(text)
+        html = process_html(text)
 
         # RSS has certain requirements: iframes are not allowed, image references
         # must be absolute and style attributes are forbidden.
