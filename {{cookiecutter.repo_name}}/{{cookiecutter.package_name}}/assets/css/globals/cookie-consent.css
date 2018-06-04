@@ -1,0 +1,101 @@
+/*
+|--------------------------------------------------------------------------
+| Cookie consent
+|--------------------------------------------------------------------------
+| @prefix: cc-
+|
+*/
+.cc-Bar {
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+
+  display: none;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: @padding-top;
+
+  background-color: #000;
+  color: #fff;
+}
+
+.cc-Bar-show {
+  display: block;
+}
+
+.cc-Bar_Inner {
+  @include Grid_Container;
+
+  align-items: center;
+  flex-flow: column wrap;
+  justify-content: space-between;
+
+  display: flex;
+
+  @media (--md) {
+    flex-flow: row wrap;
+  }
+}
+
+.cc-Bar_Content {
+  flex: 1;
+
+  margin-bottom: 16px;
+
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+
+  @media (--sm) {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+  }
+
+  @media (--md) {
+    margin-bottom: 0;
+  }
+}
+
+.cc-Bar_Actions {
+  align-items: center;
+
+  display: flex;
+  margin-left: 15px;
+
+  @media (--sm) {
+    margin-left: 30px;
+  }
+}
+
+.cc-Bar_Accept {
+  @include Button-primary;
+
+  padding: 4px 15px;
+
+  @media (--sm) {
+    padding: 8px 30px;
+  }
+}
+
+.cc-Bar_LearnMore {
+  text-decoration: underline;
+
+  color: #fff;
+}
+
+.cc-Bar_CloseIcon {
+  position: relative;
+
+  width: 26px;
+  height: 26px;
+  margin-left: 100px;
+
+  cursor: pointer;
+}
+
+.cc-Button_OptIn,
+.cc-Button_OptOut {
+  display: inline-block;
+}

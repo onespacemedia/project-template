@@ -11,6 +11,7 @@ import { Navigation } from './site'
 import { externalLinks } from './utils'
 import { overflowTables } from './wysiwyg'
 import { bindAnimations } from './viewport-animation'
+import { bindCookieConsent } from './notices'
 
 document.addEventListener('DOMContentLoaded', () => {
   const body = document.body || document.documentElement
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
   new Navigation()
   overflowTables()
+  bindCookieConsent()
 
   const lazyImage = document.querySelector('.js-LazyImage')
   if (lazyImage) {
