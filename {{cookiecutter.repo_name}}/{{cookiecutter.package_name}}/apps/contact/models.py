@@ -8,6 +8,8 @@ class Contact(ContentBase):
     # The urlconf used to power this content's views.
     urlconf = '{{cookiecutter.package_name}}.apps.contact.urls'
 
+    icon = 'cms-icons/form.png'
+
     call_to_action = models.ForeignKey(
         'components.CallToAction',
         blank=True,
