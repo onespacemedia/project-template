@@ -1,3 +1,4 @@
+import 'intersection-observer'
 import { isVisible } from '../utils/index'
 
 export function bindAnimations () {

@@ -1,6 +1,6 @@
 import { debounce, getOffsetTop, mediaBreakpoints } from '../utils/index'
 
-export class Navigation {
+export default class Navigation {
   constructor () {
     this.setUpElements()
 
