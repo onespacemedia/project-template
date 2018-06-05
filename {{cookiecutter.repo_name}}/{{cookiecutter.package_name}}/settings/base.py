@@ -466,7 +466,7 @@ TYPEKIT_USED = {% if cookiecutter.uses_typekit == 'yes' %}True{% else %}False{% 
 TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 
 # Google fonts
-GOOGLE_FONTS_KIT_URL = 'https://fonts.googleapis.com/css?family=Muli:400,600|Source+Sans+Pro:400,700'
+GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
 SILENCED_SYSTEM_CHECKS = []
 
