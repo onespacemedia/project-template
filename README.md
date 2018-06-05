@@ -20,6 +20,9 @@ You will need to add a Git remote and probably set up a few other things. Work i
 1. `cd` to the directory in which your projects typically live (for us, this is `~/Workspace`).
 2. Ensure you have `cookiecutter` installed globally on your system - ```sudo apt install cookiecutter```
 3. Ensure nvm line is in your bash profile (~/.profile or ~/.bash_profile depending on distro)
+4. Run `cookiecutter gh:onespacemedia/project-template`
+5. Answer the questions.
+6. That's it! .venv will be automatically setup too.
 
 ```
 export NVM_DIR="$HOME/.nvm"
