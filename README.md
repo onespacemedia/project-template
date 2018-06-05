@@ -61,3 +61,14 @@ Hook script failed (exit status: 1)
 
 Set config for git. `git config --global user.email "you@example.com"`
 and `git config --global user.email "you@example.com"`
+
+##### NVM can't be found
+
+```
+/tmp/tmpgyJsw1.sh: line 153: nvm: command not found
+Removing project folder.
+ERROR: Stopping generation because post_gen_project hook script didn't exit successfully
+Hook script failed (exit status: 127)
+```
+
+Ubuntu uses ~/.profile instead of ~/.bash_profile. Create symlink `ln -s ~/.profile ~/.bash_profile`
