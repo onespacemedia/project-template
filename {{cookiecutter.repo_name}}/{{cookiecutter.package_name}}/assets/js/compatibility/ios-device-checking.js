@@ -1,4 +1,4 @@
-export default function iosDeviceChecking() {
+export default function iosDeviceChecking () {
   const body = document.body || document.documentElement
 
   // If the device is iOS add a class to the body so we can do specific CSS for it

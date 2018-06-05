@@ -19,7 +19,7 @@ export function setUpLazyImage () {
       })
     }
 
-     /* eslint-disable compat/compat */
+    /* eslint-disable compat/compat */
     const observer = new IntersectionObserver(callback, {
       threshold: 0,
       rootMargin: `${window.innerHeight}px`
