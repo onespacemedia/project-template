@@ -1,5 +1,5 @@
-/*
- See `doc/parallax-js.md` for instructions.
+/**
+ * See `doc/parallax-js.md` for instructions.
  */
 export default function () {
   // Don't throw an exception on ancient browsers.
