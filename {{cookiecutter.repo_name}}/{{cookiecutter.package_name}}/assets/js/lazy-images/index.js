@@ -1,5 +1,5 @@
 import 'intersection-observer'
-import LazyImage from './lazyimage'
+import LazyImage from './lazy-image'
 
 export function setUpLazyImage () {
   const lazyImage = document.querySelector('.js-LazyImage')

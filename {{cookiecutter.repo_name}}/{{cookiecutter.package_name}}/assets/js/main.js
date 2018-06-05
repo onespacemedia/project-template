@@ -9,10 +9,10 @@ import { svg4everybody } from './compatibility/svgforeverybody'
 // OSM modules
 import { bindCookieConsent } from './notices'
 import { bindAnimations } from './viewport-animation'
-import { bindExternalLinks } from './externallinks'
+import { bindExternalLinks } from './external-links'
 import { setUpNavigation } from './navigation'
-import { setUpLazyImage } from './lazyimages'
-import { setUpFocusRing } from './focusring'
+import { setUpLazyImage } from './lazy-images'
+import { setUpFocusRing } from './focus-ring'
 import { setUpOverflowTables } from './wysiwyg'
 import { removePreloadClass } from './utils'
 
