@@ -1,4 +1,4 @@
-import { wrapElement } from '../utils/index'
+import { wrapElement } from '../utils'
 
 export function setUpOverflowTables () {
   function tableSizer () {

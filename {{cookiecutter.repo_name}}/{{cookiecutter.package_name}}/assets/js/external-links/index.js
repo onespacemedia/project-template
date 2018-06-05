@@ -1,9 +1,9 @@
-/*
- External links (defined as all links pointing to a domain that is not the
- same as the one from which the current document is being served)
- will have their 'target' attribute set to '_blank'.
-
- Social media sharing links will show in a popup.
+/**
+ * External links (defined as all links pointing to a domain that is not the
+ * same as the one from which the current document is being served)
+ * will have their 'target' attribute set to '_blank'.
+ *
+ * Social media sharing links will show in a popup.
  */
 export function bindExternalLinks () {
   const links = Array.from(document.getElementsByTagName('a'))

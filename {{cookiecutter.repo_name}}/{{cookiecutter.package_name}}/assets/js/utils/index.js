@@ -1,6 +1,3 @@
-/*
- Media breakpoints
- */
 export const mediaBreakpoints = {
   sm: 768,
   md: 900,
