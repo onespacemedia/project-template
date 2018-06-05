@@ -1,6 +1,6 @@
 import { wrapElement } from '../utils'
 
-export function overflowTables () {
+export function setUpOverflowTables () {
   function tableSizer () {
     const tables = [].slice.call(
       document.querySelectorAll('.wys-WYSIWYG table')

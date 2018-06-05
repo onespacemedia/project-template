@@ -1,4 +1,5 @@
-import { isVisible } from '../utils/index'
+import 'intersection-observer'
+import { isVisible } from '../utils'
 
 export function bindAnimations () {
   const animateCallback = (entries, animateObserver) => {
