@@ -215,7 +215,8 @@ def add_field_attributes(field, class_name, placeholder=True):
 @library.render_with('pagination/pagination.html')
 @jinja2.contextfunction
 def render_pagination(context, page_obj, offset=2, pagination_key=None):
-    '''Renders the pagination for the given page of items.'''
+    ''' Renders the pagination for the given page of items. Any items that are further than OFFSET
+    from the current page are truncated except for the first and last pages which are always visible. '''
     current_page = page_obj.number
 
     page_range = page_obj.paginator.page_range

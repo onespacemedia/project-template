@@ -1,5 +1,5 @@
 {% if page_obj.has_other_pages() %}
-  <nav class="pgn-Pagination">
+  <nav class="pgn-Pagination" aria-label="You are on page {{ page_obj.number }}">
     {% if page_obj.has_previous() %}
       <a href="{{ get_pagination_url(page_obj.previous_page_number()) }}" class="pgn-Pagination_Control pgn-Pagination_Control-prev" aria-label="Previous page">
         {% include 'chevron-right.svg' %}
@@ -8,7 +8,7 @@
 
     {# using a separate element and aria-hidden because screen readers will
     probably only care about previous/next #}
-    <div class="pgn-Pagination_Pages">
+    <div class="pgn-Pagination_Pages" aria-hidden="true">
 
       {% for page_num in page_numbers_adjusted %}
         {% if not page_num %}
