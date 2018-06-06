@@ -6,7 +6,7 @@
 
 {% block content_above %}
   {{ heroes.landing_hero({
-    'kicker': content.kicker,
+    'kicker': content.hero_kicker if content.hero_kicker else pages.current.title,
     'title': content.hero_title,
   }) }}
 {% endblock %}

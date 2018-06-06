@@ -45,7 +45,7 @@ class ContactSubmissionAdmin(VersionAdmin):
         return response
 
     def get_urls(self):
-        patterns = super(ContactSubmissionAdmin, self).get_urls()
+        patterns = super().get_urls()
         patterns = [
             url(r'^export/$', self.export_view, name='submission_export'),
         ] + patterns

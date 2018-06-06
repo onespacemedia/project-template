@@ -21,33 +21,39 @@ class Contact(ContentBase):
         max_length=100,
         blank=True,
         null=True,
-        help_text='If this is left blank it will use the page title',
+        help_text='If this is left blank it will use the page title.',
+        verbose_name='Kicker',
     )
 
     hero_title = models.CharField(
         max_length=255,
+        verbose_name='Title',
     )
 
     form_email_address = models.CharField(
         max_length=255,
-        help_text='This is the email address form submissions will be sent to.',
+        help_text='Form submissions will be sent to these addresses. Separate multiple emails with a comma or space',
+        verbose_name='Email Address',
     )
 
     form_title = models.CharField(
         max_length=150,
         blank=True,
         null=True,
+        verbose_name='Title',
     )
 
     success_page_title = models.CharField(
         max_length=150,
         blank=True,
         null=True,
+        verbose_name='Title',
     )
 
     success_page_content = HtmlField(
         blank=True,
         null=True,
+        verbose_name='Content',
     )
 
     fieldsets = [
