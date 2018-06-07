@@ -25,7 +25,7 @@ layout recomputation).
       document.head.appendChild(styleElement);
     }
 
-    var cssPath = {{ settings.GOOGLE_FONTS_KIT_URL }};
+    var cssPath = '{{ settings.GOOGLE_FONTS_KIT_URL }}';
     var cacheKey = '_gfont_cache_{{ settings.GIT_COMMIT_HASH }}';
     var now = Date.now();
     var cachedVersion = window.localStorage[cacheKey];
