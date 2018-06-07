@@ -74,6 +74,20 @@ class Contact(ContentBase):
     def __str__(self):
         return self.page.title
 
+    @property
+    def get_email_addresses(self):
+        # Strip out commas if comma separated.
+        emails = self.form_email_address.replace(',', ' ')
+
+        emails = emails.split(' ')
+        for email in emails:
+            email.strip()
+
+        # Filter out empty strings
+        emails = list(filter(lambda a: a != '', emails))
+
+        return emails
+
 
 class ContactSubmission(models.Model):
 
