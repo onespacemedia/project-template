@@ -1,5 +1,7 @@
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.db import models
 
 
@@ -73,6 +75,13 @@ class Contact(ContentBase):
 
     def __str__(self):
         return self.page.title
+
+    def clean(self):
+        for email in self.email_addresses:
+            if not validate_email(email):
+                raise ValidationError('{} is not a valid email address'.format(email))
+
+        return super().clean(self)
 
     @property
     def email_addresses(self):

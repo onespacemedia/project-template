@@ -4,8 +4,6 @@ from io import StringIO
 from cms.apps.pages.admin import page_admin
 from django.conf.urls import url
 from django.contrib import admin
-from django.core.exceptions import ValidationError
-from django.core.validators import validate_email
 from django.http import HttpResponse
 from django.utils.timezone import now
 from reversion.admin import VersionAdmin
@@ -17,11 +15,6 @@ from .models import Contact, ContactSubmission
 @admin.register(ContactSubmission)
 class ContactSubmissionAdmin(VersionAdmin):
     list_display = ['first_name', 'last_name', 'email', 'phone_number', 'job_title', 'reason_for_enquiry', 'created']
-
-    def clean(self):
-        for email in self.email_addresses:
-            if not validate_email(email):
-                raise ValidationError('{} is not a valid email address'.format(email))
 
     # Rewrite to use django_import_export?
     def export_view(self, request):
