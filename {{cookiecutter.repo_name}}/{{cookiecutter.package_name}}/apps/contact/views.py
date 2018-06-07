@@ -34,7 +34,7 @@ class ContactView(CreateView):
             subject=f'New contact form submission on {settings.SITE_NAME}',
             body=email_text_template,
             reply_to=[form.cleaned_data['email']],
-            to=self.request.pages.current.content.get_email_addresses,
+            to=self.request.pages.current.content.email_addresses,
         )
 
         email.attach_alternative(email_html_template, 'text/html')

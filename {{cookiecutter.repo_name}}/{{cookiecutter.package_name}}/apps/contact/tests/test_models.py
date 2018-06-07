@@ -36,4 +36,4 @@ class ContactTestCase(TestCase):
 
         for test in tests:
             self.contact.form_email_address = test[0]
-            self.assertEquals(self.contact.get_email_addresses, test[1])
+            self.assertEquals(self.contact.email_addresses, test[1])

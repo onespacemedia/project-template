@@ -75,7 +75,7 @@ class Contact(ContentBase):
         return self.page.title
 
     @property
-    def get_email_addresses(self):
+    def email_addresses(self):
         # Strip out commas if comma separated.
         emails = self.form_email_address.replace(',', ' ')
 

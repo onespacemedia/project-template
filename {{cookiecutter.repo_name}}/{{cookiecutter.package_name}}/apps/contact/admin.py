@@ -19,7 +19,7 @@ class ContactSubmissionAdmin(VersionAdmin):
     list_display = ['first_name', 'last_name', 'email', 'phone_number', 'job_title', 'reason_for_enquiry', 'created']
 
     def clean(self):
-        for email in self.get_email_addresses:
+        for email in self.email_addresses:
             if not validate_email(email):
                 raise ValidationError('{} is not a valid email address'.format(email))
 
