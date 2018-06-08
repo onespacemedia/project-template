@@ -58,12 +58,16 @@ class ArticleArchiveView(ArticleListMixin, ListView):
         self.featured_article = None
 
     def dispatch(self, request, *args, **kwargs):
-        self.featured_article = Article.objects.filter(featured=True)[:1].get()
+        candidates = Article.objects.filter(featured=True)
+        if candidates.exists():
+            self.featured_article = candidates[:1].get()
 
         return super().dispatch(request, *args, **kwargs)
 
     def get_queryset(self):
-        return super().get_queryset().exclude(id=self.featured_article.id)
+        if self.featured_article:
+            return super().get_queryset().exclude(id=self.featured_article.id)
+        return super().get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

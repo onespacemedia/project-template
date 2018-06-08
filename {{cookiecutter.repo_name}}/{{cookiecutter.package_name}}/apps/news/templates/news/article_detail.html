@@ -15,7 +15,9 @@
       <div class="pg-LandingHero_OverhangInner">
         <div class="pg-LandingHero_OverhangBody">
           <div class="pg-LandingHero_ImageContainer">
-            {{ render_lazy_image(article.image) }}
+            {% if article.image %}
+              {{ render_lazy_image(article.image) }}
+            {% endif %}
           </div>
         </div>
       </div>
