@@ -1,5 +1,6 @@
 from cms.apps.pages.models import Page
-from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES, SUBMITTED
+from cms.plugins.moderation.models import (APPROVED, DRAFT, STATUS_CHOICES,
+                                           SUBMITTED)
 from django.contrib.admin.sites import AdminSite
 from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory, TestCase

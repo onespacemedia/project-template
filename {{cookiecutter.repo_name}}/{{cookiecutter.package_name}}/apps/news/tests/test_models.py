@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from cms.apps.pages.models import Page
 from cms.models import publication_manager
+from cms.plugins.moderation.models import APPROVED
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.utils.timezone import now
@@ -54,7 +55,7 @@ class TestNews(TestCase):
                 news_feed=self.feed,
                 title='Foo 3',
                 slug='foo3',
-                status='approved',
+                status=APPROVED,
                 date=self.date - timedelta(seconds=61),
             )
 
