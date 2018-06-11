@@ -42,7 +42,7 @@ class TestViews(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
                 content=r'<p>Some links in this article below</p>\r\n<p><a href="/newfeedpage/" title="Valid news feedpage">/newfeedpage/</a></p>\r\n<p><a href="newfeedpage/" title="Invalid news feedpage">newfeedpage</a></p>\r\n<p></p>\r\n<p>iframe below</p>\r\n<p><iframe src="https://www.w3schools.com"></iframe></p>\r\n<p>an_image below</p>\r\n<p><img src="/r/16-2/" alt="events_02" title="events_02" /></p>',

@@ -108,7 +108,7 @@ class ArticleManager(OnlineBaseManager):
 
         queryset = super(ArticleManager, self).select_published(queryset)
         queryset = queryset.filter(
-            news_feed__page__pk__in=published_news_feed_pages,
+            page__page__pk__in=published_news_feed_pages,
             date__lte=timezone.now().replace(second=0, microsecond=0),
         )
         if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
@@ -130,11 +130,12 @@ class Article(PageBase):
 
     objects = ArticleManager()
 
-    news_feed = models.ForeignKey(
+    page = models.ForeignKey(
         'news.NewsFeed',
         on_delete=models.PROTECT,
         null=True,
         blank=False,
+        verbose_name='News feed'
     )
 
     featured = models.BooleanField(
@@ -188,7 +189,7 @@ class Article(PageBase):
     )
 
     class Meta:
-        unique_together = [['news_feed', 'date', 'slug']]
+        unique_together = [['page', 'date', 'slug']]
         ordering = ['-date']
         permissions = [
             ('can_approve_articles', 'Can approve articles'),
@@ -205,7 +206,7 @@ class Article(PageBase):
 
     def get_absolute_url(self):
         """Returns the URL of the article."""
-        return self._get_permalink_for_page(self.news_feed.page)
+        return self._get_permalink_for_page(self.page.page)
 
     def get_related_articles(self, count=3):
         candidate_querysets = [

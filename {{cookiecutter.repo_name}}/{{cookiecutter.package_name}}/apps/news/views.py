@@ -20,7 +20,7 @@ class ArticleMixin(object):
     def get_context_data(self, **kwargs):
         context = super(ArticleMixin, self).get_context_data(**kwargs)
         category_list = Category.objects.filter(
-            article__news_feed__page=self.request.pages.current
+            article__page__page=self.request.pages.current
         ).distinct()
         context['category_list'] = category_list
 
@@ -44,7 +44,7 @@ class ArticleListMixin(ArticleMixin):
             'image',
             'card_image',
         ).filter(
-            news_feed__page=self.request.pages.current,
+            page__page=self.request.pages.current,
         ).order_by(
             '-date'
         )

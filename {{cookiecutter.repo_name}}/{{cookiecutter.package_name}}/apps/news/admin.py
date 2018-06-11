@@ -29,7 +29,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'news_feed', 'featured', 'date', 'status'],
+            'fields': ['title', 'slug', 'page', 'featured', 'date', 'status'],
         }),
         ('Content', {
             'fields': ['image', 'card_image', 'content', 'summary', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
@@ -58,7 +58,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['news_feed'].initial = get_default_news_feed()
+        form.base_fields['page'].initial = get_default_news_feed()
         return form
 
     def get_queryset(self, request):
