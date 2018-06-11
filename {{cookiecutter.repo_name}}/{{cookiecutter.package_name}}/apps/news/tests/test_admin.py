@@ -1,4 +1,5 @@
 from cms.apps.pages.models import Page
+from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES, SUBMITTED
 from django.contrib.admin.sites import AdminSite
 from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory, TestCase
@@ -68,9 +69,9 @@ class TestArticleAdminBase(TestCase):
     def test_articleadminbase_formfield_for_choice_field(self):
         formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
-            ('approved', 'Approved')
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
+            (APPROVED, 'Approved')
         ])
 
         self.request.user = MockSuperUser()
@@ -79,9 +80,9 @@ class TestArticleAdminBase(TestCase):
             formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
-            ('approved', 'Approved')
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
+            (APPROVED, 'Approved')
         ])
 
         self.request.user.has_perm = lambda x: False
@@ -89,8 +90,8 @@ class TestArticleAdminBase(TestCase):
             formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
         ])
 
     def test_articleadminbase_get_form(self):

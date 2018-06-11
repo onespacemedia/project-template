@@ -3,6 +3,7 @@ from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import HtmlField, OnlineBaseManager, PageBase
+from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES
 from cms.templatetags.html import truncate_paragraphs
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -113,16 +114,9 @@ class ArticleManager(OnlineBaseManager):
         )
         if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
             queryset = queryset.filter(
-                status='approved'
+                status=APPROVED
             )
         return queryset
-
-
-STATUS_CHOICES = [
-    ('draft', 'Draft'),
-    ('submitted', 'Submitted for approval'),
-    ('approved', 'Approved')
-]
 
 
 class Article(PageBase):
@@ -184,7 +178,7 @@ class Article(PageBase):
     status = models.CharField(
         max_length=100,
         choices=STATUS_CHOICES,
-        default='draft',
+        default=DRAFT,
     )
 
     class Meta:
