@@ -175,7 +175,7 @@ class Article(PageBase):
         'news.Category',
         blank=True,
     )
-    {% if cookiecutter.people == 'yes' %}author = models.ForeignKey(
+{% if cookiecutter.people == 'yes' %}    author = models.ForeignKey(
         'people.Person',
         on_delete=models.SET_NULL,
         blank=True,
