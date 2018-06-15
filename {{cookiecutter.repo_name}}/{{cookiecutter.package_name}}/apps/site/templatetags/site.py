@@ -13,8 +13,8 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 
-from ..models import Footer, Header
 from ....utils.utils import url_from_path
+from ..models import Footer, Header
 
 
 @library.global_function
