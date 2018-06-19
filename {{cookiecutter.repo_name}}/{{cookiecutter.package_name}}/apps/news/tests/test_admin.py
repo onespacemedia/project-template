@@ -56,7 +56,7 @@ class TestArticleAdminBase(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
                 date=self.date,
@@ -96,8 +96,8 @@ class TestArticleAdminBase(TestCase):
     def test_articleadminbase_get_form(self):
         form = self.article_admin.get_form(self.request, obj=None)
         default_feed = get_default_news_feed()
-        self.assertTrue('news_feed' in form.base_fields)
-        self.assertEqual(default_feed, form.base_fields['news_feed'].initial)
+        self.assertTrue('page' in form.base_fields)
+        self.assertEqual(default_feed, form.base_fields['page'].initial)
 
     def test_render_categories(self):
         categories = self.article_admin.render_categories(self.article)
