@@ -16,7 +16,7 @@ LOGGING = {
     },
     'handlers': {
         'rollbar': {
-            'access_token': '{{ cookiecutter.rollbar_access_token }}',
+            'access_token': ROLLBAR_SERVER_TOKEN,
             'environment': 'production',
             'class': 'rollbar.logger.RollbarHandler'
         },

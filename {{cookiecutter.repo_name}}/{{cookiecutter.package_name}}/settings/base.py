@@ -468,6 +468,11 @@ TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 # Google fonts
 GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
+# Rollbar error tracking. For server-side errors:
+ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
+ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
+
+
 SILENCED_SYSTEM_CHECKS = []
 
 THUMBNAIL_QUALITY = 60
