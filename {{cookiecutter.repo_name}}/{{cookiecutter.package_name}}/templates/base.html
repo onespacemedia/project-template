@@ -58,6 +58,10 @@
       {% include 'base/_typekit.html' %}
     {% endif %}
 
+    {% if settings.GOOGLE_FONTS_KIT_URL %}
+      {% include 'base/_google-fonts.html' %}
+    {% endif %}
+
     {% compress css %}
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
     {% endcompress %}

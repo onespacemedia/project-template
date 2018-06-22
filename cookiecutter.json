@@ -15,6 +15,7 @@
     "geoip": "no",
     "uses_typekit": "yes",
     "typekit_kit_id": "",
+    "google_fonts_kit_url": "",
     "google_analytics": "",
     "google_analytics_key": "",
     "adobe_creative_sdk_secret": "",

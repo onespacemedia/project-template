@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('question', models.CharField(max_length=256)),
                 ('answer', cms.models.fields.HtmlField()),
                 ('order', models.PositiveIntegerField(default=0)),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='faqs.Category')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='faqs.Category')),
                 ('og_image', cms.apps.media.models.ImageRefField(blank=True, help_text='The recommended image size is 1200x627 (1.91:1 ratio); this gives you a big stand out thumbnail. Using an image smaller than 400x209 will give you a small thumbnail and will splits posts into 2 columns. If you have text on the image make sure it is centered.', null=True, on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File', verbose_name='image')),
             ],
             options={
@@ -75,7 +75,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='faq',
             name='page',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='faqs.Faqs'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='faqs.Faqs'),
         ),
         migrations.AddField(
             model_name='faq',

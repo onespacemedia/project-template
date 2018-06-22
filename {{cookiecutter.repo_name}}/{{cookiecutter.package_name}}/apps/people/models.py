@@ -42,6 +42,7 @@ class Person(SearchMetaBase):
 
     page = models.ForeignKey(
         People,
+        on_delete=models.PROTECT,
     )
 
     slug = models.SlugField(
@@ -81,6 +82,7 @@ class Person(SearchMetaBase):
 
     team = models.ForeignKey(
         'Team',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )

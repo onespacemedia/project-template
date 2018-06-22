@@ -33,7 +33,7 @@ class TestNews(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
                 # The seconds subtraction is because of time-rounding
@@ -44,14 +44,14 @@ class TestNews(TestCase):
             self.article.categories.add(self.category)
 
             self.article_2 = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo 2',
                 slug='foo2',
                 date=self.date + timedelta(days=10)
             )
 
             self.article_3 = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo 3',
                 slug='foo3',
                 status='approved',

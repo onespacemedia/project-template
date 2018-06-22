@@ -465,6 +465,9 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 TYPEKIT_USED = {% if cookiecutter.uses_typekit == 'yes' %}True{% else %}False{% endif %}
 TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 
+# Google fonts
+GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
+
 SILENCED_SYSTEM_CHECKS = []
 
 THUMBNAIL_QUALITY = 60

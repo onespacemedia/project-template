@@ -2,7 +2,9 @@
   <a class="nws-ArticleCard_Anchor" href="{{ article.get_absolute_url() }}">
     <div class="nws-ArticleCard_ImageContainer">
       {% set card_image = article.card_image or article.image %}
-      {{ render_lazy_image(card_image, width=393, height=213) }}
+      {% if card_image %}
+        {{ render_lazy_image(card_image, width=393, height=213) }}
+      {% endif %}
     </div>
 
     <div class="nws-ArticleCard_Body">

@@ -31,7 +31,7 @@ SECTION_TYPES = (
                 'required': ['image']
             }),
             ('split', {
-                'fields': ['kicker', 'title', 'text', 'image', 'image_side' 'link_text', 'link_page', 'link_url'],
+                'fields': ['kicker', 'title', 'text', 'image', 'image_side', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'text'],
                 'required': ['title', 'image'],
             }),
@@ -181,6 +181,7 @@ class SectionBase(models.Model):
 
     link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
@@ -299,6 +300,7 @@ class ContentSection(SectionBase):
 
     page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.CASCADE,
     )
 
 

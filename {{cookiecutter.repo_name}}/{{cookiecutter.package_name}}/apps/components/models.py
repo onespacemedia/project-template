@@ -22,6 +22,7 @@ class CallToAction(models.Model):
 
     link_page = models.ForeignKey(
         Page,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
