@@ -92,13 +92,11 @@
   height: 7px;
   margin-left: 10px;
 
-  /* stylelint-disable selector-max-type */
   svg {
     display: block;
     width: inherit;
     height: inherit;
   }
-  /* stylelint-enable */
 }
 
 .nav-Header_LinkIcon-dropdown {
