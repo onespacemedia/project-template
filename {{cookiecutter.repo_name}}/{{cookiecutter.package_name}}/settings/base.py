@@ -86,9 +86,7 @@ EMAIL_SUBJECT_PREFIX = '[%s] ' % SITE_NAME
 
 # Error reporting settings.  Use these to set up automatic error notifications.
 
-ADMINS = (
-    ('Onespacemedia Errors', 'errors@onespacemedia.com'),
-)
+ADMINS = []
 
 MANAGERS = ()
 
