@@ -209,3 +209,62 @@ def add_field_attributes(field, class_name, placeholder=True):
         'class': ' '.join((field.css_classes(), class_name)),
         'placeholder': field.label if placeholder else '',
     })
+
+
+@library.global_function
+@library.render_with('pagination/pagination.html')
+@jinja2.contextfunction
+def render_pagination(context, page_obj, offset=2, pagination_key=None):
+    ''' Renders the pagination for the given page of items. Any items that are further than OFFSET
+    from the current page are truncated except for the first and last pages which are always visible. '''
+    current_page = page_obj.number
+
+    page_range = page_obj.paginator.page_range
+
+    offset_indexes = [
+        x for x in range(current_page - offset, current_page + (offset + 1))
+        if x >= 1
+    ]
+
+    # Always show the first page.
+    if not 1 in offset_indexes:
+        offset_indexes = [1] + offset_indexes
+
+    # Always show the last page.
+    if not len(page_range) in offset_indexes:
+        offset_indexes = offset_indexes + [len(page_range)]
+
+    page_numbers_adjusted = []
+
+    # Ensure we don't get more than one ellipsed entry in a row.
+    add_ellipses = False
+
+    if len(page_range) > offset:
+        for page in page_range:
+            if (
+                    page in offset_indexes
+                    # Don't be like "[1] [..] [3] [4] [5]"
+                    or (page == offset and current_page - page - offset == 1)
+                    # Don't be like "[26] [27] [..] [29]"
+                    or (
+                        page == (len(page_range) - offset + 1)
+                        and current_page + offset + 1 == len(page_range) - 1
+                    )
+            ):
+                page_numbers_adjusted.append(page)
+                add_ellipses = True
+            elif add_ellipses:
+                page_numbers_adjusted.append(None)
+                add_ellipses = False
+    else:
+        page_numbers_adjusted = page_range
+
+    return {
+        'request': context['request'],
+        'offset_indexes': offset_indexes,
+        'offset': offset,
+        'page_obj': page_obj,
+        'page_numbers_adjusted': page_numbers_adjusted,
+        'paginator': page_obj.paginator,
+        'pagination_key': pagination_key or getattr(page_obj, '_pagination_key', 'page')
+    }

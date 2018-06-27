@@ -1,0 +1,36 @@
+{% if page_obj.has_other_pages() %}
+  <nav class="pgn-Pagination" aria-label="You are on page {{ page_obj.number }}">
+    {% if page_obj.has_previous() %}
+      <a href="{{ get_pagination_url(page_obj.previous_page_number()) }}" class="pgn-Pagination_Control pgn-Pagination_Control-prev" aria-label="Previous page">
+        {% include 'chevron-right.svg' %}
+      </a>
+    {% endif %}
+
+    {# using a separate element and aria-hidden because screen readers will
+    probably only care about previous/next #}
+    <div class="pgn-Pagination_Pages" aria-hidden="true">
+
+      {% for page_num in page_numbers_adjusted %}
+        {% if not page_num %}
+          <span class="pgn-Pagination_Page pgn-Pagination_Page-fake">
+            ...
+          </span>
+        {% elif page_num == page_obj.number %}
+          <span class="pgn-Pagination_Page pgn-Pagination_Page-current">
+            {{ page_num }}
+          </span>
+        {% else %}
+          <a class="pgn-Pagination_Page" href="{{ get_pagination_url(page_num) }}">
+            {{ page_num }}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if page_obj.has_next() %}
+      <a href="{{ get_pagination_url(page_obj.next_page_number()) }}" class="pgn-Pagination_Control pgn-Pagination_Control-next" aria-label="Next page">
+        {% include 'chevron-right.svg' %}
+      </a>
+    {% endif %}
+  </nav>
+{% endif %}
