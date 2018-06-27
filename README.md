@@ -1,34 +1,23 @@
 # project-template
 
-This is the project template that the [Onespacemedia](http://www.onespacemedia.com) team use to start their projects. It uses the excellent [Cookiecutter](https://github.com/audreyr/cookiecutter) project as a foundation and makes use of a lot of it's features in the generation process.
+This is the project template that the [Onespacemedia](https://www.onespacemedia.com) team use to start their projects. It uses the excellent [Cookiecutter](https://github.com/audreyr/cookiecutter) project as a foundation and uses a lot of its features in the generation process.
 
 ## Getting started
 
 To start a project using this template, follow these steps:
 
 1. `cd` to the directory in which your projects typically live (for us, this is `~/Workspace`).
-2. Ensure you have `cookiecutter` installed globally on your system - ```pip install cookiecutter```
-3. Run `cookiecutter gh:onespacemedia/project-template`
-4. Answer the questions.
-5. That's it!
+2. Ensure you have `cookiecutter` installed globally on your system - `pip install cookiecutter` (on Linux `sudo apt-get install cookiecutter` works too)
+3. Install [nvm](https://github.com/creationix/nvm)
+4. Run `cookiecutter gh:onespacemedia/project-template`
+5. Answer the questions.
+6. That's it!
 
-You will need to add a Git remote and probably set up a few other things. Work is ongoing to improve the inital process.
+You will need to add a Git remote and probably set up a few other things. Work is ongoing to improve the initial process.
 
+## Common issues
 
-## Getting start for Linux (Tested on Ubuntu 18.04)
-
-1. `cd` to the directory in which your projects typically live (for us, this is `~/Workspace`).
-2. Ensure you have `cookiecutter` installed globally on your system - ```sudo apt install cookiecutter```
-3. Ensure nvm line is in your bash profile (~/.profile or ~/.bash_profile depending on distro)
-
-```
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-```
-
-#### Common issues
-
-##### Git flow missing
+### Git flow missing
 
 ```
 Initialised empty Git repository in /home/username/Workspace/font-g/.git/
@@ -42,19 +31,15 @@ ERROR: Stopping generation because post_gen_project hook script didn't exit succ
 Hook script failed (exit status: 1)
 ```
 
-Install gitflow `sudo apt install git-flow`.
+Install git-flow (`brew install git-flow` on Mac, `sudo apt-get install git-flow` on Linux).
 
-##### Git config missing details
+### nvm can't be found
 
 ```
-fatal: unable to auto-detect e-mail address (got 'jin@X230.(none)')
-fatal: Not a valid object name: 'master'.
-error: pathspec 'develop' did not match any file(s) known to git.
-Fatal: Could not check out branch 'develop'.
+/tmp/tmpgyJsw1.sh: line 153: nvm: command not found
 Removing project folder.
 ERROR: Stopping generation because post_gen_project hook script didn't exit successfully
-Hook script failed (exit status: 1)
+Hook script failed (exit status: 127)
 ```
 
-Set config for git. `git config --global user.email "you@example.com"`
-and `git config --global user.email "you@example.com"`
+Ubuntu uses ~/.profile instead of ~/.bash_profile, but `post_gen_project.sh` assumes the latter. Create a symlink with `ln -s ~/.profile ~/.bash_profile`.
