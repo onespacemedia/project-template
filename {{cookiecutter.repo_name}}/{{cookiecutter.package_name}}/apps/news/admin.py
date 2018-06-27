@@ -1,6 +1,7 @@
 """Admin settings for the CMS news app."""
 
 from cms.admin import OnlineBaseAdmin, PageBaseAdmin
+from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
 from django.contrib import admin
 from reversion.admin import VersionAdmin
@@ -8,7 +9,7 @@ from reversion.models import Version
 from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin
-from .models import STATUS_CHOICES, Article, Category, get_default_news_feed
+from .models import Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
@@ -72,7 +73,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
         if request:
             choices_list = STATUS_CHOICES
             if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False) and not request.user.has_perm('news.can_approve_articles'):
-                choices_list = [x for x in STATUS_CHOICES if x[0] != 'approved']
+                choices_list = [x for x in STATUS_CHOICES if x[0] != APPROVED]
 
             if db_field.name == 'status':
                 kwargs['choices'] = choices_list
