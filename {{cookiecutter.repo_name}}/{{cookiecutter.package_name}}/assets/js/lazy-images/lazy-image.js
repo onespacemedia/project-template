@@ -12,7 +12,7 @@ export default class LazyImage {
         this.image.classList.add(this.loadedClass)
       })
       this.image.addEventListener('transitionend', evt => {
-        if (evt.propertyName === 'opacity') {
+        if (evt.propertyName === 'opacity' && this.smallImage) {
           this.smallImage.parentNode.removeChild(this.smallImage)
         }
       })
