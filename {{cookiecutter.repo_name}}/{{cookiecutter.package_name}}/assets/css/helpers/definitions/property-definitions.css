@@ -68,7 +68,8 @@
   |--------------------------------------------------------------------------
   |
   */
-  font: 16px/1.5 var(--Font_Family-body);
+  font: 16px / 1.5;
+  font-family: var(--Font_Family);
 
   cursor: auto;
 }
