@@ -13,7 +13,6 @@
     "news": "yes",
     "sections": "yes",
     "geoip": "no",
-    "uses_typekit": "yes",
     "typekit_kit_id": "",
     "google_fonts_kit_url": "",
     "google_analytics": "",
