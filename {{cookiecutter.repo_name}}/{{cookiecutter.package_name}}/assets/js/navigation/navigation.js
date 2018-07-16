@@ -40,8 +40,7 @@ export default class Navigation {
       `.nav-Header_Items,
       .nav-Header_Backdrop,
       .nav-Header_Dropdown,
-      .nav-Mobile,
-      .nav-Mobile_Dropdown`
+      .nav-Mobile`
     )
   }
 

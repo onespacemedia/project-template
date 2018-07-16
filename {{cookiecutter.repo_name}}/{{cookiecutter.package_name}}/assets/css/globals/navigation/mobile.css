@@ -80,8 +80,6 @@
 
 .nav-Mobile_Item,
 .nav-Mobile_DropdownItem {
-  position: relative;
-
   flex-shrink: 0;
 
   width: 100%;
@@ -164,7 +162,7 @@
 */
 .nav-Mobile_Dropdown,
 .nav-Mobile_DropdownChild {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 100%;
   z-index: 1;
