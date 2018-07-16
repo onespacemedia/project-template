@@ -460,7 +460,6 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 )
 
 # Typekit
-TYPEKIT_USED = {% if cookiecutter.uses_typekit == 'yes' %}True{% else %}False{% endif %}
 TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 
 # Google fonts
