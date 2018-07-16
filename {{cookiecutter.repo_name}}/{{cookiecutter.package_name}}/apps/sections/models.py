@@ -241,6 +241,10 @@ class SectionBase(models.Model):
                 'link_page': 'Please provide either a "Link Page" or a "Link URL"',
             })
 
+    @cached_property
+    def cache_key(self):
+        return f'{self._meta.app_label}.{self._meta.model_name}.{self.pk}'
+
     @property
     def template(self):
         folder_name = self.type.split('-')[0]
