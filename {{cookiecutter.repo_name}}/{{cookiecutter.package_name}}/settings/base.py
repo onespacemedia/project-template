@@ -38,7 +38,6 @@ DATABASES = {
 
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
-{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
@@ -49,12 +48,54 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Ignores certain warnings on startup and/or `manage.py check`
 SILENCED_SYSTEM_CHECKS = []
 
-TIME_ZONE = 'Europe/London'
-LANGUAGE_CODE = 'en-gb'
-USE_I18N = False
-USE_L10N = True
-USE_TZ = True
+INSTALLED_APPS = [
+    'django.contrib.sessions',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
 
+    'flexible_images',
+    'sorl.thumbnail',
+    'compressor',
+
+    'django_jinja',
+    'django_lazy_image',
+
+    'cms',
+
+    'reversion',
+    'historylinks',
+    'watson',
+
+    'cms.apps.pages',
+    'cms.apps.links',
+    'cms.apps.media',
+    # Needs to be before `apps.site` so that unregistering social auth models
+    # in site/admin.py works.
+    'social_django',
+
+    {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
+    '{{cookiecutter.package_name}}.apps.components',
+    {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
+    {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
+    {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
+    {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
+    {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
+    {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
+    '{{cookiecutter.package_name}}.apps.settings',
+    '{{cookiecutter.package_name}}.apps.site',
+
+    'suit',
+    'django.contrib.admin',
+
+    'server_management',
+    'django_extensions',
+    'cachalot',
+    'webpack_loader',
+]
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
@@ -130,62 +171,18 @@ CACHES = {
 
 
 ###
-#  ___             _           _                         _   __  _
-# | _ \ _ _  ___  (_) ___  __ | |_    ___ _ __  ___  __ (_) / _|(_) __
-# |  _/| '_|/ _ \ | |/ -_)/ _||  _|  (_-<| '_ \/ -_)/ _|| ||  _|| |/ _|
-# |_|  |_|  \___/_/ |\___|\__| \__|  /__/| .__/\___|\__||_||_|  |_|\__|
-#               |__/                     |_|
+#    _       _         _
+#   /_\   __| | _ __  (_) _ __
+#  / _ \ / _` || '  \ | || '  \
+# /_/ \_\\__,_||_|_|_||_||_||_|
+#
 ###
 NEWS_APPROVAL_SYSTEM = False
 
-INSTALLED_APPS = [
-    'django.contrib.sessions',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
+ADMINS = []
+MANAGERS = ()
+SEND_BROKEN_LINK_EMAILS = False
 
-    'flexible_images',
-    'sorl.thumbnail',
-    'compressor',
-
-    'django_jinja',
-    'django_lazy_image',
-
-    'cms',
-
-    'reversion',
-    'historylinks',
-    'watson',
-
-    'cms.apps.pages',
-    'cms.apps.links',
-    'cms.apps.media',
-    # Needs to be before `apps.site` so that unregistering social auth models
-    # in site/admin.py works.
-    'social_django',
-
-    {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
-    '{{cookiecutter.package_name}}.apps.components',
-    {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
-    {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
-    {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
-    {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
-    {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
-    {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
-    '{{cookiecutter.package_name}}.apps.settings',
-    '{{cookiecutter.package_name}}.apps.site',
-
-    'suit',
-    'django.contrib.admin',
-
-    'server_management',
-    'django_extensions',
-    'cachalot',
-    'webpack_loader',
-]
 
 ###
 #  ___               _  _                  _
@@ -207,9 +204,20 @@ SERVER_EMAIL = '{name} <notifications@{domain}>'.format(
 )
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
-ADMINS = []
-MANAGERS = ()
-SEND_BROKEN_LINK_EMAILS = False
+
+###
+#  _                    _  _            _    _
+# | |    ___  __  __ _ | |(_) ___ __ _ | |_ (_) ___  _ __
+# | |__ / _ \/ _|/ _` || || |(_-</ _` ||  _|| |/ _ \| '  \
+# |____|\___/\__|\__,_||_||_|/__/\__,_| \__||_|\___/|_||_|
+#
+###
+{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
+TIME_ZONE = 'Europe/London'
+LANGUAGE_CODE = 'en-gb'
+USE_I18N = False
+USE_L10N = True
+USE_TZ = True
 
 
 ###
