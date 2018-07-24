@@ -49,7 +49,12 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Ignores certain warnings on startup and/or `manage.py check`
 SILENCED_SYSTEM_CHECKS = []
 
-# Absolute path to the directory where templates are stored.
+TIME_ZONE = 'Europe/London'
+LANGUAGE_CODE = 'en-gb'
+USE_I18N = False
+USE_L10N = True
+USE_TZ = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
@@ -132,12 +137,6 @@ CACHES = {
 #               |__/                     |_|
 ###
 NEWS_APPROVAL_SYSTEM = False
-
-TIME_ZONE = 'Europe/London'
-LANGUAGE_CODE = 'en-gb'
-USE_I18N = False
-USE_L10N = True
-USE_TZ = True
 
 INSTALLED_APPS = [
     'django.contrib.sessions',
@@ -268,11 +267,6 @@ SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
 ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
 ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
-
-# You can get your Client ID & Secret here: https://creativesdk.adobe.com/myapps.html
-ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id %}True{% else %}False{% endif %}
-ADOBE_CREATIVE_SDK_CLIENT_SECRET = '{{cookiecutter.adobe_creative_sdk_secret}}'
-ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
 
 WHITELISTED_DOMAINS = ['onespacemedia.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
