@@ -9,7 +9,7 @@
 6. Enable "Google+ API"
 7. APIs & auth -> Credentials
 8. Create new Client ID -> Web application
-9. Copy Client ID to KEY below.
+9. Copy Client ID to `SOCIAL_AUTH_GOOGLE_PLUS_KEY` in `base.py` below.
 10. Copy Client Secret to `SOCIAL_AUTH_GOOGLE_PLUS_SECRET` in `base.py`.
 11. Edit settings
 12. Set authorized domain
