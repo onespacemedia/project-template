@@ -101,7 +101,7 @@
 
 .nav-Mobile_Item,
 .nav-Mobile_DropdownItem {
- position: relative;
+  position: relative;
 
   flex-shrink: 0;
 
