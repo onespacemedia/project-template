@@ -12,12 +12,15 @@ if platform.python_implementation() == 'PyPy':
     compat.register()
 
 
-# The name of this site.  Used for branding in the online admin area.
-
+###
+#  ___
+# | _ ) __ _  ___ ___
+# | _ \/ _` |(_-</ -_)
+# |___/\__,_|/__/\___|
+#
+###
 SITE_NAME = '{{cookiecutter.project_name}}'
-
 SITE_DOMAIN = '{{cookiecutter.domain_name}}'
-
 PREPEND_WWW = True
 
 ALLOWED_HOSTS = [
@@ -25,14 +28,6 @@ ALLOWED_HOSTS = [
     'www.{}'.format(SITE_DOMAIN),
     'www.{{cookiecutter.staging_subdomain}}.onespace.media',
 ]
-
-SUIT_CONFIG = {
-    'ADMIN_NAME': SITE_NAME,
-    'MENU_EXCLUDE': ['default'],
-}
-
-# Database settings.
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -41,81 +36,19 @@ DATABASES = {
     }
 }
 
-
-# Absolute path to the directory where all uploaded media files are stored.
-
-MEDIA_ROOT = '/var/www/{{cookiecutter.package_name}}_media'
-
-MEDIA_URL = '/media/'
-
-FILE_UPLOAD_PERMISSIONS = 0o644
-
-
-# Absolute path to the directory where static files will be collected.
-
-STATIC_ROOT = '/var/www/{{cookiecutter.package_name}}_static'
-
-STATIC_URL = '/static/'
-
-NODE_MODULES_ROOT = '/var/www/{{cookiecutter.package_name}}_static'
-
-NODE_MODULES_URL = '/static/'
-
-
-# Email settings.
-
-EMAIL_HOST = 'smtp.mandrillapp.com'
-
-EMAIL_HOST_USER = 'developers@onespacemedia.com'
-
-EMAIL_HOST_PASSWORD = ''
-
-EMAIL_PORT = 587
-
-EMAIL_USE_TLS = True
-
-SERVER_EMAIL = '{name} <notifications@{domain}>'.format(
-    name=SITE_NAME,
-    domain=SITE_DOMAIN,
-)
-
-DEFAULT_FROM_EMAIL = SERVER_EMAIL
-
-EMAIL_SUBJECT_PREFIX = '[%s] ' % SITE_NAME
-
-
-# Error reporting settings.  Use these to set up automatic error notifications.
-
-ADMINS = []
-
-MANAGERS = ()
-
-SEND_BROKEN_LINK_EMAILS = False
-
-
-# Locale settings.
-
-TIME_ZONE = 'Europe/London'
-
-LANGUAGE_CODE = 'en-gb'
-
-USE_I18N = False
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Auto-discovery of project location.
-
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
-# A list of additional installed applications.
+# A secret key used for cryptographic algorithms.
+SECRET_KEY = ' '
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+# Ignores certain warnings on startup and/or `manage.py check`
+SILENCED_SYSTEM_CHECKS = []
 
 INSTALLED_APPS = [
-
     'django.contrib.sessions',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -163,74 +96,6 @@ INSTALLED_APPS = [
     'cachalot',
     'webpack_loader',
 ]
-
-# Additional static file locations.
-
-STATICFILES_DIRS = (
-    os.path.join(SITE_ROOT, 'assets'),  # For webpack_loader
-    os.path.join(SITE_ROOT, 'static'),
-)
-
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'build/',
-        'STATS_FILE': os.path.join(BASE_ROOT, 'webpack-stats.json')
-    }
-}
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-]
-
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-
-THUMBNAIL_PRESERVE_FORMAT = True
-
-# Dispatch settings.
-
-MIDDLEWARE_CLASSES = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
-    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects.middleware.RedirectFallbackMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'watson.middleware.SearchContextMiddleware',
-    'historylinks.middleware.HistoryLinkFallbackMiddleware',
-    'cms.middleware.PublicationMiddleware',
-    'cms.apps.pages.middleware.PageMiddleware',
-]
-
-PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-)
-
-
-ROOT_URLCONF = '{{cookiecutter.package_name}}.urls'
-
-WSGI_APPLICATION = '{{cookiecutter.package_name}}.wsgi.application'
-
-PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
-    '^admin/.*',
-)
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-
-MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-
-SITE_ID = 1
-
-# Absolute path to the directory where templates are stored.
-
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
@@ -295,12 +160,8 @@ TEMPLATES = [
         }
     }
 ]
-
-
 # Namespace for cache keys, if using a process-shared cache.
-
 CACHE_MIDDLEWARE_KEY_PREFIX = '{{cookiecutter.package_name}}'
-
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -309,10 +170,127 @@ CACHES = {
 }
 
 
-# A secret key used for cryptographic algorithms.
+###
+#    _       _         _
+#   /_\   __| | _ __  (_) _ __
+#  / _ \ / _` || '  \ | || '  \
+# /_/ \_\\__,_||_|_|_||_||_||_|
+#
+###
+NEWS_APPROVAL_SYSTEM = False
 
-SECRET_KEY = ' '
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+ADMINS = []
+MANAGERS = ()
+SEND_BROKEN_LINK_EMAILS = False
+
+
+###
+#  ___               _  _                  _
+# | __| _ __   __ _ (_)| |  __ _  _ _   __| |  ___  _ _  _ _  ___  _ _  ___
+# | _| | '  \ / _` || || | / _` || ' \ / _` | / -_)| '_|| '_|/ _ \| '_|(_-<
+# |___||_|_|_|\__,_||_||_| \__,_||_||_|\__,_| \___||_|  |_|  \___/|_|  /__/
+#
+###
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_HOST_USER = 'developers@onespacemedia.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_SUBJECT_PREFIX = '[%s] ' % SITE_NAME
+
+SERVER_EMAIL = '{name} <notifications@{domain}>'.format(
+    name=SITE_NAME,
+    domain=SITE_DOMAIN,
+)
+DEFAULT_FROM_EMAIL = SERVER_EMAIL
+
+
+###
+#  _                    _  _            _    _
+# | |    ___  __  __ _ | |(_) ___ __ _ | |_ (_) ___  _ __
+# | |__ / _ \/ _|/ _` || || |(_-</ _` ||  _|| |/ _ \| '  \
+# |____|\___/\__|\__,_||_||_|/__/\__,_| \__||_|\___/|_||_|
+#
+###
+{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
+TIME_ZONE = 'Europe/London'
+LANGUAGE_CODE = 'en-gb'
+USE_I18N = False
+USE_L10N = True
+USE_TZ = True
+
+
+###
+#  ___   _                  _        _
+# |   \ (_) ___ _ __  __ _ | |_  __ | |__
+# | |) || |(_-<| '_ \/ _` ||  _|/ _|| '  \
+# |___/ |_|/__/| .__/\__,_| \__|\__||_||_|
+#              |_|
+###
+MIDDLEWARE_CLASSES = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
+    {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects.middleware.RedirectFallbackMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'watson.middleware.SearchContextMiddleware',
+    'historylinks.middleware.HistoryLinkFallbackMiddleware',
+    'cms.middleware.PublicationMiddleware',
+    'cms.apps.pages.middleware.PageMiddleware',
+]
+PASSWORD_HASHERS = (
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+)
+ROOT_URLCONF = '{{cookiecutter.package_name}}.urls'
+WSGI_APPLICATION = '{{cookiecutter.package_name}}.wsgi.application'
+PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
+    '^admin/.*',
+)
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+SITE_ID = 1
+
+
+###
+#  _____  _     _          _                     _
+# |_   _|| |_  (_) _ _  __| |   _ __  __ _  _ _ | |_  _  _
+#   | |  | ' \ | || '_|/ _` |  | '_ \/ _` || '_||  _|| || |
+#   |_|  |_||_||_||_|  \__,_|  | .__/\__,_||_|   \__| \_, |
+#                              |_|                    |__/
+###
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GooglePlusAuth',
+    'django.contrib.auth.backends.ModelBackend'
+)
+SUIT_CONFIG = {
+    'ADMIN_NAME': SITE_NAME,
+    'MENU_EXCLUDE': ['default'],
+}
+SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
+SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
+GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
+ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
+ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
+
+WHITELISTED_DOMAINS = ['onespacemedia.com']
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
+SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
+    'cms.pipeline.make_staff',
+)
+
+TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
+
+TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
+GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
+
+ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
+ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
 
 WYSIWYG_OPTIONS = {
     # Overall height of the WYSIWYG
@@ -407,77 +385,63 @@ WYSIWYG_OPTIONS = {
     'content_css': '/static/build/css/wysiwyg.css'
 }
 
+
+###
+#  _   _        _                _          _     __      _          _    _
+# | | | | _ __ | | ___  __ _  __| | ___  __| |   / /  ___| |_  __ _ | |_ (_) __
+# | |_| || '_ \| |/ _ \/ _` |/ _` |/ -_)/ _` |  / /  (_-<|  _|/ _` ||  _|| |/ _|
+#  \___/ | .__/|_|\___/\__,_|\__,_|\___|\__,_| /_/   /__/ \__|\__,_| \__||_|\__|
+#        |_|
+###
+MEDIA_ROOT = '/var/www/{{cookiecutter.package_name}}_media'
+MEDIA_URL = '/media/'
+STATIC_ROOT = '/var/www/{{cookiecutter.package_name}}_static'
+STATIC_URL = '/static/'
+
+FILE_UPLOAD_PERMISSIONS = 0o644
+NODE_MODULES_ROOT = '/var/www/{{cookiecutter.package_name}}_static'
+NODE_MODULES_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(SITE_ROOT, 'assets'),  # For webpack_loader
+    os.path.join(SITE_ROOT, 'static'),
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'build/',
+        'STATS_FILE': os.path.join(BASE_ROOT, 'webpack-stats.json')
+    }
+}
+
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+]
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+
+THUMBNAIL_PRESERVE_FORMAT = True
+THUMBNAIL_QUALITY = 60
+
+
+###
+#  _  _       _                     _        _     _
+# | \| | ___ | |_  __ __ __ _  _ _ (_) __ _ | |__ | | ___  ___
+# | .` |/ _ \|  _| \ V // _` || '_|| |/ _` || '_ \| |/ -_)(_-<
+# |_|\_|\___/ \__|  \_/ \__,_||_|  |_|\__,_||_.__/|_|\___|/__/
+#
+###
+
 # Current commit hash, used for cache-busting CSS.
 try:
     GIT_COMMIT_HASH = os.popen('git rev-parse --short HEAD').read().strip()
 # Catch everything so we don't stop the application starting if there's a problem.
 except:  # pylint: disable=bare-except
     GIT_COMMIT_HASH = ''
-
-NEWS_APPROVAL_SYSTEM = False
-
-GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
-ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
-ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
-
-# You can get your Client ID & Secret here: https://creativesdk.adobe.com/myapps.html
-ADOBE_CREATIVE_SDK_ENABLED = {% if cookiecutter.adobe_creative_sdk_secret and cookiecutter.adobe_creative_sdk_id %}True{% else %}False{% endif %}
-ADOBE_CREATIVE_SDK_CLIENT_SECRET = '{{cookiecutter.adobe_creative_sdk_secret}}'
-ADOBE_CREATIVE_SDK_CLIENT_ID = '{{cookiecutter.adobe_creative_sdk_id}}'
-
-TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
-
-# Google Apps authentication.
-
-# SETUP:
-# 1. https://console.developers.google.com/project
-# 2. "Create project"
-# 3. APIs & auth -> Consent screen
-# 4. Select email address
-# 5. APIs & auth -> APIs
-# 6. Enable "Google+ API"
-# 7. APIs & auth -> Credentials
-# 8. Create new Client ID -> Web application
-# 9. Copy Client ID to KEY below.
-# 10. Copy Client Secret to SECRET below.
-# 11. Edit settings
-# 12. Set authorized domain
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GooglePlusAuth',
-    'django.contrib.auth.backends.ModelBackend'
-)
-
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
-
-WHITELISTED_DOMAINS = ['onespacemedia.com']
-SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
-
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
-)
-
-# Typekit
-TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
-
-# Google fonts
-GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
-
-# Rollbar error tracking. For server-side errors:
-ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
-ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
-
-
-SILENCED_SYSTEM_CHECKS = []
-
-THUMBNAIL_QUALITY = 60
-
-# Celery config
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-
-{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load
