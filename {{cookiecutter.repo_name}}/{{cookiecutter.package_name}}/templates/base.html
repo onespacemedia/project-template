@@ -1,4 +1,5 @@
 {% import 'components/macros/components.html' as components %}
+{% import 'macros/misc.html' as misc %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,7 +118,7 @@
       <div class="lyt-Site" id="app">
         {% include 'base/_header.html' %}
 
-        {{ components.mobile_nav_trigger() }}
+        {{ misc.mobile_nav_trigger() }}
 
         {% block content_outer %}
           <div class="lyt-Content_Outer">
