@@ -21,7 +21,7 @@ export default class Navigation {
   }
 
   /**
-   * Cache any dom elements we will use multiple times.
+   * Cache any elements we will use multiple times.
    */
   setUpElements () {
     const el = document.querySelector('.nav-Header')
