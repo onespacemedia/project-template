@@ -187,7 +187,8 @@
 .nav-Mobile_DropdownChild {
   position: fixed;
   top: var(--Mobile_NavHeight);
-  left: 100%;
+  right: -var(--Mobile_NavWidth);
+
   z-index: 1;
 
   max-width: var(--Mobile_NavWidth);
@@ -200,17 +201,19 @@
   overflow-y: scroll;
   visibility: hidden;
 
-  transform: translateX(0);
-
   /* Use trick with visibility transition delay so we can transition visibility hidden */
   transition: visibility 0s ease-out var(--Global_Transition),
-    transform var(--Global_Transition);
+    right var(--Global_Transition);
 
   .nav-Mobile_Item[aria-selected='true'] > &,
   .nav-Mobile_DropdownItem[aria-selected='true'] > & {
-    visibility: visible;
+    /*
+     * Animate right rather than transform as with transform it causes an issue with
+     * scrollbars not getting overlapped correctly
+     */
+    right: 0;
 
-    transform: translateX(-100%);
+    visibility: visible;
 
     transition-delay: 0s;
   }
