@@ -179,12 +179,8 @@
   |--------------------------------------------------------------------------
   |
   */
-  .wys-Button-primary {
-    @include Button-primary;
-  }
-
-  .wys-Button-secondary {
-    @include Button-secondary;
+  .wys-Button {
+    @include Button;
   }
 
   /*
