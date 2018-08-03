@@ -13,7 +13,6 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 
-from ....utils.utils import url_from_path
 from ..models import Footer, Header
 
 
@@ -210,8 +209,3 @@ def add_field_attributes(field, class_name, placeholder=True):
         'class': ' '.join((field.css_classes(), class_name)),
         'placeholder': field.label if placeholder else '',
     })
-
-
-@library.global_function
-def path_to_url(path, request=None):
-    return url_from_path(path, request)
