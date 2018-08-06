@@ -284,10 +284,10 @@ class SectionBase(models.Model):
                 section_options = section_type[1]
 
                 # Don't require that search_fields is set.
-                if 'search_fields' not in section_options:
+                if 'search' not in section_options:
                     continue
 
-                search_fields = section_options['search_fields']
+                search_fields = section_options['search']
 
                 search_text_items = []
                 for field in search_fields:
