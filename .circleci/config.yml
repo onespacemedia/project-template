@@ -3,6 +3,10 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.6-jessie-node-browsers
+      - image: circleci/postgres:9.5.10
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: example_project
     steps:
       - checkout
       - run:
