@@ -27,7 +27,6 @@ else
 fi
 
 # Check if the database already exists
-su - postgres
 DB_NAME="{{cookiecutter.package_name}}"
 if psql {{cookiecutter.package_name}} -c ''; then
     NEW_DB_NAME="${DB_NAME}_$(date +"%Y%m")"
@@ -61,8 +60,6 @@ fi
 
 # Create the database.
 createdb $DB_NAME
-
-su - root
 
 # Make the virtual environment.
 if command -v mkvirtualenv >/dev/null 2>&1; then

@@ -14,6 +14,12 @@ jobs:
             sudo npm install --global yarn
             sudo apt-get install postgresql postgresql-contrib
             sudo service postgresql start
+            su - postgres
+            psql
+            CREATE USER root PASSWORD '';
+            GRANT postgres TO root;
+            \q
+            su - root
 
       - run:
           name: Run cookiecutter
