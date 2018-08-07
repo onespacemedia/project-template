@@ -3,6 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.6-jessie-node-browsers
+        environment:
+            TEST_DATABASE_URL: postgresql://root@localhost/example_project
+      - image: circleci/postgres:9.5.10
+        environment:
+          - POSTGRES_USER=root
+          - POSTGRES_DB=example_project
     steps:
       - checkout
       - run:
@@ -12,14 +18,7 @@ jobs:
             if psql demo -c ''; then dropdb demo; fi
             sudo pip install --upgrade pip setuptools cookiecutter python-coveralls
             sudo npm install --global yarn
-            sudo apt-get install postgresql postgresql-contrib
-            sudo service postgresql start
-            su - postgres
-            psql
-            CREATE USER root PASSWORD '';
-            GRANT postgres TO root;
-            \q
-            su - root
+            sudo apt-get install postgresql-client-9.6
 
       - run:
           name: Run cookiecutter
