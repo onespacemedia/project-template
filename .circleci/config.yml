@@ -5,6 +5,7 @@ jobs:
       - image: circleci/python:3.6.6-jessie-node-browsers
         environment:
             TEST_DATABASE_URL: postgresql://root@localhost/example_project
+            CI: True
       - image: circleci/postgres:9.5.10
         environment:
           - POSTGRES_USER=root
@@ -18,17 +19,6 @@ jobs:
             if psql demo -c ''; then dropdb demo; fi
             sudo pip install --upgrade pip setuptools cookiecutter python-coveralls
             sudo npm install --global yarn
-
-      - run:
-          name: Install nvm
-          command: |
-            set +e
-            touch $BASH_ENV
-            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.5/install.sh | bash
-            echo 'export NVM_DIR="$HOME/.nvm"' >> $BASH_ENV
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $BASH_ENV
-            echo 'nvm install v6.2.2' >> $BASH_ENV
-            echo 'nvm alias default v6.2.2' >> $BASH_ENV
 
       - run:
           name: Install PostgreSQL client
