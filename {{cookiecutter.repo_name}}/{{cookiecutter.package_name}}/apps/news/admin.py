@@ -4,6 +4,8 @@ from cms.admin import OnlineBaseAdmin, PageBaseAdmin
 from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
 from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.utils.html import escape, mark_safe
 from reversion.admin import VersionAdmin
 from reversion.models import Version
 from suit.admin import SortableModelAdmin
@@ -26,7 +28,10 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
     list_display = ['get_image', 'title', 'date', 'render_categories', 'featured', 'is_online', 'last_modified']
     list_display_links = ['get_image', 'title']
     list_editable = ['featured', 'is_online']
-    list_filter = ['featured', 'is_online', 'categories', 'status']
+    list_filter = ['page', 'categories', 'featured', 'is_online']
+
+    if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
+        list_filter.append('status')
 
     fieldsets = [
         (None, {
@@ -87,7 +92,13 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
         categories = obj.categories.all()
         if not categories:
             return '(None)'
-        return ', '.join([str(category) for category in categories])
+        parts = []
+
+        for category in categories:
+            url = reverse('admin:news_category_change', args=[category.pk])
+            parts.append(f'<a href="{url}">{escape(category)}</a>')
+
+        return mark_safe(', '.join(parts))
 
     def last_modified(self, obj):
         versions = Version.objects.get_for_object(obj)

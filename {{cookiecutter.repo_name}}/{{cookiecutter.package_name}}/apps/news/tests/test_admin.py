@@ -103,7 +103,12 @@ class TestArticleAdminBase(TestCase):
 
     def test_render_categories(self):
         categories = self.article_admin.render_categories(self.article)
-        self.assertEqual(categories, 'Foo, Foo 2')
+        self.assertEqual(categories,
+            (
+                '<a href="/admin/news/category/{}/change/">Foo</a>, '
+                '<a href="/admin/news/category/{}/change/">Foo 2</a>'
+            ).format(self.category.pk, self.category_2.pk)
+        )
 
     def test_get_queryset(self):
         # don't do anything with it, just make sure this doesn't throw an
