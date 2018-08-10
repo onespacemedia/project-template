@@ -329,19 +329,14 @@ WYSIWYG_OPTIONS = {
     # Custom style formats
     'style_formats': [
         {
-            'title': 'Buttons',
+            'title': 'Links',
             'items': [
                 {
-                    'title': 'Primary',
+                    'title': 'Button',
                     'selector': 'a',
-                    'classes': 'wys-Button-primary'
+                    'classes': 'wys-Button'
                 },
-                {
-                    'title': 'Secondary',
-                    'selector': 'a',
-                    'classes': 'wys-Button-secondary'
-                },
-            ]
+            ],
         },
         {
             'title': 'Titles',
