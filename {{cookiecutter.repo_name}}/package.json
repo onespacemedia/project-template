@@ -5,7 +5,7 @@
     "babel-polyfill": "6.23.0",
     "es6-promise": "^4.1.0",
     "intersection-observer": "^0.4.2",
-    "reset-css": "^4.0.1",
+    "reset-css": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
