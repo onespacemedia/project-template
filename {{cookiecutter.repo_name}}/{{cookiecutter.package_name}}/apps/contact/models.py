@@ -1,8 +1,11 @@
+import re
+
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class Contact(ContentBase):
@@ -83,19 +86,16 @@ class Contact(ContentBase):
 
         return super().clean(self)
 
-    @property
-    def email_addresses(self):
-        # Strip out commas if comma separated.
-        emails = self.form_email_address.replace(',', ' ')
-
-        emails = emails.split(' ')
-        for email in emails:
-            email.strip()
-
-        # Filter out empty strings
+    # Broken into a separate function to assist with unit testing (because
+    # it's a cached property)
+    def _email_addresses(self):
+        emails = re.split(r'[\s,]+', self.form_email_address)
         emails = list(filter(lambda a: a != '', emails))
-
         return emails
+
+    @cached_property
+    def email_addresses(self):
+        return self._email_addresses()
 
 
 class ContactSubmission(models.Model):
