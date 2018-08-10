@@ -15,7 +15,6 @@ export default class Navigation {
     this.isOpen = false
 
     this.toggleIsOpen = this.toggleIsOpen.bind(this)
-    this.setupItems = this.setupItems.bind(this)
 
     this.setupListeners()
   }
@@ -42,23 +41,6 @@ export default class Navigation {
     this.els.trigger = document.querySelector('.nav-Header_Trigger')
 
     this.els.backdrop = this.els.document.querySelector('.nav-Header_Backdrop')
-  }
-
-  /**
-   * If we're on mobile we want to track the selected states to control the sub navigation open
-   * / closed. aria-selected won't be used on lg++ so we programmatically add it just for sizes
-   * below that.
-   */
-  setupItems () {
-    Array.from(
-      this.els.el.querySelectorAll(
-        '.nav-Header_Item:not(.nav-Header_Item-back)'
-      )
-    ).forEach(item => {
-      window.innerWidth <= mediaBreakpoints.lg
-        ? item.setAttribute('aria-selected', 'false')
-        : item.removeAttribute('aria-selected')
-    })
   }
 
   setupListeners () {
