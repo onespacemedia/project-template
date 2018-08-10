@@ -4,7 +4,8 @@
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "es6-promise": "^4.1.0",
-    "intersection-observer": "^0.4.2"
+    "intersection-observer": "^0.4.2",
+    "reset-css": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -71,7 +72,6 @@
     "prettier": "^1.6.1",
     "prettier-standard": "^6.0.0",
     "require-dir": "0.3.2",
-    "sanitize.css": "^5.0.0",
     "standard": "^10.0.2",
     "style-loader": "^0.18.2",
     "stylelint": "^8.1.1",
