@@ -52,7 +52,7 @@
 }
 
 .cta-CallToAction_Link {
-  @include Button-primary;
+  @include Button;
 
   margin-top: 1vr;
 }

@@ -4,7 +4,7 @@
 |--------------------------------------------------------------------------
 |
 */
-@mixin Button {
+@mixin Button-base {
   @include Font_14-20;
 
   display: inline-block;
@@ -20,15 +20,11 @@
     color var(--Global_Transition);
 }
 
-@mixin Button-primary {
-  @include Button;
+@mixin Button {
+  @include Button-base;
 
   background-color: var(--Color_Brand);
   color: #fff;
-}
-
-@mixin Button-secondary {
-  @include Button;
 }
 
 /*

@@ -70,7 +70,7 @@
 }
 
 .cc-Bar_Accept {
-  @include Button-primary;
+  @include Button;
 
   padding: 4px 15px;
 

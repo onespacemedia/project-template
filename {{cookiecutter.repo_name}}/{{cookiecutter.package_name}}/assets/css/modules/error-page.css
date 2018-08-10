@@ -40,5 +40,5 @@
 }
 
 .err-Error_FooterLink {
-  @include Button();
+  @include Button;
 }
