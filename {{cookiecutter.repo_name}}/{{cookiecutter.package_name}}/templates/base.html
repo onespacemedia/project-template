@@ -151,6 +151,19 @@
       {% include 'base/_footer.html' %}
     {% endblock %}
 
+   {% if request.user.is_superuser %}
+      <div class="dbg-Overlay">
+        <div class="dbg-Overlay_Breakpoint"></div>
+        <div class="dbg-Overlay_Inner">
+          <div class="dbg-Overlay_Row">
+            {% for _ in range(1, 13) %}
+             <div class="dbg-Overlay_Column"></div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
     {{ render_bundle('vendor', 'js') }}
     {{ render_bundle('app', 'js') }}
 
