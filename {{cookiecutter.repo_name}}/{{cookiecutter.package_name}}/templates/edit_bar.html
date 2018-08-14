@@ -5,18 +5,18 @@
         <div class="pg-EditBar_Title">{{ settings.SITE_NAME }}</div>
 
         <a class="pg-EditBar_Link" href="{{ add_url }}" target="_blank">
-          {% include 'fa-plus.svg' %}
+          {% include 'edit-bar/add.svg' %}
           New
         </a>
 
         <a class="pg-EditBar_Link js-EditBar_EditLink" href="{{ edit_url }}?_popup=1" target="_blank">
-          {% include 'fa-pencil.svg' %}
+          {% include 'edit-bar/edit.svg' %}
           Edit {{ model_name }}
         </a>
 
         {% if request.user.is_superuser %}
           <div class="pg-EditBar_Link js-DebugOverlayTrigger">
-            {% include 'fa-th.svg' %}
+            {% include 'edit-bar/grid.svg' %}
             Grid overlay
           </div>
         {% endif %}
