@@ -13,6 +13,13 @@
           {% include 'fa-pencil.svg' %}
           Edit {{ model_name }}
         </a>
+
+        {% if request.user.is_superuser %}
+          <div class="pg-EditBar_Link js-DebugOverlayTrigger">
+            {% include 'fa-th.svg' %}
+            Grid overlay
+          </div>
+        {% endif %}
       </div>
 
       <div class="pg-EditBar_Column">
