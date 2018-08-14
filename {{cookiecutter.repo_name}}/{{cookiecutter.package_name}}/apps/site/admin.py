@@ -1,11 +1,11 @@
+from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from social_django.models import Association, Nonce, UserSocialAuth
-from suit.admin import SortableStackedInline
 
 from .models import Footer, FooterLink, Header, HeaderLink
 
 
-class HeaderLinkInline(SortableStackedInline):
+class HeaderLinkInline(SortableInlineAdminMixin, admin.TabularInline):
     model = HeaderLink
     extra = 0
 
@@ -23,7 +23,7 @@ class HeaderAdmin(admin.ModelAdmin):
         return not Header.objects.count()
 
 
-class FooterLinkInline(SortableStackedInline):
+class FooterLinkInline(SortableInlineAdminMixin, admin.TabularInline):
     model = FooterLink
     extra = 0
 

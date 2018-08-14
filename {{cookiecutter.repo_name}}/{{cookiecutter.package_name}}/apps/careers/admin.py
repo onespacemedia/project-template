@@ -1,6 +1,6 @@
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
-from suit.admin import SortableModelAdmin
 
 from .models import Career, Careers
 
@@ -25,7 +25,7 @@ class CareerOpenClosedListFilter(admin.SimpleListFilter):
 
 
 @admin.register(Career)
-class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
+class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
     prepopulated_fields = {'slug': ['title']}
 
     list_display = ['__str__', 'location', 'closing_date', 'is_online']

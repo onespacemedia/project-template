@@ -1,12 +1,12 @@
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
-from suit.admin import SortableModelAdmin
 
 from .models import Partner
 
 
 @admin.register(Partner)
-class PartnerAdmin(SortableModelAdmin, PageBaseAdmin):
+class PartnerAdmin(SortableAdminMixin, PageBaseAdmin):
     list_display = ['title', 'is_online', 'order']
     list_editable = ['is_online', 'order']
 

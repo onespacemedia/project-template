@@ -33,6 +33,10 @@ urlpatterns = [
     # Site URLs
     url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),
 
+    # Jet URLs
+    url(r'^jet/', include('jet.urls', 'jet')),
+    url(r'^jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
+
     # Permalink redirection service.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),
 

@@ -1,14 +1,14 @@
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
-from suit.admin import SortableModelAdmin
 
 from .models import Category, Faq, Faqs
 
 
 @admin.register(Faq)
-class FaqAdmin(SortableModelAdmin, PageBaseAdmin):
+class FaqAdmin(SortableAdminMixin, PageBaseAdmin):
     list_display = ['__str__', 'render_category', 'is_online', 'order']
     list_editable = ['is_online', 'order']
     search_fields = ['title', 'page', 'category']

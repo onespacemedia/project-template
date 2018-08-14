@@ -8,14 +8,13 @@ from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 from reversion.admin import VersionAdmin
 from reversion.models import Version
-from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin
 from .models import Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
-class CategoryAdmin(SortableModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ['__str__']
     prepopulated_fields = {'slug': ['title']}
 

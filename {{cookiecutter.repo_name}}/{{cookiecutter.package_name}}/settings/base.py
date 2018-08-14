@@ -88,8 +88,10 @@ INSTALLED_APPS = [
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
 
-    'suit',
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
+    'adminsortable2',
 
     'server_management',
     'django_extensions',
@@ -106,7 +108,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|sitemap\.xml|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
@@ -266,10 +268,9 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GooglePlusAuth',
     'django.contrib.auth.backends.ModelBackend'
 )
-SUIT_CONFIG = {
-    'ADMIN_NAME': SITE_NAME,
-    'MENU_EXCLUDE': ['default'],
-}
+
+JET_INDEX_DASHBOARD = 'cms.dashboard.OSMDashboard'
+
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'

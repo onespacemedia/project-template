@@ -1,11 +1,11 @@
 from cms.apps.pages.admin import page_admin
 from django.core.urlresolvers import reverse_lazy
-from suit.admin import SortableStackedInline
+from jet.admin import CompactInline
 
 from .models import Content, ContentSection
 
 
-class ContentSectionInline(SortableStackedInline):
+class ContentSectionInline(CompactInline):
     model = ContentSection
     extra = 0
     filter_horizontal = ['people']

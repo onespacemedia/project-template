@@ -88,13 +88,9 @@ class Category(models.Model):
         unique=True
     )
 
-    order = models.PositiveIntegerField(
-        default=0
-    )
-
     class Meta:
         verbose_name_plural = 'Categories'
-        ordering = ['order']
+        ordering = ['title']
 
     def __str__(self):
         return self.title or self.title
