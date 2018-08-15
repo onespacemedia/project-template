@@ -47,6 +47,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets.extend(PageBaseAdmin.fieldsets)
 
+    fieldsets.remove(PageBaseAdmin.NAVIGATION_FIELDS)
     fieldsets.remove(PageBaseAdmin.TITLE_FIELDS)
     fieldsets.remove(OnlineBaseAdmin.PUBLICATION_FIELDS)
 
