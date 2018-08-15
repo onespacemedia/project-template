@@ -307,7 +307,7 @@ SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
 SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
+    '{{cookiecutter.package_name}}.apps.site.auth_pipeline.make_staff',
 )
 
 TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
