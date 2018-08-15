@@ -10,7 +10,7 @@ from .models import Category, Faq, Faqs
 @admin.register(Faq)
 class FaqAdmin(SortableAdminMixin, PageBaseAdmin):
     list_display = ['__str__', 'render_category', 'is_online', 'order']
-    list_editable = ['is_online', 'order']
+    list_editable = ['is_online']
     search_fields = ['title', 'page', 'category']
 
     fieldsets = [
