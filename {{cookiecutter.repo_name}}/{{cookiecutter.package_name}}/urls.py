@@ -1,14 +1,12 @@
 import logging
 import sys
 
-from cms.forms import CMSPasswordChangeForm
 from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.shortcuts import render
@@ -23,9 +21,6 @@ admin.autodiscover()
 urlpatterns = [
 
     # Admin URLs.
-    url(r'^admin/password_change/$', auth_views.password_change,
-        {'password_change_form': CMSPasswordChangeForm}, name='password_change'),
-    url(r'^admin/password_change/done/$', auth_views.password_change_done, name='password_change_done'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include('social_django.urls', namespace='social')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
