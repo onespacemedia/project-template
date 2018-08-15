@@ -206,6 +206,31 @@ SERVER_EMAIL = '{name} <notifications@{domain}>'.format(
 )
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
+###
+#     _         _   _                   _   _
+#    / \  _   _| |_| |__     ___  _ __ | |_(_) ___  _ __  ___
+#   / _ \| | | | __| '_ \   / _ \| '_ \| __| |/ _ \| '_ \/ __|
+#  / ___ \ |_| | |_| | | | | (_) | |_) | |_| | (_) | | | \__ \
+# /_/   \_\__,_|\__|_| |_|  \___/| .__/ \__|_|\___/|_| |_|___/
+#                                |_|
+###
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 ###
 #  _                    _  _            _    _
