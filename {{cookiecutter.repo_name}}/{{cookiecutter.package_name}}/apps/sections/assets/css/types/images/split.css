@@ -1,0 +1,85 @@
+/*
+|--------------------------------------------------------------------------
+| Split text and image section
+|--------------------------------------------------------------------------
+| Displays an image and text block side by side, can be image eft and text
+| right or image right and text left.
+|
+| @namespace: sec-
+|
+*/
+
+.sec-Split {
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.sec-Split-left {
+  @media (--sm) {
+    flex-direction: row;
+  }
+}
+
+.sec-Split-right {
+  @media (--sm) {
+    flex-direction: row-reverse;
+  }
+}
+
+.sec-Split_Image,
+.sec-Split_Content {
+  width: 100%;
+}
+
+.sec-Split_Image {
+  justify-self: flex-start;
+
+  height: 250px;
+
+  margin-bottom: 1vr;
+
+  @media (--sm) {
+    flex-basis: calc((6 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 6 / 12);
+
+    height: 300px;
+
+    margin-bottom: 0;
+  }
+
+  @media (--md) {
+    height: 420px;
+  }
+
+  .img-Image {
+    height: 100%;
+  }
+
+  .sec-Split-right & {
+    justify-self: flex-end;
+  }
+}
+
+.sec-Split_Content {
+  @media (--sm) {
+    flex-basis: calc((6 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 6 / 12);
+  }
+
+  @media (--md) {
+    flex-basis: calc((5 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 7 / 12);
+  }
+}
+
+.sec-Split_Kicker {
+  margin-bottom: 0.5vr;
+}
+
+.sec-Split_Title {
+  margin-bottom: 0.5vr;
+}
+
+.sec-Split_Actions {
+  margin-top: 1vr;
+}

@@ -32,7 +32,7 @@ SECTION_TYPES = (
                 'required': ['image']
             }),
             ('split', {
-                'fields': ['kicker', 'title', 'text', 'image', 'image_side' 'link_text', 'link_page', 'link_url'],
+                'fields': ['kicker', 'title', 'text', 'image', 'image_side', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'text'],
                 'required': ['title', 'image'],
             }),
