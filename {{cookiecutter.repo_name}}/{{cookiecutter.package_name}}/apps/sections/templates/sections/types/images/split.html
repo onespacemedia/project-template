@@ -1,6 +1,6 @@
 {% extends "sections/types/_base.html" %}
 
-{% block section_inner %}
+{% block inner %}
   <div class="sec-Split sec-Split-{{ section.image_side }}">
     <div class="sec-Split_Image">
       {{ render_lazy_image(section.image, width=800, height=600) }}
@@ -27,3 +27,5 @@
     </div>
   </div>
 {% endblock %}
+
+{% block footer %}{% endblock %}

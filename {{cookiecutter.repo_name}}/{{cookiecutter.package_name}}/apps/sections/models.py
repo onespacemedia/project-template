@@ -42,9 +42,8 @@ SECTION_TYPES = (
         'sections': [
             ('wysiwyg', {
                 'name': 'Rich text',
-                'fields': ['content'],
-                'search': ['content'],
-                'required': ['content'],
+                'fields': ['background_colour', 'kicker', 'title', 'content', 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'text'],
             }),
         ],
     }),
