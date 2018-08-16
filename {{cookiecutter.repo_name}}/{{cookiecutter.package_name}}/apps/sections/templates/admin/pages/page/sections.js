@@ -1,6 +1,6 @@
 (function ($) {
   $(window).load(function() {
-    var $sections = $('div[class*="section_set"]');
+    var $sections = $('div[id*="section_set"]');
 
     renderSectionFields();
 
@@ -12,10 +12,10 @@
     // section' handler is called. So this will work!
     // (It'll also be fired when *any* 'add another' button is pressed, but)
     // this is harmless.)
-    $(".add-row a").click(renderSectionFields);
+    $(".inline-navigation .add-row").click(renderSectionFields);
 
     function renderSectionFields() {
-      var $sections = $('div[class*="section_set"]');
+      var $sections = $('div[id*="section_set"]');
 
       var types = {
         '': {
@@ -95,7 +95,7 @@
             .filter(function(name) { return name.indexOf('field-') >= 0 })[0]
             .replace('field-', '');
 
-          if (name in helpText) {
+          if ((helpText) && (name in helpText)) {
             if (helpTextExists) {
               $helpText.text(helpText[name]);
             } else {

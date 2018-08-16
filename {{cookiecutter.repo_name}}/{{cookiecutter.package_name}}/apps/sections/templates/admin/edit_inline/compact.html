@@ -14,18 +14,29 @@
         <div class="inline-navigation-content">
             <ul id="section-type" class="inline-navigation-items sortable-items">
                 {% for inline_admin_form in inline_admin_formset %}
-                  <li class="sortable-item{% if forloop.last %} empty{% endif %}">
-                    <span class="drag-handle">&#9776;</span>
-                    <a href="#" class="inline-navigation-item{% if forloop.last %} empty{% endif %}" data-inline-related-id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
-                        {% if inline_admin_form.original %}
-                            {{ inline_admin_form.original }}
-                        {% else %}
-                            {{ inline_admin_formset.opts.verbose_name|capfirst }} #{{ forloop.counter }}
-                        {% endif %}
-                    </a>
-                  </li>
+                    {% if not forloop.last %}
+                        <li class="sortable-item{% if forloop.last %} empty{% endif %}">
+                            <span class="drag-handle">&#9776;</span>
+                            <a href="#" class="inline-navigation-item{% if forloop.last %} empty{% endif %}" data-inline-related-id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+                                {% if inline_admin_form.original %}
+                                    {{ inline_admin_form.original }}
+                                {% else %}
+                                    {{ inline_admin_formset.opts.verbose_name|capfirst }} #{{ forloop.counter }}
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
+            <div class="sortable-item empty">
+                <a href="#" class="inline-navigation-item{% if forloop.last %} empty{% endif %}" data-inline-related-id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+                    {% if inline_admin_form.original %}
+                        {{ inline_admin_form.original }}
+                    {% else %}
+                        {{ inline_admin_formset.opts.verbose_name|capfirst }} #{{ forloop.counter }}
+                    {% endif %}
+                </a>
+            </div>
         </div>
     </div>
 
@@ -143,7 +154,8 @@
 
 <style>
   .sortable-items {
-    padding: 8px 0 8px 10px;
+    padding: 8px 0 0 10px;
+    margin-bottom: 0;
     list-style-type: none;
   }
 
@@ -154,6 +166,13 @@
   }
 
   .sortable-item.empty {
+    flex-direction: column;
+    display: flex;
+
+    padding-left: 10px;
+  }
+
+  .sortable-item.empty .drag-handle {
     display: none;
   }
 
