@@ -28,8 +28,11 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            {# Break out the container for new items to prevent reordering as all new items get put inside a single container #}
+            {# i.e. Section1, Section2, NewSection1, NewSection2 would be re-ordered to: #}
+            {#      Section1, NewSection1, NewSection2, Section2 #}
             <div class="sortable-item empty">
-                <a href="#" class="inline-navigation-item{% if forloop.last %} empty{% endif %}" data-inline-related-id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+                <a href="#" class="inline-navigation-item empty" data-inline-related-id="{{ inline_admin_formset.formset.prefix }}-empty">
                     {% if inline_admin_form.original %}
                         {{ inline_admin_form.original }}
                     {% else %}
@@ -41,7 +44,7 @@
     </div>
 
     {% for inline_admin_form in inline_admin_formset %}
-        <div class="inline-related compact{% if inline_admin_form.original or inline_admin_form.show_url %} has_original{% endif %}{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+        <div class="inline-related compact{% if inline_admin_form.original or inline_admin_form.show_url %} has_original{% endif %}{% if forloop.last %} empty-form last-related{% endif %} {{ inline_admin_formset.formset.prefix }}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
             <h3>
                 <b>{{ inline_admin_formset.opts.verbose_name|capfirst }}:</b>&nbsp;
                 <span class="inline_label">

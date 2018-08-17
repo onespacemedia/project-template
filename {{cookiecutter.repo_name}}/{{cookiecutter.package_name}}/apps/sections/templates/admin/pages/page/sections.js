@@ -1,12 +1,11 @@
 (function ($) {
   $(window).load(function() {
-    var $sections = $('div[id*="section_set"]');
+    var $sections = $('div[class*="section_set"]');
 
     renderSectionFields();
 
     $sections.find('.field-type select').change(renderSectionFields);
 
-    $(document).on("change", "[class*=section_set] .field-type select", renderSectionFields);
     // As jQuery event bindings are 'first come first served',
     // showHideSectionFields will be called after the default 'add another
     // section' handler is called. So this will work!
@@ -15,7 +14,7 @@
     $(".inline-navigation .add-row").click(renderSectionFields);
 
     function renderSectionFields() {
-      var $sections = $('div[id*="section_set"]');
+      var $sections = $('div[class*="section_set"]');
 
       var types = {
         '': {
@@ -111,7 +110,7 @@
           }
         });
 
-        $('.wysiwyg', $section).each(function () {
+        $('.wysiwyg:visible', $section).each(function () {
           activate_tinymce(this)
         });
       });
