@@ -12,6 +12,9 @@
     // (It'll also be fired when *any* 'add another' button is pressed, but)
     // this is harmless.)
     $(".inline-navigation .add-row").click(renderSectionFields);
+    [].forEach.call(document.querySelectorAll('.inline-navigation-item'), function(sectionSelector) {
+      sectionSelector.addEventListener('click', function(){window.setTimeout(renderSectionFields, 0)})
+    });
 
     function renderSectionFields() {
       var $sections = $('div[class*="section_set"]');
