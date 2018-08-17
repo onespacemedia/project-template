@@ -15,6 +15,9 @@
     [].forEach.call(document.querySelectorAll('.inline-navigation-item'), function(sectionSelector) {
       sectionSelector.addEventListener('click', function(){window.setTimeout(renderSectionFields, 0)})
     });
+    [].forEach.call(document.querySelectorAll('.changeform-tabs-item'), function(e) {
+      e.addEventListener('click', function(){window.setTimeout(renderSectionFields, 0)})
+    });
 
     function renderSectionFields() {
       var $sections = $('div[class*="section_set"]');
