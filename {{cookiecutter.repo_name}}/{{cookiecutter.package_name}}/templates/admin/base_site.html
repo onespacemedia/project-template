@@ -17,6 +17,16 @@
           margin-left: 170px !important;
         }
       }
+
+      .sidebar-link.popup-section-link:hover::after {
+        content: '';
+        position: absolute;
+        top: -48px;
+        right: -64px;
+        width: 128px;
+        height: 128px;
+        transform: rotate(45deg);
+      }
     </style>
 {% endblock %}
 
