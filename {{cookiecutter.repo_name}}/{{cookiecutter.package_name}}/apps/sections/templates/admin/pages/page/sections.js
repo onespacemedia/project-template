@@ -52,7 +52,7 @@
         var $fields = $('div[class*="field-"]', $section);
 
         // Remove the fields we want on every section
-        $fields = $fields.not('.field-type, .field-order');
+        $fields = $fields.not('.field-type');
 
         // Hide all the fields initially
         $fields.hide();
