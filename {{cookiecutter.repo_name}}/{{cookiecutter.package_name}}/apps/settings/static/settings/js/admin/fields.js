@@ -17,10 +17,12 @@ function hide_inline_section_fields () {
   var fieldInput = document.querySelector('body');
   for (i = 0; i < formFields.length; i++) {
     fieldInput = formFields[i].querySelector('input');
+    // Catch the times it isn't an input
     if (!fieldInput) {
       fieldInput = formFields[i].querySelector('textarea');
     }
     if (fieldInput && fieldInput.id) {
+      // substring(3) to remove id_ from the id field
       if (optionSet.has(fieldInput.id.substring(3))) {
         formFields[i].style.display = 'none'
       }

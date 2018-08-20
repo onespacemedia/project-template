@@ -7,15 +7,15 @@ from .models import Partner
 
 @admin.register(Partner)
 class PartnerAdmin(SortableAdminMixin, PageBaseAdmin):
-    list_display = ['title', 'is_online', 'order']
+    list_display = ['order', 'title', 'is_online']
     list_editable = ['is_online']
 
     fieldsets = [
         (None, {
-            'fields': ['page', 'title', 'slug'],
+            'fields': ['title', 'slug', 'logo'],
         }),
         ('Content', {
-            'fields': ['summary', 'logo', 'website'],
+            'fields': ['summary', 'website'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.NAVIGATION_FIELDS,

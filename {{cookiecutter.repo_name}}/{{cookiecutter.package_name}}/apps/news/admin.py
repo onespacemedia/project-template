@@ -34,10 +34,10 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'page', 'featured', 'date', 'status'],
+            'fields': ['title', 'slug', 'page', 'content', 'date', 'status'],
         }),
         ('Content', {
-            'fields': ['image', 'card_image', 'content', 'summary', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
+            'fields': ['featured', 'summary', 'image', 'card_image', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
         }),
         ('Publication', {
             'fields': ['is_online'],

@@ -13,13 +13,7 @@ class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['page', 'title', 'slug'],
-        }),
-        ('Date', {
-            'fields': [('start_date', 'end_date')]
-        }),
-        ('Content', {
-            'fields': ['image', 'description'],
+            'fields': ['page', 'title', 'slug', ('start_date', 'end_date'), 'description', 'image'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,

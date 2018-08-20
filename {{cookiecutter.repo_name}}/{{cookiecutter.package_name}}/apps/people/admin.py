@@ -73,7 +73,7 @@ class PersonForm(forms.ModelForm):
 
 
 @admin.register(Person)
-class PersonAdmin(HasImageAdminMixin, SearchMetaBaseAdmin, SortableAdminMixin):
+class PersonAdmin(SortableAdminMixin, HasImageAdminMixin, SearchMetaBaseAdmin):
     form = PersonForm
 
     prepopulated_fields = {'slug': ['first_name', 'last_name']}
@@ -89,10 +89,7 @@ class PersonAdmin(HasImageAdminMixin, SearchMetaBaseAdmin, SortableAdminMixin):
 
     fieldsets = (
         (None, {
-            'fields': ['page'],
-        }),
-        ('Name information', {
-            'fields': ['title', 'first_name', 'middle_name', 'last_name', 'slug']
+            'fields': ['page', 'title', 'first_name', 'middle_name', 'last_name', 'slug']
         }),
         ('Profile', {
             'fields': ['photo', 'job_title', 'bio', 'team']
