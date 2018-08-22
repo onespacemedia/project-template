@@ -50,7 +50,7 @@
 }
 
 .frm-Error {
-  @include Font_14-20;
+  @include Font_14;
 
   color: var(--Color_Error);
 }
@@ -102,7 +102,7 @@
   color: var(--Color_Brand);
 
   @media (--xs) {
-    @include Font_14-20;
+    @include Font_14;
 
     margin-top: 0;
   }
@@ -117,7 +117,7 @@
 .frm-Form_Input,
 .frm-Form_Select,
 .frm-Form_Textarea {
-  @include Font_14-20;
+  @include Font_14;
 
   display: block;
   width: 100%;
