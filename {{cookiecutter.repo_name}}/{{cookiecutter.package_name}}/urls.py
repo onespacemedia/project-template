@@ -11,6 +11,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.shortcuts import render
 from django.views import generic
 
@@ -44,7 +45,7 @@ urlpatterns = [
     url(r'^robots.txt$', TextTemplateView.as_view(template_name='robots.txt')),
 
     # There's no favicon here!
-    url(r'^favicon.ico$', generic.RedirectView.as_view(permanent=True)),
+    url(r'^favicon.ico$', generic.RedirectView.as_view(url=staticfiles_storage.url('favicons/favicon.ico'), permanent=True)),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
