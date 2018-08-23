@@ -286,6 +286,15 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 
 TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
 
+LAZY_IMAGE_DEFAULT_QUALITY_OPTIONS = {
+    'normal': 60,
+    'webp': 80,
+}
+LAZY_IMAGE_DEFAULT_QUALITY = LAZY_IMAGE_DEFAULT_QUALITY_OPTIONS['normal']
+LAZY_IMAGE_URL_NAMESPACE = 'assets'
+LAZY_IMAGE_FILE_MODEL = 'media.File'
+LAZY_IMAGE_ENABLE_WEBP = True
+
 TYPEKIT_KIT_ID = '{{cookiecutter.typekit_kit_id}}'
 GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
