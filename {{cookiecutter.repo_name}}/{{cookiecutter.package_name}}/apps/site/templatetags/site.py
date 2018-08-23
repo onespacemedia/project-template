@@ -277,7 +277,7 @@ def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920,
                       quality=settings.LAZY_IMAGE_DEFAULT_QUALITY_OPTIONS, webp=settings.LAZY_IMAGE_ENABLE_WEBP,
                       responsive_sizes=None):
     """
-    Usage: {{ render_lazy_image(path.to.image) }}
+    Usage: render_lazy_image(path.to.image)
     """
     # If the image has a focal point set and no crop is set, add the crop
     if (image.focal_x and image.focal_y) and not crop:
