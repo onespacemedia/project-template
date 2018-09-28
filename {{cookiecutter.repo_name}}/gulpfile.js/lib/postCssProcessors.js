@@ -1,12 +1,21 @@
-var path = require('path')
-
 module.exports = [
   require('postcss-easy-import'),
   require('postcss-sassy-mixins'),
   require('postcss-conditionals'),
   require('postcss-nested'),
   require('postcss-functions')({
-    glob: path.join(__dirname, '../../{{cookiecutter.package_name}}', 'assets', 'css', 'helpers', 'functions', '*.js')
+    functions: {
+      percentage: function (val1, val2) {
+        let number = val1 / val2 * 100
+
+        return number.toFixed(2) + '%'
+      },
+      columns: function (n, t, gutter) {
+        gutter = gutter ? `${gutter}px` : 'var(--Grid_Gutter)'
+
+        return `calc((${n} / ${t} * 100%) - (${gutter} * 2) * (${t} - ${n}) / ${t})`
+      }
+    }
   }),
 
   require('postcss-custom-properties'),
