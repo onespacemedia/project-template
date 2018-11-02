@@ -42,13 +42,13 @@
   text-align: center;
 
   @media (--sm) {
-    width: calc(6 / 8 * 100%);
+    width: columns(6, 8);
     margin-right: auto;
     margin-left: auto;
   }
 
   @media (--md) {
-    width: calc(8 / 12 * 100%);
+    width: columns(8, 12);
   }
 }
 
@@ -91,12 +91,12 @@
 
 .pg-LandingHero_OverhangBody {
   @media (--sm) {
-    width: calc(7 / 8 * 100%);
+    width: columns(7, 8);
     margin-right: auto;
     margin-left: auto;
   }
 
   @media (--md) {
-    width: calc(10 / 12 * 100%);
+    width: columns(10, 12);
   }
 }
