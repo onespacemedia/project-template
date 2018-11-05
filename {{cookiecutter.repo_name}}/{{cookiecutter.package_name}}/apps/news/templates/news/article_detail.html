@@ -2,6 +2,57 @@
 {% import "components/macros/components.html" as components %}
 {% import "news/macros/news.html" as news %}
 
+{% block schema %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Article",
+      {% if cookiecutter.people == 'yes' %}{% if article.author %}"author": "{{ article.author }}",{% endif %}{% endif %}
+      "name": "How to Tie a Reef Knot”,
+      “headline”: "How to Tie a Reef Knot”,
+      {% if article.image %}
+      {% set img = thumbnail(article.image.file, "1500") %}
+      "image": {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "name": "{{ article.image.title }}",
+        "url": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ img.url }}",
+        "height": "{{ img.height }}",
+        "width": "{{ img.width }}"
+        {% if article.image.alt_text %}, "description": "{{ article.image.alt_text }}"{% endif %}
+        {% if article.image.attribution %}, "author": "{{ article.image.attribution }}"{% endif %}
+        {% if article.image.copyright %}, "copyrightHolder": "{{ article.image.copyright }}"{% endif %}
+      },
+      {% endif %}
+      {% if article.card_image %}
+      {% set img = thumbnail(article.card_image.file, "1500") %}
+      "thumbnailURL": {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "name": "{{ article.card_image.title }}",
+        "url": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ img.url }}",
+        "height": "{{ img.height }}",
+        "width": "{{ img.width }}"
+        {% if article.card_image.alt_text %}, "description": "{{ article.card_image.alt_text }}"{% endif %}
+        {% if article.card_image.attribution %}, "author": "{{ article.card_image.attribution }}"{% endif %}
+        {% if article.card_image.copyright %}, "copyrightHolder": "{{ article.card_image.copyright }}"{% endif %}
+      },
+      {% endif %}
+      {% if article.summary %}“text”: “{{ article.summary }}”,{% endif %}
+      “articleBody”: “{{ article.content }}”,
+      {% if article.categories %}“keywords”: “{% for category in article.categories %}{{ category }},{% endfor %}”,{% endif %}
+      “inLanguage”: {
+        "@type": "Language",
+        "name": ["English"]
+      }
+      "dateCreated": "{{ article.date_created }}",
+      "dateModified”: "{{ article.last_modified }}",
+      "datePublished”: "{{ article.date_created }}",
+      “wordCount”: “{{ article.article_length() }}”,
+    }
+  </script>
+{% endblock %}
+
 {% block content_above %}
   <section class="pg-LandingHero pg-LandingHero-hasOverhang">
     <div class="pg-LandingHero_Inner">

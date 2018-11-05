@@ -143,5 +143,9 @@ class Person(SearchMetaBase):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
 
+    @property
+    def colleagues(self):
+        return self.team.person_set.exclude(pk=self.pk)
+
 historylinks.register(Person)
 sitemaps.register(Person)

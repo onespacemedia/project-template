@@ -1,5 +1,34 @@
 {% extends "base.html" %}
 
+{% block schema %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Question",
+      "name": "{{ faq.title }}",
+      "text": "{{ faq.question }}",
+      "dateCreated": "{{ faq.date_created }}",
+      "datePublished”: "{{ faq.date_created }}",
+      "author": {
+        "@type": "Organization",
+        "email": "{{ settings.SERVER_EMAIL }}",
+        "name": "{{ settings.SITE_NAME }}",
+      }
+      "answerCount": “1”,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ faq.answer }}",
+        "dateCreated": "{{ faq.date_created }}",
+        "author": {
+          "@type": "Organization",
+          "email": "{{ settings.SERVER_EMAIL }}",
+          "name": "{{ settings.SITE_NAME }}",
+        }
+      }
+    }
+  </script>
+{% endblock %}
+
 {% block main %}
   <section>
     {{ faq }}

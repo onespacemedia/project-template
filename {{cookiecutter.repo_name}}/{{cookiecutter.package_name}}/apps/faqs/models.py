@@ -63,6 +63,12 @@ class Faq(PageBase):
 
     answer = HtmlField()
 
+    date_created = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+    )
+
     order = models.PositiveIntegerField(
         default=0
     )

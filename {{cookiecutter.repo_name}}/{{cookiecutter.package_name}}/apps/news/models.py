@@ -11,6 +11,7 @@ from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.html import strip_tags
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
@@ -182,6 +183,12 @@ class Article(PageBase):
         default=DRAFT,
     )
 
+    date_created = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         unique_together = [['page', 'date', 'slug']]
         ordering = ['-date']
@@ -226,6 +233,9 @@ class Article(PageBase):
         return render_to_string('news/includes/card.html', {
             'article': self,
         })
+
+    def article_length(self):
+        return len(strip_tags(self.content).split(' '))
 
 
 historylinks.register(Article)

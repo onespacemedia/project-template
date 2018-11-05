@@ -1,8 +1,9 @@
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
+from reversion import VersionAdmin
 from suit.admin import SortableModelAdmin
 
-from .models import Career, Careers
+from .models import Career, Careers, CareerLocation
 
 
 class CareerOpenClosedListFilter(admin.SimpleListFilter):
@@ -42,6 +43,10 @@ class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
         ('Applying', {
             'fields': ['email_address', 'application_url'],
         }),
+        ('Meta Fields', {
+            'fields': ['employment_type', 'education_requirements', 'experience_requirements', 'qualifications',
+                       'responsibilities', 'skills', 'work_hours', 'estimated_salary', 'base_salary']
+        }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
         PageBaseAdmin.OPENGRAPH_FIELDS,
@@ -57,3 +62,15 @@ class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
             pass
 
         return form
+
+
+@admin.register(CareerLocation)
+class LocationAdmin(VersionAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ['title']
+        }),
+        ('Address', {
+            'fields': ['street_address', 'city', 'region', 'postcode', 'country']
+        }),
+    )

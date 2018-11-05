@@ -37,6 +37,50 @@ class CareerQuerySet(models.QuerySet):
         )
 
 
+class CareerLocation(models.Model):
+
+    title = models.CharField(
+        max_length=100,
+    )
+
+    street_address = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    city = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    region = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    postcode = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    country = models.CharField(
+        max_length=2,
+        blank=True,
+        null=True,
+        help_text="The country's ISO ALPHA-2 code"
+    )
+
+    class Meta:
+        ordering = ['title']
+
+    def __unicode__(self):
+        return self.title
+
+
 class Career(PageBase):
     objects = PageBaseManager.from_queryset(CareerQuerySet)()
 
@@ -51,8 +95,8 @@ class Career(PageBase):
         help_text='The date after which this career should no longer be listed on the site. If you leave this empty, it will never be de-listed.',
     )
 
-    location = models.CharField(
-        max_length=256,
+    location = models.ForeignKey(
+        CareerLocation,
         blank=True,
         null=True,
     )
@@ -74,6 +118,76 @@ class Career(PageBase):
         'application URL',
         null=True,
         blank=True,
+    )
+
+    date_posted = models.DateField(
+        auto_now_add=True,
+        blank=True,
+        null=True,
+    )
+
+    # Schema Fields
+    employment_type = models.CharField(
+        choices=[
+            ('FULL_TIME', 'Full time'),
+            ('PART_TIME', 'Part time'),
+            ('CONTRACTOR', 'Contract'),
+            ('TEMPORARY', 'Temporary'),
+            ('INTERN', 'Internship'),
+        ],
+        max_length=16,
+        blank=True,
+        null=True,
+    )
+
+    education_requirements = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+    )
+
+    experience_requirements = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+    )
+
+    qualifications = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+        help_text='Specific qualifications required for this role.'
+    )
+
+    responsibilities = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+        help_text='Responsibilities associated with this role.'
+    )
+
+    skills = models.CharField(
+        max_length=512,
+        blank=True,
+        null=True,
+        help_text='Skills required to fulfill this role.'
+    )
+
+    work_hours = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+        help_text='The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).'
+    )
+
+    estimated_salary = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+    )
+
+    base_salary = models.PositiveIntegerField(
+        blank=True,
+        null=True,
     )
 
     order = models.PositiveIntegerField(

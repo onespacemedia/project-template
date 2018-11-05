@@ -1,5 +1,38 @@
 {% extends "base.html" %}
 
+{% block schema %}
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Event",
+      "startDate": "{{ event.start_date|date('c') }}",
+      "endDate": "{{ event.end_date|date('c') }}",
+      {% if event.summary %}"description": "{{ event.summary }}",{% endif %}
+      {% if event.image %}
+      {% set img = thumbnail(event.image.file, "1500") %}
+      "image": {
+        "@context": "http://schema.org",
+        "@type": "ImageObject",
+        "name": "{{ event.image.title }}",
+        "url": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ img.url }}",
+        "height": "{{ img.height }}",
+        "width": "{{ img.width }}"
+        {% if event.image.alt_text %}, "description": "{{ event.image.alt_text }}"{% endif %}
+        {% if event.image.attribution %}, "author": "{{ event.image.attribution }}"{% endif %}
+        {% if event.image.copyright %}, "copyrightHolder": "{{ event.image.copyright }}"{% endif %}
+      },
+      {% endif %}
+      "name": "{{ event.title }}",
+      "mainEntityOfPage": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ event.get_absolute_url() }}",
+      "location": {
+        "@type": "Place",
+        "name": "Unknown",
+        "address": "Unknown"
+      }
+    }
+  </script>
+{% endblock %}
+
 {% block main %}
   <section>
     {{ event }}

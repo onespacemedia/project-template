@@ -19,7 +19,7 @@ class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
             'fields': [('start_date', 'end_date')]
         }),
         ('Content', {
-            'fields': ['image', 'description'],
+            'fields': ['image', 'summary', 'description'],
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,

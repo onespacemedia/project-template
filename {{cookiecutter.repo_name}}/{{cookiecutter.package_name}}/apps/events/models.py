@@ -61,6 +61,11 @@ class Event(PageBase):
 
     end_date = models.DateField()
 
+    summary = models.TextField(
+        blank=True,
+        null=True,
+    )
+
     description = HtmlField()
 
     image = ImageRefField(
