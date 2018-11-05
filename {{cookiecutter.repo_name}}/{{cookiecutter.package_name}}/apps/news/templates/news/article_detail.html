@@ -7,9 +7,22 @@
     {
       "@context": "http://schema.org",
       "@type": "Article",
-      {% if cookiecutter.people == 'yes' %}{% if article.author %}"author": "{{ article.author }}",{% endif %}{% endif %}
-      "name": "{{ article.title }}”,
-      “headline”: "{{ article.title }}”,
+      "author": "{% if article.author %}{{ article.author }}{% else %}{{ settings.SITE_NAME }}{% endif %}",
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ settings.SITE_NAME }}",
+        "sameAs": "https://www.{{ settings.SITE_DOMAIN }}",
+        "logo": {
+          "@context": "http://schema.org",
+          "@type": "ImageObject",
+          "name": "{{ settings.SITE_NAME }} logo",
+          "url": "https://www.{{ settings.SITE_DOMAIN }}{{ static('img/logo.png') }}",
+          "description": "Logo for {{ settings.SITE_NAME }}",
+          "copyrightHolder": "{{ settings.SITE_NAME }}"
+        }
+      },
+      "name": "{{ article.title }}",
+      "headline": "{{ article.title }}",
       {% if article.image %}
       {% set img = thumbnail(article.image.file, "1500") %}
       "image": {
@@ -38,17 +51,18 @@
         {% if article.card_image.copyright %}, "copyrightHolder": "{{ article.card_image.copyright }}"{% endif %}
       },
       {% endif %}
-      {% if article.summary %}“text”: “{{ article.summary }}”,{% endif %}
-      “articleBody”: “{{ article.content }}”,
-      {% if article.categories %}“keywords”: “{% for category in article.categories %}{{ category }},{% endfor %}”,{% endif %}
-      “inLanguage”: {
+      {% if article.summary %}"text": "{{ article.summary }}",{% endif %}
+      "articleBody": "{{ article.tagless_content }}",
+      {% if article.categories %}"keywords": "{% for category in article.categories %}{{ category }},{% endfor %}",{% endif %}
+      "inLanguage": {
         "@type": "Language",
         "name": ["English"]
-      }
+      },
+      "mainEntityOfPage": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ article.get_absolute_url() }}",
       "dateCreated": "{{ article.date_created }}",
-      "dateModified”: "{{ article.last_modified }}",
-      "datePublished”: "{{ article.date_created }}",
-      “wordCount”: “{{ article.article_length() }}”,
+      "dateModified": "{{ article.last_modified }}",
+      "datePublished": "{{ article.date_created }}",
+      "wordCount": "{{ article.article_length() }}"
     }
   </script>
 {% endblock %}
