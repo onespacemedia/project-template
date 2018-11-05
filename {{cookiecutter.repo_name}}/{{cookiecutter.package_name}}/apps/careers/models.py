@@ -77,7 +77,7 @@ class CareerLocation(models.Model):
     class Meta:
         ordering = ['title']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 

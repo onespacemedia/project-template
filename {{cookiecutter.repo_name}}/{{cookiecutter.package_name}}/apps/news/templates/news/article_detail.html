@@ -8,8 +8,8 @@
       "@context": "http://schema.org",
       "@type": "Article",
       {% if cookiecutter.people == 'yes' %}{% if article.author %}"author": "{{ article.author }}",{% endif %}{% endif %}
-      "name": "How to Tie a Reef Knot”,
-      “headline”: "How to Tie a Reef Knot”,
+      "name": "{{ article.title }}”,
+      “headline”: "{{ article.title }}”,
       {% if article.image %}
       {% set img = thumbnail(article.image.file, "1500") %}
       "image": {

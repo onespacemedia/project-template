@@ -1,9 +1,9 @@
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
-from reversion import VersionAdmin
+from reversion.admin import VersionAdmin
 from suit.admin import SortableModelAdmin
 
-from .models import Career, Careers, CareerLocation
+from .models import Career, CareerLocation, Careers
 
 
 class CareerOpenClosedListFilter(admin.SimpleListFilter):
