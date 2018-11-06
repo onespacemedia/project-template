@@ -10,10 +10,10 @@ module.exports = [
 
         return number.toFixed(2) + '%'
       },
-      columns: function (n, t, gutter) {
+      columns: function (columns, totalColumns, gutter) {
         gutter = gutter ? `${gutter}px` : 'var(--Grid_Gutter)'
 
-        return `calc((${n} / ${t} * 100%) - (${gutter} * 2) * (${t} - ${n}) / ${t})`
+        return `calc((${columns} / ${totalColumns} * 100%) - (${gutter} * 2) * (${totalColumns} - ${columns}) / ${totalColumns})`
       }
     }
   }),
