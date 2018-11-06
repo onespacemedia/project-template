@@ -217,41 +217,41 @@ class Career(PageBase):
 
     def schema(self):
         schema = {
-            "@context": "http://schema.org",
-            "@type": "JobPosting",
-            "estimatedSalary": self.estimated_salary if self.estimated_salary else '',
-            "baseSalary": self.base_salary if self.base_salary else '',
-            "datePosted": self.date_created.isoformat() if self.date_created else '',
-            "description": "Summary: {}".format(self.summary),
-            "educationRequirements": self.education_requirements if self.education_requirements else '',
-            "employmentType": self.employment_type if self.employment_type else '',
-            "experienceRequirements": self.experience_requirements if self.experience_requirements else '',
-            "industry": "",
-            "identifier": {
-                "@type": "PropertyValue",
-                "name": settings.SITE_NAME,
-                "value": self.pk,
+            '@context': 'http://schema.org',
+            '@type': 'JobPosting',
+            'estimatedSalary': self.estimated_salary if self.estimated_salary else '',
+            'baseSalary': self.base_salary if self.base_salary else '',
+            'datePosted': self.date_created.isoformat() if self.date_created else '',
+            'description': 'Summary: {}'.format(self.summary),
+            'educationRequirements': self.education_requirements if self.education_requirements else '',
+            'employmentType': self.employment_type if self.employment_type else '',
+            'experienceRequirements': self.experience_requirements if self.experience_requirements else '',
+            'industry': '',
+            'identifier': {
+                '@type': 'PropertyValue',
+                'name': settings.SITE_NAME,
+                'value': self.pk,
             },
-            "qualifications": self.qualifications if self.qualifications else '',
-            "responsibilities": self.responsibilities if self.responsibilities else '',
-            "salaryCurrency": "GBP",
-            "skills": self.skills if self.skills else '',
-            "title": self.title if self.title else '',
-            "workHours": self.work_hours if self.work_hours else '',
-            "validThrough": self.closing_date.isoformat() if self.closing_date else '',
-            "hiringOrganization": ORGANISATION_SCHEMA,
+            'qualifications': self.qualifications if self.qualifications else '',
+            'responsibilities': self.responsibilities if self.responsibilities else '',
+            'salaryCurrency': 'GBP',
+            'skills': self.skills if self.skills else '',
+            'title': self.title if self.title else '',
+            'workHours': self.work_hours if self.work_hours else '',
+            'validThrough': self.closing_date.isoformat() if self.closing_date else '',
+            'hiringOrganization': ORGANISATION_SCHEMA,
         }
 
         if self.location:
             schema['jobLocation'] = {
-                "@type": "Place",
-                "address": {
-                    "@type": "PostalAddress",
-                    "streetAddress": self.schema_location.street_address,
-                    "addressLocality": self.schema_location.city,
-                    "addressRegion": self.schema_location.region,
-                    "postalCode": self.schema_location.postcode,
-                    "addressCountry": self.schema_location.country,
+                '@type': 'Place',
+                'address': {
+                    '@type': 'PostalAddress',
+                    'streetAddress': self.schema_location.street_address,
+                    'addressLocality': self.schema_location.city,
+                    'addressRegion': self.schema_location.region,
+                    'postalCode': self.schema_location.postcode,
+                    'addressCountry': self.schema_location.country,
                 },
             }
 

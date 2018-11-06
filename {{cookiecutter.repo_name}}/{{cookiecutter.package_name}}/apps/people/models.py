@@ -161,7 +161,7 @@ class Person(SearchMetaBase):
             'jobTitle': self.job_title if self.job_title else '',
             'name': self.__str__(),
             'url': 'http://www.janedoe.com',
-             'worksFor': ORGANISATION_SCHEMA
+            'worksFor': ORGANISATION_SCHEMA
         }
 
         if self.photo:
