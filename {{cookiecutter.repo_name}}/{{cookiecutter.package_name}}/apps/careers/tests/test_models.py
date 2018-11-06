@@ -47,8 +47,8 @@ class CareerModelsTestCase(CareersBaseTestCase):
     def test_schema_generation(self):
         self.client = Client()
 
-        url = self.future_events[0].get_absolute_url()
-        response = self.closes_future_job.get(url)
+        url = self.closes_future_job.get_absolute_url()
+        response = self.client.get(url)
         soup = BeautifulSoup(response.rendered_content, 'html.parser')
 
         valid = True

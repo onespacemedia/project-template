@@ -39,10 +39,9 @@ class ApplicationTestCase(PeopleBaseTestCase):
         self.assertEqual(self.person.twitter_url, 'https://twitter.com/onespacemedia')
 
     def test_schema_generation(self):
-        self._create_objects()
         self.client = Client()
 
-        url = self.article.get_absolute_url()
+        url = self.person.get_absolute_url()
         response = self.client.get(url)
         soup = BeautifulSoup(response.rendered_content, 'html.parser')
 

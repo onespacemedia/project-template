@@ -102,8 +102,8 @@ class Event(PageBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'Event',
-            'startDate': self.start_date,
-            'endDate': self.end_date,
+            'startDate': self.start_date.isoformat(),
+            'endDate': self.end_date.isoformat(),
             'description': self.summary if self.summary else '',
             'name': self.title,
             'mainEntityOfPage': url_from_path(self.get_absolute_url()),

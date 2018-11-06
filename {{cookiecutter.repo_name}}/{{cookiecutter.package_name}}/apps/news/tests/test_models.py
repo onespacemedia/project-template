@@ -111,7 +111,7 @@ class TestNews(TestCase):
     def test_schema_generation(self):
         self.client = Client()
 
-        url = self.person.get_absolute_url()
+        url = self.article.get_absolute_url()
         response = self.client.get(url)
         soup = BeautifulSoup(response.rendered_content, 'html.parser')
 
