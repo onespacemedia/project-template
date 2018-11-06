@@ -1,6 +1,9 @@
+import json
+
+from bs4 import BeautifulSoup
 from cms.apps.pages.models import Page
 from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase
+from django.test import Client, TestCase
 from watson import search
 
 from ..models import Faq, Faqs
@@ -36,3 +39,18 @@ class ApplicationTestCase(TestCase):
 
     def test_faq_unicode(self):
         self.assertEqual(self.faq.__str__(), 'What colour is the sky?')
+
+    def test_schema_generation(self):
+        self.client = Client()
+
+        url = self.faq.get_absolute_url()
+        response = self.client.get(url)
+        soup = BeautifulSoup(response.rendered_content, 'html.parser')
+
+        valid = True
+        try:
+            _ = json.loads(soup.find('script', type='application/ld+json').text)
+        except ValueError:
+            valid = False
+
+        self.assertTrue(valid)
