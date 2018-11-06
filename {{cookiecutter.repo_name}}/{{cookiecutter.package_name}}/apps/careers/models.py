@@ -129,8 +129,6 @@ class Career(PageBase):
 
     date_posted = models.DateField(
         auto_now_add=True,
-        blank=True,
-        null=True,
     )
 
     # Schema Fields

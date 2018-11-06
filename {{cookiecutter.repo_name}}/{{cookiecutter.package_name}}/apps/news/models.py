@@ -186,12 +186,6 @@ class Article(PageBase):
         default=DRAFT,
     )
 
-    date_created = models.DateField(
-        auto_now_add=True,
-        blank=True,
-        null=True,
-    )
-
     class Meta:
         unique_together = [['page', 'date', 'slug']]
         ordering = ['-date']
@@ -260,9 +254,9 @@ class Article(PageBase):
                 'name': ['English']
             },
             'mainEntityOfPage': url_from_path(self.get_absolute_url()),
-            'dateCreated': self.date_created.isoformat(),
+            'dateCreated': self.date.isoformat(),
             'dateModified': self.last_modified.isoformat(),
-            'datePublished': self.date_created.isoformat(),
+            'datePublished': self.date.isoformat(),
             'wordCount': self.article_length()
         }
 
