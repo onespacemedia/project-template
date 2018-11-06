@@ -13,12 +13,14 @@ from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import ORGANISATION_SCHEMA, get_related_items, schema_image, url_from_path
+from ...utils.utils import (ORGANISATION_SCHEMA, get_related_items,
+                            schema_image, url_from_path)
 
 
 class NewsFeed(ContentBase):
@@ -235,7 +237,8 @@ class Article(PageBase):
     def tagless_content(self):
         return strip_tags(self.content)
 
-    def article_length(self):
+    @cached_property
+    def word_count(self):
         return len(self.tagless_content.split(' '))
 
     def schema(self):
@@ -257,7 +260,7 @@ class Article(PageBase):
             'dateCreated': self.date.isoformat(),
             'dateModified': self.last_modified.isoformat(),
             'datePublished': self.date.isoformat(),
-            'wordCount': self.article_length()
+            'wordCount': self.word_count
         }
 
         if self.image:
