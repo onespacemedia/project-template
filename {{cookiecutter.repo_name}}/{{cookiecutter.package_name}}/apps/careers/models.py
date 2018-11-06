@@ -257,5 +257,6 @@ class Career(PageBase):
 
         return mark_safe(json.dumps(schema))
 
+
 historylinks.register(Career)
 sitemaps.register(Career)

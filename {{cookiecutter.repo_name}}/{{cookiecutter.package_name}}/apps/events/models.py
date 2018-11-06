@@ -5,14 +5,13 @@ from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField
 from cms.models.managers import PageBaseManager
-from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import date
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
-from ...utils.utils import schema_image
+from ...utils.utils import schema_image, url_from_path
 
 
 class Events(ContentBase):
@@ -107,7 +106,7 @@ class Event(PageBase):
             'endDate': self.end_date,
             'description': self.summary if self.summary else '',
             'name': self.title,
-            'mainEntityOfPage': 'https://www.{}{}'.format(settings.SITE_DOMAIN, self.get_absolute_url()),
+            'mainEntityOfPage': url_from_path(self.get_absolute_url()),
             'location': {
                 '@type': 'Place',
                 'name': 'Unknown',

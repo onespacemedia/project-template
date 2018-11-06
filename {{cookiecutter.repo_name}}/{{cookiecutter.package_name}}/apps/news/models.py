@@ -18,7 +18,7 @@ from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import get_related_items, ORGANISATION_SCHEMA, schema_image
+from ...utils.utils import ORGANISATION_SCHEMA, get_related_items, schema_image, url_from_path
 
 
 class NewsFeed(ContentBase):
@@ -259,7 +259,7 @@ class Article(PageBase):
                 'type': 'Language',
                 'name': ['English']
             },
-            'mainEntityOfPage': 'https://www.{}{}'.format(settings.SITE_DOMAIN, self.get_absolute_url()),
+            'mainEntityOfPage': url_from_path(self.get_absolute_url()),
             'dateCreated': self.date_created.isoformat(),
             'dateModified': self.last_modified.isoformat(),
             'datePublished': self.date_created.isoformat(),

@@ -9,7 +9,7 @@ from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 
-from ...utils.utils import ORGANISATION_SCHEMA, schema_image
+from ...utils.utils import ORGANISATION_SCHEMA, schema_image, url_from_path
 
 
 class Team(models.Model):
@@ -156,11 +156,11 @@ class Person(SearchMetaBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'Person',
-            'colleague': [x.get_absolute_url() for x in self.colleagues],
+            'colleague': [url_from_path(x.get_absolute_url()) for x in self.colleagues],
             'email': self.email if self.email else '',
             'jobTitle': self.job_title if self.job_title else '',
             'name': self.__str__(),
-            'url': 'http://www.janedoe.com',
+            'url': self.linkedin if self.linkedin else self.twitter_url if self.twitter else url_from_path(self.get_absolute_url()),
             'worksFor': ORGANISATION_SCHEMA
         }
 

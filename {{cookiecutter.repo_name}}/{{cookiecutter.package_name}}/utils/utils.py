@@ -58,12 +58,12 @@ ORGANISATION_SCHEMA = {
     '@type': 'Organization',
     'name': settings.SITE_NAME,
     'email': settings.SERVER_EMAIL,
-    'sameAs': 'https://www.{}'.format(settings.SITE_DOMAIN),
+    'sameAs': url_from_path('/'),
     'logo': {
         '@context': 'http://schema.org',
         '@type': 'ImageObject',
         'name': '{} logo'.format(settings.SITE_NAME),
-        'url': 'https://www.{}/static/img/logo.png'.format(settings.SITE_DOMAIN),
+        'url': url_from_path('/static/img/logo.png'),
         'description': 'Logo for {}'.format(settings.SITE_NAME),
         'copyrightHolder': '{}'.format(settings.SITE_NAME)
     }
@@ -76,7 +76,7 @@ def schema_image(image):
         '@context': 'http://schema.org',
         '@type': 'ImageObject',
         'name': image.title,
-        'url': 'https://www.{}{}'.format(settings.SITE_DOMAIN, img.url),
+        'url': url_from_path(img.url),
         'height': img.height,
         'width': img.width,
         'description': image.alt_text if image.alt_text else '',
