@@ -1,10 +1,15 @@
+import json
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import ORGANISATION_SCHEMA, schema_image
 
 
 class Team(models.Model):
@@ -146,6 +151,24 @@ class Person(SearchMetaBase):
     @property
     def colleagues(self):
         return self.team.person_set.exclude(pk=self.pk)
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Person',
+            'colleague': [x.get_absolute_url() for x in self.colleagues],
+            'email': self.email if self.email else '',
+            'jobTitle': self.job_title if self.job_title else '',
+            'name': self.__str__(),
+            'url': 'http://www.janedoe.com',
+             'worksFor': ORGANISATION_SCHEMA
+        }
+
+        if self.photo:
+            schema['image'] = schema_image(self.photo)
+
+        return mark_safe(json.dumps(schema))
+
 
 historylinks.register(Person)
 sitemaps.register(Person)

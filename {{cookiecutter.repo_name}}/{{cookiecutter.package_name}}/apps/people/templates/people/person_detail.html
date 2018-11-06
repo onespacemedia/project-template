@@ -2,37 +2,7 @@
 
 {% block schema %}
   <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Person",
-      "colleague": [
-        {% for colleague in person.colleagues %}"{{ colleague.get_absolute_url() }}",{% endfor %}
-      ],
-      {% if person.email %}"email": "{{ person.email }}",{% endif %}
-      {% if person.photo %}
-      {% set img = thumbnail(person.photo.file, "1500") %}
-      "image": {
-        "@context": "http://schema.org",
-        "@type": "ImageObject",
-        "name": "{{ person.photo.title }}",
-        "url": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ img.url }}",
-        "height": "{{ img.height }}",
-        "width": "{{ img.width }}"
-        {% if person.photo.alt_text %}, "description": "{{ person.photo.alt_text }}"{% endif %}
-        {% if person.photo.attribution %}, "author": "{{ person.photo.attribution }}"{% endif %}
-        {% if person.photo.copyright %}, "copyrightHolder": "{{ person.photo.copyright }}"{% endif %}
-      },
-      {% endif %}
-      {% if person.job_title %}"jobTitle": "{{ person.job_title }}",{% endif %}
-      "name": "{{ person }}",
-      "telephone": "(425) 123-4567",
-      "url": "http://www.janedoe.com",
-      "worksFor": {
-        "@type": "Organization",
-        "email": "{{ settings.SERVER_EMAIL }}",
-        "name": "{{ settings.SITE_NAME }}",
-      }
-    }
+    {{ person.schema() }}
   </script>
 {% endblock %}
 

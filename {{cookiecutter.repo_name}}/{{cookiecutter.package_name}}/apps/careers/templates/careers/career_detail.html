@@ -2,48 +2,7 @@
 
 {% block schema %}
   <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "JobPosting",
-      {% if career.estimated_salary %}"estimatedSalary": "{{ career.estimated_salary }}",{% endif %}
-      {% if career.base_salary %}"baseSalary": "{{ career.base_salary }}",{% endif %}
-      {% if career.date_posted %}"datePosted": "{{ career.date_posted }}",{% endif %}
-      {% if career.summary %}"description": "Summary: {{ career.summary }}",{% endif %}
-      {% if career.education_requirements %}"educationRequirements": "{{ career.education_requirements }}",{% endif %}
-      {% if career.employment_type %}"employmentType": "{{ career.employment_type }}",{% endif %}
-      {% if career.experience_requirements %}"experienceRequirements": "{{ career.experience_requirements }}",{% endif %}
-      "industry": "{# TODO #}",
-      {% if career.location %}
-      "jobLocation": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "{{ location.street_address }}",
-          "addressLocality": "{{ location.city }}",
-          "addressRegion": "{{ location.region }}",
-          "postalCode": "{{ location.postcode }}",
-          "addressCountry": "{{ location.country }}"
-        }
-      },
-      "identifier": {
-        "@type": "PropertyValue",
-        "name": "{{ settings.SITE_NAME }}",
-        "value": "{{ career.pk }}"
-      },
-      {% endif %}
-      {% if career.qualifications %}"qualifications": "{{ career.qualifications }}",{% endif %}
-      {% if career.responsibilities %}"responsibilities": "{{ career.responsibilities }}",{% endif %}
-      "salaryCurrency": "GBP",
-      {% if career.skills %}"skills": "{{ career.skills }}",{% endif %}
-      {% if career.title %}"title": "{{ career.title }}",{% endif %}
-      {% if career.work_hours %}"workHours": "{{ career.work_hours }}",{% endif %}
-      {% if career.closing_date %}"validThrough": "{{ career.closing_date }}",{% endif %}
-      "hiringOrganization": {
-        "@type": "Organization",
-        "name": "{{ settings.SITE_NAME }}",
-        "sameAs": "https://www.{{ settings.SITE_DOMAIN }}"
-      }
-    }
+    {{ career.schema() }}
   </script>
 {% endblock %}
 

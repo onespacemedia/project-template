@@ -1,5 +1,6 @@
 '''Miscellaneous helpful functions.'''
 
+from cms.apps.media.templatetags.media import thumbnail
 from django.conf import settings
 
 
@@ -51,3 +52,34 @@ def url_from_path(path, request=None):
         secure_part = 's'
 
     return 'http{}://{}{}'.format(secure_part, settings.SITE_DOMAIN, path)
+
+
+ORGANISATION_SCHEMA = {
+    '@type': 'Organization',
+    'name': settings.SITE_NAME,
+    'email': settings.SERVER_EMAIL,
+    'sameAs': 'https://www.{}'.format(settings.SITE_DOMAIN),
+    'logo': {
+        '@context': 'http://schema.org',
+        '@type': 'ImageObject',
+        'name': '{} logo'.format(settings.SITE_NAME),
+        'url': 'https://www.{}/static/img/logo.png'.format(settings.SITE_DOMAIN),
+        'description': 'Logo for {}'.format(settings.SITE_NAME),
+        'copyrightHolder': '{}'.format(settings.SITE_NAME)
+    }
+}
+
+
+def schema_image(image):
+    img = thumbnail(image.file, '1500')
+    return {
+        '@context': 'http://schema.org',
+        '@type': 'ImageObject',
+        'name': image.title,
+        'url': 'https://www.{}{}'.format(settings.SITE_DOMAIN, img.url),
+        'height': img.height,
+        'width': img.width,
+        'description': image.alt_text if image.alt_text else '',
+        'author': image.attribution if image.attribution else '',
+        'copyrightHolder': image.copyright if image.copyright else ''
+    }

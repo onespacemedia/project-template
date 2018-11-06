@@ -1,12 +1,18 @@
+import json
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField
 from cms.models.managers import PageBaseManager
+from django.conf import settings
 from django.db import models
 from django.template.defaultfilters import date
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import schema_image
 
 
 class Events(ContentBase):
@@ -92,6 +98,28 @@ class Event(PageBase):
             date_string += ' - {}'.format(date(self.end_date, 'j F Y'))
 
         return date_string
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Event',
+            'startDate': self.start_date,
+            'endDate': self.end_date,
+            'description': self.summary if self.summary else '',
+            'name': self.title,
+            'mainEntityOfPage': 'https://www.{}{}'.format(settings.SITE_DOMAIN, self.get_absolute_url()),
+            'location': {
+                '@type': 'Place',
+                'name': 'Unknown',
+                'address': 'Unknown'
+            },
+        }
+
+        if self.image:
+            schema['image'] = schema_image(self.image)
+
+        return mark_safe(json.dumps(schema))
+
 
 historylinks.register(Event)
 sitemaps.register(Event)

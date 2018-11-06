@@ -1,4 +1,6 @@
 """Models used by the CMS news app."""
+import json
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
@@ -12,10 +14,11 @@ from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import get_related_items
+from ...utils.utils import get_related_items, ORGANISATION_SCHEMA, schema_image
 
 
 class NewsFeed(ContentBase):
@@ -234,8 +237,41 @@ class Article(PageBase):
             'article': self,
         })
 
+    @property
+    def tagless_content(self):
+        return strip_tags(self.content)
+
     def article_length(self):
-        return len(strip_tags(self.content).split(' '))
+        return len(self.tagless_content.split(' '))
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Article',
+            'author': self.author if self.author else settings.SITE_NAME,
+            'publisher': ORGANISATION_SCHEMA,
+            'name': self.title,
+            'headline': self.title,
+            'text': self.summary if self.summary else '',
+            'articleBody': self.tagless_content,
+            'keywords': ','.join([x.title for x in self.categories]),
+            'inLanguage': {
+                'type': 'Language',
+                'name': ['English']
+            },
+            'mainEntityOfPage': 'https://www.{}{}'.format(settings.SITE_DOMAIN, self.get_absolute_url()),
+            'dateCreated': self.date_created.isoformat(),
+            'dateModified': self.last_modified.isoformat(),
+            'datePublished': self.date_created.isoformat(),
+            'wordCount': self.article_length()
+        }
+
+        if self.image:
+            schema['image'] = schema_image(self.image)
+        if self.card_image:
+            schema['thumbnailUrl'] = schema_image(self.card_image)
+
+        return mark_safe(json.dumps(schema))
 
 
 historylinks.register(Article)

@@ -1,10 +1,16 @@
+import json
+
 from cms import sitemaps
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase, PageBaseManager
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import ORGANISATION_SCHEMA
 
 
 class Careers(ContentBase):
@@ -76,6 +82,7 @@ class CareerLocation(models.Model):
 
     class Meta:
         ordering = ['title']
+        verbose_name = 'location'
 
     def __str__(self):
         return self.title
@@ -207,6 +214,48 @@ class Career(PageBase):
         return self.page.page.reverse('career_detail', kwargs={
             'slug': self.slug,
         })
+
+    def schema(self):
+        schema = {
+            "@context": "http://schema.org",
+            "@type": "JobPosting",
+            "estimatedSalary": self.estimated_salary if self.estimated_salary else '',
+            "baseSalary": self.base_salary if self.base_salary else '',
+            "datePosted": self.date_created.isoformat() if self.date_created else '',
+            "description": "Summary: {}".format(self.summary),
+            "educationRequirements": self.education_requirements if self.education_requirements else '',
+            "employmentType": self.employment_type if self.employment_type else '',
+            "experienceRequirements": self.experience_requirements if self.experience_requirements else '',
+            "industry": "",
+            "identifier": {
+                "@type": "PropertyValue",
+                "name": settings.SITE_NAME,
+                "value": self.pk,
+            },
+            "qualifications": self.qualifications if self.qualifications else '',
+            "responsibilities": self.responsibilities if self.responsibilities else '',
+            "salaryCurrency": "GBP",
+            "skills": self.skills if self.skills else '',
+            "title": self.title if self.title else '',
+            "workHours": self.work_hours if self.work_hours else '',
+            "validThrough": self.closing_date.isoformat() if self.closing_date else '',
+            "hiringOrganization": ORGANISATION_SCHEMA,
+        }
+
+        if self.location:
+            schema['jobLocation'] = {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": self.schema_location.street_address,
+                    "addressLocality": self.schema_location.city,
+                    "addressRegion": self.schema_location.region,
+                    "postalCode": self.schema_location.postcode,
+                    "addressCountry": self.schema_location.country,
+                },
+            }
+
+        return mark_safe(json.dumps(schema))
 
 historylinks.register(Career)
 sitemaps.register(Career)
