@@ -1,7 +1,7 @@
 import json
+from datetime import date
 
 from bs4 import BeautifulSoup
-from datetime import date
 from django.test import Client
 
 from ..models import Event

@@ -1,7 +1,7 @@
 import json
+from datetime import timedelta
 
 from bs4 import BeautifulSoup
-from datetime import timedelta
 from django.test import Client
 from django.utils import timezone
 
