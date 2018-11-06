@@ -46,7 +46,7 @@
   text-align: center;
 
   @media (--sm) {
-    width: columns(6, 8);
+    width: columns(9, 12);
     margin-right: auto;
     margin-left: auto;
   }
