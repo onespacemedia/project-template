@@ -109,6 +109,7 @@ class TestNews(TestCase):
             assert 1 / 'a'
 
     def test_schema_generation(self):
+        self._create_objects()
         self.client = Client()
 
         url = self.article.get_absolute_url()
