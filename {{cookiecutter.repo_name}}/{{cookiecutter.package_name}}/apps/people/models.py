@@ -148,7 +148,7 @@ class Person(SearchMetaBase):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
 
-    @property
+    @cached_property
     def colleagues(self):
         return self.team.person_set.exclude(pk=self.pk) if self.team else None
 
@@ -156,7 +156,7 @@ class Person(SearchMetaBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'Person',
-            'colleague': [url_from_path(x.get_absolute_url()) for x in self.colleagues],
+            'colleague': [url_from_path(x.get_absolute_url()) for x in self.colleagues] if self.colleagues else '',
             'email': self.email if self.email else '',
             'jobTitle': self.job_title if self.job_title else '',
             'name': self.__str__(),
