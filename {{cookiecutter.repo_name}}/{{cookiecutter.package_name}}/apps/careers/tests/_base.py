@@ -46,7 +46,7 @@ class CareersBaseTestCase(TestCase):
         # Add one with a past closing date.
         self.closes_future_job = Career.objects.create(
             page=self.job_page,
-            slug='foo-bar',
-            title='Tester',
+            slug='open-job',
+            title='Open job',
             closing_date=(timezone.now() + timedelta(days=30)).date()
         )
