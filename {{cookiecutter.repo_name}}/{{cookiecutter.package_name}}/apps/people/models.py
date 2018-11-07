@@ -150,7 +150,7 @@ class Person(SearchMetaBase):
 
     @property
     def colleagues(self):
-        return self.team.person_set.exclude(pk=self.pk)
+        return self.team.person_set.exclude(pk=self.pk) if self.team else None
 
     def schema(self):
         schema = {

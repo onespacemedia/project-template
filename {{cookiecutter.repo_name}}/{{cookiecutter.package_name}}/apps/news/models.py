@@ -251,7 +251,7 @@ class Article(PageBase):
             'headline': self.title,
             'text': self.summary if self.summary else '',
             'articleBody': self.tagless_content,
-            'keywords': ','.join([x.title for x in self.categories]),
+            'keywords': ','.join([x.title for x in self.categories.all()]),
             'inLanguage': {
                 'type': 'Language',
                 'name': ['English']

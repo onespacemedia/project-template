@@ -219,7 +219,7 @@ class Career(PageBase):
             '@type': 'JobPosting',
             'estimatedSalary': self.estimated_salary if self.estimated_salary else '',
             'baseSalary': self.base_salary if self.base_salary else '',
-            'datePosted': self.date_created.isoformat() if self.date_created else '',
+            'datePosted': self.date_posted.isoformat() if self.date_posted else '',
             'description': 'Summary: {}'.format(self.summary),
             'educationRequirements': self.education_requirements if self.education_requirements else '',
             'employmentType': self.employment_type if self.employment_type else '',
