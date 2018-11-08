@@ -1,14 +1,17 @@
 """Admin settings for the CMS news app."""
 
 from cms.admin import OnlineBaseAdmin, PageBaseAdmin
+from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
 from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.utils.html import escape, mark_safe
 from reversion.admin import VersionAdmin
 from reversion.models import Version
 from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin
-from .models import STATUS_CHOICES, Article, Category, get_default_news_feed
+from .models import Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
@@ -25,11 +28,14 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
     list_display = ['get_image', 'title', 'date', 'render_categories', 'featured', 'is_online', 'last_modified']
     list_display_links = ['get_image', 'title']
     list_editable = ['featured', 'is_online']
-    list_filter = ['featured', 'is_online', 'categories', 'status']
+    list_filter = ['page', 'categories', 'featured', 'is_online']
+
+    if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
+        list_filter.append('status')
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'news_feed', 'featured', 'date', 'status'],
+            'fields': ['title', 'slug', 'page', 'featured', 'date', 'status'],
         }),
         ('Content', {
             'fields': ['image', 'card_image', 'content', 'summary', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
@@ -58,7 +64,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['news_feed'].initial = get_default_news_feed()
+        form.base_fields['page'].initial = get_default_news_feed()
         return form
 
     def get_queryset(self, request):
@@ -72,7 +78,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
         if request:
             choices_list = STATUS_CHOICES
             if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False) and not request.user.has_perm('news.can_approve_articles'):
-                choices_list = [x for x in STATUS_CHOICES if x[0] != 'approved']
+                choices_list = [x for x in STATUS_CHOICES if x[0] != APPROVED]
 
             if db_field.name == 'status':
                 kwargs['choices'] = choices_list
@@ -86,7 +92,13 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
         categories = obj.categories.all()
         if not categories:
             return '(None)'
-        return ', '.join([str(category) for category in categories])
+        parts = []
+
+        for category in categories:
+            url = reverse('admin:news_category_change', args=[category.pk])
+            parts.append(f'<a href="{url}">{escape(category)}</a>')
+
+        return mark_safe(', '.join(parts))
 
     def last_modified(self, obj):
         versions = Version.objects.get_for_object(obj)

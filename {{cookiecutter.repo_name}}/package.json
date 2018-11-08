@@ -4,7 +4,8 @@
   "dependencies": {
     "babel-polyfill": "6.23.0",
     "es6-promise": "^4.1.0",
-    "intersection-observer": "^0.4.2"
+    "intersection-observer": "^0.4.2",
+    "reset-css": "^4.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -71,7 +72,6 @@
     "prettier": "^1.6.1",
     "prettier-standard": "^6.0.0",
     "require-dir": "0.3.2",
-    "sanitize.css": "^5.0.0",
     "standard": "^10.0.2",
     "style-loader": "^0.18.2",
     "stylelint": "^8.1.1",
@@ -97,7 +97,7 @@
   "lint-staged": {
     "linters": {
       "{{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}": [
-        "prettier-standard",
+        "prettier-standard --print-width 120",
         "eslint --fix",
         "git add"
       ],
@@ -106,7 +106,7 @@
         "git add"
       ],
       "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css": [
-        "prettier-standard --write",
+        "prettier-standard --print-width 120 --write",
         "stylelint --fix",
         "git add"
       ],
@@ -426,7 +426,12 @@
       "selector-combinator-space-before": "always",
       "selector-descendant-combinator-no-non-space": true,
       "selector-max-id": 0,
-      "selector-max-type": 0,
+      "selector-max-type": [
+        0,
+        {
+          "ignoreTypes": ["svg"]
+        }
+      ],
       "selector-max-universal": 0,
       "selector-no-qualifying-type": true,
       "selector-no-vendor-prefix": true,

@@ -37,14 +37,14 @@ class RedirectAdminTestCase(BaseRedirectTestCase):
             self.reset_admin()
             self.assertEqual(
                 self.admin.get_list_display(request),
-                ('old_path', 'new_path', 'test_redirect')
+                ('old_path', 'new_path', 'type', 'test_redirect')
             )
 
         with self.settings(REDIRECTS_ENABLE_REGEX=True):
             self.reset_admin()
             self.assertEqual(
                 self.admin.get_list_display(request),
-                ('old_path', 'new_path', 'regular_expression', 'test_redirect')
+                ('old_path', 'new_path', 'regular_expression', 'type', 'test_redirect')
             )
 
     def test_get_form(self):

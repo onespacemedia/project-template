@@ -1,4 +1,6 @@
 from cms.apps.pages.models import Page
+from cms.plugins.moderation.models import (APPROVED, DRAFT, STATUS_CHOICES,
+                                           SUBMITTED)
 from django.contrib.admin.sites import AdminSite
 from django.contrib.contenttypes.models import ContentType
 from django.test import RequestFactory, TestCase
@@ -56,7 +58,7 @@ class TestArticleAdminBase(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
                 date=self.date,
@@ -68,9 +70,9 @@ class TestArticleAdminBase(TestCase):
     def test_articleadminbase_formfield_for_choice_field(self):
         formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
-            ('approved', 'Approved')
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
+            (APPROVED, 'Approved')
         ])
 
         self.request.user = MockSuperUser()
@@ -79,9 +81,9 @@ class TestArticleAdminBase(TestCase):
             formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
-            ('approved', 'Approved')
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
+            (APPROVED, 'Approved')
         ])
 
         self.request.user.has_perm = lambda x: False
@@ -89,19 +91,24 @@ class TestArticleAdminBase(TestCase):
             formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
-            ('draft', 'Draft'),
-            ('submitted', 'Submitted for approval'),
+            (DRAFT, 'Draft'),
+            (SUBMITTED, 'Submitted for approval'),
         ])
 
     def test_articleadminbase_get_form(self):
         form = self.article_admin.get_form(self.request, obj=None)
         default_feed = get_default_news_feed()
-        self.assertTrue('news_feed' in form.base_fields)
-        self.assertEqual(default_feed, form.base_fields['news_feed'].initial)
+        self.assertTrue('page' in form.base_fields)
+        self.assertEqual(default_feed, form.base_fields['page'].initial)
 
     def test_render_categories(self):
         categories = self.article_admin.render_categories(self.article)
-        self.assertEqual(categories, 'Foo, Foo 2')
+        self.assertEqual(categories,
+            (
+                '<a href="/admin/news/category/{}/change/">Foo</a>, '
+                '<a href="/admin/news/category/{}/change/">Foo 2</a>'
+            ).format(self.category.pk, self.category_2.pk)
+        )
 
     def test_get_queryset(self):
         # don't do anything with it, just make sure this doesn't throw an

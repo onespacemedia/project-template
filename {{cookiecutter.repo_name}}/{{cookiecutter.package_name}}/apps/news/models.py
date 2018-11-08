@@ -3,6 +3,7 @@ from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import HtmlField, OnlineBaseManager, PageBase
+from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES
 from cms.templatetags.html import truncate_paragraphs
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -12,6 +13,8 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
+
+from ...utils.utils import get_related_items
 
 
 class NewsFeed(ContentBase):
@@ -49,6 +52,7 @@ class NewsFeed(ContentBase):
 
     call_to_action = models.ForeignKey(
         'components.CallToAction',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )
@@ -105,21 +109,14 @@ class ArticleManager(OnlineBaseManager):
 
         queryset = super(ArticleManager, self).select_published(queryset)
         queryset = queryset.filter(
-            news_feed__page__pk__in=published_news_feed_pages,
+            page__page__pk__in=published_news_feed_pages,
             date__lte=timezone.now().replace(second=0, microsecond=0),
         )
         if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
             queryset = queryset.filter(
-                status='approved'
+                status=APPROVED
             )
         return queryset
-
-
-STATUS_CHOICES = [
-    ('draft', 'Draft'),
-    ('submitted', 'Submitted for approval'),
-    ('approved', 'Approved')
-]
 
 
 class Article(PageBase):
@@ -127,10 +124,12 @@ class Article(PageBase):
 
     objects = ArticleManager()
 
-    news_feed = models.ForeignKey(
+    page = models.ForeignKey(
         'news.NewsFeed',
+        on_delete=models.PROTECT,
         null=True,
         blank=False,
+        verbose_name='News feed'
     )
 
     featured = models.BooleanField(
@@ -161,6 +160,7 @@ class Article(PageBase):
 
     call_to_action = models.ForeignKey(
         'components.CallToAction',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text="By default the call to action will be the same as the news feed. You can override it for a specific article here."
@@ -170,19 +170,20 @@ class Article(PageBase):
         'news.Category',
         blank=True,
     )
-    {% if cookiecutter.people == 'yes' %}author = models.ForeignKey(
+{% if cookiecutter.people == 'yes' %}    author = models.ForeignKey(
         'people.Person',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     ){% endif %}
     status = models.CharField(
         max_length=100,
         choices=STATUS_CHOICES,
-        default='draft',
+        default=DRAFT,
     )
 
     class Meta:
-        unique_together = [['news_feed', 'date', 'slug']]
+        unique_together = [['page', 'date', 'slug']]
         ordering = ['-date']
         permissions = [
             ('can_approve_articles', 'Can approve articles'),
@@ -199,7 +200,14 @@ class Article(PageBase):
 
     def get_absolute_url(self):
         """Returns the URL of the article."""
-        return self._get_permalink_for_page(self.news_feed.page)
+        return self._get_permalink_for_page(self.page.page)
+
+    def get_related_articles(self, count=3):
+        candidate_querysets = [
+            Article.objects.filter(categories__in=self.categories.all()),
+            Article.objects.all(),
+        ]
+        return get_related_items(candidate_querysets, count=count, exclude=self)
 
     @property
     def get_summary(self):
@@ -218,20 +226,6 @@ class Article(PageBase):
         return render_to_string('news/includes/card.html', {
             'article': self,
         })
-
-    def get_related_articles(self, count=3):
-        related_articles = Article.objects.filter(
-            categories=self.categories.all(),
-        ).exclude(
-            id=self.id
-        )
-
-        if related_articles.count() < count:
-            related_articles |= Article.objects.exclude(
-                id__in=[self.pk] + [x.id for x in related_articles]
-            )
-
-        return related_articles.distinct()[:count]
 
 
 historylinks.register(Article)

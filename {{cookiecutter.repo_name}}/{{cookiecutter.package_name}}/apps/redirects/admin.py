@@ -48,12 +48,13 @@ class RedirectModelForm(forms.ModelForm):
 
 @admin.register(Redirect)
 class RedirectAdmin(admin.ModelAdmin):
+    list_filter = ['type']
     search_fields = ('old_path', 'new_path')
 
     def get_list_display(self, request):
         if getattr(settings, 'REDIRECTS_ENABLE_REGEX', False):
-            return ('old_path', 'new_path', 'regular_expression', 'test_redirect')
-        return ('old_path', 'new_path', 'test_redirect')
+            return ('old_path', 'new_path', 'regular_expression', 'type', 'test_redirect')
+        return ('old_path', 'new_path', 'type', 'test_redirect')
 
     def get_form(self, request, obj=None, **kwargs):
         kwargs["form"] = RedirectModelForm

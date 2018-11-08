@@ -46,11 +46,13 @@ class Category(models.Model):
 class Faq(PageBase):
 
     page = models.ForeignKey(
-        Faqs
+        Faqs,
+        on_delete=models.PROTECT,
     )
 
     category = models.ForeignKey(
         'Category',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
     )

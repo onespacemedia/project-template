@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from cms.apps.pages.models import Page
 from cms.models import publication_manager
+from cms.plugins.moderation.models import APPROVED
 from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase
 from django.utils.timezone import now
@@ -33,7 +34,7 @@ class TestNews(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
                 # The seconds subtraction is because of time-rounding
@@ -44,17 +45,17 @@ class TestNews(TestCase):
             self.article.categories.add(self.category)
 
             self.article_2 = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo 2',
                 slug='foo2',
                 date=self.date + timedelta(days=10)
             )
 
             self.article_3 = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo 3',
                 slug='foo3',
-                status='approved',
+                status=APPROVED,
                 date=self.date - timedelta(seconds=61),
             )
 
@@ -79,6 +80,10 @@ class TestNews(TestCase):
     def test_article_get_absolute_url(self):
         self._create_objects()
         self.assertEqual(self.article.get_absolute_url(), '/foo/')
+
+    def test_article_get_related_articles(self):
+        self._create_objects()
+        self.assertNotEqual(len(self.article.get_related_articles()), 0)
 
     def test_articlemanager_select_published(self):
         self._create_objects()

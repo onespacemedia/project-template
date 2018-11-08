@@ -70,7 +70,7 @@ html {
 }
 
 body {
-  @include Font_16-24;
+  @include Font_16;
 
   text-rendering: optimizeLegibility;
 
@@ -133,13 +133,39 @@ p {
 |--------------------------------------------------------------------------
 | Typography - Anchors
 |--------------------------------------------------------------------------
+| It is more comment that we *don't* want any kind of default styling on
+| <a> elements. We'll unset any browser styling on <a>, then give some
+| defaults for unclassed <a> elements.
 |
 */
 a {
-  font-weight: 500;
+  font-weight: inherit;
   text-decoration: none;
 
+  color: currentColor;
+}
+
+a:not([class]) {
+  font-weight: 500;
+
   color: var(--Color_Anchor);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Typography - Basic styles
+|--------------------------------------------------------------------------
+| Undo meyer reset on <em> / <i> / <strong> / <b>
+|
+*/
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: 700;
 }
 
 /*

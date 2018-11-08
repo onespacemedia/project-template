@@ -1,0 +1,13 @@
+<div class="cc-Bar js-CookieConsent">
+  <div class="cc-Bar_Inner">
+    <div class="cc-Bar_Content">
+      {{ setting('cookie-bar-text') }} <a class="cc-Bar_LearnMore" href="{{ setting('cookie-bar-link') }}">Learn more</a>
+    </div>
+    <div class="cc-Bar_Actions">
+      <button class="cc-Bar_Accept js-CookieAccept">Accept</button>
+      <div class="cc-Bar_CloseIcon js-CookieClose">
+        {% include 'close.svg' %}
+      </div>
+    </div>
+  </div>
+</div>

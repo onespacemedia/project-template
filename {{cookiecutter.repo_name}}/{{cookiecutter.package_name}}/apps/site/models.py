@@ -49,6 +49,7 @@ class Footer(models.Model):
 
     contact_link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         verbose_name='Link page',
         blank=True,
         null=True,
@@ -74,6 +75,7 @@ class Footer(models.Model):
 
     terms_of_use_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         blank=True,
         null=True,
         related_name='+',
@@ -97,6 +99,7 @@ class Footer(models.Model):
 
     legal_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         blank=True,
         null=True,
         related_name='+',
@@ -120,6 +123,7 @@ class Footer(models.Model):
 
     privacy_policy_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         blank=True,
         null=True,
         related_name='+',
@@ -202,6 +206,7 @@ class FooterLink(models.Model):
 
     footer = models.ForeignKey(
         'site.Footer',
+        on_delete=models.PROTECT,
     )
 
     text = models.CharField(
@@ -210,6 +215,7 @@ class FooterLink(models.Model):
 
     link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
@@ -267,6 +273,7 @@ class HeaderLink(models.Model):
 
     header = models.ForeignKey(
         'site.Header',
+        on_delete=models.PROTECT,
     )
 
     link_text = models.CharField(
@@ -275,6 +282,7 @@ class HeaderLink(models.Model):
 
     link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.PROTECT,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',

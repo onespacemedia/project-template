@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from cms.apps.pages.middleware import RequestPageManager
 from cms.apps.pages.models import Page
 from django.contrib.contenttypes.models import ContentType
@@ -6,6 +7,7 @@ from django.utils.timezone import now
 from django.views import generic
 from watson import search
 
+from ....utils.utils import url_from_path
 from ..models import Article, Category, NewsFeed
 from ..views import ArticleDetailView, ArticleFeedView, ArticleListMixin
 
@@ -40,9 +42,10 @@ class TestViews(TestCase):
             )
 
             self.article = Article.objects.create(
-                news_feed=self.feed,
+                page=self.feed,
                 title='Foo',
                 slug='foo',
+                content=r'<p>Some links in this article below</p>\r\n<p><a href="/newfeedpage/" title="Valid news feedpage">/newfeedpage/</a></p>\r\n<p><a href="newfeedpage/" title="Invalid news feedpage">newfeedpage</a></p>\r\n<p></p>\r\n<p>iframe below</p>\r\n<p><iframe src="https://www.w3schools.com"></iframe></p>\r\n<p>an_image below</p>\r\n<p><img src="/r/16-2/" alt="events_02" title="events_02" /></p>',
                 date=self.date,
             )
 
@@ -88,11 +91,21 @@ class TestViews(TestCase):
 
         get = view.get(view.request)
 
+        content = get.content
+        content = content.decode('utf-8')
+        soup = BeautifulSoup(content, features="xml")
+        links = soup.find_all('link')
+        news_url_link = str(links[0])
+        article_url_link = str(links[1])
+
         self.assertEqual(get.status_code, 200)
+        self.assertGreater(len(content), len(self.article.content))
 
-        # Handle single and double digit dates.
-        self.assertIn(get['Content-Length'], ['376', '377'])
-
+        # bs returns None if there is no RSS tag. This behaviour may change in future?
+        self.assertIsNotNone(soup.rss)
+        self.assertIsNone(soup.iframe)
+        self.assertEqual(news_url_link, f'<link>{url_from_path("/")}</link>')
+        self.assertEqual(article_url_link, f'<link>{url_from_path(self.article.slug)}/</link>')
         self.assertEqual(get['Content-Type'], 'application/rss+xml; charset=utf-8')
 
     def test_articledetailview_get_context_data(self):

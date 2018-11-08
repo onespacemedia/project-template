@@ -1,0 +1,72 @@
+/*
+|--------------------------------------------------------------------------
+| Pagination
+|--------------------------------------------------------------------------
+|
+| @namespace: pgn-
+|
+*/
+.pgn-Pagination {
+  display: flex;
+}
+
+.pgn-Pagination_Pages {
+  display: flex;
+}
+
+/* Common styles for previous/next controls and pagination pages */
+.pgn-Pagination_Page,
+.pgn-Pagination_Control {
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  width: 40px;
+  height: @width;
+
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+
+  color: var(--Color_Body);
+}
+
+.pgn-Pagination_Page {
+  margin-left: 10px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.pgn-Pagination_Page-current {
+  border-color: var(--Color_Brand);
+}
+
+.pgn-Pagination_Control {
+  color: var(--Color_Brand);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 7px;
+  }
+  /* stylelint-enable */
+}
+
+.pgn-Pagination_Control-prev {
+  margin-right: 10px;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    /* Turn chevron-right into chevron-left :) */
+    transform: rotate(180deg);
+  }
+  /* stylelint-enable */
+}
+
+.pgn-Pagination_Control-next {
+  margin-left: 10px;
+}

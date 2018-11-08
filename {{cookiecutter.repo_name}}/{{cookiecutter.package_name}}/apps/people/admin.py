@@ -3,6 +3,8 @@ from urllib.parse import urlparse
 from cms.admin import SearchMetaBaseAdmin
 from django import forms
 from django.contrib import admin
+from django.core.urlresolvers import reverse
+from django.utils.html import escape, mark_safe
 from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin
@@ -79,11 +81,11 @@ class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
     # for HasImageAdminMixin
     image_field = 'photo'
 
-    list_display = ['get_image', '__str__', 'job_title', 'team', 'is_online']
+    list_display = ['get_image', '__str__', 'job_title', 'render_team', 'is_online']
     list_display_links = ['get_image', '__str__']
     list_editable = ['is_online']
-
     list_filter = list(SearchMetaBaseAdmin.list_filter) + ['team']
+    search_fields = ['first_name', 'middle_name', 'last_name', 'job_title']
 
     fieldsets = (
         (None, {
@@ -113,3 +115,14 @@ class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
             pass
 
         return form
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).select_related('team')
+
+    def render_team(self, obj):
+        if not obj.team:
+            return '-'
+        url = reverse('admin:people_team_change', args=[obj.team.pk])
+        return mark_safe(f'<a href="{url}">{escape(str(obj.team))}</a>')
+    render_team.short_description = 'Team'
+    render_team.admin_order_field = 'team'

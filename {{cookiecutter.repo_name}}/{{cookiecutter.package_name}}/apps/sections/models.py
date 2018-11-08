@@ -177,6 +177,7 @@ class SectionBase(models.Model):
 
     link_page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.SET_NULL,
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
@@ -236,6 +237,10 @@ class SectionBase(models.Model):
                 'link_page': 'Please provide either a "Link Page" or a "Link URL"',
             })
 
+    @cached_property
+    def cache_key(self):
+        return f'{self._meta.app_label}.{self._meta.model_name}.{self.pk}'
+
     @property
     def template(self):
         folder_name = self.type.split('-')[0]
@@ -275,10 +280,10 @@ class SectionBase(models.Model):
                 section_options = section_type[1]
 
                 # Don't require that search_fields is set.
-                if 'search_fields' not in section_options:
+                if 'search' not in section_options:
                     continue
 
-                search_fields = section_options['search_fields']
+                search_fields = section_options['search']
 
                 search_text_items = []
                 for field in search_fields:
@@ -295,6 +300,7 @@ class ContentSection(SectionBase):
 
     page = models.ForeignKey(
         'pages.Page',
+        on_delete=models.CASCADE,
     )
 
 

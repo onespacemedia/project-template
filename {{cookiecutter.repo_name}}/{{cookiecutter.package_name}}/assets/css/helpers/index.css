@@ -2,4 +2,5 @@
 @import 'definitions/media-definitions.css';
 @import 'definitions/selector-definitions.css';
 @import 'transitions.css';
+@import 'animations.css';
 @import 'mixins/*.css';

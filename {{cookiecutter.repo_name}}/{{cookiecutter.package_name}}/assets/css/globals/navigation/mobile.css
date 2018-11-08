@@ -1,0 +1,456 @@
+/*
+|--------------------------------------------------------------------------
+| Mobile navigation
+|--------------------------------------------------------------------------\
+| Phone and tablet
+|
+| @namespace: nav-
+|
+*/
+.nav-IsOpen {
+  /* stylelint-disable selector-max-type */
+  body {
+    /* To stop scrolling of page while nav open */
+    position: fixed;
+
+    width: 100%;
+
+    overflow: hidden;
+  }
+  /* stylelint-enable */
+}
+
+.nav-Mobile {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 11;
+
+  max-width: var(--Mobile_NavWidth);
+  width: 100%;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  background-color: #fff;
+
+  transform: translateX(100%);
+
+  @media (--lg) {
+    display: none;
+  }
+
+  .nav-IsOpen-ended & {
+    opacity: 1;
+    visibility: visible;
+
+    transform: none;
+  }
+
+  .nav-IsOpen-in & {
+    animation: SlideyMcFadeIn 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+
+  .nav-IsOpen-out & {
+    animation: SlideyMcFadeOut 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+.nav-Mobile_Logo {
+  position: absolute;
+  /* -21px for half the logo height */
+  top: calc(var(--Mobile_NavHeight) / 2 - 21px);
+  left: calc(var(--Grid_Gutter) * 2);
+
+  display: none;
+
+  @media (--xxs-viewport) {
+    display: block;
+  }
+
+  svg {
+    width: 166px;
+    height: 42px;
+  }
+}
+
+.nav-Mobile_Items {
+  position: relative;
+  top: var(--Mobile_NavHeight);
+  right: 0;
+
+  align-items: stretch;
+  flex-direction: column;
+
+  display: flex;
+  width: 100%;
+  height: calc(100% - var(--Mobile_NavHeight));
+  margin-left: auto;
+
+  background: #fff;
+  border-top: 1px solid var(--Color_Border);
+
+  overflow-y: scroll;
+
+  @media (--xs) {
+    max-width: var(--Mobile_NavWidth);
+  }
+}
+
+.nav-Mobile_Item,
+.nav-Mobile_DropdownItem {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 100%;
+
+  border-bottom: 1px solid var(--Color_Border);
+  color: var(--Color_Brand);
+
+  /* Highlight the active page (including subpages) */
+  &[aria-current] {
+    background-color: rgba(var(--Color_Brand), 0.07);
+    color: var(--Color_Brand);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Link
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Mobile_Link {
+  align-items: center;
+  justify-content: space-between;
+
+  display: flex;
+  width: 100%;
+  padding: var(--Grid_Gutter) calc(var(--Grid_Gutter) * 2);
+
+  text-align: left;
+
+  border: none;
+  color: currentColor;
+
+  transition: color var(--Global_Transition);
+
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--Color_Anchor);
+  }
+
+  .nav-Mobile_DropdownItem-back & {
+    justify-content: flex-start;
+
+    cursor: pointer;
+  }
+}
+
+.nav-Mobile_LinkIcon {
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin-left: var(--Grid_Gutter);
+
+  .nav-Mobile_Item-hasDropdown & {
+    transform: rotate(-90deg);
+  }
+
+  .nav-Mobile_DropdownItem-back & {
+    margin-right: var(--Grid_Gutter);
+    margin-left: 0;
+
+    transform: rotate(90deg);
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Mobile_Dropdown,
+.nav-Mobile_DropdownChild {
+  position: fixed;
+  top: var(--Mobile_NavHeight);
+  right: -var(--Mobile_NavWidth);
+
+  z-index: 1;
+
+  max-width: var(--Mobile_NavWidth);
+  width: 100%;
+  height: calc(100% - var(--Mobile_NavHeight));
+
+  background: #fff;
+  border-top: 1px solid var(--Color_Border);
+
+  overflow-y: scroll;
+  visibility: hidden;
+
+  /* Use trick with visibility transition delay so we can transition visibility hidden */
+  transition: visibility 0s ease-out var(--Global_Transition),
+    right var(--Global_Transition);
+
+  .nav-Mobile_Item[aria-selected='true'] > &,
+  .nav-Mobile_DropdownItem[aria-selected='true'] > & {
+    /*
+     * Animate right rather than transform as with transform it causes an issue with
+     * scrollbars not getting overlapped correctly
+     */
+    right: 0;
+
+    visibility: visible;
+
+    transition-delay: 0s;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Backdrop
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Header_Backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+
+  background-color: rgba(0, 0, 0, 0.3);
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s, visibility 0.3s;
+
+  @media (--lg) {
+    display: none;
+  }
+
+  .nav-IsOpen & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Trigger
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Header_Trigger {
+  position: absolute;
+  top: calc(var(--Mobile_NavHeight) / 2 - var(--BurgerMenu_Size) / 2);
+  right: var(--Grid_Gutter);
+  z-index: 11;
+
+  display: block;
+  width: var(--BurgerMenu_Size);
+  height: var(--BurgerMenu_Size);
+
+  cursor: pointer;
+
+  @media (--md) {
+    right: calc(var(--Grid_Gutter) * 2);
+  }
+
+  @media (--lg) {
+    display: none;
+  }
+}
+
+/*
+ * Avoid changing the calculations for the burger menu size,
+ * as they are you should be able to change the size and stroke
+ * width with the variable alone
+ */
+.nav-Header_TriggerLine {
+  position: absolute;
+  left: calc(var(--BurgerMenu_Size) / 4);
+
+  display: block;
+  width: calc(var(--BurgerMenu_Size) / 2);
+  height: var(--BurgerMenu_Stroke);
+
+  background-color: currentColor;
+  border-radius: 2px;
+
+  transition: top var(--Global_Transition) var(--Transition_EaseOutBack);
+
+  /* This stops the navigation animation on initial page load */
+  .util-Preload & {
+    animation-duration: 0s;
+  }
+}
+
+.nav-Header_TriggerLine-top {
+  top: calc(var(--BurgerMenu_Size) / 3);
+
+  animation: TriggerLine-topOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .nav-Header_Trigger-open & {
+    animation: TriggerLine-topIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+.nav-Header_TriggerLine-middle {
+  top: calc(var(--BurgerMenu_Size) / 2);
+
+  animation: TriggerLine-middleOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .nav-Header_Trigger-open & {
+    animation: TriggerLine-middleIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+.nav-Header_TriggerLine-bottom {
+  top: calc(var(--BurgerMenu_Size) / 1.5);
+
+  animation: TriggerLine-bottomOut 0.5s var(--Transition_EaseOutBack) forwards;
+
+  .nav-Header_Trigger-open & {
+    animation: TriggerLine-bottomIn 0.5s var(--Transition_EaseOutBack) forwards;
+  }
+}
+
+@keyframes TriggerLine-topIn {
+  0% {
+    top: calc(var(--BurgerMenu_Size) / 3);
+  }
+
+  50% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes TriggerLine-topOut {
+  0% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(45deg);
+  }
+
+  50% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: calc(var(--BurgerMenu_Size) / 3);
+  }
+}
+
+@keyframes TriggerLine-middleIn {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes TriggerLine-middleOut {
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes TriggerLine-bottomIn {
+  0% {
+    top: calc(var(--BurgerMenu_Size) / 1.5);
+  }
+
+  50% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes TriggerLine-bottomOut {
+  0% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    top: calc(var(--BurgerMenu_Size) / 2);
+
+    transform: rotate(0deg);
+  }
+
+  100% {
+    top: calc(var(--BurgerMenu_Size) / 1.5);
+  }
+}
+
+@keyframes SlideyMcFadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+
+    transform: 100%;
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+
+    transform: none;
+  }
+}
+
+@keyframes SlideyMcFadeOut {
+  0% {
+    opacity: 1;
+    visibility: visible;
+
+    transform: none;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+
+    transform: 100%;
+  }
+}

@@ -1,0 +1,56 @@
+{#
+Asynchronous Google Font loading.
+
+This allows us to use Google Fonts without blocking the initial page render,
+and only causing a FOUT on the first page load. The contents of the Google
+Font CSS will be stored in the browser's localStorage. How this works:
+
+First, we'll check localStorage for the cached font CSS. If we already have it
+cached inject it as an inline <style> tag.
+
+Once we hit DOMContentLoaded (i.e. we've got a mostly-complete page render
+other than JS, we fetch the Google Font kit whether we have it cached or not.
+This will update the localStorage for the next page load.
+
+If we *didn't* have the font kit cached, then we inject the text of the font
+kit (the CSS itself, not a `<link>` reference to it) into the <head>. We
+don't do this if we did already have it cached to prevent an unnecessary
+layout recomputation).
+#}
+<script>
+  (function () {
+    function injectFontCss(text) {
+      var styleElement = document.createElement('style');
+      styleElement.innerHTML = text;
+      document.head.appendChild(styleElement);
+    }
+
+    var cssPath = '{{ settings.GOOGLE_FONTS_KIT_URL }}';
+    var cacheKey = '_gfont_cache_{{ settings.GIT_COMMIT_HASH }}';
+    var now = Date.now();
+    var cachedVersion = window.localStorage[cacheKey];
+
+    if (cachedVersion) {
+      injectFontCss(cachedVersion);
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      var req = new XMLHttpRequest();
+      req.addEventListener('load', function () {
+        var text = this.responseText;
+        {#
+        Hack to add font-display: swap.
+        https://github.com/google/fonts/issues/358#issuecomment-379328314
+        #}
+        text = text.replace(/}/g, 'font-display: swap }');
+        window.localStorage[cacheKey] = text;
+
+        if (!cachedVersion) {
+          injectFontCss(text);
+        }
+      });
+      req.open('GET', cssPath);
+      req.send();
+    });
+  })();
+</script>

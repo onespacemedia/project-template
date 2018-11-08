@@ -37,13 +37,13 @@
   text-align: center;
 
   @media (--sm) {
-    width: calc(6 / 8 * 100%);
+    width: columns(9, 12);
     margin-right: auto;
     margin-left: auto;
   }
 
   @media (--md) {
-    width: calc(8 / 12 * 100%);
+    width: columns(8, 12);
   }
 }
 
@@ -52,7 +52,7 @@
 }
 
 .cta-CallToAction_Link {
-  @include Button-primary;
+  @include Button;
 
   margin-top: 1vr;
 }

@@ -42,6 +42,7 @@ class Career(PageBase):
 
     page = models.ForeignKey(
         Careers,
+        on_delete=models.PROTECT,
     )
 
     closing_date = models.DateField(
