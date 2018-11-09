@@ -242,14 +242,14 @@ class Career(PageBase):
 
         if self.location:
             schema['jobLocation'] = {
-                '@type': 'Place',
-                'address': {
-                    '@type': 'PostalAddress',
-                    'streetAddress': self.schema_location.street_address,
-                    'addressLocality': self.schema_location.city,
-                    'addressRegion': self.schema_location.region,
-                    'postalCode': self.schema_location.postcode,
-                    'addressCountry': self.schema_location.country,
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": self.location.street_address if self.location.street_address else '',
+                    "addressLocality": self.location.city if self.location.city else '',
+                    "addressRegion": self.location.region if self.location.region else '',
+                    "postalCode": self.location.postcode if self.location.postcode else '',
+                    "addressCountry": self.location.country if self.location.country else '',
                 },
             }
 
