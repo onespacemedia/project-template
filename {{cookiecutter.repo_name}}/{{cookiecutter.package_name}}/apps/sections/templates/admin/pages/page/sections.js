@@ -1,31 +1,25 @@
 (function ($) {
   $(window).load(function() {
-    var $sections = $('div[class*="section_set"]');
+    // The timeout is necessary so that Jet can load fully.
+    window.setTimeout(renderSectionFields, 1)
 
-    renderSectionFields();
+    var sectionSelector = '[id*="section_set"].inline-related'
 
-    $sections.find('.field-type select').change(renderSectionFields);
+    $(document).on("change", sectionSelector + " .field-type select", renderSectionFields);
+    // Once again, this is on a timeout so the fields get a chance to render.
+    $('.inline-navigation, .changeform-tabs-item').on('click', function () {
+      window.setTimeout(renderSectionFields, 1)
+    })
 
-    // As jQuery event bindings are 'first come first served',
-    // showHideSectionFields will be called after the default 'add another
-    // section' handler is called. So this will work!
-    // (It'll also be fired when *any* 'add another' button is pressed, but)
-    // this is harmless.)
-    $(".inline-navigation .add-row").click(renderSectionFields);
-    [].forEach.call(document.querySelectorAll('.inline-navigation-item'), function(sectionSelector) {
-      sectionSelector.addEventListener('click', function(){window.setTimeout(renderSectionFields, 0)})
-    });
-    [].forEach.call(document.querySelectorAll('.changeform-tabs-item'), function(e) {
-      e.addEventListener('click', function(){window.setTimeout(renderSectionFields, 0)})
-    });
 
     function renderSectionFields() {
-      var $sections = $('div[class*="section_set"]');
+      var $sections = $(sectionSelector);
 
       var types = {
         '': {
           'fields': [],
-          'required': []
+          'required': [],
+          'helpText': {}
         },
       {% for type in types %}
         '{{ type.slug }}': {
@@ -48,11 +42,12 @@
         var fieldsToShow = types[$select.val()].fields;
         var requiredFields = types[$select.val()].required;
         var helpText = types[$select.val()].helpText;
+
         // Get all of the fields in the section
         var $fields = $('div[class*="field-"]', $section);
 
         // Remove the fields we want on every section
-        $fields = $fields.not('.field-type');
+        $fields = $fields.not('.field-type, .field-order');
 
         // Hide all the fields initially
         $fields.hide();
@@ -99,8 +94,7 @@
             .split(' ')
             .filter(function(name) { return name.indexOf('field-') >= 0 })[0]
             .replace('field-', '');
-
-          if ((helpText) && (name in helpText)) {
+          if (name in helpText) {
             if (helpTextExists) {
               $helpText.text(helpText[name]);
             } else {
@@ -116,8 +110,8 @@
           }
         });
 
-        $('.wysiwyg:visible', $section).each(function () {
-          activate_tinymce(this)
+        $('.wysiwyg:visible', $section).each(function (index, field) {
+          activate_tinymce(field)
         });
       });
     }
