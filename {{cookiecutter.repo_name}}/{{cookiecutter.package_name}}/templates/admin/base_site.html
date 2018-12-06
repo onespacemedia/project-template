@@ -4,70 +4,90 @@
 {% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-    <h1 id="site-name">
-        {{ settings.SITE_NAME }}
-    </h1>
+  <h1 id="site-name">
+    {{ settings.SITE_NAME }}
+  </h1>
 {% endblock %}
 
 {% block extrastyle %}
-    <style>
-      @media (min-width: 960px) {
-        .mce-tinymce {
-          width: calc(100% - 170px) !important;
-          margin-left: 170px !important;
-        }
-      }
+  {{ block.super }}
 
-      .sidebar-link.popup-section-link:hover::after {
-        content: '';
-        position: absolute;
-        top: -48px;
-        right: -64px;
-        width: 128px;
-        height: 128px;
-        transform: rotate(45deg);
+  <style>
+    @media (min-width: 960px) {
+      .mce-tinymce {
+        width: calc(100% - 170px) !important;
+        margin-left: 170px !important;
       }
+    }
 
-      .related-widget-wrapper {
-        display: inline-block;
-      }
+    .sidebar-link.popup-section-link:hover::after {
+      content: '';
+      position: absolute;
+      top: -48px;
+      right: -64px;
+      width: 128px;
+      height: 128px;
+      transform: rotate(45deg);
+    }
 
-      .related-widget-wrapper .change-related,
-      .related-widget-wrapper .delete-related {
-        display: none;
-      }
-    </style>
+    .related-widget-wrapper {
+      display: inline-block;
+    }
+
+    .related-widget-wrapper .change-related,
+    .related-widget-wrapper .delete-related {
+      display: none;
+    }
+
+    /* Jet tweaks. */
+    .sidebar-link,
+    .sidebar-link:visited,
+    .sidebar-link:hover {
+      padding: 12px 12px 12px 24px;
+    }
+    .related-widget-wrapper {
+      display: inline-block;
+    }
+
+    #branding h1,
+    #branding h2 {
+      font-size: 14px;
+      line-height: 28px;
+    }
+  </style>
 {% endblock %}
 
 {% block extrahead %}
   <script type="text/javascript" src="{% static 'cms/js/misc/index.js' %}"></script>
+
+  <script>
+    window.cmsUrls = window.cmsUrls || {}
+    window.cmsUrls.imageLibraryIframe = '{% url "admin:media_file_wysiwyg_list" %}';
+  </script>
+
+  {{ block.super }}
 {% endblock %}
 
 {% block nav-global %}
-    <a href="https://documentation.onespacemedia.com/" class="sidebar-link icon">
-        <span class="sidebar-link-label">
-            <span class="sidebar-link-icon">
-              <svg id="i-file" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
-                  <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
-              </svg>
-            </span>OSM documentation portal
-        </span>
-    </a>
-    <a href="https://retainer.onespacemedia.com" class="sidebar-link icon">
-        <span class="sidebar-link-label">
-            <span class="sidebar-link-icon">
-              <svg id="i-portfolio" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
-                  <path d="M29 17 L29 28 3 28 3 17 M2 8 L30 8 30 16 C30 16 24 20 16 20 8 20 2 16 2 16 L2 8 Z M16 22 L16 18 M20 8 C20 8 20 4 16 4 12 4 12 8 12 8" />
-              </svg>
-            </span>OSM retainer portal
-        </span>
-    </a>
-{% endblock %}
+  <a href="https://documentation.onespacemedia.com/" class="sidebar-link icon">
+    <span class="sidebar-link-label">
+      <span class="sidebar-link-icon">
+        <svg id="i-file" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+            <path d="M6 2 L6 30 26 30 26 10 18 2 Z M18 2 L18 10 26 10" />
+        </svg>
+      </span>OSM documentation portal
+    </span>
+  </a>
 
-{% block userlinks %}
-    <a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>
-{% endblock %}
-
-{% block footer %}
-    {{ block.super }}
+  <a href="https://retainer.onespacemedia.com" class="sidebar-link icon">
+    <span class="sidebar-link-label">
+      <span class="sidebar-link-icon">
+        <svg id="i-portfolio" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoi
+n="round" stroke-width="3">
+          <path d="M29 17 L29 28 3 28 3 17 M2 8 L30 8 30 16 C30 16 24 20 16 20 8 20 2 16 2 16 L2 8 Z M16 22 L16 18 M20 8 C20 8 20 4 16 4 12 4
+12 8 12 8" />
+        </svg>
+      </span>OSM retainer portal
+    </span>
+  </a>
 {% endblock %}
