@@ -1,6 +1,6 @@
 import json
-
 import re
+
 from cms.apps.media.models import File
 from django.apps import apps
 from django.http import JsonResponse

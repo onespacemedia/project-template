@@ -28,8 +28,6 @@ function sendData (editData) {
 
       // form_invalid return
       if (status === 400) {
-        console.log('400 returned')
-        console.log(data)
         return
       }
       /* eslint-disable no-console */
@@ -136,8 +134,6 @@ export function setupEditing () {
 
           // form_invalid return
           if (status === 400) {
-            console.log('400 returned')
-            console.log(data)
             return
           }
           /* eslint-disable no-console */

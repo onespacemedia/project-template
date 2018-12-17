@@ -16,7 +16,7 @@ from django.shortcuts import render
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
-from .utils.views import FrontendView, FrontendEditView
+from .utils.views import FrontendEditView, FrontendView
 
 admin.autodiscover()
 
