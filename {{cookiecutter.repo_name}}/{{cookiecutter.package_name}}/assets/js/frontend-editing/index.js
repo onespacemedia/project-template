@@ -4,7 +4,7 @@ import tinymce from 'tinymce/tinymce'
 import renderWYSIWYG from './wysiwyg'
 import LazyImage from '../lazy-images/lazy-image'
 
-const siteURL = '/ch/frontend-edit/'
+const siteURL = '/frontend-edit/'
 
 function sendData (editData) {
   const ajaxOptions = {
