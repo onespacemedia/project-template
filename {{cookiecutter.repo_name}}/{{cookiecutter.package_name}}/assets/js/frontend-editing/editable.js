@@ -104,4 +104,14 @@ export class ImageEditable extends Editable {
       }
     })
   }
+
+  get editData () {
+    return {
+      app: this.el.dataset.app,
+      model: this.el.dataset.model,
+      pk: this.el.dataset.pk,
+      field: this.el.dataset.field,
+      value: this.el.dataset.value
+    }
+  }
 }

@@ -37,6 +37,7 @@ export function setupEditing () {
           originalImage.replaceChild(image, originalImage.firstChild)
           new LazyImage({el: image})
           e.source.frameElement.parentNode.removeChild(e.source.frameElement)
+          image.parentNode.dataset.value = e.data
 
           for (const imageEditable of images) {
             if (image.parentNode === imageEditable.el) {
