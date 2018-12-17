@@ -12,6 +12,7 @@ django-historylinks
 django-jinja
 django-lazy-image==0.4.0
 django-recaptcha==1.4.0
+django-threadlocals==0.8
 {% if cookiecutter.redirects == 'yes' %}onespacemedia-cms-redirects{% endif %}
 django-reversion==2.0.9
 django-suit

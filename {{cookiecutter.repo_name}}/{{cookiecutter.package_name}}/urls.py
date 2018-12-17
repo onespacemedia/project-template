@@ -16,7 +16,7 @@ from django.shortcuts import render
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
-from .utils.views import FrontendView
+from .utils.views import FrontendView, FrontendEditView
 
 admin.autodiscover()
 
@@ -33,6 +33,7 @@ urlpatterns = [
 
     # Site URLs
     url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),
+    url(r'^frontend-edit/$', FrontendEditView.as_view(), name='image_upload'),
 
     # Permalink redirection service.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),

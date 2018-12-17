@@ -16,6 +16,7 @@ import { setUpLazyImage } from './lazy-images'
 import { setUpFocusRing } from './focus-ring'
 import { setUpOverflowTables } from './wysiwyg'
 import { removePreloadClass } from './utils'
+import { setupEditing } from './frontend-editing'
 
 document.addEventListener('DOMContentLoaded', () => {
   // Add handlers for cookie consent bar
@@ -47,4 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Remove pre loading class, used for fixing some filer/animation issues on load
   removePreloadClass()
+
+  // Initialise front end editing
+  setupEditing()
 })
