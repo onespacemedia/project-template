@@ -35,21 +35,21 @@ class Editable {
     }
 
     axios(ajaxOptions)
-    .then(response => {
-      return response
-    })
-    .catch(e => {
-      const { response } = e
-      const { status, data } = response
+      .then(response => {
+        return response
+      })
+      .catch(e => {
+        const { response } = e
+        const { status, data } = response
 
-      // form_invalid return
-      if (status === 400) {
-        return
-      }
-      /* eslint-disable no-console */
-      console.error(e)
-      /* eslint-enable no-console */
-    })
+        // form_invalid return
+        if (status === 400) {
+          return
+        }
+        /* eslint-disable no-console */
+        console.error(e)
+        /* eslint-enable no-console */
+      })
   }
 }
 
@@ -79,7 +79,7 @@ export class WYSIWYGEditable extends Editable {
     })
   }
 
-  initialiseWYSIWYG (){
+  initialiseWYSIWYG () {
     renderWYSIWYG({selector: `#${this.el.getAttribute('id')}`})
 
     this.saveButtonContainer = document.createElement('div')
