@@ -14,7 +14,7 @@ export function setupEditing () {
     new WYSIWYGEditable({ el })
   }
 
-  const images = Array.from(document.querySelectorAll('.js-ImageEditable')).map(el => ImageEditable({ el }))
+  const images = Array.from(document.querySelectorAll('.js-ImageEditable')).map(el => new ImageEditable({ el }))
 
   window.addEventListener('message', (e) => {
     if (e.origin === 'http://localhost:3000') {
