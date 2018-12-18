@@ -1,0 +1,32 @@
+/*
+|--------------------------------------------------------------------------
+| Frontend Editing
+|--------------------------------------------------------------------------
+|
+| @namespace: edt-
+|
+*/
+
+.edt-SaveButton_Container {
+  justify-content: flex-end;
+
+  display: flex;
+}
+
+.edt-SaveButton_Button {
+  @include Button;
+
+  cursor: pointer;
+}
+
+.edt-Iframe {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  bottom: 10%;
+  left: 10%;
+  z-index: 10;
+
+  width: 80vw;
+  height: 80vh;
+}

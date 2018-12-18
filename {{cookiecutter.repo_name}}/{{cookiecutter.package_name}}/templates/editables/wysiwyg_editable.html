@@ -1,0 +1,8 @@
+{% extends 'editables/editable_base' %}
+
+{% block editable_class %}js-WYSIWYGEditable{% endblock %}
+
+{% block extra_info %}
+  data-wys-settings="{{ wysiwyg_settings }}"
+  id="{{ object._meta.app_label }}-{{ object._meta.object_name }}-{{ object.pk }}-{{ field_name }}"
+{% endblock %}

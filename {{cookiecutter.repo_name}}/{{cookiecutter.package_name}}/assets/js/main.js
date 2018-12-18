@@ -16,6 +16,7 @@ import { setUpLazyImage } from './lazy-images'
 import { setUpFocusRing } from './focus-ring'
 import { setUpOverflowTables } from './wysiwyg'
 import { removePreloadClass } from './utils'
+import { setupEditing } from './frontend-editing'
 
 document.addEventListener('DOMContentLoaded', () => {
   // Add handlers for cookie consent bar
@@ -47,4 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Remove pre loading class, used for fixing some filer/animation issues on load
   removePreloadClass()
+
+  // Initialise front end editing if there are any editable items
+  if (document.querySelector('.js-SimpleEditable') || document.querySelector('.js-WYSIWYGEditable') || document.querySelector('.js-ImageEditable')) {
+    import('./frontend-editing').then(module => {
+      module.setupEditing()
+    })
+  }
 })
