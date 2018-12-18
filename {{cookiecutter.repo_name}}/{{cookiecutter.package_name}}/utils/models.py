@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -34,6 +35,22 @@ class EditableMixin:
         return format_html(render_to_string('editables/simple_editable.html', context))
 
     def get_displayed_text_for_HtmlField(self, field_name, field_value):
+        wysiwyg_settings = {
+            'branding': False,
+            'codemirror': {
+                'indentOnInit': True,
+                'fullscreen': False,
+                'path': 'codemirror',
+                'config': {
+                    'lineNumbers': True,
+                    'lineWrapping': True
+                },
+                'width': 800,
+                'height': 600,
+                'saveCursorPosition': True
+            }
+        }
+        wysiwyg_settings.update(getattr(settings, 'WYSIWYG_OPTIONS', {}))
         context = {
             'object': self,
             'field_name': field_name,
