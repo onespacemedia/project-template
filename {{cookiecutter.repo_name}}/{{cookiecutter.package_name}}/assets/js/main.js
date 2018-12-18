@@ -49,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Remove pre loading class, used for fixing some filer/animation issues on load
   removePreloadClass()
 
-  // Initialise front end editing
-  setupEditing()
+  // Initialise front end editing if there are any editable items
+  if (document.querySelector('.js-SimpleEditable') || document.querySelector('.js-WYSIWYGEditable') || document.querySelector('.js-ImageEditable')) {
+    import('./frontend-editing').then(module => {
+      module.setupEditing()
+    })
+  }
 })
