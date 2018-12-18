@@ -22,9 +22,6 @@ class FrontendView(TemplateView):
 
 class FrontendEditView(View):
     def post(self, request):
-        if not request.user.is_superuser:
-            return JsonResponse({'success': False})
-
         data = json.loads(request.body.decode('utf-8'))
 
         app_name = data['app']
@@ -34,6 +31,10 @@ class FrontendEditView(View):
         value = data['value']
 
         model = apps.get_model(app_label=app_name, model_name=model_name)
+        candidate = model.objects.get(pk=pk)
+
+        if not (request.user and candidate.user_can_edit(request.user)):
+            return JsonResponse({'success': False})
 
         if field and not model._meta.get_field(field).get_internal_type() == 'HtmlField':
             value = strip_tags(re.sub('<br>', '\n', value))
@@ -41,7 +42,6 @@ class FrontendEditView(View):
         if field and model._meta.get_field(field).get_internal_type() == 'ImageRefField':
             value = File.objects.get(pk=value)
 
-        candidate = model.objects.filter(pk=pk).first()
         setattr(candidate, field, value)
         candidate.save()
 
@@ -50,7 +50,7 @@ class FrontendEditView(View):
 
 class RenderLazyImageView(View):
     def get(self, request):
-        if not request.user.is_superuser:
+        if not request.user:
             return JsonResponse({'success': False})
 
         image_pk = request.GET['pk']

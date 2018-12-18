@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.functional import cached_property
@@ -69,6 +67,11 @@ class EditableMixin:
             'ImageRefField': self.get_displayed_text_for_ImageRefField,
         }.get(field_type)
 
+    def user_can_edit(self, user):
+        if user.is_superuser:
+            return True
+        return False
+
     @cached_property
     def editable(self):
         fields = [{
@@ -78,7 +81,7 @@ class EditableMixin:
         } for x in self._meta.get_fields(include_parents=True, include_hidden=True)]
         user = get_current_user()
         out_dict = {}
-        if not (user and user.is_superuser):
+        if not (user and self.user_can_edit(user)):
             for field in fields:
                 if not field['type'] == 'ImageRefField':
                     value = field['value']
