@@ -59,4 +59,3 @@ class RenderLazyImageView(View):
         image_html = mark_safe(render_to_string('django_lazy_image/lazy-image.html', lazy_image(image)))
 
         return JsonResponse({'success': True, 'image_html': image_html})
-
