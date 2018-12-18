@@ -1,4 +1,4 @@
-<span class="{% block class %}{% endblock %}"
+<span class="{% block editable_class %}{% endblock %}"
       data-pk="{{ object.pk }}"
       data-field="{{ field_name }}"
       data-app="{{ object._meta.app_label }}"
