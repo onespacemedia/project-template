@@ -62,6 +62,11 @@ export class SimpleEditable extends Editable {
     this.el.addEventListener('blur', () => {
       this.sendData()
     })
+
+    this.el.addEventListener('paste', e => {
+      e.preventDefault()
+      document.execCommand('inserttext', false, e.clipboardData.getData('text/plain'))
+    })
   }
 }
 
