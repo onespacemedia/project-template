@@ -1,0 +1,8 @@
+<span class="{% block class %}{% endblock %}"
+      data-pk="{{ object.pk }}"
+      data-field="{{ field_name }}"
+      data-app="{{ object._meta.app_label }}"
+      data-model="{{ object._meta.object_name }}"
+      {% block extra_info %}{% endblock %}>
+  {{ field_value }}
+</span>

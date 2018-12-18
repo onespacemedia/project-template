@@ -3,6 +3,7 @@ from __future__ import print_function
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.functional import cached_property
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django_lazy_image.templatetags.lazy_image import lazy_image
 from threadlocals.threadlocals import get_current_user
@@ -11,23 +12,51 @@ from threadlocals.threadlocals import get_current_user
 class EditableMixin:
     def get_displayed_text_for_CharField(self, field_name, field_value):
         # Need to handle max_length
-        return mark_safe(f'<span class="js-SimpleEditable" data-pk="{self.pk}" data-field="{field_name}" data-app="{self._meta.app_label}" data-model="{self._meta.object_name}" contentEditable>{field_value}</span>')
+        context = {
+            'object': self,
+            'field_name': field_name,
+            'field_value': field_value,
+        }
+        return format_html(render_to_string('editables/simple_editable.html', context))
 
     def get_displayed_text_for_TextField(self, field_name, field_value):
-        return mark_safe(f'<span class="js-SimpleEditable" data-pk="{self.pk}" data-field="{field_name}" data-app="{self._meta.app_label}" data-model="{self._meta.object_name}" contentEditable>{field_value}</span>')
+        context = {
+            'object': self,
+            'field_name': field_name,
+            'field_value': field_value,
+        }
+        return format_html(render_to_string('editables/simple_editable.html', context))
 
     def get_displayed_text_for_AutoField(self, field_name, field_value):
-        return mark_safe(f'<span class="js-SimpleEditable" data-pk="{self.pk}" data-field="{field_name}" data-app="{self._meta.app_label}" data-model="{self._meta.object_name}" contentEditable>{field_value}</span>')
+        context = {
+            'object': self,
+            'field_name': field_name,
+            'field_value': field_value,
+        }
+        return format_html(render_to_string('editables/simple_editable.html', context))
 
     def get_displayed_text_for_HtmlField(self, field_name, field_value):
-        return mark_safe(f'<span class="js-WYSIWYGEditable" data-pk="{self.pk}" data-field="{field_name}" data-app="{self._meta.app_label}" data-model="{self._meta.object_name}" id="{self._meta.app_label}-{self._meta.object_name}-{self.pk}-{field_name}">{field_value}</span>')
+        context = {
+            'object': self,
+            'field_name': field_name,
+            'field_value': format_html(field_value),
+        }
+        return format_html(render_to_string('editables/wysiwyg_editable.html', context))
 
     def get_displayed_text_for_ImageRefField(self, field_name, field_value):
-        if field_value:
-            image = mark_safe(render_to_string('django_lazy_image/lazy-image.html', lazy_image(field_value)))
-            upload_url = reverse('admin:media_file_wysiwyg_list')
-            return mark_safe(f'<span class="js-ImageEditable" data-url="{upload_url}" data-pk="{self.pk}" data-field="{field_name}" data-app="{self._meta.app_label}" data-model="{self._meta.object_name}">{image}</span>')
-        return ''
+        if not field_value:
+            return ''
+
+        image = mark_safe(render_to_string('django_lazy_image/lazy-image.html', lazy_image(field_value)))
+        iframe_url = reverse('admin:media_file_wysiwyg_list')
+        context = {
+            'object': self,
+            'field_name': field_name,
+            'field_value': image,
+            'iframe_url': iframe_url
+        }
+
+        return format_html(render_to_string('editables/image_editable.html', context))
 
     def get_text_function_for_field(self, field_type):
         return {
