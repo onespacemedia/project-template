@@ -26,14 +26,6 @@ class EditableMixin:
         }
         return format_html(render_to_string('editables/simple_editable.html', context))
 
-    def get_displayed_text_for_AutoField(self, field_name, field_value):
-        context = {
-            'object': self,
-            'field_name': field_name,
-            'field_value': field_value,
-        }
-        return format_html(render_to_string('editables/simple_editable.html', context))
-
     def get_displayed_text_for_HtmlField(self, field_name, field_value):
         wysiwyg_settings = {
             'branding': False,
@@ -75,7 +67,6 @@ class EditableMixin:
 
     def get_text_function_for_field(self, field_type):
         return {
-            'AutoField': self.get_displayed_text_for_AutoField,
             'CharField': self.get_displayed_text_for_CharField,
             'TextField': self.get_displayed_text_for_TextField,
 
