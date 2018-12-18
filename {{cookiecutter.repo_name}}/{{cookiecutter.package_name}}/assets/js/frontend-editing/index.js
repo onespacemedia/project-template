@@ -46,7 +46,6 @@ export function setupEditing () {
           }
         })
         .catch(e => {
-          console.log(e)
           const {response} = e
           const {status, data} = response
 
