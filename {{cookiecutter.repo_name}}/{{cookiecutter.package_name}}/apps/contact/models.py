@@ -84,7 +84,7 @@ class Contact(ContentBase):
             if not validate_email(email):
                 raise ValidationError('{} is not a valid email address.'.format(email))
 
-        return super().clean(self)
+        return super().clean()
 
     # Broken into a separate function to assist with unit testing (because
     # it's a cached property)
