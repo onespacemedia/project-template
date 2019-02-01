@@ -64,9 +64,7 @@
       {% include 'base/_google-fonts.html' %}
     {% endif %}
 
-    {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
-    {% endcompress %}
+    <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
 
     {% block css %}{% endblock %}
 
