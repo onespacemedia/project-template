@@ -93,7 +93,7 @@ class Category(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = 'categories'
         ordering = ['order']
 
     def __str__(self):
