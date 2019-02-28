@@ -1,4 +1,6 @@
 """Models used by the CMS news app."""
+from html import unescape
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
@@ -209,11 +211,10 @@ class Article(PageBase):
         ]
         return get_related_items(candidate_querysets, count=count, exclude=self)
 
-    @property
-    def get_summary(self):
+    def get_summary(self, words=20):
         summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
 
-        return truncatewords(summary, 15)
+        return unescape(truncatewords(summary, words))
 
     @property
     def last_modified(self):
