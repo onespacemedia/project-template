@@ -82,6 +82,7 @@ class Career(PageBase):
 
     class Meta:
         ordering = ['order']
+        unique_together = [['page', 'slug']]
 
     def __str__(self):
         return self.title

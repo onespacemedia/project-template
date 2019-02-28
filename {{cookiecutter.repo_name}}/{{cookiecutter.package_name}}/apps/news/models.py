@@ -183,7 +183,7 @@ class Article(PageBase):
     )
 
     class Meta:
-        unique_together = [['page', 'date', 'slug']]
+        unique_together = [['page', 'slug']]
         ordering = ['-date']
         permissions = [
             ('can_approve_articles', 'Can approve articles'),

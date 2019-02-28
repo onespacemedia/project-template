@@ -70,6 +70,7 @@ class Event(PageBase):
 
     class Meta:
         ordering = ['start_date']
+        unique_together = [['page', 'slug']]
 
     def __str__(self):
         return self.title
