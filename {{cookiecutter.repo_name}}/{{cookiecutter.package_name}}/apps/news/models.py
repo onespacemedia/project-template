@@ -99,7 +99,7 @@ class Category(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.title or self.title
+        return self.title
 
 
 class ArticleManager(OnlineBaseManager):
