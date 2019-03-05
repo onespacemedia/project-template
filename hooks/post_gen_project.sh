@@ -111,10 +111,10 @@ mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.packag
 rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Install front-end dependencies.
-if [ -z "$CI" ]; then
-    nvm install
-    nvm use
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+nvm install
+nvm use
 
 if command -v yarn >/dev/null 2>&1; then
    yarn
