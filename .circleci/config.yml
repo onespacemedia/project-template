@@ -20,8 +20,8 @@ jobs:
             sudo pip install --upgrade pip setuptools cookiecutter python-coveralls
             sudo npm install --global yarn
             sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-            sudo export NVM_DIR="${XDG_CONFIG_HOME/:-$HOME/.}nvm"
-            sudo [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
       - run:
           name: Install PostgreSQL client
