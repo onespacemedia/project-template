@@ -20,6 +20,7 @@ class HasLinkMixin(models.Model):
         blank=True,
         null=True,
         help_text='Use this to link to an internal page.',
+        related_name='+',
     )
 
     link_url = models.CharField(
