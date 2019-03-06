@@ -1,11 +1,6 @@
-import CommonMark
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-from django.template import Context, engines
-from django.template.defaultfilters import linebreaks
-from django.template.loader import render_to_string
-from jinja2.exceptions import UndefinedError
 
 from .json import DjangoJSONEncoder
 
@@ -26,13 +21,6 @@ class EmailTemplate(models.Model):
         blank=True,
         null=True,
         help_text='For automated emails, such as contact forms, you can define where the emails are send.',
-    )
-
-    # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
-    from_email = models.CharField(
-        max_length=300,
-        default=settings.SERVER_EMAIL,
-        help_text='Please ensure that the website is configured to send mail as this user.',
     )
 
     # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
@@ -66,49 +54,19 @@ class EmailTemplate(models.Model):
     )
 
     content = models.TextField(
-        help_text="""
-            The main body of your email, rendered using <a href="http://commonmarkforhumans.com/" target="_blank">Commonmark</a>.  In general, the following merge tags are available to use:
-
-            <ul>
-                <li><strong>[fullname]</strong>: Mr Paul Smith</li>
-                <li><strong>[firstname]</strong>: Paul</li>
-                <li><strong>[lastname]</strong>: Smith</li>
-                <li><strong>[email]</strong>: paul.smith@example.com</li>
-            </ul>
-
-            Other variables may be available depending on where the email template is being used.
-
-            It's also possible to use full Jinja2 template formatting here, but check with the development team first.
-        """
+        help_text='The main body of your email, rendered using <a href="http://commonmarkforhumans.com/" target="_blank">Commonmark</a>.'
     )
-
-    def get_html_version(self):
-        self.content = linebreaks(self.content)
-
-        template = engines['backend'].from_string(self.content)
-
-        # Pass the plain text template through the rendering engine so we're able to
-        # use the full capabilities of Jinja.
-
-        try:
-            body = template.render(Context({}))
-        except UndefinedError:
-            body = self.content
-
-        # Generate the HTML version of the email and render it into the full template.
-        body = CommonMark.commonmark(body).strip()
-
-        return render_to_string('emails/base.html', {
-            'title': self.title,
-            'body': body,
-        })
 
     def __str__(self):
         return self.title or self.subject
 
+    def get_html_version(self):
+        # TODO
+        return ''
+
     class Meta:
         # Moves this model above logs in the sidebar
-        verbose_name_plural = ' Email templates'
+        verbose_name_plural = 'email templates'
 
 
 class EmailLog(models.Model):
@@ -140,9 +98,6 @@ class EmailLog(models.Model):
     def __str__(self):
         return self.message_id
 
-    def get_html_version(self):
-        return render_to_string('emails/base.html', self.kwargs)
-
     def to(self):
         return self.email_data.get('to')
 
@@ -151,3 +106,7 @@ class EmailLog(models.Model):
 
     def subject(self):
         return self.email_data.get('subject')
+
+    def get_html_version(self):
+        # TODO
+        return ''
