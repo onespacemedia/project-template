@@ -122,5 +122,5 @@
 }
 
 .sec-Section_Link {
-  @include Button-primary;
+  @include Button;
 }

@@ -96,7 +96,7 @@
 }
 
 .sec-Split_Kicker {
-  @include Font_14-20;
+  @include Font_Kicker;
 
   margin-bottom: 1vr;
 }
