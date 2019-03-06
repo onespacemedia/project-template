@@ -6,7 +6,9 @@ class SectionTemplateTagsTestCase(BaseSectionTestCase):
     def test_render_wysiwyg_section(self):
         # Disable section creation,
         with self.settings(DEBUG=False):
-            text = render_section({}, self.wysiwyg_section)
+            text = render_section({
+                'request': {'GET': {}}
+            }, self.wysiwyg_section)
 
         # Ensure all fields are actually being rendered.
         self.assertIn('Kicker test', text)
@@ -18,7 +20,9 @@ class SectionTemplateTagsTestCase(BaseSectionTestCase):
     def test_render_hero_section(self):
         # Disable section creation,
         with self.settings(DEBUG=False):
-            text = render_section({}, self.hero_section)
+            text = render_section({
+                'request': {'GET': {}}
+            }, self.hero_section)
 
         # Ensure all fields are actually being rendered.
         self.assertIn('Kicker test', text)
