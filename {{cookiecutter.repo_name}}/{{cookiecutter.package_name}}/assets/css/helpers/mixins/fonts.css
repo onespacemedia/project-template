@@ -4,6 +4,11 @@
 |--------------------------------------------------------------------------
 |
 */
+@mixin Font_12 {
+  font-size: 12px;
+  line-height: 16px;
+}
+
 @mixin Font_14 {
   font-size: 14px;
   line-height: 20px;
@@ -12,4 +17,15 @@
 @mixin Font_16 {
   font-size: 16px;
   line-height: 24px;
+}
+
+@mixin Font_Kicker {
+  @include Font_12;
+
+  font-weight: 600;
+  text-transform: uppercase;
+
+  @media (--sm) {
+    @include Font_14;
+  }
 }
