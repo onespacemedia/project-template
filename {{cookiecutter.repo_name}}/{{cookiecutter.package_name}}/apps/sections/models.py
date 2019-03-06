@@ -1,7 +1,7 @@
 from __future__ import print_function
 
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase, Page
+from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.db import models
