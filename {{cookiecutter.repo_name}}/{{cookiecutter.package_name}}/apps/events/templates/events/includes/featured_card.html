@@ -1,0 +1,18 @@
+<a class="art-Featured" href="{{ object.get_absolute_url() }}">
+  <div class="art-FeaturedCard_Content">
+    <p class="art-FeaturedCard_Kicker">{{ object.start_date|date('d F, Y') }}{% if object.start_date != object.end_date %} - {{ object.end_date|date('d F, Y') }}{% endif %}</p>
+    <h3 class="art-FeaturedCard_Title">{{ object }}</h3>
+    {% if object.get_summary() %}<p class="art-FeaturedCard_Summary">{{ object.get_summary() }}</p>{% endif %}
+  </div>
+
+  <div class="art-FeaturedCard_ImageContainer">
+    {% block image %}
+      {% set card_image = object.card_image or object.image %}
+      {% if card_image %}
+        {{ render_lazy_image(card_image, width=513, height=417) }}
+      {% else %}
+        <div class="art-FeaturedCard_ImagePlaceholder" style="background-image: url({{ static('img/article-fallback.jpg') }})"></div>
+      {% endif %}
+    {% endblock %}
+  </div>
+</a>

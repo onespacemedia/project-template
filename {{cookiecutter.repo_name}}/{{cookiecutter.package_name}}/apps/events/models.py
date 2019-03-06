@@ -8,6 +8,7 @@ from cms.models.managers import PageBaseManager
 from cms.templatetags.html import truncate_paragraphs
 from django.db import models
 from django.template.defaultfilters import date, striptags, truncatewords
+from django.template.loader import render_to_string
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
@@ -124,6 +125,16 @@ class Event(PageBase):
             date_string += ' - {}'.format(date(self.end_date, 'j F Y'))
 
         return date_string
+
+    def render_card(self):
+        return render_to_string('events/includes/card.html', {
+            'object': self,
+        })
+
+    def render_featured_card(self):
+        return render_to_string('events/includes/featured_card.html', {
+            'object': self,
+        })
 
 
 historylinks.register(Event)
