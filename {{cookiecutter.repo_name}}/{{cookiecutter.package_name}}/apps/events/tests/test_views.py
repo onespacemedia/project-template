@@ -26,8 +26,8 @@ class EventViewsTestCase(EventsBaseTestCase):
 
         past_view = PastEventListView()
         past_view.request = self.factory.get('/')
-        past_view.request.pages = RequestPageManager(view.request)
-        past_queryset = view.get_queryset()
+        past_view.request.pages = RequestPageManager(past_view.request)
+        past_queryset = past_view.get_queryset()
 
         # Make sure upcoming view only shows future events and they don't appear in the past view
         for event in self.future_events:
