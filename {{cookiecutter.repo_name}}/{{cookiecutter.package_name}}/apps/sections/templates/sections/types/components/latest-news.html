@@ -1,10 +1,10 @@
 {% extends "sections/types/_base.html" %}
 
-{% block section_body %}
+{% block body %}
   <ul class="lst-List ani-Animation_Stagger" data-animation="SlideUp" data-time="150">
     {% for object in section.get_latest_news() %}
       <li class="lst-List_Item lst-List_Item-threeUp ani-Animation_Child">
-        {{ object.render_item() }}
+        {{ object.render_card() }}
       </li>
     {% endfor %}
   </ul>
