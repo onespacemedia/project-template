@@ -1,0 +1,31 @@
+{% extends "sections/types/_base.html" %}
+
+{% block inner %}
+  <div class="sec-Split sec-Split-{{ section.image_side }}">
+    <div class="sec-Split_Image">
+      {{ render_lazy_image(section.image, width=800) }}
+    </div>
+
+    <div class="sec-Split_Content">
+      {% if section.kicker %}
+        <p class="sec-Split_Kicker">{{ section.kicker }}</p>
+      {% endif %}
+
+      <h2 class="sec-Split_Title">{{ section.title }}</h2>
+
+      {% if section.text %}
+        <div class="sec-Split_Text">
+          {{ section.text }}
+        </div>
+      {% endif %}
+
+      {% if section.has_link %}
+        <div class="sec-Split_Actions">
+          <a class="sec-Split_Link" href="{{ section.link_location }}">{{ section.link_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

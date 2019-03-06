@@ -14,15 +14,16 @@ from django.utils.text import slugify
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
-            ('landing-hero', {
-                'fields': ['kicker', 'title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
+            ('hero', {
+                'name': 'Hero (normal)',
+                'fields': ['kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'text'],
                 'required': ['title', 'image'],
                 'help_text': {
-                    'kicker': 'If this is left blank it will inherit the pages title',
+                    'kicker': 'If this is left blank it will inherit the title of the page.',
                 },
             }),
-        ]
+        ],
     }),
     ('Images', {
         'sections': [
@@ -39,17 +40,12 @@ SECTION_TYPES = (
     }),
     ('Text', {
         'sections': [
-            ('centered', {
-                'fields': ['background_colour', 'kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
+            ('wysiwyg', {
+                'name': 'Rich text',
+                'fields': ['background_colour', 'kicker', 'title', 'content', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'text'],
-                'required': ['title'],
             }),
-            ('dual-column', {
-                'fields': ['kicker', 'title', 'text', 'link_text', 'link_page', 'link_url'],
-                'search': ['kicker', 'title', 'text'],
-                'required': ['title'],
-            }),
-        ]
+        ],
     }),
 )
 
@@ -127,9 +123,9 @@ class SectionBase(models.Model):
     background_colour = models.CharField(
         max_length=255,
         choices=[
-            ('white', 'White'),
+            ('transparent', 'Transparent'),
         ],
-        default='white',
+        default='transparent',
     )
 
     kicker = models.CharField(

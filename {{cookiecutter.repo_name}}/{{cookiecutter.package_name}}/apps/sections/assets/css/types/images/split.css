@@ -1,0 +1,114 @@
+/*
+|--------------------------------------------------------------------------
+| Split text and image section
+|--------------------------------------------------------------------------
+| Displays an image and text block side by side, can be image eft and text
+| right or image right and text left.
+|
+| @namespace: sec-
+|
+*/
+.sec-Split {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  display: flex;
+}
+
+.sec-Split-left {
+  @media (--sm) {
+    flex-direction: row;
+  }
+}
+
+.sec-Split-right {
+  @media (--sm) {
+    flex-direction: row-reverse;
+  }
+}
+
+.sec-Split_Image,
+.sec-Split_Content {
+  width: 100%;
+}
+
+.sec-Split_Image {
+  justify-self: flex-start;
+
+  margin-bottom: 1vr;
+
+  @media (--sm) {
+    flex-basis: calc((6 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 6 / 12);
+
+    margin-bottom: 0;
+  }
+
+  @media (--md) {
+    flex-basis: calc((4 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 8 / 12);
+  }
+
+  .img-Image {
+    height: 100%;
+  }
+
+  .sec-Split-right & {
+    justify-self: flex-end;
+
+    @media (--sm) {
+      margin-left: calc(var(--Grid_Gutter) * 2);
+    }
+  }
+
+  .sec-Split-left & {
+    justify-self: flex-end;
+
+    @media (--sm) {
+      margin-right: calc(var(--Grid_Gutter) * 2);
+    }
+  }
+}
+
+.sec-Split_Content {
+  @media (--sm) {
+    flex-basis: calc((6 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 6 / 12);
+
+    /* A column worth of padding between content and image */
+    .sec-Split-right & {
+      padding-right: calc((1 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 11 / 12);
+    }
+
+    .sec-Split-left & {
+      padding-left: calc((1 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 11 / 12);
+    }
+  }
+
+  @media (--md) {
+    /* A column and gutter worth of padding between content and image */
+    .sec-Split-right & {
+      padding-right: calc((1 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 11 / 12 + (var(--Grid_Gutter) * 2));
+    }
+
+    .sec-Split-left & {
+      padding-left: calc((1 / 12 * 100%) - (var(--Grid_Gutter) * 2) * 11 / 12 + (var(--Grid_Gutter) * 2));
+    }
+  }
+}
+
+.sec-Split_Kicker {
+  @include Font_14-20;
+
+  margin-bottom: 1vr;
+}
+
+.sec-Split_Title {
+  margin-bottom: 1vr;
+}
+
+.sec-Split_Actions {
+  margin-top: 1vr;
+}
+
+.sec-Split_Link {
+  @include Button;
+}
