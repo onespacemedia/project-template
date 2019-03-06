@@ -7,12 +7,13 @@
 
   <div class="art-FeaturedCard_ImageContainer">
     {% block image %}
-      {% set card_image = object.card_image or object.image %}
-      {% if card_image %}
-        {{ render_lazy_image(card_image, width=513, height=417) }}
-      {% else %}
-        <div class="art-FeaturedCard_ImagePlaceholder" style="background-image: url({{ static('img/article-fallback.jpg') }})"></div>
-      {% endif %}
+      {% with card_image = object.card_image or object.image %}
+        {% if card_image %}
+          {{ render_lazy_image(card_image, width=513, height=417) }}
+        {% else %}
+          <div class="art-FeaturedCard_ImagePlaceholder" style="background-image: url({{ static('img/article-fallback.jpg') }})"></div>
+        {% endif %}
+      {% endwith %}
     {% endblock %}
   </div>
 </a>

@@ -24,8 +24,7 @@ class BaseEventListView(ListView):
         qs = self.get_unfiltered_queryset().order_by('end_date')
         candidates = self.get_unfiltered_queryset().order_by('-featured', 'end_date')
 
-        if candidates.exists():
-            self.featured_event = candidates.first()
+        self.featured_event = candidates.first()
 
         if self.featured_event:
             qs = qs.exclude(id=self.featured_event.id)

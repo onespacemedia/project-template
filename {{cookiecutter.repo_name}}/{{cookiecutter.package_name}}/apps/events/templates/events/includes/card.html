@@ -1,10 +1,11 @@
 <a class="art-Card" href="{{ object.get_absolute_url() }}">
-  {% set card_image = object.card_image or object.image %}
-  {% if card_image %}
-    <div class="art-Card_ImageContainer">
-        {{ render_lazy_image(card_image, width=192, height=108) }}
-    </div>
-  {% endif %}
+  {% with card_image = object.card_image or object.image %}
+    {% if card_image %}
+      <div class="art-Card_ImageContainer">
+          {{ render_lazy_image(card_image, width=192, height=108) }}
+      </div>
+    {% endif %}
+  {% endwith %}
 
   <div class="art-Card_Body">
     <h3 class="art-Card_Title">{{ object }}</h3>

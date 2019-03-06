@@ -95,6 +95,12 @@ class Event(PageBase):
         blank=True,
     )
 
+    card_image = ImageRefField(
+        blank=True,
+        null=True,
+        help_text="By default the card will try and use the main image, if it doesn't look right you can override it here.",
+    )
+
     categories = models.ManyToManyField(
         'events.Category',
         blank=True,
