@@ -50,8 +50,7 @@ SECTION_TYPES = (
         ],
     }),
     ('Components', {
-        'sections': [
-{% if cookiecutter.news == 'yes' %}
+        'sections': [{% if cookiecutter.news == 'yes' %}
             ('latest-news', {
                 'fields': ['background_colour', 'title', 'news_feed', 'link_text', 'link_page', 'link_url'],
                 'search': ['title'],
