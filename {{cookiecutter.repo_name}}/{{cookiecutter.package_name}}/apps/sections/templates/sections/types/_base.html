@@ -31,11 +31,11 @@
 
       {% block footer %}
         {% if section.has_link %}
-          <p class="sec-Section_Footer">
+          <footer class="sec-Section_Footer">
             <a href="{{ section.link_location }}" class="sec-Section_Link {% block link_class %}{% endblock %}">
               {{ section.link_text }}
             </a>
-          </p>
+          </footer>
         {% endif %}
       {% endblock %}
     </div>
