@@ -1,7 +1,7 @@
 from cms.apps.pages.middleware import RequestPageManager
 from django.test import RequestFactory
 
-from ..views import EventDetailView, UpcomingEventListView, PastEventListView
+from ..views import EventDetailView, PastEventListView, UpcomingEventListView
 from ._base import EventsBaseTestCase
 
 
