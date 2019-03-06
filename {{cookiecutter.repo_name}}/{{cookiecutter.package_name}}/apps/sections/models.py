@@ -11,6 +11,9 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
+from ...utils.models import HasLinkMixin, VideoMixin
+{% if cookiecutter.news == 'yes' %}from ..news.models import Article{% endif %}
+
 SECTION_TYPES = (
     ('Heroes', {
         'sections': [
@@ -44,6 +47,16 @@ SECTION_TYPES = (
                 'fields': ['background_colour', 'kicker', 'title', 'content', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'content'],
             }),
+        ],
+    }),
+    ('Components', {
+        'sections': [
+{% if cookiecutter.news == 'yes' %}
+            ('latest-news', {
+                'fields': ['background_colour', 'title', 'news_feed', 'link_text', 'link_page', 'link_url'],
+                'search': ['title'],
+                'required': ['news_feed'],
+            }),{% endif %}
         ],
     }),
 )
@@ -112,7 +125,7 @@ def get_section_type_choices(types):
     return groups
 
 
-class SectionBase(models.Model):
+class SectionBase(HasLinkMixin, VideoMixin):
 
     type = models.CharField(
         choices=get_section_type_choices(SECTION_TYPES),
@@ -167,29 +180,12 @@ class SectionBase(models.Model):
         ],
         default='left',
     )
-
-    link_text = models.CharField(
-        max_length=100,
+{% if cookiecutter.news == 'yes' %}
+    news_feed = models.ForeignKey(
+        'news.NewsFeed',
         blank=True,
         null=True,
-    )
-
-    link_page = models.ForeignKey(
-        'pages.Page',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        help_text='Use this to link to an internal page.',
-        related_name='+'
-    )
-
-    link_url = models.CharField(
-        'link URL',
-        max_length=200,
-        blank=True,
-        null=True,
-        help_text='Use this to link to any other URL.',
-    )
+    ){% endif %}
 
     order = models.PositiveIntegerField(
         default=0,
@@ -236,6 +232,8 @@ class SectionBase(models.Model):
                 'link_page': 'Please provide either a "Link Page" or a "Link URL"',
             })
 
+        super().clean()
+
     @cached_property
     def cache_key(self):
         return f'{self._meta.app_label}.{self._meta.model_name}.{self.pk}'
@@ -249,19 +247,6 @@ class SectionBase(models.Model):
             'folder': folder_name,
             'file_name': f'{file_name}.html'
         }
-
-    @property
-    def has_link(self):
-        return self.link_location and self.link_text
-
-    @cached_property
-    def link_location(self):
-        if self.link_page_id:
-            try:
-                return self.link_page.get_absolute_url()
-            except Page.DoesNotExist:
-                pass
-        return self.link_url
 
     def get_searchable_text(self):
         """Returns a blob of text suitable for searching."""
@@ -293,6 +278,18 @@ class SectionBase(models.Model):
                 return '\n'.join(search_text_items)
 
         return ''
+{% if cookiecutter.news == 'yes' %}
+    def get_latest_news(self):
+        return Article.objects.filter(
+            page__page=self.news_feed
+        ).prefetch_related(
+            'categories',
+        ).select_related(
+            'image',
+            'card_image',
+        ).order_by(
+            '-date'
+        )[:3]{% endif %}
 
 
 class ContentSection(SectionBase):
