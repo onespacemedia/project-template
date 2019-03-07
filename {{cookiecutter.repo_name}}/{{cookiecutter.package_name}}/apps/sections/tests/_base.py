@@ -32,7 +32,7 @@ class BaseSectionTestCase(TestCase):
             )
 
             self.hero_section = ContentSection.objects.create(
-                type='heroes-hero',
+                type='heroes-landing-hero',
                 page=self.content_page,
                 kicker='Kicker test',
                 title='Title test',
