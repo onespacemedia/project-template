@@ -20,6 +20,7 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
         )
 
     kwargs['object'] = template_obj
+    kwargs['settings'] = settings
 
     # Does this email template have a `to_email` defined?
     if template_obj.to_email:
