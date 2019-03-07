@@ -19,4 +19,4 @@ def get_email_template_html(object_id):
 
 @library.global_function
 def email_url(path):
-    return path_to_url(None, path)
+    return path_to_url(path)

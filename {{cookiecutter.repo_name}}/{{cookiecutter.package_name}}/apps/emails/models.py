@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.template.loader import render_to_string
 
 from .json import DjangoJSONEncoder
 
@@ -9,10 +10,11 @@ class EmailTemplate(models.Model):
 
     reference = models.CharField(
         max_length=300,
-        blank=True,
-        null=True,
+        choices=[
+            ('contact', 'Contact'),
+        ],
         unique=True,
-        help_text="This will be used in the application to send emails of this type. It's recommended that you don't change this value after it's defined. otherwise bad things may happen.",
+        help_text="This will be used in the application to send emails of this type.",
     )
 
     # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
@@ -54,17 +56,25 @@ class EmailTemplate(models.Model):
     )
 
     content = models.TextField(
+        blank=True,
+        null=True,
         help_text='The main body of your email, rendered using <a href="http://commonmarkforhumans.com/" target="_blank">Commonmark</a>.'
+    )
+
+    order = models.PositiveIntegerField(
+        default=0,
     )
 
     def __str__(self):
         return self.title or self.subject
 
     def get_html_version(self):
-        # TODO
-        return ''
+        return render_to_string(f'emails/{self.reference}.html', {
+            'object': self,
+        })
 
     class Meta:
+        ordering = ['order']
         # Moves this model above logs in the sidebar
         verbose_name_plural = 'email templates'
 
@@ -78,6 +88,8 @@ class EmailLog(models.Model):
     email_template = models.ForeignKey(
         EmailTemplate,
         on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
     )
 
     email_data = JSONField(
@@ -108,5 +120,4 @@ class EmailLog(models.Model):
         return self.email_data.get('subject')
 
     def get_html_version(self):
-        # TODO
-        return ''
+        return render_to_string('emails/base.html', self.kwargs)

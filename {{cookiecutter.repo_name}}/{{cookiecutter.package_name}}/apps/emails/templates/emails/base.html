@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>{% block title %}{{cookiecutter.project_name}}{% endblock %}</title>
+    <title>{% block title %}{{ settings.SITE_NAME }}{% endblock %}</title>
 
     {% include 'emails/styles.html' %}
 
