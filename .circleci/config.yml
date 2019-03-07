@@ -18,8 +18,9 @@ jobs:
             sudo apt-get install libgeoip-dev
             if psql demo -c ''; then dropdb demo; fi
             sudo pip install --upgrade pip setuptools cookiecutter python-coveralls
-            sudo npm install --global yarn
             curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+            . ~/.nvm/nvm.sh
+            npm install --global yarn
 
       - run:
           name: Install PostgreSQL client
@@ -32,7 +33,7 @@ jobs:
       - run:
           name: Run cookiecutter
           command: |
-            sudo cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
+            cookiecutter --no-input -f -o . --config-file tests/cookiecutter.yml .
 
       - run:
           name: Install project dependencies
