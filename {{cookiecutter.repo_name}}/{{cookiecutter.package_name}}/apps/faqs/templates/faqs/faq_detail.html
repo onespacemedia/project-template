@@ -2,12 +2,12 @@
 
 {% block schema %}
   <script type="application/ld+json">
-    {{ faq.schema() }}
+    {{ object.schema() }}
   </script>
 {% endblock %}
 
 {% block main %}
   <section>
-    {{ faq }}
+    {{ object }}
   </section>
 {% endblock %}
