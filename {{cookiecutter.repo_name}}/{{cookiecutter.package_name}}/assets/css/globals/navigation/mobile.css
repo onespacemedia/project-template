@@ -2,7 +2,7 @@
 |--------------------------------------------------------------------------
 | Mobile navigation
 |--------------------------------------------------------------------------\
-| Phone and tabet
+| Phone and tablet
 |
 | @namespace: nav-
 |
@@ -22,7 +22,7 @@
 
 .nav-Mobile {
   position: fixed;
-  top: var(--Mobile_NavHeight);
+  top: 0;
   right: 0;
   bottom: 0;
 
@@ -33,6 +33,8 @@
 
   font-size: 16px;
   font-weight: 600;
+
+  background-color: #fff;
 
   transform: translateX(100%);
 
@@ -56,20 +58,39 @@
   }
 }
 
+.nav-Mobile_Logo {
+  position: absolute;
+  /* -21px for half the logo height */
+  top: calc(var(--Mobile_NavHeight) / 2 - 21px);
+  left: calc(var(--Grid_Gutter) * 2);
+
+  display: none;
+
+  @media (--xxs-viewport) {
+    display: block;
+  }
+
+  svg {
+    width: 166px;
+    height: 42px;
+  }
+}
+
 .nav-Mobile_Items {
-  position: fixed;
+  position: relative;
+  top: var(--Mobile_NavHeight);
   right: 0;
-  z-index: 10;
 
   align-items: stretch;
   flex-direction: column;
 
   display: flex;
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--Mobile_NavHeight));
   margin-left: auto;
 
   background: #fff;
+  border-top: 1px solid var(--Color_Border);
 
   overflow-y: scroll;
 
@@ -80,6 +101,8 @@
 
 .nav-Mobile_Item,
 .nav-Mobile_DropdownItem {
+  position: relative;
+
   flex-shrink: 0;
 
   width: 100%;
@@ -162,30 +185,35 @@
 */
 .nav-Mobile_Dropdown,
 .nav-Mobile_DropdownChild {
-  position: absolute;
-  top: 0;
-  left: 100%;
+  position: fixed;
+  top: var(--Mobile_NavHeight);
+  right: -var(--Mobile_NavWidth);
+
   z-index: 1;
 
   max-width: var(--Mobile_NavWidth);
   width: 100%;
-  height: 100%;
+  height: calc(100% - var(--Mobile_NavHeight));
 
   background: #fff;
+  border-top: 1px solid var(--Color_Border);
 
+  overflow-y: scroll;
   visibility: hidden;
-
-  transform: translateX(0);
 
   /* Use trick with visibility transition delay so we can transition visibility hidden */
   transition: visibility 0s ease-out var(--Global_Transition),
-    transform var(--Global_Transition);
+    right var(--Global_Transition);
 
   .nav-Mobile_Item[aria-selected='true'] > &,
   .nav-Mobile_DropdownItem[aria-selected='true'] > & {
-    visibility: visible;
+    /*
+     * Animate right rather than transform as with transform it causes an issue with
+     * scrollbars not getting overlapped correctly
+     */
+    right: 0;
 
-    transform: translateX(-100%);
+    visibility: visible;
 
     transition-delay: 0s;
   }
@@ -199,7 +227,7 @@
 */
 .nav-Header_Backdrop {
   position: fixed;
-  top: var(--Mobile_NavHeight);
+  top: 0;
   right: 0;
   bottom: 0;
   left: 0;
@@ -229,38 +257,38 @@
 |
 */
 .nav-Header_Trigger {
-  position: relative;
+  position: absolute;
+  top: calc(var(--Mobile_NavHeight) / 2 - var(--BurgerMenu_Size) / 2);
+  right: var(--Grid_Gutter);
+  z-index: 11;
 
   display: block;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-
-  border: 1px solid var(--Color_Border);
-  border-radius: 2px;
+  width: var(--BurgerMenu_Size);
+  height: var(--BurgerMenu_Size);
 
   cursor: pointer;
 
-  transition: background-color var(--Global_Transition);
+  @media (--md) {
+    right: calc(var(--Grid_Gutter) * 2);
+  }
 
   @media (--lg) {
     display: none;
   }
 }
 
-.nav-Header_Trigger-open {
-  background-color: var(--Color_Brand);
-  border-color: @background-color;
-  color: #fff;
-}
-
+/*
+ * Avoid changing the calculations for the burger menu size,
+ * as they are you should be able to change the size and stroke
+ * width with the variable alone
+ */
 .nav-Header_TriggerLine {
   position: absolute;
-  left: 9px;
+  left: calc(var(--BurgerMenu_Size) / 4);
 
   display: block;
-  width: 13px;
-  height: 1px;
+  width: calc(var(--BurgerMenu_Size) / 2);
+  height: var(--BurgerMenu_Stroke);
 
   background-color: currentColor;
   border-radius: 2px;
@@ -274,7 +302,7 @@
 }
 
 .nav-Header_TriggerLine-top {
-  top: 11px;
+  top: calc(var(--BurgerMenu_Size) / 3);
 
   animation: TriggerLine-topOut 0.5s var(--Transition_EaseOutBack) forwards;
 
@@ -284,7 +312,7 @@
 }
 
 .nav-Header_TriggerLine-middle {
-  top: 15px;
+  top: calc(var(--BurgerMenu_Size) / 2);
 
   animation: TriggerLine-middleOut 0.5s var(--Transition_EaseOutBack) forwards;
 
@@ -294,7 +322,7 @@
 }
 
 .nav-Header_TriggerLine-bottom {
-  top: 19px;
+  top: calc(var(--BurgerMenu_Size) / 1.5);
 
   animation: TriggerLine-bottomOut 0.5s var(--Transition_EaseOutBack) forwards;
 
@@ -305,17 +333,17 @@
 
 @keyframes TriggerLine-topIn {
   0% {
-    top: 11px;
+    top: calc(var(--BurgerMenu_Size) / 3);
   }
 
   50% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(0deg);
   }
 
   100% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(45deg);
   }
@@ -323,19 +351,19 @@
 
 @keyframes TriggerLine-topOut {
   0% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(45deg);
   }
 
   50% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(0deg);
   }
 
   100% {
-    top: 11px;
+    top: calc(var(--BurgerMenu_Size) / 3);
   }
 }
 
@@ -361,17 +389,17 @@
 
 @keyframes TriggerLine-bottomIn {
   0% {
-    top: 19px;
+    top: calc(var(--BurgerMenu_Size) / 1.5);
   }
 
   50% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(0deg);
   }
 
   100% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(-45deg);
   }
@@ -379,19 +407,19 @@
 
 @keyframes TriggerLine-bottomOut {
   0% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(-45deg);
   }
 
   50% {
-    top: 15px;
+    top: calc(var(--BurgerMenu_Size) / 2);
 
     transform: rotate(0deg);
   }
 
   100% {
-    top: 19px;
+    top: calc(var(--BurgerMenu_Size) / 1.5);
   }
 }
 

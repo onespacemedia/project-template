@@ -1,0 +1,93 @@
+.sec-LandingHero {
+  position: relative;
+
+  padding-top: 3vr;
+  padding-bottom: @padding-top;
+
+  @media (--sm) {
+    padding-top: 5vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--md) {
+    padding-top: 7vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--lg) {
+    padding-top: 8vr;
+    padding-bottom: @padding-top;
+  }
+
+  @media (--xlg) {
+    padding-top: 10vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.sec-LandingHero_Image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .img-Image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.sec-LandingHero_Inner {
+  @include Grid_Container;
+
+  position: relative;
+
+  align-items: center;
+
+  display: flex;
+}
+
+.sec-LandingHero_Content {
+  @media (--sm) {
+    width: columns(10, 12);
+    margin-right: auto;
+  }
+
+  @media (--md) {
+    width: columns(8, 12);
+  }
+
+  @media (--lg) {
+    width: columns(6, 12);
+  }
+}
+
+.sec-LandingHero_Kicker {
+  @include Font_Kicker;
+
+  margin-bottom: 0.5vr;
+}
+
+.sec-LandingHero_Text {
+  margin-top: 0.5vr;
+
+  @media (--sm) {
+    margin-top: 1vr;
+  }
+}
+
+.sec-LandingHero_Actions {
+  margin-top: 0.5vr;
+
+  @media (--sm) {
+    margin-top: 1vr;
+  }
+}
+
+.sec-LandingHero_Link {
+  @include Button;
+}

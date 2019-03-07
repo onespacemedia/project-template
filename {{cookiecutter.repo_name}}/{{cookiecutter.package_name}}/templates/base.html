@@ -1,3 +1,5 @@
+{% import 'macros/misc.html' as misc %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,9 +64,7 @@
       {% include 'base/_google-fonts.html' %}
     {% endif %}
 
-    {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
-    {% endcompress %}
+    <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
 
     {% block css %}{% endblock %}
 
@@ -115,6 +115,8 @@
       <div class="lyt-Site" id="app">
         {% include 'base/_header.html' %}
 
+        {{ misc.mobile_nav_trigger() }}
+
         {% block content_outer %}
           <div class="lyt-Content_Outer">
             {% block content_above %}{% endblock %}
@@ -146,6 +148,19 @@
 
       {% include 'base/_footer.html' %}
     {% endblock %}
+
+   {% if request.user.is_superuser %}
+      <div class="dbg-Overlay">
+        <div class="dbg-Overlay_Breakpoint"></div>
+        <div class="dbg-Overlay_Inner">
+          <div class="dbg-Overlay_Row">
+            {% for _ in range(1, 13) %}
+             <div class="dbg-Overlay_Column"></div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
 
     {{ render_bundle('vendor', 'js') }}
     {{ render_bundle('app', 'js') }}

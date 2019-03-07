@@ -125,6 +125,7 @@ class Person(SearchMetaBase):
 
     class Meta:
         ordering = ['order']
+        unique_together = [['page', 'slug']]
         verbose_name_plural = 'people'
 
     def __str__(self):

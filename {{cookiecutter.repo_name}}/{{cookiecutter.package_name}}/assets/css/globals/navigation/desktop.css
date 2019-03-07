@@ -23,7 +23,7 @@
 |
 */
 .nav-Header_Items {
-  @include Font_16-24;
+  @include Font_16;
 
   align-items: stretch;
 

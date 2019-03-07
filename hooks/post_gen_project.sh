@@ -94,7 +94,7 @@ perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 |
 
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/components/templates {{cookiecutter.package_name}}/apps/components/templates
 
-{% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
+{% for project in ['careers', 'contact', 'events', 'faqs', 'news', 'partners', 'people', 'redirects', 'sections'] %}
     {% if cookiecutter[project] == 'no' %}
         echo "Remove the {{project}} app.";
         rm -r {{ cookiecutter.package_name }}/apps/{{ project }}

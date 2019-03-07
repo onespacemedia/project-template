@@ -9,6 +9,7 @@ import { svg4everybody } from './compatibility/svgforeverybody'
 // OSM modules
 import { bindCookieConsent } from './notices'
 import { bindAnimations } from './viewport-animation'
+import { bindDebugOverlay } from './debug-overlay'
 import { bindExternalLinks } from './external-links'
 import { setUpNavigation } from './navigation'
 import { setUpLazyImage } from './lazy-images'
@@ -22,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Bind the in viewport checking for animations
   bindAnimations()
+
+  // Set up debug grid overlay.
+  bindDebugOverlay()
 
   // Make all external links open in a new tab
   bindExternalLinks()

@@ -46,6 +46,7 @@
   margin-left: var(--Grid_Inside);
 
   color: inherit;
+  cursor: pointer;
 
   .svg-Image {
     height: 15px;

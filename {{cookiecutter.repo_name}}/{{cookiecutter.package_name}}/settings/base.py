@@ -78,6 +78,7 @@ INSTALLED_APPS = [
 
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
+    {% if cookiecutter.contact == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.contact',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
     {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
     {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
@@ -329,19 +330,14 @@ WYSIWYG_OPTIONS = {
     # Custom style formats
     'style_formats': [
         {
-            'title': 'Buttons',
+            'title': 'Links',
             'items': [
                 {
-                    'title': 'Primary',
+                    'title': 'Button',
                     'selector': 'a',
-                    'classes': 'wys-Button-primary'
+                    'classes': 'wys-Button'
                 },
-                {
-                    'title': 'Secondary',
-                    'selector': 'a',
-                    'classes': 'wys-Button-secondary'
-                },
-            ]
+            ],
         },
         {
             'title': 'Titles',

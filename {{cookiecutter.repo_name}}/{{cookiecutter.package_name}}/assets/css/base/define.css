@@ -70,7 +70,7 @@ html {
 }
 
 body {
-  @include Font_16-24;
+  @include Font_16;
 
   text-rendering: optimizeLegibility;
 
@@ -149,6 +149,23 @@ a:not([class]) {
   font-weight: 500;
 
   color: var(--Color_Anchor);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Typography - Basic styles
+|--------------------------------------------------------------------------
+| Undo meyer reset on <em> / <i> / <strong> / <b>
+|
+*/
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: 700;
 }
 
 /*

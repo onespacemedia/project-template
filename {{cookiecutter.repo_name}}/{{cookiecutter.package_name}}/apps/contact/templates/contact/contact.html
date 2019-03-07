@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% import 'macros/heroes.html' as heroes %}
+{% import 'macros/forms.html' as forms %}
+
+{% set content = pages.current.content %}
+
+{% block content_above %}
+  {{ heroes.landing_hero({
+    'kicker': content.hero_kicker if content.hero_kicker else pages.current.title,
+    'title': content.hero_title,
+  }) }}
+{% endblock %}
+
+{% block main %}
+  <section class="sec-Section">
+    <header class="sec-Section_Header">
+      <h1 class="sec-Section_Title">{{ content.form_title }}</h1>
+    </header>
+
+    <div class="sec-Section_Inner">
+      <form action="{{ pages.current.get_absolute_url() }}" method="post">{% csrf_token %}
+        {% if form.errors %}
+          <div class="frm-Form_Header">
+            <div class="frm-ErrorMessage">
+              <p class="frm-ErrorMessage_Text">Sorry, we couldn't send your message. Please check the highlighted fields
+                and try again.</p>
+            </div>
+          </div>
+        {% endif %}
+        <div class="frm-Form_Items">
+          {% for field in form %}
+            {% with half_size = (field.field.widget.__class__.__name__ != 'Textarea' and field.name != 'subject') %}
+              {{ forms.render_item(field, half_size=half_size) }}
+            {% endwith %}
+          {% endfor %}
+        </div>
+
+        <footer class="frm-Form_SubmitLine">
+          <button type="submit" class="frm-Form_Submit">Send your message</button>
+        </footer>
+      </form>
+    </div>
+  </section>
+{% endblock %}

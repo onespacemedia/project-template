@@ -1,12 +1,13 @@
 /*
 |--------------------------------------------------------------------------
-| Sanitize
+| Meyer reset
 |--------------------------------------------------------------------------
-| Sanitize.css is a small CSS file that provides better cross-browser
-| consistency in the default styling of HTML elements.
+| The goal of a reset stylesheet is to reduce browser inconsistencies in
+| things like default line heights, margins and font sizes of headings,
+| and so on..
 |
 */
-@import 'sanitize.css';
+@import 'reset-css';
 
 /*
 |--------------------------------------------------------------------------

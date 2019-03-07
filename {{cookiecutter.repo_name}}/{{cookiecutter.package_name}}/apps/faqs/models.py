@@ -71,6 +71,7 @@ class Faq(PageBase):
         return self.question
 
     class Meta:
+        unique_together = [['page', 'slug']]
         verbose_name = 'FAQ'
         verbose_name_plural = 'FAQs'
         ordering = ['order', 'question']

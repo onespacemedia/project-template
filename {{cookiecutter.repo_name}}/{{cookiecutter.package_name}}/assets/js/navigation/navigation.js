@@ -1,4 +1,4 @@
-import { debounce, getOffsetTop, mediaBreakpoints } from '../utils'
+import { debounce, mediaBreakpoints } from '../utils'
 
 export default class Navigation {
   constructor () {
@@ -15,11 +15,13 @@ export default class Navigation {
     this.isOpen = false
 
     this.toggleIsOpen = this.toggleIsOpen.bind(this)
-    this.setupItems = this.setupItems.bind(this)
 
     this.setupListeners()
   }
 
+  /**
+   * Cache any elements we will use multiple times.
+   */
   setUpElements () {
     const el = document.querySelector('.nav-Header')
 
@@ -27,36 +29,18 @@ export default class Navigation {
       el,
       document: document.documentElement || document.body,
       header: document.querySelector('.hd-Header'),
-      nav: document.querySelector('.nav-Header_Items')
+      nav: document.querySelector('.nav-Header_Items'),
+      logo: document.querySelector('.hd-Header_Logo')
     }
   }
 
+  /**
+   * Cache any elements for the mobile nav that need to be cached after the mobile nav is created.
+   */
   setUpMobileElements () {
-    this.els.trigger = this.els.el.querySelector('.nav-Header_Trigger')
+    this.els.trigger = document.querySelector('.nav-Header_Trigger')
 
     this.els.backdrop = this.els.document.querySelector('.nav-Header_Backdrop')
-
-    this.els.tops = this.els.document.querySelectorAll(
-      `.nav-Header_Items,
-      .nav-Header_Backdrop,
-      .nav-Header_Dropdown,
-      .nav-Mobile`
-    )
-  }
-
-  setupItems () {
-    // If we're on mobile we want to track the selected states to control the sub navigation open
-    // / closed. aria-selected won't be used on lg++ so we programmatically add it just for sizes
-    // below that
-    Array.from(
-      this.els.el.querySelectorAll(
-        '.nav-Header_Item:not(.nav-Header_Item-back)'
-      )
-    ).forEach(item => {
-      window.innerWidth <= mediaBreakpoints.lg
-        ? item.setAttribute('aria-selected', 'false')
-        : item.removeAttribute('aria-selected')
-    })
   }
 
   setupListeners () {
@@ -69,6 +53,10 @@ export default class Navigation {
     )
   }
 
+  /**
+   * Copy the desktop version of the nav and change the class names for mobile nav. Also add a
+   * couple of mobile only elements.
+   */
   generateMobileNav () {
     const backdrop = document.createElement('div')
     backdrop.className = 'nav-Header_Backdrop'
@@ -80,12 +68,19 @@ export default class Navigation {
     const mobileNavItems = this.els.nav.cloneNode(true)
     this.replaceClassNames(mobileNavItems, 'nav-Header', 'nav-Mobile')
 
+    const mobileLogo = this.els.logo.cloneNode(true)
+    this.replaceClassNames(mobileLogo, 'hd-Header_Logo', 'nav-Mobile_Logo')
+
+    mobileNav.appendChild(mobileLogo)
     mobileNav.appendChild(mobileNavItems)
 
     this.insertAfter(mobileNav, this.els.header)
     this.insertAfter(backdrop, this.els.header)
   }
 
+  /**
+   * For the given elements replace partial or full class names with the given value.
+   */
   replaceClassNames (els, origClass, newClass) {
     const allChildren = els.querySelectorAll('nav,div,span,ul,li,a,button')
 
@@ -107,21 +102,12 @@ export default class Navigation {
     })
   }
 
+  /**
+   * Close the mobile menu if the window grows too large.
+   */
   handleResizeComplete () {
     if (window.innerWidth > mediaBreakpoints.lg) {
       if (this.isOpen) this.setIsOpen(false)
-
-      this.isOpen = false
-
-      Array.from(this.els.tops).forEach(item => {
-        item.style.top = ''
-
-        if (item.getAttribute('style') === '') {
-          item.removeAttribute('style')
-        }
-      })
-    } else {
-      this.setTop()
     }
   }
 
@@ -129,6 +115,9 @@ export default class Navigation {
     this.setIsOpen(!this.isOpen)
   }
 
+  /**
+   * Add aria selected and active states for items and dropdowns.
+   */
   constructItems (elements) {
     return Array.from(elements).map(item => {
       const dropdown = item.querySelector('[data-hasDropdown]')
@@ -184,17 +173,6 @@ export default class Navigation {
     })
   }
 
-  setTop () {
-    Array.from(this.els.tops).forEach(el => {
-      const top =
-        window.innerWidth <= mediaBreakpoints.xs
-          ? this.els.header.offsetHeight
-          : getOffsetTop(this.els.header) + this.els.header.offsetHeight
-
-      el.style.top = `${top}px`
-    })
-  }
-
   setIsOpen (val) {
     this.isOpen = val
 
@@ -219,13 +197,10 @@ export default class Navigation {
           })
         }
       }
+
       this.items.forEach(item => {
         setAllInactive(item)
       })
-    }
-
-    if (val) {
-      this.setTop()
     }
 
     const animationFnc = e => {

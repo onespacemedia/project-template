@@ -4,6 +4,7 @@
     "staging_subdomain": "{{ cookiecutter.staging_subdomain|default('example') }}",
     "repo_name": "{{ cookiecutter.project_name|lower|replace(' ', '-') }}",
     "package_name": "{{ cookiecutter.repo_name|replace('-', '_') }}",
+    "contact": "no",
     "events": "no",
     "faqs": "no",
     "careers": "no",

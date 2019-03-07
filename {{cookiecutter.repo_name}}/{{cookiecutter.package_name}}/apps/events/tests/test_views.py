@@ -1,7 +1,7 @@
 from cms.apps.pages.middleware import RequestPageManager
 from django.test import RequestFactory
 
-from ..views import EventDetailView, EventListView
+from ..views import EventDetailView, PastEventListView, UpcomingEventListView
 from ._base import EventsBaseTestCase
 
 
@@ -11,7 +11,7 @@ class EventViewsTestCase(EventsBaseTestCase):
         self.factory = RequestFactory()
 
     def test_eventlistview_get_paginate_by(self):
-        view = EventListView()
+        view = UpcomingEventListView()
         view.request = self.factory.get('/')
         view.request.pages = RequestPageManager(view.request)
         # 10 is the default, but set to 6 in _base, so we can be sure this is
@@ -19,17 +19,24 @@ class EventViewsTestCase(EventsBaseTestCase):
         self.assertEquals(view.get_paginate_by(None), 6)
 
     def test_eventlistview_get_queryset(self):
-        view = EventListView()
+        view = UpcomingEventListView()
         view.request = self.factory.get('/')
         view.request.pages = RequestPageManager(view.request)
-        queryset = view.get_queryset()
+        queryset = view.get_unfiltered_queryset()
 
-        # Make sure get_queryset is only showing upcoming events.
+        past_view = PastEventListView()
+        past_view.request = self.factory.get('/past')
+        past_view.request.pages = RequestPageManager(past_view.request)
+        past_queryset = past_view.get_unfiltered_queryset()
+
+        # Make sure upcoming view only shows future events and they don't appear in the past view
         for event in self.future_events:
             self.assertIn(event, queryset)
+            self.assertNotIn(event, past_queryset)
 
-        # ...and isn't showing past ones.
+        # ...and vice versa.
         for event in self.past_events:
+            self.assertIn(event, past_queryset)
             self.assertNotIn(event, queryset)
 
     def test_eventdetailview_get_context_data(self):
