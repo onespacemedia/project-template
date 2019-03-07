@@ -58,7 +58,8 @@ INSTALLED_APPS = [
 
     'flexible_images',
     'sorl.thumbnail',
-    'compressor',
+    'compressor',{% if cookiecutter.contact == 'yes' %}
+    'captcha',{% endif %}
 
     'django_jinja',
     'django_lazy_image',
@@ -294,6 +295,10 @@ GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
 ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
 ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
+{% if cookiecutter.contact == 'yes' %}
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
+NOCAPTCHA = True{% endif %}
 
 WYSIWYG_OPTIONS = {
     # Overall height of the WYSIWYG
