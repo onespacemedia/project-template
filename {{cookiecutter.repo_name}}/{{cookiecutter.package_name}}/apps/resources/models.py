@@ -3,7 +3,7 @@ from os.path import splitext
 
 from cms.apps.media.models import FileRefField, ImageRefField
 from cms.apps.pages.models import ContentBase, Page
-from cms.models import HtmlField, OnlineBase, PageBase
+from cms.models import HtmlField, PageBase
 from cms.templatetags.html import truncate_paragraphs
 from django.core.exceptions import ValidationError
 from django.db import models
