@@ -1,3 +1,4 @@
+from cms.views import SearchMetaDetailMixin
 from django.views.generic import DetailView, ListView
 
 from .models import Resource, ResourceType
@@ -46,5 +47,5 @@ class ResourceListView(ListView):
         return context
 
 
-class ResourceDetailView(DetailView):
+class ResourceDetailView(SearchMetaDetailMixin, DetailView):
     model = Resource
