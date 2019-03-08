@@ -22,7 +22,7 @@ class ResourceListView(ListView):
         return qs
 
     def get_queryset(self):
-        qs = self.get_unfiltered_queryset().select_related('type', 'thumbnail', 'page')
+        qs = self.get_unfiltered_queryset().select_related('type', 'image', 'page')
 
         self.featured_resource = qs.first()
 

@@ -217,7 +217,7 @@ class Resource(PageBase):
         return None
 
     def render_item(self):
-        return render_to_string('resources/includes/resource_item.html', {
+        return render_to_string('resources/includes/item.html', {
             'object': self,
         })
 
