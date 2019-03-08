@@ -15,8 +15,3 @@ def get_email_log_html(object_id):
 @register.assignment_tag()
 def get_email_template_html(object_id):
     return EmailTemplate.objects.get(pk=object_id).get_html_version()
-
-
-@library.global_function
-def email_url(path):
-    return path_to_url(path)
