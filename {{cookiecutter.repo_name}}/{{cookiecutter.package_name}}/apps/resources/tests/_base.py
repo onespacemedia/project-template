@@ -1,3 +1,4 @@
+from cms.apps.media.models import File
 from cms.apps.pages.models import Page
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.uploadedfile import SimpleUploadedFile
@@ -23,25 +24,28 @@ class ResourcesBaseTestCase(TestCase):
                 per_page=6,
             )
 
-            self.whitepaper_type = ResourceType(
+            self.whitepaper_type = ResourceType.objects.create(
                 title='Whitepaper',
                 slug='whitepaper',
             )
 
-            self.case_study_type = ResourceType(
+            self.case_study_type = ResourceType.objects.create(
                 title='Case study',
                 slug='case-study',
             )
 
-            self.video_type = ResourceType(
+            self.video_type = ResourceType.objects.create(
                 title='Video',
                 slug='video',
                 icon_override='video',
             )
 
-            self.file = SimpleUploadedFile("test.pdf", b"\x00\x01\x02\x03")
+            self.file = File.objects.create(
+                title='test',
+                file=SimpleUploadedFile('test.pdf', b'\x00\x01\x02\x03'),
+            )
 
-            self.whitepaper = Resource(
+            self.whitepaper = Resource.objects.create(
                 page=self.resources_page,
                 title='Whitepaper test',
                 slug='whitepaper-test',
@@ -49,7 +53,15 @@ class ResourcesBaseTestCase(TestCase):
                 type=self.whitepaper_type,
             )
 
-            self.case_study = Resource(
+            self.whitepaper_other = Resource.objects.create(
+                page=self.resources_page,
+                title='Whitepaper test 2',
+                slug='whitepaper-test-2',
+                file=self.file,
+                type=self.whitepaper_type,
+            )
+
+            self.case_study = Resource.objects.create(
                 page=self.resources_page,
                 title='Case study test',
                 slug='case-study-test',
@@ -57,7 +69,7 @@ class ResourcesBaseTestCase(TestCase):
                 type=self.case_study_type
             )
 
-            self.video = Resource(
+            self.video = Resource.objects.create(
                 page=self.resources_page,
                 title='Video test',
                 slug='video-test',
