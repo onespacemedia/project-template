@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <ul>
+    {% for object in object_list %}
+      <li>{{ object.render_item() }}</li>
+    {% else %}
+      <li>No resources</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
