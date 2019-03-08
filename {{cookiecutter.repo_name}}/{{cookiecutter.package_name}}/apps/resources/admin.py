@@ -24,8 +24,6 @@ class ResourceAdmin(HasImageAdminMixin, PageBaseAdmin):
     list_editable = ['is_online']
     list_filter = ['page', 'type', 'is_online']
 
-    filter_horizontal = ['products']
-
     fieldsets = [
         (None, {
             'fields': ['title', 'slug', 'page', 'date', 'type'],
