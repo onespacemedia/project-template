@@ -227,6 +227,6 @@ class Resource(PageBase):
         })
 
     def get_related_resources(self, count=3):
-        candidates = []
+        candidates = [Resource.objects.filter(type=self.type), Resources.objects.all()]
 
         return get_related_items(candidates, count, exclude=self)
