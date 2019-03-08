@@ -72,7 +72,7 @@ class Resources(ContentBase):
     icon = 'cms-icons/resources.png'
 
     # The urlconf used to power this content's views.
-    urlconf = '{{ cookiecutter.package_name }}.apps.resources.urls.resources'
+    urlconf = '{{ cookiecutter.package_name }}.apps.resources.urls'
 
     fieldsets = [
         (None, {
