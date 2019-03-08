@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
     {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
     {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
+    {% if cookiecutter.resources == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.resources',
     {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
