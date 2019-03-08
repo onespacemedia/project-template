@@ -2,7 +2,7 @@ from html import unescape
 from os.path import splitext
 
 from cms.apps.media.models import FileRefField, ImageRefField
-from cms.apps.pages.models import ContentBase, Page
+from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase
 from cms.templatetags.html import truncate_paragraphs
 from django.core.exceptions import ValidationError
