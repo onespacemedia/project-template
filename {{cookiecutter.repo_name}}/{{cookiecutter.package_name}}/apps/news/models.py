@@ -225,7 +225,12 @@ class Article(PageBase):
 
     def render_card(self):
         return render_to_string('news/includes/card.html', {
-            'article': self,
+            'object': self,
+        })
+
+    def render_featured_card(self):
+        return render_to_string('news/includes/featured_card.html', {
+            'object': self,
         })
 
 
