@@ -1,32 +1,3 @@
-<article class="nws-ArticleCard">
-  <a class="nws-ArticleCard_Anchor" href="{{ article.get_absolute_url() }}">
-    <div class="nws-ArticleCard_ImageContainer">
-      {% set card_image = article.card_image or article.image %}
-      {% if card_image %}
-        {{ render_lazy_image(card_image, width=393, height=213) }}
-      {% endif %}
-    </div>
+{% extends 'includes/article_card.html' %}
 
-    <div class="nws-ArticleCard_Body">
-      <div class="nws-ArticleCard_Meta">
-        <time class="nws-ArticleCard_Time">
-          {{ article.date | date('j F Y') }}
-        </time>
-
-        {% if article.categories.all() %}
-        <span class="nws-ArticleCard_Categories">
-          {% for category in article.categories.all() %}
-          {{ category }}{% if not loop.last %}, {% endif %}
-          {% endfor %}
-        </span>
-        {% endif %}
-      </div>
-
-      <h3 class="nws-ArticleCard_Title">{{ article }}</h3>
-
-      <p class="nws-ArticleCard_Text">{{ article.get_summary }}</p>
-
-      <span class="nws-ArticleCard_Link">Read more</span>
-    </div>
-  </a>
-</article>
+{% block bottom_text %}{% if object.get_summary() %}{{ object.get_summary() }}{% endif %}{% endblock %}

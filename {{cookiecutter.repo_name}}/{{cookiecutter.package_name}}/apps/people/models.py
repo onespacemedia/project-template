@@ -3,6 +3,7 @@ from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from historylinks import shortcuts as historylinks
 
@@ -143,6 +144,11 @@ class Person(SearchMetaBase):
     def twitter_url(self):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
+
+    def render_card(self):
+        return render_to_string('news/includes/card.html', {
+            'article': self,
+        })
 
 historylinks.register(Person)
 sitemaps.register(Person)

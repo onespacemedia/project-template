@@ -1,3 +1,4 @@
+{% extends 'includes/featured_card.html' %}
 <a class="art-Featured" href="{{ object.get_absolute_url() }}">
   <div class="art-FeaturedCard_Content">
     <p class="art-FeaturedCard_Kicker">{{ object.start_date|date('d F, Y') }}{% if object.start_date != object.end_date %} - {{ object.end_date|date('d F, Y') }}{% endif %}</p>

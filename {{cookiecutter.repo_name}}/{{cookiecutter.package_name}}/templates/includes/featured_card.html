@@ -1,0 +1,17 @@
+<a class="art-FeaturedCard" href="{{ object.get_absolute_url() }}">
+  <div class="art-FeaturedCard_Content">
+    {% block content_above %}{% endblock %}
+
+    {% if self.kicker() %}<p class="art-FeaturedCard_Kicker">{% block kicker %}{% endblock %}</p>{% endif %}
+
+    <h2 class="art-FeaturedCard_Title">{{ object.title }}</h2>
+
+    {% if self.bottom_text() %}<p class="art-FeaturedCard_BottomText">{% block bottom_text %}{% endblock %}</p>{% endif %}
+  </div>
+
+  {% if object.card_image or object.image %}
+    <div class="art-FeaturedCard_Image">
+      {{ render_lazy_image(object.card_image or object.image, width=843, height=480, blur=False, show_small_image=False) }}
+    </div>
+  {% endif %}
+</a>

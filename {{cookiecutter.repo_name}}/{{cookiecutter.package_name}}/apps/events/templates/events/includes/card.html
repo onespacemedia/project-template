@@ -1,19 +1,7 @@
-<a class="art-Card" href="{{ object.get_absolute_url() }}">
-  {% with card_image = object.card_image or object.image %}
-    {% if card_image %}
-      <div class="art-Card_ImageContainer">
-          {{ render_lazy_image(card_image, width=192, height=108) }}
-      </div>
-    {% endif %}
-  {% endwith %}
+{% extends 'includes/article_card.html' %}
 
-  <div class="art-Card_Body">
-    <h3 class="art-Card_Title">{{ object }}</h3>
+{% block kicker %}
+  {{ object.start_date|date('d F, Y') }}{% if object.start_date != object.end_date %} - {{ object.end_date|date('d F, Y') }}{% endif %}
+{% endblock %}
 
-    <p class="art-Card_Meta">
-      {{ object.start_date|date('d F, Y') }}{% if object.start_date != object.end_date %} - {{ object.end_date|date('d F, Y') }}{% endif %}
-    </p>
-
-    {% if object.get_summary() %}<p class="art-Card_Text">{{ object.get_summary() }}</p>{% endif %}
-  </div>
-</a>
+{% block bottom_text %}{% if object.get_summary() %}{{ object.get_summary() }}{% endif %}{% endblock %}

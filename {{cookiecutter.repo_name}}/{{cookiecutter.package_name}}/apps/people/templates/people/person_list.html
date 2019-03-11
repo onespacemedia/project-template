@@ -1,11 +1,13 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block main %}
-  <ul>
-    {% for object in object_list %}
-      <li><a href="{{ object.get_absolute_url() }}">{{ object }}</a></li>
-    {% else %}
-      <li>No people</li>
-    {% endfor %}
-  </ul>
+  {% if object_list %}
+    {{ listings.four_up(object_list) }}
+  {% else %}
+    <p>There are no people.</p>
+  {% endif %}
+
+  {% if page_obj %}
+    {{ render_pagination(page_obj) }}
+  {% endif %}
 {% endblock %}
