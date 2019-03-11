@@ -1,0 +1,12 @@
+{% extends 'sections/types/_base.html' %}
+
+{% block body %}
+  <div class="sec-DualColumns ani-Animation_Stagger" data-animation="SlideUp" data-time="75">
+    <div class="sec-DualColumns_Column wys-WYSIWYG ani-Animation_Child">
+      {{ section.left_column|html }}
+    </div>
+    <div class="sec-DualColumns_Column wys-WYSIWYG ani-Animation_Child">
+      {{ section.right_column|html }}
+    </div>
+  </div>
+{% endblock %}
