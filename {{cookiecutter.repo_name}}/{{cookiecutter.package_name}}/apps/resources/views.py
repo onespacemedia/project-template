@@ -23,8 +23,9 @@ class ResourceListView(ListView):
 
     def get_queryset(self):
         qs = self.get_unfiltered_queryset().select_related('type', 'image', 'page')
+        candidates = self.get_unfiltered_queryset().order_by('-featured')
 
-        self.featured_resource = qs.first()
+        self.featured_resource = candidates.first()
 
         if self.featured_resource:
             qs = qs.exclude(id=self.featured_resource.id)

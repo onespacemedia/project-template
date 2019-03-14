@@ -18,7 +18,7 @@ class ResourcesConfig(AppConfig):
             model = Resource
 
             def items(self):
-                return super().items().filter(content__is_null=False)
+                return super().items().exclude(content=None)
 
         watson.register(Resource, adapter_cls=PageBaseSearchAdapter)
         sitemaps.register(Resource, sitemap_cls=ResourceSiteMap)

@@ -175,7 +175,7 @@ class Resource(PageBase):
         ordering = ['-date', 'title']
 
     def __str__(self):
-        return self.short_title or self.title
+        return self.title
 
     def clean(self):
         if not self.content and not self.file and not self.external_url:

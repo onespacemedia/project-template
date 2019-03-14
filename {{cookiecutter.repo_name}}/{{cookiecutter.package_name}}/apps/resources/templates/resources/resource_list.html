@@ -8,4 +8,8 @@
       <li>No resources</li>
     {% endfor %}
   </ul>
+
+  {% if page_obj %}
+    {{ render_pagination(page_obj) }}
+  {% endif %}
 {% endblock %}
