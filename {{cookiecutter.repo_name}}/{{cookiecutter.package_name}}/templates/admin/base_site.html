@@ -54,6 +54,26 @@
       font-size: 14px;
       line-height: 28px;
     }
+
+    .sidebar-popup {
+      background-color: unset;
+    }
+
+    .sidebar-popup-section {
+      position: absolute;
+      right: 0;
+      left: 0;
+
+      background-color: #ecf2f6;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sidebar-popup-title,
+    .sidebar-popup-search {
+      display: none;
+    }
   </style>
 {% endblock %}
 
@@ -65,11 +85,29 @@
     window.cmsUrls.imageLibraryIframe = '{% url "admin:media_file_wysiwyg_list" %}';
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var appsList = Array.from(document.querySelectorAll('.app-item'))
+      // appsList contains nodes with data atributes of the form: data-app-label="APP"
+
+      var popupsList = document.querySelector('.sidebar-popup')
+      // appsList contains nodes with classes of the form: sidebar-popup-section-APP
+
+      for (var i=appsList.length - 1; i>=0; i--) {
+        var appName = appsList[i].dataset.appLabel
+        var relatedPopup = popupsList.querySelector('.sidebar-popup-section-' + appName)
+        relatedPopup.style.top = appsList[i].getBoundingClientRect().top + 'px'
+      }
+    })
+  </script>
+
+  {% include "admin/cms/scripts.html" %}
+
   {{ block.super }}
 {% endblock %}
 
 {% block nav-global %}
-  <a href="https://documentation.onespacemedia.com/" class="sidebar-link icon">
+  <a href="https://documentation.onespacemedia.com/" target="_blank" class="sidebar-link icon">
     <span class="sidebar-link-label">
       <span class="sidebar-link-icon">
         <svg id="i-file" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
@@ -79,7 +117,7 @@
     </span>
   </a>
 
-  <a href="https://retainer.onespacemedia.com" class="sidebar-link icon">
+  <a href="https://retainer.onespacemedia.com" target="_blank" class="sidebar-link icon">
     <span class="sidebar-link-label">
       <span class="sidebar-link-icon">
         <svg id="i-portfolio" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoi
