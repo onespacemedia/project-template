@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% import 'macros/heroes.html' as heroes %}
+{% import 'macros/heroes.html' as heroes with context %}
 {% import 'macros/forms.html' as forms %}
 
 {% set content = pages.current.content %}
 
 {% block content_above %}
   {{ heroes.landing_hero({
-    'kicker': content.hero_kicker if content.hero_kicker else pages.current.title,
+    'kicker': content.hero_kicker,
     'title': content.hero_title,
   }) }}
 {% endblock %}

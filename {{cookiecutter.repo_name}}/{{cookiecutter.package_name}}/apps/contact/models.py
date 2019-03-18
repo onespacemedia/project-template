@@ -1,11 +1,8 @@
-import re
-
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
-from django.utils.functional import cached_property
 
 
 class Contact(ContentBase):
@@ -33,12 +30,6 @@ class Contact(ContentBase):
     hero_title = models.CharField(
         max_length=255,
         verbose_name='title',
-    )
-
-    form_email_address = models.CharField(
-        max_length=255,
-        help_text='Form submissions will be sent to these addresses. Separate multiple emails with a comma or a space.',
-        verbose_name='email address',
     )
 
     form_title = models.CharField(
@@ -69,7 +60,7 @@ class Contact(ContentBase):
             'fields': ['hero_kicker', 'hero_title'],
         }],
         ['Form', {
-            'fields': ['form_email_address', 'form_title'],
+            'fields': ['form_title'],
         }],
         ['Success page', {
             'fields': ['success_page_title', 'success_page_content'],
@@ -85,17 +76,6 @@ class Contact(ContentBase):
                 raise ValidationError('{} is not a valid email address.'.format(email))
 
         return super().clean()
-
-    # Broken into a separate function to assist with unit testing (because
-    # it's a cached property)
-    def _email_addresses(self):
-        emails = re.split(r'[\s,]+', self.form_email_address)
-        emails = list(filter(lambda a: a != '', emails))
-        return emails
-
-    @cached_property
-    def email_addresses(self):
-        return self._email_addresses()
 
 
 class ContactSubmission(models.Model):

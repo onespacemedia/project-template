@@ -1,0 +1,257 @@
+<style type="text/css">
+  /* reset */
+  #outlook a {
+    padding: 0;
+  }
+
+  /* Force Outlook to provide a "view in browser" menu link. */
+  .ExternalClass {
+    width: 100%;
+  }
+
+  /* Force Hotmail to display emails at full width */
+  .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {
+    line-height: 100%;
+  }
+
+  p {
+    margin:2em 0;
+    padding:0;
+    font-size: 14px;
+    line-height: 26px;
+    color: #161616;
+  }
+
+  li {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  blockquote {
+    padding-left: 30px;
+
+    font-style: italic;
+
+    border-left: 2px solid #cbcbcb;
+
+    color: #757575;
+  }
+
+  blockquote p,
+  blockquote h1,
+  blockquote h2,
+  blockquote h3,
+  blockquote h4 {
+    color: #757575;
+  }
+
+  /* squash Exact Target injected paragraphs */
+  table td {
+    border-collapse: collapse;
+  }
+
+  /* Outlook 07, 10 padding issue fix */
+  table {
+    border-collapse: collapse;
+    mso-table-lspace: 0pt;
+    mso-table-rspace: 0pt;
+  }
+
+  /* remove spacing around Outlook 07, 10 tables */
+
+  /* bring inline */
+  img {
+    display: block;
+    outline: none;
+    text-decoration: none;
+    -ms-interpolation-mode: bicubic;
+  }
+
+  a img {
+    border: none;
+  }
+
+  a {
+    font-weight: 400;
+    font-size: 14px;
+    text-decoration: none;
+    color: #1141e4 !important;
+  }
+
+  /* text link */
+  a.phone {
+    text-decoration: none;
+    color: #1141e4 !important;
+    pointer-events: auto;
+    cursor: default;
+  }
+
+  /* phone link, use as wrapper on phone numbers */
+  span {
+    font-size: 13px;
+    line-height: 17px;
+    color: #161616;
+  }
+
+  h1,h2,h3,h4,h5,h6{
+    margin:2em 0;
+    padding:0;
+    color: #161616;
+  }
+
+  h1 {
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: bold;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: bold;
+  }
+
+  h4 {
+    font-size: 14px;
+    line-height: 26px;
+  }
+
+  .eml-Body {
+    width:100%;
+    margin:0;
+    padding:0;
+
+    line-height: 100% !important;
+  }
+
+  .eml-Body_Wrapper {
+    background: #fff;
+  }
+
+  .eml-Body_Cell {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .eml-Header_Cell {
+    vertical-align: middle;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .eml-Header_Title {
+    margin: 0;
+  }
+
+  .eml-Content,
+  .eml-Columns {
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+  }
+
+  .eml-Content_Cell,
+  .eml-Columns_Cell {
+    padding-top: 22px;
+    padding-right: 35px;
+    padding-bottom: 22px;
+    padding-left: 35px;
+  }
+
+  .eml-Column_Text {
+    margin: 0 16px 0 0;
+
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 22px;
+  }
+
+  .eml-Column-first {
+    width: 60%;
+  }
+
+  .eml-Column-second {
+    width: 40%;
+  }
+
+  .eml-Footer {
+    border-collapse: collapse;
+    background-color: transparent;
+    border-top: 0;
+    border-bottom: 0;
+  }
+
+  .eml-Footer_Cell {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .eml-Footer_Text {
+    margin: 0;
+
+    font-size: 11px;
+    line-height: 18px;
+
+    color: #5d5d5d
+  }
+
+  .btn-Base {
+    display: block;
+    padding: 12px 22px;
+
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2.2px;
+    font-size: 11px;
+    line-height: 12px;
+    font-weight: 400;
+
+    border: none;
+    border-radius: 2px;
+
+    transition: all 0.2s;
+  }
+
+  .btn-Grey {
+    border: 1px solid #e3e3e3;
+  }
+
+  .btn-Grey:hover {
+    text-decoration: none;
+
+    background-color: #161616;
+    border-color: #161616;
+    color: #ffffff !important;
+  }
+
+  @media screen and (max-width: 600px) {
+    .eml-Column {
+      width: 100%;
+    }
+
+    .eml-Column-second {
+      margin-top: 14px;
+    }
+
+    .eml-Content_Cell {
+      padding-top: 0;
+      padding-right: 18px;
+      padding-left: 18px;
+      padding-bottom: 0;
+    }
+
+    .eml-Columns_Cell {
+      padding-right: 18px;
+      padding-left: 18px;
+    }
+
+    blockquote {
+      padding-left: 12px;
+    }
+  }
+</style>

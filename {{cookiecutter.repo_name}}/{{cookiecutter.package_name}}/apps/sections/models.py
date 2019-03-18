@@ -47,6 +47,10 @@ SECTION_TYPES = (
                 'fields': ['background_colour', 'kicker', 'title', 'content', 'link_text', 'link_page', 'link_url'],
                 'search': ['kicker', 'title', 'content'],
             }),
+            ('dual-column', {
+                'fields': ['background_colour', 'kicker', 'title', 'left_column', 'right_column', 'link_text', 'link_page', 'link_url'],
+                'search': ['kicker', 'title', 'left_column', 'right_column'],
+            }),
         ],
     }),
     ('Components', {
@@ -157,6 +161,16 @@ class SectionBase(HasLinkMixin, VideoMixin):
     )
 
     content = HtmlField(
+        blank=True,
+        null=True,
+    )
+
+    left_column = HtmlField(
+        blank=True,
+        null=True,
+    )
+
+    right_column = HtmlField(
         blank=True,
         null=True,
     )

@@ -58,7 +58,8 @@ INSTALLED_APPS = [
 
     'flexible_images',
     'sorl.thumbnail',
-    'compressor',
+    'compressor',{% if cookiecutter.contact == 'yes' %}
+    'captcha',{% endif %}
 
     'django_jinja',
     'django_lazy_image',
@@ -79,6 +80,7 @@ INSTALLED_APPS = [
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
     {% if cookiecutter.contact == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.contact',
+    {% if cookiecutter.emails == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.emails',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
     {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
     {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
@@ -98,6 +100,7 @@ INSTALLED_APPS = [
     'cachalot',
     'webpack_loader',
 ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
@@ -293,6 +296,10 @@ GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
 ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
 ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
+{% if cookiecutter.contact == 'yes' %}
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
+NOCAPTCHA = True{% endif %}
 
 WYSIWYG_OPTIONS = {
     # Overall height of the WYSIWYG
