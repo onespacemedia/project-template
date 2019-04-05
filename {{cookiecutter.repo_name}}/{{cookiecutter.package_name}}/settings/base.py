@@ -5,7 +5,6 @@ import platform
 import sys
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS
-from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat  # pylint: disable=import-error
@@ -268,15 +267,19 @@ SITE_ID = 1
 #                              |_|                    |__/
 ###
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GooglePlusAuth',
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
 SUIT_CONFIG = {
     'ADMIN_NAME': SITE_NAME,
     'MENU_EXCLUDE': ['default'],
 }
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
+
+DEFAULT_GOOGLE_OAUTH2_KEY = '938455100537-nu7cm468n7b2944pj73g0u7qrff81m6c.apps.googleusercontent.com'
+DEFAULT_GOOGLE_OAUTH2_SECRET = 'fEK5U8rBxPQv8y-yKZMMcA1a'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '{{cookiecutter.google_plus_key}}' or DEFAULT_GOOGLE_OAUTH2_KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '{{cookiecutter.google_plus_secret}}' or DEFAULT_GOOGLE_OAUTH2_SECRET
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
 ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
 ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
@@ -285,8 +288,18 @@ WHITELISTED_DOMAINS = ['onespacemedia.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    '{{cookiecutter.package_name}}.apps.site.auth_pipeline.make_staff',
 )
 
 TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
