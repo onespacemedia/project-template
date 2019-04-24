@@ -146,20 +146,20 @@ export function removePreloadClass () {
 
 // Wrap an HTMLElement around either a single element, or each element in an
 // HTMLElement array.
-export function wrapElement (toWrap, elms) {
-  // Convert `elms` to an array, if necessary.
-  if (!elms.length) {
-    elms = [elms]
+export function wrapElement (toWrap, elements) {
+  // Convert `elements` to an array, if necessary.
+  if (!elements.length) {
+    elements = [elements]
   } else {
     /* Array.from allows it to be used on an HTMLCollection. */
-    elms = Array.from(elms)
+    elements = Array.from(elements)
   }
 
   // Loops backwards to prevent having to clone the wrapper on the
   // first element (see `child` below).
-  for (let i = elms.length - 1; i >= 0; i--) {
+  for (let i = elements.length - 1; i >= 0; i--) {
     const child = i > 0 ? toWrap.cloneNode(true) : toWrap
-    const el = elms[i]
+    const el = elements[i]
 
     // Cache the current parent and sibling.
     const parent = el.parentNode
