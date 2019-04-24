@@ -6,7 +6,7 @@ jobs:
         environment:
           - TEST_DATABASE_URL=postgresql://root@localhost/example_project
           - CI=True
-      - image: circleci/postgres:9.5.10
+      - image: circleci/postgres:9.6.11
         environment:
           - POSTGRES_USER=root
           - POSTGRES_DB=example_project
