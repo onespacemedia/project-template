@@ -14,6 +14,20 @@ except ImportError:
         pass
 
 
+class LinkFieldsLastAdminMixin:
+    '''
+    A mixin for ModelAdmin & its inlines which ensures that fields from
+    HasLinkMixin always come last (which almost invariably makes most sense).
+    '''
+    def get_fields(self, request, obj=None):
+        '''Make fields from HasLinkMixin last.'''
+        fields = list(super().get_fields(request, obj=obj))
+        for field in ['link_page', 'link_url', 'link_text']:
+            fields.remove(field)
+            fields.append(field)
+        return fields
+
+
 class UsedOnAdminMixin(object):
     '''
     Designed for components that are used inside pages.
