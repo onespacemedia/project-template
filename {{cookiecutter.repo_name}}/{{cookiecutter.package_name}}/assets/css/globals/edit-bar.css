@@ -19,7 +19,7 @@
     z-index: 10;
 
     display: block;
-    padding: 0.25vr var(--Grid_Gutter);
+    padding: 6px var(--Grid_Gutter);
 
     font-size: 14px;
 
@@ -85,6 +85,8 @@
   position: fixed;
   top: 0;
   right: 0;
+  /* Position the frame so it doesn't overlap the edit bar. This is 24px
+  (typical line height) + 6px + 6px (top and bottom padding) */
   bottom: 36px;
   left: 0;
   z-index: 1000;

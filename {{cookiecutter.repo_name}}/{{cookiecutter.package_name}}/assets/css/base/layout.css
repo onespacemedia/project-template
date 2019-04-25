@@ -32,7 +32,8 @@
   /* Make way for the edit bar if it's present. */
   .lyt-Body-hasEditBar & {
     @media (--md) {
-      padding-bottom: 40px;
+      /* 24px (typical line height) + 6px + 6px (top and bottom padding) */
+      padding-bottom: 36px;
     }
   }
 }
