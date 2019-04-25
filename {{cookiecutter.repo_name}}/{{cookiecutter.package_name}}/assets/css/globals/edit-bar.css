@@ -54,6 +54,7 @@
   cursor: pointer;
 
   .svg-Image {
+    width: 15px;
     height: 15px;
     margin-right: calc(var(--Grid_Inside) / 2);
   }
