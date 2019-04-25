@@ -28,6 +28,13 @@
     overflow: hidden;
   }
   /* stylelint-enable */
+
+  /* Make way for the edit bar if it's present. */
+  .lyt-Body-hasEditBar & {
+    @media (--md) {
+      padding-bottom: 40px;
+    }
+  }
 }
 
 /*
