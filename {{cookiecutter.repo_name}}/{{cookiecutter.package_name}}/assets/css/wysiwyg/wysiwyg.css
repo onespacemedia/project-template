@@ -124,6 +124,7 @@
 
       border-right: 1px solid var(--Color_Border);
       border-bottom: 1px solid var(--Color_Border);
+      overflow-wrap: break-word;
 
       @media (--md) {
         padding: 0.5vr var(--Grid_Gutter);
