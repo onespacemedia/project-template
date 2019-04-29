@@ -53,12 +53,6 @@
                 {% endif %}
                 <div class="submit-row">
                     <input type="submit" value="{% trans 'Log in' %}" class="btn btn-info"/>
-
-                    {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
-                      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger pull-right">
-                        OSM staff login
-                      </a>
-                    {% endif %}
                 </div>
             </form>
 
@@ -69,6 +63,13 @@
     {% endblock %}
 {% endblock %}
 
+
 {% block footer_links %}
-  {{ block.super }}
+    {{ block.super }}
+
+    {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
+      <a href="{% url 'social:begin' 'google-oauth2' %}">
+        OSM staff login
+      </a>
+    {% endif %}
 {% endblock %}
