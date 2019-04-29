@@ -19,6 +19,9 @@
 .lst-Grid_Item {
   @include Grid_Column;
 
+  flex-direction: column;
+
+  display: flex;
   width: 100%;
   margin-bottom: calc(var(--Grid_Gutter) * 2);
 }
