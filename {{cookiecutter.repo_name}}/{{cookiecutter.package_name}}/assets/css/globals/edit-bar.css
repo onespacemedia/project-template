@@ -11,15 +11,20 @@
 .pg-EditBar {
   display: none;
 
-  padding: 0.25vr var(--Grid_Gutter);
-
-  font-size: 14px;
-
-  background-color: var(--Color_Body);
-  color: #fff;
-
   @media (--md) {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+
     display: block;
+    padding: 6px var(--Grid_Gutter);
+
+    font-size: 14px;
+
+    background-color: var(--Color_Body);
+    color: #fff;
   }
 }
 
@@ -49,6 +54,7 @@
   cursor: pointer;
 
   .svg-Image {
+    width: 15px;
     height: 15px;
     margin-right: calc(var(--Grid_Inside) / 2);
   }
@@ -77,9 +83,11 @@
 */
 .pg-EditBar_FrameContainer {
   position: fixed;
-  top: 36px;
+  top: 0;
   right: 0;
-  bottom: 0;
+  /* Position the frame so it doesn't overlap the edit bar. This is 24px
+  (typical line height) + 6px + 6px (top and bottom padding) */
+  bottom: 36px;
   left: 0;
   z-index: 1000;
 

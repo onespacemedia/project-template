@@ -106,7 +106,7 @@
     {% include 'base/_analytics.html' %}
   </head>
 
-  <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
+  <body class="util-Preload util-IsTabbing {% if edit_bar() %}lyt-Body-hasEditBar{% endif %} {% block body_class %}{% endblock %}">
     {% include 'base/_browser-update.html' %}
 
     {{ edit_bar() }}
