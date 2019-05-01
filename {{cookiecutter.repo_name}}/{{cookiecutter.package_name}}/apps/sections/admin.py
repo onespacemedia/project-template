@@ -2,10 +2,11 @@ from cms.apps.pages.admin import page_admin
 from django.core.urlresolvers import reverse_lazy
 from suit.admin import SortableStackedInline
 
+from ...utils.admin import LinkFieldsLastAdminMixin
 from .models import Content, ContentSection
 
 
-class ContentSectionInline(SortableStackedInline):
+class ContentSectionInline(LinkFieldsLastAdminMixin, SortableStackedInline):
     model = ContentSection
     extra = 0
     filter_horizontal = ['people']
