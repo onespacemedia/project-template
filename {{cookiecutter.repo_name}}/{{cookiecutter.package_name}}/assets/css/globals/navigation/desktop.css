@@ -146,6 +146,7 @@
     border-width: 0 6px 6px;
   }
 
+  /* :focus-within allows using the keyboard alone to tab to dropdown menus. */
   .nav-Header_Item-hasDropdown:hover > &,
   .nav-Header_Item-hasDropdown:focus-within > & {
     opacity: 1;
