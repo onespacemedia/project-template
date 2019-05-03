@@ -146,8 +146,18 @@
     border-width: 0 6px 6px;
   }
 
-  /* :focus-within allows using the keyboard alone to tab to dropdown menus. */
-  .nav-Header_Item-hasDropdown:hover > &,
+  .nav-Header_Item-hasDropdown:hover > & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /*
+  :focus-within allows using the keyboard to tab to dropdown menus. This needs
+  to duplicate the above properties because IE11 and Edge do not support
+  focus-within; if you merge it with the above selector, they will ignore the
+  entire selector (not just the focus-within part) and hover-dropdowns won't
+  work.
+  */
   .nav-Header_Item-hasDropdown:focus-within > & {
     opacity: 1;
     visibility: visible;
