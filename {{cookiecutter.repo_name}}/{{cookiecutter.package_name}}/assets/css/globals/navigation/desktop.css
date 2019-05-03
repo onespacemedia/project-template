@@ -146,7 +146,8 @@
     border-width: 0 6px 6px;
   }
 
-  .nav-Header_Item-hasDropdown:hover > & {
+  .nav-Header_Item-hasDropdown:hover > &,
+  .nav-Header_Item-hasDropdown:focus-within > & {
     opacity: 1;
     visibility: visible;
   }
