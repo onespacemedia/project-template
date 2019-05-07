@@ -36,7 +36,7 @@
         <span class="pg-EditBar_Divider">|</span>
 
         <p class="pg-EditBar_Text">
-          You are logged in as <strong>{{ user.first_name }}</strong>
+          You are logged in as <strong>{% if user.first_name %}{{ user.first_name }}{% else %}{{ user.email }}{% endif %}</strong>
         </p>
 
         <img src="{{ gravatar_url(user.email, size=24) }}" class="pg-EditBar_Image" />

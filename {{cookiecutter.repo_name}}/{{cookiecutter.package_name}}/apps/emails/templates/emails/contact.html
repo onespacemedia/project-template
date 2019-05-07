@@ -1,9 +1,9 @@
-{% extends 'emails/_base.html' %}
+{% extends 'emails/base.html' %}
+
+{% block heading %}{{ object.title or 'Contact submission' }}{% endblock %}
 
 {% block content %}
-  <p>Someone has submitted a contact form on {{ settings.SITE_NAME }}.</p>
-
-  <p>
+  <p style="margin-top: 0;">
     <strong>Name:</strong> {{ first_name }} {{ last_name }}{% if job_title %}, {{ job_title }}{% endif %}<br>
     {% if phone_number %}<strong>Phone number:</strong> {{ phone_number }}<br>{% endif %}
     <strong>Subject:</strong> {{ reason_for_enquiry }}<br>
@@ -11,6 +11,8 @@
   </p>
 
   <p>
-    {{ message|linebreaksbr }}
+    <strong>Message:</strong><br/>{{ message|linebreaksbr }}
   </p>
+
+  <p style="margin-bottom: 0;">{{ object.content | md }}</p>
 {% endblock %}
