@@ -33,8 +33,9 @@ class RedirectModelForm(forms.ModelForm):
 
         # urlparse is extremely forgiving (or maybe URLs are just really weird).
         # There are all sorts of things that urlparse will happily parse as
-        # actual URLs (with scheme, netloc, path, etc). Just pass these
-        # straight through.
+        # actual URLs (with scheme, netloc, path, etc). We'll ignore regular
+        # expressions because it's entirely possible that they will pass as
+        # a URL.
         if not self.cleaned_data.get('regular_expression'):
             # So let's find out if it looks something like a URL. This is
             # so rather than manually trimming the path from the URL on a page
