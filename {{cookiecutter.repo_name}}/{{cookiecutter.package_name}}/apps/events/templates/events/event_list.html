@@ -1,11 +1,14 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% import 'macros/listings.html' as listings %}
 
 {% block main %}
-  <ul>
-    {% for event in event_list %}
-      <li>{{ event }}</li>
-    {% else %}
-      <li>No events</li>
-    {% endfor %}
-  </ul>
+  {% if object_list %}
+    {{ listings.three_up(object_list) }}
+  {% else %}
+    <p>There are no events.</p>
+  {% endif %}
+
+  {% if page_obj %}
+    {{ render_pagination(page_obj) }}
+  {% endif %}
 {% endblock %}

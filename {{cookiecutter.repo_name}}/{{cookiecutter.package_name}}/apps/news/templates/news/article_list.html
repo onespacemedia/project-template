@@ -1,6 +1,6 @@
-{% extends "news/base.html" %}
-{% import "components/macros/components.html" as components %}
-{% import "news/macros/news.html" as news %}
+{% extends 'news/base.html' %}
+{% import 'components/macros/components.html' as components %}
+{% import 'macros/listings.html' as listings %}
 
 {% block content_above %}
   <section class="pg-LandingHero">
@@ -14,13 +14,11 @@
 {% endblock %}
 
 {% block main %}
-  <div class="nws-Articles">
-    {% if object_list %}
-      {{ news.article_list(object_list, featured_article) }}
-    {% else %}
-      <p>There are no articles.</p>
-    {% endif %}
-  </div>
+  {% if object_list %}
+    {{ listings.three_up(object_list) }}
+  {% else %}
+    <p>There are no articles.</p>
+  {% endif %}
 
   {% if page_obj %}
     {{ render_pagination(page_obj) }}
