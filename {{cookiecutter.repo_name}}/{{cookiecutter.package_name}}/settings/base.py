@@ -325,7 +325,7 @@ WYSIWYG_OPTIONS = {
 
     # Items to display on the 3 toolbar lines
     'toolbar1': 'code | cut copy pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap',
-    'toolbar2': 'template styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript',
+    'toolbar2': 'styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript',
     'toolbar3': '',
 
     # Display menubar with dropdowns
