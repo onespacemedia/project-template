@@ -51,7 +51,6 @@
     "lint-staged": "^3.6.1",
     "postcss-assets": "^4.1.0",
     "postcss-color-alpha": "^2.0.0",
-    "postcss-conditionals": "^2.1.0",
     "postcss-custom-media": "^6.0.0",
     "postcss-custom-properties": "^5.0.1",
     "postcss-custom-selectors": "^4.0.1",
