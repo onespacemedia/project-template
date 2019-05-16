@@ -1,7 +1,6 @@
 module.exports = [
   require('postcss-easy-import'),
   require('postcss-sassy-mixins'),
-  require('postcss-conditionals'),
   require('postcss-nested'),
   require('postcss-functions')({
     functions: {
@@ -28,10 +27,6 @@ module.exports = [
     loadPaths: ['img/'],
     baseUrl: '/static/'
   }),
-  require('postcss-inline-svg')({
-    path: '{{cookiecutter.package_name}}/assets/img/'
-  }),
-  require('postcss-brand-colors'),
   require('postcss-property-lookup'),
   require('postcss-lh')({
     rhythmUnit: 'vr'
