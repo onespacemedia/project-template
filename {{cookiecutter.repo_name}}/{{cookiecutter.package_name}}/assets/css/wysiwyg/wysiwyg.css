@@ -9,7 +9,7 @@
 | @namespace: wys-
 */
 
-/* stylelint-disable declaration-no-important, max-nesting-depth, selector-max-id, selector-max-type, selector-max-universal */
+/* stylelint-disable declaration-no-important, max-nesting-depth, selector-max-id, selector-max-type, selector-max-universal, osm/enforce-namespace */
 #tinymce,
 .wys-WYSIWYG {
   > img {
