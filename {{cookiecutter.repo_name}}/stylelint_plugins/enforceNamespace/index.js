@@ -29,9 +29,10 @@ module.exports = stylelint.createPlugin(ruleName, function (max, options) {
   return function (root, result) {
     var namespaceLoc = root.source.input.css.indexOf('@namespace')
     if (namespaceLoc === -1) {
-      isEmpyFile = true
-      for (node in root.nodes) {
-        if (node.type = 'rule') {
+      var isEmpyFile = true
+
+      for (node of root.nodes) {
+        if (node.type === 'rule') {
           isEmpyFile = false
         }
       }
@@ -47,7 +48,7 @@ module.exports = stylelint.createPlugin(ruleName, function (max, options) {
 
       return
     }
-    
+
     var namespaceStart = root.source.input.css.indexOf(' ', namespaceLoc)
     var namespaceEnd = root.source.input.css.indexOf('\n', namespaceLoc)
     var namespace = root.source.input.css.substring(namespaceStart + 1, namespaceEnd)
