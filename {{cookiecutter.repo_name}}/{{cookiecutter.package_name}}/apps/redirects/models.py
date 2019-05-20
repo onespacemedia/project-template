@@ -64,3 +64,24 @@ class Redirect(models.Model):
         if not self.regular_expression:
             return self.new_path
         return re.sub(self.old_path, self.new_path, path)
+
+    def clean(self):
+        path = self.new_path
+
+        if path.startswith('http'):
+            path = path.split(settings.SITE_DOMAIN)[-1]
+
+        if path.endswith('/'):
+            path_options = [path[:-1], path]
+        else:
+            path_options = [path, f'{path}/']
+
+        for redirect in Redirect.objects.all():
+            if redirect.old_path in path_options:
+                raise ValidationError({
+                    'new_path': 'There is already a redirect from this URL. Please do not redirect to redirects',
+                })
+            elif getattr(settings, "REDIRECTS_ENABLE_REGEX", False) and self.regular_expression and re.match(self.regular_expression, redirect.old_path):
+                raise ValidationError({
+                    'new_path': 'There is already a redirect from this URL. Please do not redirect to redirects',
+                })
