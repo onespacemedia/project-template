@@ -2,6 +2,7 @@ from cms.admin import PageBaseAdmin
 from django.contrib import admin
 from suit.admin import SortableModelAdmin
 
+from ...utils.admin import SEOQualityControlFilter
 from .models import Career, Careers
 
 
@@ -30,7 +31,7 @@ class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
 
     list_display = ['__str__', 'location', 'closing_date', 'is_online']
     list_editable = ['is_online']
-    list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter]
+    list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter, SEOQualityControlFilter]
 
     fieldsets = [
         (None, {
