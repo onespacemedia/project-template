@@ -250,7 +250,7 @@ class Article(PageBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'Article',
-            'author': {% if cookiecutter.people == 'yes' %}self.author.__str__() or {% endif %}settings.SITE_NAME,
+            'author': {% if cookiecutter.people == 'yes' %}str(self.author) or {% endif %}settings.SITE_NAME,
             'publisher': ORGANISATION_SCHEMA,
             'name': self.title,
             'headline': self.title,
