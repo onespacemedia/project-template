@@ -1,10 +1,16 @@
+import json
+
 from cms import sitemaps
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase, PageBaseManager
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import ORGANISATION_SCHEMA
 
 
 class Careers(ContentBase):
@@ -37,6 +43,52 @@ class CareerQuerySet(models.QuerySet):
         )
 
 
+class CareerLocation(models.Model):
+
+    title = models.CharField(
+        max_length=100,
+    )
+
+    street_address = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    city = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    region = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    postcode = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+    )
+
+    country = models.CharField(
+        max_length=2,
+        blank=True,
+        null=True,
+        default='GB',
+        help_text="The country's ISO ALPHA-2 code"
+    )
+
+    class Meta:
+        ordering = ['title']
+        verbose_name = 'location'
+
+    def __str__(self):
+        return self.title
+
+
 class Career(PageBase):
     objects = PageBaseManager.from_queryset(CareerQuerySet)()
 
@@ -51,8 +103,8 @@ class Career(PageBase):
         help_text='The date after which this career should no longer be listed on the site. If you leave this empty, it will never be de-listed.',
     )
 
-    location = models.CharField(
-        max_length=256,
+    location = models.ForeignKey(
+        CareerLocation,
         blank=True,
         null=True,
     )
@@ -76,6 +128,66 @@ class Career(PageBase):
         blank=True,
     )
 
+    date_posted = models.DateField(
+        default=now,
+    )
+
+    # Schema Fields
+    employment_type = models.CharField(
+        choices=[
+            ('FULL_TIME', 'Full time'),
+            ('PART_TIME', 'Part time'),
+            ('CONTRACTOR', 'Contract'),
+            ('TEMPORARY', 'Temporary'),
+            ('INTERN', 'Internship'),
+        ],
+        max_length=16,
+        blank=True,
+        null=True,
+    )
+
+    education_requirements = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    experience_requirements = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    qualifications = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    responsibilities = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    skills = models.TextField(
+        blank=True,
+        null=True,
+    )
+
+    work_hours = models.CharField(
+        max_length=128,
+        blank=True,
+        null=True,
+        help_text='The typical working hours for this job (e.g. 1st shift, night shift, 8am-5pm).'
+    )
+
+    estimated_salary = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+    )
+
+    base_salary = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+    )
+
     order = models.PositiveIntegerField(
         default=0,
     )
@@ -94,6 +206,49 @@ class Career(PageBase):
         return self.page.page.reverse('career_detail', kwargs={
             'slug': self.slug,
         })
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'JobPosting',
+            'estimatedSalary': self.estimated_salary or '',
+            'baseSalary': self.base_salary or '',
+            'datePosted': self.date_posted.isoformat() or '',
+            'description': 'Summary: {}'.format(self.summary),
+            'educationRequirements': self.education_requirements or '',
+            'employmentType': self.employment_type or '',
+            'experienceRequirements': self.experience_requirements or '',
+            'industry': '',
+            'identifier': {
+                '@type': 'PropertyValue',
+                'name': settings.SITE_NAME,
+                'value': self.pk,
+            },
+            'qualifications': self.qualifications or '',
+            'responsibilities': self.responsibilities or '',
+            'salaryCurrency': 'GBP',
+            'skills': self.skills or '',
+            'title': self.title or '',
+            'workHours': self.work_hours or '',
+            'validThrough': self.closing_date.isoformat() or '',
+            'hiringOrganization': ORGANISATION_SCHEMA,
+        }
+
+        if self.location:
+            schema['jobLocation'] = {
+                "@type": "Place",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": self.location.street_address or '',
+                    "addressLocality": self.location.city or '',
+                    "addressRegion": self.location.region or '',
+                    "postalCode": self.location.postcode or '',
+                    "addressCountry": self.location.country or '',
+                },
+            }
+
+        return mark_safe(json.dumps(schema))
+
 
 historylinks.register(Career)
 sitemaps.register(Career)

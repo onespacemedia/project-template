@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
+{% block schema %}
+  <script type="application/ld+json">
+    {{ object.schema() }}
+  </script>
+{% endblock %}
+
 {% block main %}
   <section>
-    {{ faq }}
+    {{ object }}
   </section>
 {% endblock %}

@@ -1,4 +1,5 @@
 """Models used by the CMS news app."""
+import json
 from html import unescape
 
 from cms import sitemaps
@@ -13,10 +14,14 @@ from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.functional import cached_property
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import get_related_items
+from ...utils.utils import (ORGANISATION_SCHEMA, get_related_items,
+                            schema_image, url_from_path)
 
 
 class NewsFeed(ContentBase):
@@ -232,6 +237,43 @@ class Article(PageBase):
         return render_to_string('news/includes/featured_card.html', {
             'object': self,
         })
+
+    @property
+    def tagless_content(self):
+        return strip_tags(self.content)
+
+    @cached_property
+    def word_count(self):
+        return len(self.tagless_content.split(' '))
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Article',
+            'author': {% if cookiecutter.people == 'yes' %}str(self.author) or {% endif %}settings.SITE_NAME,
+            'publisher': ORGANISATION_SCHEMA,
+            'name': self.title,
+            'headline': self.title,
+            'text': self.summary or '',
+            'articleBody': self.tagless_content,
+            'keywords': ','.join([x.title for x in self.categories.all()]),
+            'inLanguage': {
+                'type': 'Language',
+                'name': ['English']
+            },
+            'mainEntityOfPage': url_from_path(self.get_absolute_url()),
+            'dateCreated': self.date.isoformat(),
+            'dateModified': (self.last_modified or self.date).isoformat(),
+            'datePublished': self.date.isoformat(),
+            'wordCount': self.word_count
+        }
+
+        if self.image:
+            schema['image'] = schema_image(self.image)
+        if self.card_image:
+            schema['thumbnailUrl'] = schema_image(self.card_image)
+
+        return mark_safe(json.dumps(schema))
 
 
 historylinks.register(Article)

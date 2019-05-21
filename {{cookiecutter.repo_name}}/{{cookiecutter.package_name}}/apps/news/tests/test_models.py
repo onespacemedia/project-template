@@ -1,10 +1,12 @@
+import json
 from datetime import timedelta
 
+from bs4 import BeautifulSoup
 from cms.apps.pages.models import Page
 from cms.models import publication_manager
 from cms.plugins.moderation.models import APPROVED
 from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase
+from django.test import Client, TestCase
 from django.utils.timezone import now
 from watson import search
 
@@ -105,3 +107,19 @@ class TestNews(TestCase):
         with self.assertRaises(TypeError), \
              publication_manager.select_published(True):
             assert 1 / 'a'
+
+    def test_schema_generation(self):
+        self._create_objects()
+        self.client = Client()
+
+        url = self.article.get_absolute_url()
+        response = self.client.get(url)
+        soup = BeautifulSoup(response.rendered_content, 'html.parser')
+
+        valid = True
+        try:
+            _ = json.loads(soup.find('script', type='application/ld+json').text)
+        except ValueError:
+            valid = False
+
+        self.assertTrue(valid)

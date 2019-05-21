@@ -1,3 +1,4 @@
+import json
 from html import unescape
 
 from cms import sitemaps
@@ -9,8 +10,11 @@ from cms.templatetags.html import truncate_paragraphs
 from django.db import models
 from django.template.defaultfilters import date, striptags, truncatewords
 from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import schema_image, url_from_path
 
 
 class Events(ContentBase):
@@ -86,6 +90,7 @@ class Event(PageBase):
 
     summary = models.TextField(
         blank=True,
+        null=True,
     )
 
     content = HtmlField()
@@ -131,6 +136,27 @@ class Event(PageBase):
             date_string += ' - {}'.format(date(self.end_date, 'j F Y'))
 
         return date_string
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Event',
+            'startDate': self.start_date.isoformat(),
+            'endDate': self.end_date.isoformat(),
+            'description': self.summary or '',
+            'name': self.title,
+            'mainEntityOfPage': url_from_path(self.get_absolute_url()),
+            'location': {
+                '@type': 'Place',
+                'name': 'Unknown',
+                'address': 'Unknown'
+            },
+        }
+
+        if self.image:
+            schema['image'] = schema_image(self.image)
+
+        return mark_safe(json.dumps(schema))
 
     def render_card(self):
         return render_to_string('events/includes/card.html', {

@@ -1,5 +1,8 @@
+import json
 from datetime import timedelta
 
+from bs4 import BeautifulSoup
+from django.test import Client
 from django.utils import timezone
 
 from ..models import Career
@@ -40,3 +43,18 @@ class CareerModelsTestCase(CareersBaseTestCase):
         self.assertTrue(self.job.is_open())
         self.assertTrue(self.closes_future_job.is_open())
         self.assertFalse(self.closed_job.is_open())
+
+    def test_schema_generation(self):
+        self.client = Client()
+
+        url = self.closes_future_job.get_absolute_url()
+        response = self.client.get(url)
+        soup = BeautifulSoup(response.rendered_content, 'html.parser')
+
+        valid = True
+        try:
+            _ = json.loads(soup.find('script', type='application/ld+json').text)
+        except ValueError:
+            valid = False
+
+        self.assertTrue(valid)
