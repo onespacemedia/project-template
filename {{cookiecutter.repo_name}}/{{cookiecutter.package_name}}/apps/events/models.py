@@ -104,7 +104,7 @@ class Event(PageBase):
             '@type': 'Event',
             'startDate': self.start_date.isoformat(),
             'endDate': self.end_date.isoformat(),
-            'description': self.summary if self.summary else '',
+            'description': self.summary or '',
             'name': self.title,
             'mainEntityOfPage': url_from_path(self.get_absolute_url()),
             'location': {

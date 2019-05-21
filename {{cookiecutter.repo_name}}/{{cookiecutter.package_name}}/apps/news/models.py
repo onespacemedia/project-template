@@ -245,11 +245,11 @@ class Article(PageBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'Article',
-            'author': {% if cookiecutter.people == 'yes' %}self.author.__str__() if self.author else {% endif %}settings.SITE_NAME,
+            'author': {% if cookiecutter.people == 'yes' %}self.author.__str__() or {% endif %}settings.SITE_NAME,
             'publisher': ORGANISATION_SCHEMA,
             'name': self.title,
             'headline': self.title,
-            'text': self.summary if self.summary else '',
+            'text': self.summary or else '',
             'articleBody': self.tagless_content,
             'keywords': ','.join([x.title for x in self.categories.all()]),
             'inLanguage': {
@@ -258,7 +258,7 @@ class Article(PageBase):
             },
             'mainEntityOfPage': url_from_path(self.get_absolute_url()),
             'dateCreated': self.date.isoformat(),
-            'dateModified': self.last_modified.isoformat() if self.last_modified else self.date.isoformat(),
+            'dateModified': self.last_modified.isoformat() or self.date.isoformat(),
             'datePublished': self.date.isoformat(),
             'wordCount': self.word_count
         }

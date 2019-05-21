@@ -157,10 +157,10 @@ class Person(SearchMetaBase):
             '@context': 'http://schema.org',
             '@type': 'Person',
             'colleague': [url_from_path(x.get_absolute_url()) for x in self.colleagues] if self.colleagues else '',
-            'email': self.email if self.email else '',
-            'jobTitle': self.job_title if self.job_title else '',
+            'email': self.email or '',
+            'jobTitle': self.job_title or '',
             'name': self.__str__(),
-            'url': self.linkedin if self.linkedin else self.twitter_url if self.twitter else url_from_path(self.get_absolute_url()),
+            'url': self.linkedin or self.twitter_url or url_from_path(self.get_absolute_url()),
             'worksFor': ORGANISATION_SCHEMA
         }
 

@@ -77,6 +77,7 @@ class CareerLocation(models.Model):
         max_length=2,
         blank=True,
         null=True,
+        default='GB'
         help_text="The country's ISO ALPHA-2 code"
     )
 
@@ -161,21 +162,18 @@ class Career(PageBase):
         max_length=512,
         blank=True,
         null=True,
-        help_text='Specific qualifications required for this role.'
     )
 
     responsibilities = models.CharField(
         max_length=512,
         blank=True,
         null=True,
-        help_text='Responsibilities associated with this role.'
     )
 
     skills = models.CharField(
         max_length=512,
         blank=True,
         null=True,
-        help_text='Skills required to fulfill this role.'
     )
 
     work_hours = models.CharField(
@@ -217,26 +215,26 @@ class Career(PageBase):
         schema = {
             '@context': 'http://schema.org',
             '@type': 'JobPosting',
-            'estimatedSalary': self.estimated_salary if self.estimated_salary else '',
-            'baseSalary': self.base_salary if self.base_salary else '',
-            'datePosted': self.date_posted.isoformat() if self.date_posted else '',
+            'estimatedSalary': self.estimated_salary or '',
+            'baseSalary': self.base_salary or '',
+            'datePosted': self.date_posted.isoformat() or '',
             'description': 'Summary: {}'.format(self.summary),
-            'educationRequirements': self.education_requirements if self.education_requirements else '',
-            'employmentType': self.employment_type if self.employment_type else '',
-            'experienceRequirements': self.experience_requirements if self.experience_requirements else '',
+            'educationRequirements': self.education_requirements or '',
+            'employmentType': self.employment_type or '',
+            'experienceRequirements': self.experience_requirements or '',
             'industry': '',
             'identifier': {
                 '@type': 'PropertyValue',
                 'name': settings.SITE_NAME,
                 'value': self.pk,
             },
-            'qualifications': self.qualifications if self.qualifications else '',
-            'responsibilities': self.responsibilities if self.responsibilities else '',
+            'qualifications': self.qualifications or '',
+            'responsibilities': self.responsibilities or '',
             'salaryCurrency': 'GBP',
-            'skills': self.skills if self.skills else '',
-            'title': self.title if self.title else '',
-            'workHours': self.work_hours if self.work_hours else '',
-            'validThrough': self.closing_date.isoformat() if self.closing_date else '',
+            'skills': self.skills or '',
+            'title': self.title or '',
+            'workHours': self.work_hours or '',
+            'validThrough': self.closing_date.isoformat() or '',
             'hiringOrganization': ORGANISATION_SCHEMA,
         }
 
@@ -245,11 +243,11 @@ class Career(PageBase):
                 "@type": "Place",
                 "address": {
                     "@type": "PostalAddress",
-                    "streetAddress": self.location.street_address if self.location.street_address else '',
-                    "addressLocality": self.location.city if self.location.city else '',
-                    "addressRegion": self.location.region if self.location.region else '',
-                    "postalCode": self.location.postcode if self.location.postcode else '',
-                    "addressCountry": self.location.country if self.location.country else '',
+                    "streetAddress": self.location.street_address or '',
+                    "addressLocality": self.location.city or '',
+                    "addressRegion": self.location.region or '',
+                    "postalCode": self.location.postcode or '',
+                    "addressCountry": self.location.country or '',
                 },
             }
 
