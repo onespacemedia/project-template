@@ -7,7 +7,6 @@ from ...utils.admin import LinkFieldsLastAdminMixin
 from .models import Content, ContentSection
 
 
-
 class ContentSectionInline(LinkFieldsLastAdminMixin, CompactInline):
     model = ContentSection
     extra = 0
