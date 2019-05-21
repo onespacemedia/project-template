@@ -1,6 +1,19 @@
 <script>
   (function () {
-    var cacheKey = '_tk_cache_{{ settings.GIT_COMMIT_HASH }}';
+    if (!window.localStorage) {
+      return
+    }
+
+    var cachePrefix = '_tk_cache_'
+    var cacheKey = cachePrefix + '{{ settings.GIT_COMMIT_HASH }}';
+    // {# Clear old cache keys. #}
+    var localStorageKeys = Object.keys(window.localStorage)
+    for (var i = 0; i < localStorageKeys.length; i++) {
+      if (localStorageKeys[i].startsWith(cachePrefix) && localStorageKeys[i] !== cacheKey) {
+        window.localStorage.removeItem(localStorageKeys[i])
+      }
+    }
+
     if (window.localStorage && window.localStorage.getItem(cacheKey)) {
       document.documentElement.classList.add('wf-active')
       var script = document.createElement('script')

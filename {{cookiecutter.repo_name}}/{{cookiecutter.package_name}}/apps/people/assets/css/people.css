@@ -1,0 +1,39 @@
+/*
+|--------------------------------------------------------------------------
+| People
+|--------------------------------------------------------------------------
+| @namespace: ppl-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Card
+|--------------------------------------------------------------------------
+|
+*/
+.ppl-Card {
+  @include CardShadowAndHover;
+
+  display: block;
+
+  border: 1px solid var(--Color_Border);
+}
+
+.ppl-Card_Body {
+  padding: 1vr var(--Grid_Inside);
+
+  text-align: center;
+
+  @media (--md) {
+    padding: 1.5vr 32px;
+  }
+
+  @media (--lg) {
+    padding: 1.5vr 56px 2vr;
+  }
+}
+
+.ppl-Card_JobTitle {
+  margin-top: 0.5vr;
+}

@@ -1,12 +1,15 @@
 import json
+from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, PageBase
 from cms.models import HtmlField
 from cms.models.managers import PageBaseManager
+from cms.templatetags.html import truncate_paragraphs
 from django.db import models
-from django.template.defaultfilters import date
+from django.template.defaultfilters import date, striptags, truncatewords
+from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
@@ -20,6 +23,13 @@ class Events(ContentBase):
     icon = 'cms-icons/events.png'
     urlconf = '{{ cookiecutter.package_name }}.apps.events.urls'
 
+    hero_title_past = models.CharField(
+        max_length=255,
+        verbose_name='past events title',
+        blank=True,
+        null=True,
+    )
+
     per_page = models.PositiveIntegerField(
         'events per page',
         default=10,
@@ -32,13 +42,21 @@ class Events(ContentBase):
 
 
 class Category(models.Model):
-
     title = models.CharField(
-        max_length=100,
+        max_length=50,
+    )
+
+    slug = models.SlugField(
+        unique=True
+    )
+
+    order = models.PositiveIntegerField(
+        default=0
     )
 
     class Meta:
         verbose_name_plural = 'categories'
+        ordering = ['order']
 
     def __str__(self):
         return self.title
@@ -62,6 +80,10 @@ class Event(PageBase):
         on_delete=models.PROTECT,
     )
 
+    featured = models.BooleanField(
+        default=False,
+    )
+
     start_date = models.DateField()
 
     end_date = models.DateField()
@@ -71,15 +93,27 @@ class Event(PageBase):
         null=True,
     )
 
-    description = HtmlField()
+    content = HtmlField()
 
     image = ImageRefField(
         null=True,
         blank=True,
     )
 
+    card_image = ImageRefField(
+        blank=True,
+        null=True,
+        help_text="By default the card will try and use the main image, if it doesn't look right you can override it here.",
+    )
+
+    categories = models.ManyToManyField(
+        'events.Category',
+        blank=True,
+    )
+
     class Meta:
         ordering = ['start_date']
+        unique_together = [['page', 'slug']]
 
     def __str__(self):
         return self.title
@@ -88,6 +122,11 @@ class Event(PageBase):
         return self.page.page.reverse('event_detail', kwargs={
             'slug': self.slug,
         })
+
+    def get_summary(self, words=20):
+        summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
+
+        return unescape(truncatewords(summary, words))
 
     @property
     def date(self):
@@ -118,6 +157,16 @@ class Event(PageBase):
             schema['image'] = schema_image(self.image)
 
         return mark_safe(json.dumps(schema))
+
+      def render_card(self):
+        return render_to_string('events/includes/card.html', {
+            'object': self,
+        })
+
+    def render_featured_card(self):
+        return render_to_string('events/includes/featured_card.html', {
+            'object': self,
+        })
 
 
 historylinks.register(Event)

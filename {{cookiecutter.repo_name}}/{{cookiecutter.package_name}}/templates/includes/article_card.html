@@ -1,0 +1,23 @@
+<a class="{% block card_class %}art-Card{% endblock %}" href="{{ object.get_absolute_url() }}">
+  {% if object.card_image or object.image %}
+    <div class="art-Card_Image">
+      {{ render_lazy_image(object.card_image or object.image, width=404, height=218, blur=False, show_small_image=False) }}
+    </div>
+  {% else %}
+    <div class="art-Card_ImageContainer-placeholder">
+      <img class="art-Card_Image-placeholder" src="{{ static('img/news-placeholder.jpg') }}" />
+    </div>
+  {% endif %}
+
+  <div class="art-Card_Content">
+    {% block body %}
+      {% block content_above %}{% endblock %}
+
+      {% if self.kicker() %}<p class="art-Card_Kicker">{% block kicker %}{% endblock %}</p>{% endif %}
+
+      <h3 class="art-Card_Title">{{ object.title }}</h3>
+
+      {% if self.bottom_text() %}<p class="art-Card_BottomText">{% block bottom_text %}{% endblock %}</p>{% endif %}
+    {% endblock %}
+  </div>
+</a>

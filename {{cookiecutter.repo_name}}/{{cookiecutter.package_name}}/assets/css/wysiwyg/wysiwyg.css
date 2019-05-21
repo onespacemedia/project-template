@@ -124,6 +124,7 @@
 
       border-right: 1px solid var(--Color_Border);
       border-bottom: 1px solid var(--Color_Border);
+      overflow-wrap: break-word;
 
       @media (--md) {
         padding: 0.5vr var(--Grid_Gutter);
@@ -181,6 +182,27 @@
   */
   .wys-Button {
     @include Button;
+  }
+
+  /*
+  |--------------------------------------------------------------------------
+  | Subscripts & superscripts
+  |--------------------------------------------------------------------------
+  |
+  */
+  sup,
+  sub {
+    /* em so that it works at any font size in the WYSIWYG. */
+    font-size: 0.6em;
+    line-height: 1;
+  }
+
+  sup {
+    vertical-align: super;
+  }
+
+  sub {
+    vertical-align: sub;
   }
 
   /*

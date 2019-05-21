@@ -5,7 +5,6 @@ import platform
 import sys
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS
-from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat  # pylint: disable=import-error
@@ -58,7 +57,8 @@ INSTALLED_APPS = [
 
     'flexible_images',
     'sorl.thumbnail',
-    'compressor',
+    'compressor',{% if cookiecutter.contact == 'yes' %}
+    'captcha',{% endif %}
 
     'django_jinja',
     'django_lazy_image',
@@ -79,12 +79,14 @@ INSTALLED_APPS = [
     {% if cookiecutter.careers == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.careers',
     '{{cookiecutter.package_name}}.apps.components',
     {% if cookiecutter.contact == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.contact',
+    {% if cookiecutter.emails == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.emails',
     {% if cookiecutter.events == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.events',
     {% if cookiecutter.faqs == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.faqs',
     {% if cookiecutter.news == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.news',
     {% if cookiecutter.partners == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.partners',
     {% if cookiecutter.people == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.people',
     {% if cookiecutter.redirects == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.redirects',
+    {% if cookiecutter.resources == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.resources',
     {% if cookiecutter.sections == 'no' %}# {% endif %}'{{cookiecutter.package_name}}.apps.sections',
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
@@ -97,6 +99,7 @@ INSTALLED_APPS = [
     'cachalot',
     'webpack_loader',
 ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
@@ -264,15 +267,16 @@ SITE_ID = 1
 #                              |_|                    |__/
 ###
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GooglePlusAuth',
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
 SUIT_CONFIG = {
     'ADMIN_NAME': SITE_NAME,
     'MENU_EXCLUDE': ['default'],
 }
-SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
-SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '{{cookiecutter.google_plus_key}}'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '{{cookiecutter.google_plus_secret}}'
 GOOGLE_ANALYTICS = '{{cookiecutter.google_analytics}}'
 ADMIN_ANALYTICS_ID = GOOGLE_ANALYTICS
 ADMIN_ANALYTICS_GOOGLE_API_KEY = '{{cookiecutter.google_analytics_key}}'
@@ -281,8 +285,18 @@ WHITELISTED_DOMAINS = ['onespacemedia.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    '{{cookiecutter.package_name}}.apps.site.auth_pipeline.make_staff',
 )
 
 TINYPNG_API_KEY = '{{cookiecutter.tinypng_api_key}}'
@@ -292,6 +306,10 @@ GOOGLE_FONTS_KIT_URL = '{{cookiecutter.google_fonts_kit_url}}'
 
 ROLLBAR_SERVER_TOKEN = '{{ cookiecutter.rollbar_server_token }}'
 ROLLBAR_CLIENT_TOKEN = '{{ cookiecutter.rollbar_client_token }}'
+{% if cookiecutter.contact == 'yes' %}
+RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PRIVATE_KEY = ''
+NOCAPTCHA = True{% endif %}
 
 WYSIWYG_OPTIONS = {
     # Overall height of the WYSIWYG
@@ -302,12 +320,12 @@ WYSIWYG_OPTIONS = {
     'plugins': [
         'advlist autolink link image lists charmap hr anchor pagebreak',
         'wordcount visualblocks visualchars code fullscreen cmsimage hr template',
-        'table contextmenu directionality paste textcolor colorpicker textpattern'
+        'table contextmenu directionality textcolor colorpicker textpattern'
     ],
 
     # Items to display on the 3 toolbar lines
-    'toolbar1': 'code | cut copy paste pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap',
-    'toolbar2': 'template styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript',
+    'toolbar1': 'code | cut copy pastetext | undo redo | bullist numlist | link unlink anchor cmsimage | blockquote charmap',
+    'toolbar2': 'styleselect formatselect | bold italic underline hr | alignleft aligncenter alignright | table | removeformat | subscript superscript',
     'toolbar3': '',
 
     # Display menubar with dropdowns

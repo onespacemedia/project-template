@@ -36,7 +36,7 @@
         <span class="pg-EditBar_Divider">|</span>
 
         <p class="pg-EditBar_Text">
-          You are logged in as <strong>{{ user.first_name }}</strong>
+          You are logged in as <strong>{% if user.first_name %}{{ user.first_name }}{% else %}{{ user.email }}{% endif %}</strong>
         </p>
 
         <img src="{{ gravatar_url(user.email, size=24) }}" class="pg-EditBar_Image" />
@@ -45,41 +45,41 @@
   </div>
 
   <script>
-  const editLink = document.querySelector('.js-EditBar_EditLink')
+  (function () {
+    window.dismissChangeRelatedObjectPopup = function () {
+      document.querySelector('.pg-EditBar_FrameContainer').style.opacity = 0
+      window.location.reload()
+    }
 
-  editLink.addEventListener('click', (e) => {
-    e.preventDefault()
+    var editLink = document.querySelector('.js-EditBar_EditLink')
 
-    // Create a containing element
-    const container = document.createElement('div')
-    container.classList.add('pg-EditBar_FrameContainer')
+    editLink.addEventListener('click', function (e) {
+      e.preventDefault()
 
-    // Create an iframe
-    const iframe = document.createElement('iframe')
-    iframe.classList.add('pg-EditBar_Frame')
-    iframe.setAttribute('src', editLink.getAttribute('href'))
+      const container = document.createElement('div')
+      container.classList.add('pg-EditBar_FrameContainer')
 
-    container.appendChild(iframe)
-    document.body.appendChild(container)
+      const iframe = document.createElement('iframe')
+      iframe.classList.add('pg-EditBar_Frame')
+      iframe.setAttribute('src', editLink.getAttribute('href'))
 
-    container.addEventListener('click', (e) => {
-      container.style.opacity = 0
-      document.body.classList.remove('nav-IsOpen')
+      container.appendChild(iframe)
+      document.body.appendChild(container)
 
-      setTimeout(() => {
-        container.remove()
-      }, 150)
+      container.addEventListener('click', function (e) {
+        container.style.opacity = 0
+        document.body.classList.remove('nav-IsOpen')
+
+        setTimeout(function () {
+          container.remove()
+        }, 150)
+      })
+
+      setTimeout(function () {
+        document.body.classList.add('nav-IsOpen')
+        container.style.opacity = 1
+      }, 100)
     })
-
-    setTimeout(() => {
-      document.body.classList.add('nav-IsOpen')
-      container.style.opacity = 1
-    }, 100)
-  })
-
-  function dismissChangeRelatedObjectPopup() {
-    document.querySelector('.pg-EditBar_FrameContainer').style.opacity = 0
-    window.location.reload()
-  }
+  })()
   </script>
 {% endif %}

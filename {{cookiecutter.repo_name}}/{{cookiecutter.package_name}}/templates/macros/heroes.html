@@ -1,40 +1,31 @@
 {% macro landing_hero(object) %}
-  <header class="sec-Hero">
-    {% if object.image %}
-      <div class="sec-Hero_Image">
-        {{ render_lazy_image(object.image, width=1600, height=430) }}
-      </div>
-    {% endif %}
-    <div class="sec-Hero_Inner">
-      <div class="sec-Hero_Content">
-        {% if object.kicker %}
-          <p class="sec-Hero_Kicker">
-            {{ object.kicker }}
-          </p>
-        {% endif %}
+  <section class="sec-LandingHero">
+    <div class="sec-LandingHero_Image">
+      {% if object.image %}
+        {{ render_lazy_image(object.image, width=1660, height=934, blur=False, show_small_image=False) }}
+      {% endif %}
+    </div>
 
-        <h1 class="sec-Hero_Title">
+    <div class="sec-LandingHero_Inner">
+      <div class="sec-LandingHero_Content">
+        <p class="sec-LandingHero_Kicker">{{ object.kicker or pages.current.content }}</p>
+
+        <h1 class="sec-LandingHero_Title">
           {{ object.title }}
         </h1>
 
         {% if object.text %}
-          <p class="sec-Hero_Text">
-            {{ object.text|md }}
+          <p class="sec-LandingHero_Text">
+            {{ object.text }}
           </p>
         {% endif %}
 
-        {% if caller %}
-          <div class="sec-Hero_Extra">
-            {{ caller() }}
+        {% if object.has_link %}
+          <div class="sec-LandingHero_Actions">
+            <a class="sec-LandingHero_Link" href="{{ object.link_location }}">{{ object.link_text }}</a>
           </div>
-        {% endif %}
-
-        {% if object.link_location and object.link_text %}
-          <a href="{{ object.link_location }}" class="sec-Hero_Link">
-            {{ object.link_text }}
-          </a>
         {% endif %}
       </div>
     </div>
-  </header>
+  </section>
 {% endmacro %}

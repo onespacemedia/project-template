@@ -1,5 +1,6 @@
 """Models used by the CMS news app."""
 import json
+from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
@@ -99,11 +100,11 @@ class Category(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name_plural = 'categories'
         ordering = ['order']
 
     def __str__(self):
-        return self.title or self.title
+        return self.title
 
 
 class ArticleManager(OnlineBaseManager):
@@ -189,7 +190,7 @@ class Article(PageBase):
     )
 
     class Meta:
-        unique_together = [['page', 'date', 'slug']]
+        unique_together = [['page', 'slug']]
         ordering = ['-date']
         permissions = [
             ('can_approve_articles', 'Can approve articles'),
@@ -215,11 +216,10 @@ class Article(PageBase):
         ]
         return get_related_items(candidate_querysets, count=count, exclude=self)
 
-    @property
-    def get_summary(self):
+    def get_summary(self, words=20):
         summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
 
-        return truncatewords(summary, 15)
+        return unescape(truncatewords(summary, words))
 
     @property
     def last_modified(self):
@@ -230,7 +230,12 @@ class Article(PageBase):
 
     def render_card(self):
         return render_to_string('news/includes/card.html', {
-            'article': self,
+            'object': self,
+        })
+
+    def render_featured_card(self):
+        return render_to_string('news/includes/featured_card.html', {
+            'object': self,
         })
 
     @property

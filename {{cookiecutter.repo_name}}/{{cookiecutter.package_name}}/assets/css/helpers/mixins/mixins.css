@@ -56,7 +56,7 @@
   padding-right: var(--Grid_Gutter);
   padding-left: @padding-right;
 
-  @media (--sm) {
+  @media (--xs) {
     max-width: calc(var(--Grid_Container) + (var(--Grid_Gutter) * 4));
     padding-right: calc(var(--Grid_Gutter) * 2);
     padding-left: @padding-right;
@@ -133,15 +133,18 @@
 
 /*
 |--------------------------------------------------------------------------
-| Resets
+| Spread
 |--------------------------------------------------------------------------
+| Forces an element to the full width and height of its nearest positioned
+| ascendent.
 |
 */
-@mixin Reset_List {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
+@mixin Spread {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 /*
@@ -159,4 +162,27 @@
   clip: rect(1px, 1px, 1px, 1px);
 
   overflow: hidden;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Card box shadow and hover effect
+|--------------------------------------------------------------------------
+| 'Borrowed' from Muzli's cards
+|
+*/
+@mixin CardShadowAndHover {
+  box-shadow: 0 2px 11px 0 rgba(#000, 0.06);
+
+  transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+
+  @media (hover: hover) {
+    &:not(.crd-Card-noHover):hover {
+      box-shadow: rgba(#000, 0.05) 0 4px 4px, rgba(#000, 0.05) 0 8px 8px,
+        rgba(#000, 0.05) 0 16px 16px, rgba(#000, 0.05) 0 32px 32px,
+        rgba(#000, 0.05) 0 64px 64px;
+
+      transform: translate(0, -4px);
+    }
+  }
 }
