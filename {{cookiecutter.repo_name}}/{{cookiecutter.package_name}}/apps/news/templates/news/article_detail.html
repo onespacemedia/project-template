@@ -1,10 +1,10 @@
 {% extends "news/base.html" %}
 {% import "components/macros/components.html" as components %}
-{% import "news/macros/news.html" as news %}
+{% import 'macros/listings.html' as listings %}
 
 {% block schema %}
   <script type="application/ld+json">
-    {{ article.schema() }}
+    {{ object.schema() }}
   </script>
 {% endblock %}
 
@@ -13,7 +13,7 @@
     <div class="pg-LandingHero_Inner">
       <div class="pg-LandingHero_Body">
         <p class="pg-LandingHero_Kicker">{{ pages.current.content.hero_kicker or pages.current }}</p>
-        <h1 class="pg-LandingHero_Title">{{ article.title }}</h1>
+        <h1 class="pg-LandingHero_Title">{{ object.title }}</h1>
       </div>
     </div>
 
@@ -21,8 +21,8 @@
       <div class="pg-LandingHero_OverhangInner">
         <div class="pg-LandingHero_OverhangBody">
           <div class="pg-LandingHero_ImageContainer">
-            {% if article.image %}
-              {{ render_lazy_image(article.image) }}
+            {% if object.image %}
+              {{ render_lazy_image(object.image) }}
             {% endif %}
           </div>
         </div>
@@ -34,7 +34,7 @@
 {% block main %}
   <article class="nws-Article">
     <div class="wys-WYSIWYG">
-      {{ article.content|html }}
+      {{ object.content|html }}
     </div>
   </article>
 {% endblock %}
@@ -48,7 +48,7 @@
       </header>
 
       <div class="sec-Section_Body">
-        {{ news.article_list(article.get_related_articles()) }}
+        {{ listings.three_up(object.get_related_articles()) }}
       </div>
     </div>
   </section>
