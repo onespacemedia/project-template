@@ -21,16 +21,6 @@ module.exports = [
         const chroma = require('chroma-js')
         const easingCoordinates = require('easing-coordinates')
 
-        // If the passed easing function isn't a real one, jump out here. See:
-        // https://developer.mozilla.org/docs/Web/CSS/single-transition-timing-function
-        const stepsFunction = 'steps'
-        const cubicFunction = 'cubic-bezier'
-        const easeShorthands = ['ease', 'ease-in', 'ease-out', 'ease-in-out']
-        const timingFunctions = [...easeShorthands, cubicFunction, stepsFunction]
-        if (!timingFunctions.includes(easingFunction.indexOf('(') !== -1 ? easingFunction.substring(0, easingFunction.indexOf('(')) : easingFunction)) {
-          return ''
-        }
-
         // Change 'transparent' into a transparent version of the starting color
         let colors = [startingColor, finalColor]
         colors = colors.map((color, i) => {
@@ -54,7 +44,7 @@ module.exports = [
           // Round the colours to the nearest 'alphaDecimals' decimal places
           const prefix = color.indexOf('(') !== -1 ? color.substring(0, color.indexOf('(')) : color
           const values = color.match(/\((.*)\)/).pop().split(',').map(string =>
-            string.indexOf('%') === -1 ? +Number(string).toFixed(alphaDecimals) : string.trim()
+            string.indexOf('%') === -1 ? + Number(string).toFixed(alphaDecimals) : string.trim()
           )
 
           // Pair the colour stop with the co-ords
