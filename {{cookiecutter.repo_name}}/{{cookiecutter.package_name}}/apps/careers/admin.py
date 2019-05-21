@@ -2,7 +2,8 @@ from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
 
-from .models import Career, Careers
+from ...utils.admin import SEOQualityControlFilter
+from .models import Career, CareerLocation, Careers
 
 
 class CareerOpenClosedListFilter(admin.SimpleListFilter):
@@ -30,7 +31,7 @@ class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
 
     list_display = ['__str__', 'location', 'closing_date', 'is_online']
     list_editable = ['is_online']
-    list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter]
+    list_filter = list(PageBaseAdmin.list_filter) + [CareerOpenClosedListFilter, SEOQualityControlFilter]
 
     fieldsets = [
         (None, {
@@ -41,6 +42,10 @@ class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
         }),
         ('Applying', {
             'fields': ['email_address', 'application_url'],
+        }),
+        ('Schema fields', {
+            'fields': ['employment_type', 'education_requirements', 'experience_requirements', 'qualifications',
+                       'responsibilities', 'skills', 'work_hours', 'estimated_salary', 'base_salary']
         }),
         PageBaseAdmin.PUBLICATION_FIELDS,
         PageBaseAdmin.SEO_FIELDS,
@@ -57,3 +62,15 @@ class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
             pass
 
         return form
+
+
+@admin.register(CareerLocation)
+class LocationAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {
+            'fields': ['title']
+        }),
+        ('Address', {
+            'fields': ['street_address', 'city', 'region', 'postcode', 'country']
+        }),
+    )

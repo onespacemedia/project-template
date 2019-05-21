@@ -64,9 +64,7 @@
       {% include 'base/_google-fonts.html' %}
     {% endif %}
 
-    {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
-    {% endcompress %}
+    <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
 
     {% block css %}{% endblock %}
 
@@ -108,7 +106,8 @@
     {% include 'base/_analytics.html' %}
   </head>
 
-  <body class="util-Preload util-IsTabbing {% block body_class %}{% endblock %}">
+  <body class="util-Preload util-IsTabbing {% if edit_bar() %}lyt-Body-hasEditBar{% endif %} {% block body_class %}{% endblock %}">
+    {% block schema %}{% endblock %}
     {% include 'base/_browser-update.html' %}
 
     {{ edit_bar() }}
@@ -166,13 +165,5 @@
 
     {{ render_bundle('vendor', 'js') }}
     {{ render_bundle('app', 'js') }}
-
-    {% compress js %}
-      {% block compressed_js_first %}{% endblock %}
-
-      <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
-
-      {% block compressed_js_last %}{% endblock %}
-    {% endcompress %}
   </body>
 </html>

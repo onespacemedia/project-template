@@ -1,0 +1,31 @@
+{% macro landing_hero(object) %}
+  <section class="sec-LandingHero">
+    <div class="sec-LandingHero_Image">
+      {% if object.image %}
+        {{ render_lazy_image(object.image, width=1660, height=934, blur=False, show_small_image=False) }}
+      {% endif %}
+    </div>
+
+    <div class="sec-LandingHero_Inner">
+      <div class="sec-LandingHero_Content">
+        <p class="sec-LandingHero_Kicker">{{ object.kicker or pages.current.content }}</p>
+
+        <h1 class="sec-LandingHero_Title">
+          {{ object.title }}
+        </h1>
+
+        {% if object.text %}
+          <p class="sec-LandingHero_Text">
+            {{ object.text }}
+          </p>
+        {% endif %}
+
+        {% if object.has_link %}
+          <div class="sec-LandingHero_Actions">
+            <a class="sec-LandingHero_Link" href="{{ object.link_location }}">{{ object.link_text }}</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+{% endmacro %}

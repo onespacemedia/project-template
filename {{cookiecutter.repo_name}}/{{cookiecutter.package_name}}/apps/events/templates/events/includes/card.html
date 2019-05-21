@@ -1,0 +1,7 @@
+{% extends 'includes/article_card.html' %}
+
+{% block kicker %}
+  {{ object.start_date|date('d F, Y') }}{% if object.start_date != object.end_date %} - {{ object.end_date|date('d F, Y') }}{% endif %}
+{% endblock %}
+
+{% block bottom_text %}{% if object.get_summary() %}{{ object.get_summary() }}{% endif %}{% endblock %}

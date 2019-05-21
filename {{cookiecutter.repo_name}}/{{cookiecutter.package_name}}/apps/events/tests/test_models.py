@@ -1,4 +1,8 @@
+import json
 from datetime import date
+
+from bs4 import BeautifulSoup
+from django.test import Client
 
 from ..models import Event
 from ._base import EventsBaseTestCase
@@ -50,3 +54,18 @@ class EventsModelsTestCase(EventsBaseTestCase):
             end_date=date(2017, 11, 11),
         )
         self.assertEquals(date_test.date, '1 January 2017 - 11 November 2017')
+
+    def test_schema_generation(self):
+        self.client = Client()
+
+        url = self.future_events[0].get_absolute_url()
+        response = self.client.get(url)
+        soup = BeautifulSoup(response.rendered_content, 'html.parser')
+
+        valid = True
+        try:
+            _ = json.loads(soup.find('script', type='application/ld+json').text)
+        except ValueError:
+            valid = False
+
+        self.assertTrue(valid)

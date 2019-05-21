@@ -1,0 +1,39 @@
+{% macro two_up(object_list) %}
+  <ul class="lst-Grid">
+    {% for object in object_list %}
+      <li class="lst-Grid_Item lst-Grid_Item-twoUp">
+        {{ object.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro three_up(object_list) %}
+  <ul class="lst-Grid">
+    {% for object in object_list %}
+      <li class="lst-Grid_Item lst-Grid_Item-threeUp">
+        {{ object.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro four_up(object_list) %}
+  <ul class="lst-Grid">
+    {% for object in object_list %}
+      <li class="lst-Grid_Item lst-Grid_Item-fourUp">
+        {{ object.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
+{% macro stacked(object_list) %}
+  <ul class="lst-Stacked">
+    {% for object in object_list %}
+      <li class="lst-Stacked_Item">
+        {{ object.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}

@@ -1,18 +1,26 @@
 from email.utils import make_msgid
 
-import CommonMark
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-from django.template import Context, engines
-from django.template.defaultfilters import linebreaks
 from django.template.loader import render_to_string
+from html2text import html2text
 
 from .models import EmailLog, EmailTemplate
 
 
 def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
-    # We will allow Django's DoesNotExist exception to be raised here.
-    template_obj = EmailTemplate.objects.get(reference=reference)
+    template_obj = EmailTemplate.objects.filter(reference=reference).first()
+
+    # As long as developers set up email templates properly;
+    # it should be impossible to cause an error by using this app.
+    # We can create an empty template object if one doesn't exist
+    if not template_obj:
+        template_obj = EmailTemplate.objects.create(
+            reference=reference,
+        )
+
+    kwargs['object'] = template_obj
+    kwargs['settings'] = settings
 
     # Does this email template have a `to_email` defined?
     if template_obj.to_email:
@@ -23,7 +31,7 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
     msg_id = make_msgid(domain=settings.SITE_DOMAIN)
 
     email_data = {
-        'from_email': template_obj.from_email,
+        'from_email': settings.DEFAULT_FROM_EMAIL,
         'bcc': [email for email in template_obj.bcc_list.split(',')] if template_obj.bcc_list else [],
         'subject': template_obj.subject,
         'headers': {
@@ -51,8 +59,7 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
     email_data['to'] = to
 
     # If a Reply-To value is defined, turn it into the format required.
-    if template_obj.reply_to:
-        email_data['reply_to'] = [template_obj.reply_to]
+    email_data['reply_to'] = [kwargs.get('reply_to') or template_obj.reply_to or '']
 
     # Generate the email content.
     #
@@ -64,25 +71,9 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
     if 'title' not in kwargs:
         kwargs['title'] = template_obj.title
 
-    plain_text_template = linebreaks(template_obj.content)
-
-    # Replace the merge tags in the template.{% raw %}
-    if 'user' in kwargs:
-        plain_text_template = plain_text_template.replace('[fullname]', '{{ user.get_full_name() }}')
-        plain_text_template = plain_text_template.replace('[firstname]', '{{ user.first_name }}')
-        plain_text_template = plain_text_template.replace('[lastname]', '{{ user.last_name }}')
-        plain_text_template = plain_text_template.replace('[email]', '{{ user.email }}')
-
-    #{% endraw %}
-    # Pass the plain text template through the rendering engine so we're able to
-    # use the full capabilities of Jinja.
-
-    template = engines['backend'].from_string(plain_text_template)
-    email_data['body'] = template.render(Context(kwargs))
-
-    # Generate the HTML version of the email and render it into the full template.
-    kwargs['body'] = CommonMark.commonmark(email_data['body']).strip()
-    html_template = render_to_string('emails/base.html', kwargs)
+    html_template = render_to_string(f'emails/{template_obj.reference}.html', kwargs)
+    # Create a text version of the email template
+    email_data['body'] = html2text(html_template)
 
     # Allow testing that template rendering is error-free.
     if 'fake' in kwargs and kwargs['fake']:

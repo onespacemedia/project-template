@@ -1,0 +1,3 @@
+{% extends 'includes/featured_card.html' %}
+
+{% block bottom_text %}{% if object.get_summary() %}{{ object.get_summary() }}{% endif %}{% endblock %}

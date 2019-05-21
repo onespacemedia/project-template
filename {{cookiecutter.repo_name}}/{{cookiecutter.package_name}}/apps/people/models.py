@@ -1,10 +1,16 @@
+import json
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils.functional import cached_property
+from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import ORGANISATION_SCHEMA, schema_image, url_from_path
 
 
 class Team(models.Model):
@@ -125,6 +131,7 @@ class Person(SearchMetaBase):
 
     class Meta:
         ordering = ['order']
+        unique_together = [['page', 'slug']]
         verbose_name_plural = 'people'
 
     def __str__(self):
@@ -142,6 +149,32 @@ class Person(SearchMetaBase):
     def twitter_url(self):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
+
+    @cached_property
+    def colleagues(self):
+        return self.team.person_set.exclude(pk=self.pk) if self.team else None
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Person',
+            'colleague': [url_from_path(x.get_absolute_url()) for x in self.colleagues] if self.colleagues else '',
+            'email': self.email or '',
+            'jobTitle': self.job_title or '',
+            'name': self.__str__(),
+            'url': self.linkedin or self.twitter_url or url_from_path(self.get_absolute_url()),
+            'worksFor': ORGANISATION_SCHEMA
+        }
+
+        if self.photo:
+            schema['image'] = schema_image(self.photo)
+
+        return mark_safe(json.dumps(schema))
+
+    def render_card(self):
+        return render_to_string('news/includes/card.html', {
+            'article': self,
+        })
 
 historylinks.register(Person)
 sitemaps.register(Person)

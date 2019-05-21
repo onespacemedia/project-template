@@ -1,4 +1,4 @@
-{% if '.onespace.media' in request.get_host %}
+Sitemap: https://{% if settings.PREPEND_WWW %}www.{% endif%}{{ settings.SITE_DOMAIN }}/sitemap.xml{% if '.onespace.media' in request.get_host %}
 User-agent: *
 Disallow: /
 {% endif %}

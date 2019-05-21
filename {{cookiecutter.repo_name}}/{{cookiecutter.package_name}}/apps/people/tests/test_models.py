@@ -1,3 +1,8 @@
+import json
+
+from bs4 import BeautifulSoup
+from django.test import Client
+
 from ..models import Person, Team
 from ._base import PeopleBaseTestCase
 
@@ -32,3 +37,18 @@ class ApplicationTestCase(PeopleBaseTestCase):
     def test_person_twitter_url(self):
         self.person.twitter = 'onespacemedia'
         self.assertEqual(self.person.twitter_url, 'https://twitter.com/onespacemedia')
+
+    def test_schema_generation(self):
+        self.client = Client()
+
+        url = self.person.get_absolute_url()
+        response = self.client.get(url)
+        soup = BeautifulSoup(response.rendered_content, 'html.parser')
+
+        valid = True
+        try:
+            _ = json.loads(soup.find('script', type='application/ld+json').text)
+        except ValueError:
+            valid = False
+
+        self.assertTrue(valid)

@@ -26,8 +26,16 @@ layout recomputation).
     }
 
     var cssPath = '{{ settings.GOOGLE_FONTS_KIT_URL }}';
-    var cacheKey = '_gfont_cache_{{ settings.GIT_COMMIT_HASH }}';
-    var now = Date.now();
+    var cachePrefix = '_gfont_cache_';
+    var cacheKey = cachePrefix + '{{ settings.GIT_COMMIT_HASH }}';
+    // {# Clear old cache keys. #}
+    var localStorageKeys = Object.keys(window.localStorage)
+    for (var i = 0; i < localStorageKeys.length; i++) {
+      if (localStorageKeys[i].startsWith(cachePrefix) && localStorageKeys[i] !== cacheKey) {
+        window.localStorage.removeItem(localStorageKeys[i])
+      }
+    }
+
     var cachedVersion = window.localStorage[cacheKey];
 
     if (cachedVersion) {

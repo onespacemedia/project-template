@@ -1,2 +1,2 @@
 [run]
-omit = tests/*, *migrations*
+omit = tests/*, *migrations*, *.html

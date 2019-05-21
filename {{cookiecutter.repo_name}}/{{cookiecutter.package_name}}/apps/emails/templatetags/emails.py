@@ -1,5 +1,7 @@
 from django import template
+from django_jinja import library
 
+from ...site.templatetags.site import path_to_url
 from ..models import EmailLog, EmailTemplate
 
 register = template.Library()

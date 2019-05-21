@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 
-from ...utils.admin import HasImageAdminMixin
+from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import People, Person, Team
 
 
@@ -84,7 +84,7 @@ class PersonAdmin(SortableAdminMixin, HasImageAdminMixin, SearchMetaBaseAdmin):
     list_display = ['get_image', '__str__', 'job_title', 'render_team', 'is_online']
     list_display_links = ['get_image', '__str__']
     list_editable = ['is_online']
-    list_filter = list(SearchMetaBaseAdmin.list_filter) + ['team']
+    list_filter = list(SearchMetaBaseAdmin.list_filter) + ['team', SEOQualityControlFilter]
     search_fields = ['first_name', 'middle_name', 'last_name', 'job_title']
 
     fieldsets = (

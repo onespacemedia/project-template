@@ -1,0 +1,16 @@
+<a class="ppl-Card" href="{{ object.get_absolute_url() }}">
+  <div class="ppl-Card_Photo">
+    {% if object.card_image or object.photo %}{{ render_lazy_image(object.card_image or object.photo, width=403, height=209) }}{% endif %}
+  </div>
+  <div class="ppl-Card_Body">
+    <h4 class="ppl-Card_Name">
+      {{ object }}
+    </h4>
+
+    {% if object.job_title %}
+      <p class="ppl-Card_JobTitle">
+        {{ object.job_title }}
+      </p>
+    {% endif %}
+  </div>
+</a>

@@ -1,4 +1,7 @@
 """Models used by the CMS news app."""
+import json
+from html import unescape
+
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
@@ -11,10 +14,14 @@ from django.db import models
 from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
+from django.utils.functional import cached_property
+from django.utils.html import strip_tags
+from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import get_related_items
+from ...utils.utils import (ORGANISATION_SCHEMA, get_related_items,
+                            schema_image, url_from_path)
 
 
 class NewsFeed(ContentBase):
@@ -89,11 +96,11 @@ class Category(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = 'Categories'
-        ordering = ['title']
+        verbose_name_plural = 'categories'
+        ordering = ['order']
 
     def __str__(self):
-        return self.title or self.title
+        return self.title
 
 
 class ArticleManager(OnlineBaseManager):
@@ -179,7 +186,7 @@ class Article(PageBase):
     )
 
     class Meta:
-        unique_together = [['page', 'date', 'slug']]
+        unique_together = [['page', 'slug']]
         ordering = ['-date']
         permissions = [
             ('can_approve_articles', 'Can approve articles'),
@@ -205,11 +212,10 @@ class Article(PageBase):
         ]
         return get_related_items(candidate_querysets, count=count, exclude=self)
 
-    @property
-    def get_summary(self):
+    def get_summary(self, words=20):
         summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
 
-        return truncatewords(summary, 15)
+        return unescape(truncatewords(summary, words))
 
     @property
     def last_modified(self):
@@ -220,8 +226,50 @@ class Article(PageBase):
 
     def render_card(self):
         return render_to_string('news/includes/card.html', {
-            'article': self,
+            'object': self,
         })
+
+    def render_featured_card(self):
+        return render_to_string('news/includes/featured_card.html', {
+            'object': self,
+        })
+
+    @property
+    def tagless_content(self):
+        return strip_tags(self.content)
+
+    @cached_property
+    def word_count(self):
+        return len(self.tagless_content.split(' '))
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Article',
+            'author': {% if cookiecutter.people == 'yes' %}str(self.author) or {% endif %}settings.SITE_NAME,
+            'publisher': ORGANISATION_SCHEMA,
+            'name': self.title,
+            'headline': self.title,
+            'text': self.summary or '',
+            'articleBody': self.tagless_content,
+            'keywords': ','.join([x.title for x in self.categories.all()]),
+            'inLanguage': {
+                'type': 'Language',
+                'name': ['English']
+            },
+            'mainEntityOfPage': url_from_path(self.get_absolute_url()),
+            'dateCreated': self.date.isoformat(),
+            'dateModified': (self.last_modified or self.date).isoformat(),
+            'datePublished': self.date.isoformat(),
+            'wordCount': self.word_count
+        }
+
+        if self.image:
+            schema['image'] = schema_image(self.image)
+        if self.card_image:
+            schema['thumbnailUrl'] = schema_image(self.card_image)
+
+        return mark_safe(json.dumps(schema))
 
 
 historylinks.register(Article)

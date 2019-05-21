@@ -3,10 +3,12 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse_lazy
 from jet.admin import CompactInline
 
+from ...utils.admin import LinkFieldsLastAdminMixin
 from .models import Content, ContentSection
 
 
-class ContentSectionInline(CompactInline):
+
+class ContentSectionInline(LinkFieldsLastAdminMixin, CompactInline):
     model = ContentSection
     extra = 0
     filter_horizontal = ['people']

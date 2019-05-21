@@ -28,7 +28,7 @@ fi
 
 # Check if the database already exists
 DB_NAME="{{cookiecutter.package_name}}"
-if psql {{cookiecutter.package_name}} -c ''; then
+if psql {{cookiecutter.package_name}} -c '' -h localhost -p 5432; then
     NEW_DB_NAME="${DB_NAME}_$(date +"%Y%m")"
     echo "You are trying to create a new database '$DB_NAME' which already exists; we can't do that (the database name needs to be available)."
     echo 'Please select a fix:'
@@ -59,7 +59,7 @@ if psql {{cookiecutter.package_name}} -c ''; then
 fi
 
 # Create the database.
-createdb $DB_NAME
+createdb $DB_NAME -h localhost -p 5432
 
 # Make the virtual environment.
 if command -v mkvirtualenv >/dev/null 2>&1; then
@@ -94,7 +94,7 @@ perl -pi -e s,SECRET_KEY\ =\ \'\ \',SECRET_KEY\ =\ \'$(openssl rand -base64 50 |
 
 mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/apps/components/templates {{cookiecutter.package_name}}/apps/components/templates
 
-{% for project in ['careers', 'events', 'faqs', 'partners', 'people', 'news', 'redirects', 'sections'] %}
+{% for project in ['careers', 'contact', 'emails', 'events', 'faqs', 'news', 'partners', 'people', 'redirects', 'resources', 'sections'] %}
     {% if cookiecutter[project] == 'no' %}
         echo "Remove the {{project}} app.";
         rm -r {{ cookiecutter.package_name }}/apps/{{ project }}
@@ -111,18 +111,12 @@ mv {{ "{{" }}cookiecutter.package_name{{ "}}" }}/templates {{cookiecutter.packag
 rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 
 # Install front-end dependencies.
-if [ -z "$CI" ]; then
-    nvm install
-    nvm use
-fi
+. ~/.nvm/nvm.sh
+nvm install
+nvm use
 
-if command -v yarn >/dev/null 2>&1; then
-   yarn
-   yarn run build
-else
-   npm install
-   npm run build
-fi
+yarn
+yarn run build
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then

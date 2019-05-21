@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <ul>
+    {% for object in object_list %}
+      <li>{{ object.render_item() }}</li>
+    {% else %}
+      <li>No resources</li>
+    {% endfor %}
+  </ul>
+
+  {% if page_obj %}
+    {{ render_pagination(page_obj) }}
+  {% endif %}
+{% endblock %}

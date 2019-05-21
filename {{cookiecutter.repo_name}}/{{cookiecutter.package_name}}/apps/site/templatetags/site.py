@@ -20,6 +20,21 @@ register = template.Library()
 
 
 @library.global_function
+def path_to_url(path):
+    if path.startswith('http://') or path.startswith('https://'):
+        return path
+
+    if not path.startswith('/'):
+        path = '/' + path
+
+    return u'https://{}{}{}'.format(
+        'www.' if settings.PREPEND_WWW else '',
+        settings.SITE_DOMAIN,
+        path,
+    )
+
+
+@library.global_function
 def frontend_templates():
     return mark_safe([
         str(f[:-5])

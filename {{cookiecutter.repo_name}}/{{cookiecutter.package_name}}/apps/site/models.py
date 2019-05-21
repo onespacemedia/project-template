@@ -1,7 +1,8 @@
 from cms.apps.pages.models import Page
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
+
+from ...utils.models import HasLinkMixin
 
 
 class Footer(models.Model):
@@ -202,32 +203,11 @@ class Footer(models.Model):
         }
 
 
-class FooterLink(models.Model):
+class FooterLink(HasLinkMixin, models.Model):
 
     footer = models.ForeignKey(
         'site.Footer',
         on_delete=models.PROTECT,
-    )
-
-    text = models.CharField(
-        max_length=100,
-    )
-
-    link_page = models.ForeignKey(
-        'pages.Page',
-        on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-        help_text='Use this to link to an internal page.',
-        related_name='+'
-    )
-
-    link_url = models.CharField(
-        verbose_name='Link URL',
-        max_length=200,
-        blank=True,
-        null=True,
-        help_text='Use this to link to an external page.'
     )
 
     order = models.PositiveIntegerField()
@@ -236,27 +216,7 @@ class FooterLink(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return self.text
-
-    def clean(self):
-        if self.link_page or self.link_url:
-            pass
-        else:
-            raise ValidationError({
-                'link_page': 'Please supply either a link page or a link URL.'
-            })
-
-    def has_link(self):
-        return self.link_location and self.text
-
-    @cached_property
-    def link_location(self):
-        if self.link_page_id:
-            try:
-                return self.link_page.get_absolute_url()
-            except Page.DoesNotExist:
-                pass
-        return self.link_url
+        return self.link_text
 
 
 class Header(models.Model):
@@ -269,32 +229,11 @@ class Header(models.Model):
         return 'Header'
 
 
-class HeaderLink(models.Model):
+class HeaderLink(HasLinkMixin, models.Model):
 
     header = models.ForeignKey(
         'site.Header',
         on_delete=models.PROTECT,
-    )
-
-    link_text = models.CharField(
-        max_length=100,
-    )
-
-    link_page = models.ForeignKey(
-        'pages.Page',
-        on_delete=models.PROTECT,
-        blank=True,
-        null=True,
-        help_text='Use this to link to an internal page.',
-        related_name='+'
-    )
-
-    link_url = models.CharField(
-        'link URL',
-        max_length=200,
-        blank=True,
-        null=True,
-        help_text='Use this to link to an external page.'
     )
 
     order = models.PositiveIntegerField()
@@ -304,23 +243,3 @@ class HeaderLink(models.Model):
 
     def __str__(self):
         return self.link_text
-
-    def clean(self):
-        if self.link_page or self.link_url:
-            pass
-        else:
-            raise ValidationError({
-                'link_page': 'Please supply either a link page or a link url.'
-            })
-
-    def has_link(self):
-        return self.link_location and self.link_text
-
-    @cached_property
-    def link_location(self):
-        if self.link_page_id:
-            try:
-                return self.link_page.get_absolute_url()
-            except Page.DoesNotExist:
-                pass
-        return self.link_url

@@ -1,8 +1,14 @@
+import json
+
 from cms import sitemaps
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase
 from django.db import models
+from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
+
+from ...utils.utils import ORGANISATION_SCHEMA
 
 
 class Faqs(ContentBase):
@@ -63,6 +69,10 @@ class Faq(PageBase):
 
     answer = HtmlField()
 
+    date_created = models.DateField(
+        default=now,
+    )
+
     order = models.PositiveIntegerField(
         default=0
     )
@@ -71,6 +81,7 @@ class Faq(PageBase):
         return self.question
 
     class Meta:
+        unique_together = [['page', 'slug']]
         verbose_name = 'FAQ'
         verbose_name_plural = 'FAQs'
         ordering = ['order', 'question']
@@ -79,6 +90,27 @@ class Faq(PageBase):
         return self.page.page.reverse('faq_detail', kwargs={
             'slug': self.slug,
         })
+
+    def schema(self):
+        schema = {
+            '@context': 'http://schema.org',
+            '@type': 'Question',
+            'name': self.title,
+            'text': self.question,
+            'dateCreated': self.date_created.isoformat(),
+            'datePublished': self.date_created.isoformat(),
+            'author': ORGANISATION_SCHEMA,
+            'answerCount': '1',
+            'acceptedAnswer': {
+                '@type': 'Answer',
+                'text': self.answer,
+                'dateCreated': self.date_created.isoformat(),
+                'author': ORGANISATION_SCHEMA
+            }
+        }
+
+        return mark_safe(json.dumps(schema))
+
 
 historylinks.register(Faq)
 sitemaps.register(Faq)
