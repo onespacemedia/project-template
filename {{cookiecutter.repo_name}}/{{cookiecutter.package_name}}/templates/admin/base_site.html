@@ -20,16 +20,6 @@
       }
     }
 
-    .sidebar-link.popup-section-link:hover::after {
-      content: '';
-      position: absolute;
-      top: -48px;
-      right: -64px;
-      width: 128px;
-      height: 128px;
-      transform: rotate(45deg);
-    }
-
     .related-widget-wrapper {
       display: inline-block;
     }
@@ -55,24 +45,49 @@
       line-height: 28px;
     }
 
-    .sidebar-popup {
-      background-color: unset;
-    }
-
     .sidebar-popup-section {
-      position: absolute;
-      right: 0;
-      left: 0;
-
-      background-color: #ecf2f6;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-      overflow: hidden;
+      position: unset;
     }
 
-    .sidebar-popup-title,
-    .sidebar-popup-search {
-      display: none;
+    @media screen and (min-width: 960px) {
+      .sidebar-popup {
+        background-color: unset;
+        overflow-y: unset;
+      }
+
+      .sidebar-popup-section {
+        position: absolute;
+        right: 0;
+        left: 0;
+
+        background-color: #ecf2f6;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.15) 4px 16px 16px;
+        overflow: hidden;
+
+      }
+
+      .sidebar-popup-title,
+      .sidebar-popup-search {
+        display: none;
+      }
+
+      .sidebar-popup-container {
+        background-color: unset !important;
+      }
+    }
+
+    .sidebar-popup {
+      top: unset;
+      bottom: unset;
+    }
+
+    .sidebar-popup-list-item a:hover {
+      background-color: #42cf77;
+      color: #fff;
+
+      cursor: pointer;
     }
   </style>
 {% endblock %}
@@ -87,16 +102,35 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      var appsList = Array.from(document.querySelectorAll('.app-item'))
       // appsList contains nodes with data atributes of the form: data-app-label="APP"
+      var appsList = Array.from(document.querySelectorAll('.app-item'))
 
+      // popupList contains nodes with classes of the form: sidebar-popup-section-APP
       var popupsList = document.querySelector('.sidebar-popup')
-      // appsList contains nodes with classes of the form: sidebar-popup-section-APP
+
+      // Nuke all event listeners on popupsList
+      popupsList.innerHTML += ''
 
       for (var i=appsList.length - 1; i>=0; i--) {
         var appName = appsList[i].dataset.appLabel
         var relatedPopup = popupsList.querySelector('.sidebar-popup-section-' + appName)
-        relatedPopup.style.top = appsList[i].getBoundingClientRect().top + 'px'
+        appsList[i].addEventListener('mouseenter', sidebarHoverIn.bind(this, appsList[i], popupsList, relatedPopup))
+      }
+
+      function sidebarHoverIn (el, popupsList, popup) {
+        popupsList.style.top = el.getBoundingClientRect().top + 'px'
+
+        var popupsArray = Array.from(popupsList.querySelectorAll('.sidebar-popup-section'))
+        for (var i=popupsArray.length - 1; i>=0; i--) {
+          popupsArray[i].style.display = 'none'
+        }
+        popup.style.display = 'block'
+
+        // for mobile, don't set this as Jet does something else with the sidebar for mobiles
+        if (window.innerWidth > 960) {
+          var sidebarContainer = document.querySelector('.sidebar-popup-container')
+          sidebarContainer.style.display = 'block'
+        }
       }
     })
   </script>
@@ -120,10 +154,8 @@
   <a href="https://retainer.onespacemedia.com" target="_blank" class="sidebar-link icon">
     <span class="sidebar-link-label">
       <span class="sidebar-link-icon">
-        <svg id="i-portfolio" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoi
-n="round" stroke-width="3">
-          <path d="M29 17 L29 28 3 28 3 17 M2 8 L30 8 30 16 C30 16 24 20 16 20 8 20 2 16 2 16 L2 8 Z M16 22 L16 18 M20 8 C20 8 20 4 16 4 12 4
-12 8 12 8" />
+        <svg id="i-portfolio" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+          <path d="M29 17 L29 28 3 28 3 17 M2 8 L30 8 30 16 C30 16 24 20 16 20 8 20 2 16 2 16 L2 8 Z M16 22 L16 18 M20 8 C20 8 20 4 16 4 12 4 12 8 12 8" />
         </svg>
       </span>OSM retainer portal
     </span>

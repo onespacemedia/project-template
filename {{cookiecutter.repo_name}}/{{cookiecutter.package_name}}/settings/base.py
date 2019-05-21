@@ -295,6 +295,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 JET_INDEX_DASHBOARD = 'cms.dashboard.OSMDashboard'
+JET_CHANGE_FORM_SIBLING_LINKS = False
 
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '{{cookiecutter.google_plus_key}}'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = '{{cookiecutter.google_plus_secret}}'

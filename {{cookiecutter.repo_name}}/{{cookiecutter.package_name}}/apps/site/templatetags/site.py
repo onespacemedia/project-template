@@ -7,6 +7,7 @@ import jinja2
 from bs4 import BeautifulSoup
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from cms.html import process as process_html
+from django import template
 from django.conf import settings
 from django.template.defaultfilters import stringfilter
 from django.urls import NoReverseMatch, reverse
@@ -14,6 +15,8 @@ from django.utils.safestring import mark_safe
 from django_jinja import library
 
 from ..models import Footer, Header
+
+register = template.Library()
 
 
 @library.global_function
@@ -203,6 +206,7 @@ def gravatar_url(email, size=40):
     )
 
 
+@register.simple_tag
 @library.filter
 def add_field_attributes(field, class_name, placeholder=True):
     return field.as_widget(attrs={

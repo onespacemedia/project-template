@@ -1,116 +1,75 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_static %}
-
-{% block bodyclass %}{{ block.super }} login{% endblock %}
-
-{% block usertools %}{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
+{% load i18n admin_static site %}
 
 {% block extrastyle %}
-    {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static "core/css/login.css" %}" />
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/auth/login.css" %}" />
 {% endblock %}
 
-{% block content %}
-{% if form.errors and not form.non_field_errors %}
-<p class="errornote">
-{% if form.errors.items|length == 1 %}{% trans "Please correct the error below." %}{% else %}{% trans "Please correct the errors below." %}{% endif %}
-</p>
-{% endif %}
+{% block main_content %}
+  <div class="ath-Container">
+    <div class="ath-Inner">
+      {% block content_above %}
+        <div class="ath-Above">
+          <div class="ath-Logo"></div>
+        </div>
+      {% endblock %}
+      <div class="ath-Wrapper">
+        <div class="ath-Form">
+          <h2 class="ath-Form_Heading">{{ settings.SITE_NAME }} admin login</h2>
+          {% if message %}<h3 class="ath-Form_Message">{{ message|linebreaksbr }}</h3>{% endif %}
+          <form class="frm-Form" method="post">
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <p class="frm-Error">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
 
-{% if form.non_field_errors %}
-{% for error in form.non_field_errors %}
-<p class="errornote">
-    {{ error }}
-</p>
-{% endfor %}
-{% endif %}
+            <form class="frm-Form" method="post">
+              <div class="frm-Items">
+                <div class="frm-Item{% if form.username.errors %} frm-Item-error{% endif %}">
+                  {% add_field_attributes form.username 'frm-Input js-Form_Input' %}
+                  {% if form.username.errors %}
+                    <div class="frm-Item_Extra">
+                      {% for error in form.username.errors %}
+                        <p class="frm-Error">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="frm-Item{% if form.password.errors %} frm-Item-error{% endif %}">
+                  {% add_field_attributes form.password 'frm-Input js-Form_Input' %}
+                  {% if form.password.errors %}
+                    <div class="frm-Item_Extra">
+                      {% for error in form.password.errors %}
+                        <p class="frm-Error">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="frm-Actions">
+                {% csrf_token %}
 
-<div id="content-main">
-<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
-  <div class="form-row">
-    {{ form.username.errors }}
-    {{ form.username.label_tag }} {{ form.username }}
+                {% url 'admin_password_reset' as password_reset_url %}
+                {% if password_reset_url %}
+                  <div class="frm-SubLinks">
+                    <a href="{{ password_reset_url }}" class="frm-Link">{% trans 'Forgotten your password or username?' %}</a>
+                  </div>
+                {% endif %}
+                <button class="frm-Action" type="submit">Log in</button>
+              </div>
+            </form>
+          </form>
+        </div>
+      </div>
+      <div class="ath-Below">
+        {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
+          <a class="ath-Link onespacemedia-login" href="{% url 'social:begin' 'google-oauth2' %}">
+            OSM staff login
+          </a>
+        {% endif %}
+      </div>
+    </div>
   </div>
-  <div class="form-row">
-    {{ form.password.errors }}
-    {{ form.password.label_tag }} {{ form.password }}
-    <input type="hidden" name="next" value="{{ next }}" />
-  </div>
-  {% url 'admin_password_reset' as password_reset_url %}
-  {% if password_reset_url %}
-  <div class="password-reset-link">
-    <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-  </div>
-  {% endif %}
-  <div class="submit-row">
-    <label>&nbsp;</label><input type="submit" value="{% trans 'Log in' %}" />
-  </div>
-</form>
-
-<script type="text/javascript">
-document.getElementById('id_username').focus()
-</script>
-
-{% if settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY %}
-  <form id="google-plus" method="post" action="{% url 'social:complete' "google-plus" %}" style="margin:0;">
-      {% csrf_token %}
-      <input id="at" type="hidden" name="access_token" value="" />
-      <input id="code" type="hidden" name="code" value="" />
-  </form>
-
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script type="text/javascript">
-  $(function() {
-      var script_added = false;
-      $('.onespacemedia-login').on('click', function () {
-          if (script_added === false) {
-              var po = document.createElement('script');
-              po.type = 'text/javascript';
-              po.async = true;
-              po.src = 'https://apis.google.com/js/client:plusone.js';
-              var s = document.getElementsByTagName('script')[0];
-              s.parentNode.insertBefore(po, s);
-              setTimeout(function() {
-                  $('#___signin_0 button').trigger('click');
-              }, 1000);
-              script_added = true;
-          } else {
-              $('#___signin_0 button').trigger('click');
-          }
-      });
-  });
-  var signInCallback = function (result) {
-      if (result['error']) {
-      } else {
-          $('#code').attr('value', result['code']);
-          $('#at').attr('value', result['access_token']);
-          $('#google-plus').submit();
-      }
-  };
-  </script>
-
-  <style>
-  #___signin_0 {
-      display: none !important;
-  }
-  </style>
-
-  <a href="#" class="onespacemedia-login">OSM staff login</a>
-
-    <span class="g-signin"
-        data-callback="signInCallback"
-        data-clientid="{{ settings.SOCIAL_AUTH_GOOGLE_PLUS_KEY }}"
-        data-cookiepolicy="single_host_origin"
-        data-requestvisibleactions="http://schemas.google.com/AddActivity"
-        data-scope="https://www.googleapis.com/auth/plus.profile.emails.read">
-    </span>
-{% endif %}
-
-</div>
 {% endblock %}

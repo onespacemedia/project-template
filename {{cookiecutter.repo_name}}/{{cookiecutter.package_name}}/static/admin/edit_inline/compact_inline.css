@@ -1,0 +1,22 @@
+/* stylelint-disable */
+.inline-navigation-items .inline-navigation-item,
+.inline-navigation-items .inline-navigation-item:hover {
+  align-items: center;
+
+  margin-bottom: 0;
+  padding: 8px 10px;
+
+  cursor: pointer;
+}
+
+html.no-touchevents .dragging .inline-navigation-item:hover {
+  background: #f6fafc;
+  color: #d0dbe6;
+}
+
+.drag-handle {
+  margin-right: 10px;
+
+  cursor: all-scroll;
+}
+/* stylelint-enable */
