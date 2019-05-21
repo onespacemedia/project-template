@@ -254,7 +254,7 @@ class Article(PageBase):
             'publisher': ORGANISATION_SCHEMA,
             'name': self.title,
             'headline': self.title,
-            'text': self.summary or else '',
+            'text': self.summary or '',
             'articleBody': self.tagless_content,
             'keywords': ','.join([x.title for x in self.categories.all()]),
             'inLanguage': {

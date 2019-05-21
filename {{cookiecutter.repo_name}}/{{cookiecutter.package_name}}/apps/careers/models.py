@@ -77,7 +77,7 @@ class CareerLocation(models.Model):
         max_length=2,
         blank=True,
         null=True,
-        default='GB'
+        default='GB',
         help_text="The country's ISO ALPHA-2 code"
     )
 

@@ -158,7 +158,7 @@ class Event(PageBase):
 
         return mark_safe(json.dumps(schema))
 
-      def render_card(self):
+    def render_card(self):
         return render_to_string('events/includes/card.html', {
             'object': self,
         })
