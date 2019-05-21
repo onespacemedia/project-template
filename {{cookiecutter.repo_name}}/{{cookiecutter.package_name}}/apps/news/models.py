@@ -263,7 +263,7 @@ class Article(PageBase):
             },
             'mainEntityOfPage': url_from_path(self.get_absolute_url()),
             'dateCreated': self.date.isoformat(),
-            'dateModified': self.last_modified.isoformat() or self.date.isoformat(),
+            'dateModified': (self.last_modified or self.date).isoformat(),
             'datePublished': self.date.isoformat(),
             'wordCount': self.word_count
         }
