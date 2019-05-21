@@ -4,7 +4,7 @@ from django.test import TestCase
 from ..auth_pipeline import make_staff
 
 
-class Backend(object):
+class Backend:
     name = None
 
     def __init__(self, name, *args, **kwargs):
@@ -12,7 +12,7 @@ class Backend(object):
         self.name = name
 
 
-class MockSuperUser(object):
+class MockSuperUser:
     is_staff = False
     is_superuser = False
 
@@ -24,7 +24,7 @@ class PipelineTest(TestCase):
 
     def test_make_staff(self):
         facebook_backend = Backend('facebook')
-        google_plus_backend = Backend('google-plus')
+        google_oauth2_backend = Backend('google-oauth2')
         user = MockSuperUser()
         response = HttpResponse()
 
@@ -36,7 +36,7 @@ class PipelineTest(TestCase):
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
 
-        make_staff(google_plus_backend, user, response)
+        make_staff(google_oauth2_backend, user, response)
 
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
