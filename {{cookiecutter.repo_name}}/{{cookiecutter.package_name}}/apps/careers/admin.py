@@ -43,7 +43,7 @@ class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
         ('Applying', {
             'fields': ['email_address', 'application_url'],
         }),
-        ('Meta Fields', {
+        ('Schema fields', {
             'fields': ['employment_type', 'education_requirements', 'experience_requirements', 'qualifications',
                        'responsibilities', 'skills', 'work_hours', 'estimated_salary', 'base_salary']
         }),
