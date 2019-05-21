@@ -4,8 +4,8 @@ from cms import sitemaps
 from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase
 from django.db import models
-from django.utils.timezone import now
 from django.utils.safestring import mark_safe
+from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
 from ...utils.utils import ORGANISATION_SCHEMA
