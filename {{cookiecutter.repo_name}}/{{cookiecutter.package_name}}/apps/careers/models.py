@@ -146,32 +146,27 @@ class Career(PageBase):
         null=True,
     )
 
-    education_requirements = models.CharField(
-        max_length=512,
+    education_requirements = models.TextField(
         blank=True,
         null=True,
     )
 
-    experience_requirements = models.CharField(
-        max_length=512,
+    experience_requirements = models.TextField(
         blank=True,
         null=True,
     )
 
-    qualifications = models.CharField(
-        max_length=512,
+    qualifications = models.TextField(
         blank=True,
         null=True,
     )
 
-    responsibilities = models.CharField(
-        max_length=512,
+    responsibilities = models.TextField(
         blank=True,
         null=True,
     )
 
-    skills = models.CharField(
-        max_length=512,
+    skills = models.TextField(
         blank=True,
         null=True,
     )
