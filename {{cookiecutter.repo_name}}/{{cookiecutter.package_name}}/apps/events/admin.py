@@ -3,7 +3,7 @@ from django.contrib import admin
 from reversion.models import Version
 from suit.admin import SortableModelAdmin
 
-from ...utils.admin import HasImageAdminMixin
+from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import Category, Event, Events
 
 
@@ -18,7 +18,7 @@ class EventAdmin(HasImageAdminMixin, PageBaseAdmin):
     list_display = ['get_image', '__str__', 'start_date', 'end_date', 'featured', 'is_online', 'last_modified']
     list_display_links = ['get_image', '__str__']
     list_editable = ['featured', 'is_online']
-    list_filter = ['page', 'categories', 'featured', 'is_online']
+    list_filter = ['page', 'categories', 'featured', 'is_online', SEOQualityControlFilter]
 
     filter_horizontal = ['categories']
 

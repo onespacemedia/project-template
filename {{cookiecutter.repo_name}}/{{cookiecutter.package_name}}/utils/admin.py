@@ -1,5 +1,7 @@
 from cms.apps.pages.models import ContentBase
+from django.contrib import admin
 from django.core.urlresolvers import NoReverseMatch, reverse
+from django.db.models import Q
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
@@ -146,3 +148,42 @@ class HasImageAdminMixin(object):
             # etc.
             return '(corrupt image?)'
     get_image.short_description = 'Image'
+
+
+class SEOQualityControlFilter(admin.SimpleListFilter):
+    '''
+    A filter for models deriving from SearchMetaBase, to find pages with
+    incomplete SEO, OpenGraph or Twitter card information.
+
+    Usage:
+
+    class MyModelAdmin(SearchMetaBaseAdmin):
+        list_filter = [SEOQualityControlFilter]
+    '''
+
+    title = 'Quality control'
+
+    parameter_name = 'seo_quality_control'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('no-meta-description', 'No meta description'),
+            ('no-browser-title', 'No browser title'),
+            ('incomplete-opengraph-fields', 'Incomplete Open Graph fields'),
+            ('no-og-image', 'No Open Graph image'),
+            ('incomplete-twitter-fields', 'Incomplete Twitter card fields'),
+        )
+
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+
+        options = {
+            'no-meta-description': lambda qs: qs.filter(Q(meta_description=None) | Q(meta_description='')),
+            'no-browser-title': lambda qs: qs.filter(Q(browser_title=None) | Q(browser_title='')),
+            'incomplete-opengraph-fields': lambda qs: qs.filter(Q(og_description=None) | Q(og_description='') | Q(og_image=None)),
+            'no-og-image': lambda qs: qs.filter(og_image=None),
+            'incomplete-twitter-fields': lambda qs: qs.filter(Q(twitter_description=None) | Q(twitter_description='') | Q(og_image=None)),
+        }
+
+        return options[self.value()](queryset)

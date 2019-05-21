@@ -10,7 +10,7 @@ from reversion.admin import VersionAdmin
 from reversion.models import Version
 from suit.admin import SortableModelAdmin
 
-from ...utils.admin import HasImageAdminMixin
+from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import Article, Category, get_default_news_feed
 
 
@@ -28,7 +28,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
     list_display = ['get_image', 'title', 'date', 'render_categories', 'featured', 'is_online', 'last_modified']
     list_display_links = ['get_image', 'title']
     list_editable = ['featured', 'is_online']
-    list_filter = ['page', 'categories', 'featured', 'is_online']
+    list_filter = ['page', 'categories', 'featured', 'is_online', SEOQualityControlFilter]
 
     if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False):
         list_filter.append('status')
