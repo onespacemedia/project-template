@@ -1,5 +1,5 @@
 """Admin settings for the CMS news app."""
-
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import OnlineBaseAdmin, PageBaseAdmin
 from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
@@ -14,7 +14,7 @@ from .models import Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(SortableAdminMixin, VersionAdmin):
     list_display = ['__str__']
     prepopulated_fields = {'slug': ['title']}
 
