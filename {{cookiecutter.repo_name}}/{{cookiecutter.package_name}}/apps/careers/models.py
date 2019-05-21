@@ -129,7 +129,7 @@ class Career(PageBase):
     )
 
     date_posted = models.DateField(
-        auto_now_add=True,
+        default=now,
     )
 
     # Schema Fields
