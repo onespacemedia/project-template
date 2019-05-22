@@ -199,9 +199,11 @@
   },
   "stylelint": {
     "plugins": [
-      "stylelint-order"
+      "stylelint-order",
+      "./stylelint_plugins/enforceNamespace/index.js"
     ],
     "rules": {
+      "osm/enforce-namespace": true,
       "order/order": [
         {
           "type": "at-rule",
