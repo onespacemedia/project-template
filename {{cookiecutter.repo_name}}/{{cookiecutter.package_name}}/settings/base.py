@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
-    'flexible_images',
     'sorl.thumbnail',
     'compressor',{% if cookiecutter.contact == 'yes' %}
     'captcha',{% endif %}

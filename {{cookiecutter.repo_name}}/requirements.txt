@@ -7,7 +7,6 @@ django>=1.11,<1.12
 django-cachalot
 django-compressor
 django-extensions
-django-flexible-images
 django-historylinks
 django-jinja
 django-lazy-image==0.4.0
