@@ -30,12 +30,12 @@ jobs:
           name: pylint
           command: |
             . .venv/bin/activate
-            pylint {{ cookiecutter.package_name }}/ --load-plugins pylint_django,pylint.extensions.mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
+            yarn run lint:python
       - run:
           name: iSort
           command: |
             . .venv/bin/activate
-            isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/* --skip issue_notify.py
+            yarn run lint:isort
       - run:
           name: tests
           command: |
