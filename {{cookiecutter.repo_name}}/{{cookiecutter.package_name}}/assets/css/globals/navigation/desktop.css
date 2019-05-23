@@ -202,6 +202,12 @@
     opacity: 1;
     visibility: visible;
   }
+
+  /* See comment under .nav-Header_Dropdown for explanation of code duplication. */
+  .nav-Header_Item-hasDropdown:focus-within > & {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 .nav-Header_Link-dropdown {
