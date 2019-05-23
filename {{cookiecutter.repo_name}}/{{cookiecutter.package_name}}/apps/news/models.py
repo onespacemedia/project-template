@@ -205,9 +205,9 @@ class Article(PageBase):
             'slug': self.slug,
         })
 
-    def get_absolute_url(self):
+    def get_absolute_url(self, page=None):
         """Returns the URL of the article."""
-        return self._get_permalink_for_page(self.page.page)
+        return self._get_permalink_for_page(page or self.page.page)
 
     def get_related_articles(self, count=3):
         candidate_querysets = [
@@ -228,14 +228,16 @@ class Article(PageBase):
         if version:
             return version.revision.date_created
 
-    def render_card(self):
+    def render_card(self, page=None):
         return render_to_string('news/includes/card.html', {
             'object': self,
+            'page': page,
         })
 
-    def render_featured_card(self):
+    def render_featured_card(self, page=None):
         return render_to_string('news/includes/featured_card.html', {
             'object': self,
+            'page': page,
         })
 
     @property

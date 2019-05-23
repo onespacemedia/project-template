@@ -202,8 +202,8 @@ class Career(PageBase):
     def is_open(self):
         return self.closing_date is None or self.closing_date >= now().date()
 
-    def get_absolute_url(self):
-        return self.page.page.reverse('career_detail', kwargs={
+    def get_absolute_url(self, page=None):
+        return (page or self.page.page).reverse('career_detail', kwargs={
             'slug': self.slug,
         })
 
