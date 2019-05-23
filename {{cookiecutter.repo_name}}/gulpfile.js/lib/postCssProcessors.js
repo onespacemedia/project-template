@@ -14,10 +14,14 @@ module.exports = [
 
         return `calc((${columns} / ${totalColumns} * 100%) - (${gutter} * 2) * (${totalColumns} - ${columns}) / ${totalColumns})`
       },
-      smooth_gradient: function (direction, startingColor, easingFunction, finalColor = 'transparent', stops = 5, colorMode = '') {
+      'smooth-gradient': function (direction, startingColor, finalColor, easingFunction='ease', stops = 5, colorMode = '') {
         // Code  adapted from the easing-gradients PostCSS plugin here:
         // https://github.com/larsenwork/postcss-easing-gradients
-
+        //
+        // Simple usage:
+        //
+        // background-image: smooth-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0))
+        //
         const chroma = require('chroma-js')
         const easingCoordinates = require('easing-coordinates')
 
