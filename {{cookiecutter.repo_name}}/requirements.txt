@@ -20,7 +20,7 @@ Jinja2
 lxml
 onespacemedia-cms
 onespacemedia-server-management
-paramiko==1.17.0
+paramiko==1.17.6
 Pillow
 pygithub
 python-memcached
