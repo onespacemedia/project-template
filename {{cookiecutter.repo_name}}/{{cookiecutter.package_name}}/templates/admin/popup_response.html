@@ -4,7 +4,7 @@
 <html>
   <head>
     <title>{% trans 'Popup closing...' %}</title>
-    {% if request.GET|slice:'_editBar' %}
+    {% if '_editBar' in request.GET.keys %}
       <script>
         window.parent.location.reload()
       </script>
