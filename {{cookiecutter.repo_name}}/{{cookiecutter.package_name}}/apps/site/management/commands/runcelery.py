@@ -1,4 +1,5 @@
 from os import execvp
+
 from django.core.management import BaseCommand
 
 
