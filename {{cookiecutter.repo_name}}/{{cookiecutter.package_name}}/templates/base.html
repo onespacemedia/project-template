@@ -163,7 +163,9 @@
       </div>
     {% endif %}
 
-    {{ render_bundle('vendor', 'js') }}
-    {{ render_bundle('app', 'js') }}
+    {% if not settings.IN_CI %}
+      {{ render_bundle('vendor', 'js') }}
+      {{ render_bundle('app', 'js') }}
+    {% endif %}
   </body>
 </html>

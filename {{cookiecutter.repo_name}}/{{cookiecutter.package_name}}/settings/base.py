@@ -456,6 +456,9 @@ try:
 except:  # pylint: disable=bare-except
     GIT_COMMIT_HASH = ''
 
+# Don't render webpack bundle when we're in CI.
+IN_CI = bool(os.environ.get('CI'))
+
 if 'test' in sys.argv:
     # The CMS tests use test-only models, which won't be loaded if we only load
     # our real migration files, so point to a nonexistent one, which will make
