@@ -2,10 +2,11 @@ from adminsortable2.admin import SortableInlineAdminMixin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from reversion.admin import VersionAdmin
 from social_django.models import Association, Nonce, UserSocialAuth
 
 from ...utils.forms import UserEmailUniqueFormMixin
-from .models import Footer, FooterLink, Header, HeaderLink
+from .models import Footer, FooterLink, Header, HeaderLink, User
 
 
 class UserCreationAdminForm(UserEmailUniqueFormMixin, UserCreationForm):
