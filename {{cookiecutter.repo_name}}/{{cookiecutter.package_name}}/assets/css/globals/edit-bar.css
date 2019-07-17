@@ -77,36 +77,3 @@
 .pg-EditBar_Image {
   margin-left: var(--Grid_Inside);
 }
-
-/**
-* iFrame things
-*/
-.pg-EditBar_FrameContainer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  /* Position the frame so it doesn't overlap the edit bar. This is 24px
-  (typical line height) + 6px + 6px (top and bottom padding) */
-  bottom: 36px;
-  left: 0;
-  z-index: 1000;
-
-  align-items: center;
-  justify-content: center;
-
-  display: flex;
-  padding: 40px;
-
-  background-color: rgba(0, 0, 0, 0.8);
-  opacity: 0;
-
-  transition: opacity 0.3s;
-}
-
-.pg-EditBar_Frame {
-  width: 85%;
-  height: 90%;
-
-  background-color: #edeff1;
-  border: 0;
-}
