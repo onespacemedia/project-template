@@ -186,6 +186,7 @@ CACHES = {
 #
 ###
 NEWS_APPROVAL_SYSTEM = False
+ONLINE_DEFAULT = True
 
 ADMINS = []
 MANAGERS = ()
