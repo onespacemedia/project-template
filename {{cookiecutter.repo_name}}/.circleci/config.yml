@@ -30,12 +30,12 @@ jobs:
           name: pylint
           command: |
             . .venv/bin/activate
-            yarn run lint:python
+            pylint {{ cookiecutter.package_name }}
       - run:
           name: iSort
           command: |
             . .venv/bin/activate
-            yarn run lint:isort
+            isort --check-only {{ cookiecutter.package_name }}
       - run:
           name: tests
           command: |
