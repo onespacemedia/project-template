@@ -1,8 +1,8 @@
-{% macro two_up(object_list) %}
+{% macro two_up(object_list, page=None) %}
   <ul class="lst-Grid">
     {% for object in object_list %}
       <li class="lst-Grid_Item lst-Grid_Item-twoUp">
-        {{ object.render_card() }}
+        {{ object.render_card(page=page) }}
       </li>
     {% endfor %}
   </ul>
@@ -12,7 +12,7 @@
   <ul class="lst-Grid">
     {% for object in object_list %}
       <li class="lst-Grid_Item lst-Grid_Item-threeUp">
-        {{ object.render_card() }}
+        {{ object.render_card(page=page) }}
       </li>
     {% endfor %}
   </ul>
@@ -22,7 +22,7 @@
   <ul class="lst-Grid">
     {% for object in object_list %}
       <li class="lst-Grid_Item lst-Grid_Item-fourUp">
-        {{ object.render_card() }}
+        {{ object.render_card(page=page) }}
       </li>
     {% endfor %}
   </ul>
@@ -32,7 +32,7 @@
   <ul class="lst-Stacked">
     {% for object in object_list %}
       <li class="lst-Stacked_Item">
-        {{ object.render_card() }}
+        {{ object.render_card(page=page) }}
       </li>
     {% endfor %}
   </ul>

@@ -1,4 +1,4 @@
-<a class="ppl-Card" href="{{ object.get_absolute_url() }}">
+<a class="ppl-Card" href="{{ object.get_absolute_url(page=page) }}">
   <div class="ppl-Card_Photo">
     {% if object.card_image or object.photo %}{{ render_lazy_image(object.card_image or object.photo, width=403, height=209) }}{% endif %}
   </div>
