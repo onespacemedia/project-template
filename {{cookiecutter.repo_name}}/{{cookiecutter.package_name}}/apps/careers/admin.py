@@ -25,6 +25,8 @@ class CareerOpenClosedListFilter(admin.SimpleListFilter):
         if self.value() == 'open':
             return queryset.select_open()
 
+        return queryset
+
 
 @admin.register(Career)
 class CareerAdmin(SortableModelAdmin, PageBaseAdmin):

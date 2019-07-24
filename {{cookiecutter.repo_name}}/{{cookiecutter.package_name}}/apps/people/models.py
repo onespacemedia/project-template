@@ -47,7 +47,7 @@ class People(ContentBase):
 class Person(SearchMetaBase):
 
     page = models.ForeignKey(
-        People,
+        'people.People',
         on_delete=models.PROTECT,
     )
 
@@ -149,6 +149,7 @@ class Person(SearchMetaBase):
     def twitter_url(self):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
+        return None
 
     @cached_property
     def colleagues(self):

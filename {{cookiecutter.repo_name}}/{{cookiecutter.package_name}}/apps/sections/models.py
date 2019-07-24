@@ -312,7 +312,13 @@ class ContentSection(SectionBase):
         on_delete=models.CASCADE,
     )
 
+    def __str__(self):
+        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+
 
 class Content(ContentBase):
 
     icon = 'cms-icons/sections.png'
+
+    def __str__(self):
+        return self.page.title

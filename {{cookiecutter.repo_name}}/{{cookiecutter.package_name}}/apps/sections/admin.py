@@ -12,7 +12,7 @@ class ContentSectionInline(LinkFieldsLastAdminMixin, SortableStackedInline):
     filter_horizontal = ['people']
     fk_name = 'page'
 
-    class Media(object):
+    class Media:
         js = [reverse_lazy('admin_sections_js')]
 
         css = {

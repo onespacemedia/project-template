@@ -76,7 +76,7 @@ class Event(PageBase):
     objects = PageBaseManager.from_queryset(EventQueryset)()
 
     page = models.ForeignKey(
-        Events,
+        'events.Events',
         on_delete=models.PROTECT,
     )
 

@@ -6,7 +6,7 @@ from django.conf import settings
 from .models import Redirect
 
 
-class RedirectFallbackMiddleware(object):
+class RedirectFallbackMiddleware:
     def _redirect_for_path(self, path):
         if not getattr(settings, "REDIRECTS_ENABLE_REGEX", False):
             try:
@@ -17,7 +17,7 @@ class RedirectFallbackMiddleware(object):
         for redirect in Redirect.objects.all():
             if redirect.old_path == path:
                 return redirect
-            elif redirect.regular_expression and re.match(redirect.old_path, path):
+            if redirect.regular_expression and re.match(redirect.old_path, path):
                 return redirect
 
         return None

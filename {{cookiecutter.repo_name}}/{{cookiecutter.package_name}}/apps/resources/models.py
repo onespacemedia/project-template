@@ -85,6 +85,9 @@ class Resources(ContentBase):
         default=12,
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class ResourceType(models.Model):
     title = models.CharField(
@@ -161,7 +164,7 @@ class Resource(PageBase):
     # |------------------------------------------------------------------------
 
     type = models.ForeignKey(
-        ResourceType,
+        'resources.ResourceType',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
