@@ -20,7 +20,7 @@ class Redirect(models.Model):
         max_length=200,
         db_index=True,
         unique=True,
-        help_text="This should be an absolute path, excluding the domain name. Example: '/events/search/'."
+        help_text="This can either be a whole URL, or just a path excluding the domain name. Example: 'https://www.example.com/events/' or '/events/'."
     )
 
     new_path = models.CharField(
