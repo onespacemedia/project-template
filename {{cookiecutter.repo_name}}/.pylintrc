@@ -1,11 +1,12 @@
 [MASTER]
-
 profile=no
 ignore=CVS, tests, urls.py, migrations
 persistent=yes
+load-plugins=pylint_django,pylint.extensions.mccabe
+
 
 [MESSAGES CONTROL]
-disable=W0403,W0232,E1101,C0111,R0904,E1002,R0912,C0103,R0801,R0914,C0301,C1001,E1120,E0202,W0613,W0212,W0142
+disable=W0403,W0232,E1101,C0111,R0904,E1002,R0912,C0103,R0801,R0914,C0301,C1001,E1120,E0202,W0613,W0212,W0142,missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code
 
 [REPORTS]
 output-format=text

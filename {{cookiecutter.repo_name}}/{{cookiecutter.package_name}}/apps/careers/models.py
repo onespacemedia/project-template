@@ -93,7 +93,7 @@ class Career(PageBase):
     objects = PageBaseManager.from_queryset(CareerQuerySet)()
 
     page = models.ForeignKey(
-        Careers,
+        'careers.Careers',
         on_delete=models.PROTECT,
     )
 
@@ -104,7 +104,7 @@ class Career(PageBase):
     )
 
     location = models.ForeignKey(
-        CareerLocation,
+        'careers.CareerLocation',
         blank=True,
         null=True,
     )

@@ -228,6 +228,8 @@ class Article(PageBase):
         if version:
             return version.revision.date_created
 
+        return None
+
     def render_card(self):
         return render_to_string('news/includes/card.html', {
             'object': self,

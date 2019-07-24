@@ -27,7 +27,7 @@ def get_oembed_info_url(url):
         soup = BeautifulSoup(text, 'html.parser')
     except:  # pylint:disable=bare-except
         # Either requests failed, or it looked nothing like HTML.
-        return
+        return None
 
     # Video providers that support oEmbed will have something that looks like
     # this:
@@ -41,7 +41,7 @@ def get_oembed_info_url(url):
         assert rel_tag.get('href')
     except:  # pylint:disable=bare-except
         # This can probably happen if a video is private or deleted.
-        return
+        return None
 
     # Now, let's grab the JSON
     return rel_tag.get('href')
@@ -60,11 +60,11 @@ def get_video_info(url):
     '''
 
     if not url or (not url.startswith('http://') and not url.startswith('https://')):
-        return
+        return None
 
     oembed_url = get_oembed_info_url(url)
     if not oembed_url:
-        return
+        return None
 
     try:
         req = requests.get(oembed_url)
@@ -74,11 +74,11 @@ def get_video_info(url):
         # happen here. Not just requests.exception.RequestException -
         # there's all the ones that could happen in the json library
         # too.
-        return
+        return None
 
     # Sanity check -
     if not json.get('html'):
-        return
+        return None
 
     return json
 
@@ -88,7 +88,7 @@ def get_video_iframe_url(url, modest=False):
     info = get_video_info(url)
 
     if not info:
-        return
+        return None
 
     soup = BeautifulSoup(info['html'], 'html.parser')
     src = soup.find('iframe')['src']

@@ -61,7 +61,7 @@ class RedirectModelForm(forms.ModelForm):
 
     class Meta:
         model = Redirect
-        exclude = []
+        exclude = []  # pylint:disable=modelform-uses-exclude
 
 
 @admin.register(Redirect)

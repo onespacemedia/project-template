@@ -1,4 +1,5 @@
 argon2-cffi
+astroid==2.2.5
 beautifulsoup4==4.6.0
 celery[redis]
 CommonMark==0.7.4
@@ -16,6 +17,7 @@ django-suit
 django-watson==1.3.1
 django-webpack-loader
 {% if cookiecutter.emails == 'yes' %}html2text==2018.1.9{% endif %}
+isort==4.3.20
 Jinja2
 lxml
 onespacemedia-cms
@@ -23,6 +25,9 @@ onespacemedia-server-management
 paramiko==1.17.6
 Pillow
 pygithub
+pylint==2.3.0
+pylint-django==2.0.5
+pylint-plugin-utils==0.5
 python-memcached
 rollbar
 social-auth-app-django

@@ -52,7 +52,7 @@ class Category(models.Model):
 class Faq(PageBase):
 
     page = models.ForeignKey(
-        Faqs,
+        'faqs.Faqs',
         on_delete=models.PROTECT,
     )
 
