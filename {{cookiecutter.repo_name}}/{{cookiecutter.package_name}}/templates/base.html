@@ -66,6 +66,10 @@
 
     <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
 
+    {% if request.user.is_staff %}
+      <link rel="stylesheet" href="{{ static('build/css/staff.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
+    {% endif %}
+
     {% block css %}{% endblock %}
 
     <script>
