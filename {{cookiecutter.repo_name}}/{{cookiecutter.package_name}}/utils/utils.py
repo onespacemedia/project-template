@@ -1,7 +1,9 @@
 '''Miscellaneous helpful functions.'''
 
-from cms.apps.media.templatetags.media import thumbnail
-from django.conf import settings
+from cms.apps.media.templatetags.media import thumbnail{% if cookiecutter.multilingual == 'yes' %}
+from cms.apps.pages.models import Country{% endif %}
+from django.conf import settings{% if cookiecutter.multilingual == 'yes' %}
+from threadlocals.threadlocals import get_current_request{% endif %}
 
 
 def get_related_items(candidate_querysets, count=3, exclude=None):
@@ -82,4 +84,18 @@ def schema_image(image):
         'description': image.alt_text if image.alt_text else '',
         'author': image.attribution if image.attribution else '',
         'copyrightHolder': image.copyright if image.copyright else ''
-    }
+    }{% if cookiecutter.multilingual == 'yes' %}
+
+
+def get_country_code():
+    try:
+        default_country_code = Country.objects.filter(default=True).first().code.lower()
+    except AttributeError:
+        default_country_code = 'en'
+
+    try:
+        country_code = get_current_request().country.code.lower()
+    except:  # pylint:disable=bare-except
+        country_code = default_country_code
+
+    return country_code{% endif %}

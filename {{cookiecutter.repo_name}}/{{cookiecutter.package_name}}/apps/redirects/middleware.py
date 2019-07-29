@@ -1,7 +1,10 @@
 import re
+{% if cookiecutter.multilingual == 'yes' %}
+from cms.apps.pages.models import Country
+{% endif %}from django import http
+from django.conf import settings{% if cookiecutter.multilingual == 'yes' %}
 
-from django import http
-from django.conf import settings
+from ...utils.utils import get_country_code{% endif %}
 
 from .models import Redirect
 
@@ -35,12 +38,18 @@ class RedirectFallbackMiddleware:
             if path.endswith('/'):
                 r = self._redirect_for_path(path[:-1])
             else:
-                r = self._redirect_for_path('{}/'.format(path))
+                r = self._redirect_for_path(f'{path}/')
 
         if r is not None:
             if r.new_path == '':
                 return http.HttpResponseGone()
-            return http.HttpResponsePermanentRedirect(r.sub_path(path)) if r.type == '301' else http.HttpResponseRedirect(r.sub_path(path))
+            new_path = r.sub_path(path)
+            {% if cookiecutter.multilingual == 'yes' %}
+            existing_code = re.match(r'/([^/]*)/', r.new_path)
+            if not (existing_code and Country.objects.filter(code=existing_code.group(1)).exists()):
+                new_path = f'/{get_country_code()}{new_path}'
+            {% endif %}
+            return http.HttpResponsePermanentRedirect(new_path) if r.type == '301' else http.HttpResponseRedirect(new_path)
 
         # No redirect was found. Return the response.
         return response
