@@ -20,7 +20,7 @@ from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
-from ...utils.utils import (ORGANISATION_SCHEMA, get_related_items,
+from ...utils.utils import ({% if cookiecutter.multilingual == 'yes' %}get_country_code, {% endif %}ORGANISATION_SCHEMA, get_related_items,
                             schema_image, url_from_path)
 
 
@@ -207,7 +207,11 @@ class Article(PageBase):
 
     def get_absolute_url(self, page=None):
         """Returns the URL of the article."""
-        return self._get_permalink_for_page(page or self.page.page)
+        url = self._get_permalink_for_page(page or self.page.page)
+{% if cookiecutter.multilingual == 'yes' %}
+        url = f'/{get_country_code()}{url}'
+{% endif %}
+        return url
 
     def get_related_articles(self, count=3):
         candidate_querysets = [

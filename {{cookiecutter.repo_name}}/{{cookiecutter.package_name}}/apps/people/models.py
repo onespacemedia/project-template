@@ -10,7 +10,7 @@ from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 
-from ...utils.utils import ORGANISATION_SCHEMA, schema_image, url_from_path
+from ...utils.utils import {% if cookiecutter.multilingual == 'yes' %}get_country_code, {% endif %}ORGANISATION_SCHEMA, schema_image, url_from_path
 
 
 class Team(models.Model):
@@ -141,9 +141,14 @@ class Person(SearchMetaBase):
         return ' '.join(parts)
 
     def get_absolute_url(self, page=None):
-        return (page or self.page.page).reverse('person_detail', kwargs={
+        url = (page or self.page.page).reverse('person_detail', kwargs={
             'slug': self.slug,
         })
+
+{% if cookiecutter.multilingual == 'yes' %}
+        url = f'/{get_country_code()}{url}'
+{% endif %}
+        return url
 
     @cached_property
     def twitter_url(self):

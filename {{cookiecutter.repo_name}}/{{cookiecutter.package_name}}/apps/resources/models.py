@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.functional import cached_property
 
-from ...utils.utils import get_related_items
+from ...utils.utils import {% if cookiecutter.multilingual == 'yes' %}get_country_code, {% endif %}get_related_items
 
 FILE_TYPES = [
     {
@@ -188,9 +188,13 @@ class Resource(PageBase):
 
     def get_absolute_url(self, page=None):
         if self.content:
-            return (page or self.page.page).reverse('detail', kwargs={
+            url = (page or self.page.page).reverse('detail', kwargs={
                 'slug': self.slug,
             })
+{% if cookiecutter.multilingual == 'yes' %}
+            url = f'/{get_country_code()}{url}'
+{% endif %}
+            return url
         if self.file:
             return self.file.get_absolute_url()
         return self.external_url

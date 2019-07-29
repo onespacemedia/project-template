@@ -14,7 +14,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
-from ...utils.utils import schema_image, url_from_path
+from ...utils.utils import {% if cookiecutter.multilingual == 'yes' %}get_country_code, {% endif %}schema_image, url_from_path
 
 
 class Events(ContentBase):
@@ -119,9 +119,13 @@ class Event(PageBase):
         return self.title
 
     def get_absolute_url(self, page=None):
-        return (page or self.page.page).reverse('event_detail', kwargs={
+        url = (page or self.page.page).reverse('event_detail', kwargs={
             'slug': self.slug,
         })
+{% if cookiecutter.multilingual == 'yes' %}
+        url = f'/{get_country_code()}{url}'
+{% endif %}
+        return url
 
     def get_summary(self, words=20):
         summary = self.summary or striptags(truncate_paragraphs(self.content, 1))

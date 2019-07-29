@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
-from ...utils.utils import ORGANISATION_SCHEMA
+from ...utils.utils import {% if cookiecutter.multilingual == 'yes' %}get_country_code, {% endif %}ORGANISATION_SCHEMA
 
 
 class Faqs(ContentBase):
@@ -87,9 +87,13 @@ class Faq(PageBase):
         ordering = ['order', 'question']
 
     def get_absolute_url(self, page=None):
-        return (page or self.page.page).reverse('faq_detail', kwargs={
+        url = (page or self.page.page).reverse('faq_detail', kwargs={
             'slug': self.slug,
         })
+{% if cookiecutter.multilingual == 'yes' %}
+        url = f'/{get_country_code()}{url}'
+{% endif %}
+        return url
 
     def schema(self):
         schema = {
