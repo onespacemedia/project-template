@@ -1,7 +1,7 @@
 from cms.apps.pages.admin import page_admin
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse_lazy
-from jet.admin import CompactInline
+from osm_jet.admin import JetCompactInline
 
 from ...utils.admin import LinkFieldsLastAdminMixin
 from .models import Content, ContentSection
@@ -15,16 +15,13 @@ class ContentSectionInline(LinkFieldsLastAdminMixin, CompactInline):
 
     class Media:
         js = [
-            reverse_lazy('admin_sections_js'),
-            staticfiles_storage.url('cms/js/sortable/sortables.min.js'),
-            staticfiles_storage.url('admin/edit_inline/compact_inline.js'),
-        ]
+            reverse_lazy('admin_sections_js')
+        ] + JetCompactInline.Media.js
 
         css = {
             'all': [
                 staticfiles_storage.url('css/admin-sections.css'),
-                staticfiles_storage.url('admin/edit_inline/compact_inline.css'),
-            ],
+            ] + JetCompactInline.Media.css['all']
         }
 
 
