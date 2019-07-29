@@ -22,6 +22,7 @@ Jinja2
 lxml
 onespacemedia-cms
 onespacemedia-server-management
+osm-jet
 paramiko==1.16.0
 Pillow
 pygithub

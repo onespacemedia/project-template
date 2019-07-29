@@ -296,6 +296,10 @@ SITE_ID = 1
 #   |_|  |_||_||_||_|  \__,_|  | .__/\__,_||_|   \__| \_, |
 #                              |_|                    |__/
 ###
+JET_INDEX_DASHBOARD = '{{cookiecutter.package_name}}.apps.site.dashboard.OSMDashboard'
+JET_CHANGE_FORM_SIBLING_LINKS = False
+JET_DEFAULT_THEME = 'osm'
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
