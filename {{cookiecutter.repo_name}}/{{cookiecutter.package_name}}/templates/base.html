@@ -108,7 +108,6 @@
 
   <body class="util-Preload util-IsTabbing {% if edit_bar() %}lyt-Body-hasEditBar{% endif %} {% block body_class %}{% endblock %}">
     {% block schema %}{% endblock %}
-    {% include 'base/_browser-update.html' %}
 
     {{ edit_bar() }}
 
@@ -163,7 +162,9 @@
       </div>
     {% endif %}
 
-    {{ render_bundle('vendor', 'js') }}
-    {{ render_bundle('app', 'js') }}
+    {% if not settings.IN_CI %}
+      {{ render_bundle('vendor', 'js') }}
+      {{ render_bundle('app', 'js') }}
+    {% endif %}
   </body>
 </html>

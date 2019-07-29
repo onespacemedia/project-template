@@ -32,30 +32,29 @@ class DjangoJSONEncoder(json.JSONEncoder):
             if r.endswith('+00:00'):
                 r = r[:-6] + 'Z'
             return r
-        elif isinstance(o, datetime.date):
+        if isinstance(o, datetime.date):
             return o.isoformat()
-        elif isinstance(o, datetime.time):
+        if isinstance(o, datetime.time):
             if is_aware(o):
                 raise ValueError("JSON can't represent timezone-aware times.")
             r = o.isoformat()
             if o.microsecond:
                 r = r[:12]
             return r
-        elif isinstance(o, datetime.timedelta):
+        if isinstance(o, datetime.timedelta):
             return duration_iso_string(o)
-        elif isinstance(o, decimal.Decimal):
+        if isinstance(o, decimal.Decimal):
             return str(o)
-        elif isinstance(o, uuid.UUID):
+        if isinstance(o, uuid.UUID):
             return str(o)
-        elif isinstance(o, Promise):
+        if isinstance(o, Promise):
             return six.text_type(o)
-        elif isinstance(o, CallableBool):
+        if isinstance(o, CallableBool):
             return bool(o)
-        elif isinstance(o, Model):
+        if isinstance(o, Model):
             return {
                 'app_label': o._meta.app_label,
                 'model_name': o._meta.model_name,
                 'pk': o.pk,
             }
-        else:
-            return super(DjangoJSONEncoder, self).default(o)
+        return super(DjangoJSONEncoder, self).default(o)

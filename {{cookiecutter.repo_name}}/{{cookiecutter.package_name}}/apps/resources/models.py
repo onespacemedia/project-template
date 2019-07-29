@@ -85,6 +85,9 @@ class Resources(ContentBase):
         default=12,
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class ResourceType(models.Model):
     title = models.CharField(
@@ -161,7 +164,7 @@ class Resource(PageBase):
     # |------------------------------------------------------------------------
 
     type = models.ForeignKey(
-        ResourceType,
+        'resources.ResourceType',
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
@@ -183,9 +186,9 @@ class Resource(PageBase):
                 'content': 'Please provide either some page content, an attachment, or an external URL.',
             })
 
-    def get_absolute_url(self):
+    def get_absolute_url(self, page=None):
         if self.content:
-            return self.page.page.reverse('detail', kwargs={
+            return (page or self.page.page).reverse('detail', kwargs={
                 'slug': self.slug,
             })
         if self.file:
@@ -216,14 +219,16 @@ class Resource(PageBase):
                     return extension
         return None
 
-    def render_item(self):
+    def render_item(self, page=None):
         return render_to_string('resources/includes/item.html', {
             'object': self,
+            'page': page,
         })
 
-    def render_featured_item(self):
+    def render_featured_item(self, page=None):
         return render_to_string('resources/includes/featured_item.html', {
             'object': self,
+            'page': page,
         })
 
     def get_related_resources(self, count=3):

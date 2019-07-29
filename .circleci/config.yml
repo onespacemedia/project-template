@@ -40,16 +40,16 @@ jobs:
           name: Install project dependencies
           command: |
             cd demo/ && . .venv/bin/activate
-            pip install --upgrade pytest pytest-cov pytest-django pylint==1.7.5 pylint-django==0.7.2 pylint-mccabe==0.1.3 isort==4.2.15 astroid==1.5.3
+            pip install --upgrade pytest pytest-cov pytest-django
 
       - run:
           name: Test project
           command: |
             cd demo && . .venv/bin/activate
-            pylint demo/ --load-plugins pylint_django,pylint_mccabe --ignore=migrations,tests -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code --reports=n
-            isort --check-only --diff --quiet --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*
             yarn run lint:css
             yarn run lint:js
+            yarn run lint:python
+            yarn run lint:isort
             pytest --cov=demo --create-db --nomigrations --ds=demo.settings.local
 
 workflows:

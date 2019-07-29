@@ -9,10 +9,10 @@ from sorl.thumbnail import get_thumbnail
 try:
     from ..apps.sections.models import ContentSection, SectionBase
 except ImportError:
-    class ContentSection(object):
+    class ContentSection:
         pass
 
-    class SectionBase(object):
+    class SectionBase:
         pass
 
 
@@ -30,7 +30,7 @@ class LinkFieldsLastAdminMixin:
         return fields
 
 
-class UsedOnAdminMixin(object):
+class UsedOnAdminMixin:
     '''
     Designed for components that are used inside pages.
 
@@ -101,7 +101,7 @@ class UsedOnAdminMixin(object):
     pages_used_on.allow_tags = True
 
 
-class HasImageAdminMixin(object):
+class HasImageAdminMixin:
     '''
     A helper to add a thumbnail into admin list views, for models that have an
     ImageRefField field.

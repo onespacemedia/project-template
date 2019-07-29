@@ -52,7 +52,7 @@ class Category(models.Model):
 class Faq(PageBase):
 
     page = models.ForeignKey(
-        Faqs,
+        'faqs.Faqs',
         on_delete=models.PROTECT,
     )
 
@@ -86,8 +86,8 @@ class Faq(PageBase):
         verbose_name_plural = 'FAQs'
         ordering = ['order', 'question']
 
-    def get_absolute_url(self):
-        return self.page.page.reverse('faq_detail', kwargs={
+    def get_absolute_url(self, page=None):
+        return (page or self.page.page).reverse('faq_detail', kwargs={
             'slug': self.slug,
         })
 

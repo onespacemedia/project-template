@@ -76,7 +76,7 @@ class Event(PageBase):
     objects = PageBaseManager.from_queryset(EventQueryset)()
 
     page = models.ForeignKey(
-        Events,
+        'events.Events',
         on_delete=models.PROTECT,
     )
 
@@ -118,8 +118,8 @@ class Event(PageBase):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return self.page.page.reverse('event_detail', kwargs={
+    def get_absolute_url(self, page=None):
+        return (page or self.page.page).reverse('event_detail', kwargs={
             'slug': self.slug,
         })
 
@@ -158,14 +158,16 @@ class Event(PageBase):
 
         return mark_safe(json.dumps(schema))
 
-    def render_card(self):
+    def render_card(self, page=None):
         return render_to_string('events/includes/card.html', {
             'object': self,
+            'page': page,
         })
 
-    def render_featured_card(self):
+    def render_featured_card(self, page=None):
         return render_to_string('events/includes/featured_card.html', {
             'object': self,
+            'page': page,
         })
 
 

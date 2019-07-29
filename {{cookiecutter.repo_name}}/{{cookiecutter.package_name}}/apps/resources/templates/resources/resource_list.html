@@ -3,7 +3,7 @@
 {% block main %}
   <ul>
     {% for object in object_list %}
-      <li>{{ object.render_item() }}</li>
+      <li>{{ object.render_item(page=pages.current) }}</li>
     {% else %}
       <li>No resources</li>
     {% endfor %}
