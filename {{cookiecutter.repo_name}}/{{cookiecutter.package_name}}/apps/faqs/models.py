@@ -30,6 +30,9 @@ class Faqs(ContentBase):
 
     def __str__(self):
         return self.page.title
+{% if cookiecutter.multilingual == 'yes' %}
+    def get_absolute_url(self):
+        return f'/{get_country_code()}{self.page.get_absolute_url()}'{% endif %}
 
 
 class Category(models.Model):
