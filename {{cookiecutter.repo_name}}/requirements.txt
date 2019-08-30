@@ -7,7 +7,6 @@ cryptography
 django>=1.11,<1.12
 django-admin-sortable2
 django-cachalot
-django-compressor
 django-extensions
 django-historylinks
 django-jet
