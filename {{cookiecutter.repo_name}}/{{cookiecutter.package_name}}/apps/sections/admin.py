@@ -7,7 +7,7 @@ from ...utils.admin import LinkFieldsLastAdminMixin
 from .models import Content, ContentSection
 
 
-class ContentSectionInline(LinkFieldsLastAdminMixin, CompactInline):
+class ContentSectionInline(LinkFieldsLastAdminMixin, JetCompactInline):
     model = ContentSection
     extra = 0
     filter_horizontal = ['people']
