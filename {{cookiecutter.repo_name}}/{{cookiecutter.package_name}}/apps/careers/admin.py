@@ -1,6 +1,7 @@
 from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
+from reversion.admin import VersionAdmin
 
 from ...utils.admin import SEOQualityControlFilter
 from .models import Career, CareerLocation, Careers
@@ -67,7 +68,8 @@ class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
 
 
 @admin.register(CareerLocation)
-class LocationAdmin(admin.ModelAdmin):
+class LocationAdmin(VersionAdmin):
+
     fieldsets = (
         (None, {
             'fields': ['title']
