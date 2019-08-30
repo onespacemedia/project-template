@@ -1,5 +1,6 @@
 import re
 from sre_constants import error as RegexError
+from urllib.parse import urlparse
 
 from django import forms
 from django.conf import settings
@@ -11,9 +12,10 @@ from .models import Redirect
 
 class RedirectModelForm(forms.ModelForm):
     def clean(self):
-        cleaned_data = super(RedirectModelForm, self).clean()
-        if getattr(settings, "REDIRECTS_ENABLE_REGEX", False):
-            if cleaned_data["regular_expression"] and "test_path" in cleaned_data:
+        cleaned_data = super().clean()
+
+        if getattr(settings, 'REDIRECTS_ENABLE_REGEX', False):
+            if cleaned_data['regular_expression'] and 'test_path' in cleaned_data:
                 try:
                     re.sub(
                         cleaned_data['old_path'],
@@ -28,8 +30,24 @@ class RedirectModelForm(forms.ModelForm):
 
     def clean_old_path(self):
         data = self.cleaned_data['old_path']
-        if data and not data.startswith('/'):
-            raise forms.ValidationError('"From" path must start with a forward slash.')
+
+        # urlparse is extremely forgiving (or maybe URLs are just really weird).
+        # There are all sorts of things that urlparse will happily parse as
+        # actual URLs (with scheme, netloc, path, etc). We'll ignore regular
+        # expressions because it's entirely possible that they will pass as
+        # a URL.
+        if not self.cleaned_data.get('regular_expression'):
+            # So let's find out if it looks something like a URL. This is
+            # so rather than manually trimming the path from the URL on a page
+            # on their existing site, they can just paste in the new URL.
+            parsed = urlparse(data)
+
+            if parsed.netloc and parsed.path and parsed.scheme in ['http', 'https']:
+                data = parsed.path
+
+            if not data.startswith('/'):
+                raise forms.ValidationError('"From" path must either be a full URL or start with a forward slash.')
+
         return data
 
     def clean_test_path(self):
@@ -43,7 +61,7 @@ class RedirectModelForm(forms.ModelForm):
 
     class Meta:
         model = Redirect
-        exclude = []
+        exclude = []  # pylint:disable=modelform-uses-exclude
 
 
 @admin.register(Redirect)
@@ -54,6 +72,7 @@ class RedirectAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         if getattr(settings, 'REDIRECTS_ENABLE_REGEX', False):
             return ('old_path', 'new_path', 'regular_expression', 'type', 'test_redirect')
+
         return ('old_path', 'new_path', 'type', 'test_redirect')
 
     def get_form(self, request, obj=None, **kwargs):
@@ -63,7 +82,7 @@ class RedirectAdmin(admin.ModelAdmin):
             kwargs.update({
                 'exclude': ['regular_expression', 'test_path']
             })
-        form = super(RedirectAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
         return form
 
     def test_redirect(self, obj):

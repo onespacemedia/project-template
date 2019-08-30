@@ -86,7 +86,7 @@ class EmailLog(models.Model):
     )
 
     email_template = models.ForeignKey(
-        EmailTemplate,
+        'emails.EmailTemplate',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

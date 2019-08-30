@@ -1,5 +1,5 @@
 """Admin settings for the CMS news app."""
-
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import OnlineBaseAdmin, PageBaseAdmin
 from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
@@ -8,14 +8,13 @@ from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
 from reversion.admin import VersionAdmin
 from reversion.models import Version
-from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import Article, Category, get_default_news_feed
 
 
 @admin.register(Category)
-class CategoryAdmin(SortableModelAdmin):
+class CategoryAdmin(SortableAdminMixin, VersionAdmin):
     list_display = ['__str__']
     prepopulated_fields = {'slug': ['title']}
 
@@ -35,10 +34,10 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'page', 'featured', 'date', 'status'],
+            'fields': ['title', 'slug', 'page', 'content', 'date', 'status'],
         }),
         ('Content', {
-            'fields': ['image', 'card_image', 'content', 'summary', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
+            'fields': ['featured', 'summary', 'image', 'card_image', 'categories'{% if cookiecutter.people == 'yes' %}, 'author'{% endif %}],
         }),
         ('Publication', {
             'fields': ['is_online'],
@@ -48,6 +47,7 @@ class ArticleAdmin(HasImageAdminMixin, PageBaseAdmin, VersionAdmin):
 
     fieldsets.extend(PageBaseAdmin.fieldsets)
 
+    fieldsets.remove(PageBaseAdmin.NAVIGATION_FIELDS)
     fieldsets.remove(PageBaseAdmin.TITLE_FIELDS)
     fieldsets.remove(OnlineBaseAdmin.PUBLICATION_FIELDS)
 

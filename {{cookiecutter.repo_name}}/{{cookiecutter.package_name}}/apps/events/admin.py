@@ -1,14 +1,15 @@
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
+from reversion.admin import VersionAdmin
 from reversion.models import Version
-from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import Category, Event, Events
 
 
 @admin.register(Category)
-class CategoryAdmin(SortableModelAdmin):
+class CategoryAdmin(SortableAdminMixin, VersionAdmin):
     list_display = ['__str__']
     prepopulated_fields = {'slug': ['title']}
 

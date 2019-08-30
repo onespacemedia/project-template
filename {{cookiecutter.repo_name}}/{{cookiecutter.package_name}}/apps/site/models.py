@@ -22,7 +22,7 @@ class Footer(models.Model):
     )
 
     links_title = models.CharField(
-        verbose_name='Title',
+        verbose_name='Footer links title',
         max_length=50,
         blank=True,
         null=True,
@@ -67,7 +67,7 @@ class Footer(models.Model):
     )
 
     terms_of_use_text = models.CharField(
-        verbose_name='Text',
+        verbose_name='Terms of use text',
         max_length=255,
         blank=True,
         null=True,

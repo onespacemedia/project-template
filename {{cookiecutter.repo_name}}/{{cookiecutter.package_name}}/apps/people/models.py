@@ -47,7 +47,7 @@ class People(ContentBase):
 class Person(SearchMetaBase):
 
     page = models.ForeignKey(
-        People,
+        'people.People',
         on_delete=models.PROTECT,
     )
 
@@ -140,8 +140,8 @@ class Person(SearchMetaBase):
 
         return ' '.join(parts)
 
-    def get_absolute_url(self):
-        return self.page.page.reverse('person_detail', kwargs={
+    def get_absolute_url(self, page=None):
+        return (page or self.page.page).reverse('person_detail', kwargs={
             'slug': self.slug,
         })
 
@@ -149,6 +149,7 @@ class Person(SearchMetaBase):
     def twitter_url(self):
         if self.twitter:
             return f'https://twitter.com/{self.twitter}'
+        return None
 
     @cached_property
     def colleagues(self):
@@ -171,9 +172,10 @@ class Person(SearchMetaBase):
 
         return mark_safe(json.dumps(schema))
 
-    def render_card(self):
+    def render_card(self, page=None):
         return render_to_string('news/includes/card.html', {
             'article': self,
+            'page': page,
         })
 
 historylinks.register(Person)

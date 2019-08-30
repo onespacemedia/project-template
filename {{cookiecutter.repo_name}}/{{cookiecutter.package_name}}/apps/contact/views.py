@@ -1,8 +1,8 @@
 from django.views.generic import CreateView, TemplateView
 
 from ..emails.utils import send_email
-from .models import ContactSubmission
 from .forms import ContactForm
+from .models import ContactSubmission
 
 
 class ContactView(CreateView):

@@ -1,11 +1,11 @@
 from urllib.parse import urlparse
 
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import SearchMetaBaseAdmin
 from django import forms
 from django.contrib import admin
 from django.core.urlresolvers import reverse
 from django.utils.html import escape, mark_safe
-from suit.admin import SortableModelAdmin
 
 from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter
 from .models import People, Person, Team
@@ -73,7 +73,7 @@ class PersonForm(forms.ModelForm):
 
 
 @admin.register(Person)
-class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
+class PersonAdmin(SortableAdminMixin, HasImageAdminMixin, SearchMetaBaseAdmin):
     form = PersonForm
 
     prepopulated_fields = {'slug': ['first_name', 'last_name']}
@@ -89,10 +89,7 @@ class PersonAdmin(HasImageAdminMixin, SortableModelAdmin, SearchMetaBaseAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ['page'],
-        }),
-        ('Name information', {
-            'fields': ['title', 'first_name', 'middle_name', 'last_name', 'slug']
+            'fields': ['page', 'title', 'first_name', 'middle_name', 'last_name', 'slug']
         }),
         ('Profile', {
             'fields': ['photo', 'job_title', 'bio', 'team']

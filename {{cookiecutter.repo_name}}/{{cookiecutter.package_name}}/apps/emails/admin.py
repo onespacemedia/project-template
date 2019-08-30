@@ -1,12 +1,12 @@
+from adminsortable2.admin import SortableAdminMixin
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from suit.admin import SortableModelAdmin
 
 from .models import EmailLog, EmailTemplate
 
 
 @admin.register(EmailTemplate)
-class EmailTemplateAdmin(SortableModelAdmin, VersionAdmin):
+class EmailTemplateAdmin(SortableAdminMixin, VersionAdmin):
 
     list_display = ['title', 'reference', 'reply_to', 'bcc_list', 'subject']
 

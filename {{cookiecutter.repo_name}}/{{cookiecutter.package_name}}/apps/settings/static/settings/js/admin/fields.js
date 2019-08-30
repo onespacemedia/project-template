@@ -1,36 +1,35 @@
-$(function () {
+window.jQuery(function () {
   setInterval(hide_inline_section_fields, 100)
-})
+});
 
-//	Function to hide fields of a section inline based on its type
 function hide_inline_section_fields () {
-  //	Define which section types have which elements
-  var elements = {
-    '.field-string': ['string'],
-    '.field-text': ['text'],
-    '.field-number': ['number'],
-    '.field-image': ['image'],
-    '.field-html': ['html']
+  var options = document.querySelector('#id_type').querySelectorAll('option');
+  var optionSet = new Set();
+  var optionSelected = document.querySelector('.select2-selection__rendered').innerHTML.toLowerCase();
+  for (var i = 0; i < options.length; i++) {
+    // Catch the case options[i].value = '', which is when no settings type chosen
+    if (options[i].value) {
+      optionSet.add(options[i].value)
+    }
   }
 
-  //	Loop all of the section inlines
-  $('.tab-content').each(function () {
-    var _this = this
+  var formFields = document.querySelectorAll('.form-row');
+  var fieldInput = document.querySelector('body');
+  for (i = 0; i < formFields.length; i++) {
+    fieldInput = formFields[i].querySelector('input');
+    // Catch the times it isn't an input
+    if (!fieldInput) {
+      fieldInput = formFields[i].querySelector('textarea');
+    }
+    if (fieldInput && fieldInput.id) {
+      // substring(3) to remove id_ from the id field
+      if (optionSet.has(fieldInput.id.substring(3))) {
+        formFields[i].style.display = 'none'
+      }
 
-    //	Get the type select of the section
-    var select = $('[id$=_type]', $(this))[0].value
-    select = select == '' ? '0' : select
-
-    //	Loop the elements
-    for (var element in elements) {
-      var element_object = $(element, $(this))
-
-      // Hide / show the element based on select index
-      if (elements[element].indexOf(select) != -1) {
-        element_object.css('display', '')
-      } else {
-        element_object.css('display', 'none')
+      if (fieldInput.id.substring(3) === optionSelected) {
+        formFields[i].style.display = 'block'
       }
     }
-  })
+  }
 }

@@ -1,0 +1,314 @@
+/*
+|--------------------------------------------------------------------------
+| Authentication
+|--------------------------------------------------------------------------
+| @namespace: ath-
+|
+*/
+
+.ath-Container {
+  display: flex;
+
+  height: 100vh;
+
+  background-color: #e9e5e5;
+}
+
+.ath-Container::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url('/static/img/login-background.jpg');
+  background-size: cover;
+}
+
+.ath-Inner {
+  z-index: 1;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  display: flex;
+  max-width: calc(1100px + (20px * 2));
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.ath-Wrapper {
+  display: flex;
+}
+
+.ath-Form {
+  max-width: 520px;
+  width: 100%;
+
+  padding: 20px 20px 30px;
+
+  background-color: #fff;
+
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ath-Logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto;
+
+  background-image: svg-load('svg/osm-logo.svg', fill=#fff);
+}
+
+.ath-Form_Heading {
+  margin-top: 20px;
+
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  line-height: 18px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000;
+}
+
+.ath-Form_Message {
+  margin-top: 28px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.ath-Message {
+  font-weight: 600;
+
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+
+  color: #fff;
+}
+
+.ath-Message_SubHeading {
+  max-width: 500px;
+  margin-top: 15px;
+
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+
+  color: #fff;
+}
+
+.ath-Above {
+  margin: 28px 0 56px;
+}
+
+.ath-Below {
+  margin: 56px 0 28px;
+}
+
+.ath-Below .ath-Link {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  line-height: 18px;
+  text-transform: uppercase;
+
+  color: hsla(0, 0%, 100%, 0.25);
+
+  transition: color 0.3s;
+}
+
+.ath-Below .ath-Link:hover {
+  font-weight: 700;
+
+  color: hsla(0, 0%, 100%, 0.4);
+}
+
+/* sm breakpoint */
+@media (min-width: 768px) {
+  .ath-Message_Button {
+    min-width: 265px;
+    width: auto;
+  }
+
+  .ath-Form {
+    width: 520px;
+    padding: 80px 95px 60px;
+  }
+
+  .ath-Inner {
+    padding-right: calc(20px * 2);
+    padding-left: calc(20px * 2);
+  }
+
+  .ath-Form_Message {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .ath-Message {
+    font-size: 24px;
+    line-height: 30px;
+  }
+
+  .ath-Message_SubHeading {
+    font-size: 16px;
+  }
+
+  .frm-Actions {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .frm-Form_Submit {
+    width: 100%;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Forms
+|--------------------------------------------------------------------------
+| @namespace: frm-
+|
+*/
+.frm-Form {
+  margin-top: 35px;
+}
+
+.frm-Items {
+  flex-direction: column;
+
+  display: flex;
+}
+
+.frm-Item {
+  @include Font_18;
+
+  margin-top: 28px;
+}
+.frm-Item:first-child {
+  margin-top: 0;
+}
+
+.frm-Form .frm-Input {
+  height: auto;
+  width: 100%;
+
+  padding: 11px 14px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+
+  border: solid 1px #dcdcdc;
+  border-radius: 2px;
+  outline: none;
+
+  color: #000;
+}
+.frm-Item-error .frm-Input {
+  border: solid 1px #cf011c;
+}
+.frm-Form .frm-Input::placeholder {
+  font-size: 14px;
+  line-height: 18px;
+  color: #9b9b9b;
+}
+
+.frm-Error {
+  font-size: 14px;
+  line-height: 18px;
+  color: #cf011c;
+}
+
+.frm-Item_Extra {
+  margin-top: 5px;
+}
+
+.frm-Actions {
+  margin-top: 28px;
+
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.frm-Action {
+  display: inline-block;
+  width: 100%;
+  padding: 10px calc(15px * 2);
+
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  background-color: #000;
+  border: 2px solid #000;
+  color: #fff;
+  cursor: pointer;
+
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
+}
+
+.frm-Action:hover {
+  background: transparent;
+  border: 2px solid #161616;
+  color: #161616;
+}
+
+.frm-SubLinks {
+  align-items: center;
+
+  display: flex;
+
+  margin: 28px 0;
+}
+
+.frm-Link {
+  font-size: 14px;
+  line-height: 18px;
+  color: #808080;
+}
+
+.frm-Link::after {
+  content: '';
+
+  margin: 0 10px;
+
+  background: #808080;
+
+  border-left: 1px solid #808080;
+}
+
+.frm-Link:last-child {
+  .frm-Link::after {
+    display: none;
+  }
+}
+
+.frm-Link:hover {
+  text-decoration: underline;
+}
+
+::-webkit-clear-button {
+  display: none;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}

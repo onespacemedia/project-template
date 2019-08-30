@@ -12,7 +12,7 @@ from ...utils.utils import url_from_path
 from .models import Article, Category
 
 
-class ArticleMixin(object):
+class ArticleMixin:
     model = Article
 
     context_object_name = 'article'

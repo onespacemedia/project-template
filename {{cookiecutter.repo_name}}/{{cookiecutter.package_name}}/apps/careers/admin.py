@@ -1,7 +1,7 @@
+from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
 from reversion.admin import VersionAdmin
-from suit.admin import SortableModelAdmin
 
 from ...utils.admin import SEOQualityControlFilter
 from .models import Career, CareerLocation, Careers
@@ -25,9 +25,11 @@ class CareerOpenClosedListFilter(admin.SimpleListFilter):
         if self.value() == 'open':
             return queryset.select_open()
 
+        return queryset
+
 
 @admin.register(Career)
-class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
+class CareerAdmin(SortableAdminMixin, PageBaseAdmin):
     prepopulated_fields = {'slug': ['title']}
 
     list_display = ['__str__', 'location', 'closing_date', 'is_online']
@@ -67,6 +69,7 @@ class CareerAdmin(SortableModelAdmin, PageBaseAdmin):
 
 @admin.register(CareerLocation)
 class LocationAdmin(VersionAdmin):
+
     fieldsets = (
         (None, {
             'fields': ['title']

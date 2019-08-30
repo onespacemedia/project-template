@@ -2,7 +2,7 @@
 
 {% block main %}
   {% if object_list %}
-    {{ listings.four_up(object_list) }}
+    {{ listings.four_up(object_list, page=pages.current) }}
   {% else %}
     <p>There are no people.</p>
   {% endif %}
