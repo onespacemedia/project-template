@@ -1,75 +1,75 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_static suit_tags %}
+{% load i18n admin_static site %}
 
-{% block bodyclass %}login{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
-
-{% block header %}{% endblock %}
-
-{% block content-left %}{% endblock %}
-
-{% block container %}
-
-    {% block content %}
-
-        {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
-            <p class="errornote alert alert-error">
-                {% blocktrans count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-            </p>
-        {% endif %}
-
-        {% if form.non_field_errors or form.this_is_the_login_form.errors %}
-            {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
-                <p class="errornote alert alert-error">
-                    {{ error }}
-                </p>
-            {% endfor %}
-        {% endif %}
-
-        <div id="content-main">
-            <h1><i class="icon-lock icon-white"></i> {{ 'ADMIN_NAME'|suit_conf }}</h1>
-
-            <form action="{{ app_path }}" method="post" id="login-form"><div class="hide">{% csrf_token %}</div>
-                <div class="form-row control-group{% if not form.this_is_the_login_form.errors and form.username.errors %} error{% endif %}">
-                    <label for="id_username" class="control-label required">{{ form.username.label }}:</label> {{ form.username }}
-                  {% if not form.this_is_the_login_form.errors and form.username.errors %}<div class="help-block">{{ form.username.errors }}</div>{% endif %}
-                </div>
-                <div class="form-row control-group{% if not form.this_is_the_login_form.errors and form.password.errors %} error{% endif %}">
-                    <label for="id_password" class="control-label required">{% trans 'Password' %}:</label> {{ form.password }}
-                  {% if not form.this_is_the_login_form.errors and form.password.errors %}<div class="help-block">{{ form.password.errors }}</div>{% endif %}
-                    <input type="hidden" name="this_is_the_login_form" value="1"/>
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                </div>
-                {% url 'admin_password_reset' as password_reset_url %}
-                {% if password_reset_url %}
-                    <div class="password-reset-link">
-                        <a href="{{ password_reset_url }}">{% trans 'Forgotten your password or username?' %}</a>
-                    </div>
-                {% endif %}
-                <div class="submit-row">
-                    <input type="submit" value="{% trans 'Log in' %}" class="btn btn-info"/>
-                </div>
-            </form>
-
-            <script type="text/javascript">
-                document.getElementById('id_username').focus()
-            </script>
-        </div>
-    {% endblock %}
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static "admin/auth/login.css" %}" />
 {% endblock %}
 
+{% block main_content %}
+  <div class="ath-Container">
+    <div class="ath-Inner">
+      {% block content_above %}
+        <div class="ath-Above">
+          <div class="ath-Logo"></div>
+        </div>
+      {% endblock %}
+      <div class="ath-Wrapper">
+        <div class="ath-Form">
+          <h2 class="ath-Form_Heading">{{ settings.SITE_NAME }} admin login</h2>
+          {% if message %}<h3 class="ath-Form_Message">{{ message|linebreaksbr }}</h3>{% endif %}
+          <form class="frm-Form" method="post">
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <p class="frm-Error">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
 
-{% block footer_links %}
-    {{ block.super }}
+            <form class="frm-Form" method="post">
+              <div class="frm-Items">
+                <div class="frm-Item{% if form.username.errors %} frm-Item-error{% endif %}">
+                  {% add_field_attributes form.username 'frm-Input js-Form_Input' %}
+                  {% if form.username.errors %}
+                    <div class="frm-Item_Extra">
+                      {% for error in form.username.errors %}
+                        <p class="frm-Error">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="frm-Item{% if form.password.errors %} frm-Item-error{% endif %}">
+                  {% add_field_attributes form.password 'frm-Input js-Form_Input' %}
+                  {% if form.password.errors %}
+                    <div class="frm-Item_Extra">
+                      {% for error in form.password.errors %}
+                        <p class="frm-Error">{{ error }}</p>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="frm-Actions">
+                {% csrf_token %}
 
-    {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
-      <a href="{% url 'social:begin' 'google-oauth2' %}">
-        OSM staff login
-      </a>
-    {% endif %}
+                {% url 'admin_password_reset' as password_reset_url %}
+                {% if password_reset_url %}
+                  <div class="frm-SubLinks">
+                    <a href="{{ password_reset_url }}" class="frm-Link">{% trans 'Forgotten your password or username?' %}</a>
+                  </div>
+                {% endif %}
+                <button class="frm-Action" type="submit">Log in</button>
+              </div>
+            </form>
+          </form>
+        </div>
+      </div>
+      <div class="ath-Below">
+        {% if settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY %}
+          <a class="ath-Link onespacemedia-login" href="{% url 'social:begin' 'google-oauth2' %}">
+            OSM staff login
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endblock %}

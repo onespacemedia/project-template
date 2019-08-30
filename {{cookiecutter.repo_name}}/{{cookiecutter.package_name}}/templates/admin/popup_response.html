@@ -1,0 +1,20 @@
+{% load i18n static jet_tags %}
+{% jet_popup_response_data as data %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% trans 'Popup closing...' %}</title>
+    {% if '_editBar' in request.GET.keys %}
+      <script>
+        window.parent.location.reload()
+      </script>
+    {% else %}
+      <script src="{% static "jet/js/build/bundle.min.js" %}"></script>
+    {% endif %}
+  </head>
+  <body>
+    <div id="django-admin-popup-response-constants"
+         data-popup-response="{{ data|escape }}">
+    </div>
+  </body>
+</html>

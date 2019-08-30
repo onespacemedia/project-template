@@ -96,7 +96,7 @@ class Category(models.Model):
     )
 
     order = models.PositiveIntegerField(
-        default=0
+        default=0,
     )
 
     class Meta:

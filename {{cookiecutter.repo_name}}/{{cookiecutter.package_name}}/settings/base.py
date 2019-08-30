@@ -90,8 +90,10 @@ INSTALLED_APPS = [
     '{{cookiecutter.package_name}}.apps.settings',
     '{{cookiecutter.package_name}}.apps.site',
 
-    'suit',
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
+    'adminsortable2',
 
     'server_management',
     'django_extensions',
@@ -109,7 +111,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|sitemap\.xml|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
@@ -181,6 +183,7 @@ CACHES = {
 #
 ###
 NEWS_APPROVAL_SYSTEM = False
+ONLINE_DEFAULT = True
 
 ADMINS = []
 MANAGERS = ()
@@ -207,6 +210,31 @@ SERVER_EMAIL = '{name} <notifications@{domain}>'.format(
 )
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
+###
+#     _         _   _                   _   _
+#    / \  _   _| |_| |__     ___  _ __ | |_(_) ___  _ __  ___
+#   / _ \| | | | __| '_ \   / _ \| '_ \| __| |/ _ \| '_ \/ __|
+#  / ___ \ |_| | |_| | | | | (_) | |_) | |_| | (_) | | | \__ \
+# /_/   \_\__,_|\__|_| |_|  \___/| .__/ \__|_|\___/|_| |_|___/
+#                                |_|
+###
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
 ###
 #  _                    _  _            _    _
@@ -265,14 +293,17 @@ SITE_ID = 1
 #   |_|  |_||_||_||_|  \__,_|  | .__/\__,_||_|   \__| \_, |
 #                              |_|                    |__/
 ###
+JET_INDEX_DASHBOARD = '{{cookiecutter.package_name}}.apps.site.dashboard.OSMDashboard'
+JET_CHANGE_FORM_SIBLING_LINKS = False
+JET_DEFAULT_THEME = 'osm'
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
-SUIT_CONFIG = {
-    'ADMIN_NAME': SITE_NAME,
-    'MENU_EXCLUDE': ['default'],
-}
+
+JET_INDEX_DASHBOARD = 'cms.dashboard.OSMDashboard'
+JET_CHANGE_FORM_SIBLING_LINKS = False
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '{{cookiecutter.google_plus_key}}'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '{{cookiecutter.google_plus_secret}}'

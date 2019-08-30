@@ -2,7 +2,6 @@ from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.models import PageBase
 from django.db import models
-from historylinks import shortcuts as historylinks
 
 
 class Partner(PageBase):
@@ -31,5 +30,5 @@ class Partner(PageBase):
     def __str__(self):
         return self.title
 
-historylinks.register(Partner)
+
 sitemaps.register(Partner)
