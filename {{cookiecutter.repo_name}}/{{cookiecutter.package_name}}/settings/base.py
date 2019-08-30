@@ -115,7 +115,6 @@ TEMPLATES = [
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension',
-                'compressor.contrib.jinja2ext.CompressorExtension',
                 '{{cookiecutter.package_name}}.apps.site.extensions.DjangoNow',
             ],
             'bytecode_cache': {
@@ -452,7 +451,6 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 WEBPACK_LOADER = {
@@ -461,11 +459,6 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(BASE_ROOT, 'webpack-stats.json')
     }
 }
-
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-]
-COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 THUMBNAIL_PRESERVE_FORMAT = True
 THUMBNAIL_QUALITY = 60
