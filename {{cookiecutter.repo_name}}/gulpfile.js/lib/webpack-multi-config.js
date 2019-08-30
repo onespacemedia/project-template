@@ -140,7 +140,6 @@ module.exports = function(env) {
         }
       }),
       new webpack.optimize.OccurrenceOrderPlugin,
-      new webpack.optimize.UglifyJsPlugin(),
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.ModuleConcatenationPlugin()
     )
