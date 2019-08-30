@@ -11,12 +11,10 @@ from .models import Footer, FooterLink, Header, HeaderLink, User
 
 class UserCreationAdminForm(UserEmailUniqueFormMixin, UserCreationForm):
     '''Like UserCreationForm, but forces case-insensitivity on emails.'''
-    pass
 
 
 class UserAdminForm(UserEmailUniqueFormMixin, UserChangeForm):
     '''Like UserChangeForm, but forces case-insensitivity on emails.'''
-    pass
 
 
 @admin.register(User)
