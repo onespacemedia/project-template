@@ -35,8 +35,6 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'site.User'
-
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
