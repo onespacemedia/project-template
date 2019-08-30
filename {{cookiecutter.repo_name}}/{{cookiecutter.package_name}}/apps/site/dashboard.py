@@ -16,6 +16,6 @@ class OSMDashboard(Dashboard):
         self.available_children.append(modules.RecentActions)
         self.available_children.append(modules.LinkList)
         self.children.append(modules.RecentActions(
-            'Recent Actions',
+            'Recent actions',
             column=1,
         ))
