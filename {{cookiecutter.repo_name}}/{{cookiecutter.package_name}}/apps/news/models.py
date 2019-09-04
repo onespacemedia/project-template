@@ -1,6 +1,5 @@
 """Models used by the CMS news app."""
 import json
-from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
