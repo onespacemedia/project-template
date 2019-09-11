@@ -17,6 +17,13 @@ class ArticleMixin:
 
     context_object_name = 'article'
 
+    def get_queryset(self):
+        qs = super().get_queryset().filter(
+            page__page=self.request.pages.current,
+        )
+
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         category_list = Category.objects.filter(
@@ -37,17 +44,18 @@ class ArticleListMixin(ArticleMixin):
     def get_paginate_by(self, queryset):
         return self.request.pages.current.content.per_page
 
-    def get_queryset(self):
+    def get_base_queryset(self):
         return super().get_queryset().prefetch_related(
             'categories',
         ).select_related(
             'image',
             'card_image',
-        ).filter(
-            page__page=self.request.pages.current,
         ).order_by(
             '-date'
         )
+
+    def get_queryset(self):
+        return self.get_base_queryset()
 
 
 class ArticleArchiveView(ArticleListMixin, ListView):
@@ -58,9 +66,7 @@ class ArticleArchiveView(ArticleListMixin, ListView):
         self.featured_article = None
 
     def dispatch(self, request, *args, **kwargs):
-        candidates = Article.objects.filter(featured=True)
-        if candidates.exists():
-            self.featured_article = candidates[:1].get()
+        self.featured_article = self.get_base_queryset().filter(featured=True).first()
 
         return super().dispatch(request, *args, **kwargs)
 
