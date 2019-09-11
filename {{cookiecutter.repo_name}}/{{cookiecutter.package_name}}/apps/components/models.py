@@ -17,3 +17,40 @@ class CallToAction(HasLinkMixin, models.Model):
 
     def __str__(self):
         return self.title
+
+
+class StatSet(models.Model):
+    label = models.CharField(
+        max_length=50,
+        help_text="This is not shown on the front end of the site; it's to help you find it in the admin.",
+    )
+
+    def __str__(self):
+        return self.label
+
+
+class Statistic(models.Model):
+    stat_set = models.ForeignKey(
+        'components.StatSet',
+        related_name='statistics',
+    )
+
+    statistic = models.CharField(
+        max_length=64,
+    )
+
+    text = models.TextField(
+        max_length=200,
+        blank=True,
+        null=True,
+    )
+
+    order = models.PositiveIntegerField(
+        default=0,
+    )
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f'{self.stat_set} - card {self.order}'

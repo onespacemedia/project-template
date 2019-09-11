@@ -60,6 +60,10 @@ SECTION_TYPES = (
                 'search': ['title'],
                 'required': ['news_feed'],
             }),{% endif %}
+            ('statistics', {
+                'fields': ['background_colour', 'stat_set'],
+                'required': ['stat_set'],
+            }),
         ],
     }),
 )
@@ -192,6 +196,12 @@ class SectionBase(HasLinkMixin, VideoMixin):
             ('right', 'Right'),
         ],
         default='left',
+    )
+
+    stat_set = models.ForeignKey(
+        'components.StatSet',
+        blank=True,
+        null=True,
     )
 {% if cookiecutter.news == 'yes' %}
     news_feed = models.ForeignKey(

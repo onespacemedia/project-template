@@ -1,0 +1,16 @@
+{% extends 'sections/types/_base.html' %}
+
+{% block body %}
+  <div class="lst-Grid ani-Animation_Stagger" data-animation="SlideUp" data-time="120">
+    {% for stat in section.stat_set.statistics.all() %}
+      <div class="lst-Grid_Item lst-Grid_Item-twoToFourUp ani-Animation_Child">
+        <div class="sec-Statistic">
+          <div class="sec-Statistic_Stat">{{ stat.statistic }}</div>
+          {% if stat.text %}
+            <div class="sec-Statistic_Text">{{ stat.text }}</div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
