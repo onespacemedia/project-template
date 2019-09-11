@@ -18,7 +18,7 @@ class ArticleMixin:
     context_object_name = 'article'
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleMixin, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         category_list = Category.objects.filter(
             article__page__page=self.request.pages.current
         ).distinct()
@@ -38,7 +38,7 @@ class ArticleListMixin(ArticleMixin):
         return self.request.pages.current.content.per_page
 
     def get_queryset(self):
-        return super(ArticleListMixin, self).get_queryset().prefetch_related(
+        return super().get_queryset().prefetch_related(
             'categories',
         ).select_related(
             'image',

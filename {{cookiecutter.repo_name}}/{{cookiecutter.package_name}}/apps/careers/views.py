@@ -11,7 +11,7 @@ class CareerListView(ListView):
         return self.request.pages.current.content.per_page
 
     def get_queryset(self):
-        queryset = super(CareerListView, self).get_queryset()
+        queryset = super().get_queryset()
         # Only show the careers with either no closing date or a closing date
         # that is not in the past, and that are assigned to the current
         # page.

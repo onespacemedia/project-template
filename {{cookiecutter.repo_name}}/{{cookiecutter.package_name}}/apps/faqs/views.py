@@ -10,7 +10,7 @@ class FaqListView(ListView):
         return self.request.pages.current.content.per_page
 
     def get_queryset(self):
-        queryset = super(FaqListView, self).get_queryset()
+        queryset = super().get_queryset()
 
         return queryset.filter(page__page=self.request.pages.current)
 
