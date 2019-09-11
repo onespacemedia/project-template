@@ -50,12 +50,26 @@
   }
 }
 
+.lst-Grid_Item-twoToFourUp {
+  @media (--sm) {
+    @include TwoUp;
+  }
+
+  @media (--md) {
+    @include FourUp;
+  }
+}
+
 .lst-Grid_Item-fourUp {
   @media (--sm) {
     @include TwoUp;
   }
 
   @media (--md) {
+    @include ThreeUp;
+  }
+
+  @media (--lg) {
     @include FourUp;
   }
 }

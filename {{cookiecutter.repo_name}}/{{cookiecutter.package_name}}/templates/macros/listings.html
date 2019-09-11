@@ -28,6 +28,16 @@
   </ul>
 {% endmacro %}
 
+{% macro two_to_four_up(object_list) %}
+  <ul class="lst-Grid">
+    {% for object in object_list %}
+      <li class="lst-Grid_Item lst-Grid_Item-twoToFourUp">
+        {{ object.render_card(page=page) }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endmacro %}
+
 {% macro stacked(object_list) %}
   <ul class="lst-Stacked">
     {% for object in object_list %}
