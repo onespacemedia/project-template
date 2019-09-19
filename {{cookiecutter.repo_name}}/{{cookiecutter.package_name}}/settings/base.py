@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_lazy_image',
 
     'cms',
+    'osm_jet',
 
     'reversion',
     'historylinks',
