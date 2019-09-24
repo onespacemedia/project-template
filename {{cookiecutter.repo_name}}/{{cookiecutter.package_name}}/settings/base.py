@@ -61,8 +61,8 @@ INSTALLED_APPS = [
     'django_jinja',
     'django_lazy_image',
 
-    'cms',
     'osm_jet',
+    'cms',
 
     'reversion',
     'historylinks',
@@ -300,9 +300,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
-
-JET_INDEX_DASHBOARD = 'cms.dashboard.OSMDashboard'
-JET_CHANGE_FORM_SIBLING_LINKS = False
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '{{cookiecutter.google_plus_key}}'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '{{cookiecutter.google_plus_secret}}'
