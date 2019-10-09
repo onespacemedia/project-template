@@ -149,7 +149,8 @@
       }
     }
 
-    thead {
+    thead,
+    th {
       background-color: var(--Color_Brand);
       color: #fff;
     }
