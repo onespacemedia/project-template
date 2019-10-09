@@ -347,7 +347,7 @@ WYSIWYG_OPTIONS = {
     # Main plugins to load, this has been stripped to match the toolbar
     # See https://www.tinymce.com/docs/get-started/work-with-plugins/
     'plugins': [
-        'advlist autolink link image lists charmap hr anchor pagebreak',
+        'paste advlist autolink link image lists charmap hr anchor pagebreak',
         'wordcount visualblocks visualchars code fullscreen cmsimage hr template',
         'table contextmenu directionality textcolor colorpicker textpattern'
     ],
@@ -404,11 +404,6 @@ WYSIWYG_OPTIONS = {
                     'selector': 'h1,h2,h3,h4,h5,h6',
                     'classes': 'wys-Title-large'
                 },
-                {
-                    'title': 'Extra large',
-                    'selector': 'h1,h2,h3,h4,h5,h6',
-                    'classes': 'wys-Title-extraLarge'
-                }
             ]
         }
     ],

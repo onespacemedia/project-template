@@ -151,18 +151,7 @@
 
     thead {
       background-color: var(--Color_Brand);
-    }
-
-    tr:first-child {
-      th,
-      td {
-        text-align: center;
-
-        background-color: var(--Color_Brand);
-        border: 1px solid var(--Color_Brand);
-
-        color: #fff;
-      }
+      color: #fff;
     }
   }
 
@@ -237,11 +226,15 @@
   |--------------------------------------------------------------------------
   |
   */
+  h4:not([class]),
+  h5:not([class]),
+  h6:not([class]),
   .wys-Title-small {
     margin-top: 1vr;
     margin-bottom: 0.5vr;
   }
 
+  h3:not([class]),
   .wys-Title-medium {
     margin-top: 1vr;
     margin-bottom: 0.5vr;
@@ -251,6 +244,7 @@
     }
   }
 
+  h2:not([class]),
   .wys-Title-large {
     margin-top: 1vr;
     margin-bottom: 0.5vr;
