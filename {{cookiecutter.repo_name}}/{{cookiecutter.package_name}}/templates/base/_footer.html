@@ -52,29 +52,14 @@
             Copyright © {% now "Y" %} {{ settings.SITE_NAME }}
           </p>
 
-          {% set extra_links = footer.extra_links %}
-          {% if extra_links.terms.has_link or extra_links.legal.has_link or extra_links.privacy.has_link %}
+          {% if footer.extra_links.links.all() %}
             <ul class="ft-Bar_Links">
-              {% if extra_links.terms.has_link %}
+              {% for link in footer.extra_links.links.all() %}
                 <li class="ft-Bar_LinksItem">
                   <a class="ft-Bar_Link"
-                     href="{{ extra_links.terms.link_location }}">{{ extra_links.terms.label }}</a>
+                     href="{{ link.link_location }}">{{ link.link_text }}</a>
                 </li>
-              {% endif %}
-
-              {% if extra_links.legal.has_link %}
-                <li class="ft-Bar_LinksItem">
-                  <a class="ft-Bar_Link"
-                     href="{{ extra_links.legal.link_location }}">{{ extra_links.legal.label }}</a>
-                </li>
-              {% endif %}
-
-              {% if extra_links.privacy.has_link %}
-                <li class="ft-Bar_LinksItem">
-                  <a class="ft-Bar_Link"
-                     href="{{ extra_links.privacy.link_location }}">{{ extra_links.privacy.label }}</a>
-                </li>
-              {% endif %}
+              {% endfor %}
             </ul>
           {% endif %}
         </div>

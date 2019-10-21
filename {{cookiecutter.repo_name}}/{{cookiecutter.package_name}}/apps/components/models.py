@@ -54,3 +54,30 @@ class Statistic(models.Model):
 
     def __str__(self):
         return f'{self.stat_set} - card {self.order}'
+
+
+class LinkSet(models.Model):
+    label = models.CharField(
+        max_length=50,
+        help_text="This is not shown on the front end of the site; it's to help you find it in the admin.",
+    )
+
+    def __str__(self):
+        return self.label
+
+
+class Link(HasLinkMixin):
+    link_set = models.ForeignKey(
+        'components.LinkSet',
+        related_name='links',
+    )
+
+    order = models.PositiveIntegerField(
+        default=0,
+    )
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f'{self.link_set} - link {self.order}'
