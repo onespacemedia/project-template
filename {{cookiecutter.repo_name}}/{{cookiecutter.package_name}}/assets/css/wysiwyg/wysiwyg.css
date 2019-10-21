@@ -255,6 +255,16 @@
     }
   }
 
+  /*
+  |--------------------------------------------------------------------------
+  | Misc
+  |--------------------------------------------------------------------------
+  |
+  */
+  hr {
+    margin: 1vr 0;
+  }
+
   /* We want every first and last item to never have their relative margin */
   > *:first-child {
     margin-top: 0 !important;
