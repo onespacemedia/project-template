@@ -10,8 +10,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
-from ...utils.models import ProjectContentBase
-from ...utils.models import HasLinkMixin, VideoMixin
+from ...utils.models import HasLinkMixin, ProjectContentBase, VideoMixin
 {% if cookiecutter.news == 'yes' %}from ..news.models import Article{% endif %}
 
 SECTION_TYPES = (
