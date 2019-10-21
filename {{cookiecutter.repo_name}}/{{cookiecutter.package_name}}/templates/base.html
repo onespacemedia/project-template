@@ -1,4 +1,5 @@
 {% import 'macros/misc.html' as misc %}
+{% import 'components/macros/components.html' as components %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +142,13 @@
               </div>
             {% endblock %}
 
-            {% block content_below %}{% endblock %}
+            {% block content_below %}
+              {% with cta = object is defined and object.call_to_action or pages.current.content.call_to_action %}
+                {% if cta %}
+                  {{ components.call_to_action(cta) }}
+                {% endif %}
+              {% endwith %}
+            {% endblock %}
           </div>
         {% endblock %}
       </div>

@@ -1,5 +1,4 @@
-{% extends "news/base.html" %}
-{% import "components/macros/components.html" as components %}
+{% extends 'news/base.html' %}
 {% import 'macros/listings.html' as listings %}
 
 {% block schema %}
@@ -53,8 +52,5 @@
     </div>
   </section>
 
-  {% set cta = object is defined and object.call_to_action or pages.current.content.call_to_action %}
-  {% if cta %}
-    {{ components.call_to_action(cta) }}
-  {% endif %}
+  {{ super() }}
 {% endblock %}
