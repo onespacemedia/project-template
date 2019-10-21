@@ -1,9 +1,24 @@
-from cms.apps.pages.models import Page
+from cms.apps.pages.models import ContentBase, Page
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
 from .video import get_video_info
+
+
+class ProjectContentBase(ContentBase):
+    call_to_action = models.ForeignKey(
+        'components.CallToAction',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.page.title
 
 
 class HasLinkMixin(models.Model):

@@ -1,7 +1,6 @@
 import json
 
 from cms import sitemaps
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase, PageBaseManager
 from django.conf import settings
 from django.db import models
@@ -10,10 +9,11 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA
 
 
-class Careers(ContentBase):
+class Careers(ProjectContentBase):
 
     classifier = 'apps'
     icon = 'cms-icons/careers.png'
@@ -25,9 +25,6 @@ class Careers(ContentBase):
         blank=True,
         null=True
     )
-
-    def __str__(self):
-        return self.page.title
 
 
 class CareerQuerySet(models.QuerySet):

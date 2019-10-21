@@ -3,7 +3,7 @@ from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase, PageBase
+from cms.apps.pages.models import PageBase
 from cms.models import HtmlField
 from cms.models.managers import PageBaseManager
 from cms.templatetags.html import truncate_paragraphs
@@ -14,10 +14,11 @@ from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import schema_image, url_from_path
 
 
-class Events(ContentBase):
+class Events(ProjectContentBase):
 
     classifier = 'apps'
     icon = 'cms-icons/events.png'
@@ -36,9 +37,6 @@ class Events(ContentBase):
         blank=True,
         null=True
     )
-
-    def __str__(self):
-        return self.page.title
 
 
 class Category(models.Model):

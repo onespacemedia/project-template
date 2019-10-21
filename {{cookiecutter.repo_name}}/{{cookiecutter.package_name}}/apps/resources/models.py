@@ -2,7 +2,6 @@ from html import unescape
 from os.path import splitext
 
 from cms.apps.media.models import FileRefField, ImageRefField
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase
 from cms.templatetags.html import truncate_paragraphs
 from django.core.exceptions import ValidationError
@@ -12,6 +11,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.functional import cached_property
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import get_related_items
 
 FILE_TYPES = [
@@ -65,7 +65,7 @@ ICON_CHOICES = [
 ]
 
 
-class Resources(ContentBase):
+class Resources(ProjectContentBase):
 
     classifier = 'apps'
 
@@ -84,9 +84,6 @@ class Resources(ContentBase):
         verbose_name='resources per page',
         default=12,
     )
-
-    def __str__(self):
-        return self.page.title
 
 
 class ResourceType(models.Model):

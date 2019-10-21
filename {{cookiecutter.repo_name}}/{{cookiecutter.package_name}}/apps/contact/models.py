@@ -1,23 +1,17 @@
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 from django.db import models
 
+from ...utils.models import ProjectContentBase
 
-class Contact(ContentBase):
+
+class Contact(ProjectContentBase):
 
     # The urlconf used to power this content's views.
     urlconf = '{{cookiecutter.package_name}}.apps.contact.urls'
 
     icon = 'cms-icons/form.png'
-
-    call_to_action = models.ForeignKey(
-        'components.CallToAction',
-        blank=True,
-        null=True,
-        on_delete=models.PROTECT,
-    )
 
     hero_kicker = models.CharField(
         max_length=100,
@@ -66,9 +60,6 @@ class Contact(ContentBase):
             'fields': ['success_page_title', 'success_page_content'],
         }],
     ]
-
-    def __str__(self):
-        return self.page.title
 
     def clean(self):
         for email in self.email_addresses:

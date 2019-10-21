@@ -1,7 +1,6 @@
 from __future__ import print_function
 
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -11,6 +10,7 @@ from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
+from ...utils.models import ProjectContentBase
 from ...utils.models import HasLinkMixin, VideoMixin
 {% if cookiecutter.news == 'yes' %}from ..news.models import Article{% endif %}
 
@@ -326,9 +326,6 @@ class ContentSection(SectionBase):
         return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
 
 
-class Content(ContentBase):
+class Content(ProjectContentBase):
 
     icon = 'cms-icons/sections.png'
-
-    def __str__(self):
-        return self.page.title

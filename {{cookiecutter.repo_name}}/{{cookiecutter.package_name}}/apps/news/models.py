@@ -4,7 +4,7 @@ from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase, Page
+from cms.apps.pages.models import Page
 from cms.models import HtmlField, OnlineBaseManager, PageBase
 from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES
 from cms.templatetags.html import truncate_paragraphs
@@ -20,11 +20,12 @@ from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import (ORGANISATION_SCHEMA, get_related_items,
                             schema_image, url_from_path)
 
 
-class NewsFeed(ContentBase):
+class NewsFeed(ProjectContentBase):
 
     """A stream of news articles."""
     classifier = 'apps'
@@ -56,16 +57,6 @@ class NewsFeed(ContentBase):
         verbose_name='Articles per page',
         default=12,
     )
-
-    call_to_action = models.ForeignKey(
-        'components.CallToAction',
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-    )
-
-    def __str__(self):
-        return self.page.title
 
 
 def get_default_news_page():

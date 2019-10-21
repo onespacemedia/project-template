@@ -1,17 +1,17 @@
 import json
 
 from cms import sitemaps
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, PageBase
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 from historylinks import shortcuts as historylinks
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA
 
 
-class Faqs(ContentBase):
+class Faqs(ProjectContentBase):
 
     classifier = 'apps'
     icon = 'cms-icons/faqs.png'
@@ -27,9 +27,6 @@ class Faqs(ContentBase):
     class Meta:
         verbose_name = 'FAQs'
         verbose_name_plural = 'FAQs'
-
-    def __str__(self):
-        return self.page.title
 
 
 class Category(models.Model):

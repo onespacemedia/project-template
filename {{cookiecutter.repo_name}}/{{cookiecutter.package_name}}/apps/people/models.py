@@ -2,7 +2,6 @@ import json
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import ContentBase
 from cms.models import HtmlField, SearchMetaBase
 from django.db import models
 from django.template.loader import render_to_string
@@ -10,6 +9,7 @@ from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from historylinks import shortcuts as historylinks
 
+from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA, schema_image, url_from_path
 
 
@@ -27,7 +27,7 @@ class Team(models.Model):
         return self.title
 
 
-class People(ContentBase):
+class People(ProjectContentBase):
 
     classifier = 'apps'
     icon = 'cms-icons/people.png'
@@ -39,9 +39,6 @@ class People(ContentBase):
         blank=True,
         null=True,
     )
-
-    def __str__(self):
-        return self.page.title
 
 
 class Person(SearchMetaBase):
