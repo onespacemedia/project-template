@@ -13,6 +13,7 @@ from django.template.defaultfilters import stringfilter
 from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
+from django_lazy_image.templatetags.lazy_image import lazy_image
 
 from ..models import Footer, Header
 
@@ -287,3 +288,19 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
         'paginator': page_obj.paginator,
         'pagination_key': pagination_key or getattr(page_obj, '_pagination_key', 'page')
     }
+
+
+@library.global_function
+@library.render_with('django_lazy_image/lazy-image.html')
+def render_lazy_image(image, height=None, width=None, blur=True, max_width=1920, crop=None, show_small_image=True,
+                      quality=settings.LAZY_IMAGE_DEFAULT_QUALITY_OPTIONS, webp=settings.LAZY_IMAGE_ENABLE_WEBP,
+                      responsive_sizes=None):
+    """
+    Usage: render_lazy_image(path.to.image)
+    """
+    # If the image has a focal point set and no crop is set, add the crop
+    if (image.focal_x and image.focal_y) and not crop:
+        focal_x = round(float(image.focal_x))
+        focal_y = round(float(image.focal_y))
+        crop = '{}% {}%'.format(focal_x, focal_y)
+    return lazy_image(image, height, width, blur, max_width, crop, show_small_image, quality, webp, responsive_sizes)
