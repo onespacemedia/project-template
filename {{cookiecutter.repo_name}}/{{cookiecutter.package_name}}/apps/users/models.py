@@ -72,10 +72,12 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(
         max_length=100,
+        null=True,
     )
 
     last_name = models.CharField(
         max_length=100,
+        null=True,
     )
 
     is_staff = models.BooleanField(
@@ -95,6 +97,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(
         auto_now_add=True,
     )
+
+    class Meta:
+        ordering = ['email']
+
+    def __str__(self):
+        return self.email
 
     def get_full_name(self):
         """

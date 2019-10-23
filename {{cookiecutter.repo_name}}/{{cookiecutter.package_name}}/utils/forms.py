@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from ..apps.users.models import User
 
 
-class UserEmailUniqueFormMixin(object):
+class UserEmailUniqueFormMixin:
     '''
     A mixin for ModelForm derivatives for the User model that want to
     enforce no two users having the same *case-insensitive* email address

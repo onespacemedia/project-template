@@ -9,12 +9,10 @@ from .models import User
 
 class UserCreationAdminForm(UserEmailUniqueFormMixin, UserCreationForm):
     '''Like UserCreationForm, but forces case-insensitivity on emails.'''
-    pass
 
 
 class UserAdminForm(UserEmailUniqueFormMixin, UserChangeForm):
     '''Like UserChangeForm, but forces case-insensitivity on emails.'''
-    pass
 
 
 @admin.register(User)
@@ -44,7 +42,7 @@ class UserAdmin(BaseUserAdmin, VersionAdmin):
         }),
     )
 
-    list_display = ['get_first_name', 'get_last_name', 'email', 'is_active', 'is_staff']
+    list_display = ['email', 'get_first_name', 'get_last_name', 'is_active', 'is_staff']
     ordering = ['last_name', 'first_name', 'email']
     readonly_fields = ['date_joined']
 
