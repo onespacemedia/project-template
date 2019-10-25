@@ -219,35 +219,32 @@ class SectionBase(HasLinkMixin, VideoMixin):
         ordering = ['order']
 
     def __str__(self):
-        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+        return self.get_type_display()
 
     def clean(self):
         sections = get_section_types_flat()
+        required = [getattr(self, field) for field in self.definition.get('required', [])]
 
-        for section in sections:
-            if self.type == section['slug']:
-                required = [getattr(self, field)
-                            for field in section['required']]
-                if not all(required):
-                    fields_str = ''
-                    fields_len = len(section['required'])
-                    fields = {}
+        if not all(required):
+            fields_str = ''
+            fields_len = len(section['required'])
+            fields = {}
 
-                    for index, field in enumerate(section['required']):
-                        fields[field] = ValidationError(f'Please provide an {field}', code='required')
-                        connector = ', '
+            for index, field in enumerate(section['required']):
+                fields[field] = ValidationError(f'Please provide an {field}', code='required')
+                connector = ', '
 
-                        if index == fields_len - 2:
-                            connector = ' and '
-                        elif index == fields_len - 1:
-                            connector = ''
+                if index == fields_len - 2:
+                    connector = ' and '
+                elif index == fields_len - 1:
+                    connector = ''
 
-                        anchor = f'id_{self._meta.model_name}_set-{self.order}-{field}'
-                        fields_str += f'<a href="#{anchor}">{field.title()}</a>{connector}'
+                anchor = f'id_{self._meta.model_name}_set-{self.order}-{field}'
+                fields_str += f'<a href="#{anchor}">{field.title()}</a>{connector}'
 
-                    fields['__all__'] = ValidationError(mark_safe(f'{fields_str} fields are required'), code='error')
+            fields['__all__'] = ValidationError(mark_safe(f'{fields_str} fields are required'), code='error')
 
-                    raise ValidationError(fields)
+            raise ValidationError(fields)
 
         if self.link_text and (not self.link_page and not self.link_url):
             raise ValidationError({
@@ -260,6 +257,21 @@ class SectionBase(HasLinkMixin, VideoMixin):
     def cache_key(self):
         return f'{self._meta.app_label}.{self._meta.model_name}.{self.pk}'
 
+    @cached_property
+    def definition(self):
+        # Let's look for the options for our section type.
+        for section_group in SECTION_TYPES:
+            for section_type in section_group[1]['sections']:
+                section_label = slugify('{}-{}'.format(section_group[0], section_type[0]))
+
+                if section_label == self.type:
+                    return section_type[1]
+
+        return {
+            'fields': [],
+            'required': [],
+        }
+
     @property
     def template(self):
         folder_name = self.type.split('-')[0]
@@ -271,35 +283,28 @@ class SectionBase(HasLinkMixin, VideoMixin):
         }
 
     def get_searchable_text(self):
-        """Returns a blob of text suitable for searching."""
+        '''
+        Returns a blob of text suitable for searching. It will search all
+        fields in its definition's 'search'. If that field is a ForeignKey,
+        and the referenced object implements a get_searchable_text method,
+        it will include the result of calling that method too.
+        '''
 
-        # Let's look for the options for our section type.
-        for section_group in SECTION_TYPES:
-            for section_type in section_group[1]['sections']:
-                section_label = slugify(f'{section_group[0]}-{section_type[0]}')
+        search_fields = self.definition.get('search', [])
 
-                if not section_label == self.type:
-                    continue
+        search_text_items = []
 
-                # If we defeated the above clause then we have the options
-                # for the right section type.
-                section_options = section_type[1]
+        for field in search_fields:
+            search_item = getattr(self, field)
 
-                # Don't require that search_fields is set.
-                if 'search' not in section_options:
-                    continue
+            if isinstance(search_item, models.Model):
+                if hasattr(search_item, 'get_searchable_text'):
+                    search_text_items.append(search_item.get_searchable_text())
 
-                search_fields = section_options['search']
+            elif search_item:
+                search_text_items.append(strip_tags(str(search_item)))
 
-                search_text_items = []
-                for field in search_fields:
-                    search_item = getattr(self, field)
-                    if search_item:
-                        search_text_items.append(strip_tags(search_item))
-
-                return '\n'.join(search_text_items)
-
-        return ''
+        return ' '.join(search_text_items)
 {% if cookiecutter.news == 'yes' %}
     def get_latest_news(self):
         return Article.objects.filter(
@@ -322,9 +327,30 @@ class ContentSection(SectionBase):
     )
 
     def __str__(self):
-        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+        return self.get_type_display()
 
 
-class Content(ProjectContentBase):
+class SectionedContentBase(ContentBase):
+    '''
+    A helper ContentBase derivative that ensures that the page's sectioned
+    content is indexed by Watson.
+    '''
+
+    sections_attribute = 'contentsection_set'
+
+    class Meta:
+        abstract = True
+
+    def get_searchable_text(self):
+        text = super().get_searchable_text()
+        sections = getattr(self.page, self.sections_attribute).all()
+
+        for section in sections:
+            text = text + ' ' + section.get_searchable_text()
+
+        return text
+
+
+class Content(SectionedContentBase, ProjectContentBase):
 
     icon = 'cms-icons/sections.png'
