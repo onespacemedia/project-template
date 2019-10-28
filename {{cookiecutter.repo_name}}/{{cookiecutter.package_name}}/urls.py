@@ -13,6 +13,8 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.shortcuts import render
 from django.views import generic
 
+from .apps.users import auth_views as reset_views
+
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
 from .utils.views import FrontendView
 
@@ -25,6 +27,13 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include('social_django.urls', namespace='social')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
+    url(r'^admin/reset-password/$', reset_views.PasswordResetView.as_view(), name='password_reset'),
+    url(r'^admin/reset-password/sent/$', reset_views.PasswordResetSentView.as_view(), name='password_reset_sent'),
+    url(
+        r'^admin/reset-password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        reset_views.PasswordResetConfirmView.as_view(),
+        name='password_reset_confirm'
+    ),
 
     # Site URLs
     url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),

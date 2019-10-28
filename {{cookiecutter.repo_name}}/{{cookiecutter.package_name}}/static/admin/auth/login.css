@@ -1,0 +1,319 @@
+/*
+|--------------------------------------------------------------------------
+| Authentication
+|--------------------------------------------------------------------------
+| @namespace: ath-
+|
+*/
+* {
+  box-sizing: border-box;
+}
+
+.ath-Container {
+  display: flex;
+
+  height: 100vh;
+
+  background-color: #e9e5e5;
+}
+
+.ath-Container::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-image: url('/static/img/login-background.jpg');
+  background-size: cover;
+}
+
+.ath-Inner {
+  z-index: 1;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  display: flex;
+  max-width: calc(1100px + (20px * 2));
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.ath-Wrapper {
+  max-width: 520px;
+  width: 100%;
+}
+
+.ath-Wrapper-wide {
+  max-width: 700px;
+  width: 100%;
+}
+
+.ath-Form {
+  width: 100%;
+
+  padding: 40px 35px;
+
+  background-color: #fff;
+
+  box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.19);
+}
+
+.ath-Logo {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto;
+
+  background-image: url('/static/svg/osm-logo.svg');
+}
+
+.ath-Form_Heading {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  line-height: 18px;
+  text-transform: uppercase;
+
+  color: #000;
+}
+
+.ath-Form_Message {
+  margin-top: 0;
+  margin-bottom: 18px;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+
+  color: #000;
+}
+
+.ath-Above {
+  margin: 28px 0 56px;
+}
+
+.ath-Form_Content {
+  display: flex;
+}
+
+.ath-Form_InlineAction {
+  display: block;
+  padding: 0;
+
+  font: inherit;
+  text-decoration: underline;
+
+  border: 0;
+  background-color: none;
+  cursor: pointer;
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  transition: color 0.2s;
+}
+.ath-Form_InlineAction:hover {
+  color: #42cf77;
+}
+
+.ath-Below {
+  display: flex;
+  width: 100%;
+  margin: 24px 0 28px;
+}
+
+.ath-Link {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  line-height: 18px;
+  text-transform: uppercase;
+
+  color: hsla(0, 0%, 100%, 0.25);
+
+  transition: color 0.3s;
+}
+.ath-Link:hover {
+  font-weight: 700;
+
+  color: hsla(0, 0%, 100%, 0.4);
+}
+
+.ath-Link_Password {
+  margin-left: auto;
+}
+
+.ath-Form_QRContainer {
+  display: flex;
+}
+
+.ath-Form_QRCode {
+  margin: 0 auto;
+}
+
+.ath-Form_Text-aside {
+  padding-right: 20px;
+}
+
+.helptext {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* sm breakpoint */
+@media (min-width: 768px) {
+  .ath-Message_Button {
+    min-width: 265px;
+    width: auto;
+  }
+
+  .ath-Form {
+    padding: 75px 95px 70px;
+  }
+
+  .ath-Inner {
+    padding-right: calc(20px * 2);
+    padding-left: calc(20px * 2);
+  }
+
+  .frm-Actions {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Forms
+|--------------------------------------------------------------------------
+| @namespace: frm-
+|
+*/
+.frm-Form p {
+  flex-direction: column;
+
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.frm-Form p label {
+  margin-bottom: 12px;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  line-height: 15px;
+  text-transform: uppercase;
+
+  color: #000;
+}
+
+.frm-Form input {
+  height: 50px;
+  padding: 0 16px;
+
+  border: 1px solid #DCDCDC;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+}
+
+.frm-Error {
+  font-size: 14px;
+  line-height: 18px;
+  color: #cf011c;
+}
+
+.frm-Item_Extra {
+  margin-top: 5px;
+}
+
+.frm-Actions {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  display: flex;
+  margin-top: 36px;
+  margin-right: -12px;
+  margin-left: -12px;
+
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.frm-Actions .frm-Action {
+  display: block;
+  width: 100%;
+  padding: 10px calc(15px * 2);
+  margin-right: 12px;
+  margin-left: 12px;
+
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  line-height: 17px;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+
+  background-color: #000;
+  border: 2px solid #000;
+  color: #fff;
+  cursor: pointer;
+
+  transition: background-color 0.3s, border 0.3s, color 0.3s;
+}
+.frm-Action:hover {
+  background: transparent;
+  border: 2px solid #161616;
+  color: #161616;
+}
+
+.frm-Actions .frm-Action-disabled {
+  background-color: #aaa;
+  border-color: #aaa;
+}
+.frm-Actions .frm-Action-disabled:hover {
+  background-color: #aaa;
+  border-color: #aaa;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.frm-Actions .frm-Action-cancel {
+  order: 1;
+
+  background-color: #cf011c;
+  border-color: #cf011c;
+}
+.frm-Actions .frm-Action-cancel:hover {
+  background-color: #cf011c;
+  border-color: #cf011c;
+  color: #fff;
+}
+
+.frm-Form_SecretButton .frm-Form_VisuallyHidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  visibility: hidden;
+}
+
+::-webkit-clear-button {
+  display: none;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}

@@ -116,7 +116,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/|django/forms/|auth/|captcha/).*',
+            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/|django/forms/|auth/|captcha/|users/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
