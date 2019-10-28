@@ -26,6 +26,9 @@ class Careers(ProjectContentBase):
         null=True
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class CareerQuerySet(models.QuerySet):
     def select_open(self):

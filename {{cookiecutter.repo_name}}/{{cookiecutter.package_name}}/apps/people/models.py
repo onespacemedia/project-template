@@ -40,6 +40,9 @@ class People(ProjectContentBase):
         null=True,
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class Person(SearchMetaBase):
 

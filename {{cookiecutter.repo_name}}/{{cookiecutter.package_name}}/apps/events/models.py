@@ -38,6 +38,9 @@ class Events(ProjectContentBase):
         null=True
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class Category(models.Model):
     title = models.CharField(
