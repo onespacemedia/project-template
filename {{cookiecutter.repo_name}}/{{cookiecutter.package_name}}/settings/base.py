@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.forms',
 
     'sorl.thumbnail',{% if cookiecutter.contact == 'yes' %}
     'captcha',{% endif %}
@@ -115,7 +116,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|reversion/|registration/|jet.dashboard/|adminsortable2/|sitemap\.xml|debug_toolbar/|django/forms/|auth/|captcha/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [

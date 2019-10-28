@@ -85,6 +85,9 @@ class Resources(ProjectContentBase):
         default=12,
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 class ResourceType(models.Model):
     title = models.CharField(

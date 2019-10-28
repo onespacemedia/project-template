@@ -61,6 +61,9 @@ class Contact(ProjectContentBase):
         }],
     ]
 
+    def __str__(self):
+        return self.page.title
+
     def clean(self):
         for email in self.email_addresses:
             if not validate_email(email):

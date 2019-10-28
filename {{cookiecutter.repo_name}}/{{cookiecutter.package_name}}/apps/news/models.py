@@ -58,6 +58,9 @@ class NewsFeed(ProjectContentBase):
         default=12,
     )
 
+    def __str__(self):
+        return self.page.title
+
 
 def get_default_news_page():
     """Returns the default news page."""
