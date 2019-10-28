@@ -222,16 +222,15 @@ class SectionBase(HasLinkMixin, VideoMixin):
         return self.get_type_display()
 
     def clean(self):
-        sections = get_section_types_flat()
         required = [getattr(self, field) for field in self.definition.get('required', [])]
 
         if not all(required):
             fields_str = ''
-            fields_len = len(section['required'])
+            fields_len = len(required)
             fields = {}
 
-            for index, field in enumerate(section['required']):
-                fields[field] = ValidationError(f'Please provide an {field}', code='required')
+            for index, field in enumerate(self.definition.get('required', [])):
+                fields[field] = ValidationError(f'This field is required for this section type', code='required')
                 connector = ', '
 
                 if index == fields_len - 2:
