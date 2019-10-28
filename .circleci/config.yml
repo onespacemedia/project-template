@@ -40,7 +40,7 @@ jobs:
           name: Install project dependencies
           command: |
             cd demo/ && . .venv/bin/activate
-            pip install --upgrade pytest pytest-cov pytest-django
+            pip install pytest==5.2.1 pytest-cov==2.8.1 pytest-django==3.5.1
 
       - run:
           name: Test project

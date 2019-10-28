@@ -28,6 +28,9 @@ class Faqs(ProjectContentBase):
         verbose_name = 'FAQs'
         verbose_name_plural = 'FAQs'
 
+    def __str__(self):
+        return self.page.title
+
 
 class Category(models.Model):
 

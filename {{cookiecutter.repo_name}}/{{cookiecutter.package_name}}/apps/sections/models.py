@@ -353,3 +353,6 @@ class SectionedContentBase(ProjectContentBase):
 class Content(SectionedContentBase):
 
     icon = 'cms-icons/sections.png'
+
+    def __str__(self):
+        return self.page.title

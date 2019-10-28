@@ -47,4 +47,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Remove pre loading class, used for fixing some filer/animation issues on load
   removePreloadClass()
+
+  if (document.querySelector('.g-recaptcha')) {
+    const rcScript = document.createElement('script')
+    rcScript.setAttribute(
+      'src',
+      'https://www.google.com/recaptcha/api.js?hl=en'
+    )
+    window.addEventListener('DOMContentLoaded', function () {
+      document.body.appendChild(rcScript)
+    })
+  }
 })
