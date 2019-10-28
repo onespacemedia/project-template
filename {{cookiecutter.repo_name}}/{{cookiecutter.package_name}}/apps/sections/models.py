@@ -329,7 +329,7 @@ class ContentSection(SectionBase):
         return self.get_type_display()
 
 
-class SectionedContentBase(ContentBase):
+class SectionedContentBase(ProjectContentBase):
     '''
     A helper ContentBase derivative that ensures that the page's sectioned
     content is indexed by Watson.
@@ -350,6 +350,6 @@ class SectionedContentBase(ContentBase):
         return text
 
 
-class Content(SectionedContentBase, ProjectContentBase):
+class Content(SectionedContentBase):
 
     icon = 'cms-icons/sections.png'
