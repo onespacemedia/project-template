@@ -28,7 +28,9 @@ urlpatterns = [
     url(r'^admin/', include('social_django.urls', namespace='social')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
     url(r'^admin/reset-password/$', reset_views.PasswordResetView.as_view(), name='password_reset'),
-    url(r'^admin/reset-password/sent/$', reset_views.PasswordResetSentView.as_view(), name='password_reset_sent'),
+    url(r'^admin/reset-password/sent/$', reset_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    url(r'^admin/reset-password/complete/$', reset_views.PasswordResetCompleteView.as_view(),
+        name='password_reset_complete'),
     url(
         r'^admin/reset-password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         reset_views.PasswordResetConfirmView.as_view(),
