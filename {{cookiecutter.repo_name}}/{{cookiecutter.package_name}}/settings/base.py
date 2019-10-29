@@ -37,6 +37,7 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = '/admin/'
 
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
