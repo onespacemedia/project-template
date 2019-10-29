@@ -1,6 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.forms import (PasswordResetForm as BasePasswordResetForm,
-                                       SetPasswordForm as BaseSetPasswordForm)
+from django.contrib.auth.forms import PasswordResetForm, SetPasswordForm
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -8,10 +7,10 @@ from django.urls import reverse
 from ...utils.utils import url_from_path
 
 
-class PasswordResetForm(BasePasswordResetForm):
+class ProjectPasswordResetForm(PasswordResetForm):
 
     def __init__(self, *args, **kwargs):
-        super(PasswordResetForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['email'].widget.attrs['class'] = 'frm-Form_Input'
         self.fields['email'].widget.attrs['placeholder'] = self.fields['email'].label
@@ -45,9 +44,9 @@ class PasswordResetForm(BasePasswordResetForm):
                 raise
 
 
-class SetPasswordForm(BaseSetPasswordForm):
+class ProjectSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
-        super(SetPasswordForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.fields['new_password1'].help_text = "Your password must be at least 8 characters long and cannot be entirely numeric"
         self.fields['new_password2'].help_text = "Enter the same password for verification."
