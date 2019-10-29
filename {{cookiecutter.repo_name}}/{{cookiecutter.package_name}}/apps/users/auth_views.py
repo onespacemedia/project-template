@@ -28,4 +28,3 @@ class ProjectPasswordResetConfirmView(PasswordResetConfirmView):
 
 class ProjectPasswordResetCompleteView(PasswordResetCompleteView):
     template_name = 'users/reset/password_reset_complete.html'
-
