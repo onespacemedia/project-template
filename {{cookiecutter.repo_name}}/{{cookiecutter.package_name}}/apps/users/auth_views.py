@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.views import (PasswordResetView, PasswordResetCompleteView,
                                        PasswordResetConfirmView, PasswordResetDoneView)
 
@@ -8,6 +9,11 @@ class ProjectPasswordResetView(PasswordResetView):
     form_class = ProjectPasswordResetForm
 
     template_name = 'users/reset/password_reset_form.html'
+    html_email_template_name = 'emails/password-reset.html'
+    email_template_name = 'emails/password-reset.txt'
+    extra_email_context = {
+        'settings': settings
+    }
 
 
 class ProjectPasswordResetDoneView(PasswordResetDoneView):
