@@ -1,6 +1,8 @@
 from django.conf import settings
-from django.contrib.auth.views import (PasswordResetView, PasswordResetCompleteView,
-                                       PasswordResetConfirmView, PasswordResetDoneView)
+from django.contrib.auth.views import (PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
 
 from .forms import ProjectPasswordResetForm, ProjectSetPasswordForm
 
