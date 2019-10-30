@@ -14,7 +14,6 @@ from django.shortcuts import render
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
-from .apps.users import auth_views as reset_views
 from .utils.views import FrontendView
 
 admin.autodiscover()
@@ -25,16 +24,8 @@ urlpatterns = [
     # Admin URLs.
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include('social_django.urls', namespace='social')),
+    url(r'^admin/', include('{{ cookiecutter.package_name }}.apps.users.urls')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
-    url(r'^admin/reset-password/$', reset_views.ProjectPasswordResetView.as_view(), name='password_reset'),
-    url(r'^admin/reset-password/sent/$', reset_views.ProjectPasswordResetDoneView.as_view(), name='password_reset_done'),
-    url(r'^admin/reset-password/complete/$', reset_views.ProjectPasswordResetCompleteView.as_view(),
-        name='password_reset_complete'),
-    url(
-        r'^admin/reset-password/reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        reset_views.ProjectPasswordResetConfirmView.as_view(),
-        name='password_reset_confirm'
-    ),
 
     # Site URLs
     url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),
