@@ -11,8 +11,8 @@ class ProjectPasswordResetView(PasswordResetView):
     form_class = ProjectPasswordResetForm
 
     template_name = 'users/reset/password_reset_form.html'
-    html_email_template_name = 'emails/password-reset.html'
-    email_template_name = 'emails/password-reset.txt'
+    html_email_template_name = 'emails/password_reset.html'
+    email_template_name = 'emails/password_reset.txt'
     extra_email_context = {
         'settings': settings
     }
