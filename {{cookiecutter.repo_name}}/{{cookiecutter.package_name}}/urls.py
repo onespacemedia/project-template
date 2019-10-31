@@ -24,6 +24,7 @@ urlpatterns = [
     # Admin URLs.
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/', include('social_django.urls', namespace='social')),
+    url(r'^admin/', include('{{ cookiecutter.package_name }}.apps.users.urls')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
 
     # Site URLs
