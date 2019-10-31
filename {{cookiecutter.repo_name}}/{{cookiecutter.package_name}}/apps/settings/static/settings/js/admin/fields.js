@@ -1,5 +1,7 @@
 window.jQuery(function () {
-  setInterval(hide_inline_section_fields, 100)
+  hide_inline_section_fields()
+
+  window.jQuery(document).on("change", "#id_type", hide_inline_section_fields);
 });
 
 function hide_inline_section_fields () {
