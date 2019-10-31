@@ -32,7 +32,13 @@ var cssTask = function () {
 var cssProductionTask = function () {
   return gulp.src(path.join(config.root.dest, config.tasks.css.dest,  '/*.' + config.tasks.css.extensions))
     .pipe(postcss([require('cssnano')({
-      mergeRules: false
+      mergeRules: false,
+      /*
+      `z-index` rewriting needs to be disabled because we have multiple
+      stylesheets. For example, the z-index in the edit bar (10) gets
+      rewritten to 1, because 10 is the only value used in the admin-only CSS.
+      */
+      zindex: false
     })]))
     .pipe(gulp.dest(paths.dest))
 }
