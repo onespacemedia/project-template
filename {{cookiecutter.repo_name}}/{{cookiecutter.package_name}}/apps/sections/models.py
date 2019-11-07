@@ -258,7 +258,9 @@ class SectionBase(HasLinkMixin, VideoMixin):
 
     @cached_property
     def definition(self):
-        # Let's look for the options for our section type.
+        '''
+        Returns the definition in SECTION_TYPES for this section instance.
+        '''
         for section_group in SECTION_TYPES:
             for section_type in section_group[1]['sections']:
                 section_label = slugify('{}-{}'.format(section_group[0], section_type[0]))
