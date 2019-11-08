@@ -125,6 +125,11 @@
   transform: translateX(50%);
   transition: opacity 0.3s, visibility 0.3s;
 
+  /* Fixes an issue in Safari 13 where font would look fuzzy/blurry */
+  /* Webkit prefix included because autoprefixer isn't adding it automatically */
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: subpixel-antialiased;
+
   .nav-IsOpen & {
     transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
