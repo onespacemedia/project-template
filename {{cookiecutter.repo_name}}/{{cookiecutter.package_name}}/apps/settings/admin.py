@@ -9,13 +9,13 @@ class SettingAdmin(admin.ModelAdmin):
 
     list_display = ['name', 'key']
 
-    def get_form(self, request, obj=None, **kwargs):
+    def get_form(self, request, obj=None, change=False, **kwargs):
         if getattr(settings, 'SETTINGS_ADMINS', None) is not None:
             if obj and request.user.username not in settings.SETTINGS_ADMINS:
                 self.exclude = ['name', 'key']
                 self.prepopulated_fields = {}
 
-        form = super(SettingAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj=obj, change=change, **kwargs)
 
         if obj:
             form.base_fields['type'].help_text = 'Changing the type of an existing setting can cause things to break. Be careful!'

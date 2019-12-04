@@ -75,14 +75,14 @@ class RedirectAdmin(admin.ModelAdmin):
 
         return ('old_path', 'new_path', 'type', 'test_redirect')
 
-    def get_form(self, request, obj=None, **kwargs):
+    def get_form(self, request, obj=None, change=False, **kwargs):
         kwargs["form"] = RedirectModelForm
 
         if not getattr(settings, 'REDIRECTS_ENABLE_REGEX', False):
             kwargs.update({
                 'exclude': ['regular_expression', 'test_path']
             })
-        form = super().get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj=obj, change=change, **kwargs)
         return form
 
     def test_redirect(self, obj):
