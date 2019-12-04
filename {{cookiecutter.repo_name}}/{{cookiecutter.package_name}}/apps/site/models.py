@@ -70,6 +70,7 @@ class Footer(models.Model):
         'components.LinkSet',
         blank=True,
         null=True,
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):

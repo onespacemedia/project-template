@@ -116,7 +116,8 @@ class ResourceType(models.Model):
 
 class Resource(PageBase):
     page = models.ForeignKey(
-        'resources.Resources'
+        'resources.Resources',
+        on_delete=models.PROTECT,
     )
 
     summary = models.TextField(
