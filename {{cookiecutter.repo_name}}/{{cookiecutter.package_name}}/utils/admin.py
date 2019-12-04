@@ -1,7 +1,7 @@
 from cms.apps.pages.models import ContentBase
 from django.contrib import admin
-from django.core.urlresolvers import NoReverseMatch, reverse
 from django.db.models import Q
+from django.urls import NoReverseMatch, reverse
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail

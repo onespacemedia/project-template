@@ -4,7 +4,7 @@ from cms.admin import OnlineBaseAdmin, PageBaseAdmin
 from cms.plugins.moderation.models import APPROVED, STATUS_CHOICES
 from django.conf import settings
 from django.contrib import admin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import escape, mark_safe
 from reversion.admin import VersionAdmin
 from reversion.models import Version
