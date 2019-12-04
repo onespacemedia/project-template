@@ -22,13 +22,13 @@ admin.autodiscover()
 urlpatterns = [
 
     # Admin URLs.
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^admin/', include('social_django.urls', namespace='social')),
     url(r'^admin/', include('{{ cookiecutter.package_name }}.apps.users.urls')),
     {% if cookiecutter.sections == 'no' %}# {% endif %}url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
 
     # Site URLs
-    url(r'^assets/', include('django_lazy_image.urls', namespace='assets')),
+    url(r'^assets/', include(('django_lazy_image.urls', 'django_lazy_image'), namespace='assets')),
 
     # Jet URLs
     url(r'^jet/', include('jet.urls', 'jet')),
