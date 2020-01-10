@@ -13,6 +13,7 @@ from django.template.defaultfilters import stringfilter
 from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
+from sorl.thumbnail import get_thumbnail
 
 from ..models import Footer, Header
 
@@ -286,4 +287,28 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
         'page_numbers_adjusted': page_numbers_adjusted,
         'paginator': page_obj.paginator,
         'pagination_key': pagination_key or getattr(page_obj, '_pagination_key', 'page')
+    }
+
+
+@library.global_function
+@library.render_with('_image_sourceset.html')
+def render_2x_image(image, width='', height='', **kwargs):
+    dimentions = f'{width}x{height}'
+    width_2x = width * 2 if width else ''
+    height_2x = height * 2 if height else ''
+    dimentions_2x = f'{width_2x}x{height_2x}'
+
+    image_url = get_thumbnail(image.file, dimentions, quality=100, **kwargs).url
+
+    image_url_2x = get_thumbnail(image.file, dimentions_2x, quality=100, **kwargs).url
+
+    webp_url = get_thumbnail(image.file, dimentions, quality=100, format='WEBP', **kwargs).url
+
+    webp_url_2x = get_thumbnail(image.file, dimentions_2x, quality=100, format='WEBP', **kwargs).url
+
+    return {
+        'image': image_url,
+        'image_2x': image_url_2x,
+        'webp': webp_url,
+        'webp_2x': webp_url_2x,
     }
