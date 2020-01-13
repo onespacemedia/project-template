@@ -14,6 +14,10 @@
   overflow: hidden;
 }
 
+.img-Image-isTransparent {
+  background-color: transparent;
+}
+
 .img-Image_Media {
   position: absolute;
   top: 0;
