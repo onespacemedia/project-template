@@ -95,7 +95,6 @@ jobs:
           command: |
             . .venv/bin/activate
             python manage.py update --remote=staging --commit=$CIRCLE_SHA1
-            python issue_notify.py staging
 
   deploy_production_site:
     working_directory: ~/{{ cookiecutter.repo_name }}
@@ -125,7 +124,6 @@ jobs:
           command: |
             . .venv/bin/activate
             python manage.py update --remote=production --commit=$CIRCLE_SHA1
-            python issue_notify.py production
 
 workflows:
   version: 2
