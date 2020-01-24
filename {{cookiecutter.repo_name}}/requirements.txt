@@ -6,7 +6,7 @@ CommonMark==0.7.4
 cryptography
 django>=2.2,<2.3
 django-admin-sortable2
-django-cachalot
+django-cacheops==4.2
 django-extensions
 django-historylinks
 django-jet

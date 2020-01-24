@@ -103,7 +103,7 @@ INSTALLED_APPS = [
 
     'server_management',
     'django_extensions',
-    'cachalot',
+    'cacheops',
     'webpack_loader',
 ]
 
