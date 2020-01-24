@@ -24,7 +24,7 @@ class SettingsModelsTestCase(TestCase):
             type='text',
             text='Line\nbreak',
         )
-        self.assertEquals(setting.value, 'Line<br />break')
+        self.assertEquals(setting.value, 'Line<br>break')
         # Ensure it's marked as safe
         self.assertIsInstance(setting.value, SafeString)
 
