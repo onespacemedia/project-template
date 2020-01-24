@@ -1,2 +1,2 @@
 @import 'helpers/index.css';
-@import 'staff/*.css';
+@import-glob 'staff/*.css';

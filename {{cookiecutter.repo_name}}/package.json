@@ -1,122 +1,100 @@
 {
   "name": "{{cookiecutter.repo_name}}",
-  "main": "gulpfile.js",
   "dependencies": {
-    "babel-polyfill": "6.23.0",
-    "es6-promise": "^4.1.0",
-    "intersection-observer": "^0.4.2",
-    "reset-css": "^4.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.1",
-    "babel-core": "6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "7.0.0",
-    "babel-plugin-dynamic-import-webpack": "^1.0.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
-    "babel-preset-latest": "^6.24.1",
-    "browser-sync": "2.18.12",
-    "chroma-js": "^2.0.3",
-    "css-loader": "^0.28.4",
-    "cssnano": "^3.10.0",
-    "del": "3.0.0",
-    "easing-coordinates": "^2.0.2",
-    "eslint": "^4.6.1",
-    "eslint-config-prettier": "^2.4.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-friendly-formatter": "^3.0.0",
-    "eslint-loader": "^1.8.0",
-    "eslint-plugin-compat": "^1.0.3",
-    "eslint-plugin-html": "^3.0.0",
-    "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "5.2.1",
-    "eslint-plugin-prettier": "^2.2.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "extract-text-webpack-plugin": "^2.1.2",
-    "gulp": "3.9.1",
-    "gulp-changed": "3.1.0",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-if": "2.0.2",
-    "gulp-notify": "2.2.0",
-    "gulp-nunjucks-render": "^2.0.0",
-    "gulp-postcss": "^7.0.0",
-    "gulp-sequence": "0.4.6",
-    "gulp-sizereport": "1.2.0",
-    "gulp-sourcemaps": "2.4.0",
-    "gulp-util": "3.0.8",
-    "gulp-watch": "4.3.11",
-    "husky": "^0.13.4",
-    "json-loader": "^0.5.4",
-    "lint-staged": "^3.6.1",
-    "postcss-assets": "^4.1.0",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.6.3",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "es6-promise": "^4.2.8",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.2",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^5.2.3",
+    "file-loader": "^4.2.0",
+    "husky": "^3.0.9",
+    "intersection-observer": "^0.4.2",
+    "lint-staged": "^9.4.2",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss": "^7.0.21",
+    "postcss-assets": "^5.0.0",
     "postcss-color-alpha": "^2.0.0",
-    "postcss-custom-media": "^6.0.0",
-    "postcss-custom-properties": "^5.0.1",
-    "postcss-custom-selectors": "^4.0.1",
-    "postcss-easy-import": "^2.1.0",
-    "postcss-functions": "^2.1.1",
-    "postcss-hexrgba": "^0.2.1",
-    "postcss-lh": "^1.1.4",
-    "postcss-media-minmax": "^3.0.0",
-    "postcss-nested": "^2.0.2",
-    "postcss-property-lookup": "^1.2.1",
+    "postcss-custom-media": "^7.0.8",
+    "postcss-custom-properties": "^9.0.2",
+    "postcss-custom-selectors": "^5.1.2",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-functions": "^3.0.0",
+    "postcss-hexrgba": "^2.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-import-ext-glob": "^1.1.0",
+    "postcss-lh": "^2.0.2",
+    "postcss-loader": "^3.0.0",
+    "postcss-media-minmax": "^4.0.0",
+    "postcss-nested": "^4.1.2",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-property-lookup": "^2.0.0",
     "postcss-pxtorem": "^4.0.1",
-    "postcss-reporter": "4.0.0",
+    "postcss-reporter": "^6.0.1",
     "postcss-round-subpixels": "^1.2.0",
     "postcss-sassy-mixins": "^2.1.0",
-    "postcss-will-change": "^2.0.0",
-    "prettier": "^1.6.1",
-    "prettier-standard": "^6.0.0",
-    "require-dir": "0.3.2",
-    "standard": "^10.0.2",
+    "postcss-will-change": "^3.0.0",
+    "prettier": "^1.18.2",
+    "prettier-standard": "^15.0.1",
+    "reset-css": "^5.0.1",
+    "siema": "^1.5.1",
     "style-loader": "^0.18.2",
-    "stylelint": "^8.1.1",
-    "stylelint-order": "^0.5.0",
-    "vue-hot-reload-api": "^2.1.0",
+    "stylelint": "^11.1.1",
+    "stylelint-order": "^3.1.1",
+    "stylelint-webpack-plugin": "^1.0.3",
     "vue-html-loader": "^1.2.4",
-    "vue-loader": "^12.2.1",
-    "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.3.4",
-    "webpack": "3.0.0",
-    "webpack-bundle-analyzer": "3.3.2",
-    "webpack-bundle-tracker": "0.2.0",
-    "webpack-dev-middleware": "1.10.2",
-    "webpack-hot-middleware": "2.18.0"
+    "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.41.2",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0"
   },
   "scripts": {
     "precommit": "if test -e /usr/local/bin/virtualenvwrapper.sh >/dev/null 2>&1; then export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python && source /usr/local/bin/virtualenvwrapper.sh && workon \"${PWD##*/}\"; else . .venv/bin/activate; fi; lint-staged",
-    "dev": "gulp",
-    "build": "gulp production",
-    "lint:css": "stylelint \"{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css\"",
-    "lint:js": "eslint --ext .js,.vue {{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}",
-    "lint:python": "pylint {{cookiecutter.package_name}}/",
-    "lint:isort": "isort --check-only --diff --quiet"
+    "build": "webpack -p --display-error-details",
+    "dev": "webpack-dev-server --host 0.0.0.0 --watch-content-base",
+    "lint:css": "stylelint \"{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css/**}/*.css\"",
+    "lint:js": "eslint --ext .js,.vue {{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}"
   },
   "lint-staged": {
-    "linters": {
-      "{{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}": [
-        "prettier-standard --print-width 120",
-        "eslint --fix",
-        "git add"
-      ],
-      "*.vue": [
-        "eslint --fix",
-        "git add"
-      ],
-      "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css": [
-        "prettier-standard --print-width 120 --write",
-        "stylelint --fix",
-        "git add"
-      ],
-      "**/!(migrations|tests)/*.py": [
-        "isort",
-        "pylint",
-        "git add"
-      ]
-    }
+    "{{cookiecutter.package_name}}/assets/js/{**/*.js,*.js}": [
+      "prettier-standard --print-width 120",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.vue": [
+      "eslint --fix",
+      "git add"
+    ],
+    "{{cookiecutter.package_name}}/{assets/**,apps/*/assets/css}/*.css": [
+      "prettier-standard --print-width 120",
+      "stylelint --fix",
+      "git add"
+    ],
+    "**/!(migrations|tests)/*.py": [
+      "isort --skip-glob=.venv --skip-glob=node_modules --skip-glob=*/migrations/*",
+      "pylint --load-plugins pylint_django,pylint.extensions.mccabe -d missing-docstring,invalid-name,no-init,too-many-ancestors,no-member,line-too-long,attribute-defined-outside-init,too-few-public-methods,no-self-use,unused-argument,protected-access,locally-disabled,duplicate-code,fixme --reports=n",
+      "git add"
+    ]
   },
   "browserslist": [
     "Android >= 4.4.4",
@@ -127,357 +105,5 @@
     "iOS >= 9.3",
     "Opera >= 43",
     "Safari >= 9.1"
-  ],
-  "babel": {
-    "plugins": [
-      "dynamic-import-webpack",
-      "transform-runtime",
-      "transform-object-rest-spread"
-    ],
-    "presets": [
-      "latest",
-      [
-        "env",
-        {
-          "targets": {
-            "browsers": [
-              "Android >= 4.4.4",
-              "Chrome >= 49",
-              "Edge >= 14",
-              "Firefox >= 52",
-              "ie >= 11",
-              "iOS >= 9.3",
-              "Opera >= 43",
-              "Safari >= 9.1"
-            ]
-          },
-          "useBuiltIns": true
-        }
-      ]
-    ]
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "standard",
-      "prettier"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-      "sourceType": "module"
-    },
-    "plugins": [
-      "compat",
-      "html",
-      "prettier"
-    ],
-    "ecmaFeatures": {
-      "modules": true
-    },
-    "env": {
-      "browser": true,
-      "es6": true
-    },
-    "rules": {
-      "compat/compat": 2,
-      "no-var": [
-        2
-      ],
-      "object-shorthand": [
-        2,
-        "always"
-      ],
-      "prefer-const": [
-        1
-      ],
-      "prefer-template": [
-        2
-      ],
-      "no-console": [
-        1
-      ],
-      "no-unused-vars": [
-        1
-      ]
-    }
-  },
-  "stylelint": {
-    "plugins": [
-      "stylelint-order",
-      "./stylelint_plugins/enforceNamespace/index.js"
-    ],
-    "rules": {
-      "osm/enforce-namespace": true,
-      "order/order": [
-        {
-          "type": "at-rule",
-          "name": "apply"
-        },
-        {
-          "type": "at-rule",
-          "name": "include"
-        },
-        "custom-properties",
-        "declarations",
-        {
-          "type": "at-rule",
-          "name": "media",
-          "hasBlock": true
-        },
-        "rules"
-      ],
-      "order/properties-order": [
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "content",
-            "font-awesome"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "position",
-            "top",
-            "right",
-            "bottom",
-            "left",
-            "z-index"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "align-content",
-            "align-items",
-            "align-self",
-            "flex",
-            "flex-basis",
-            "flex-direction",
-            "flex-flow",
-            "flex-grow",
-            "flex-shrink",
-            "flex-wrap",
-            "justify-content",
-            "order"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "display",
-            "max-width",
-            "max-height",
-            "min-width",
-            "min-height",
-            "width",
-            "height",
-            "clear",
-            "float",
-            "margin",
-            "margin-top",
-            "margin-right",
-            "margin-bottom",
-            "margin-left",
-            "padding",
-            "padding-top",
-            "padding-right",
-            "padding-bottom",
-            "padding-left",
-            "table-layout"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "font-family",
-            "font-size",
-            "font-style",
-            "font-weight",
-            "letter-spacing",
-            "list-style",
-            "list-style-position",
-            "line-height",
-            "text-align",
-            "text-decoration",
-            "text-indent",
-            "text-overflow",
-            "text-rendering",
-            "text-transform"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "appearance",
-            "background",
-            "background-attachment",
-            "background-blend-mode",
-            "background-color",
-            "background-image",
-            "background-position",
-            "background-repeat",
-            "background-size",
-            "border",
-            "border-color",
-            "border-top",
-            "border-right",
-            "border-bottom",
-            "border-left",
-            "border-top-color",
-            "border-right-color",
-            "border-bottom-color",
-            "border-left-color",
-            "border-radius",
-            "border-top-left-radius",
-            "border-top-right-radius",
-            "border-bottom-right-radius",
-            "border-bottom-left-radius",
-            "box-shadow",
-            "clip",
-            "color",
-            "cursor",
-            "fill",
-            "mix-blend-mode",
-            "opacity",
-            "overflow",
-            "overflow-x",
-            "overflow-y",
-            "visibility",
-            "will-change"
-          ]
-        },
-        {
-          "emptyLineBefore": "always",
-          "properties": [
-            "animation",
-            "animation-delay",
-            "animation-direction",
-            "animation-duration",
-            "animation-fill-mode",
-            "animation-iteration-count",
-            "animation-name",
-            "animation-play-state",
-            "animation-timing-function",
-            "transform",
-            "transition"
-          ]
-        }
-      ],
-      "color-hex-case": "lower",
-      "color-hex-length": "short",
-      "color-named": [
-        "never",
-        {
-          "ignore": [
-            "inside-function"
-          ]
-        }
-      ],
-      "font-weight-notation": "numeric",
-      "function-calc-no-unspaced-operator": true,
-      "function-comma-newline-before": "never-multi-line",
-      "function-comma-space-before": "never",
-      "function-linear-gradient-no-nonstandard-direction": true,
-      "function-name-case": "lower",
-      "function-url-quotes": "always",
-      "number-leading-zero": "always",
-      "number-max-precision": 5,
-      "number-no-trailing-zeros": true,
-      "string-no-newline": true,
-      "string-quotes": "single",
-      "length-zero-no-unit": true,
-      "unit-case": "lower",
-      "value-no-vendor-prefix": true,
-      "value-list-comma-space-after": "always-single-line",
-      "value-list-comma-space-before": "never",
-      "value-list-max-empty-lines": 0,
-      "shorthand-property-no-redundant-values": true,
-      "property-case": "lower",
-      "property-no-vendor-prefix": true,
-      "keyframe-declaration-no-important": true,
-      "declaration-bang-space-after": "never",
-      "declaration-bang-space-before": "always",
-      "declaration-colon-space-after": "always",
-      "declaration-colon-space-before": "never",
-      "declaration-no-important": true,
-      "declaration-block-no-duplicate-properties": [
-        true,
-        {
-          "ignore": [
-            "consecutive-duplicates-with-different-values"
-          ]
-        }
-      ],
-      "declaration-block-no-redundant-longhand-properties": true,
-      "declaration-block-no-shorthand-property-overrides": true,
-      "declaration-block-semicolon-newline-after": "always-multi-line",
-      "declaration-block-semicolon-space-before": "never",
-      "declaration-block-single-line-max-declarations": 3,
-      "declaration-block-trailing-semicolon": "always",
-      "block-closing-brace-empty-line-before": "never",
-      "block-closing-brace-newline-after": "always",
-      "block-closing-brace-newline-before": "always-multi-line",
-      "block-no-empty": true,
-      "block-opening-brace-newline-after": "always-multi-line",
-      "block-opening-brace-space-before": "always",
-      "selector-attribute-brackets-space-inside": "never",
-      "selector-attribute-operator-space-after": "never",
-      "selector-attribute-quotes": "always",
-      "selector-class-pattern": "^[a-z]([a-z0-9]){1,3}-[A-Z0-9][a-zA-Z0-9]+(_[A-Z][a-zA-Z0-9]+)?(-[a-z0-9]([a-zA-Z0-9-]+)?([a-z0-9]+)?)?$",
-      "selector-combinator-space-after": "always",
-      "selector-combinator-space-before": "always",
-      "selector-descendant-combinator-no-non-space": true,
-      "selector-max-id": 0,
-      "selector-max-type": [
-        0,
-        {
-          "ignoreTypes": ["svg"]
-        }
-      ],
-      "selector-max-universal": 0,
-      "selector-no-qualifying-type": true,
-      "selector-no-vendor-prefix": true,
-      "selector-pseudo-class-case": "lower",
-      "selector-pseudo-class-parentheses-space-inside": "never",
-      "selector-pseudo-element-case": "lower",
-      "selector-pseudo-element-colon-notation": "double",
-      "selector-type-case": "lower",
-      "selector-max-empty-lines": 0,
-      "selector-list-comma-space-after": "always-single-line",
-      "selector-list-comma-space-before": "never",
-      "media-feature-colon-space-after": "always",
-      "media-feature-colon-space-before": "never",
-      "media-feature-name-case": "lower",
-      "media-feature-name-no-vendor-prefix": true,
-      "media-feature-parentheses-space-inside": "never",
-      "media-feature-range-operator-space-after": "always",
-      "media-feature-range-operator-space-before": "always",
-      "at-rule-name-case": "lower",
-      "at-rule-name-space-after": "always",
-      "at-rule-no-vendor-prefix": true,
-      "comment-no-empty": true,
-      "comment-whitespace-inside": "always",
-      "indentation": 2,
-      "max-empty-lines": 1,
-      "max-nesting-depth": [
-        3,
-        {
-          "ignore": [
-            "blockless-at-rules"
-          ],
-          "ignoreAtRules": ["media"]
-        }
-      ],
-      "no-duplicate-selectors": true,
-      "no-eol-whitespace": true,
-      "no-invalid-double-slash-comments": true,
-      "no-missing-end-of-source-newline": true,
-      "no-unknown-animations": true
-    },
-    "ignoreFiles": [
-      "**/*/static/**/*.css",
-      "**/*/vendor/**/*.css"
-    ]
-  }
+  ]
 }

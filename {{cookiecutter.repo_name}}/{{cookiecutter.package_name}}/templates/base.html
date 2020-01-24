@@ -65,10 +65,12 @@
       {% include 'base/_google-fonts.html' %}
     {% endif %}
 
-    <link rel="stylesheet" href="{{ static('build/css/app.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
+    {% if not settings.IN_CI %}
+      {{ render_bundle('main', 'css') }}
 
-    {% if request.user.is_staff %}
-      <link rel="stylesheet" href="{{ static('build/css/staff.css') }}?last={{ settings.GIT_COMMIT_HASH }}">
+      {% if request.user.is_staff %}
+        {{ render_bundle('staff', 'css') }}
+      {% endif %}
     {% endif %}
 
     {% block css %}{% endblock %}
@@ -174,8 +176,7 @@
     {% endif %}
 
     {% if not settings.IN_CI %}
-      {{ render_bundle('vendor', 'js') }}
-      {{ render_bundle('app', 'js') }}
+      {{ render_bundle('main', 'js') }}
     {% endif %}
   </body>
 </html>

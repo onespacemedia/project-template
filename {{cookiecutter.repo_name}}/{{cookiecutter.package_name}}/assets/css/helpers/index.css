@@ -3,4 +3,5 @@
 @import 'definitions/selector-definitions.css';
 @import 'transitions.css';
 @import 'animations.css';
-@import 'mixins/*.css';
+@import 'mixins/fonts.css';
+@import 'mixins/mixins.css';
