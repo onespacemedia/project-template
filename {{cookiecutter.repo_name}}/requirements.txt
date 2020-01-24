@@ -35,4 +35,4 @@ social-auth-app-django
 sorl-thumbnail
 requests
 Werkzeug
-{% if cookiecutter.geoip == 'yes' %}geoip{% endif %}
+{% if cookiecutter.geoip == 'yes' %}geoip2{% endif %}

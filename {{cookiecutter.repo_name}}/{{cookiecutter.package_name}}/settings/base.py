@@ -248,7 +248,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # |____|\___/\__|\__,_||_||_|/__/\__,_| \__||_|\___/|_||_|
 #
 ###
-{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
+{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip2/'))
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
 USE_I18N = False
