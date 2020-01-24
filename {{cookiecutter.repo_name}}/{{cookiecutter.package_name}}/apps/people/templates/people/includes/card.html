@@ -1,6 +1,6 @@
 <a class="ppl-Card" href="{{ object.get_absolute_url(page=page) }}">
   <div class="ppl-Card_Photo">
-    {% if object.card_image or object.photo %}{{ render_lazy_image(object.card_image or object.photo, width=403, height=209) }}{% endif %}
+    {% if object.card_image or object.photo %}{{ render_osm_lazy_image(object.card_image or object.photo, width=403, height=209) }}{% endif %}
   </div>
   <div class="ppl-Card_Body">
     <h4 class="ppl-Card_Name">
