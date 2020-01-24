@@ -65,4 +65,4 @@ class FAQsTestCase(TestCase):
         view.request = request
         view.kwargs = {'slug': self.faq.slug}
         obj = view.get_object()
-        self.assertEquals(obj, self.faq)
+        self.assertEqual(obj, self.faq)

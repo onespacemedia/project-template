@@ -31,4 +31,4 @@ class EventsAdminTestCase(EventsBaseTestCase):
     def test_eventadmin_get_form(self):
         # Ensure a default page is being set for new objects.
         form = self.admin.get_form(self.request, obj=None)()
-        self.assertEquals(form.base_fields['page'].initial, self.events_page)
+        self.assertEqual(form.base_fields['page'].initial, self.events_page)

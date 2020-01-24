@@ -47,13 +47,13 @@ class EventsModelsTestCase(EventsBaseTestCase):
             start_date=date(2017, 1, 1),
             end_date=date(2017, 1, 1),
         )
-        self.assertEquals(date_test.date, '1 January 2017')
+        self.assertEqual(date_test.date, '1 January 2017')
 
         date_test = Event(
             start_date=date(2017, 1, 1),
             end_date=date(2017, 11, 11),
         )
-        self.assertEquals(date_test.date, '1 January 2017 - 11 November 2017')
+        self.assertEqual(date_test.date, '1 January 2017 - 11 November 2017')
 
     def test_schema_generation(self):
         self.client = Client()

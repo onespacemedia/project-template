@@ -29,7 +29,7 @@ class PeopleAdminFormTestCase(PeopleBaseTestCase):
 
         # Test for empty
         form.cleaned_data['twitter'] = ''
-        self.assertEquals(form.clean_twitter(), '')
+        self.assertEqual(form.clean_twitter(), '')
 
         check_these = [
             'onespacemedia',
@@ -41,7 +41,7 @@ class PeopleAdminFormTestCase(PeopleBaseTestCase):
         ]
         for check_this in check_these:
             form.cleaned_data['twitter'] = check_this
-            self.assertEquals(form.clean_twitter(), 'onespacemedia')
+            self.assertEqual(form.clean_twitter(), 'onespacemedia')
 
         with self.assertRaises(ValidationError):
             form.cleaned_data['twitter'] = 'https://#'
@@ -53,7 +53,7 @@ class PeopleAdminFormTestCase(PeopleBaseTestCase):
 
         # Check empty.
         form.cleaned_data['linkedin'] = ''
-        self.assertEquals(form.clean_linkedin(), '')
+        self.assertEqual(form.clean_linkedin(), '')
 
         # Check username and URL forms.
         check_these = [
@@ -64,9 +64,9 @@ class PeopleAdminFormTestCase(PeopleBaseTestCase):
         ]
         for check_this in check_these:
             form.cleaned_data['linkedin'] = check_this
-            self.assertEquals(form.clean_linkedin(), 'https://www.linkedin.com/in/onespacemedia')
+            self.assertEqual(form.clean_linkedin(), 'https://www.linkedin.com/in/onespacemedia')
 
     def test_form_get_form(self):
         # Ensure a default page is being set for new objects.
         form = self.admin.get_form(self.request, obj=None)()
-        self.assertEquals(form.base_fields['page'].initial, self.person_page)
+        self.assertEqual(form.base_fields['page'].initial, self.person_page)
