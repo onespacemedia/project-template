@@ -20,7 +20,7 @@ html2text==2018.1.9
 isort==4.3.20
 Jinja2
 lxml
-git+https://github.com/onespacemedia/cms@develop
+onespacemedia-cms
 onespacemedia-server-management
 osm-jet
 paramiko==1.17.6
