@@ -71,7 +71,7 @@ fi
 # If GeoIP wasn't enabled, delete the GeoIP folder.
 {% if cookiecutter.geoip == "no" %}
     echo "Removing GeoIP folder";
-    rm -rf {{cookiecutter.package_name}}/geoip/
+    rm -rf {{cookiecutter.package_name}}/geoip2/
 {% endif %}
 
 # Install Python dependencies.
