@@ -423,7 +423,7 @@ WYSIWYG_OPTIONS = {
     'image_advtab': True,
 
     # Custom CSS to style the wysiwyg content area
-    'content_css': '/static/build/css/wysiwyg.css'
+    'content_css': '/static/build/css/wysiwyg.bundle.css'
 }
 
 

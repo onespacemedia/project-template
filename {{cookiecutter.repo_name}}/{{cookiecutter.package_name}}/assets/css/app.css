@@ -24,13 +24,24 @@
 
 /*
 |--------------------------------------------------------------------------
+| Wysiwyg
+|--------------------------------------------------------------------------
+| We manually import this ourselves as we want to be able to wrap it in a
+| class, it can't go in any existing folder as then it get's imported twice
+| because of globbing
+|
+*/
+@import 'wysiwyg/wysiwyg.css';
+
+/*
+|--------------------------------------------------------------------------
 | Base
 |--------------------------------------------------------------------------
 | Styles that will effect most of the pages on the site and aren't specific
 | to any particular part of the site.
 |
 */
-@import 'base/**/*.css';
+@import-glob 'base/**/*.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +52,7 @@
 | the footer
 |
 */
-@import 'globals/**/*.css';
+@import-glob 'globals/**/*.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +62,7 @@
 | aren't global like the header or footer. An example would be a breadcrumb
 |
 */
-@import 'modules/**/*.css';
+@import-glob 'modules/**/*.css';
 
 /*
 |--------------------------------------------------------------------------
@@ -60,46 +71,4 @@
 | Styles specific to a reusable app
 |
 */
-@import '../../apps/**/assets/**/*.css';
-
-/*
-|--------------------------------------------------------------------------
-| Vue components
-|--------------------------------------------------------------------------
-| Styles Vue components
-|
-*/
-@import '../js/**/*.css';
-
-/*
-|--------------------------------------------------------------------------
-| Vendor
-|--------------------------------------------------------------------------
-| Vendor specific files that come from `node_modules` or the very rare time
-| we have to actually create a vendors folder. Stylelint is disabled for all
-| vendor imports for obvious reasons.
-|
-*/
-
-/*
-|--------------------------------------------------------------------------
-| Vendor overrides
-|--------------------------------------------------------------------------
-| Vendor files should never be edited themselves. If you want to make style
-| changes to something imported then create a file in `./overrides/` with the
-| same name as the 3rd party plugin
-|
-*/
-@import 'django-lazy-image/assets/css/lazy-image.css';
-@import 'overrides/**/*.css';
-
-/*
-|--------------------------------------------------------------------------
-| Wysiwyg
-|--------------------------------------------------------------------------
-| We manually import this ourselves as we want to be able to wrap it in a
-| class, it can't go in any existing folder as then it get's imported twice
-| because of globbing
-|
-*/
-@import 'wysiwyg/wysiwyg.css';
+@import-glob '../../apps/**/assets/**/*.css';

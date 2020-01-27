@@ -1,3 +1,6 @@
+import '../css/app.css'
+import * as Images from '../img' // eslint-disable-line no-unused-vars
+
 import 'babel-polyfill'
 
 // Browser compatibility shims and helpers
@@ -14,7 +17,7 @@ import { bindExternalLinks } from './external-links'
 import { setUpNavigation } from './navigation'
 import { setUpLazyImage } from './lazy-images'
 import { setUpFocusRing } from './focus-ring'
-import { setUpOverflowTables } from './wysiwyg'
+import { setUpOverflowTables } from './wysiwyg-js'
 import { removePreloadClass } from './utils'
 
 document.addEventListener('DOMContentLoaded', () => {
