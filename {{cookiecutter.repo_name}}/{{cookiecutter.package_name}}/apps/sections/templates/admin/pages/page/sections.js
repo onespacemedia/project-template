@@ -1,5 +1,5 @@
 (function ($) {
-  $(window).load(function() {
+  document.addEventListener('DOMContentLoaded', function() {
     // The timeout is necessary so that Jet can load fully.
     window.setTimeout(renderSectionFields, 1)
 
@@ -115,5 +115,5 @@
         });
       });
     }
-  });
+  })
 })(window.jQuery);
