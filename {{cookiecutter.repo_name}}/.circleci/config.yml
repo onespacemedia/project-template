@@ -35,7 +35,7 @@ jobs:
           name: iSort
           command: |
             . .venv/bin/activate
-            isort --check-only {{ cookiecutter.package_name }}
+            isort
       - run:
           name: tests
           command: |
