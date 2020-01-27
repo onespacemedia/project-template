@@ -9,8 +9,8 @@ from django.contrib import admin
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.urls import include, re_path
 from django.shortcuts import render
+from django.urls import include, re_path
 from django.views import generic
 
 {% if cookiecutter.sections == 'no' %}# {% endif %}from .apps.sections.models import sections_js
