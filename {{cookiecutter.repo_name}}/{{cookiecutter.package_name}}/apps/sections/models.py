@@ -201,12 +201,14 @@ class SectionBase(HasLinkMixin, VideoMixin):
         'components.StatSet',
         blank=True,
         null=True,
+        on_delete=models.CASCADE,
     )
 {% if cookiecutter.news == 'yes' %}
     news_feed = models.ForeignKey(
         'news.NewsFeed',
         blank=True,
         null=True,
+        on_delete=models.CASCADE,
     ){% endif %}
 
     order = models.PositiveIntegerField(

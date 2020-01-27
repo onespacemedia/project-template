@@ -1,7 +1,7 @@
 from adminsortable2.admin import SortableAdminMixin
 from cms.admin import PageBaseAdmin
 from django.contrib import admin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import escape, mark_safe
 
 from .models import Category, Faq, Faqs

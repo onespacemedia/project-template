@@ -27,12 +27,12 @@ class ResourcesViewsTestCase(ResourcesBaseTestCase):
         view.object = self.case_study
 
         context = view.get_context_data(object=self.case_study)
-        self.assertEquals(context['object'], self.case_study)
-        self.assertEquals(context['title'], str(self.case_study))
+        self.assertEqual(context['object'], self.case_study)
+        self.assertEqual(context['title'], str(self.case_study))
 
         # Test some SEO stuff.
         self.case_study.browser_title = 'SEO test'
         self.case_study.save()
 
         context = view.get_context_data(object=self.case_study)
-        self.assertEquals(context['title'], 'SEO test')
+        self.assertEqual(context['title'], 'SEO test')

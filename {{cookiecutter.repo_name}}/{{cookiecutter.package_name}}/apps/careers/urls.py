@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from .views import CareerDetailView, CareerListView
 
 urlpatterns = [
-    url(r'^$', CareerListView.as_view(), name='career_list'),
-    url(r'^(?P<slug>[^/]+)/$', CareerDetailView.as_view(), name='career_detail'),
+    re_path(r'^$', CareerListView.as_view(), name='career_list'),
+    re_path(r'^(?P<slug>[^/]+)/$', CareerDetailView.as_view(), name='career_detail'),
 ]

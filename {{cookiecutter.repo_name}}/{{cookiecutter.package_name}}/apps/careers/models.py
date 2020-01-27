@@ -107,6 +107,7 @@ class Career(PageBase):
         'careers.CareerLocation',
         blank=True,
         null=True,
+        on_delete=models.SET_NULL,
     )
 
     summary = models.TextField(

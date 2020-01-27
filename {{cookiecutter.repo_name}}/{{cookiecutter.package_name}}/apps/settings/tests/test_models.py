@@ -11,20 +11,20 @@ class SettingsModelsTestCase(TestCase):
             name='Test',
         )
 
-        self.assertEquals(str(setting), 'Test')
+        self.assertEqual(str(setting), 'Test')
 
     def test_setting_value(self):
         setting = Setting(
             type='string',
             string='Testing',
         )
-        self.assertEquals(setting.value, 'Testing')
+        self.assertEqual(setting.value, 'Testing')
 
         setting = Setting(
             type='text',
             text='Line\nbreak',
         )
-        self.assertEquals(setting.value, 'Line<br />break')
+        self.assertEqual(setting.value, 'Line<br>break')
         # Ensure it's marked as safe
         self.assertIsInstance(setting.value, SafeString)
 
@@ -32,13 +32,13 @@ class SettingsModelsTestCase(TestCase):
             type='number',
             number=1,
         )
-        self.assertEquals(setting.value, 1)
+        self.assertEqual(setting.value, 1)
 
         setting = Setting(
             type='html',
             html='<p>Hi!</p>',
         )
-        self.assertEquals(setting.value, '<p>Hi!</p>')
+        self.assertEqual(setting.value, '<p>Hi!</p>')
         self.assertIsInstance(setting.value, SafeString)
 
         fake_file = File(
@@ -50,5 +50,5 @@ class SettingsModelsTestCase(TestCase):
             type='image',
             image=fake_file,
         )
-        self.assertEquals(setting.value, fake_file)
+        self.assertEqual(setting.value, fake_file)
         self.assertIsInstance(setting.value, File)

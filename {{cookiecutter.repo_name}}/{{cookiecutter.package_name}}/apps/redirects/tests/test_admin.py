@@ -1,7 +1,7 @@
 from django.contrib.admin.sites import AdminSite, NotRegistered
 from django.contrib.auth import get_user_model
-from django.core.urlresolvers import reverse
 from django.test import RequestFactory
+from django.urls import reverse
 
 from ...redirects import admin
 from ..admin import RedirectModelForm

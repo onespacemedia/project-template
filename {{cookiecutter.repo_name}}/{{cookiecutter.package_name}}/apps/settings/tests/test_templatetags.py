@@ -14,13 +14,13 @@ class SettingsTagsTest(TestCase):
         )
 
     def test_setting(self):
-        self.assertEquals(setting('test-setting'), self.setting.value)
-        self.assertEquals(setting('test-setting'), 'Value')
+        self.assertEqual(setting('test-setting'), self.setting.value)
+        self.assertEqual(setting('test-setting'), 'Value')
         # Test ones that don't exist, and defaults.
-        self.assertEquals(setting('no'), None)
-        self.assertEquals(setting('no', 'yes'), 'yes')
+        self.assertEqual(setting('no'), None)
+        self.assertEqual(setting('no', 'yes'), 'yes')
 
     def test_get_setting(self):
         # Test one that is real.
-        self.assertEquals(get_setting('test-setting'), self.setting)
-        self.assertEquals(get_setting('nope'), None)
+        self.assertEqual(get_setting('test-setting'), self.setting)
+        self.assertEqual(get_setting('nope'), None)

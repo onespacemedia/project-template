@@ -1,11 +1,11 @@
 """URLs used by the CMS news app."""
 
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.ArticleArchiveView.as_view(), name='article_archive'),
-    url(r'^feed/$', views.ArticleFeedView.as_view(), name='article_feed'),
-    url(r'^(?P<slug>[^/]+)/$', views.ArticleDetailView.as_view(), name='article_detail'),
+    re_path(r'^$', views.ArticleArchiveView.as_view(), name='article_archive'),
+    re_path(r'^feed/$', views.ArticleFeedView.as_view(), name='article_feed'),
+    re_path(r'^(?P<slug>[^/]+)/$', views.ArticleDetailView.as_view(), name='article_detail'),
 ]

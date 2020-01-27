@@ -17,7 +17,7 @@ class TemplateTagsTestCase(TestCase):
         ]
 
         for test in tests:
-            self.assertEquals(md(test[0]), test[1])
+            self.assertEqual(md(test[0]), test[1])
 
         # Test it without the 'inline' option.
         tests = [
@@ -31,4 +31,4 @@ class TemplateTagsTestCase(TestCase):
         ]
 
         for test in tests:
-            self.assertEquals(md(test[0], inline=False), test[1])
+            self.assertEqual(md(test[0], inline=False), test[1])
