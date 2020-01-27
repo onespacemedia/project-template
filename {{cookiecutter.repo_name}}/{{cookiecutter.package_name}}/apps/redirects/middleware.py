@@ -2,11 +2,12 @@ import re
 
 from django import http
 from django.conf import settings
+from django.utils.deprecation import MiddlewareMixin
 
 from .models import Redirect
 
 
-class RedirectFallbackMiddleware:
+class RedirectFallbackMiddleware(MiddlewareMixin):
     def _redirect_for_path(self, path):
         if not getattr(settings, "REDIRECTS_ENABLE_REGEX", False):
             try:

@@ -146,7 +146,7 @@ class ArticleFeedView(ArticleListMixin, BaseListView):
         # Write the response.
         content = feed.writeString('utf-8')
         response = HttpResponse(content)
-        response['Content-Type'] = feed.mime_type
+        response['Content-Type'] = feed.content_type
 
         return response
 

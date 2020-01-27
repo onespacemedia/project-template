@@ -4,7 +4,7 @@ from adminsortable2.admin import SortableAdminMixin
 from cms.admin import SearchMetaBaseAdmin
 from django import forms
 from django.contrib import admin
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import escape, mark_safe
 
 from ...utils.admin import HasImageAdminMixin, SEOQualityControlFilter

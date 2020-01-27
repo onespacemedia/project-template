@@ -12,7 +12,6 @@ import uuid
 # from django.apps import apps;  apps.get_model
 from django.db.models import Model
 from django.utils import six
-from django.utils.deprecation import CallableBool
 from django.utils.duration import duration_iso_string
 from django.utils.functional import Promise
 from django.utils.timezone import is_aware
@@ -49,8 +48,6 @@ class DjangoJSONEncoder(json.JSONEncoder):
             return str(o)
         if isinstance(o, Promise):
             return six.text_type(o)
-        if isinstance(o, CallableBool):
-            return bool(o)
         if isinstance(o, Model):
             return {
                 'app_label': o._meta.app_label,

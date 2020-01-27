@@ -32,13 +32,13 @@ class CareerViewsTestCase(CareersBaseTestCase):
         view.object = self.job
 
         context = view.get_context_data(object=self.job)
-        self.assertEquals(context['object'], self.job)
+        self.assertEqual(context['object'], self.job)
         # Make sure a proper title is being put into the context.
-        self.assertEquals(context['title'], str(self.job))
+        self.assertEqual(context['title'], str(self.job))
 
         # Test some SEO stuff.
         self.job.browser_title = 'SEO test'
         self.job.save()
 
         context = view.get_context_data(object=self.job)
-        self.assertEquals(context['title'], 'SEO test')
+        self.assertEqual(context['title'], 'SEO test')

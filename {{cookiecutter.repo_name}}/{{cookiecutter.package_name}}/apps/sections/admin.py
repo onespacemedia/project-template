@@ -1,6 +1,6 @@
 from cms.apps.pages.admin import page_admin
 from django.contrib.staticfiles.storage import staticfiles_storage
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from osm_jet.admin import JetCompactInline
 
 from ...utils.admin import LinkFieldsLastAdminMixin

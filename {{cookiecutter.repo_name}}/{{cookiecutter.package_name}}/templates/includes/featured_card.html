@@ -11,7 +11,7 @@
 
   {% if object.card_image or object.image %}
     <div class="art-FeaturedCard_Image">
-      {{ render_lazy_image(object.card_image or object.image, width=843, height=480, blur=False, show_small_image=False) }}
+      {{ render_osm_lazy_image(object.card_image or object.image, width=843, height=480, blur=False, show_small_image=False) }}
     </div>
   {% endif %}
 </a>

@@ -1,7 +1,7 @@
-from django.conf.urls import url
+from django.urls import re_path
 
 from . import views
 
 urlpatterns = [
-    url(r'thumbnail/(?P<pk>\d+)/(?P<width>\d+|auto)/(?P<height>\d+|auto)/(?P<format>source|jpg|png|webp)/(?P<crop>[^/]+)/', views.ImageView.as_view(), name='thumbnail'),
+    re_path(r'thumbnail/(?P<pk>\d+)/(?P<width>\d+|auto)/(?P<height>\d+|auto)/(?P<format>source|jpg|png|webp)/(?P<crop>[^/]+)/', views.ImageView.as_view(), name='thumbnail'),
 ]

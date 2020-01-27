@@ -4,7 +4,7 @@
   <div class="{% block split_class %}sec-Split sec-Split-{{ section.image_side }}{% endblock %}">
     {% block split_graphics %}
       <div class="sec-Split_Image">
-        {{ render_lazy_image(section.image, width=800) }}
+        {{ render_osm_lazy_image(section.image, width=800) }}
       </div>
     {% endblock %}
 

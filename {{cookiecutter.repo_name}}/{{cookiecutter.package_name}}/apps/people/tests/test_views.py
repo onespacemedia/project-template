@@ -46,7 +46,7 @@ class PeopleViewsTestCase(PeopleBaseTestCase):
         view.request.pages = RequestPageManager(view.request)
         view.request.pages.current.content.per_page = 7
 
-        self.assertEquals(view.get_paginate_by(view.get_queryset()), 7)
+        self.assertEqual(view.get_paginate_by(view.get_queryset()), 7)
 
     def test_detail_get_context_data(self):
         view = PersonView()
@@ -57,8 +57,8 @@ class PeopleViewsTestCase(PeopleBaseTestCase):
         context = view.get_context_data(object=view.object)
 
         # Make sure a proper title is in the context.
-        self.assertEquals(context['title'], 'Foo Bar')
+        self.assertEqual(context['title'], 'Foo Bar')
 
         self.person.browser_title = 'Browser Title'
         context = view.get_context_data(object=self.person)
-        self.assertEquals(context['title'], 'Browser Title')
+        self.assertEqual(context['title'], 'Browser Title')

@@ -6,6 +6,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import admin
 from django.utils.html import escape
+from django.utils.safestring import mark_safe
 
 from .models import Redirect
 
@@ -75,14 +76,14 @@ class RedirectAdmin(admin.ModelAdmin):
 
         return ('old_path', 'new_path', 'type', 'test_redirect')
 
-    def get_form(self, request, obj=None, **kwargs):
+    def get_form(self, request, obj=None, change=False, **kwargs):
         kwargs["form"] = RedirectModelForm
 
         if not getattr(settings, 'REDIRECTS_ENABLE_REGEX', False):
             kwargs.update({
                 'exclude': ['regular_expression', 'test_path']
             })
-        form = super().get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj=obj, change=change, **kwargs)
         return form
 
     def test_redirect(self, obj):
@@ -90,8 +91,6 @@ class RedirectAdmin(admin.ModelAdmin):
             url = re.sub(obj.old_path, obj.new_path, obj.test_path)
         else:
             url = obj.old_path
-        return '<a target="_blank" href="{}">Test</a>'.format(
-            escape(url)
-        )
+        return mark_safe(f'<a target="_blank" href="{escape(url)}">Test</a>')
 
     test_redirect.allow_tags = True

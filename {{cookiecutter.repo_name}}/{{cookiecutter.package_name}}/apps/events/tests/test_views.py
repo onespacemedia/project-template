@@ -16,7 +16,7 @@ class EventViewsTestCase(EventsBaseTestCase):
         view.request.pages = RequestPageManager(view.request)
         # 10 is the default, but set to 6 in _base, so we can be sure this is
         # working
-        self.assertEquals(view.get_paginate_by(None), 6)
+        self.assertEqual(view.get_paginate_by(None), 6)
 
     def test_eventlistview_get_queryset(self):
         view = UpcomingEventListView()
@@ -46,13 +46,13 @@ class EventViewsTestCase(EventsBaseTestCase):
         view.object = self.future_event
 
         context = view.get_context_data(object=self.future_event)
-        self.assertEquals(context['object'], self.future_event)
+        self.assertEqual(context['object'], self.future_event)
         # Make sure a proper title is being put into the context.
-        self.assertEquals(context['title'], str(self.future_event))
+        self.assertEqual(context['title'], str(self.future_event))
 
         # Test some SEO stuff.
         self.future_event.browser_title = 'SEO test'
         self.future_event.save()
 
         context = view.get_context_data(object=self.future_event)
-        self.assertEquals(context['title'], 'SEO test')
+        self.assertEqual(context['title'], 'SEO test')

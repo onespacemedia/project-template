@@ -1,7 +1,7 @@
 <a class="{% block card_class %}art-Card{% endblock %}" href="{{ object.get_absolute_url(page=page) }}">
   {% if object.card_image or object.image %}
     <div class="art-Card_Image">
-      {{ render_lazy_image(object.card_image or object.image, width=404, height=218, blur=False, show_small_image=False) }}
+      {{ render_osm_lazy_image(object.card_image or object.image, width=404, height=218, blur=False, show_small_image=False) }}
     </div>
   {% else %}
     <div class="art-Card_ImageContainer-placeholder">

@@ -33,6 +33,7 @@ class Statistic(models.Model):
     stat_set = models.ForeignKey(
         'components.StatSet',
         related_name='statistics',
+        on_delete=models.CASCADE,
     )
 
     statistic = models.CharField(
@@ -70,6 +71,7 @@ class Link(HasLinkMixin):
     link_set = models.ForeignKey(
         'components.LinkSet',
         related_name='links',
+        on_delete=models.CASCADE,
     )
 
     order = models.PositiveIntegerField(

@@ -31,8 +31,8 @@ class BaseEventListView(ListView):
 
         return qs
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['featured_event'] = self.featured_event
 
@@ -43,8 +43,8 @@ class PastEventListView(BaseEventListView):
     def get_unfiltered_queryset(self):
         return super().get_unfiltered_queryset().select_past()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['switcher_text'] = 'View upcoming events'
         context['switcher_url'] = self.request.pages.current.get_absolute_url()
@@ -57,8 +57,8 @@ class UpcomingEventListView(BaseEventListView):
     def get_unfiltered_queryset(self):
         return super().get_unfiltered_queryset().select_upcoming()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
 
         context['switcher_text'] = 'View past events'
         context['switcher_url'] = self.request.pages.current.reverse('event_list_past')

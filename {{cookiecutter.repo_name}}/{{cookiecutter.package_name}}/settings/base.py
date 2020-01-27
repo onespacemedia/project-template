@@ -103,7 +103,7 @@ INSTALLED_APPS = [
 
     'server_management',
     'django_extensions',
-    'cachalot',
+    'cacheops',
     'webpack_loader',
 ]
 
@@ -248,7 +248,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # |____|\___/\__|\__,_||_||_|/__/\__,_| \__||_|\___/|_||_|
 #
 ###
-{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
+{% if cookiecutter.geoip == 'no' %}# {% endif %}GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip2/'))
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
 USE_I18N = False
@@ -263,7 +263,7 @@ USE_TZ = True
 # |___/ |_|/__/| .__/\__,_| \__|\__||_||_|
 #              |_|
 ###
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     {% if cookiecutter.geoip == 'no' %}# {% endif %}'cms.middleware.LocalisationMiddleware',
@@ -495,6 +495,6 @@ if 'test' in sys.argv:
         MIGRATION_MODULES[app_name] = None
 
     # Remove the localisation middleware
-    if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE_CLASSES:
-        MIDDLEWARE_CLASSES = tuple(
-            c for c in MIDDLEWARE_CLASSES if c != 'cms.middleware.LocalisationMiddleware')
+    if 'cms.middleware.LocalisationMiddleware' in MIDDLEWARE:
+        MIDDLEWARE = tuple(
+            c for c in MIDDLEWARE if c != 'cms.middleware.LocalisationMiddleware')
