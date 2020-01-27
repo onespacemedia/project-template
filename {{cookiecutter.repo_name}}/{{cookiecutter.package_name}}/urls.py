@@ -53,10 +53,10 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^404/$', generic.TemplateView.as_view(template_name='404.html')),
-        url(r'^500/$', generic.TemplateView.as_view(template_name='500.html')),
-        url(r'^frontend/$', FrontendView.as_view()),
-        url(r'^frontend/(?P<slug>[\w-]+)/$', FrontendView.as_view())
+        re_path(r'^404/$', generic.TemplateView.as_view(template_name='404.html')),
+        re_path(r'^500/$', generic.TemplateView.as_view(template_name='500.html')),
+        re_path(r'^frontend/$', FrontendView.as_view()),
+        re_path(r'^frontend/(?P<slug>[\w-]+)/$', FrontendView.as_view())
     ]
 
 
