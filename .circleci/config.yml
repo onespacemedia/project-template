@@ -49,7 +49,7 @@ jobs:
             yarn run lint:css
             yarn run lint:js
             yarn run lint:python
-            yarn run lint:isort
+            pylint demo
             pytest --cov=demo --create-db --nomigrations --ds=demo.settings.local
 
 workflows:
