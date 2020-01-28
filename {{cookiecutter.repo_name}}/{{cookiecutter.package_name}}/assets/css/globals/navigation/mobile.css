@@ -187,7 +187,7 @@
 .nav-Mobile_DropdownChild {
   position: fixed;
   top: var(--Mobile_NavHeight);
-  right: -var(--Mobile_NavWidth);
+  right: calc(var(--Mobile_NavWidth) * -1);
 
   z-index: 1;
 
