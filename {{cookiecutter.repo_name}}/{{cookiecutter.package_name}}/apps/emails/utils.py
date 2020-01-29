@@ -79,6 +79,9 @@ def send_email(reference, to=None, **kwargs):  # pylint: disable=too-complex
     if 'fake' in kwargs and kwargs['fake']:
         return
 
+    kwargs.pop('object')
+    kwargs.pop('settings')
+
     # Store this email in the database.
     EmailLog.objects.create(
         message_id=msg_id,
