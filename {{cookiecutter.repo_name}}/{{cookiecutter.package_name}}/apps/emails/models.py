@@ -14,7 +14,7 @@ class EmailTemplate(models.Model):
             ('contact', 'Contact'),
         ],
         unique=True,
-        help_text="This will be used in the application to send emails of this type.",
+        help_text='This will be used in the application to send emails of this type.',
     )
 
     # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
@@ -22,7 +22,7 @@ class EmailTemplate(models.Model):
         max_length=300,
         blank=True,
         null=True,
-        help_text='For automated emails, such as contact forms, you can define where the emails are send.',
+        help_text='For automated emails, such as contact forms, you can define where the emails are sent.',
     )
 
     # CharField as "Paul Smith <paul.smith@example.com>" is a valid value.
@@ -58,7 +58,7 @@ class EmailTemplate(models.Model):
     content = models.TextField(
         blank=True,
         null=True,
-        help_text='The main body of your email, rendered using <a href="http://commonmarkforhumans.com/" target="_blank">Commonmark</a>.'
+        help_text='The main body of your email, rendered using <a href="https://commonmark.org/help/" target="_blank">Commonmark</a>.'
     )
 
     order = models.PositiveIntegerField(
