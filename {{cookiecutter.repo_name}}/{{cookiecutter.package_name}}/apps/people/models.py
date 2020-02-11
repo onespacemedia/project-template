@@ -173,8 +173,8 @@ class Person(SearchMetaBase):
         return mark_safe(json.dumps(schema))
 
     def render_card(self, page=None):
-        return render_to_string('news/includes/card.html', {
-            'article': self,
+        return render_to_string('people/includes/card.html', {
+            'object': self,
             'page': page,
         })
 
