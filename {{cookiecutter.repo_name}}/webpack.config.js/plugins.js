@@ -7,7 +7,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const SourceMapDevToolPlugin = require('webpack').SourceMapDevToolPlugin;
 
 const MiniCssExtractPlugin = new _MiniCssExtractPlugin({
-  filename: 'css/[name]-[hash].bundle.css',
+  filename: 'css/[name].bundle.css',
   chunkFilename: '[id].css',
   hmr: process.env.NODE_ENV === 'development',
 });

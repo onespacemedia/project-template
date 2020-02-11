@@ -8,7 +8,9 @@
     <!-- Favicons -->
     {% include 'base/_favicons.html' %}
 
-    <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
+    {% if not settings.IN_CI %}
+      <link rel="stylesheet" href="{{ get_css_path('main') }}?last={{ settings.GIT_COMMIT_HASH }}">
+    {% endif %}
   </head>
 
   <body>

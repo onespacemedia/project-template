@@ -14,6 +14,7 @@ from django.urls import NoReverseMatch, reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
+from webpack_loader.utils import get_files
 
 from ..models import Footer, Header
 
@@ -312,3 +313,8 @@ def render_2x_image(image, width='', height='', **kwargs):
         'webp': webp_url,
         'webp_2x': webp_url_2x,
     }
+
+
+@library.global_function
+def get_css_path(bundle):
+    return get_files(bundle, 'css')[0]['publicPath']

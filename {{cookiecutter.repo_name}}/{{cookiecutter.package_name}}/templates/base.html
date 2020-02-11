@@ -66,10 +66,10 @@
     {% endif %}
 
     {% if not settings.IN_CI %}
-      {{ render_bundle('main', 'css') }}
+      <link rel="stylesheet" href="{{ get_css_path('main') }}?last={{ settings.GIT_COMMIT_HASH }}">
 
       {% if request.user.is_staff %}
-        {{ render_bundle('staff', 'css') }}
+        <link rel="stylesheet" href="{{ get_css_path('staff') }}?last={{ settings.GIT_COMMIT_HASH }}">
       {% endif %}
     {% endif %}
 
