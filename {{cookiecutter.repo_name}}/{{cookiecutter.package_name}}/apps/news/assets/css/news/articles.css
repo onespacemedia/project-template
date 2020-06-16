@@ -2,35 +2,46 @@
 |--------------------------------------------------------------------------
 | Articles
 |--------------------------------------------------------------------------
-| @namespace: nws-
+| @namespace: art-
 |
 */
 
 /*
 |--------------------------------------------------------------------------
-| Items
+| Share button
 |--------------------------------------------------------------------------
 |
 */
-.nws-Articles_Items {
-  grid-gap: calc(var(--Grid_Gutter) * 2);
-
-  display: grid;
+.art-Share {
+  display: none;
 
   @media (--sm) {
-    grid-gap: calc(var(--Grid_Gutter) * 2);
-    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
 
-    display: grid;
-  }
+    display: flex;
+    margin-left: auto;
 
-  @media (--md) {
-    grid-template-columns: repeat(3, 1fr);
+    cursor: pointer;
+
+    transition: color var(--Global_Transition);
+
+    &:hover {
+      color: var(--Color_Anchor);
+    }
   }
 }
 
-.nws-Articles_Item-full {
-  @media (--sm) {
-    grid-column: 1 / -1;
+.art-Share_Button {
+  margin-left: 0.5vr;
+
+  appearance: none;
+  background-color: transparent;
+  border: 0;
+
+  & svg {
+    width: 21px;
+    height: 21px;
+
+    color: var(--Color_Brand);
   }
 }

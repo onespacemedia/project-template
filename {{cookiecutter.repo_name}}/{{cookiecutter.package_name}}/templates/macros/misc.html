@@ -5,3 +5,69 @@
     <span class="nav-Header_TriggerLine nav-Header_TriggerLine-bottom"></span>
   </div>
 {% endmacro %}
+
+{% macro social_share_modal(url, title, label='Share this page', modifier=None) %}
+  {% set title_e = title|urlencode %}
+  {% set url_e = path_to_url(url)|urlencode %}
+
+  <div class="mod-Modal{% if modifier %} mod-Modal-{{ modifier }}{% endif %} js-Modal">
+    <div class="mod-Modal_Background js-Modal_Close"></div>
+
+    <div class="mod-Modal_Inner">
+      <div class="mod-Modal_Body">
+        <button class="mod-Modal_Close js-Modal_Close" aria-label="Close modal">
+          {% include 'close.svg' %}
+        </button>
+
+        <div class="mod-Content">
+          <h3 class="mod-Content_Title">{{ label }}</h3>
+
+          <ul class="mod-Links">
+            <li class="mod-Links_Item">
+              <a class="mod-Links_Link" href="https://twitter.com/intent/tweet?url={{ url_e }}&amp;text={{ title_e }}"
+                  aria-label="Share on Twitter">
+                {% include 'twitter.svg' %}
+              </a>
+            </li>
+            <li class="mod-Links_Item">
+              <a class="mod-Links_Link" href="https://www.facebook.com/sharer.php?u={{ url_e }}"
+                  aria-label="Share on Facebook">
+                {% include 'facebook.svg' %}
+              </a>
+            </li>
+            <li class="mod-Links_Item">
+              <a class="mod-Links_Link" href="https://www.linkedin.com/shareArticle?url={{ url_e }}&amp;title={{ title_e }}"
+                  aria-label="Share on LinkedIn">
+                {% include 'linkedin.svg' %}
+              </a>
+            </li>
+            <li class="mod-Links_Item">
+              <a class="mod-Links_Link" href="mailto:?subject={{ title_e }}!&body={{ url_e }}"
+                  aria-label="Share on Email">
+                {% include 'email.svg' %}
+              </a>
+            </li>
+          </ul>
+
+          <div class="mod-Copy">
+            <div class="mod-Copy_Item">
+              <div class="mod-Copy_Button js-Modal_Copy">Copy link</div>
+              <input class="frm-Form_Input frm-Form_Input-buttonLeft js-Modal_CopyInput" value="{{ path_to_url(url) }}">
+            </div>
+
+            <div class="mod-Copy_Text js-Modal_CopyText">Link Copied to clipboard</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endmacro %}
+
+{% macro social_share_icon() %}
+  <div class="art-Share js-Modal_Open">
+    <span class="art-Share_Text">Share</span>
+    <button class="art-Share_Button">
+      {% include 'share.svg' %}
+    </button>
+  </div>
+{% endmacro %}

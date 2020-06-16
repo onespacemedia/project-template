@@ -1,0 +1,216 @@
+/*
+|--------------------------------------------------------------------------
+| Modal
+|--------------------------------------------------------------------------
+| @namespace: mod-
+|
+*/
+.mod-Modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+
+  align-items: center;
+
+  display: flex;
+
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.mod-Modal-isOpen {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mod-Modal_Background {
+  @include Spread;
+
+  background-color: rgba(#000, 0.8);
+}
+
+.mod-Modal_Inner {
+  @include Grid_Container;
+}
+
+.mod-Modal_Body {
+  position: relative;
+
+  width: columns(10, 12);
+  margin: 0 auto;
+  padding: 1.5vr calc(var(--Grid_Gutter) * 2);
+
+  background: #fff;
+  box-shadow: 0 0 20px 0 #000, 0.15);
+
+  @media (--sm) {
+    width: columns(8, 12);
+    padding: 2vr calc(var(--Grid_Gutter) * 2);
+  }
+
+  @media (--lg) {
+    width: columns(7, 12);
+    padding: 2vr calc(var(--Grid_Gutter) * 4) 2.5vr;
+  }
+}
+
+.mod-Modal_Close {
+  position: absolute;
+  top: 24px;
+  right: @top;
+
+  appearance: none;
+  background-color: transparent;
+  border: none;
+
+  transition: color var(--Global_Transition);
+
+  svg {
+    width: 24px;
+    height: @width;
+  }
+
+  &:hover {
+    color: var(--Color_Anchor);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+*/
+.mod-Content_Title {
+  margin-bottom: 1vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Links
+|--------------------------------------------------------------------------
+|
+*/
+.mod-Links {
+  flex-wrap: wrap;
+
+  display: flex;
+  margin-top: -16px;
+  margin-right: -8px;
+  margin-left: @margin-right;
+}
+
+.mod-Links_Item {
+  flex-grow: 1;
+
+  width: 10%;
+  margin-top: 16px;
+  margin-right: 8px;
+  margin-left: @margin-right;
+}
+
+.mod-Links_Link {
+  @include Button;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  padding: 1vr var(--Grid_Inside);
+
+  background-color: #fff;
+  border: 1px solid transparent;
+  color: #000;
+
+  transition: color var(--Global_Transition),
+    background-color var(--Global_Transition);
+
+  /* In a media query to overwrite the button mixin inline-flex */
+  @media (--sm) {
+    display: flex;
+  }
+
+  &:hover {
+    background-color: var(--Color_Brand);
+    border: 1px solid transparent;
+  }
+
+  svg {
+    width: 24px;
+    height: @width;
+
+    margin-left: 0;
+  }
+}
+
+/* stylelint-disable no-duplicate-selectors */
+/* Simplified declaration for changing SVG color on hover */
+.mod-Links_Link {
+  &:hover svg {
+    color: #fff;
+  }
+}
+/* stylelint-enable */
+
+/*
+|--------------------------------------------------------------------------
+| Links
+|--------------------------------------------------------------------------
+|
+*/
+.mod-Copy {
+  flex-direction: column;
+
+  display: flex;
+  margin-top: 0.75vr;
+}
+
+.mod-Copy_Item {
+  display: flex;
+}
+
+.mod-Copy_Button {
+  @include Button;
+  flex-direction: column;
+  flex-shrink: 0;
+  justify-content: center;
+
+  display: flex;
+
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+
+  cursor: pointer;
+}
+
+.mod-Copy_Text {
+  @include Font_14;
+
+  margin-left: auto;
+
+  opacity: 0;
+}
+
+.mod-Copy_Text-active {
+  animation: successFadeOut 5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes successFadeOut {
+  0% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

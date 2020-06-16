@@ -1,0 +1,3 @@
+<svg viewBox="0 0 15 33">
+  <use xlink:href="{{ static('svg/sprite.svg') }}#facebook"></use>
+</svg>
