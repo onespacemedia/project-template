@@ -1,0 +1,15 @@
+/*
+|--------------------------------------------------------------------------
+| IE fallback
+| @namespace: util-
+|--------------------------------------------------------------------------
+|
+*/
+@import 'helpers/index.css';
+
+.util-IsIE {
+  /* Add IE specific styles here */
+  .img-Image_Media > .img-Image_Image {
+    display: none;
+  }
+}

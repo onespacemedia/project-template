@@ -8,7 +8,8 @@ const config = {
   entry: {
     main: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/main.js'),
     staff: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/staff.js'),
-    wysiwyg: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/wysiwyg.js')
+    wysiwyg: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/wysiwyg.js'),
+    iefallback: path.resolve(__dirname, '../alchemie_technology/assets/js/ie-fallback.js')
   },
   module: {
     rules: [

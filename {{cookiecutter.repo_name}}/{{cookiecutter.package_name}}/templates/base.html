@@ -82,10 +82,10 @@
 
       if (!('grid' in body.style)) {
         var grid = document.createElement('link')
-        grid.href = '/static/build/css/grid-fallback.css'
+        grid.href = '{{ get_css_path('iefallback') }}?last={{ settings.GIT_COMMIT_HASH }}'
         grid.rel = 'stylesheet'
         document.head.appendChild(grid)
-        body.className += ' util-NoGrid'
+        body.className += ' util-IsIE'
       }
 
       function hasNativeCSSProperties() {
