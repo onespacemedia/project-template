@@ -31,7 +31,7 @@ layout recomputation).
     // {# Clear old cache keys. #}
     var localStorageKeys = Object.keys(window.localStorage)
     for (var i = 0; i < localStorageKeys.length; i++) {
-      if (localStorageKeys[i].startsWith(cachePrefix) && localStorageKeys[i] !== cacheKey) {
+      if ((localStorageKeys[i].indexOf(cachePrefix, 0) === 0) && localStorageKeys[i] !== cacheKey) {
         window.localStorage.removeItem(localStorageKeys[i])
       }
     }

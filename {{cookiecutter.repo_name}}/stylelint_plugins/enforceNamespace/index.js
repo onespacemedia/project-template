@@ -59,7 +59,7 @@ module.exports = stylelint.createPlugin(ruleName, function (max, options) {
     root.walkRules(rule => {
       if (isInsideAtRule(rule)) return
       const topParentSelector = findTopParentSelector(rule)
-      if (!topParentSelector.startsWith(namespace)) {
+      if (topParentSelector.indexOf(namespace, 0) !== 0) {
         stylelint.utils.report({
         ruleName: ruleName,
         result: result,
