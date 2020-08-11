@@ -16,7 +16,8 @@ export function bindExternalLinks () {
     'https://www.linkedin.com/shareArticle?'
   ]
 
-  let thisDomain = window.location.hostname
+  let thisDomain = window.location.hostname // eslint-disable-line
+                                            // This gets flagged incorrectly for browser incompatibility
 
   if (thisDomain.indexOf('www.') === 0) {
     thisDomain = thisDomain.substr(4)
