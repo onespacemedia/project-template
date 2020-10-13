@@ -304,7 +304,7 @@ JET_DEFAULT_THEME = 'osm'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '{{cookiecutter.google_plus_key}}'
@@ -447,6 +447,7 @@ STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'assets'),  # For webpack_loader
     os.path.join(SITE_ROOT, 'static'),
 )
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',

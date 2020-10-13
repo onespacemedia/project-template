@@ -15,7 +15,6 @@ MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/{{cookiecutter.package_name}}', 'node_modules'))
 
-
 # Use local server.
 
 SITE_DOMAIN = 'localhost:8000'
