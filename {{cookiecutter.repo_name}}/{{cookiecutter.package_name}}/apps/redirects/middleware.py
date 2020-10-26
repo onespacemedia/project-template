@@ -35,7 +35,8 @@ class RedirectFallbackMiddleware:
 
         return response
 
-    def _redirect_for_path(self, path):
+    @staticmethod
+    def _redirect_for_path(path):
         try:
             return Redirect.objects.get(old_path=path)
         except Redirect.DoesNotExist:
@@ -44,6 +45,6 @@ class RedirectFallbackMiddleware:
         if getattr(settings, "REDIRECTS_ENABLE_REGEX", False):
             for obj in Redirect.objects.all():
                 if obj.regular_expression and re.match(obj.old_path, path):
-                    return redirect
+                    return obj
 
         return None

@@ -56,7 +56,7 @@
 .dbg-Overlay_Column {
   @include Grid_Column;
 
-  flex-grow: 0 0 auto;
+  flex: 0 0 auto;
 
   width: calc(1 / 12 * 100% - (var(--Grid_Gutter) * 2));
   height: 100%;
