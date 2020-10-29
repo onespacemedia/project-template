@@ -92,11 +92,7 @@ def get_sourceset(image, width=None, height=None, max_width=settings.RESPONSIVE_
             if thumbnail_data.rendered:
                 return get_thumbnail(file_, geometry_string, **kwargs)
         else:
-            image_options = ThumbnailData(key=key, media_file=image.file)
-
-            image_options.options = dict({
-                'geometry_string': geometry_string,
-            }, **kwargs)
+            image_options = ThumbnailData.create(key, image.file, dict(geometry_string=geometry_string, **kwargs))
 
             option_store.set(image_options)
 

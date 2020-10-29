@@ -13,7 +13,11 @@ class DeferredThumbnailView(RedirectView):
         if thumbnail_data:
             options = thumbnail_data.options
 
-            file_ = thumbnail_data.media_file
+            try:
+                file_ = thumbnail_data.file
+            except FileNotFoundError:
+                option_store.delete(thumbnail_data)
+                raise Http404('File from thumbnail data does not exist')
 
             thumbnail = get_thumbnail(file_, **options)
 

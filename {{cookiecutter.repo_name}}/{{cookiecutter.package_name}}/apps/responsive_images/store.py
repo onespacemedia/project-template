@@ -33,6 +33,15 @@ class OptionStore:
         obj.save()
         cache.set(cache_key, obj, None)
 
+    def delete(self, obj):
+        try:
+            cache_key = self._get_key(obj.key)
+            cache.delete(cache_key)
+            obj.delete()
+            return True
+        except ThumbnailData.DoesNotExist:
+            return False
+
     def flush(self):
         images = ThumbnailData.objects.filter(pk__startswith=self.cache_prefix)
         key_list = images.values_list('key')
