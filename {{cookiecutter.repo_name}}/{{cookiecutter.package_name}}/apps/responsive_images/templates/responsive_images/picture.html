@@ -1,0 +1,18 @@
+{% macro source_set(image) %}
+    {%- for pixel_density, thumbnail in image.items() %}{{ thumbnail.url }} {{ pixel_density }}x{% if not loop.last %}, {% endif %}{% endfor -%}
+{% endmacro %}
+
+<picture>
+  {% if webp %}
+    {% for item in images %}
+      <source srcset="{{- source_set(item.webp_image) -}}" type="image/webp" media="{{ item.media }}">
+    {% endfor %}
+    <source srcset="{{- source_set(default.webp_image) -}}" type="image/webp">
+  {% endif %}
+  {% for item in images %}
+    <source srcset="{{- source_set(item.source_image) -}}" media="{{ item.media }}">
+  {% endfor %}
+  <img alt="{{ alt_text }}" width="{{ default.width }}" height="{{ default.height }}"
+       src="{{ default.source_image['1'].url }}"
+       class="img-Image_Image" loading="{{ loading }}">
+</picture>

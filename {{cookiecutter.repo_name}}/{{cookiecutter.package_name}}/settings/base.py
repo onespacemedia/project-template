@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'captcha',{% endif %}
 
     'django_jinja',
-    'django_lazy_image',
+    '{{cookiecutter.package_name}}.apps.responsive_images',
 
     'osm_jet',
     'cms',

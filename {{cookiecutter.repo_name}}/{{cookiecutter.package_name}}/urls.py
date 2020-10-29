@@ -28,7 +28,7 @@ urlpatterns = [
     {% if cookiecutter.sections == 'no' %}# {% endif %}re_path(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
 
     # Site URLs
-    re_path(r'^assets/', include(('django_lazy_image.urls', 'lazy_image'), namespace='assets')),
+    re_path(r'^assets/', include('{{ cookiecutter.package_name }}.apps.responsive_images.urls')),
 
     # Jet URLs
     re_path(r'^jet/', include('jet.urls', 'jet')),

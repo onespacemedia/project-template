@@ -1,0 +1,20 @@
+<div class="img-Image{% if is_transparent %} img-Image-isTransparent{% endif %}">
+  <div class="img-Image_AspectRatioHolder">
+    <div class="img-Image_AspectRatio" style="padding-bottom: {{ default.aspect_ratio }}"></div>
+
+    <div class="img-Image_Media">
+      {% if small_image %}
+        <img
+          class="img-Image_Image img-Image_Image-small{% if blur %} img-Image_Image-blurred{% endif %}"
+          alt=""
+          src="{{ small_image.url }}"
+          width="{{ default.width }}"
+          height="{{ default.height }}"
+          loading="eager"
+        >
+      {% endif %}
+
+      {% include 'responsive_images/picture.html' with context %}
+    </div>
+  </div>
+</div>

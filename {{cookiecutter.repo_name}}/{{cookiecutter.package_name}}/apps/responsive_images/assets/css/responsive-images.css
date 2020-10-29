@@ -18,17 +18,6 @@
   background-color: transparent;
 }
 
-.img-Image_Media {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-}
-
 .img-Image_Image {
   position: absolute;
   top: 0;
@@ -64,10 +53,6 @@
   filter: blur(50px);
 
   transform: scale(1);
-}
-
-.img-Image_Image-loaded {
-  opacity: 1;
 }
 
 .img-Image_Image-hide {
