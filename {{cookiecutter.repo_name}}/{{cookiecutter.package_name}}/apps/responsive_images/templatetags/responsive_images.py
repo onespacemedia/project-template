@@ -213,7 +213,7 @@ def get_image_data(image, width=None, height=None, blur=False, show_small_image=
             )
 
     return {
-        'alt_text': alt_text or image.alt_text,
+        'alt_text': alt_text or image.alt_text or '',
         'blur': blur,
         'default': default,
         'images': processed_images,
