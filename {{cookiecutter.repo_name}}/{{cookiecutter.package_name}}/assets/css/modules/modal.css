@@ -48,7 +48,7 @@
   padding: 1.5vr calc(var(--Grid_Gutter) * 2);
 
   background: #fff;
-  box-shadow: 0 0 20px 0 #000, 0.15);
+  box-shadow: 0 0 20px 0 rgba(#000, 0.15);
 
   @media (--sm) {
     width: columns(8, 12);
