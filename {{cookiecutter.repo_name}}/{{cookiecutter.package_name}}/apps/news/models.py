@@ -1,17 +1,14 @@
 """Models used by the CMS news app."""
 import json
-from html import unescape
 
 from cms import sitemaps
 from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import Page
 from cms.models import HtmlField, OnlineBaseManager, PageBase
 from cms.plugins.moderation.models import APPROVED, DRAFT, STATUS_CHOICES
-from cms.templatetags.html import truncate_paragraphs
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.template.defaultfilters import striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -209,11 +206,6 @@ class Article(PageBase):
             Article.objects.all(),
         ]
         return get_related_items(candidate_querysets, count=count, exclude=self)
-
-    def get_summary(self, words=20):
-        summary = self.summary or striptags(truncate_paragraphs(self.content, 1))
-
-        return unescape(truncatewords(summary, words))
 
     @property
     def last_modified(self):
