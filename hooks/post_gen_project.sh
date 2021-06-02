@@ -117,7 +117,6 @@ nvm use
 
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
-
     # Create a git repo and configure it for git flow.
     git init
 
@@ -125,13 +124,13 @@ if [ -z "$CI" ]; then
     mv pre-push .git/hooks/pre-push
     chmod +x .git/hooks/pre-push
     git flow init -d
+fi
 
 # We run this after initalising the git repo so the hooks are added correctly
 yarn
 yarn run build
 
 if [ -z "$CI" ]; then
-
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
     git commit --amend --all --no-edit
