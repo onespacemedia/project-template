@@ -80,6 +80,7 @@ if [ -z "$CI" ]; then
 fi
 
 # Upgrade setuptools to avoid issues with python-memcached
+pip install --upgrade pip
 pip install --upgrade setuptools
 pip install -r requirements.txt
 
@@ -114,9 +115,6 @@ rm -r {{ "{{" }}cookiecutter.package_name{{ "}}" }}
 nvm install
 nvm use
 
-yarn
-yarn run build
-
 # The following commands don't need to be run under CI.
 if [ -z "$CI" ]; then
 
@@ -126,8 +124,13 @@ if [ -z "$CI" ]; then
     mkdir -p .git/hooks
     mv pre-push .git/hooks/pre-push
     chmod +x .git/hooks/pre-push
-
     git flow init -d
+
+# We run this after initalising the git repo so the hooks are added correctly
+yarn
+yarn run build
+
+if [ -z "$CI" ]; then
 
     # Add all of the project files to a Git commit and push to the remote repo.
     git add .
