@@ -6,7 +6,7 @@
     "plugin:vue/essential"
   ],
   "parserOptions": {
-    "ecmaVersion": 10,
+    "ecmaVersion": 2019,
     "parser": "babel-eslint",
     "sourceType": "module"
   },
