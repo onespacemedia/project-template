@@ -7,7 +7,6 @@ from django.db import models
 from django.db.models import Q
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from historylinks import shortcuts as historylinks
 
 from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA
@@ -251,5 +250,4 @@ class Career(PageBase):
         return mark_safe(json.dumps(schema))
 
 
-historylinks.register(Career)
 sitemaps.register(Career)

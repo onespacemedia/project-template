@@ -11,7 +11,7 @@ import uuid
 
 # from django.apps import apps;  apps.get_model
 from django.db.models import Model
-from django.utils import six
+import six
 from django.utils.duration import duration_iso_string
 from django.utils.functional import Promise
 from django.utils.timezone import is_aware

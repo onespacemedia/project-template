@@ -5,7 +5,6 @@ from cms.models import HtmlField, PageBase
 from django.db import models
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from historylinks import shortcuts as historylinks
 
 from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA
@@ -112,5 +111,4 @@ class Faq(PageBase):
         return mark_safe(json.dumps(schema))
 
 
-historylinks.register(Faq)
 sitemaps.register(Faq)

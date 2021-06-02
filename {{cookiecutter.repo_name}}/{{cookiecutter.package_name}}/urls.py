@@ -81,3 +81,8 @@ def handler500(request):
     response = render(request, "500.html", {})
     response.status_code = 500
     return response
+
+
+urlpatterns += [
+    re_path(r'$', PageDispatcherView.as_view())
+]

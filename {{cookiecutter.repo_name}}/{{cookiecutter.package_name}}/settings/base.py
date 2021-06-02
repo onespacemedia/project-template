@@ -38,6 +38,7 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/admin/'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
@@ -61,7 +62,6 @@ INSTALLED_APPS = [
     'django.forms',
 
     'sorl.thumbnail',{% if cookiecutter.contact == 'yes' %}
-    'captcha',{% endif %}
 
     'django_jinja',
     'django_lazy_image',
@@ -69,8 +69,8 @@ INSTALLED_APPS = [
     'osm_jet',
     'cms',
 
+    'captcha',{% endif %}
     'reversion',
-    'historylinks',
     'watson',
 
     'cms.apps.pages',
@@ -274,7 +274,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'watson.middleware.SearchContextMiddleware',
-    'historylinks.middleware.HistoryLinkFallbackMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',
 ]

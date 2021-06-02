@@ -12,7 +12,6 @@ from django.template.defaultfilters import date, striptags, truncatewords
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.timezone import now
-from historylinks import shortcuts as historylinks
 
 from ...utils.models import ProjectContentBase
 from ...utils.utils import schema_image, url_from_path
@@ -172,5 +171,4 @@ class Event(PageBase):
         })
 
 
-historylinks.register(Event)
 sitemaps.register(Event)
