@@ -47,6 +47,8 @@ jobs:
           name: Test project
           command: |
             cd demo && . .venv/bin/activate
+            . ~/.nvm/nvm.sh
+            nvm use
             yarn run lint:css
             yarn run lint:js
             yarn run lint:python
