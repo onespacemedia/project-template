@@ -79,13 +79,15 @@
 
       body.classList.add('util-JSEnabled')
 
-      if (!('grid' in body.style)) {
-        var grid = document.createElement('link')
-        grid.href = '{{ get_css_path('iefallback') }}?last={{ settings.GIT_COMMIT_HASH }}'
-        grid.rel = 'stylesheet'
-        document.head.appendChild(grid)
-        body.className += ' util-IsIE'
-      }
+      {% if not settings.IN_CI %}
+        if (!('grid' in body.style)) {
+          var grid = document.createElement('link')
+          grid.href = '{{ get_css_path('iefallback') }}?last={{ settings.GIT_COMMIT_HASH }}'
+          grid.rel = 'stylesheet'
+          document.head.appendChild(grid)
+          body.className += ' util-IsIE'
+        }
+      {% endif %}
 
       function hasNativeCSSProperties() {
         var opacity = 0

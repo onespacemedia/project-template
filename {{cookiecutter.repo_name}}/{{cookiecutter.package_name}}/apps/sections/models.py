@@ -248,9 +248,6 @@ class SectionBase(HasSecondaryLinkMixin, HasLinkMixin):
 
         return ''
 
-    def get_checklist_items(self):
-        return [x for x in self.checklist_items.split('\n') if x]
-
 {% if cookiecutter.news == 'yes' %}
     def get_latest_news(self, count=3):
         return Article.objects.filter(
