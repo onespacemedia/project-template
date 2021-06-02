@@ -6,53 +6,55 @@
 |
 */
 .cta-CallToAction {
-  margin-top: 1vr;
-  padding-top: 1vr;
-  padding-bottom: @padding-top;
-
-  background-color: #e6ebf1;
-  border-top: 1px solid var(--Color_Border);
-
-  @media (--sm) {
-    padding-top: 1.5vr;
-    padding-bottom: @padding-top;
-  }
-
-  @media (--md) {
-    padding-top: 2vr;
-    padding-bottom: @padding-top;
-  }
-
-  @media (--lg) {
-    padding-top: 3vr;
-    padding-bottom: @padding-top;
-  }
+  border-radius: 16px 4px;
+  overflow: hidden;
 }
 
 .cta-CallToAction_Inner {
-  @include Grid_Container;
+  justify-content: space-between;
+
+  display: flex;
 }
 
-.cta-CallToAction_Body {
-  text-align: center;
+.cta-CallToAction_Content {
+  padding-top: 3.5vr;
+  padding-bottom: 3.5vr;
+
+  padding-left: columns(1, 12);
 
   @media (--sm) {
-    width: columns(9, 12);
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  @media (--md) {
-    width: columns(8, 12);
+    width: columns(6, 12);
   }
 }
 
-.cta-CallToAction_Kicker {
-  margin-bottom: 0.5vr;
+.cta-CallToAction_Title {
+  color: #fff;
 }
 
 .cta-CallToAction_Link {
-  @include Button;
-
   margin-top: 1vr;
+}
+
+.cta-CallToAction_ImageContainer {
+  position: relative;
+
+  @media (--sm) {
+    width: columns(6, 12);
+  }
+}
+
+.cta-CallToAction_Background-image {
+  @include Spread;
+
+  .img-Image {
+    @include Spread;
+  }
+}
+
+.cta-CallToAction_Image {
+  @include Spread;
+
+  .img-Image {
+    @include Spread;
+  }
 }

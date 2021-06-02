@@ -1,0 +1,19 @@
+.crd-Icon {
+  display: flex;
+}
+
+.crd-Icon_Icon {
+  margin-right: var(--Grid_Gutter);
+
+  .msc-Icon {
+    font-size: 32px;
+  }
+}
+
+.crd-Icon_Title {
+  font-weight: 500;
+}
+
+.crd-Icon_Text {
+  color: rgba(#fff, 0.6);
+}

@@ -1,0 +1,21 @@
+/*
+|--------------------------------------------------------------------------
+| Split text and image section
+|--------------------------------------------------------------------------
+| Displays an image and text block side by side, can be image eft and text
+| right or image right and text left.
+|
+| @namespace: sec-
+|
+*/
+.sec-Split_Video {
+  @include Intrinsic();
+}
+
+.sec-Split_Text {
+  margin-top: 0.5vr;
+}
+
+.sec-Split_Footer {
+  margin-top: 1vr;
+}

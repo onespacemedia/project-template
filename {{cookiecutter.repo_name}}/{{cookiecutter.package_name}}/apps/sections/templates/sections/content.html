@@ -5,3 +5,7 @@
     {{ render_section(section) }}
   {% endfor %}
 {% endblock %}
+
+{% block extra_js %}
+  {{ sections_js() }}
+{% endblock %}

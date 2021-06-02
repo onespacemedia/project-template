@@ -1,0 +1,159 @@
+.sec-Section-smallUpper {
+  padding-top: 0.75vr;
+
+  @media (--sm) {
+    padding-top: 1vr;
+  }
+
+  @media (--md) {
+    padding-top: 1.25vr;
+  }
+
+  @media (--lg) {
+    padding-top: 1.5vr;
+  }
+
+  @media (--xlg) {
+    padding-top: 2vr;
+  }
+}
+
+.sec-Section-smallLower {
+  padding-bottom: 0.75vr;
+
+  @media (--sm) {
+    padding-bottom: 1vr;
+  }
+
+  @media (--md) {
+    padding-bottom: 1.25vr;
+  }
+
+  @media (--lg) {
+    padding-bottom: 1.5vr;
+  }
+
+  @media (--xlg) {
+    padding-bottom: 2vr;
+  }
+}
+
+.sec-Section-normalUpper {
+  padding-top: 1vr;
+
+  @media (--sm) {
+    padding-top: 1.5vr;
+  }
+
+  @media (--md) {
+    padding-top: 2vr;
+  }
+
+  @media (--lg) {
+    padding-top: 3vr;
+  }
+
+  @media (--xlg) {
+    padding-top: 4vr;
+  }
+}
+
+.sec-Section-normalLower {
+  padding-bottom: 1vr;
+
+  @media (--sm) {
+    padding-bottom: 1.5vr;
+  }
+
+  @media (--md) {
+    padding-bottom: 2vr;
+  }
+
+  @media (--lg) {
+    padding-bottom: 3vr;
+  }
+
+  @media (--xlg) {
+    padding-bottom: 4vr;
+  }
+}
+
+.sec-Section-largeUpper {
+  padding-top: 1.5vr;
+
+  @media (--sm) {
+    padding-top: 2vr;
+  }
+
+  @media (--md) {
+    padding-top: 3vr;
+  }
+
+  @media (--lg) {
+    padding-top: 4vr;
+  }
+
+  @media (--xlg) {
+    padding-top: 6vr;
+  }
+}
+
+.sec-Section-largeLower {
+  padding-bottom: 1.5vr;
+
+  @media (--sm) {
+    padding-bottom: 2vr;
+  }
+
+  @media (--md) {
+    padding-bottom: 3vr;
+  }
+
+  @media (--lg) {
+    padding-bottom: 4vr;
+  }
+
+  @media (--xlg) {
+    padding-bottom: 6vr;
+  }
+}
+
+.sec-Section-extraLargeUpper {
+  padding-top: 2vr;
+
+  @media (--sm) {
+    padding-top: 3vr;
+  }
+
+  @media (--md) {
+    padding-top: 4vr;
+  }
+
+  @media (--lg) {
+    padding-top: 6vr;
+  }
+
+  @media (--xlg) {
+    padding-top: 8vr;
+  }
+}
+
+.sec-Section-extraLargeLower {
+  padding-bottom: 2vr;
+
+  @media (--sm) {
+    padding-bottom: 3vr;
+  }
+
+  @media (--md) {
+    padding-bottom: 4vr;
+  }
+
+  @media (--lg) {
+    padding-bottom: 6vr;
+  }
+
+  @media (--xlg) {
+    padding-bottom: 8vr;
+  }
+}

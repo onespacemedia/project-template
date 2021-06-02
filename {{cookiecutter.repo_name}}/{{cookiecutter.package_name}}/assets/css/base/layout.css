@@ -9,16 +9,11 @@
 |
 */
 .lyt-Site {
-  max-width: var(--Grid_Constrained);
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
+  flex-direction: column;
 
-  /* var(--Grid_Constrained) + (1px * 2) for each border */
-  @media (width >= 1602px) {
-    border-right: 1px solid var(--Color_Border);
-    border-left: @border-right;
-  }
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
 
   /* Prefer to use the actual term for it (iOS) */
   /* stylelint-disable selector-class-pattern */
@@ -65,5 +60,41 @@
 }
 
 .lyt-Content_Inner {
+  @include Grid_Container;
+}
+
+.lyt-Content_Body-hasAside {
+  flex-direction: column;
+  justify-content: space-between;
+
+  display: flex;
+
+  @media (--sm) {
+    flex-direction: row;
+  }
+}
+
+.lyt-Main {
+  .lyt-Content_Body-hasAside & {
+    @media (--sm) {
+      width: columns(8, 12);
+    }
+
+    @media (--lg) {
+      width: columns(7, 12);
+    }
+  }
+}
+
+.lyt-Aside {
+  margin-top: 1.5vr;
+
+  @media (--sm) {
+    width: columns(4, 12);
+    margin-top: 0;
+  }
+}
+
+.lyt-Content_Below {
   @include Grid_Container;
 }

@@ -1,0 +1,12 @@
+{% extends 'sections/types/_base.html' %}
+{% import 'macros/listings.html' as listing %}
+
+{% block body %}
+  <ul class="lst-Grid">
+    {% for object in section.card_set.cards.all() %}
+      <li class="lst-Grid_Item lst-Grid_Item-{{ section.cards_per_row }}Up">
+        {{ object.render_card() }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+.sbx-Sidebox_Body {
+  padding: 0.75vr calc(var(--Grid_Gutter));
+
+  background-color: #fff;
+}
+
+.sbx-Sidebox_Title {
+  font-weight: 500;
+}
+
+.sbx-Sidebox_Text {
+  margin-top: 8px;
+}

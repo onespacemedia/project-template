@@ -1,0 +1,19 @@
+<section class="cta-CallToAction">
+  <div class="cta-CallToAction_Inner">
+    <div class="cta-CallToAction_Content">
+      <h2 class="cta-CallToAction_Title">{{ object.title }}</h2>
+      <a class="cta-CallToAction_Link" href="{{ object.link_location }}">{{ object.link_text }}</a>
+    </div>
+
+    <div class="cta-CallToAction_ImageContainer">
+      {% if object.background_image %}
+        <div class="cta-CallToAction_Background-image">
+          {{ render_osm_lazy_image(object.card_image or object.background_image, width=604, height=465, blur=False, show_small_image=False) }}
+        </div>
+      {% endif %}
+      <div class="cta-CallToAction_Image">
+        {{ render_osm_lazy_image(object.card_image or object.image, width=604, height=465, blur=False, show_small_image=False) }}
+      </div>
+    </div>
+  </div>
+</section>

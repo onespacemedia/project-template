@@ -1,0 +1,21 @@
+<div class="sbx-Sidebox">
+  {% if object.image %}
+    <div class="sbx-Sidebox_Image">
+      {{ render_osm_lazy_image(object.image) }}
+    </div>
+  {% endif %}
+
+  <div class="sbx-Sidebox_Body">
+    {% if object.title %}
+      <div class="sbx-Sidebox_Title">
+        {{ object.title }}
+      </div>
+    {% endif %}
+
+    {% if object.text %}
+      <div class="sbx-Sidebox_Text">
+        {{ object.text }}
+      </div>
+    {% endif %}
+  </div>
+</div>

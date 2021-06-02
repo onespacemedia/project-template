@@ -1,0 +1,12 @@
+{% import 'macros/misc.html' as misc %}
+
+<div class="crd-Icon">
+  <div class="crd-Icon_Icon">
+    {{ misc.material_icon(object.icon) }}
+  </div>
+
+  <div class="crd-Icon_Body">
+    <div class="crd-Icon_Title">{{ object.title }}</div>
+    <div class="crd-Icon_Text">{{ object.text }}</div>
+  </div>
+</div>
