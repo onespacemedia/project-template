@@ -3,8 +3,6 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.functional import cached_property
 
-from .video import get_video_info
-
 
 class ProjectContentBase(ContentBase):
     call_to_action = models.ForeignKey(
