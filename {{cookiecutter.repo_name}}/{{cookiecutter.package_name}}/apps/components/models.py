@@ -1,9 +1,7 @@
 from cms.apps.media.models import ImageRefField
-from cms.apps.pages.models import Page
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
-from django.utils.safestring import mark_safe
 
 from ...utils.models import HasLinkMixin
 
