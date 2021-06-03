@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import SectionBase, SECTION_TYPES
+from ..models import SECTION_TYPES, SectionBase
 
 
 class SectionModelsTestCase(TestCase):
