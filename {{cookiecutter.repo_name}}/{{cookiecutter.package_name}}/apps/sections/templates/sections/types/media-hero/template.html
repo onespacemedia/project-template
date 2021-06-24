@@ -1,0 +1,39 @@
+{% extends 'sections/types/_base.html' %}
+
+{% block inner %}
+  <div class="sec-MediaHero js-MediaHero">
+    <div class="sec-MediaHero_Content">
+      {% if section.kicker %}
+        <div class="sec-MediaHero_Kicker">{{ section.kicker }}</div>
+      {% endif %}
+
+      <h1 class="sec-MediaHero_Title">{{ section.title }}</h1>
+
+      {% if section.has_link %}
+        <footer class="sec-MediaHero_Footer">
+          <a href="{{ section.link_location }}" class="sec-Section_Link">
+            {{ section.link_text }}
+          </a>
+        </footer>
+      {% endif %}
+    </div>
+
+    {% if section.image or section.video %}
+      <div class="sec-MediaHero_Media js-MediaHero_Media">
+        {% if section.image %}
+          <div class="sec-MediaHero_Image">
+            {{ render_osm_lazy_image(section.image, width=806, height=541, blur=False, show_small_image=False) }}
+          </div>
+        {% endif %}
+
+        {% if section.video %}
+          <div class="sec-MediaHero_Video">
+            <div class="sec-MediaHero_VideoRatio">
+              {{ section.video.embed_html(autoplay=True, loop=True, controls=False, mute=True) }}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

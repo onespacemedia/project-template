@@ -1,0 +1,18 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrastyle %}
+  {{ block.super }}
+
+  <style>
+    .ui-sortable .form-row {
+      display: table-row !important;
+    }
+    .ui-sortable .form-row.empty-form {
+      display: none !important;
+    }
+
+    .ui-sortable .original {
+      padding: 0 !important;
+    }
+  </style>
+{% endblock %}

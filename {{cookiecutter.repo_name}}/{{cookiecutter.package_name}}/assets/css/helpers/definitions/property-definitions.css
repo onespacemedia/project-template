@@ -34,7 +34,7 @@
   */
   --Grid_Constrained: 1600px;
   --Grid_Container: 1240px;
-  --Grid_Gutter: 15px;
+  --Grid_Gutter: 16px;
   /* This differentiates to the Grid_Gutter in that this is used for the inside of panels and
    cards. On all old projects this has been styled by using the Grid_Gutter. This is wrong, it
    seemed right because the insides were normally 30ish and the Grid_Gutter was 30 as well so i
@@ -60,7 +60,7 @@
   |--------------------------------------------------------------------------
   |
   */
-  --Global_Radius: 3px;
+  --Global_Radius: 4px;
   --Global_Transition: 0.2s;
   --Transition_EaseOutBack: cubic-bezier(0.175, 0.885, 0.32, 1.075);
 
@@ -70,7 +70,7 @@
   |--------------------------------------------------------------------------
   |
   */
-  font: 16px/1.5 var(--Font_Family-body);
+  font: 16px/2 var(--Font_Family-body);
 
   cursor: auto;
 }

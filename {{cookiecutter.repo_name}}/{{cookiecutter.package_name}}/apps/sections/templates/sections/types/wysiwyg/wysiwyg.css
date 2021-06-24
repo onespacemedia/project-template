@@ -1,0 +1,11 @@
+.sec-WYSIWYG {
+  width: 100%;
+
+  @media (--sm) {
+    width: columns(10, 12);
+  }
+
+  @media (--lg) {
+    width: columns(8, 12);
+  }
+}

@@ -1,6 +1,7 @@
 import logging
 import sys
 
+from cms.apps.pages.views import PageDispatcherView
 from cms.sitemaps import registered_sitemaps
 from cms.views import TextTemplateView
 from django.conf import settings
@@ -22,10 +23,10 @@ admin.autodiscover()
 urlpatterns = [
 
     # Admin URLs.
-    re_path(r'^admin/', admin.site.urls),
+    {% if cookiecutter.sections == 'no' %}# {% endif %}re_path(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
     re_path(r'^admin/', include('social_django.urls', namespace='social')),
     re_path(r'^admin/', include('{{ cookiecutter.package_name }}.apps.users.urls')),
-    {% if cookiecutter.sections == 'no' %}# {% endif %}re_path(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
+    re_path(r'^admin/', admin.site.urls),
 
     # Site URLs
     re_path(r'^assets/', include(('django_lazy_image.urls', 'lazy_image'), namespace='assets')),
@@ -81,3 +82,8 @@ def handler500(request):
     response = render(request, "500.html", {})
     response.status_code = 500
     return response
+
+
+urlpatterns += [
+    re_path(r'$', PageDispatcherView.as_view())
+]

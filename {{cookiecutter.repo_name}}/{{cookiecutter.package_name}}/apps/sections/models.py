@@ -1,149 +1,77 @@
 from __future__ import print_function
 
-from cms.apps.media.models import ImageRefField
+from cms.apps.media.models import ImageRefField, VideoRefField
 from cms.models import HtmlField
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
-from ...utils.models import HasLinkMixin, ProjectContentBase, VideoMixin
-{% if cookiecutter.news == 'yes' %}from ..news.models import Article{% endif %}
+from ...utils.models import (HasLinkMixin, HasSecondaryLinkMixin,
+                             ProjectContentBase)
+from ..news.models import Article
+from .utils import generate_section_types, get_section_type_choices
 
-SECTION_TYPES = (
-    ('Heroes', {
-        'sections': [
-            ('landing-hero', {
-                'fields': ['kicker', 'title', 'text', 'image', 'link_text', 'link_page', 'link_url'],
-                'search': ['kicker', 'title', 'text'],
-                'required': ['title', 'image'],
-                'help_text': {
-                    'kicker': 'If this is left blank it will inherit the title of the page.',
-                },
-            }),
-        ],
-    }),
-    ('Images', {
-        'sections': [
-            ('full-width', {
-                'fields': ['image', 'mobile_image'],
-                'required': ['image']
-            }),
-            ('split', {
-                'fields': ['kicker', 'title', 'content', 'image', 'image_side', 'link_text', 'link_page', 'link_url'],
-                'search': ['kicker', 'title', 'content'],
-                'required': ['title', 'image'],
-            }),
-        ]
-    }),
-    ('Text', {
-        'sections': [
-            ('wysiwyg', {
-                'name': 'Rich text',
-                'fields': ['background_colour', 'kicker', 'title', 'content', 'link_text', 'link_page', 'link_url'],
-                'search': ['kicker', 'title', 'content'],
-            }),
-            ('dual-column', {
-                'fields': ['background_colour', 'kicker', 'title', 'left_column', 'right_column', 'link_text', 'link_page', 'link_url'],
-                'search': ['kicker', 'title', 'left_column', 'right_column'],
-            }),
-        ],
-    }),
-    ('Components', {
-        'sections': [{% if cookiecutter.news == 'yes' %}
-            ('latest-news', {
-                'fields': ['background_colour', 'title', 'news_feed', 'link_text', 'link_page', 'link_url'],
-                'search': ['title'],
-                'required': ['news_feed'],
-            }),{% endif %}
-            ('statistics', {
-                'fields': ['background_colour', 'stat_set'],
-                'required': ['stat_set'],
-            }),
-        ],
-    }),
-)
-
-
-def get_section_name(obj):
-    if 'name' in obj[1]:
-        return obj[1]['name']
-
-    return obj[0][0].upper() + obj[0][1:].replace('-', ' ')
-
-
-def get_section_types_flat():
-    '''Gets a list of section types as a flat list of dictionaries.'''
-    types = []
-    # Loop section groups.
-    for group in SECTION_TYPES:
-        # Every section that appears in the optgroup
-        for section_type in group[1]['sections']:
-            types.append({
-                'slug': f'{slugify(group[0])}-{section_type[0]}',
-                'name': f'{group[0]} - {get_section_name(section_type)}',
-                'fields': section_type[1].get('fields', []),
-                'search': section_type[1].get('search', []),
-                'required': section_type[1].get('required', []),
-                'help_text': section_type[1].get('help_text', {}),
-            })
-    return types
+SECTION_ORDER = ['heroes', 'media', 'text', 'components']
+SECTION_TYPES = generate_section_types()
+PADDING_DEFAULT = 'normal'
+PADDING_CHOICES = [
+    ('none', 'None'),
+    ('small', 'Small'),
+    (PADDING_DEFAULT, 'Normal'),
+    ('large', 'Large'),
+    ('extraLarge', 'Extra large'),
+]
 
 
 def sections_js(request):
     model_fields = [f.name for f in SectionBase._meta.get_fields()]
-    # Since our sections aren't at the top level we'll need to create an array
-    # of them when we are iterating
-    sections = get_section_types_flat()
 
-    for section_type in sections:
+    for section_type in SECTION_TYPES:
         for field in section_type['fields']:
             if field not in model_fields:
                 print(f"NOTE: Field `{field}` is referenced by section type `{section_type['name']}`, but doesn't exist.")
 
-    return render_to_response('admin/pages/page/sections.js', {
-        'types': sections,
+    return render(request, 'admin/pages/page/sections.js', context={
+        'types': SECTION_TYPES,
     }, content_type='application/javascript')
 
 
-def get_section_type_choices(types):
-    # Will be used to build up our optgroups
-    groups = []
-
-    for section_group in SECTION_TYPES:
-        label = section_group[0]
-        content = section_group[1]
-
-        # We'll need to build a tuple of the section option value & option name
-        sections = []
-
-        for section in content['sections']:
-            section_label = slugify(f'{section_group[0]}-{section[0]}')
-
-            sections.append(
-                (slugify(section_label), get_section_name(section)))
-
-        groups.append((label, sections))
-
-    return groups
-
-
-class SectionBase(HasLinkMixin, VideoMixin):
-
+class SectionBase(HasSecondaryLinkMixin, HasLinkMixin):
     type = models.CharField(
-        choices=get_section_type_choices(SECTION_TYPES),
+        choices=get_section_type_choices(SECTION_TYPES, order=SECTION_ORDER),
         max_length=100,
     )
 
     background_colour = models.CharField(
         max_length=255,
         choices=[
-            ('transparent', 'Transparent'),
+            ('white', 'White'),
+            ('black', 'Black'),
         ],
-        default='transparent',
+        default='white',
+    )
+
+    top_padding = models.CharField(
+        max_length=255,
+        choices=PADDING_CHOICES,
+        default=PADDING_DEFAULT,
+    )
+
+    bottom_padding = models.CharField(
+        max_length=255,
+        choices=PADDING_CHOICES,
+        default=PADDING_DEFAULT,
+    )
+
+    icon = models.CharField(
+        max_length=150,
+        blank=True,
+        null=True,
+        help_text=mark_safe("The name of the icon from <a href='https://fonts.google.com/icons'>Google's material icons</a>. All lowercase and underscores instead of spaces. For example, 'Open in new' becomes 'open_in_new'.")
     )
 
     kicker = models.CharField(
@@ -168,14 +96,13 @@ class SectionBase(HasLinkMixin, VideoMixin):
         null=True,
     )
 
-    left_column = HtmlField(
-        blank=True,
-        null=True,
-    )
-
-    right_column = HtmlField(
-        blank=True,
-        null=True,
+    media_side = models.CharField(
+        max_length=10,
+        choices=[
+            ('left', 'Left'),
+            ('right', 'Right'),
+        ],
+        default='left',
     )
 
     image = ImageRefField(
@@ -183,18 +110,14 @@ class SectionBase(HasLinkMixin, VideoMixin):
         null=True,
     )
 
-    mobile_image = ImageRefField(
+    background_image = ImageRefField(
         blank=True,
         null=True,
     )
 
-    image_side = models.CharField(
-        max_length=10,
-        choices=[
-            ('left', 'Left'),
-            ('right', 'Right'),
-        ],
-        default='left',
+    video = VideoRefField(
+        blank=True,
+        null=True,
     )
 
     stat_set = models.ForeignKey(
@@ -211,6 +134,29 @@ class SectionBase(HasLinkMixin, VideoMixin):
         on_delete=models.CASCADE,
     ){% endif %}
 
+    card_set = models.ForeignKey(
+        'components.CardSet',
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+    )
+
+    cards_per_row = models.CharField(
+        choices=[
+            ('three', 'Three'),
+            ('four', 'Four'),
+        ],
+        max_length=10,
+        default='four',
+    )
+
+    call_to_action = models.ForeignKey(
+        'components.CallToAction',
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+    )
+
     order = models.PositiveIntegerField(
         default=0,
         help_text='Order which the section will be displayed',
@@ -221,10 +167,10 @@ class SectionBase(HasLinkMixin, VideoMixin):
         ordering = ['order']
 
     def __str__(self):
-        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+        return next((x for x in SECTION_TYPES if x['slug'] == self.type), None)['name']
 
     def clean(self):
-        sections = get_section_types_flat()
+        sections = SECTION_TYPES
 
         for section in sections:
             if self.type == section['slug']:
@@ -263,14 +209,13 @@ class SectionBase(HasLinkMixin, VideoMixin):
         return f'{self._meta.app_label}.{self._meta.model_name}.{self.pk}'
 
     @property
-    def template(self):
-        folder_name = self.type.split('-')[0]
-        file_name = '-'.join(self.type.split('-')[1:])
+    def template_path(self):
+        return f'sections/types/{self.type}/template.html'
 
-        return {
-            'folder': folder_name,
-            'file_name': f'{file_name}.html'
-        }
+    @property
+    def cacheable(self):
+        # Used to add cases when a section shouldn't be cached
+        return True
 
     def get_searchable_text(self):
         """Returns a blob of text suitable for searching."""
@@ -302,8 +247,9 @@ class SectionBase(HasLinkMixin, VideoMixin):
                 return '\n'.join(search_text_items)
 
         return ''
+
 {% if cookiecutter.news == 'yes' %}
-    def get_latest_news(self):
+    def get_latest_news(self, count=3):
         return Article.objects.filter(
             page__page=self.news_feed
         ).prefetch_related(
@@ -313,7 +259,7 @@ class SectionBase(HasLinkMixin, VideoMixin):
             'card_image',
         ).order_by(
             '-date'
-        )[:3]{% endif %}
+        )[:count]{% endif %}
 
 
 class ContentSection(SectionBase):
@@ -324,7 +270,7 @@ class ContentSection(SectionBase):
     )
 
     def __str__(self):
-        return next((x for x in get_section_types_flat() if x['slug'] == self.type), None)['name']
+        return next((x for x in SECTION_TYPES if x['slug'] == self.type), None)['name']
 
 
 class Content(ProjectContentBase):

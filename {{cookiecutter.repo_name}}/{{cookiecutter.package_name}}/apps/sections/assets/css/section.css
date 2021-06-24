@@ -5,60 +5,20 @@
 | @namespace: sec-
 |
 */
-.sec-Section-transparent {
-  /* Transparent sections (background the same colour as the body) use
-  margins to space them to avoid the illusion of excessive padding -
-  margins collapse on adjacent sections.
-
-  If you change these spacings, make sure you adjust the spacing for
-  sections with a coloured background below. */
-  margin-top: 1vr;
-  margin-bottom: @margin-top;
-
-  @media (--sm) {
-    margin-top: 1.5vr;
-    margin-bottom: @margin-top;
-  }
-
-  @media (--md) {
-    margin-top: 2vr;
-    margin-bottom: @margin-top;
-  }
-
-  @media (--lg) {
-    margin-top: 3vr;
-    margin-bottom: @margin-top;
-  }
-
-  @media (--xlg) {
-    margin-top: 4vr;
-    margin-bottom: @margin-top;
-  }
+.sec-Section {
+  position: relative;
 }
 
 .sec-Section-coloured {
-  padding-top: 1vr;
-  padding-bottom: @padding-top;
+  color: #fff;
+}
 
-  @media (--sm) {
-    padding-top: 1.5vr;
-    padding-bottom: @padding-top;
-  }
+.sec-Section-white {
+  background-color: #fff;
+}
 
-  @media (--md) {
-    padding-top: 2vr;
-    padding-bottom: @padding-top;
-  }
-
-  @media (--lg) {
-    padding-top: 3vr;
-    padding-bottom: @padding-top;
-  }
-
-  @media (--xlg) {
-    padding-top: 4vr;
-    padding-bottom: @padding-top;
-  }
+.sec-Section-black {
+  background-color: #000;
 }
 
 .sec-Section_Inner {
@@ -95,6 +55,10 @@
 
 .sec-Section_Title {
   margin-bottom: 0.5vr;
+
+  .sec-Section-coloured & {
+    color: #fff;
+  }
 }
 
 .sec-Section_Text {
@@ -123,4 +87,55 @@
 
 .sec-Section_Link {
   @include Button;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Section extra
+|--------------------------------------------------------------------------
+| Other section items that can be used on multiple sections.
+|
+*/
+.sec-Section_Columns {
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  display: flex;
+
+  @media (--sm) {
+    flex-direction: row;
+  }
+}
+
+.sec-Section_Columns-reverse {
+  @media (--sm) {
+    flex-direction: row-reverse;
+  }
+}
+
+.sec-Section_Column {
+  width: 100%;
+  margin-bottom: 0.75vr;
+
+  @media (--sm) {
+    width: columns(6, 12);
+    margin-bottom: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sec-Section_Column-wide {
+  @media (--sm) {
+    width: columns(7, 12);
+  }
+}
+
+.sec-Section_Column-narrow {
+  @media (--sm) {
+    width: columns(5, 12);
+  }
 }

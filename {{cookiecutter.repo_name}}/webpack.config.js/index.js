@@ -1,15 +1,20 @@
 const path = require('path');
 const loaders = require('./loaders');
 const plugins = require('./plugins');
+const sections = require('./sections');
 
 const ASSET_PATH = process.env.ASSET_PATH || '/static/build/';
+const defaultEntries = {
+  main: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/main.js'),
+  staff: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/staff.js'),
+  wysiwyg: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/wysiwyg.js'),
+  iefallback: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/ie-fallback.js')
+}
 
 const config = {
   entry: {
-    main: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/main.js'),
-    staff: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/staff.js'),
-    wysiwyg: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/wysiwyg.js'),
-    iefallback: path.resolve(__dirname, '../{{cookiecutter.package_name}}/assets/js/ie-fallback.js')
+    ...defaultEntries,
+    ...sections.entries,
   },
   module: {
     rules: [

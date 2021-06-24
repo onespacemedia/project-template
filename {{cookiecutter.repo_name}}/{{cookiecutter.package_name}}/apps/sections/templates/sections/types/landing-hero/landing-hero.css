@@ -1,0 +1,49 @@
+.sec-LandingHero_Kicker {
+  align-items: center;
+
+  display: flex;
+  margin-bottom: 1vr;
+
+  .sec-Section-coloured & {
+    color: #fff;
+  }
+}
+
+.sec-LandingHero_KickerIcon {
+  height: 40px;
+  margin-right: 8px;
+
+  .msc-Icon {
+    font-size: 40px;
+  }
+}
+
+.sec-LandingHero_Title {
+  .sec-Section-coloured & {
+    color: #fff;
+  }
+}
+
+.sec-LandingHero_Text {
+  margin-top: 0.5vr;
+
+  @media (--sm) {
+    width: columns(5, 6);
+  }
+}
+
+.sec-LandingHero_Actions {
+  margin-top: 0.5vr;
+
+  @media (--sm) {
+    margin-top: 1vr;
+  }
+}
+
+.sec-LandingHero_SecondaryLink {
+  margin-left: 8px;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

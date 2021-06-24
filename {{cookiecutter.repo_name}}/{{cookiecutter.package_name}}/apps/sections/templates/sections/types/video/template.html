@@ -1,0 +1,7 @@
+{% extends 'sections/types/_base.html' %}
+
+{% block body %}
+  <div class="sec-Video">
+    {{ section.video.embed_html(controls=True) }}
+  </div>
+{% endblock %}

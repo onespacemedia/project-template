@@ -17,7 +17,6 @@ from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.html import strip_tags
 from django.utils.safestring import mark_safe
-from historylinks import shortcuts as historylinks
 from reversion.models import Version
 
 from ...utils.models import ProjectContentBase
@@ -274,5 +273,4 @@ class Article(PageBase):
         return mark_safe(json.dumps(schema))
 
 
-historylinks.register(Article)
 sitemaps.register(Article)

@@ -1,4 +1,4 @@
-<section class="{% block section_class %}sec-Section sec-Section-transparent{% endblock %}" {% block section_extra %}{% endblock %}>
+<section class="{% block section_class %}sec-Section sec-Section-{{ section.top_padding }}Upper sec-Section-{{ section.bottom_padding }}Lower sec-Section-{{ section.background_colour }}{% if not section.background_colour in ['white'] %} sec-Section-coloured{% endif %}{% endblock %}" {% block section_extra %}{% endblock %}>
   {% block section_content %}
     <div class="sec-Section_Inner {% block inner_class %}{% endblock %}">
       {% block inner %}

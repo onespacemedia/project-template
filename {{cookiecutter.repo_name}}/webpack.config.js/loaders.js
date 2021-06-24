@@ -20,7 +20,7 @@ const ESLintLoader = {
   use: {
     loader: 'eslint-loader',
     options: {
-      configFile: path.resolve(__dirname, '../.eslintrc')
+      configFile: path.resolve(__dirname, '../.eslintrc.json')
     },
   }
 };

@@ -7,7 +7,6 @@ from django.db import models
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
-from historylinks import shortcuts as historylinks
 
 from ...utils.models import ProjectContentBase
 from ...utils.utils import ORGANISATION_SCHEMA, schema_image, url_from_path
@@ -178,5 +177,4 @@ class Person(SearchMetaBase):
             'page': page,
         })
 
-historylinks.register(Person)
 sitemaps.register(Person)
