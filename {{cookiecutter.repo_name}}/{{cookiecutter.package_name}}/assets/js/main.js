@@ -15,7 +15,6 @@ import { bindAnimations } from './viewport-animation'
 import { bindDebugOverlay } from './debug-overlay'
 import { bindExternalLinks } from './external-links'
 import { setUpNavigation } from './navigation'
-import { setUpLazyImage } from './lazy-images'
 import { setUpFocusRing } from './focus-ring'
 import { setUpOverflowTables } from './wysiwyg-js'
 import { removePreloadClass } from './utils'
@@ -36,9 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Set up the nav bar and mobile nav menu
   setUpNavigation()
-
-  // Set up lazy loading for images
-  setUpLazyImage()
 
   // Add utility classes for when tabbing is happening
   setUpFocusRing()

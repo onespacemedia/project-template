@@ -11,7 +11,6 @@ django-extensions
 django-historylinks
 django-jet
 django-jinja
-git+https://github.com/onespacemedia/django-lazy-image@master
 django-recaptcha==1.4.0
 django-reversion==2.0.9
 django-watson==1.5.3
